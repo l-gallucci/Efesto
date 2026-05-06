@@ -815,20 +815,85 @@ def _parse_uniop_pred(pred_path, idx_to_orf, threshold=0.5):
     return orf_to_op
 
 
-def run_uniop(faa_files, fna_dir, out_dir, uniop_path, fna_ext="fna"):
+def make_uniop_faa(bakta_faa_path, bakta_gff_path, out_faa_path):
     """
-    Run UniOP on each genome using the FNA file (-i mode, since Bakta FAA
-    headers have no coordinate information).
+    Create a UniOP-compatible FAA from a Bakta FAA + Bakta GFF3.
 
-    UniOP output format:
-      uniop.operon  — CSV: idx_genes (numpy array string), idx_op
-      uniop.pred    — TSV: Gene_A_idx  Gene_B_idx  probability
+    Bakta FAA headers:  >CJMEHH_00001 hypothetical protein
+    UniOP needs:        >CJMEHH_00001 # start # end # strand # ID=...
 
-    Both use 1-based integer indices into the FAA produced by UniOP's internal
-    Prodigal run. We parse the FAA to build idx → prodigal_orf_name, then use
-    the existing prodigal_to_bakta map (built separately) for the final linking.
+    Reads coordinates from the Bakta GFF3 (locus_tag= attribute) and rewrites
+    the FAA headers in Prodigal-compatible format. Sequences are unchanged.
+    Returns True if successful, False if no coordinates could be matched.
+    """
+    # Parse GFF3: locus_tag → (contig, start, end, strand)
+    coord_map = {}
+    with open(bakta_gff_path) as fh:
+        for line in fh:
+            if line.startswith("#"):
+                continue
+            parts = line.rstrip().split("\t")
+            if len(parts) < 9 or parts[2] != "CDS":
+                continue
+            contig = parts[0]
+            try:
+                start = int(parts[3])
+                end   = int(parts[4])
+            except ValueError:
+                continue
+            strand     = 1 if parts[6] == "+" else -1
+            locus_tag  = None
+            for attr in parts[8].split(";"):
+                attr = attr.strip()
+                if attr.startswith("locus_tag="):
+                    locus_tag = attr[10:].strip()
+                    break
+                if attr.startswith("ID=") and locus_tag is None:
+                    locus_tag = attr[3:].strip()
+            if locus_tag:
+                coord_map[locus_tag] = (contig, start, end, strand)
 
-    Returns dict: genome_faa_name → {prodigal_orf_id → operon_id}
+    if not coord_map:
+        return False
+
+    matched = 0
+    with open(bakta_faa_path) as fh_in, open(out_faa_path, "w") as fh_out:
+        current_id = None
+        for line in fh_in:
+            if line.startswith(">"):
+                current_id = line[1:].split()[0].strip()
+                coords = coord_map.get(current_id)
+                if coords:
+                    contig, start, end, strand = coords
+                    fh_out.write(
+                        f">{current_id} # {start} # {end} # {strand} # "
+                        f"ID={current_id};partial=00;start_type=ATG;"
+                        f"rbs_motif=None;gc_cont=0.500\n"
+                    )
+                    matched += 1
+                else:
+                    # No coordinates found — write original header as fallback
+                    fh_out.write(line)
+            else:
+                fh_out.write(line)
+
+    return matched > 0
+
+
+def run_uniop(faa_files, fna_dir, out_dir, uniop_path, fna_ext="fna",
+              prodigal_faa_dir=None, bakta_gff_dir=None):
+    """
+    Run UniOP on each genome.
+
+    Input mode priority:
+      1. pyrodigal FAA (--fna_dir used): headers already Prodigal-compatible
+         → pass directly to UniOP with -a
+      2. Bakta FAA + GFF3 (--faa_dir + --bakta_gff_dir): reconstruct headers
+         from GFF3 coordinates → write temp FAA → pass to UniOP with -a
+         (locus tags preserved in all outputs, no re-annotation needed)
+      3. FNA fallback: UniOP runs Prodigal internally with -i
+
+    Returns dict: genome_faa_name → {orf_id → operon_id}
     """
     uniop_dir = out_dir / "_uniop"
     uniop_dir.mkdir(exist_ok=True)
@@ -841,65 +906,89 @@ def run_uniop(faa_files, fna_dir, out_dir, uniop_path, fna_ext="fna"):
 
         operon_file = work_dir / "uniop.operon"
         pred_file   = work_dir / "uniop.pred"
-        # UniOP saves the FAA it generates with the same stem as the input FNA
-        uniop_faa   = work_dir / f"{stem}.faa"
 
-        if operon_file.exists() and uniop_faa.exists():
+        faa_for_uniop = None
+        faa_for_index = None
+
+        # Priority 1: pyrodigal FAA — headers already Prodigal-compatible
+        if prodigal_faa_dir:
+            candidate = Path(prodigal_faa_dir) / f"{stem}.faa"
+            if candidate.exists():
+                faa_for_uniop = candidate
+                faa_for_index = candidate
+
+        # Priority 2: Bakta FAA + GFF3 — build temp FAA with coordinate headers
+        if faa_for_uniop is None and bakta_gff_dir:
+            bakta_gff = None
+            for ext in (".gff3", ".gff"):
+                c = Path(bakta_gff_dir) / (stem + ext)
+                if c.exists():
+                    bakta_gff = c
+                    break
+            if bakta_gff and faa.exists():
+                temp_faa = work_dir / f"{stem}_uniop.faa"
+                if not temp_faa.exists():
+                    ok = make_uniop_faa(str(faa), str(bakta_gff), str(temp_faa))
+                    if not ok:
+                        print(f"  [WARN] UniOP: could not build temp FAA for {stem}",
+                              file=sys.stderr)
+                if temp_faa.exists():
+                    faa_for_uniop = temp_faa
+                    faa_for_index = temp_faa
+
+        if operon_file.exists():
             print(f"  [INFO] UniOP cache hit for {stem}")
         else:
-            # Always use -i mode (FNA) — Bakta FAA headers lack coordinates
-            fna_path = None
-            if fna_dir:
-                for ext in [fna_ext, "fna", "fasta", "fa"]:
-                    candidate = Path(fna_dir) / f"{stem}.{ext}"
-                    if candidate.exists():
-                        fna_path = candidate
-                        break
-            if fna_path is None:
-                print(f"  [WARN] UniOP: no FNA found for {stem} — skipping.",
-                      file=sys.stderr)
-                continue
+            if faa_for_uniop:
+                cmd = ["python3", str(uniop_path),
+                       "-a", str(faa_for_uniop.resolve()),
+                       "-t", str(work_dir.resolve())]
+            else:
+                # Priority 3: FNA — UniOP runs Prodigal internally
+                fna_path = None
+                if fna_dir:
+                    for ext in [fna_ext, "fna", "fasta", "fa"]:
+                        candidate = Path(fna_dir) / f"{stem}.{ext}"
+                        if candidate.exists():
+                            fna_path = candidate
+                            break
+                if fna_path is None:
+                    print(f"  [WARN] UniOP: no FAA or FNA found for {stem} — skipping.",
+                          file=sys.stderr)
+                    continue
+                cmd = ["python3", str(uniop_path),
+                       "-i", str(fna_path.resolve()),
+                       "-t", str(work_dir.resolve())]
 
-            cmd = ["python3", str(uniop_path),
-                   "-i", str(fna_path.resolve()),   # absolute path
-                   "-t", str(work_dir.resolve())]    # absolute path
             r = subprocess.run(cmd, capture_output=True, text=True)
             if r.returncode != 0:
                 print(f"  [WARN] UniOP failed for {stem}:\n{r.stderr[:400]}",
                       file=sys.stderr)
-                # Also write full stderr to a per-genome log
                 err_log = work_dir / "uniop_error.log"
                 err_log.write_text(
                     f"Command: {' '.join(cmd)}\n\nSTDOUT:\n{r.stdout}\n\nSTDERR:\n{r.stderr}")
                 print(f"         Full error → {err_log}", file=sys.stderr)
                 continue
 
-        # Find the FAA produced by UniOP's Prodigal run
-        # UniOP names it after the FNA stem, placed in the work_dir
-        faa_candidates = list(work_dir.glob("*.faa"))
-        if not faa_candidates:
-            print(f"  [WARN] UniOP: no FAA found in {work_dir} for {stem}",
-                  file=sys.stderr)
-            continue
-        uniop_faa = faa_candidates[0]
+        if faa_for_index is None:
+            faa_candidates = list(work_dir.glob("*.faa"))
+            if not faa_candidates:
+                print(f"  [WARN] UniOP: no FAA for index in {work_dir}",
+                      file=sys.stderr)
+                continue
+            faa_for_index = faa_candidates[0]
 
-        # Build index → prodigal orf name
-        idx_to_orf = _parse_uniop_faa_index(str(uniop_faa))
+        idx_to_orf = _parse_uniop_faa_index(str(faa_for_index))
 
-        # Parse operon predictions
         orf_to_op = {}
         if operon_file.exists():
             orf_to_op = _parse_uniop_operon(str(operon_file), idx_to_orf)
-
-        # Fallback to pairwise predictions if operon file is empty
         if not orf_to_op and pred_file.exists():
             orf_to_op = _parse_uniop_pred(str(pred_file), idx_to_orf)
 
         n_operons = len(set(orf_to_op.values()))
-        n_genes   = len(orf_to_op)
-        print(f"  [INFO] {stem}: {n_operons} operons, {n_genes} genes assigned")
+        print(f"  [INFO] {stem}: {n_operons} operons, {len(orf_to_op)} genes assigned")
 
-        # Key by both faa.name and stem for flexible lookup
         genome_operon_map[faa.name] = orf_to_op
         genome_operon_map[stem]     = orf_to_op
 
@@ -1649,10 +1738,12 @@ def main():
             print(f"       UniOP script: {uniop_script}")
             genome_operon_map = run_uniop(
                 faa_files,
-                fna_dir    = fna_dir_for_uniop,
-                out_dir    = out_dir,
-                uniop_path = str(uniop_script),
-                fna_ext    = args.fna_ext if args.fna_dir else "fna",
+                fna_dir          = fna_dir_for_uniop,
+                out_dir          = out_dir,
+                uniop_path       = str(uniop_script),
+                fna_ext          = args.fna_ext if args.fna_dir else "fna",
+                prodigal_faa_dir = str(faa_dir) if args.fna_dir else None,
+                bakta_gff_dir    = args.bakta_gff_dir,
             )
             if genome_operon_map:
                 # Add uniop_context to every row for use in all output files
