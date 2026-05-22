@@ -12,7 +12,7 @@ New in this version (metagenome support):
   12. Long-format tidy output  MetalGenie-Evo-results-long.tsv
 """
 
-import argparse, csv, json, os, re, sys, fnmatch, shutil, subprocess
+import argparse, csv, datetime, json, os, re, sys, fnmatch, shutil, subprocess
 from collections import defaultdict
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from pathlib import Path
@@ -723,7 +723,6 @@ def _parse_uniop_operon(operon_path, idx_to_orf):
 
     Returns dict: orf_name → operon_id (string)
     """
-    import re as _re
     orf_to_op = {}
     try:
         with open(operon_path) as fh:
@@ -741,10 +740,10 @@ def _parse_uniop_operon(operon_path, idx_to_orf):
                 # Extract gene indices from numpy array string.
                 # e.g. "[np.int64(1), np.int64(2), np.int64(3)]" → [1, 2, 3]
                 # Match \(digits\) to avoid capturing "64" from "np.int64".
-                indices = [int(x) for x in _re.findall(r'\((\d+)\)', idx_genes_str)]
+                indices = [int(x) for x in re.findall(r'\((\d+)\)', idx_genes_str)]
                 # Fallback: plain "[1, 2, 3]" format (no type prefix)
                 if not indices:
-                    indices = [int(x) for x in _re.findall(r'\b(\d+)\b', idx_genes_str)]
+                    indices = [int(x) for x in re.findall(r'\b(\d+)\b', idx_genes_str)]
                 op_id = f"OP{int(idx_op_str):04d}"
                 for idx in indices:
                     orf = idx_to_orf.get(idx)
@@ -763,7 +762,6 @@ def _parse_uniop_pred(pred_path, idx_to_orf, threshold=0.5):
     Uses union-find to build connected components of pairs with prob > threshold.
     Returns dict: orf_name → operon_id
     """
-    import re as _re
     parent = {}
 
     def _find(x):
@@ -991,7 +989,6 @@ def run_uniop(faa_files, fna_dir, out_dir, uniop_path, fna_ext="fna",
         print(f"  [INFO] {stem}: {n_operons} operons, {len(orf_to_op)} genes assigned")
 
         genome_operon_map[faa.name] = orf_to_op
-        genome_operon_map[stem]     = orf_to_op
 
     return genome_operon_map
 
@@ -1243,7 +1240,7 @@ def write_operon_structure(path, final_rows, genome_operon_map,
             ctx = _uniop_context(orf, genome, genome_operon_map,
                                  op_to_orfs_with_hits)
             row = {
-                "operon_id":         op_id if op_id else f"no_operon",
+                "operon_id":         op_id if op_id else "no_operon",
                 "genome":            genome,
                 "contig":            r["contig"],
                 "orf":               orf,
@@ -1559,6 +1556,9 @@ def main():
 
     gene_map=read_map(str(Path(args.hmm_dir)/"MetalGenie-map.txt"))
     if not gene_map: gene_map=read_map(str(Path(args.hmm_dir)/"FeGenie-map.txt"))
+    if not gene_map:
+        print(f"[WARN] No MetalGenie-map.txt or FeGenie-map.txt found in {args.hmm_dir} — "
+              f"gene names will show as raw HMM stems in all outputs.", file=sys.stderr)
     cutoffs=read_cutoffs(str(Path(args.hmm_dir)/"HMM-bitcutoffs.txt"))
     cat_hmms=defaultdict(list); h2c={}
     for entry in sorted(Path(args.hmm_dir).iterdir()):
@@ -1804,13 +1804,12 @@ def main():
               f"-i {anvio_path.name} -p MetalGenie-Evo")
 
     # ── Write run log ─────────────────────────────────────────────────────────
-    import datetime as _dt
     log_path = out_dir / "MetalGenie-Evo-run.log"
     cc2 = defaultdict(int)
     for r in final_rows: cc2[r["cat"]] += 1
     with open(log_path, "w") as lf:
         lf.write("MetalGenie-Evo run log\n")
-        lf.write(f"Date          : {_dt.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+        lf.write(f"Date          : {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
         lf.write(f"Command       : {' '.join(sys.argv)}\n")
         lf.write(f"Output dir    : {out_dir}\n")
         lf.write(f"Genomes input : {len(faa_files)}\n")
