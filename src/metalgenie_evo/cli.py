@@ -223,9 +223,6 @@ def _pyrodigal_job(args_tuple):
 
 def run_prodigal(fna_files, out_dir, meta_mode=False, threads=1,
                  gene_caller="pyrodigal-gv"):
-    print(f"[INFO] Running {gene_caller} on {len(fna_files)} assemblies "
-          f"({'meta' if meta_mode else 'single'} mode)…")
-
     prodigal_dir = out_dir / "_prodigal"
     faa_dir = prodigal_dir / "faa"
     gff_dir = prodigal_dir / "gff"
@@ -238,7 +235,7 @@ def run_prodigal(fna_files, out_dir, meta_mode=False, threads=1,
         for fna in fna_files
     ]
 
-    print(f"[INFO] Running {caller} on {len(fna_files)} assemblies "
+    print(f"[INFO] Running {gene_caller} on {len(fna_files)} assemblies "
           f"({'meta' if meta_mode else 'single'} mode)…")
 
     n_workers = min(threads, len(fna_files))
@@ -741,9 +738,13 @@ def _parse_uniop_operon(operon_path, idx_to_orf):
                     continue
                 idx_genes_str = line[:last_comma].strip().strip('"')
                 idx_op_str    = line[last_comma+1:].strip()
-                # Extract all integers from the numpy array string
-                # e.g. "[np.int64(1), np.int64(2), np.int64(3)]"
-                indices = [int(x) for x in _re.findall(r'\d+', idx_genes_str)]
+                # Extract gene indices from numpy array string.
+                # e.g. "[np.int64(1), np.int64(2), np.int64(3)]" → [1, 2, 3]
+                # Match \(digits\) to avoid capturing "64" from "np.int64".
+                indices = [int(x) for x in _re.findall(r'\((\d+)\)', idx_genes_str)]
+                # Fallback: plain "[1, 2, 3]" format (no type prefix)
+                if not indices:
+                    indices = [int(x) for x in _re.findall(r'\b(\d+)\b', idx_genes_str)]
                 op_id = f"OP{int(idx_op_str):04d}"
                 for idx in indices:
                     orf = idx_to_orf.get(idx)
@@ -1192,12 +1193,15 @@ def _uniop_context(orf, genome, genome_operon_map, op_to_orfs_with_hits):
     - 'singleton_in_operon'        : in a UniOP operon but no other HMM hits
                                      in the same operon
     - 'not_in_operon'              : not assigned to any UniOP operon
+
+    Keys in op_to_orfs_with_hits must be (genome, op_id) tuples to avoid
+    collision between identically-numbered operons from different genomes.
     """
     op_map = genome_operon_map.get(genome, {})
     op_id  = op_map.get(orf)
     if op_id is None:
         return "not_in_operon"
-    other_hits = [o for o in op_to_orfs_with_hits.get(op_id, []) if o != orf]
+    other_hits = [o for o in op_to_orfs_with_hits.get((genome, op_id), []) if o != orf]
     return "in_operon_with_other_hits" if other_hits else "singleton_in_operon"
 
 
@@ -1211,13 +1215,14 @@ def write_operon_structure(path, final_rows, genome_operon_map,
       singleton_in_operon        — operon contains no other HMM-positive ORFs
       not_in_operon              — ORF not assigned to any UniOP operon
     """
-    # Build operon → list of ORFs that have HMM hits
+    # Build (genome, operon_id) → list of ORFs with HMM hits.
+    # Keyed by tuple to prevent collision when different genomes share operon IDs (OP0001, …).
     op_to_orfs_with_hits = defaultdict(list)
     for r in final_rows:
         op_map = genome_operon_map.get(r["genome"], {})
         op_id  = op_map.get(r["orf"])
         if op_id:
-            op_to_orfs_with_hits[op_id].append(r["orf"])
+            op_to_orfs_with_hits[(r["genome"], op_id)].append(r["orf"])
 
     use_bakta = bool(prodigal_to_bakta)
     fields = ["operon_id","genome","contig","orf","gene","category",
@@ -1234,7 +1239,7 @@ def write_operon_structure(path, final_rows, genome_operon_map,
             genome = r["genome"]; orf = r["orf"]
             op_map = genome_operon_map.get(genome, {})
             op_id  = op_map.get(orf, "")
-            members = [o for o in op_to_orfs_with_hits.get(op_id, []) if o != orf]
+            members = [o for o in op_to_orfs_with_hits.get((genome, op_id), []) if o != orf]
             ctx = _uniop_context(orf, genome, genome_operon_map,
                                  op_to_orfs_with_hits)
             row = {
@@ -1538,7 +1543,15 @@ def main():
         faa_ext="faa"
     else:
         faa_dir=Path(args.faa_dir); faa_ext=args.faa_ext
-        if args.gff_dir: gff_dir_path=Path(args.gff_dir)
+        if args.gff_dir:
+            gff_dir_path=Path(args.gff_dir)
+        else:
+            print("[WARN] --faa_dir used without --gff_dir: falling back to "
+                  "ordinal-index clustering. If using Bakta FAA files, this "
+                  "will produce incorrect clusters because Bakta locus tags "
+                  "(e.g. CJMEHH_00001) don't encode contig boundaries. "
+                  "Add --gff_dir pointing to your Bakta GFF3 files.",
+                  file=sys.stderr)
 
     faa_files=sorted(faa_dir.glob(f"*.{faa_ext}"))
     if not faa_files: sys.exit(f"[ERROR] No .{faa_ext} in {faa_dir}")
@@ -1603,7 +1616,8 @@ def main():
             for orf in orf_group:
                 hit=orf_hits.get(orf)
                 if hit is None: continue
-                contig=_orf_to_contig(orf)
+                contig=(orf_coords[orf]["contig"] if orf in orf_coords
+                        else _orf_to_contig(orf))
                 cluster_rows.append({"cat":hit["cat"],"genome":genome,"contig":contig,
                     "orf":orf,"hmm_stem":hit["hmm_stem"],"bitscore":hit["bitscore"],
                     "cutoff":cutoffs.get(hit["hmm_stem"],0),"evalue":hit["evalue"],
@@ -1686,10 +1700,11 @@ def main():
             r["bakta_id"] = r["orf"]
         print("[INFO] No Bakta mapping — orf column contains Prodigal ORF names")
 
+    # summary and gene-summary don't carry uniop_context — write now
     for path,fn in [(out_dir/"MetalGenie-Evo-summary.csv",write_summary),
-                    (out_dir/"MetalGenie-Evo-geneSummary-clusters.csv",write_gene_summary),
-                    (out_dir/"MetalGenie-Evo-results-long.tsv",write_long_format)]:
+                    (out_dir/"MetalGenie-Evo-geneSummary-clusters.csv",write_gene_summary)]:
         print(f"[INFO] Writing {path.name}…"); fn(str(path),final_rows)
+    # long-format is written after UniOP so uniop_context column is populated
     print(f"[INFO] Writing MetalGenie-Evo-heatmap-data.csv…")
     write_heatmap(str(out_dir/"MetalGenie-Evo-heatmap-data.csv"),final_rows,all_genomes,norm_dict)
 
@@ -1746,12 +1761,13 @@ def main():
                 bakta_gff_dir    = args.bakta_gff_dir,
             )
             if genome_operon_map:
-                # Add uniop_context to every row for use in all output files
+                # Add uniop_context to every row for use in all output files.
+                # Key by (genome, op_id) to prevent cross-genome operon ID collision.
                 op_to_hits = defaultdict(list)
                 for r in final_rows:
                     op_id = genome_operon_map.get(r["genome"], {}).get(r["orf"])
                     if op_id:
-                        op_to_hits[op_id].append(r["orf"])
+                        op_to_hits[(r["genome"], op_id)].append(r["orf"])
                 for r in final_rows:
                     r["uniop_context"] = _uniop_context(
                         r["orf"], r["genome"], genome_operon_map, op_to_hits)
@@ -1769,6 +1785,11 @@ def main():
             else:
                 print("[WARN] UniOP produced no predictions — "
                       "see MetalGenie-Evo-run.log for details.", file=sys.stderr)
+
+    # Write long-format after UniOP so uniop_context column is included when available
+    long_path = out_dir / "MetalGenie-Evo-results-long.tsv"
+    print(f"[INFO] Writing {long_path.name}…")
+    write_long_format(str(long_path), final_rows)
 
     # ── Anvi'o functions output (optional) ───────────────────────────────────
     if args.anvio:
