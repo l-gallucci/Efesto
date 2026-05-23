@@ -1,0 +1,3 @@
+Bad file format in HMM file /Users/lgallucc/Desktop/LocalBioinf/MetalGenie-Evo/hmm_library/_dedup_work/sidero_active.hmm:
+Didn't find HMMER3/f tag: bad format or not a HMMER save file?
+

@@ -108,6 +108,11 @@ def main():
     p.add_argument("--norm_coverage", action="store_true",
                    help="TPM-normalise coverage heatmap")
     p.add_argument("--keep_tblout", action="store_true")
+    p.add_argument("--normalize_hmms", action="store_true",
+                   help="Convert any pre-HMMER3/f profiles in --hmm_dir to current "
+                        "format using hmmconvert before running. Needed only once "
+                        "after adding models built with HMMER < 3.1. "
+                        "Safe to run repeatedly (skips already-current files).")
     # ── Operon prediction (UniOP) ─────────────────────────────────────────────
     p.add_argument("--operon_prediction", action="store_true",
                    help="Run UniOP operon prediction and produce "
@@ -179,6 +184,10 @@ def main():
     if not gene_map:
         print(f"[WARN] No MetalGenie-map.txt or FeGenie-map.txt found in {args.hmm_dir} — "
               f"gene names will show as raw HMM stems in all outputs.", file=sys.stderr)
+
+    if args.normalize_hmms:
+        from metalgenie_evo.hmmer import normalize_hmm_library
+        normalize_hmm_library(args.hmm_dir)
 
     cutoffs  = read_cutoffs(str(Path(args.hmm_dir) / "HMM-bitcutoffs.txt"))
     registry = load_registry(args.hmm_dir)

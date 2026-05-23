@@ -1,11 +1,54 @@
-"""HMMER search execution and tblout parsing."""
+"""HMMER search execution, tblout parsing, and library normalization."""
 
 import os
 import sys
 import subprocess
+import tempfile
 from collections import defaultdict
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from pathlib import Path
+
+_CURRENT_HMM_TAG = "HMMER3/f"
+
+
+def normalize_hmm_library(hmm_dir):
+    """Convert any pre-HMMER3/f profiles to current format using hmmconvert.
+
+    Safe to call repeatedly — skips files already in HMMER3/f format.
+    Converts in-place. Prints a one-line summary.
+    """
+    hmm_dir = Path(hmm_dir)
+    all_hmms = sorted(hmm_dir.rglob("*.hmm"))
+    needs = []
+    for hmm in all_hmms:
+        try:
+            with open(hmm) as fh:
+                first = next((l.strip() for l in fh if l.strip()), "")
+        except OSError:
+            continue
+        if not first.startswith(_CURRENT_HMM_TAG):
+            needs.append(hmm)
+
+    if not needs:
+        print(f"[INFO] HMM library already normalized ({len(all_hmms)} files)")
+        return
+
+    print(f"[INFO] Normalizing {len(needs)}/{len(all_hmms)} HMM profiles "
+          f"to HMMER3/f via hmmconvert…")
+    converted, failed = 0, []
+    for hmm in needs:
+        r = subprocess.run(["hmmconvert", str(hmm)],
+                           capture_output=True, text=True)
+        if r.returncode == 0 and r.stdout.strip():
+            hmm.write_text(r.stdout)
+            converted += 1
+        else:
+            failed.append(hmm.name)
+
+    if failed:
+        print(f"[WARN] hmmconvert failed for: {', '.join(failed)}", file=sys.stderr)
+    print(f"[INFO] Normalized {converted} profiles"
+          + (f"  ({len(failed)} failed)" if failed else ""))
 
 
 def _hmmsearch_job(args_tuple):
