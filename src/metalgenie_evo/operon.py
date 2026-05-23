@@ -32,9 +32,9 @@ _DEFAULT_OPERON_RULES = [
      "genes": ["MtrA", "MtrB_TIGR03509", "MtrC_TIGR03507", "MtoA", "CymA"],
      "rule": "mtr_disambiguation", "on_fail": "keep_all"},
     {"name": "SIDERO_TRANSPORT",
-     "categories": ["iron_aquisition-siderophore_transport_potential",
-                    "iron_aquisition-heme_transport",
-                    "iron_aquisition-siderophore_transport"],
+     "categories": ["iron_acquisition-siderophore_transport_potential",
+                    "iron_acquisition-heme_transport",
+                    "iron_acquisition-siderophore_transport"],
      "genes": [], "rule": "require_n_cat_or_lone_trusted", "min_genes": 2,
      "trusted_lone": ["FutA1-iron_ABC_transporter_iron-binding-rep",
                       "FutA2-iron_ABC_transporter_iron-binding-rep",
@@ -42,10 +42,10 @@ _DEFAULT_OPERON_RULES = [
                       "LbtU-LvtA-PiuA-PirA-RhtA", "LbtU-LbtB-legiobactin_receptor",
                       "LbtU_LbtB-legiobactin_receptor_2", "IroC-salmochelin_transport-rep"],
      "on_fail": "drop"},
-    {"name": "SIDERO_SYNTH", "categories": ["iron_aquisition-siderophore_synthesis"],
+    {"name": "SIDERO_SYNTH", "categories": ["iron_acquisition-siderophore_synthesis"],
      "genes": [], "rule": "require_n_cat", "min_genes": 3, "on_fail": "drop"},
     {"name": "IRON_TRANSPORT",
-     "categories": ["iron_aquisition-iron_transport", "iron_aquisition-heme_oxygenase"],
+     "categories": ["iron_acquisition-iron_transport", "iron_acquisition-heme_oxygenase"],
      "genes": [], "rule": "require_n_cat", "min_genes": 2, "on_fail": "drop"},
 ]
 
@@ -65,11 +65,11 @@ _TRUSTED_LONE = {"FutA1-iron_ABC_transporter_iron-binding-rep",
                  "LbtU-LvtA-PiuA-PirA-RhtA", "LbtU-LbtB-legiobactin_receptor",
                  "LbtU_LbtB-legiobactin_receptor_2", "IroC-salmochelin_transport-rep"}
 
-_SIDERO_TRANS_CATS = {"iron_aquisition-siderophore_transport_potential",
-                      "iron_aquisition-siderophore_transport",
-                      "iron_aquisition-heme_transport"}
-_SIDERO_SYNTH_CATS = {"iron_aquisition-siderophore_synthesis"}
-_IRON_TRANS_CATS   = {"iron_aquisition-iron_transport", "iron_aquisition-heme_oxygenase"}
+_SIDERO_TRANS_CATS = {"iron_acquisition-siderophore_transport_potential",
+                      "iron_acquisition-siderophore_transport",
+                      "iron_acquisition-heme_transport"}
+_SIDERO_SYNTH_CATS = {"iron_acquisition-siderophore_synthesis"}
+_IRON_TRANS_CATS   = {"iron_acquisition-iron_transport", "iron_acquisition-heme_oxygenase"}
 _IRON_ACQ_ALL      = _SIDERO_TRANS_CATS | _SIDERO_SYNTH_CATS | _IRON_TRANS_CATS
 
 FE_REDOX = {"iron_reduction", "iron_oxidation"}

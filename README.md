@@ -533,7 +533,7 @@ If `operon_rules.json` is present in `--hmm_dir`, the JSON rule engine is used i
 # Full rebuild from all sources
 python scripts/curate_hmm_library.py \
     --fegenie_dir   /path/to/FeGenie/hmms/iron/ \
-    --flat_dir      /path/to/new_iron_hmms  iron_aquisition  tabuteau \
+    --flat_dir      /path/to/new_iron_hmms  iron_acquisition  tabuteau \
     --methmmdb_json /path/to/MetHMMDB/metadata.json \
     --methmmdb_dir  /path/to/MetHMMDB/ \
     --out_dir       hmm_library/ \

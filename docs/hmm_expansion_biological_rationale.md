@@ -519,14 +519,15 @@ neutrophilic iron oxidizers:
 Based on PubMed-indexed work by Blake & White (2020), at least **six distinct
 electron carrier arrangements** are used across 8+ phyla of iron-oxidizing microorganisms,
 suggesting that rusticyanin/Cyt579 is only one solution to the problem of Fe²⁺ oxidation
-at low pH. The FeGenie library currently captures Cyc2 but lacks rusticyanin and Cyt579.
+at low pH. The FeGenie library captured Cyc2 but lacked rusticyanin and Cyt579.
+**Both are now added (2026-05-23).**
 
 **MetalGenie-Evo relevance:**
 - Rusticyanin + Cyt579 are diagnostic of *acidophilic* iron oxidation (acid mine drainage,
   sulfidic mine waste, bioleaching systems)
 - Their presence in a metagenome indicates Fe-S mineral weathering capacity
-- FeGenie developers noted Cyc2 is already covered; rusticyanin and Cyt579 are the
-  missing complementary markers
+- Cyc1 and Cyc2 are already in the library (FeGenie); rusticyanin and Cyt579 complete
+  the acidophilic Fe(II)-oxidation marker set
 
 ### Model organisms
 
@@ -543,14 +544,19 @@ at low pH. The FeGenie library currently captures Cyc2 but lacks rusticyanin and
   *Adv Microb Physiol* 76:81–127.
   [doi:10.1016/bs.ampbs.2020.01.003](https://doi.org/10.1016/bs.ampbs.2020.01.003)
 
-### HMM sources and action
+### HMM sources — DEPLOYED
 
-- **Rusticyanin:** Pfam PF00127 (Copper-binding cupredoxin) — non-specific; need a
-  rusticyanin-specific NCBIfam model. NCBIfam NF033156 (*rusticyanin*) exists.
-- **Cytochrome 579:** limited HMM coverage; may require building a custom model from
-  *At. ferrooxidans* + close relatives sequences
-- **Recommendation:** add to `iron_oxidation-acidophilic` subcategory alongside
-  existing Cyc2 models; flag as `low_confidence` until a calibrated model is available
+| Protein | HMM | Source | GA | LENG | NSEQ | File | Key reference |
+|---------|-----|--------|----|------|------|------|---------------|
+| Rusticyanin | TIGR03095.1 | NCBIfam/JCVI | 146.7 | 148 | 4 | `hmm_library/iron_oxidation/rusticyanin_TIGR03095.hmm` | [doi:10.1099/mic.0.26966-0](https://doi.org/10.1099/mic.0.26966-0) |
+| Cytochrome 579 | NF033864.1 | NCBIfam | 280.0 | 179 | 4 | `hmm_library/iron_oxidation/cytochrome579_NF033864.hmm` | [doi:10.1128/AEM.02799-07](https://doi.org/10.1128/AEM.02799-07) |
+
+Note: NF033156 is *not* rusticyanin (it is a bleomycin-binding protein). Correct model
+is TIGR03095 (`rusti_cyanin` equivalog, JCVI, NSEQ=4, GA=TC=146.7, NC=68.5).
+
+Both models have NCBIfam-calibrated GA=TC cutoffs (no borderline sequences in NCBI
+training universe). Added to `iron_oxidation` category alongside Cyc1/Cyc2 (consistent
+placement — no separate subcategory created).
 
 ---
 
@@ -730,18 +736,18 @@ for this ecological context.
 
 ## Priority and implementation order
 
-| Priority | Category | Rationale |
-|----------|----------|-----------|
-| 1 | **MtrA / MtoA disambiguation** | Fix existing model ambiguity; directly affects iron reduction vs oxidation calls |
-| 2 | **Rusticyanin + Cytochrome 579** | Extend existing `iron_oxidation` for acidophilic systems; one known NCBIfam model |
-| 3 | **Fe-S sensors (FNR, IscR, NsrR, SoxR)** | Extend existing `iron_gene_regulation`; NCBIfam models ready |
-| 4 | **Ferredoxin / Flavodoxin switch** | Iron stress biomarker; relevant for ocean metagenomes |
-| 5 | **Fur-family (Zur, Mur, Nur, PerR)** | New regulatory categories; NCBIfam models ready with cutoffs |
-| 6 | **ZnuABC / MntH** | High-confidence uptake systems; specific NCBIfam models available |
-| 7 | **SUF / ISC** | Strong environmental genomics relevance; well-curated NCBIfam models |
-| 8 | **Dps iron storage + Multicopper oxidase** | Complete oxic iron cycling picture |
-| 9 | **ModABC (molybdate transport)** | Direct metal uptake system; simpler than full Moco biosynthesis |
-| 10 | **Cobalamin biosynthesis** | Complex (30 genes), two pathways; highest implementation cost |
+| Priority | Category | Rationale | Key references (PubMed) |
+|----------|----------|-----------|-------------------------|
+| 1 | **MtrA / MtoA disambiguation** | ✅ DONE (2026-05-23) — curated seeds, TC/GA/NC calibrated | [doi:10.1128/AEM.03493-15](https://doi.org/10.1128/AEM.03493-15) |
+| 2 | **Rusticyanin + Cytochrome 579** | ✅ DONE (2026-05-23) — TIGR03095 + NF033864 deployed to `iron_oxidation/` | [doi:10.1099/mic.0.26966-0](https://doi.org/10.1099/mic.0.26966-0); [doi:10.1128/AEM.02799-07](https://doi.org/10.1128/AEM.02799-07) |
+| 3 | **Fe-S sensors (IscR, SoxR, NsrR)** | ✅ DONE (2026-05-23) — TIGR02010.1/TIGR01950.1/NF008240.0 deployed. FNR skipped: no clean NCBIfam equivalog (CRP-FNR domain non-specific). | IscR: [doi:10.1016/s1369-5274(03)00039-0](https://doi.org/10.1016/s1369-5274(03)00039-0); SoxR: [doi:10.1016/j.jinorgbio.2013.11.008](https://doi.org/10.1016/j.jinorgbio.2013.11.008); NsrR: [doi:10.1371/journal.pone.0003623](https://doi.org/10.1371/journal.pone.0003623) |
+| 4 | **Ferredoxin / Flavodoxin switch** | ✅ DONE (2026-05-23) — TIGR01752.1 (flav_long) + TIGR01753.1 (flav_short) added to `iron_stress`. No clean petF equivalog in NCBIfam. | [doi:10.1038/382802a0](https://doi.org/10.1038/382802a0) |
+| 5 | **Fur-family (Zur, PerR)** | ✅ DONE (2026-05-23) — NF008646.0 (Zur) + NF052545.1 (PerR). Mur/Nur: no clean NCBIfam equivalog found. | Zur: [doi:10.3389/fcimb.2013.00059](https://doi.org/10.3389/fcimb.2013.00059); PerR: [doi:10.1111/j.1365-2958.2008.06192.x](https://doi.org/10.1111/j.1365-2958.2008.06192.x) |
+| 6 | **ZnuABC / MntH** | ✅ ALREADY IN LIBRARY — ZnuABC in `metal_resistance-cobalt_zinc_cadmium`, MntH in `metal_resistance-non-specific`. No action needed. | — |
+| 7 | **SUF / ISC** | ✅ DONE (2026-05-23) — sufC/sufB/sufS (TIGR01978/01980/01979) + IscS (TIGR02006.1) in new `iron_sulfur_assembly` category. sufD skipped (7-bit GA-NC gap). | SUF: [doi:10.1074/jbc.M308004200](https://doi.org/10.1074/jbc.M308004200); IscS: [doi:10.1074/jbc.M401261200](https://doi.org/10.1074/jbc.M401261200) |
+| 8 | **Dps iron storage + Multicopper oxidase** | ✅ DONE (2026-05-23) — Dps (NF009990.0) added to `iron_storage`; multicopper oxidase already in `metal_resistance-copper` (CueO/Mco/MmcO). Dps overlaps with PF00210 (ferritin domain) — intentional, Dps is functionally distinct. | [doi:10.1128/MMBR.66.4.630-670.2002](https://doi.org/10.1128/MMBR.66.4.630-670.2002) |
+| 9 | **ModABC (molybdate transport)** | ✅ DONE (2026-05-23) — ModA already in library; added ModC (TIGR02142.1). ModB skipped (GA-NC gap = 0.75 bits). | [doi:10.1111/mmi.14152](https://doi.org/10.1111/mmi.14152) |
+| 10 | **Cobalamin biosynthesis** | Complex (30 genes), two pathways; highest implementation cost | [doi:10.1042/BST20120066](https://doi.org/10.1042/BST20120066) |
 
 For each category, the workflow is:
 1. Download target NCBIfam/TIGRFAM models by accession from NCBI FTP

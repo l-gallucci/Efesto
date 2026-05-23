@@ -60,11 +60,11 @@ identity with ≥ 80% bidirectional coverage. The representative was selected by
 
 | Deprecated model | Category | Kept representative | Reason |
 |---|---|---|---|
-| `IsdG-heme-oxygenase_fam2-rep` | iron_aquisition-heme_oxygenase | `IsdG-heme-oxygenase_fam1-rep` | fam1 has higher nseq (15 vs 8); near-identical cutoffs (102 vs 101.8) |
-| `Sid_MbtC_Mycobactin_biosynthesis_…` | iron_aquisition-siderophore_synthesis | `K04790` (tabuteau) | tabuteau model calibrated (626.5), nseq=128 vs fegenie nseq=25, cutoff=0 |
-| `Sid_AsbD_Petrobactin_biosynthesis_…` | iron_aquisition-siderophore_synthesis | `K24111` (tabuteau) | tabuteau model calibrated (97.4), nseq=39 vs fegenie nseq=25 |
-| `FpuC-FhuC-FpuD-YusV-CbrD-FepC-PvuE-FecE-HatC-ATPase` | iron_aquisition-siderophore_transport | `FpuCD-YusV-CbrD-FepC-FepE-PvuE-ABC_transporters_ATPase` | near-identical ABC ATPase models (nseq 51 vs 50); retained the one with slightly higher nseq |
-| `FecE-PvuE-FhuC-CbrD-FepC-YusV-FpuD-FpuC-PiuA-PirA-FepA-RhtA` | iron_aquisition-siderophore_transport | `PvuE-FecB-vibrioferrin_transport` | kept higher-cutoff model (350.0 vs 200.1) |
+| `IsdG-heme-oxygenase_fam2-rep` | iron_acquisition-heme_oxygenase | `IsdG-heme-oxygenase_fam1-rep` | fam1 has higher nseq (15 vs 8); near-identical cutoffs (102 vs 101.8) |
+| `Sid_MbtC_Mycobactin_biosynthesis_…` | iron_acquisition-siderophore_synthesis | `K04790` (tabuteau) | tabuteau model calibrated (626.5), nseq=128 vs fegenie nseq=25, cutoff=0 |
+| `Sid_AsbD_Petrobactin_biosynthesis_…` | iron_acquisition-siderophore_synthesis | `K24111` (tabuteau) | tabuteau model calibrated (97.4), nseq=39 vs fegenie nseq=25 |
+| `FpuC-FhuC-FpuD-YusV-CbrD-FepC-PvuE-FecE-HatC-ATPase` | iron_acquisition-siderophore_transport | `FpuCD-YusV-CbrD-FepC-FepE-PvuE-ABC_transporters_ATPase` | near-identical ABC ATPase models (nseq 51 vs 50); retained the one with slightly higher nseq |
+| `FecE-PvuE-FhuC-CbrD-FepC-YusV-FpuD-FpuC-PiuA-PirA-FepA-RhtA` | iron_acquisition-siderophore_transport | `PvuE-FecB-vibrioferrin_transport` | kept higher-cutoff model (350.0 vs 200.1) |
 | `CdCoZn_efflux_czcA_5` | metal_resistance-multimetal | `CdCoZn_efflux_czcA_1` | both methmmdb czcA variants; czcA_1 has more than double the nseq (50 vs 23) |
 | `Ag_efflux_silA_1` | metal_resistance-silver | `CuAg_cusA_1` (metal_resistance-multimetal) | CusA and SilA are paralogous RND efflux pumps (Cu/Ag vs Ag); the broader CuAg model with higher nseq (75 vs 25) covers both families |
 | `Ag_lipoprotein_silC_1` | metal_resistance-silver | `CuAg_cusC_1` (metal_resistance-multimetal) | CusC and SilC are paralogous OMF components of the same RND system; CuAg model retained (nseq 101 vs 24) |
@@ -81,8 +81,28 @@ Retaining them in the resistance category would inflate false-positive resistanc
 
 | Deprecated model | Source category | Clusters with | Evidence |
 |---|---|---|---|
-| `Fe_binding_yfeA_1` (methmmdb) | iron_resistance | FeGenie `Iron_uptake_YfeA_…` [iron_aquisition-iron_transport] | YfeA is the periplasmic substrate-binding protein of the Yfe chelated-iron ABC transporter (Yersinia pestis). It is an iron acquisition gene, not a resistance determinant. |
-| `Fe_transport_1` (methmmdb) | iron_resistance | FeGenie `Iron_uptake_YfeB_…` [iron_aquisition-iron_transport] | YfeB is the membrane permease subunit of the same Yfe system. Same rationale as above. |
+| `Fe_binding_yfeA_1` (methmmdb) | iron_resistance | FeGenie `Iron_uptake_YfeA_…` [iron_acquisition-iron_transport] | YfeA is the periplasmic substrate-binding protein of the Yfe chelated-iron ABC transporter (Yersinia pestis). It is an iron acquisition gene, not a resistance determinant. |
+| `Fe_transport_1` (methmmdb) | iron_resistance | FeGenie `Iron_uptake_YfeB_…` [iron_acquisition-iron_transport] | YfeB is the membrane permease subunit of the same Yfe system. Same rationale as above. |
+| `Cation_symport_actP_1` | metal_resistance-non-specific | — | ActP is a cation/acetate symporter involved in acetate uptake, not metal homeostasis. No homology to any metal resistance or transport function. |
+| `Multidrug_efflux_yfmO_2` | metal_resistance-non-specific | — | YfmO is a subunit of the MdtABC multidrug efflux complex. Primary function is antibiotic resistance; no evidence for metal-specific efflux. |
+| `Multidrug_resistance_mdtA_1` | metal_resistance-non-specific | — | MdtA: membrane fusion protein of MdtABC multidrug efflux. Not metal-specific. |
+| `Multidrug_resistance_mdtB_1` | metal_resistance-non-specific | — | MdtB: RND permease subunit of MdtABC. Not metal-specific. |
+| `Multidrug_resistance_mdtC_1` | metal_resistance-non-specific | — | MdtC: RND permease subunit of MdtABC. Not metal-specific. |
+
+### Category reclassifications (2026-05-23)
+
+Models whose source category was incorrect but which are retained as active under the correct category.
+
+| Model | Old category | New category | Reason |
+|---|---|---|---|
+| `Fe_periplasmic_1`, `Fe_permease_efeU_1`, `Fe_transport_2/3`, `Fe_transport_fbpB/C_1`, `Fe_transport_fecD/E_1` | `iron_resistance` | `iron_acquisition-iron_transport` | These are iron uptake transporters (EfeU, FbpBC, FecDE, YfeCD); erroneously placed in resistance by FeGenie. [doi:10.3389/fcimb.2013.00090](https://doi.org/10.3389/fcimb.2013.00090) |
+| `Fe_ferripyoverdine_receptor_1`, `Fe_pyochelin_1` | `iron_resistance` | `iron_acquisition-siderophore_transport` | TonB-dependent outer membrane receptors for siderophore-iron complexes; acquisition, not resistance. |
+| `Transferrin_TbpB_binding_protein_Haemophilus_influenzae_P44971` | `iron_storage` | `iron_acquisition-iron_transport` | TbpB captures host transferrin for iron extraction — acquisition from host, not storage. |
+| `FMN_reductase_arsH_2`, `Quinone_reductase_arsH_1` | `metal_resistance-non-specific` | `metal_resistance-arsenic` | ArsH is the auxiliary NADPH-oxidoreductase of the *ars* operon; function is arsenic detoxification. |
+| `Metal_binding_zinT_1` | `metal_resistance-non-specific` | `metal_resistance-cobalt_zinc_cadmium` | ZinT is a periplasmic zinc-binding chaperone that assists ZnuABC zinc uptake. |
+| `Cation_efflux_fieF_1` | `metal_resistance-non-specific` | `metal_resistance-cobalt_zinc_cadmium` | FieF (YiiP) is a CDF-family Fe²⁺/Zn²⁺ efflux transporter; more specific to Zn/Fe homeostasis than "non-specific". |
+| `flavodoxin_long`, `flavodoxin_short` | `iron_gene_regulation` | `iron_stress` | Flavodoxins are electron carriers expressed under iron limitation as ferredoxin substitutes — biomarkers of iron stress, not transcriptional regulators. [doi:10.1038/382802a0](https://doi.org/10.1038/382802a0) |
+| `Zur` | `iron_gene_regulation` | `metal_resistance-cobalt_zinc_cadmium` | Zur is a zinc-sensing Fur-family repressor (Zn²⁺, not Fe²⁺). Placed with ZnuABC and other zinc homeostasis models. [doi:10.3389/fcimb.2013.00059](https://doi.org/10.3389/fcimb.2013.00059) |
 
 ---
 
@@ -103,7 +123,7 @@ regulation vs transport). These were **not deprecated** for the following reason
    (siderophore transport) — these are unrelated folds. Deprecating one would silently
    remove a whole protein class.
 
-3. **FutA1 / FutA2 (iron_aquisition-iron_transport).** These cyanobacterial
+3. **FutA1 / FutA2 (iron_acquisition-iron_transport).** These cyanobacterial
    iron-binding ABC transporter substrate-binding proteins are paralogous (both
    annotated as FutA), share high sequence identity, and cluster at 70%. However
    FutA1 and FutA2 have been shown to have distinct expression patterns and iron
@@ -274,10 +294,14 @@ by separate HMMs `OmcS`, `OmcZ` already in the library).
    of MtrB + MtrC in the same cluster) is the definitive discriminator for sequences
    in this score range. MetalGenie-Evo's UniOP/operon module provides this context.
 
-2. **MtoA NC margin is narrow (15 bits)**: The betaproteobacteria DmsE-family
-   sequences at 460–505 bits are of unknown iron-oxidation relevance. If some
-   represent true MtoA homologs in novel iron oxidizers, they should be added
-   to the seed set and the NC will drop accordingly.
+2. **MtoA NC margin is narrow (30.8 bits)**: The betaproteobacteria DmsE-family
+   sequences at 460–505 bits (NC = 505.5, *Limnohabitans sp.*) are **confirmed
+   non-iron-oxidizers** (validated 2026-05-23): *Limnohabitans* = freshwater
+   heterotroph; *Rhodoferax* = iron **reducer** (scores 486–497, below GA);
+   *Polynucleobacter* = obligate aerobe, tiny genome; *Sulfurimicrobium* = sulfur
+   oxidizer; *Methylococcales/Methylophilaceae* = methanotrophs. No action needed.
+   NC = 505 confirmed. GA = 520 is appropriately placed (14.5 bits above NC,
+   16.3 bits below TC).
 
 3. **Geobacter and Desulfuromonas** use completely different MHC proteins for EET
    (OmcB, OmcS, OmcZ, DmsE-family with different topology). These are already
@@ -303,6 +327,15 @@ python scripts/calibrate_mtr_mto_cutoffs.py
 
 ---
 
+## New categories added (2026-05-23)
+
+| Category | Models | Rationale | Key references |
+|---|---|---|---|
+| `iron_stress` | `flavodoxin_long` (TIGR01752.1), `flavodoxin_short` (TIGR01753.1) | Iron-starvation response biomarkers. Flavodoxins substitute for ferredoxin when iron is limiting. Detecting them in metagenomes indicates Fe-stress capacity. NOT transcriptional regulators; separated from `iron_gene_regulation`. | [doi:10.1038/382802a0](https://doi.org/10.1038/382802a0) |
+| `iron_sulfur_assembly` | `sufC` (TIGR01978.1), `sufB` (TIGR01980.1), `sufS` (TIGR01979.1), `IscS` (TIGR02006.1) | Fe-S cluster biosynthesis machinery. SUF system (oxidative-stress / iron-limitation pathway); ISC system (constitutive). Allows distinguishing organisms relying on stress-tolerant SUF vs housekeeping ISC assembly. | SUF: [doi:10.1074/jbc.M308004200](https://doi.org/10.1074/jbc.M308004200); IscS: [doi:10.1074/jbc.M401261200](https://doi.org/10.1074/jbc.M401261200) |
+
+---
+
 ## Summary of all deprecations
 
 | Status | Count | Reason |
@@ -311,7 +344,7 @@ python scripts/calibrate_mtr_mto_cutoffs.py
 | `deprecated_dedup_lower_coverage` | 87 | Name-based duplicate with lower alignment coverage |
 | `deprecated_exact_duplicate` | 1 | Byte-identical to another active model |
 | `deprecated_dedup_sequence_cluster` | 12 | Layer B: redundant at 70% id / 80% cov |
-| `deprecated_category_mismatch` | 2 | Iron uptake genes misclassified as resistance |
-| **Total deprecated** | **162** | |
-| **Active** | **456** | |
-| **Library total** | **618** | |
+| `deprecated_category_mismatch` | 7 | Acquisition genes in resistance; non-metal genes (ActP, MdtABC, YfmO) |
+| **Total deprecated** | **167** | |
+| **Active** | **466** | |
+| **Library total** | **633** | |
