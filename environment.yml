@@ -2,17 +2,17 @@ name: metalgenie-evo
 channels:
   - conda-forge
   - bioconda
-  - defaults
 dependencies:
   # ── Core pipeline ───────────────────────────────────────────────────────────
-  - python>=3.8
+  - python>=3.9
   - hmmer>=3.3
   - pyrodigal>=3.0
-  - pyrodigal-gv
+  - pyrodigal-gv>=0.3.0
+  - numpy                    # pyrodigal internal arrays; also handles UniOP np.int64 output
   - pip
 
-  # ── Coverage heatmap (optional, only needed for --bam) ─────────────────────
-  - samtools>=1.10
+  # ── Coverage heatmap (optional, only needed for --bam / --depth) ───────────
+  - samtools>=1.15
 
   # ── Visualisation — scripts/plot_heatmap.R (optional) ─────────────────────
   - r-base>=4.1
@@ -26,3 +26,11 @@ dependencies:
   # ── MetalGenie-Evo Python package ──────────────────────────────────────────
   - pip:
     - -e .
+
+# ── UniOP operon prediction (optional, --operon_prediction) ─────────────────
+# UniOP is NOT on conda or pip — install manually:
+#
+#   git clone https://github.com/hongsua/UniOP.git
+#   MetalGenie-Evo ... --operon_prediction --uniop_path /path/to/UniOP/src/UniOP
+#
+# Su H, Zhang R, Söding J (2024) bioRxiv doi:10.1101/2024.11.11.623000

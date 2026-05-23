@@ -21,9 +21,11 @@ echo "[INFO] Active environment : $CONDA_DEFAULT_ENV"
 
 # ── Check required tools ──────────────────────────────────────────────────────
 MISSING=()
-for tool in python3 hmmsearch prodigal; do
+for tool in python3 hmmsearch; do
     command -v "$tool" &>/dev/null || MISSING+=("$tool")
 done
+# pyrodigal and pyrodigal-gv are Python packages — verify via import
+python3 -c "import pyrodigal, pyrodigal_gv" 2>/dev/null || MISSING+=("pyrodigal/pyrodigal-gv")
 if [[ ${#MISSING[@]} -gt 0 ]]; then
     echo "[ERROR] Missing tools: ${MISSING[*]}"
     echo "        Run: conda env create -f environment.yml"
