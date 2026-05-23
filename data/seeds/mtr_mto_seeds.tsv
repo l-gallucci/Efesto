@@ -1,0 +1,22 @@
+accession	subfamily	organism	role	reference
+WP_011071900.1	MtrA	Shewanella oneidensis MR-1	iron_reduction	doi:10.1126/science.1096742
+AAN54830.1	MtrA	Shewanella oneidensis MR-1 (locus SO_1777)	iron_reduction	doi:10.1126/science.1096742
+CAQ9398997.1	MtrA	Shewanella xiamenensis (MAG)	iron_reduction	doi:10.1038/s41396-019-0570-7
+WP_482097394.1	MtrA	Shewanella sp.	iron_reduction	doi:10.1038/s41396-019-0570-7
+WP_432404861.1	MtrA	Shewanella baltica	iron_reduction	doi:10.1038/s41396-019-0570-7
+QYX66249.1	MtrA	Shewanella putrefaciens	iron_reduction	doi:10.1038/s41396-019-0570-7
+WP_011623263.1	MtrA	Shewanella sp. (unclassified)	iron_reduction	doi:10.1038/s41396-019-0570-7
+BGZ64319.1	MtrA	Shewanella algae	iron_reduction	doi:10.1038/s41396-019-0570-7
+BGZ78722.1	MtrA	Shewanella marina	iron_reduction	doi:10.1038/s41396-019-0570-7
+XAG79646.1	MtrA	bacterium 19NY03SH02 (unclassified Shewanellales)	iron_reduction	doi:10.1038/s41396-019-0570-7
+WP_233132600.1	MtrA	Paraferrimonas haliotis	iron_reduction	doi:10.1038/s41396-019-0570-7
+WP_095506167.1	MtrA	Paraferrimonas sedimenticola	iron_reduction	doi:10.1038/s41396-019-0570-7
+WP_095505338.1	MtrA	Paraferrimonas sedimenticola (paralog)	iron_reduction	doi:10.1038/s41396-019-0570-7
+WP_222466948.1	MtrA	Ferrimonas balearica	iron_reduction	doi:10.1128/AEM.01012-10
+WP_013344866.1	MtrA	Ferrimonas balearica DSM 9799	iron_reduction	doi:10.1128/AEM.01012-10
+ADE12722.1	MtoA	Sideroxydans lithotrophicus ES-1 (locus Slit_2497)	iron_oxidation	doi:10.3389/fmicb.2012.00037
+WP_013030620.1	MtoA	Sideroxydans lithotrophicus	iron_oxidation	doi:10.3389/fmicb.2012.00037
+WP_283743965.1	MtoA	Sideroxydans sp. CL21	iron_oxidation	doi:10.3389/fmicb.2012.00037
+WP_283743089.1	MtoA	Sideroxydans sp. CL21	iron_oxidation	doi:10.3389/fmicb.2012.00037
+ADL56010.1	MtoA	Gallionella capsiferriformans ES-2	iron_oxidation	doi:10.1128/AEM.00331-11
+WP_013293942.1	MtoA	Gallionella capsiferriformans	iron_oxidation	doi:10.1128/AEM.00331-11

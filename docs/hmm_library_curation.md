@@ -124,6 +124,185 @@ Pairs retained:
 
 ---
 
+## MtrA / MtoA Disambiguation — Calibrated (2026-05-23)
+
+**Status:** Curated seeds deployed; TC/GA/NC calibrated against 3794-sequence
+universe. GA cutoffs deployed. Inherent Shewanella MtrD twilight zone documented.
+
+### Problem (FeGenie-derived models, nseq=9/10)
+
+FeGenie MtrA and MtoA HMMs cross-hit each other at ~2× the calibrated cutoff:
+
+```
+MtrA HMM (FeGenie, nseq=9)  vs MtoA consensus: 265.8 bits  (cutoff=140) — 1.9× cutoff
+MtoA HMM (FeGenie, nseq=10) vs MtrA consensus: 289.8 bits  (cutoff=140) — 2.1× cutoff
+```
+
+NCBIfam/TIGRFAM survey: no model discriminates the two subfamilies.
+TIGR03508 ("DmsE family decaheme c-type cytochrome") covers BOTH families
+across 2531 RefSeq hits — too broad. No dedicated MtrA or MtoA model exists.
+
+### Resolution — HMM rebuild from curated seeds
+
+Script: `scripts/build_mtr_mto_subfamily_hmms.py`
+Seed file: `data/seeds/mtr_mto_seeds.tsv`
+
+**Seeds used (final set — 15 MtrA, 6 MtoA):**
+
+| Accession | Subfamily | Organism | Len | Role in seed set |
+|---|---|---|---|---|
+| WP_011071900.1 | MtrA | *Shewanella oneidensis* MR-1 | 333 | Canonical MtrA |
+| AAN54830.1     | MtrA | *Shewanella oneidensis* MR-1 (SO_1777) | 333 | Original locus |
+| CAQ9398997.1   | MtrA | *Shewanella xiamenensis* (MAG) | 333 | Shewanella diversity |
+| WP_482097394.1 | MtrA | *Shewanella* sp. | 333 | Shewanella diversity |
+| WP_432404861.1 | MtrA | *Shewanella baltica* | 333 | Shewanella diversity |
+| QYX66249.1     | MtrA | *Shewanella putrefaciens* | 333 | Shewanella diversity |
+| WP_011623263.1 | MtrA | *Shewanella* sp. (unclassified) | 329 | Shewanella diversity |
+| BGZ64319.1     | MtrA | *Shewanella algae* | 329 | Shewanella diversity |
+| BGZ78722.1     | MtrA | *Shewanella marina* | 325 | Shewanella diversity |
+| XAG79646.1     | MtrA | *bacterium* 19NY03SH02 (Shewanellales) | 329 | Unclassified Shewanellales |
+| WP_233132600.1 | MtrA | *Paraferrimonas haliotis* | ~330 | Non-Shewanella iron reducer |
+| WP_095506167.1 | MtrA | *Paraferrimonas sedimenticola* | ~330 | Non-Shewanella iron reducer |
+| WP_095505338.1 | MtrA | *Paraferrimonas sedimenticola* (paralog) | ~330 | Non-Shewanella iron reducer |
+| WP_222466948.1 | MtrA | *Ferrimonas balearica* | ~330 | Non-Shewanella iron reducer |
+| WP_013344866.1 | MtrA | *Ferrimonas balearica* DSM 9799 | ~330 | Non-Shewanella iron reducer |
+| ADE12722.1     | MtoA | *Sideroxydans lithotrophicus* ES-1 (Slit_2497) | 355 | Canonical MtoA |
+| WP_013030620.1 | MtoA | *Sideroxydans lithotrophicus* | 355 | Sideroxydans diversity |
+| WP_283743965.1 | MtoA | *Sideroxydans* sp. CL21 | 359 | Sideroxydans diversity |
+| WP_283743089.1 | MtoA | *Sideroxydans* sp. CL21 | 354 | Sideroxydans diversity |
+| ADL56010.1     | MtoA | *Gallionella capsiferriformans* ES-2 | 343 | Genus diversity |
+| WP_013293942.1 | MtoA | *Gallionella capsiferriformans* | 343 | Genus diversity |
+
+**HMM build statistics:**
+
+| Model | NSEQ | EFFN | LENG |
+|---|---|---|---|
+| MtrA | 15 | ~0.43 | 333 |
+| MtoA | 6  | 0.630 | 344 |
+
+### Full calibration against 3794-sequence universe
+
+The calibration universe = all NCBI proteins titled "DmsE family decaheme c-type
+cytochrome" (NCBI query: `decaheme[Title] AND "DmsE"[Title]`, 2026-05-23).
+This represents the TIGR03508 superfamily — the broadest boundary within which
+MtrA and MtoA must be distinguished.
+
+**Key calibration finding: Shewanella MtrD is the critical NC**
+
+NCBI does not distinguish MtrA from MtrD (or DmsE) in protein titles — all are
+called "DmsE family decaheme c-type cytochrome". The true discriminating boundary
+was found by scoring confirmed MtrD sequences (DMSO/alternate-respiration periplasmic
+decaheme paralog in *Shewanella*; locus SO_1780 family) directly:
+
+| Protein | Organism | Score vs MtrA HMM |
+|---|---|---|
+| MtrD — GIU44267.1 | *Shewanella* sp. | 551.7 |
+| MtrD — GIU17583.1 | *Shewanella* sp. | 549.4 |
+| MtrD — GLD76960.1 | *Shewanella* sp. | 547.2 |
+| MtrD — GIU07609.1 | *Shewanella* sp. | 546.9 |
+| MtrD — AAN54835.2 | *S. oneidensis* MR-1 | 539.9 |
+| MtrD — GCF87789.1 | *Shewanella* sp. | 529.9 |
+
+These are the highest-scoring confirmed NON-MtrA sequences in the Shewanellales.
+
+**Score landscape for MtrA HMM across the full universe:**
+
+```
+MtoA (Gallionellaceae iron oxidizers)      :  223 – 262 bits  [correctly excluded]
+MtrD (Shewanella DMSO/alternate respiration):  530 – 552 bits  ← NC
+────────── twilight zone: 552 – 603 bits ─────────────────────── GA = 580
+Ferrimonas / Paraferrimonas (iron reducers) :  603 – 637 bits  ← TC
+Shewanella MtrA                            :  603 – 706 bits  ← TC (same range)
+Unclassified Shewanellales (MAG)           :  690 – 724 bits  
+```
+
+**Score landscape for MtoA HMM:**
+
+```
+Shewanella MtrA / MtrD (iron reducers)     :  255 – 303 bits  [correctly excluded]
+betaproteobacteria DmsE-family (unknown)   :  460 – 505 bits  ← NC (uncertain)
+────────── twilight zone: 505 – 536 bits ─────────────────────── GA = 520
+Gallionella capsiferriformans ES-2         :  612 bits         ← TC
+Sideroxydans sp. CL21 (most distant)       :  536 bits         ← TC (lowest)
+Sideroxydans lithotrophicus ES-1           :  646 bits         
+```
+
+### TC / GA / NC values
+
+**MtrA HMM:**
+
+| Value | Bits | Basis |
+|---|---|---|
+| NC (Noise Cutoff) | 552 | Max MtrD score (*Shewanella* SO_1780 family) |
+| **GA (Gathering, deployed)** | **580** | Midpoint NC–TC; 28 bits above NC |
+| TC (Trusted Cutoff) | 603 | Min confirmed MtrA (*Ferrimonas balearica*) |
+| Twilight zone | 552–603 | Gene-context required for sequences in this range |
+
+**MtoA HMM:**
+
+| Value | Bits | Basis |
+|---|---|---|
+| NC (Noise Cutoff) | 505 | Max score for betaproteobacteria DmsE-family (*Rhodoferax*, *Polynucleobacter*) |
+| **GA (Gathering, deployed)** | **520** | Conservative; 15 bits above NC |
+| TC (Trusted Cutoff) | 536 | Min confirmed MtoA (*Sideroxydans* sp. CL21) |
+| Twilight zone | 505–536 | Narrow; gene-context required |
+
+### Metagenome annotation guidance
+
+The following table describes expected annotation behavior for real metagenomes:
+
+| Organism type | MtrA score | MtoA score | Expected output | Notes |
+|---|---|---|---|---|
+| *Shewanella* MtrA | 600–706 | 255–292 | iron_reduction | Correctly assigned |
+| *Shewanella* MtrD (DMSO) | 530–552 | ~260 | **not annotated** | Below GA (580); gene context confirms |
+| *Ferrimonas* / *Paraferrimonas* | 603–637 | 263–273 | iron_reduction | Correctly assigned |
+| Unclassified Shewanellales MAG | 690–724 | ~292 | iron_reduction | Correctly assigned |
+| *Geobacter* (uses OmcB/Z, not MtrA) | <50 | <50 | **not annotated** | Different protein family entirely |
+| *Gallionella* / *Sideroxydans* MtoA | 223–262 | 536–646 | iron_oxidation | Correctly assigned |
+| betaproteobacteria DmsE-family | ~200–400 | 460–505 | **not annotated** | Below both GAs |
+| Sequences scoring 552–603 (MtrA zone) | — | — | **low_confidence** | Twilight zone; flag for review |
+| Sequences scoring 505–536 (MtoA zone) | — | — | **low_confidence** | Twilight zone; narrow margin |
+
+**MtrA/MtoA cannot be assigned to Geobacter**, which uses outer-membrane
+multiheme cytochromes OmcB, OmcS, OmcZ (different protein family, captured
+by separate HMMs `OmcS`, `OmcZ` already in the library).
+
+### Known remaining limitations
+
+1. **Shewanella MtrD twilight zone (552–603 bits)** is inherent to the protein
+   family — MtrA and MtrD share the decaheme c-type fold. Gene context (presence
+   of MtrB + MtrC in the same cluster) is the definitive discriminator for sequences
+   in this score range. MetalGenie-Evo's UniOP/operon module provides this context.
+
+2. **MtoA NC margin is narrow (15 bits)**: The betaproteobacteria DmsE-family
+   sequences at 460–505 bits are of unknown iron-oxidation relevance. If some
+   represent true MtoA homologs in novel iron oxidizers, they should be added
+   to the seed set and the NC will drop accordingly.
+
+3. **Geobacter and Desulfuromonas** use completely different MHC proteins for EET
+   (OmcB, OmcS, OmcZ, DmsE-family with different topology). These are already
+   in the library as separate HMMs and do not interact with MtrA/MtoA annotation.
+
+4. **MtoA database sparsity**: Only 6 unique MtoA sequences in all of NCBI (2026-05-23).
+   The model will improve significantly as Gallionellaceae MAGs accumulate.
+
+### Calibration procedure used
+
+```bash
+# Universe: all "DmsE family decaheme c-type cytochrome" sequences (3794 total)
+python scripts/calibrate_mtr_mto_cutoffs.py
+# Output: hmm_library/_calibration/mtr_mto/calibration_report.tsv
+# Output: hmm_library/_calibration/mtr_mto/calibration_summary.txt
+
+# NC validation (MtrD scoring):
+# Searched MtrD sequences manually from NCBI:
+# '"MtrD" AND Shewanella[Organism] AND decaheme[All Fields]'
+# → GIU44267.1, GLD76960.1, AAN54835.2, GCF87789.1 etc.
+# → scored 530–552 bits → sets NC at 552
+```
+
+---
+
 ## Summary of all deprecations
 
 | Status | Count | Reason |

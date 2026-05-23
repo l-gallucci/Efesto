@@ -1,0 +1,70 @@
+======================================================================
+  MtrA / MtoA calibration summary
+======================================================================
+
+── MTRA HMM ──────────────────────────────────────────────
+  MtrA_confirmed        n=0
+  MtoA_confirmed        n=0
+  MtoA_candidate        n=  11  min=  223.9  max=  305.5  mean=  257.6
+    top     305.5
+    top     266.7
+    top     266.7
+    ...
+    bot     236.1
+    bot     236.1
+    bot     223.9
+  Shewanella_DmsE       n=1208  min=  187.5  max=  705.2  mean=  548.3
+    top     705.2
+    top     705.2
+    top     704.7
+    ...
+    bot     218.9
+    bot     215.5
+    bot     187.5
+  other                 n=2543  min=   15.2  max=  690.8  mean=  301.9
+    top     690.8
+    top     690.8
+    top     637.2
+    ...
+    bot      16.8
+    bot      15.3
+    bot      15.2
+
+── MTOA HMM ──────────────────────────────────────────────
+  MtrA_confirmed        n=0
+  MtoA_confirmed        n=0
+  MtoA_candidate        n=  11  min=  282.5  max=  646.1  mean=  465.2
+    top     646.1
+    top     646.1
+    top     629.9
+    ...
+    bot     287.5
+    bot     287.2
+    bot     282.5
+  Shewanella_DmsE       n=1210  min=   14.8  max=  303.1  mean=  261.6
+    top     303.1
+    top     301.1
+    top     295.1
+    ...
+    bot     154.4
+    bot      20.8
+    bot      14.8
+  other                 n=2548  min=   14.5  max=  505.5  mean=  268.2
+    top     505.5
+    top     497.1
+    top     486.3
+    ...
+    bot      17.6
+    bot      15.5
+    bot      14.5
+
+── RECOMMENDED CUTOFFS ─────────────────────────────────────────────
+  MTRA NC (highest non-member):             705.2
+
+  MTOA TC (lowest confirmed true positive): 282.5
+  MTOA NC (highest non-member):             505.5
+  MTOA GA (TC - 10, recommended):           272.5
+  MTOA discrimination gap (TC - NC):        -223.0 bits
+  *** WARNING: NC > TC — model cannot discriminate! Needs more/better seeds. ***
+
+======================================================================
