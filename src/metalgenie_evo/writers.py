@@ -126,6 +126,9 @@ def write_anvio_functions(path, final_rows, prodigal_to_bakta=None):
                 continue
             seen.add(orf)
             caller = r.get("bakta_id") or orf
-            w.writerow([caller, "MetalGenie-Evo", r["hmm_stem"],
+            source = ("MetalGenie-Evo-low_confidence"
+                      if r.get("confidence") == "low_confidence"
+                      else "MetalGenie-Evo")
+            w.writerow([caller, source, r["hmm_stem"],
                         f"{r['gene_name']} [{r['cat']}]",
                         f"{r['evalue']:.2e}"])
