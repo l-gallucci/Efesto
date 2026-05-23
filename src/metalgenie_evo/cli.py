@@ -98,6 +98,11 @@ def main():
                         "genomic context is unavailable.")
     p.add_argument("--threads", type=int, default=4)
     p.add_argument("--hmm_threads", type=int, default=1)
+    p.add_argument("--zero_cutoff_min_bitscore", type=float, default=30.0,
+                   help="Minimum bitscore applied to HMMs that have no calibrated "
+                        "cutoff in the registry (cutoff=0.0). These hits are "
+                        "reported as 'low_confidence' in the long-format output. "
+                        "Set to 0 to disable (not recommended). Default: 30")
     p.add_argument("--norm", action="store_true",
                    help="Normalise gene-count heatmap")
     p.add_argument("--bam", help="Single BAM file (requires samtools >=1.10)")
@@ -243,9 +248,10 @@ def main():
     print(f"[INFO] Launching hmmsearch ({args.threads} threads, "
           f"{args.hmm_threads} per job)…")
     run_all_hmmsearches(faa_files, cat_hmms, cutoffs, tblout_dir,
-                        args.threads, args.hmm_threads)
+                        args.threads, args.hmm_threads,
+                        zero_cutoff_min_bitscore=args.zero_cutoff_min_bitscore)
     print("[INFO] Collecting best HMM hits…")
-    best_hit = collect_best_hits(faa_files, cat_hmms, tblout_dir)
+    best_hit = collect_best_hits(faa_files, cat_hmms, tblout_dir, cutoffs=cutoffs)
 
     print("[INFO] Clustering and filtering…")
     if args.min_contig_len > 0:
@@ -290,6 +296,7 @@ def main():
                     "bitscore":   hit["bitscore"],
                     "cutoff":     cutoffs.get(hit["hmm_stem"], 0),
                     "evalue":     hit["evalue"],
+                    "confidence": hit.get("confidence", "low_confidence"),
                     "cluster_id": cluster_id,
                     "contig_len": clen.get(contig, 0),
                 })

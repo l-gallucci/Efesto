@@ -37,7 +37,8 @@ def write_gene_summary(path, rows):
 def write_long_format(path, rows):
     has_uniop = any("uniop_context" in r for r in rows)
     fields = ["category", "genome", "contig", "orf", "gene", "bitscore",
-              "bitscore_cutoff", "cluster_id", "heme_c_motifs", "contig_len"]
+              "bitscore_cutoff", "confidence", "cluster_id", "heme_c_motifs",
+              "contig_len"]
     if has_uniop:
         fields.append("uniop_context")
     with open(path, "w", newline="") as fh:
@@ -53,6 +54,7 @@ def write_long_format(path, rows):
                 "gene":           r["gene_name"],
                 "bitscore":       f"{r['bitscore']:.1f}",
                 "bitscore_cutoff": r["cutoff"],
+                "confidence":     r.get("confidence", "low_confidence"),
                 "cluster_id":     r["cluster_id"],
                 "heme_c_motifs":  r["heme_motifs"],
                 "contig_len":     r.get("contig_len", ""),
