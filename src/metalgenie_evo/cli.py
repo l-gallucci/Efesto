@@ -23,8 +23,10 @@ from metalgenie_evo.clustering import _orf_to_contig, build_clusters
 from metalgenie_evo.coverage import build_contig_coverage, load_bams_tsv
 from metalgenie_evo.gene_calling import run_prodigal
 from metalgenie_evo.hmmer import collect_best_hits, run_all_hmmsearches
-from metalgenie_evo.io import (build_contig_length_dict, load_gff_dir,
-                                read_fasta, read_cutoffs, read_map)
+from metalgenie_evo.io import (build_contig_length_dict, filter_categories,
+                                load_gff_dir, load_registry, print_provenance,
+                                read_fasta, read_cutoffs, read_map,
+                                VALID_ANNOTATE_TOKENS)
 from metalgenie_evo.operon import (count_heme, filter_cluster_fegenie,
                                     filter_cluster_json, load_operon_rules,
                                     second_pass)
@@ -60,7 +62,20 @@ def main():
                         "results to Prodigal v2.6.3. "
                         "Both require the respective Python package to be installed.")
     p.add_argument("--gff_dir", help="Prodigal GFF files for bp clustering")
-    p.add_argument("--hmm_dir", required=True)
+    p.add_argument("--hmm_dir", default=None,
+                   help="HMM library directory "
+                        "(default: bundled hmm_library/ shipped with the package)")
+    p.add_argument("--annotate", nargs="+", default=["all"],
+                   metavar="TOKEN",
+                   help="Select HMM categories to annotate. One or more tokens: "
+                        "element-level (Fe, Cu, Zn, Mn, Ni, Co, Mo, As, Hg, "
+                        "Cd, Cr, Ag, Te, Mg, multimetal) or process-level "
+                        "(Fe-metabolism, Fe-resistance, Fe-acquisition, "
+                        "Fe-reduction, Fe-oxidation, Fe-storage, Fe-regulation, "
+                        "Cu-resistance, Mn-resistance, Ni-resistance, "
+                        "As-resistance, Hg-resistance, Co-Zn-Cd-resistance, ...). "
+                        "Use 'all' to annotate everything (default). "
+                        f"Valid tokens: {', '.join(VALID_ANNOTATE_TOKENS)}")
     p.add_argument("--out", default="metalgenie_evo_out")
     p.add_argument("--min_contig_len", type=int, default=0,
                    help="Skip ORFs on contigs shorter than this (bp). 0=no filter")
@@ -115,6 +130,14 @@ def main():
                         "from Bakta external gene calls.")
     args = p.parse_args()
 
+    if args.hmm_dir is None:
+        _bundled = Path(__file__).parents[2] / "hmm_library"
+        if _bundled.exists():
+            args.hmm_dir = str(_bundled)
+        else:
+            sys.exit("[ERROR] --hmm_dir not set and bundled hmm_library/ not found. "
+                     "Specify --hmm_dir /path/to/hmm_library explicitly.")
+
     out_dir    = Path(args.out)
     out_dir.mkdir(parents=True, exist_ok=True)
     tblout_dir = out_dir / "_tblout_cache"
@@ -158,16 +181,31 @@ def main():
               f"gene names will show as raw HMM stems in all outputs.", file=sys.stderr)
 
     cutoffs  = read_cutoffs(str(Path(args.hmm_dir) / "HMM-bitcutoffs.txt"))
+    registry = load_registry(args.hmm_dir)
+    deprecated_stems = {
+        r["stem"] for r in registry
+        if r.get("status", "active") != "active"
+    }
     cat_hmms = defaultdict(list)
     h2c      = {}
+    n_skipped = 0
     for entry in sorted(Path(args.hmm_dir).iterdir()):
         if entry.is_dir() and not entry.name.startswith("."):
             for hf in sorted(entry.glob("*.hmm")):
+                if hf.stem in deprecated_stems:
+                    n_skipped += 1
+                    continue
                 cat_hmms[entry.name].append((hf.stem, hf))
                 h2c[hf.stem] = entry.name
+    if n_skipped:
+        print(f"[INFO] Skipped {n_skipped} deprecated HMMs (registry)")
     if not cat_hmms:
         sys.exit(f"[ERROR] No HMM dirs in {args.hmm_dir}")
+    cat_hmms  = filter_categories(cat_hmms, args.annotate)
+    if not cat_hmms:
+        sys.exit("[ERROR] --annotate filter removed all categories — check tokens")
     total_hmms = sum(len(v) for v in cat_hmms.values())
+    print_provenance(args.annotate, registry, cat_hmms)
     print(f"[INFO] {total_hmms} HMMs across {len(cat_hmms)} categories")
     operon_rules, report_all_pats, json_mode = load_operon_rules(args.hmm_dir)
 
