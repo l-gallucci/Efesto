@@ -1,6 +1,6 @@
 # MetalGenie-Evo
 
-**MetalGenie-Evo** is built on top of [FeGenie](https://github.com/Arkadiy-Garber/FeGenie), an established tool for identifying iron-cycling genes in genome and metagenome assemblies. MetalGenie-Evo extends FeGenie's biological logic with additional features — coordinate-based operon clustering, parallel execution, and configurable filtering rules — and broadens its scope to include metal mobility resistance genes through integration of **MetHMMDB** and additional curated HMM sources.
+**MetalGenie-Evo** is built on top of [FeGenie](https://github.com/Arkadiy-Garber/FeGenie), an established tool for identifying iron-cycling genes in genome and metagenome assemblies. MetalGenie-Evo extends FeGenie's biological logic with additional features — coordinate-based operon clustering, parallel execution, and configurable filtering rules — and broadens its scope to include metal mobility resistance genes through integration of **MetHMMDB** and additional curated HMM sources. A **cluster confidence score** integrates HMM quality, genomic co-occurrence, operon prediction, and BGC context into a single per-cluster reliability metric.
 
 ## Citations
 
@@ -30,10 +30,12 @@ If you use MetalGenie-Evo in your research, please cite all of the following tha
 
 - [What's new compared to FeGenie](#whats-new-compared-to-fegenie)
 - [How it works](#how-it-works)
+- [Cluster confidence scoring](#cluster-confidence-scoring)
 - [Installation](#installation)
 - [HMM library](#hmm-library)
 - [Usage](#usage)
 - [Operon prediction with UniOP](#operon-prediction-with-uniop)
+- [AntiSMASH BGC integration](#antismash-bgc-integration)
 - [Anvi'o integration](#anvio-integration)
 - [Output files](#output-files)
 - [Operon filtering logic](#operon-filtering-logic)
@@ -65,7 +67,7 @@ By default, MetalGenie-Evo uses an exact reimplementation of FeGenie's operon-co
 
 ### 5 — Expanded HMM library
 
-Integrates four sources: FeGenie, Tabuteau et al. 2025 (KOfam + custom), NCBI NF*/Pfam, and MetHMMDB. All sources are merged, deduplicated, and tracked in a versioned registry.
+Integrates four sources: FeGenie, Tabuteau et al. 2025 (KOfam + custom), NCBI NF*/Pfam, and MetHMMDB. All sources are merged, deduplicated, and tracked in a versioned registry. Startup provenance output lists active sources, model counts, and flags models with limited training data (nseq < 10).
 
 ### 6 — Metagenome-specific features
 
@@ -74,15 +76,31 @@ Integrates four sources: FeGenie, Tabuteau et al. 2025 (KOfam + custom), NCBI NF
 - **Relaxed operon thresholds** (`--relaxed_operons`) — halves thresholds for short contigs
 - **TPM-normalised coverage** (`--norm_coverage`)
 - **Contig column** in all outputs
-- **Long-format output** (`MetalGenie-Evo-results-long.tsv`)
+- **Long-format output** (`MetalGenie-Evo-results-long.tsv`) with `model_nseq` column
 
 ### 7 — UniOP operon prediction (optional)
 
-The `--operon_prediction` flag runs [UniOP](https://github.com/hongsua/UniOP) on each genome/MAG and produces `MetalGenie-Evo-OperonStructure.tsv`, linking each HMM hit to its predicted operon. UniOP uses only intergenic distances and is fully applicable to MAGs and novel organisms. The operon prediction is an independent, additional output — it does not filter or modify HMM hits.
+The `--operon_prediction` flag runs [UniOP](https://github.com/hongsua/UniOP) on each genome/MAG and produces `MetalGenie-Evo-OperonStructure.tsv`, linking each HMM hit to its predicted operon. UniOP uses only intergenic distances and is fully applicable to MAGs and novel organisms. Pair probabilities from UniOP feed directly into the cluster confidence score.
 
 ### 8 — Anvi'o integration (optional)
 
-The `--anvio` flag produces `MetalGenie-Evo-anvio-functions.tsv`, directly importable with `anvi-import-functions`. When used with `--bakta_gff_dir`, MetalGenie-Evo maps Prodigal ORF names to Bakta gene IDs via coordinate matching, enabling seamless integration with Anvi'o databases built from Bakta external gene calls.
+The `--anvio` flag produces two files: `MetalGenie-Evo-anvio-functions.tsv` for `anvi-import-functions`, and `MetalGenie-Evo-anvio-gene-scores.tsv` for `anvi-import-misc-data` (per-gene numeric scores including cluster confidence, co-occurrence score, HMM weight, UniOP weight, and BGC boost).
+
+### 9 — Cluster confidence scoring
+
+Every reported cluster receives a `cluster_confidence` score (0–1, capped at 1.2 with BGC boost) integrating four components: HMM calibration quality, genomic co-occurrence and completeness, UniOP operon probability, and antiSMASH siderophore context. See [Cluster confidence scoring](#cluster-confidence-scoring).
+
+### 10 — AntiSMASH BGC integration (optional)
+
+The `--bgc_dir` flag accepts a directory of antiSMASH GFF3/GFF output files. Clusters overlapping a predicted siderophore biosynthetic region receive a 1.2× boost to their confidence score.
+
+### 11 — Per-category bp-gap tuning
+
+Each operon rule in `operon_rules.json` can define a per-rule `max_bp_gap`. When clustering, MetalGenie-Evo applies the more restrictive of the two adjacent genes' rule-specific gaps, making tight operons (e.g. MtrMto: 2 000 bp, FoxABC: 1 000 bp) stricter than the global window without penalising loosely encoded systems (e.g. SIDERO_SYNTH: 5 000 bp).
+
+### 12 — GFF3 output and summary statistics
+
+MetalGenie-Evo automatically writes `MetalGenie-Evo-results.gff3` (when coordinate data is available) and `MetalGenie-Evo-summary-stats.tsv` every run. The GFF3 can be loaded directly into genome browsers. The summary-stats file reports overall counts, cluster confidence tier distribution, per-category hit counts, and per-genome hit counts with mean confidence.
 
 ---
 
@@ -99,7 +117,7 @@ Best-hit collection  ─────  one hit per ORF, highest bitscore wins
         │
         ▼
 Genomic clustering
-  ├── GFF mode  →  bp-distance + optional strand separation
+  ├── GFF mode  →  bp-distance + per-rule gap overrides + optional strand separation
   └── Index mode  →  Prodigal ordinal gap (fallback, FeGenie-compatible)
         │
         ▼
@@ -115,10 +133,17 @@ Second-pass per-gene filters
   └── iron_gene_regulation: ≥1 regulation gene in cluster
         │
         ▼
+Cluster confidence scoring
+  ├── hmm_weight        — mean calibration tier (calibrated=1.0, low_confidence=0.5)
+  ├── co_occ_score      — completeness × distance decay × edge penalty
+  ├── uniop_pair_score  — min pairwise UniOP probability (1.0 if no data)
+  └── bgc_boost         — 1.2× if overlaps antiSMASH siderophore region
+        │
+        ▼
 Heme-motif counting  (CXXCH, CX3CH, CX4CH, CX14CH, CX15CH)
         │
         ▼
-Output CSVs  +  optional UniOP operon structure  +  optional Anvi'o TSV
+Output CSVs + GFF3 + summary-stats + optional UniOP structure + optional Anvi'o TSVs
 ```
 
 FeGenie operon rules implemented exactly:
@@ -136,6 +161,50 @@ FeGenie operon rules implemented exactly:
 | Iron/heme transport | ≥ 2 distinct transport HMMs |
 | Cyc1 | Co-occurs with ≥ 2 Fe-redox genes |
 | Cyc2 | Length ≥ 365 aa + ≥ 1 CXXCH motif |
+
+---
+
+## Cluster confidence scoring
+
+Every reported cluster receives a `cluster_confidence` score computed as:
+
+```
+cluster_confidence = min(1.2,  hmm_weight  ×  co_occ_score  ×  uniop_pair_score  ×  bgc_boost)
+```
+
+### Components
+
+**HMM weight** (`hmm_weight`)
+
+Mean per-ORF calibration confidence across the cluster. ORFs whose HMM has a calibrated bitscore cutoff contribute 1.0; ORFs with no calibrated cutoff (zero-cutoff fallback) contribute 0.5. Rewards clusters where most genes are from well-characterised HMM models.
+
+**Co-occurrence score** (`co_occ_score`)
+
+```
+co_occ_score = completeness × distance_factor × edge_factor
+```
+
+- **Completeness** — `min(n_observed / canonical_size, 1.0)`. Each operon rule that defines a `canonical_size` contributes an expected gene count; the score rewards clusters that recover a larger fraction of the expected complement.
+- **Distance factor** — mean pairwise distance decay across all adjacent gene pairs. Decay follows `exp(-ln(2) × gap_bp / 500)`, with a half-life of 500 bp (genes within 500 bp of each other contribute full weight; weight halves with every 500 bp gap).
+- **Edge factor** — 0.7× if any gene in the cluster lies within 3 000 bp of the contig edge, reflecting the risk of partial operon recovery at contig boundaries.
+
+**UniOP pair score** (`uniop_pair_score`)
+
+Minimum pairwise UniOP co-operon probability across all gene pairs in the cluster. A cluster where all gene pairs are predicted to be in the same operon with high probability scores near 1.0; a single uncertain pair brings the score down. Returns 1.0 if UniOP data is not available.
+
+**BGC boost** (`bgc_boost`)
+
+1.2× if any gene in the cluster overlaps an antiSMASH-predicted siderophore biosynthetic region; 1.0 otherwise. Requires `--bgc_dir`.
+
+### Interpretation
+
+| Score range | Meaning |
+|---|---|
+| ≥ 0.8 | High confidence — complete operon, calibrated HMMs, compact genomic arrangement |
+| 0.5 – 0.8 | Medium confidence — partial operon or low-nseq models involved |
+| < 0.5 | Low confidence — single gene, uncalibrated model, or contig edge hit |
+
+`cluster_confidence` appears in `MetalGenie-Evo-results-long.tsv`, `MetalGenie-Evo-summary.csv`, `MetalGenie-Evo-results.gff3`, and `MetalGenie-Evo-summary-stats.tsv`.
 
 ---
 
@@ -237,14 +306,18 @@ MetalGenie-Evo ... --operon_prediction --uniop_path /path/to/UniOP/src/UniOP
 
 The `hmm_library/` directory is included in this repository and is ready to use. It contains:
 
-- **FeGenie iron HMMs** — original profiles for iron cycling genes
-- **Tabuteau et al. HMMs** — additional iron acquisition profiles from KOfam, FeGenie, and NCBI NF* sources
-- **MetHMMDB metal resistance HMMs** — profiles for metal mobility resistance genes
-- `HMM-bitcutoffs.txt` — per-HMM bitscore thresholds
-- `MetalGenie-map.txt` — HMM stem → readable gene name mapping
-- `hmm_registry.tsv` — full provenance record
-- `deduplication_log.tsv` — log of all cross-source duplicate decisions
+- **FeGenie iron HMMs** (196) — original profiles for iron cycling genes
+- **Tabuteau et al. HMMs** (130) — additional iron acquisition profiles from KOfam, FeGenie, and NCBI NF* sources
+- **MetHMMDB metal resistance HMMs** (115) — profiles for metal mobility resistance genes
+- **NCBIfam profiles** (15) — curated models for iron oxidation, regulation, sulfur assembly, and molybdenum resistance
+- `HMM-bitcutoffs.txt` — per-HMM bitscore thresholds (337 calibrated; 129 use `--zero_cutoff_min_bitscore` fallback)
+- `FeGenie-map.txt` — HMM stem → readable gene name mapping
+- `hmm_registry.tsv` — full provenance record (stem, name, accession, category, source, nseq, cutoff, reference)
 - `operon_rules.json` — configurable filtering rules (for model organisms; absent = FeGenie default)
+
+At startup MetalGenie-Evo prints a provenance table listing active sources, model counts, and a warning if any active models have nseq < 10 (limited training sequences).
+
+> **Zero-cutoff models:** MetHMMDB models (115) and 14 FeGenie siderophore models have no calibrated bitscore cutoff. They are searched with `hmmsearch -T <zero_cutoff_min_bitscore>` (default 30.0). Raise this floor with `--zero_cutoff_min_bitscore` to reduce false positives from these models.
 
 ---
 
@@ -280,6 +353,20 @@ MetalGenie-Evo \
     --hmm_dir  hmm_library/ \
     --out      results/ \
     --threads  16
+```
+
+### With full confidence scoring (UniOP + antiSMASH)
+
+```bash
+MetalGenie-Evo \
+    --faa_dir           orfs/ \
+    --gff_dir           gff/ \
+    --hmm_dir           hmm_library/ \
+    --out               results/ \
+    --threads           16 \
+    --operon_prediction \
+    --uniop_path        /path/to/UniOP/src/UniOP \
+    --bgc_dir           antismash_output/
 ```
 
 ### Report all hits (skip operon filtering)
@@ -325,6 +412,7 @@ Where `bam_map.tsv` / `depth_map.tsv` is a two-column TSV: `genome_label<TAB>fil
 | `--min_contig_len` | `0` | Skip ORFs on contigs shorter than this (bp) |
 | `--relaxed_operons` | off | Halve operon min-gene thresholds for short contigs |
 | `--relaxed_threshold` | `10000` | Contig length (bp) below which thresholds are relaxed |
+| `--zero_cutoff_min_bitscore` | `30.0` | Minimum bitscore fallback for zero-cutoff HMMs |
 | `--bam` | — | Single sorted BAM file (requires samtools ≥ 1.10) |
 | `--bams` | — | TSV: `genome<TAB>bam_path` |
 | `--depth` | — | Pre-computed depth file (jgi / BBMap / samtools / plain) |
@@ -333,7 +421,8 @@ Where `bam_map.tsv` / `depth_map.tsv` is a two-column TSV: `genome_label<TAB>fil
 | `--operon_prediction` | off | Run UniOP and write `OperonStructure.tsv` |
 | `--uniop_path` | `uniop` | Path to UniOP script |
 | `--bakta_gff_dir` | — | Bakta GFF3 directory for Prodigal↔Bakta ID mapping |
-| `--anvio` | off | Write Anvi'o-compatible functions TSV |
+| `--bgc_dir` | — | antiSMASH output directory for siderophore BGC boost |
+| `--anvio` | off | Write Anvi'o-compatible functions and gene-scores TSVs |
 
 \* `--faa_dir` and `--fna_dir` are mutually exclusive; exactly one is required.
 
@@ -343,7 +432,7 @@ Where `bam_map.tsv` / `depth_map.tsv` is a two-column TSV: `genome_label<TAB>fil
 
 UniOP predicts operons from intergenic distances alone — no RNA-seq, no functional annotations, no reference genomes required. It achieves AUC-PR of 0.95–0.99 across diverse prokaryotic genomes and has been validated on 3,269 MAGs across 15 phyla. Runtime averages 1.3 seconds per genome on CPU.
 
-MetalGenie-Evo runs UniOP as an independent step after HMM annotation. Operon predictions are an additional output and do not filter or modify HMM hits.
+MetalGenie-Evo runs UniOP as an independent step after HMM annotation. UniOP pair probabilities feed into the `uniop_pair_score` component of the cluster confidence score (minimum pairwise co-operon probability across all gene pairs). Operon assignments are also written to `MetalGenie-Evo-OperonStructure.tsv`.
 
 ### Input detection
 
@@ -378,9 +467,46 @@ UniOP results are cached in `results/_uniop/<genome>/` and reused on subsequent 
 
 ---
 
+## AntiSMASH BGC integration
+
+The `--bgc_dir` flag points to a directory containing antiSMASH output for your genomes. MetalGenie-Evo searches for GFF3/GFF files matching each genome's stem (e.g. `genome.gff3`, `genome/genome.gff3`) and identifies regions annotated as siderophore or metallophore biosynthetic gene clusters.
+
+Any cluster where at least one ORF overlaps a siderophore BGC region receives a **1.2× BGC boost** on its `cluster_confidence` score, reflecting that co-location with a siderophore BGC is strong independent evidence for iron acquisition function.
+
+```bash
+MetalGenie-Evo \
+    --faa_dir  orfs/ \
+    --gff_dir  gff/ \
+    --hmm_dir  hmm_library/ \
+    --out      results/ \
+    --bgc_dir  antismash_output/
+```
+
+Only siderophore-type regions trigger the boost (keyword matching on `siderophore` and `metallophore` in the `product=` or `type=` GFF attribute). NRPS/PKS clusters without explicit siderophore annotation do not trigger the boost.
+
+---
+
 ## Anvi'o integration
 
-The `--anvio` flag produces `MetalGenie-Evo-anvio-functions.tsv` for direct import with `anvi-import-functions`.
+The `--anvio` flag produces two files:
+
+**`MetalGenie-Evo-anvio-functions.tsv`** — import with `anvi-import-functions`:
+```bash
+anvi-import-functions \
+    -c CONTIGS.db \
+    -i results/MetalGenie-Evo-anvio-functions.tsv \
+    -p MetalGenie-Evo
+```
+
+**`MetalGenie-Evo-anvio-gene-scores.tsv`** — import with `anvi-import-misc-data`:
+```bash
+anvi-import-misc-data \
+    -c CONTIGS.db \
+    --target-data-table genes \
+    results/MetalGenie-Evo-anvio-gene-scores.tsv
+```
+
+The gene-scores file contains per-gene numeric columns: `cluster_confidence`, `co_occ_score`, `hmm_weight`, `uniop_weight`, and `bgc_boost`. These can be visualised per-gene in the Anvi'o interactive interface.
 
 ### Without Bakta mapping
 
@@ -399,7 +525,7 @@ anvi-import-functions \
 
 ### With Bakta mapping (`--bakta_gff_dir`) — recommended
 
-When using `--fna_dir` + `--bakta_gff_dir`, MetalGenie-Evo runs Prodigal internally, then matches each Prodigal ORF to its Bakta gene ID via coordinate overlap (±3 bp tolerance). The `gene_callers_id` column in the Anvi'o TSV will contain Bakta IDs (e.g. `AMXMAG_00053`), which map directly to Anvi'o integer IDs when the contigs database was built from Bakta external gene calls.
+When using `--fna_dir` + `--bakta_gff_dir`, MetalGenie-Evo runs Prodigal internally, then matches each Prodigal ORF to its Bakta gene ID via coordinate overlap (±3 bp tolerance). The `gene_callers_id` column in both Anvi'o TSVs will contain Bakta IDs (e.g. `AMXMAG_00053`), which map directly to Anvi'o integer IDs when the contigs database was built from Bakta external gene calls.
 
 ```bash
 # Step 1 — Build Anvi'o contigs database from Bakta external gene calls
@@ -425,6 +551,11 @@ anvi-import-functions \
     -c CONTIGS.db \
     -i results/MetalGenie-Evo-anvio-functions.tsv \
     -p MetalGenie-Evo
+
+anvi-import-misc-data \
+    -c CONTIGS.db \
+    --target-data-table genes \
+    results/MetalGenie-Evo-anvio-gene-scores.tsv
 ```
 
 ---
@@ -435,10 +566,12 @@ anvi-import-functions \
 
 | File | Description |
 |---|---|
-| `MetalGenie-Evo-summary.csv` | Per-ORF detailed results with cluster separators |
-| `MetalGenie-Evo-geneSummary-clusters.csv` | FeGenie R-script compatible compact summary |
+| `MetalGenie-Evo-summary.csv` | Per-ORF detailed results with cluster separators; includes `cluster_confidence` |
+| `MetalGenie-Evo-geneSummary-clusters.csv` | FeGenie R-script compatible compact summary; includes `cluster_confidence` |
 | `MetalGenie-Evo-heatmap-data.csv` | Gene-count matrix (categories × genomes) |
-| `MetalGenie-Evo-results-long.tsv` | Tidy long-format TSV, one row per ORF |
+| `MetalGenie-Evo-results-long.tsv` | Tidy long-format TSV — one row per ORF, all scoring columns |
+| `MetalGenie-Evo-results.gff3` | GFF3 feature file (written when `--gff_dir` / `--fna_dir` used) |
+| `MetalGenie-Evo-summary-stats.tsv` | Run-level statistics: counts, confidence tier distribution, per-genome summary |
 
 ### Optional outputs
 
@@ -447,21 +580,39 @@ anvi-import-functions \
 | `MetalGenie-Evo-coverage-heatmap.csv` | `--bam` / `--bams` / `--depth` / `--depths` |
 | `MetalGenie-Evo-OperonStructure.tsv` | `--operon_prediction` |
 | `MetalGenie-Evo-anvio-functions.tsv` | `--anvio` |
+| `MetalGenie-Evo-anvio-gene-scores.tsv` | `--anvio` |
 
-### Column reference — `MetalGenie-Evo-summary.csv`
+### Column reference — `MetalGenie-Evo-results-long.tsv`
 
 | Column | Description |
 |---|---|
 | `category` | Functional category (e.g. `iron_reduction`) |
-| `genome/assembly` | Source genome filename |
+| `genome` | Source genome filename |
 | `contig` | Source contig identifier |
-| `orf` | ORF identifier |
-| `gene` | Readable gene name (from `MetalGenie-map.txt`) |
+| `orf` | ORF identifier (Bakta ID when `--bakta_gff_dir` used) |
+| `gene` | Readable gene name (from `FeGenie-map.txt`) |
 | `bitscore` | hmmsearch bitscore |
-| `bitscore_cutoff` | Per-HMM cutoff used |
+| `bitscore_cutoff` | Per-HMM calibrated cutoff (0 = fallback applied) |
+| `confidence` | `calibrated` or `low_confidence` |
 | `cluster_id` | Genomic cluster index |
 | `heme_c_motifs` | Count of CXXCH heme-binding motifs |
-| `protein_sequence` | Amino acid sequence |
+| `contig_len` | Contig length in bp |
+| `cluster_confidence` | Composite cluster reliability score (0–1.2) |
+| `model_nseq` | Number of training sequences for the HMM (from registry) |
+| `uniop_context` | UniOP operon ID or `singleton_...` / `not_in_operon` |
+
+### Column reference — `MetalGenie-Evo-results.gff3`
+
+GFF3 attributes per feature: `ID`, `gene`, `category`, `hmm_stem`, `cluster_id`, `cluster_confidence`, `confidence`.
+
+### Column reference — `MetalGenie-Evo-summary-stats.tsv`
+
+| Section | Metrics |
+|---|---|
+| `RUN` | total ORF hits, total clusters, genomes with hits, genomes with zero hits, runtime |
+| `CONFIDENCE` | mean cluster confidence, high/medium/low confidence cluster counts |
+| `CATEGORY` | ORF hit count per functional category |
+| `GENOME` | per-genome ORF hit count and mean cluster confidence |
 
 ### Column reference — `MetalGenie-Evo-OperonStructure.tsv`
 
@@ -491,19 +642,21 @@ Use `--all_results` to bypass all filtering entirely.
 
 ### For model organisms: JSON rule engine
 
-If `operon_rules.json` is present in `--hmm_dir`, the JSON rule engine is used instead. Intended for users working with well-characterised organisms.
+If `operon_rules.json` is present in `--hmm_dir`, the JSON rule engine is used instead. Rules can also define `canonical_size` (expected gene count for completeness scoring) and `max_bp_gap` (per-rule bp distance override).
 
 ```json
 {
   "report_all_categories": ["metal_resistance-*", "iron_storage"],
   "rules": [
     {
-      "name":       "FLEET",
-      "categories": ["iron_oxidation"],
-      "genes":      ["EetA","EetB","Ndh2","FmnB","FmnA","DmkA","DmkB","PplA"],
-      "rule":       "require_n_of",
-      "min_genes":  5,
-      "on_fail":    "passthrough_non_members"
+      "name":           "FLEET",
+      "categories":     ["iron_oxidation"],
+      "genes":          ["EetA","EetB","Ndh2","FmnB","FmnA","DmkA","DmkB","PplA"],
+      "rule":           "require_n_of",
+      "min_genes":      5,
+      "canonical_size": 8,
+      "max_bp_gap":     2000,
+      "on_fail":        "passthrough_non_members"
     }
   ]
 }
@@ -543,7 +696,15 @@ python scripts/curate_hmm_library.py \
 python scripts/curate_hmm_library.py --verify hmm_library/
 ```
 
-To add individual HMMs manually: place `.hmm` files in a subdirectory of `hmm_library/` named after the category, add cutoffs to `HMM-bitcutoffs.txt`, names to `MetalGenie-map.txt`, and optionally rules to `operon_rules.json`.
+To add individual HMMs manually:
+
+1. Place `.hmm` files in `hmm_library/<category>/`
+2. Add `<file_stem>\t<bitscore>` to `hmm_library/HMM-bitcutoffs.txt`
+3. Add `<file_stem>\t<gene_name>` to `hmm_library/FeGenie-map.txt`
+4. Add a row to `hmm_library/hmm_registry.tsv` (stem must equal filename without `.hmm`)
+5. Optionally add a rule to `operon_rules.json`
+
+> **Registry rule:** The `stem` column in `hmm_registry.tsv` must exactly match the HMM filename without the `.hmm` extension. Mismatches silently break cutoff and gene-name lookup.
 
 ---
 
@@ -588,6 +749,7 @@ Rscript scripts/plot_heatmap.R --input results/ --type interactive --min_count 1
 | Feature | FeGenie | MetalGenie-Evo |
 |---|---|---|
 | Operon clustering | ORF ordinal index | **bp coordinates (GFF)** + ordinal fallback |
+| Per-rule bp-gap tuning | No | **Yes (`max_bp_gap` per operon rule)** |
 | Strand awareness | No | **Yes (`--strand_aware`)** |
 | Parallelism | Sequential | **ProcessPoolExecutor** |
 | Operon filter logic | Hardcoded Python | **Exact port + JSON override for model organisms** |
@@ -596,6 +758,10 @@ Rscript scripts/plot_heatmap.R --input results/ --type interactive --min_count 1
 | Additional iron HMMs | No | **Yes (Tabuteau et al. 2025)** |
 | HMM deduplication | No | **Yes (ACC + NAME + Jaccard, cross-source only)** |
 | Versioned HMM registry | No | **Yes (`hmm_registry.tsv`)** |
+| Cluster confidence score | No | **Yes (HMM × co-occ × UniOP × BGC)** |
+| GFF3 output | No | **Yes (auto when coordinates available)** |
+| Summary statistics | No | **Yes (`MetalGenie-Evo-summary-stats.tsv`)** |
+| antiSMASH BGC boost | No | **Yes (`--bgc_dir`)** |
 | Normalised heatmap | `--norm` | **`--norm`** (same) |
 | Coverage heatmap | `--bam` | **`--bam` / `--bams` / `--depth` / `--depths`** |
 | Coverage normalisation | No | **TPM (`--norm_coverage`)** |
@@ -604,8 +770,10 @@ Rscript scripts/plot_heatmap.R --input results/ --type interactive --min_count 1
 | Relaxed operon thresholds | No | **Yes (`--relaxed_operons`)** |
 | Contig column in outputs | No | **Yes** |
 | Long-format output | No | **Yes (`-results-long.tsv`)** |
+| model_nseq in output | No | **Yes (from HMM registry)** |
 | Operon prediction | No | **Yes (UniOP, `--operon_prediction`)** |
-| Anvi'o integration | No | **Yes (`--anvio`, `--bakta_gff_dir`)** |
+| Anvi'o functions import | No | **Yes (`--anvio`)** |
+| Anvi'o gene-scores import | No | **Yes (`--anvio`, numeric confidence scores)** |
 | R script compatibility | Yes | **Yes (same CSV format)** |
 | FeGenie filter rules | All | **All (exact port)** |
 
