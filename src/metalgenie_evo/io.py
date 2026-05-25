@@ -14,6 +14,8 @@ SOURCE_REFS = {
     "tabuteau": "doi:10.1111/1462-2920.70218",
     "methmmdb": "doi:10.1101/2024.12.26.629440",
     "interpro": "doi:10.1093/nar/gkac993",
+    "ncbifam":  "https://www.ncbi.nlm.nih.gov/genome/annotation_prok/evidence/",
+    "curated":  "see registry reference column",
 }
 
 SOURCE_LABELS = {
@@ -21,6 +23,8 @@ SOURCE_LABELS = {
     "tabuteau": "Tabuteau et al. 2025 (Environ Microbiol)",
     "methmmdb": "MetHMMDB (Kciuchcinski et al. 2025, bioRxiv)",
     "interpro": "InterPro (Paysan-Lafosse et al. 2023, NAR)",
+    "ncbifam":  "NCBIfam (NCBI prokaryotic genome annotation)",
+    "curated":  "manually curated models",
 }
 
 # ── Category catalog: user-facing token → internal HMM directory names ────────
@@ -266,10 +270,28 @@ def filter_categories(cat_hmms, annotate_tokens):
     return filtered
 
 
+_NSEQ_WARN_THRESHOLD = 10
+
+
+def build_nseq_map(registry):
+    """Return {stem: int} for all registry rows that have a valid nseq value."""
+    nseq = {}
+    for r in registry:
+        stem = r.get("stem", "")
+        if not stem:
+            continue
+        try:
+            nseq[stem] = int(float(r["nseq"]))
+        except (KeyError, ValueError, TypeError):
+            pass
+    return nseq
+
+
 def print_provenance(annotate_tokens, registry, cat_hmms):
     """Print HMM source/reference table for the active categories."""
     active_cats = set(cat_hmms)
-    active_rows = [r for r in registry if r.get("category") in active_cats]
+    active_stems = {hf.stem for hmm_list in cat_hmms.values() for _, hf in hmm_list}
+    active_rows = [r for r in registry if r.get("stem") in active_stems]
     if not active_rows:
         return
 
@@ -299,4 +321,22 @@ def print_provenance(annotate_tokens, registry, cat_hmms):
     no_ref = sum(1 for r in active_rows if not r.get("reference", "").strip())
     if no_ref:
         print(f"[WARN] {no_ref} active models lack a reference — treat hits cautiously",
+              file=sys.stderr)
+
+    low_by_src = defaultdict(list)
+    for r in active_rows:
+        try:
+            if int(float(r.get("nseq", 100))) < _NSEQ_WARN_THRESHOLD:
+                low_by_src[r.get("source", "unknown")].append(r["stem"])
+        except (ValueError, TypeError):
+            pass
+    if low_by_src:
+        total_low = sum(len(v) for v in low_by_src.values())
+        src_summary = ", ".join(
+            f"{src}={len(stems)}"
+            for src, stems in sorted(low_by_src.items(), key=lambda x: -len(x[1]))
+        )
+        print(f"[WARN] {total_low} active models have nseq < {_NSEQ_WARN_THRESHOLD} "
+              f"(limited training data — treat hits cautiously; "
+              f"filter hmm_registry.tsv by nseq column for details): {src_summary}",
               file=sys.stderr)

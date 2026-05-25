@@ -37,7 +37,18 @@ def cluster_by_index(orf_set, max_gap=5):
     return clusters
 
 
-def cluster_by_coordinates(orf_set, orf_coords, max_bp_gap=5000, strand_aware=False):
+def cluster_by_coordinates(orf_set, orf_coords, max_bp_gap=5000, strand_aware=False,
+                           orf_stem_map=None, stem_gap_map=None):
+    """
+    Cluster ORFs by base-pair proximity.
+
+    When stem_gap_map is provided, the effective gap threshold for joining two
+    consecutive ORFs is min(gap_a, gap_b) where gap_x is stem_gap_map[stem_x]
+    (falling back to max_bp_gap when the stem has no per-rule value). This makes
+    tight gene systems (MtrMto: 2000 bp, FoxABC: 1000 bp) stricter than the
+    global window without breaking detection of loosely encoded systems
+    (SIDERO_SYNTH: 5000 bp).
+    """
     by_c = defaultdict(list)
     for orf in orf_set:
         c = orf_coords.get(orf)
@@ -61,7 +72,15 @@ def cluster_by_coordinates(orf_set, orf_coords, max_bp_gap=5000, strand_aware=Fa
                 continue
             group = [sg[0][3]]
             for i in range(1, len(sg)):
-                if sg[i][0] - sg[i - 1][1] <= max_bp_gap:
+                if stem_gap_map is not None and orf_stem_map is not None:
+                    gap_a = stem_gap_map.get(
+                        orf_stem_map.get(sg[i - 1][3], ""), max_bp_gap)
+                    gap_b = stem_gap_map.get(
+                        orf_stem_map.get(sg[i][3], ""), max_bp_gap)
+                    effective_gap = min(gap_a, gap_b)
+                else:
+                    effective_gap = max_bp_gap
+                if sg[i][0] - sg[i - 1][1] <= effective_gap:
                     group.append(sg[i][3])
                 else:
                     clusters.append(group)
@@ -70,9 +89,22 @@ def cluster_by_coordinates(orf_set, orf_coords, max_bp_gap=5000, strand_aware=Fa
     return clusters
 
 
-def build_clusters(genome, orf_hits, orf_coords, max_gap, max_bp_gap, strand_aware):
+def build_clusters(genome, orf_hits, orf_coords, max_gap, max_bp_gap, strand_aware,
+                   stem_gap_map=None):
+    """
+    Entry point for clustering ORF hits within a genome.
+
+    stem_gap_map: {hmm_stem → max_bp_gap} from operon rules. When provided,
+    overrides the global max_bp_gap per ORF pair using the more restrictive of
+    the two ORFs' per-rule gaps. ORFs whose stem has no rule entry keep the
+    global max_bp_gap.
+    """
     if orf_coords:
+        orf_stem_map = (
+            {orf: hit["hmm_stem"] for orf, hit in orf_hits.items()}
+            if stem_gap_map else None)
         return cluster_by_coordinates(
             orf_hits.keys(), orf_coords,
-            max_bp_gap=max_bp_gap, strand_aware=strand_aware)
+            max_bp_gap=max_bp_gap, strand_aware=strand_aware,
+            orf_stem_map=orf_stem_map, stem_gap_map=stem_gap_map)
     return cluster_by_index(orf_hits.keys(), max_gap=max_gap)

@@ -1,36 +1,46 @@
 """Output writers: CSV/TSV summary files and heatmaps."""
 
 import csv
+import datetime
 from collections import defaultdict
 
 from metalgenie_evo.coverage import compute_tpm
 
 
+def _fmt_conf(r):
+    c = r.get("cluster_confidence")
+    return f"{c:.3f}" if c is not None else ""
+
+
 def write_summary(path, rows):
     with open(path, "w") as fh:
         fh.write("category,genome/assembly,contig,orf,gene,bitscore,"
-                 "bitscore_cutoff,cluster_id,heme_c_motifs,protein_sequence\n")
+                 "bitscore_cutoff,cluster_id,cluster_confidence,"
+                 "heme_c_motifs,protein_sequence\n")
         prev = None
         for r in rows:
             if prev is not None and r["cluster_id"] != prev:
-                fh.write("#,#,#,#,#,#,#,#,#\n")
+                fh.write("#,#,#,#,#,#,#,#,#,#\n")
             orf_id = r.get("bakta_id", r["orf"])
             fh.write(f"{r['cat']},{r['genome']},{r['contig']},{orf_id},"
                      f"{r['gene_name']},{r['bitscore']:.1f},{r['cutoff']},"
-                     f"{r['cluster_id']},{r['heme_motifs']},{r['sequence']}\n")
+                     f"{r['cluster_id']},{_fmt_conf(r)},"
+                     f"{r['heme_motifs']},{r['sequence']}\n")
             prev = r["cluster_id"]
 
 
 def write_gene_summary(path, rows):
     with open(path, "w") as fh:
-        fh.write("process,assembly,contig,orf,gene,bitscore,cluster_id\n")
+        fh.write("process,assembly,contig,orf,gene,bitscore,cluster_id,"
+                 "cluster_confidence\n")
         prev = None
         for r in rows:
             if prev is not None and r["cluster_id"] != prev:
-                fh.write("#,#,#,#,#,#,#\n")
+                fh.write("#,#,#,#,#,#,#,#\n")
             orf_id = r.get("bakta_id", r["orf"])
             fh.write(f"{r['cat']},{r['genome']},{r['contig']},{orf_id},"
-                     f"{r['gene_name']},{r['bitscore']:.1f},{r['cluster_id']}\n")
+                     f"{r['gene_name']},{r['bitscore']:.1f},{r['cluster_id']},"
+                     f"{_fmt_conf(r)}\n")
             prev = r["cluster_id"]
 
 
@@ -38,7 +48,7 @@ def write_long_format(path, rows):
     has_uniop = any("uniop_context" in r for r in rows)
     fields = ["category", "genome", "contig", "orf", "gene", "bitscore",
               "bitscore_cutoff", "confidence", "cluster_id", "heme_c_motifs",
-              "contig_len"]
+              "contig_len", "cluster_confidence", "model_nseq"]
     if has_uniop:
         fields.append("uniop_context")
     with open(path, "w", newline="") as fh:
@@ -47,17 +57,21 @@ def write_long_format(path, rows):
         w.writeheader()
         for r in rows:
             row = {
-                "category":       r["cat"],
-                "genome":         r["genome"],
-                "contig":         r["contig"],
-                "orf":            r.get("bakta_id", r["orf"]),
-                "gene":           r["gene_name"],
-                "bitscore":       f"{r['bitscore']:.1f}",
-                "bitscore_cutoff": r["cutoff"],
-                "confidence":     r.get("confidence", "low_confidence"),
-                "cluster_id":     r["cluster_id"],
-                "heme_c_motifs":  r["heme_motifs"],
-                "contig_len":     r.get("contig_len", ""),
+                "category":          r["cat"],
+                "genome":            r["genome"],
+                "contig":            r["contig"],
+                "orf":               r.get("bakta_id", r["orf"]),
+                "gene":              r["gene_name"],
+                "bitscore":          f"{r['bitscore']:.1f}",
+                "bitscore_cutoff":   r["cutoff"],
+                "confidence":        r.get("confidence", "low_confidence"),
+                "cluster_id":        r["cluster_id"],
+                "heme_c_motifs":     r["heme_motifs"],
+                "contig_len":        r.get("contig_len", ""),
+                "cluster_confidence": f"{r.get('cluster_confidence', ''):.3f}"
+                                      if r.get("cluster_confidence") is not None
+                                      else "",
+                "model_nseq":        r.get("model_nseq", ""),
             }
             if has_uniop:
                 row["uniop_context"] = r.get("uniop_context", "not_in_operon")
@@ -105,6 +119,169 @@ def write_coverage_heatmap(path, rows, all_genomes, genome_cov,
         for cat in all_cats:
             fh.write(cat + "," + ",".join(
                 f"{cm[cat].get(g, 0.0):.4f}" for g in all_genomes) + "\n")
+
+
+def write_gff3(path, final_rows, genome_coords):
+    """
+    Write HMM hits as GFF3 features.
+
+    Only rows with coordinate information (from genome_coords) are written.
+    Rows without coordinates are silently skipped (no coordinate data without
+    --gff_dir or --fna_dir).
+
+    Attributes per feature:
+        ID, gene, category, hmm_stem, cluster_id, cluster_confidence, confidence
+    """
+    n_written = 0
+    with open(path, "w") as fh:
+        fh.write("##gff-version 3\n")
+        fh.write(f"## Generated by MetalGenie-Evo  {datetime.datetime.now().strftime('%Y-%m-%d')}\n")
+        for r in final_rows:
+            coords = genome_coords.get(r["genome"], {}).get(r["orf"])
+            if coords is None:
+                continue
+            contig = coords["contig"]
+            start  = coords["start"]
+            end    = coords["end"]
+            strand = coords.get("strand", ".")
+            conf   = r.get("cluster_confidence")
+            conf_s = f"{conf:.3f}" if conf is not None else "."
+            orf_id = r.get("bakta_id", r["orf"])
+            attrs  = (
+                f"ID={orf_id}"
+                f";gene={r['gene_name']}"
+                f";category={r['cat']}"
+                f";hmm_stem={r['hmm_stem']}"
+                f";cluster_id={r['cluster_id']}"
+                f";cluster_confidence={conf_s}"
+                f";confidence={r.get('confidence', 'low_confidence')}"
+            )
+            fh.write(
+                f"{contig}\tMetalGenie-Evo\tCDS\t{start}\t{end}"
+                f"\t.\t{strand}\t.\t{attrs}\n"
+            )
+            n_written += 1
+    return n_written
+
+
+def write_summary_stats(path, final_rows, all_genomes, genome_coords=None,
+                        runtime_s=None):
+    """
+    Write a human-readable summary statistics TSV.
+
+    Sections:
+        RUN        — overall counts and runtime
+        CONFIDENCE — cluster confidence tier distribution
+        CATEGORY   — hit counts per HMM category
+        GENOME     — per-genome hit count and mean cluster_confidence
+    """
+    clusters  = defaultdict(list)
+    for r in final_rows:
+        clusters[r["cluster_id"]].append(r)
+
+    confs = [r.get("cluster_confidence") for r in final_rows
+             if r.get("cluster_confidence") is not None]
+    by_cluster_conf = [grp[0].get("cluster_confidence")
+                       for grp in clusters.values()
+                       if grp[0].get("cluster_confidence") is not None]
+
+    n_high   = sum(1 for c in by_cluster_conf if c >= 0.8)
+    n_mid    = sum(1 for c in by_cluster_conf if 0.5 <= c < 0.8)
+    n_low    = sum(1 for c in by_cluster_conf if c < 0.5)
+    mean_all = sum(by_cluster_conf) / len(by_cluster_conf) if by_cluster_conf else 0.0
+
+    cat_counts = defaultdict(int)
+    for r in final_rows:
+        cat_counts[r["cat"]] += 1
+
+    genome_hits  = defaultdict(int)
+    genome_confs = defaultdict(list)
+    for r in final_rows:
+        genome_hits[r["genome"]] += 1
+        c = r.get("cluster_confidence")
+        if c is not None:
+            genome_confs[r["genome"]].append(c)
+
+    n_genomes_hit  = len(genome_hits)
+    n_genomes_zero = len(all_genomes) - n_genomes_hit
+
+    with open(path, "w") as fh:
+        def row(section, metric, value, note=""):
+            fh.write(f"{section}\t{metric}\t{value}\t{note}\n")
+
+        fh.write("# MetalGenie-Evo summary statistics\n")
+        fh.write(f"# {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+        fh.write("section\tmetric\tvalue\tnotes\n")
+
+        row("RUN", "total_orf_hits",     len(final_rows))
+        row("RUN", "total_clusters",     len(clusters))
+        row("RUN", "genomes_with_hits",  n_genomes_hit)
+        row("RUN", "genomes_zero_hits",  n_genomes_zero,
+            "zero-hit genomes listed at bottom")
+        if runtime_s is not None:
+            row("RUN", "runtime_seconds", f"{runtime_s:.1f}")
+
+        row("CONFIDENCE", "mean_cluster_confidence", f"{mean_all:.3f}",
+            "per-cluster, not per-orf")
+        row("CONFIDENCE", "high_confidence_clusters",   n_high,  "conf >= 0.8")
+        row("CONFIDENCE", "medium_confidence_clusters", n_mid,   "0.5 <= conf < 0.8")
+        row("CONFIDENCE", "low_confidence_clusters",    n_low,   "conf < 0.5")
+
+        for cat, n in sorted(cat_counts.items()):
+            row("CATEGORY", cat, n, "ORF hits")
+
+        for g in sorted(all_genomes):
+            n     = genome_hits.get(g, 0)
+            confs_g = genome_confs.get(g, [])
+            mean_g  = f"{sum(confs_g)/len(confs_g):.3f}" if confs_g else "NA"
+            row("GENOME", g, n, f"mean_cluster_confidence={mean_g}")
+
+
+def write_anvio_misc_data(path, final_rows, prodigal_to_bakta=None):
+    """
+    Per-gene numeric scores for anvi'o misc-data import.
+
+    Format (tab-delimited):
+        gene_callers_id  cluster_confidence  co_occ_score  hmm_weight
+                         uniop_weight  bgc_boost
+
+    gene_callers_id is the Bakta gene ID when --bakta_gff_dir was used, otherwise
+    the Prodigal ORF name. For anvi'o import, integer gene_callers_ids are required:
+
+        anvi-import-misc-data -c CONTIGS.db \\
+            --target-data-table genes \\
+            MetalGenie-Evo-anvio-gene-scores.tsv
+
+    Prodigal users must first map ORF names to integer IDs:
+        anvi-export-gene-calls -c CONTIGS.db -o gene_calls.tsv
+    then join on the orf name in column 'contig'_'start'_'stop'_'direction'.
+    Bakta users with external gene calls imported via anvi-import-external-gene-calls
+    can use the Bakta locus tags directly.
+    """
+    fields = ["gene_callers_id", "cluster_confidence", "co_occ_score",
+              "hmm_weight", "uniop_weight", "bgc_boost"]
+    seen = set()
+    with open(path, "w", newline="") as fh:
+        w = csv.writer(fh, delimiter="\t")
+        w.writerow(fields)
+        for r in final_rows:
+            orf = r["orf"]
+            if orf in seen:
+                continue
+            seen.add(orf)
+            caller = r.get("bakta_id") or orf
+            conf   = r.get("cluster_confidence")
+            w.writerow([
+                caller,
+                f"{conf:.4f}"         if conf is not None else "",
+                f"{r.get('co_occ_score', ''):.4f}"
+                    if r.get("co_occ_score") is not None else "",
+                f"{r.get('hmm_w', ''):.4f}"
+                    if r.get("hmm_w") is not None else "",
+                f"{r.get('uniop_w', ''):.4f}"
+                    if r.get("uniop_w") is not None else "",
+                f"{r.get('bgc_boost', 1.0):.4f}",
+            ])
 
 
 def write_anvio_functions(path, final_rows, prodigal_to_bakta=None):

@@ -8,29 +8,39 @@ from pathlib import Path
 
 # ── Default operon rules (used when no operon_rules.json is present) ──────────
 _DEFAULT_OPERON_RULES = [
+    # canonical_size: expected number of genes in a complete system (for completeness scoring).
+    # max_bp_gap:     recommended max intergenic gap for this gene system (bp).
+    #                 Used as metadata; the global --max_bp_gap is the detection window.
     {"name": "FLEET", "categories": ["iron_oxidation"],
      "genes": ["EetA", "EetB", "Ndh2", "FmnB", "FmnA", "DmkA", "DmkB", "PplA"],
-     "rule": "require_n_of", "min_genes": 5, "on_fail": "passthrough_non_members"},
+     "rule": "require_n_of", "min_genes": 5, "on_fail": "passthrough_non_members",
+     "canonical_size": 8, "max_bp_gap": 2000},
     {"name": "MAM", "categories": ["magnetosome_formation"],
      "genes": ["MamA", "MamB", "MamE", "MamK", "MamP", "MamM", "MamQ", "MamI", "MamL", "MamO"],
-     "rule": "require_n_of", "min_genes": 5, "on_fail": "passthrough_non_members"},
+     "rule": "require_n_of", "min_genes": 5, "on_fail": "passthrough_non_members",
+     "canonical_size": 10, "max_bp_gap": 3000},
     {"name": "FOXABC", "categories": ["iron_oxidation"],
      "genes": ["FoxA", "FoxB", "FoxC"],
-     "rule": "require_n_of", "min_genes": 2, "on_fail": "passthrough_non_members"},
+     "rule": "require_n_of", "min_genes": 2, "on_fail": "passthrough_non_members",
+     "canonical_size": 3, "max_bp_gap": 1000},
     {"name": "FOXEYZ", "categories": ["iron_oxidation"],
      "genes": ["FoxE", "FoxY", "FoxZ"],
-     "rule": "require_anchor", "anchor": "FoxE", "on_fail": "passthrough_non_members"},
+     "rule": "require_anchor", "anchor": "FoxE", "on_fail": "passthrough_non_members",
+     "canonical_size": 3, "max_bp_gap": 1000},
     {"name": "DFE1", "categories": ["iron_reduction", "probable_iron_reduction"],
      "genes": ["DFE_0448", "DFE_0449", "DFE_0450", "DFE_0451"],
-     "rule": "require_n_of", "min_genes": 3, "on_fail": "passthrough_non_members"},
+     "rule": "require_n_of", "min_genes": 3, "on_fail": "passthrough_non_members",
+     "canonical_size": 4, "max_bp_gap": 1000},
     {"name": "DFE2", "categories": ["iron_reduction", "probable_iron_reduction"],
      "genes": ["DFE_0461", "DFE_0462", "DFE_0463", "DFE_0464", "DFE_0465"],
-     "rule": "require_n_of", "min_genes": 3, "on_fail": "passthrough_non_members"},
+     "rule": "require_n_of", "min_genes": 3, "on_fail": "passthrough_non_members",
+     "canonical_size": 5, "max_bp_gap": 1000},
     {"name": "MtrMto",
      "categories": ["iron_oxidation", "iron_reduction",
                     "possible_iron_oxidation_and_possible_iron_reduction"],
      "genes": ["MtrA", "MtrB_TIGR03509", "MtrC_TIGR03507", "MtoA", "CymA"],
-     "rule": "mtr_disambiguation", "on_fail": "keep_all"},
+     "rule": "mtr_disambiguation", "on_fail": "keep_all",
+     "canonical_size": 3, "max_bp_gap": 2000},
     {"name": "SIDERO_TRANSPORT",
      "categories": ["iron_acquisition-siderophore_transport_potential",
                     "iron_acquisition-heme_transport",
@@ -41,12 +51,14 @@ _DEFAULT_OPERON_RULES = [
                       "FutC-iron_ABC_transporter_ATPase-rep",
                       "LbtU-LvtA-PiuA-PirA-RhtA", "LbtU-LbtB-legiobactin_receptor",
                       "LbtU_LbtB-legiobactin_receptor_2", "IroC-salmochelin_transport-rep"],
-     "on_fail": "drop"},
+     "on_fail": "drop", "max_bp_gap": 2000},
     {"name": "SIDERO_SYNTH", "categories": ["iron_acquisition-siderophore_synthesis"],
-     "genes": [], "rule": "require_n_cat", "min_genes": 3, "on_fail": "drop"},
+     "genes": [], "rule": "require_n_cat", "min_genes": 3, "on_fail": "drop",
+     "max_bp_gap": 5000},
     {"name": "IRON_TRANSPORT",
      "categories": ["iron_acquisition-iron_transport", "iron_acquisition-heme_oxygenase"],
-     "genes": [], "rule": "require_n_cat", "min_genes": 2, "on_fail": "drop"},
+     "genes": [], "rule": "require_n_cat", "min_genes": 2, "on_fail": "drop",
+     "max_bp_gap": 2000},
 ]
 
 _REPORT_ALL_PATTERNS = ["metal_resistance-*", "iron_storage"]
@@ -73,6 +85,44 @@ _IRON_TRANS_CATS   = {"iron_acquisition-iron_transport", "iron_acquisition-heme_
 _IRON_ACQ_ALL      = _SIDERO_TRANS_CATS | _SIDERO_SYNTH_CATS | _IRON_TRANS_CATS
 
 FE_REDOX = {"iron_reduction", "iron_oxidation"}
+
+
+def build_stem_gap_map(rules, gene_map):
+    """
+    Return {hmm_stem → max_bp_gap} from rules that define max_bp_gap for named genes.
+
+    gene_map must be {hmm_stem → gene_name} (from read_map). Rules without a genes
+    list (SIDERO_SYNTH, IRON_TRANSPORT, …) contribute their max_bp_gap as a fallback
+    only for stems that belong to those categories — not implemented here since those
+    rules have no named genes to anchor on. They continue using the global max_bp_gap.
+    """
+    name_to_gap = {}
+    for rule in (rules if rules else _DEFAULT_OPERON_RULES):
+        gap = rule.get("max_bp_gap")
+        if gap:
+            for g in rule.get("genes", []):
+                name_to_gap[g] = gap
+    result = {}
+    for stem, name in (gene_map or {}).items():
+        if name in name_to_gap:
+            result[stem] = name_to_gap[name]
+    return result
+
+
+def build_canonical_size_map(rules):
+    """
+    Return {gene_name → canonical_size} from rules that define both a genes list
+    and a canonical_size. Used to look up completeness expectations per cluster.
+    """
+    if not rules:
+        return {}
+    result = {}
+    for rule in rules:
+        cs = rule.get("canonical_size")
+        if cs and rule.get("genes"):
+            for g in rule["genes"]:
+                result[g] = cs
+    return result
 
 
 def load_operon_rules(hmm_dir):
