@@ -6,6 +6,11 @@
     <marker id="arrowRed" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
       <path d="M0,0 L0,6 L8,3 z" fill="#60a5fa"/>
     </marker>
+    <!-- paths for curved text labels -->
+    <path id="topArcText"
+          d="M 40,57 A 52,52 0 0,1 144,57"/>
+    <path id="botArcText"
+          d="M 40,113 A 52,52 0 0,0 144,113"/>
     <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="0%">
       <stop offset="0%"   stop-color="#0f172a"/>
       <stop offset="100%" stop-color="#1e293b"/>
