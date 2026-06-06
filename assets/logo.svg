@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 170" width="920" height="170">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 160" width="920" height="160">
   <defs>
     <marker id="arrowOx" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
       <path d="M0,0 L0,6 L8,3 z" fill="#f59e0b"/>
@@ -18,102 +18,113 @@
   </defs>
 
   <!-- Background -->
-  <rect width="920" height="170" rx="14" fill="url(#bg)"/>
+  <rect width="920" height="160" rx="14" fill="url(#bg)"/>
 
-  <!-- ── LEFT: redox cycling wheel ──────────────────────────── -->
-  <!-- circle: cx=92, cy=85, r=52 → y: 33–137  x: 40–144      -->
+  <!-- ── LEFT: redox cycling wheel ──────────────────────────────────── -->
+  <!-- cx=93, cy=80, r=55 → fits 38–148 horizontally -->
 
   <!-- guide ring -->
-  <circle cx="92" cy="85" r="52" fill="none" stroke="#1e3a5f" stroke-width="1.5"/>
+  <circle cx="93" cy="80" r="55" fill="none" stroke="#1e3a5f" stroke-width="1.5"/>
 
-  <!-- Oxidation arc: left → right across the top, amber -->
-  <path d="M 44,59 A 52,52 0 0,1 140,59"
-        fill="none" stroke="#f59e0b" stroke-width="3.5" stroke-linecap="round"
+  <!-- Oxidation arc top (amber) — left-to-right across the top -->
+  <path d="M 53,50 A 55,55 0 0,1 133,50"
+        fill="none" stroke="#f59e0b" stroke-width="3" stroke-linecap="round"
         marker-end="url(#arrowOx)"/>
 
-  <!-- Reduction arc: right → left across the bottom, blue -->
-  <path d="M 140,111 A 52,52 0 0,1 44,111"
-        fill="none" stroke="#60a5fa" stroke-width="3.5" stroke-linecap="round"
+  <!-- Reduction arc bottom (blue) — right-to-left across the bottom -->
+  <path d="M 133,110 A 55,55 0 0,1 53,110"
+        fill="none" stroke="#60a5fa" stroke-width="3" stroke-linecap="round"
         marker-end="url(#arrowRed)"/>
 
-  <!-- Curved "OXIDATION" label following top arc (outside circle) -->
-  <text font-family="Arial, sans-serif" font-size="9" font-weight="bold"
-        fill="#f59e0b" opacity="0.85" letter-spacing="1">
-    <textPath href="#topArcText" startOffset="18%">OXIDATION</textPath>
-  </text>
+  <!-- Reduced forms label (bottom, inside arc) -->
+  <text x="93" y="124" font-family="'Courier New', monospace" font-size="11"
+        fill="#60a5fa" text-anchor="middle" font-weight="bold">Fe²⁺ · Mn²⁺</text>
 
-  <!-- Curved "REDUCTION" label following bottom arc (outside circle) -->
-  <text font-family="Arial, sans-serif" font-size="9" font-weight="bold"
-        fill="#60a5fa" opacity="0.85" letter-spacing="1">
-    <textPath href="#botArcText" startOffset="18%">REDUCTION</textPath>
-  </text>
+  <!-- Oxidised forms label (top, inside arc) -->
+  <text x="93" y="44" font-family="'Courier New', monospace" font-size="11"
+        fill="#f59e0b" text-anchor="middle" font-weight="bold">Fe³⁺ · MnO₂</text>
+
+  <!-- OXIDATION label — left of arc -->
+  <text x="9" y="67" font-family="Arial, sans-serif" font-size="8"
+        fill="#f59e0b" opacity="0.75" transform="rotate(-55,9,67)">OXIDATION</text>
+
+  <!-- REDUCTION label — right of arc -->
+  <text x="176" y="100" font-family="Arial, sans-serif" font-size="8"
+        fill="#60a5fa" opacity="0.75" transform="rotate(-55,176,100)">REDUCTION</text>
 
   <!-- Centre genome icon -->
-  <circle cx="92" cy="85" r="20" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
-  <path d="M 80,78 Q 92,71 104,78" fill="none" stroke="#a78bfa" stroke-width="2.2" stroke-linecap="round"/>
-  <path d="M 80,85 Q 92,78 104,85" fill="none" stroke="#a78bfa" stroke-width="2.2" stroke-linecap="round"/>
-  <path d="M 80,92 Q 92,85 104,92" fill="none" stroke="#a78bfa" stroke-width="2.2" stroke-linecap="round"/>
-
-  <!-- subtitle under wheel -->
-  <text x="92" y="158" font-family="Arial, sans-serif" font-size="8.5"
-        fill="#475569" text-anchor="middle">Fe · Mn cycling</text>
+  <circle cx="93" cy="80" r="19" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+  <path d="M 81,73 Q 93,66 105,73" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round"/>
+  <path d="M 81,80 Q 93,73 105,80" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round"/>
+  <path d="M 81,87 Q 93,80 105,87" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round"/>
 
   <!-- left divider -->
-  <line x1="185" y1="28" x2="185" y2="145" stroke="#334155" stroke-width="1"/>
+  <line x1="185" y1="25" x2="185" y2="135" stroke="#334155" stroke-width="1"/>
 
-  <!-- ── CENTRE: title ──────────────────────────────────────── -->
-  <text x="437" y="84" font-family="'Courier New', monospace" font-size="42"
+  <!-- ── CENTRE: title ────────────────────────────────────────────── -->
+  <text x="437" y="78" font-family="'Courier New', monospace" font-size="42"
         fill="#f1f5f9" text-anchor="middle" font-weight="bold" letter-spacing="2">Efesto</text>
-  <text x="437" y="115" font-family="Arial, sans-serif" font-size="13"
+  <text x="437" y="108" font-family="Arial, sans-serif" font-size="13.5"
         fill="#64748b" text-anchor="middle">Metal cycling gene annotation · genomes &amp; metagenomes</text>
 
   <!-- right divider -->
-  <line x1="690" y1="28" x2="690" y2="145" stroke="#334155" stroke-width="1"/>
+  <line x1="690" y1="25" x2="690" y2="135" stroke="#334155" stroke-width="1"/>
 
-  <!-- ── RIGHT: element tiles ───────────────────────────────── -->
-  <!-- 3 × 2 grid  |  tile: 64 × 58 px  |  gap: 8 px          -->
-  <!-- Col x-left: 698  766  834   |  Row y-top: 24  90        -->
+  <!-- ── RIGHT: element tiles (3×2 grid, 64×58px, 7px gap) ────────── -->
+  <!-- Row 1 y=22, Row 2 y=87  |  Col cx: 727, 798, 869             -->
 
   <!-- Fe  26  purple -->
-  <rect x="698" y="24" width="64" height="58" rx="7" fill="#5b21b6" opacity="0.9"/>
-  <text x="730" y="55" font-family="'Courier New', monospace" font-size="24"
+  <rect x="695" y="22" width="64" height="58" rx="7" fill="#5b21b6" opacity="0.9"/>
+  <text x="727" y="52" font-family="'Courier New', monospace" font-size="24"
         fill="white" text-anchor="middle" font-weight="bold">Fe</text>
-  <text x="703" y="35" font-family="Arial, sans-serif" font-size="8" fill="#c4b5fd">iron</text>
-  <text x="757" y="74" font-family="Arial, sans-serif" font-size="9" fill="#ddd6fe" text-anchor="end">26</text>
+  <text x="750" y="72" font-family="Arial, sans-serif" font-size="9"
+        fill="#ddd6fe" text-anchor="end">26</text>
+  <text x="700" y="32" font-family="Arial, sans-serif" font-size="8"
+        fill="#c4b5fd">iron</text>
 
-  <!-- Mn  25  ocean blue -->
-  <rect x="770" y="24" width="64" height="58" rx="7" fill="#0369a1" opacity="0.9"/>
-  <text x="802" y="55" font-family="'Courier New', monospace" font-size="24"
+  <!-- Mn  25  blue -->
+  <rect x="766" y="22" width="64" height="58" rx="7" fill="#0369a1" opacity="0.9"/>
+  <text x="798" y="52" font-family="'Courier New', monospace" font-size="24"
         fill="white" text-anchor="middle" font-weight="bold">Mn</text>
-  <text x="775" y="35" font-family="Arial, sans-serif" font-size="8" fill="#7dd3fc">Mn</text>
-  <text x="829" y="74" font-family="Arial, sans-serif" font-size="9" fill="#bae6fd" text-anchor="end">25</text>
+  <text x="821" y="72" font-family="Arial, sans-serif" font-size="9"
+        fill="#bae6fd" text-anchor="end">25</text>
+  <text x="771" y="32" font-family="Arial, sans-serif" font-size="8"
+        fill="#7dd3fc">manganese</text>
 
-  <!-- Cu  29  amber-brown -->
-  <rect x="842" y="24" width="64" height="58" rx="7" fill="#92400e" opacity="0.9"/>
-  <text x="874" y="55" font-family="'Courier New', monospace" font-size="24"
+  <!-- Cu  29  amber -->
+  <rect x="837" y="22" width="64" height="58" rx="7" fill="#92400e" opacity="0.9"/>
+  <text x="869" y="52" font-family="'Courier New', monospace" font-size="24"
         fill="white" text-anchor="middle" font-weight="bold">Cu</text>
-  <text x="847" y="35" font-family="Arial, sans-serif" font-size="8" fill="#fcd34d">copper</text>
-  <text x="901" y="74" font-family="Arial, sans-serif" font-size="9" fill="#fde68a" text-anchor="end">29</text>
+  <text x="892" y="72" font-family="Arial, sans-serif" font-size="9"
+        fill="#fde68a" text-anchor="end">29</text>
+  <text x="842" y="32" font-family="Arial, sans-serif" font-size="8"
+        fill="#fcd34d">copper</text>
 
   <!-- Zn  30  teal -->
-  <rect x="698" y="90" width="64" height="58" rx="7" fill="#065f46" opacity="0.9"/>
-  <text x="730" y="121" font-family="'Courier New', monospace" font-size="24"
+  <rect x="695" y="87" width="64" height="58" rx="7" fill="#065f46" opacity="0.9"/>
+  <text x="727" y="117" font-family="'Courier New', monospace" font-size="24"
         fill="white" text-anchor="middle" font-weight="bold">Zn</text>
-  <text x="703" y="101" font-family="Arial, sans-serif" font-size="8" fill="#6ee7b7">zinc</text>
-  <text x="757" y="140" font-family="Arial, sans-serif" font-size="9" fill="#a7f3d0" text-anchor="end">30</text>
+  <text x="750" y="137" font-family="Arial, sans-serif" font-size="9"
+        fill="#a7f3d0" text-anchor="end">30</text>
+  <text x="700" y="97" font-family="Arial, sans-serif" font-size="8"
+        fill="#6ee7b7">zinc</text>
 
-  <!-- Mo  42  dark red -->
-  <rect x="770" y="90" width="64" height="58" rx="7" fill="#7f1d1d" opacity="0.9"/>
-  <text x="802" y="121" font-family="'Courier New', monospace" font-size="24"
+  <!-- Mo  42  red -->
+  <rect x="766" y="87" width="64" height="58" rx="7" fill="#7f1d1d" opacity="0.9"/>
+  <text x="798" y="117" font-family="'Courier New', monospace" font-size="24"
         fill="white" text-anchor="middle" font-weight="bold">Mo</text>
-  <text x="775" y="101" font-family="Arial, sans-serif" font-size="8" fill="#f87171">Mo</text>
-  <text x="829" y="140" font-family="Arial, sans-serif" font-size="9" fill="#fca5a5" text-anchor="end">42</text>
+  <text x="821" y="137" font-family="Arial, sans-serif" font-size="9"
+        fill="#fca5a5" text-anchor="end">42</text>
+  <text x="771" y="97" font-family="Arial, sans-serif" font-size="8"
+        fill="#f87171">molybdenum</text>
 
-  <!-- As  33  olive green -->
-  <rect x="842" y="90" width="64" height="58" rx="7" fill="#3f6212" opacity="0.9"/>
-  <text x="874" y="121" font-family="'Courier New', monospace" font-size="24"
+  <!-- As  33  green -->
+  <rect x="837" y="87" width="64" height="58" rx="7" fill="#3f6212" opacity="0.9"/>
+  <text x="869" y="117" font-family="'Courier New', monospace" font-size="24"
         fill="white" text-anchor="middle" font-weight="bold">As</text>
-  <text x="847" y="101" font-family="Arial, sans-serif" font-size="8" fill="#bef264">arsenic</text>
-  <text x="901" y="140" font-family="Arial, sans-serif" font-size="9" fill="#d9f99d" text-anchor="end">33</text>
+  <text x="892" y="137" font-family="Arial, sans-serif" font-size="9"
+        fill="#d9f99d" text-anchor="end">33</text>
+  <text x="842" y="97" font-family="Arial, sans-serif" font-size="8"
+        fill="#bef264">arsenic</text>
 
 </svg>
