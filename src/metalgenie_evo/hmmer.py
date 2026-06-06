@@ -64,7 +64,7 @@ def _hmmsearch_job(args_tuple):
     return tblout_path, r.returncode == 0, r.stderr if r.returncode else ""
 
 
-def parse_tblout(path):
+def parse_tblout(path, max_evalue=1e-5):
     hits = []
     if not os.path.isfile(path):
         return hits
@@ -80,7 +80,7 @@ def parse_tblout(path):
                 b = float(parts[5])
             except ValueError:
                 continue
-            if e < 0.1:
+            if e <= max_evalue:
                 hits.append((parts[0], e, b))
     return hits
 
@@ -112,7 +112,7 @@ def run_all_hmmsearches(faa_files, cat_hmms, cutoffs, out_tmp,
     print()
 
 
-def collect_best_hits(faa_files, cat_hmms, out_tmp, cutoffs=None):
+def collect_best_hits(faa_files, cat_hmms, out_tmp, cutoffs=None, max_evalue=1e-5):
     if cutoffs is None:
         cutoffs = {}
     bh = defaultdict(dict)
@@ -122,7 +122,8 @@ def collect_best_hits(faa_files, cat_hmms, out_tmp, cutoffs=None):
             for stem, _ in hmm_list:
                 calibrated = cutoffs.get(stem, 0) > 0
                 for orf, ev, bs in parse_tblout(
-                        str(out_tmp / f"{genome}__{stem}.tblout")):
+                        str(out_tmp / f"{genome}__{stem}.tblout"),
+                        max_evalue=max_evalue):
                     prev = bh[genome].get(orf)
                     if prev is None or bs > prev["bitscore"]:
                         bh[genome][orf] = {

@@ -40,8 +40,8 @@ from metalgenie_evo.uniop import (
     _uniop_context, build_prodigal_bakta_map, run_uniop, write_operon_structure)
 from metalgenie_evo.writers import (
     write_anvio_functions, write_anvio_misc_data, write_coverage_heatmap,
-    write_gene_summary, write_gff3, write_heatmap, write_long_format,
-    write_summary, write_summary_stats)
+    write_gene_summary, write_gff3, write_heatmap, write_hit_faa, write_hit_fna,
+    write_long_format, write_summary, write_summary_stats)
 
 
 def main():
@@ -110,6 +110,12 @@ def main():
                         "cutoff in the registry (cutoff=0.0). These hits are "
                         "reported as 'low_confidence' in the long-format output. "
                         "Set to 0 to disable (not recommended). Default: 30")
+    p.add_argument("--max_evalue", type=float, default=1e-5,
+                   help="Maximum E-value for accepting an hmmsearch hit. "
+                        "Recommended by MetHMMDB developers for uncalibrated models. "
+                        "For calibrated models the bitscore cutoff is the primary gate "
+                        "so this value mainly affects zero-cutoff (methmmdb) hits. "
+                        "Default: 1e-5")
     p.add_argument("--norm", action="store_true",
                    help="Normalise gene-count heatmap")
     p.add_argument("--bam", help="Single BAM file (requires samtools >=1.10)")
@@ -212,9 +218,14 @@ def main():
     cutoffs  = read_cutoffs(str(Path(args.hmm_dir) / "HMM-bitcutoffs.txt"))
     registry = load_registry(args.hmm_dir)
     nseq_map = build_nseq_map(registry)
+    _skip_statuses = {"deprecated", "inactive"}
     deprecated_stems = {
         r["stem"] for r in registry
-        if r.get("status", "active") != "active"
+        if any(r.get("status", "active").startswith(s) for s in _skip_statuses)
+    }
+    experimental_stems = {
+        r["stem"] for r in registry
+        if r.get("status", "active") == "experimental"
     }
     cat_hmms = defaultdict(list)
     h2c      = {}
@@ -237,6 +248,13 @@ def main():
     total_hmms = sum(len(v) for v in cat_hmms.values())
     print_provenance(args.annotate, registry, cat_hmms)
     print(f"[INFO] {total_hmms} HMMs across {len(cat_hmms)} categories")
+    active_exp = experimental_stems & {hf.stem
+                                       for hmms in cat_hmms.values()
+                                       for _, hf in hmms}
+    if active_exp:
+        print(f"[WARN] {len(active_exp)} experimental models active "
+              f"(nseq < 10, no calibrated cutoff — treat hits with high caution): "
+              f"{', '.join(sorted(active_exp))}", file=sys.stderr)
     operon_rules, report_all_pats, json_mode = load_operon_rules(args.hmm_dir)
     _active_rules     = operon_rules if operon_rules else _DEFAULT_OPERON_RULES
     gene_canonical_map = build_canonical_size_map(_active_rules)
@@ -273,7 +291,8 @@ def main():
                         args.threads, args.hmm_threads,
                         zero_cutoff_min_bitscore=args.zero_cutoff_min_bitscore)
     print("[INFO] Collecting best HMM hits…")
-    best_hit = collect_best_hits(faa_files, cat_hmms, tblout_dir, cutoffs=cutoffs)
+    best_hit = collect_best_hits(faa_files, cat_hmms, tblout_dir,
+                                 cutoffs=cutoffs, max_evalue=args.max_evalue)
 
     print("[INFO] Clustering and filtering…")
     if args.min_contig_len > 0:
@@ -554,6 +573,24 @@ def main():
     else:
         print("[INFO] GFF3 output skipped: no coordinate data "
               "(requires --fna_dir or --gff_dir)")
+
+    # ── Sequence FASTA outputs ────────────────────────────────────────────────
+    faa_out = out_dir / "MetalGenie-Evo-hits.faa"
+    print(f"[INFO] Writing {faa_out.name}…")
+    n_faa = write_hit_faa(str(faa_out), final_rows)
+    print(f"       {n_faa} protein sequences written")
+
+    if args.fna_dir and genome_coords:
+        fna_out = out_dir / "MetalGenie-Evo-hits.fna"
+        print(f"[INFO] Writing {fna_out.name}…")
+        n_fna = write_hit_fna(str(fna_out), final_rows, genome_coords,
+                              args.fna_dir, fna_ext=args.fna_ext)
+        print(f"       {n_fna} nucleotide sequences written"
+              + (f" ({n_faa - n_fna} skipped — contig not in FNA)"
+                 if n_fna < n_faa else ""))
+    elif genome_coords and not args.fna_dir:
+        print("[INFO] Nucleotide FASTA skipped: requires --fna_dir "
+              "(GFF coordinates available but source FNA not provided)")
 
     # ── Summary statistics ────────────────────────────────────────────────────
     _runtime = time.time() - _run_start

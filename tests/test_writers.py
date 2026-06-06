@@ -1,11 +1,13 @@
-"""Tests for write_gff3 and write_summary_stats in writers.py."""
+"""Tests for write_gff3, write_summary_stats, write_hit_faa, write_hit_fna."""
 
 import csv
 from pathlib import Path
 
 import pytest
 
-from metalgenie_evo.writers import write_gff3, write_summary_stats
+from metalgenie_evo.writers import (
+    write_gff3, write_hit_faa, write_hit_fna, write_summary_stats,
+)
 
 
 def _make_row(orf="orf1", genome="g1.faa", contig="c1", cat="iron_reduction",
@@ -159,3 +161,114 @@ class TestWriteSummaryStats:
         out = str(tmp_path / "stats.tsv")
         write_summary_stats(out, [], ["g1.faa"])
         assert Path(out).exists()
+
+
+class TestWriteHitFaa:
+    def _row(self, orf="orf1", seq="MAST", cluster_confidence=0.9):
+        r = _make_row(orf=orf, cluster_confidence=cluster_confidence)
+        r["sequence"] = seq
+        r["bakta_id"] = orf
+        return r
+
+    def test_creates_file(self, tmp_path):
+        out = str(tmp_path / "hits.faa")
+        write_hit_faa(out, [self._row()])
+        assert Path(out).exists()
+
+    def test_fasta_header_fields(self, tmp_path):
+        out = str(tmp_path / "hits.faa")
+        write_hit_faa(out, [self._row(orf="orf1", seq="MAST")])
+        lines = Path(out).read_text().splitlines()
+        assert lines[0].startswith(">orf1")
+        assert "gene=mtrA" in lines[0]
+        assert "category=iron_reduction" in lines[0]
+        assert "bitscore=200.0" in lines[0]
+        assert "cluster_confidence=0.900" in lines[0]
+        assert "confidence=calibrated" in lines[0]
+
+    def test_sequence_written(self, tmp_path):
+        out = str(tmp_path / "hits.faa")
+        write_hit_faa(out, [self._row(seq="MKVL")])
+        lines = Path(out).read_text().splitlines()
+        assert lines[1] == "MKVL"
+
+    def test_rows_without_sequence_skipped(self, tmp_path):
+        out = str(tmp_path / "hits.faa")
+        row = self._row(seq="")
+        n = write_hit_faa(out, [row])
+        assert n == 0
+        assert Path(out).read_text() == ""
+
+    def test_returns_count(self, tmp_path):
+        out = str(tmp_path / "hits.faa")
+        rows = [self._row("o1", "MAST"), self._row("o2", "MKLL")]
+        n = write_hit_faa(out, rows)
+        assert n == 2
+
+    def test_multiple_rows(self, tmp_path):
+        out = str(tmp_path / "hits.faa")
+        rows = [self._row("o1", "MAST"), self._row("o2", "MKLL")]
+        write_hit_faa(out, rows)
+        lines = Path(out).read_text().splitlines()
+        assert lines[0].startswith(">o1")
+        assert lines[2].startswith(">o2")
+
+
+class TestWriteHitFna:
+    def _make_fna(self, tmp_path, name="g1", seq="A" * 100):
+        fna = tmp_path / f"{name}.fna"
+        fna.write_text(f">contig1\n{seq}\n")
+        return tmp_path
+
+    def _row_with_bakta(self, orf="orf1"):
+        r = _make_row(orf=orf, genome="g1.faa", contig="contig1")
+        r["sequence"] = "MAST"
+        r["bakta_id"] = orf
+        return r
+
+    def test_creates_file(self, tmp_path):
+        fna_dir = self._make_fna(tmp_path)
+        coords  = {"g1.faa": {"orf1": _make_coords(start=1, end=9, strand="+")}}
+        out     = str(tmp_path / "hits.fna")
+        write_hit_fna(out, [self._row_with_bakta()], coords, str(fna_dir))
+        assert Path(out).exists()
+
+    def test_sequence_extracted(self, tmp_path):
+        fna_dir = self._make_fna(tmp_path, seq="ATGCGTAAATTT" + "N" * 88)
+        coords  = {"g1.faa": {"orf1": _make_coords(start=1, end=9, strand="+", contig="contig1")}}
+        out     = str(tmp_path / "hits.fna")
+        write_hit_fna(out, [self._row_with_bakta()], coords, str(fna_dir))
+        lines = Path(out).read_text().splitlines()
+        assert lines[1] == "ATGCGTAAA"
+
+    def test_reverse_complement(self, tmp_path):
+        fna_dir = self._make_fna(tmp_path, seq="ATGCGT" + "N" * 94)
+        coords  = {"g1.faa": {"orf1": _make_coords(start=1, end=6, strand="-", contig="contig1")}}
+        out     = str(tmp_path / "hits.fna")
+        write_hit_fna(out, [self._row_with_bakta()], coords, str(fna_dir))
+        lines = Path(out).read_text().splitlines()
+        assert lines[1] == "ACGCAT"
+
+    def test_header_fields(self, tmp_path):
+        fna_dir = self._make_fna(tmp_path)
+        coords  = {"g1.faa": {"orf1": _make_coords(start=1, end=9, strand="+", contig="contig1")}}
+        out     = str(tmp_path / "hits.fna")
+        write_hit_fna(out, [self._row_with_bakta()], coords, str(fna_dir))
+        header = Path(out).read_text().splitlines()[0]
+        assert "gene=mtrA" in header
+        assert "start=1" in header
+        assert "strand=+" in header
+        assert "cluster_confidence=" in header
+
+    def test_missing_fna_skipped(self, tmp_path):
+        coords = {"g1.faa": {"orf1": _make_coords()}}
+        out    = str(tmp_path / "hits.fna")
+        n = write_hit_fna(out, [self._row_with_bakta()], coords, str(tmp_path))
+        assert n == 0
+
+    def test_orf_without_coords_skipped(self, tmp_path):
+        fna_dir = self._make_fna(tmp_path)
+        coords  = {"g1.faa": {}}
+        out     = str(tmp_path / "hits.fna")
+        n = write_hit_fna(out, [self._row_with_bakta()], coords, str(fna_dir))
+        assert n == 0

@@ -317,7 +317,9 @@ The `hmm_library/` directory is included in this repository and is ready to use.
 
 At startup MetalGenie-Evo prints a provenance table listing active sources, model counts, and a warning if any active models have nseq < 10 (limited training sequences).
 
-> **Zero-cutoff models:** MetHMMDB models (115) and 14 FeGenie siderophore models have no calibrated bitscore cutoff. They are searched with `hmmsearch -T <zero_cutoff_min_bitscore>` (default 30.0). Raise this floor with `--zero_cutoff_min_bitscore` to reduce false positives from these models.
+> **Zero-cutoff models:** MetHMMDB models (115) and 14 FeGenie siderophore models have no calibrated bitscore cutoff. They are searched with `hmmsearch -T <zero_cutoff_min_bitscore>` (default 30.0). The default E-value filter (`--max_evalue 1e-5`) is the primary specificity gate for these models, as recommended by the MetHMMDB developers. Raise `--zero_cutoff_min_bitscore` or lower `--max_evalue` to reduce false positives.
+
+> **Experimental models:** 10 MetHMMDB models with nseq < 10 are marked `experimental` in the registry. They are included in runs but trigger a startup warning. Their hits appear as `low_confidence` in the output and can be identified via the `model_nseq` column in `MetalGenie-Evo-results-long.tsv`.
 
 ---
 
@@ -413,6 +415,7 @@ Where `bam_map.tsv` / `depth_map.tsv` is a two-column TSV: `genome_label<TAB>fil
 | `--relaxed_operons` | off | Halve operon min-gene thresholds for short contigs |
 | `--relaxed_threshold` | `10000` | Contig length (bp) below which thresholds are relaxed |
 | `--zero_cutoff_min_bitscore` | `30.0` | Minimum bitscore fallback for zero-cutoff HMMs |
+| `--max_evalue` | `1e-5` | Maximum E-value for accepting a hit (primary gate for MetHMMDB models) |
 | `--bam` | — | Single sorted BAM file (requires samtools ≥ 1.10) |
 | `--bams` | — | TSV: `genome<TAB>bam_path` |
 | `--depth` | — | Pre-computed depth file (jgi / BBMap / samtools / plain) |
