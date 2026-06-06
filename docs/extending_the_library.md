@@ -24,7 +24,7 @@
 Models built with HMMER < 3.1 must be converted to HMMER3/f format:
 
 ```bash
-MetalGenie-Evo --normalize_hmms --faa_dir orfs/ --hmm_dir hmm_library/ --out results/
+Efesto --normalize_hmms --faa_dir orfs/ --hmm_dir hmm_library/ --out results/
 ```
 
 Or manually:
@@ -61,13 +61,13 @@ modifying the library itself:
 
 ```bash
 # Annotate only iron metabolism
-MetalGenie-Evo --annotate Fe-metabolism --faa_dir orfs/ --hmm_dir hmm_library/ --out results/
+Efesto --annotate Fe-metabolism --faa_dir orfs/ --hmm_dir hmm_library/ --out results/
 
 # Multiple tokens
-MetalGenie-Evo --annotate Fe-metabolism Cu Zn --faa_dir orfs/ --hmm_dir hmm_library/ --out results/
+Efesto --annotate Fe-metabolism Cu Zn --faa_dir orfs/ --hmm_dir hmm_library/ --out results/
 
 # All categories (default)
-MetalGenie-Evo --annotate all --faa_dir orfs/ --hmm_dir hmm_library/ --out results/
+Efesto --annotate all --faa_dir orfs/ --hmm_dir hmm_library/ --out results/
 ```
 
 Accepted tokens: element-level (`Fe`, `Cu`, `Zn`, `Mn`, `Ni`, `Co`, `Mo`, `As`, `Hg`,

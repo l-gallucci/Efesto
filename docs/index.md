@@ -1,6 +1,6 @@
-# MetalGenie-Evo Documentation
+# Efesto Documentation
 
-MetalGenie-Evo is a profile HMM annotation pipeline for iron-cycling and metal resistance
+Efesto is a profile HMM annotation pipeline for iron-cycling and metal resistance
 genes in genomes and metagenomes. It extends [FeGenie](https://github.com/Arkadiy-Garber/FeGenie)
 with coordinate-aware operon clustering, a cluster confidence scoring system, an expanded
 curated HMM library, and integration with external tools (UniOP, antiSMASH, Anvi'o).
@@ -11,7 +11,7 @@ curated HMM library, and integration with external tools (UniOP, antiSMASH, Anvi
 
 ### Getting started
 - [[Installation|installation]]
-- [Usage — quick start](https://github.com/l-gallucci/MetalGenie-Evo#usage)
+- [Usage — quick start](https://github.com/l-gallucci/Efesto#usage)
 
 ### HMM library
 - [[HMM library overview|hmm_library]] — categories, sources, model counts, registry format
@@ -53,6 +53,6 @@ Key design decisions:
 
 ---
 
-## Citing MetalGenie-Evo
+## Citing Efesto
 
-If you use MetalGenie-Evo, cite all sources that apply to your run. See [README — Citations](https://github.com/l-gallucci/MetalGenie-Evo#citations).
+If you use Efesto, cite all sources that apply to your run. See [README — Citations](https://github.com/l-gallucci/Efesto#citations).

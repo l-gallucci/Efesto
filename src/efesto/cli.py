@@ -1,5 +1,5 @@
 """
-MetalGenie-Evo  —  HMM-based annotation of iron cycling and metal resistance genes
+Efesto  —  HMM-based annotation of iron cycling and metal resistance genes
 ===================================================================================
 Built on FeGenie (Garber et al. 2020). See README for full documentation.
 
@@ -9,7 +9,7 @@ New in this version (metagenome support):
   9.  Relaxed operon thresholds  --relaxed_operons
   10. TPM coverage normalisation  --norm_coverage
   11. Contig column in all outputs
-  12. Long-format tidy output  MetalGenie-Evo-results-long.tsv
+  12. Long-format tidy output  Efesto-results-long.tsv
 """
 
 import argparse
@@ -21,24 +21,24 @@ from collections import defaultdict
 from itertools import groupby
 from pathlib import Path
 
-from metalgenie_evo.clustering import _orf_to_contig, build_clusters
-from metalgenie_evo.coverage import build_contig_coverage, load_bams_tsv
-from metalgenie_evo.gene_calling import run_prodigal
-from metalgenie_evo.hmmer import collect_best_hits, run_all_hmmsearches
-from metalgenie_evo.io import (build_contig_length_dict, build_nseq_map,
+from efesto.clustering import _orf_to_contig, build_clusters
+from efesto.coverage import build_contig_coverage, load_bams_tsv
+from efesto.gene_calling import run_prodigal
+from efesto.hmmer import collect_best_hits, run_all_hmmsearches
+from efesto.io import (build_contig_length_dict, build_nseq_map,
                                 filter_categories, load_gff_dir, load_registry,
                                 print_provenance, read_fasta, read_cutoffs,
                                 read_map, VALID_ANNOTATE_TOKENS)
-from metalgenie_evo.operon import (_DEFAULT_OPERON_RULES, build_canonical_size_map,
+from efesto.operon import (_DEFAULT_OPERON_RULES, build_canonical_size_map,
                                     build_stem_gap_map, count_heme,
                                     filter_cluster_fegenie, filter_cluster_json,
                                     load_operon_rules, second_pass)
-from metalgenie_evo.bgc import bgc_boost_for_cluster, parse_antismash_gff
-from metalgenie_evo.scoring import (
+from efesto.bgc import bgc_boost_for_cluster, parse_antismash_gff
+from efesto.scoring import (
     cluster_confidence, co_occurrence_score, hmm_weight, uniop_pair_score)
-from metalgenie_evo.uniop import (
+from efesto.uniop import (
     _uniop_context, build_prodigal_bakta_map, run_uniop, write_operon_structure)
-from metalgenie_evo.writers import (
+from efesto.writers import (
     write_anvio_functions, write_anvio_misc_data, write_coverage_heatmap,
     write_gene_summary, write_gff3, write_heatmap, write_hit_faa, write_hit_fna,
     write_long_format, write_summary, write_summary_stats)
@@ -46,7 +46,7 @@ from metalgenie_evo.writers import (
 
 def main():
     p = argparse.ArgumentParser(
-        prog="MetalGenie-Evo",
+        prog="Efesto",
         description="HMM-based annotation of iron cycling and metal resistance genes",
         formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     ig = p.add_mutually_exclusive_group(required=True)
@@ -83,7 +83,7 @@ def main():
                         "As-resistance, Hg-resistance, Co-Zn-Cd-resistance, ...). "
                         "Use 'all' to annotate everything (default). "
                         f"Valid tokens: {', '.join(VALID_ANNOTATE_TOKENS)}")
-    p.add_argument("--out", default="metalgenie_evo_out")
+    p.add_argument("--out", default="efesto_out")
     p.add_argument("--min_contig_len", type=int, default=0,
                    help="Skip ORFs on contigs shorter than this (bp). 0=no filter")
     p.add_argument("--max_gap", type=int, default=5,
@@ -140,13 +140,13 @@ def main():
                    help="Path to UniOP executable (default: 'uniop', assumed in PATH)")
     # ── Anvi'o output ─────────────────────────────────────────────────────────
     p.add_argument("--anvio", action="store_true",
-                   help="Write MetalGenie-Evo-anvio-functions.tsv, compatible with "
+                   help="Write Efesto-anvio-functions.tsv, compatible with "
                         "anvi-import-functions. gene_callers_id column contains ORF "
                         "names — map to integer IDs from your Anvi'o contigs database "
                         "before importing (see README).")
     p.add_argument("--bakta_gff_dir",
                    help="Directory of Bakta GFF3 files. When provided together with "
-                        "--fna_dir, MetalGenie-Evo runs Prodigal internally for HMM "
+                        "--fna_dir, Efesto runs Prodigal internally for HMM "
                         "search and UniOP, then maps Prodigal ORF names back to Bakta "
                         "gene IDs via coordinate matching. The --anvio output will use "
                         "Bakta IDs directly, compatible with Anvi'o databases built "
@@ -212,7 +212,7 @@ def main():
               f"gene names will show as raw HMM stems in all outputs.", file=sys.stderr)
 
     if args.normalize_hmms:
-        from metalgenie_evo.hmmer import normalize_hmm_library
+        from efesto.hmmer import normalize_hmm_library
         normalize_hmm_library(args.hmm_dir)
 
     cutoffs  = read_cutoffs(str(Path(args.hmm_dir) / "HMM-bitcutoffs.txt"))
@@ -433,14 +433,14 @@ def main():
         print("[INFO] No Bakta mapping — orf column contains Prodigal ORF names")
 
     # summary and gene-summary don't carry uniop_context — write now
-    for path, fn in [(out_dir / "MetalGenie-Evo-summary.csv", write_summary),
-                     (out_dir / "MetalGenie-Evo-geneSummary-clusters.csv", write_gene_summary)]:
+    for path, fn in [(out_dir / "Efesto-summary.csv", write_summary),
+                     (out_dir / "Efesto-geneSummary-clusters.csv", write_gene_summary)]:
         print(f"[INFO] Writing {path.name}…")
         fn(str(path), final_rows)
     # long-format is written after UniOP so uniop_context column is populated
 
-    print("[INFO] Writing MetalGenie-Evo-heatmap-data.csv…")
-    write_heatmap(str(out_dir / "MetalGenie-Evo-heatmap-data.csv"),
+    print("[INFO] Writing Efesto-heatmap-data.csv…")
+    write_heatmap(str(out_dir / "Efesto-heatmap-data.csv"),
                   final_rows, all_genomes, norm_dict)
 
     bam_map   = {}
@@ -461,9 +461,9 @@ def main():
         print("[INFO] Computing coverage…")
         gc = build_contig_coverage(faa_files, bam_map, depth_map, out_dir)
         if gc:
-            print("[INFO] Writing MetalGenie-Evo-coverage-heatmap.csv…")
+            print("[INFO] Writing Efesto-coverage-heatmap.csv…")
             write_coverage_heatmap(
-                str(out_dir / "MetalGenie-Evo-coverage-heatmap.csv"),
+                str(out_dir / "Efesto-coverage-heatmap.csv"),
                 final_rows, all_genomes, gc,
                 norm_coverage=args.norm_coverage,
                 contig_lengths=contig_lengths if args.norm_coverage else None)
@@ -517,7 +517,7 @@ def main():
                     r["uniop_context"] = _uniop_context(
                         r["orf"], r["genome"], genome_operon_map, op_to_hits)
 
-                op_path = out_dir / "MetalGenie-Evo-OperonStructure.tsv"
+                op_path = out_dir / "Efesto-OperonStructure.tsv"
                 print(f"[INFO] Writing {op_path.name}…")
                 write_operon_structure(str(op_path), final_rows, genome_operon_map,
                                        prodigal_to_bakta=prodigal_to_bakta)
@@ -532,7 +532,7 @@ def main():
                       f"{ctx_counts['not_in_operon']}")
             else:
                 print("[WARN] UniOP produced no predictions — "
-                      "see MetalGenie-Evo-run.log for details.", file=sys.stderr)
+                      "see Efesto-run.log for details.", file=sys.stderr)
 
     # Parse BGC regions if --bgc_dir provided.
     if args.bgc_dir:
@@ -559,13 +559,13 @@ def main():
             r["cluster_confidence"] = conf
 
     # Write long-format after UniOP so uniop_context column is included when available
-    long_path = out_dir / "MetalGenie-Evo-results-long.tsv"
+    long_path = out_dir / "Efesto-results-long.tsv"
     print(f"[INFO] Writing {long_path.name}…")
     write_long_format(str(long_path), final_rows)
 
     # ── GFF3 output ──────────────────────────────────────────────────────────
     if genome_coords:
-        gff3_path = out_dir / "MetalGenie-Evo-hits.gff3"
+        gff3_path = out_dir / "Efesto-hits.gff3"
         print(f"[INFO] Writing {gff3_path.name}…")
         n_gff = write_gff3(str(gff3_path), final_rows, genome_coords)
         print(f"       {n_gff} features written "
@@ -575,13 +575,13 @@ def main():
               "(requires --fna_dir or --gff_dir)")
 
     # ── Sequence FASTA outputs ────────────────────────────────────────────────
-    faa_out = out_dir / "MetalGenie-Evo-hits.faa"
+    faa_out = out_dir / "Efesto-hits.faa"
     print(f"[INFO] Writing {faa_out.name}…")
     n_faa = write_hit_faa(str(faa_out), final_rows)
     print(f"       {n_faa} protein sequences written")
 
     if args.fna_dir and genome_coords:
-        fna_out = out_dir / "MetalGenie-Evo-hits.fna"
+        fna_out = out_dir / "Efesto-hits.fna"
         print(f"[INFO] Writing {fna_out.name}…")
         n_fna = write_hit_fna(str(fna_out), final_rows, genome_coords,
                               args.fna_dir, fna_ext=args.fna_ext)
@@ -594,7 +594,7 @@ def main():
 
     # ── Summary statistics ────────────────────────────────────────────────────
     _runtime = time.time() - _run_start
-    stats_path = out_dir / "MetalGenie-Evo-summary-stats.tsv"
+    stats_path = out_dir / "Efesto-summary-stats.tsv"
     print(f"[INFO] Writing {stats_path.name}…")
     write_summary_stats(str(stats_path), final_rows,
                         [f.name for f in faa_files],
@@ -603,7 +603,7 @@ def main():
 
     # ── Anvi'o functions output (optional) ───────────────────────────────────
     if args.anvio:
-        anvio_path = out_dir / "MetalGenie-Evo-anvio-functions.tsv"
+        anvio_path = out_dir / "Efesto-anvio-functions.tsv"
         print(f"[INFO] Writing {anvio_path.name}…")
         write_anvio_functions(str(anvio_path), final_rows,
                               prodigal_to_bakta=prodigal_to_bakta)
@@ -611,9 +611,9 @@ def main():
                    else "Prodigal ORF names — map to int IDs before import")
         print(f"       gene_callers_id: {id_note}")
         print(f"       Import with: anvi-import-functions -c CONTIGS.db "
-              f"-i {anvio_path.name} -p MetalGenie-Evo")
+              f"-i {anvio_path.name} -p Efesto")
 
-        misc_path = out_dir / "MetalGenie-Evo-anvio-gene-scores.tsv"
+        misc_path = out_dir / "Efesto-anvio-gene-scores.tsv"
         print(f"[INFO] Writing {misc_path.name}…")
         write_anvio_misc_data(str(misc_path), final_rows,
                               prodigal_to_bakta=prodigal_to_bakta)
@@ -621,12 +621,12 @@ def main():
               f"--target-data-table genes {misc_path.name}")
 
     # ── Write run log ─────────────────────────────────────────────────────────
-    log_path = out_dir / "MetalGenie-Evo-run.log"
+    log_path = out_dir / "Efesto-run.log"
     cc2 = defaultdict(int)
     for r in final_rows:
         cc2[r["cat"]] += 1
     with open(log_path, "w") as lf:
-        lf.write("MetalGenie-Evo run log\n")
+        lf.write("Efesto run log\n")
         lf.write(f"Date          : "
                  f"{datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
         lf.write(f"Command       : {' '.join(sys.argv)}\n")
@@ -649,7 +649,7 @@ def main():
     cc    = defaultdict(int)
     for r in final_rows:
         cc[r["cat"]] += 1
-    print(f"\n{'─' * 60}\n  MetalGenie-Evo  —  run complete")
+    print(f"\n{'─' * 60}\n  Efesto  —  run complete")
     print(f"  {len(final_rows)} ORFs in {n_hit}/{len(faa_files)} genomes")
     print(f"\n  Hits per category:")
     for cat, n in sorted(cc.items()):

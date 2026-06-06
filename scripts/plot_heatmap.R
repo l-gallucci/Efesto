@@ -1,19 +1,19 @@
 #!/usr/bin/env Rscript
 # =============================================================================
-# plot_heatmap.R  —  Visualisation script for MetalGenie-Evo output
+# plot_heatmap.R  —  Visualisation script for Efesto output
 # =============================================================================
-# Generates hierarchically clustered heatmaps from MetalGenie-Evo CSV output.
+# Generates hierarchically clustered heatmaps from Efesto CSV output.
 # Automatically detects the input type (gene counts vs coverage) and adapts
 # colour scales accordingly.
 #
 # Usage
 # -----
-#   Rscript scripts/plot_heatmap.R --input results/MetalGenie-Evo-heatmap-data.csv
+#   Rscript scripts/plot_heatmap.R --input results/Efesto-heatmap-data.csv
 #   Rscript scripts/plot_heatmap.R --input results/ --type both --format both
 #
 # Arguments
 # ---------
-#   --input   Path to a single CSV file OR a MetalGenie-Evo output directory.
+#   --input   Path to a single CSV file OR a Efesto output directory.
 #             If a directory is given, all *heatmap*.csv files are processed.
 #   --type    Plot type: "static" | "interactive" | "both"  (default: both)
 #   --format  Output format for static: "pdf" | "png" | "both"  (default: both)
@@ -51,7 +51,7 @@ suppressPackageStartupMessages({
 
 option_list <- list(
   make_option("--input",     type = "character", default = NULL,
-              help = "CSV file or MetalGenie-Evo output directory"),
+              help = "CSV file or Efesto output directory"),
   make_option("--type",      type = "character", default = "both",
               help = "Plot type: static | interactive | both  [default: both]"),
   make_option("--format",    type = "character", default = "both",
@@ -328,9 +328,9 @@ for (csv_path in csv_files) {
 
   # Title
   title <- if (data_type == "coverage") {
-    "MetalGenie-Evo — Coverage-based abundance"
+    "Efesto — Coverage-based abundance"
   } else {
-    "MetalGenie-Evo — Gene presence by category"
+    "Efesto — Gene presence by category"
   }
 
   cluster_rows <- !opt$no_cluster_rows

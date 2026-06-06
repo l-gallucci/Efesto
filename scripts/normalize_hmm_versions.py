@@ -2,7 +2,7 @@
 """
 normalize_hmm_versions.py
 =========================
-Convert all HMM profiles in the MetalGenie-Evo library to the current
+Convert all HMM profiles in the Efesto library to the current
 HMMER3/f format using hmmconvert.
 
 Run once after adding new models, or whenever mixed-version warnings appear.

@@ -1,4 +1,4 @@
-# MetalGenie-Evo — Session Checkpoint
+# Efesto — Session Checkpoint
 **Date:** 2026-05-24  
 **Target:** mSystems publication  
 **Test suite:** 79 tests, all passing  
@@ -10,7 +10,7 @@
 
 HMM-based annotation of iron cycling and metal resistance genes in genomes and metagenomes. Built on FeGenie (Garber et al. 2020, ISME J). Adds metagenome support (Pyrodigal ORF calling), cluster confidence scoring, operon prediction (UniOP), antiSMASH BGC integration, and rich output formats.
 
-Entry point: `MetalGenie-Evo` CLI → `src/metalgenie_evo/cli.py:main()`
+Entry point: `Efesto` CLI → `src/efesto/cli.py:main()`
 
 ---
 
@@ -103,14 +103,14 @@ Per-category clustering: `build_stem_gap_map()` → `effective_gap = min(gap_a, 
 
 | File | Format | Notes |
 |---|---|---|
-| `MetalGenie-Evo-results.csv` | CSV | Main output, `#` separator between clusters |
-| `MetalGenie-Evo-results-long.tsv` | TSV | Tidy format, includes `cluster_confidence`, `model_nseq`, `uniop_context` |
-| `MetalGenie-Evo-gene-summary.csv` | CSV | Per-gene, no sequences |
-| `MetalGenie-Evo-heatmap.csv` | CSV | Category × genome presence matrix |
-| `MetalGenie-Evo-results.gff3` | GFF3 | Written when genome_coords available |
-| `MetalGenie-Evo-summary-stats.tsv` | TSV | RUN/CONFIDENCE/CATEGORY/GENOME sections |
-| `MetalGenie-Evo-anvio-functions.tsv` | TSV | anvi-import-functions compatible |
-| `MetalGenie-Evo-anvio-gene-scores.tsv` | TSV | anvi-import-misc-data compatible (--anvio) |
+| `Efesto-results.csv` | CSV | Main output, `#` separator between clusters |
+| `Efesto-results-long.tsv` | TSV | Tidy format, includes `cluster_confidence`, `model_nseq`, `uniop_context` |
+| `Efesto-gene-summary.csv` | CSV | Per-gene, no sequences |
+| `Efesto-heatmap.csv` | CSV | Category × genome presence matrix |
+| `Efesto-results.gff3` | GFF3 | Written when genome_coords available |
+| `Efesto-summary-stats.tsv` | TSV | RUN/CONFIDENCE/CATEGORY/GENOME sections |
+| `Efesto-anvio-functions.tsv` | TSV | anvi-import-functions compatible |
+| `Efesto-anvio-gene-scores.tsv` | TSV | anvi-import-misc-data compatible (--anvio) |
 
 ---
 
@@ -126,7 +126,7 @@ Per-category clustering: `build_stem_gap_map()` → `effective_gap = min(gap_a, 
    Run `hmmsearch` against Swiss-Prot, find bitscore gap between annotated iron-function hits and non-hits. Required for defensible per-model cutoffs in mSystems methods section.
 
 3. **Reference genome benchmark** (publication-critical, ~1 week)  
-   Test MetalGenie-Evo against genomes with known iron cycling / metal resistance phenotypes. Report precision/recall per category. Compare against FeGenie on same dataset.
+   Test Efesto against genomes with known iron cycling / metal resistance phenotypes. Report precision/recall per category. Compare against FeGenie on same dataset.
 
 4. **MetHMMDB developer contact** (see questions list below)
 
@@ -160,7 +160,7 @@ Per-category clustering: `build_stem_gap_map()` → `effective_gap = min(gap_a, 
 3. Do they have a reference genome benchmark with known metal resistance phenotypes (shareable)?
 4. Which model families have known false positive issues (especially transporters vs. resistance genes)?
 5. Is journal publication of the bioRxiv preprint (Dec 2024) imminent? (methods citation)
-6. Courtesy notice: their library is integrated in MetalGenie-Evo, targeting mSystems.
+6. Courtesy notice: their library is integrated in Efesto, targeting mSystems.
 
 ---
 

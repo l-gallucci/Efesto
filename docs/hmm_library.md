@@ -1,6 +1,6 @@
 # HMM Library
 
-MetalGenie-Evo ships with a curated library of profile HMMs in `hmm_library/`.
+Efesto ships with a curated library of profile HMMs in `hmm_library/`.
 All models are tracked in a versioned registry (`hmm_library/hmm_registry.tsv`)
 with provenance, bitscore cutoffs, and curation status.
 
@@ -124,7 +124,7 @@ See [[Library curation log|hmm_library_curation]] for full decision log.
 
 ## Startup provenance output
 
-At startup, MetalGenie-Evo prints a provenance table listing active sources,
+At startup, Efesto prints a provenance table listing active sources,
 model counts, and any models with `nseq < 10` (flagged as `low_training_data`):
 
 ```

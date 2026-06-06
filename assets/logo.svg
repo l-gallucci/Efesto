@@ -50,7 +50,7 @@
 
   <!-- ── CENTRE: title ── -->
   <text x="430" y="70" font-family="'Courier New', monospace" font-size="38"
-        fill="#f1f5f9" text-anchor="middle" font-weight="bold" letter-spacing="1">MetalGenie-Evo</text>
+        fill="#f1f5f9" text-anchor="middle" font-weight="bold" letter-spacing="1">Efesto</text>
   <text x="430" y="100" font-family="Arial, sans-serif" font-size="14"
         fill="#94a3b8" text-anchor="middle">Metal cycling gene annotation · genomes &amp; metagenomes</text>
 

@@ -2,7 +2,7 @@
 
 import pytest
 
-from metalgenie_evo.uniop import _parse_uniop_pred, _parse_uniop_operon
+from efesto.uniop import _parse_uniop_pred, _parse_uniop_operon
 
 
 def _write_pred(tmp_path, lines):

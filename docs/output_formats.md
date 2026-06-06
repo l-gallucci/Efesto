@@ -1,6 +1,6 @@
 # Output Formats
 
-MetalGenie-Evo writes results to `--out` (default: `metalgenie_evo_out/`).
+Efesto writes results to `--out` (default: `efesto_out/`).
 
 ---
 
@@ -8,25 +8,25 @@ MetalGenie-Evo writes results to `--out` (default: `metalgenie_evo_out/`).
 
 | File | Description |
 |------|-------------|
-| `MetalGenie-Evo-summary.csv` | Per-ORF detailed results with cluster separators; includes `cluster_confidence` |
-| `MetalGenie-Evo-geneSummary-clusters.csv` | FeGenie R-script compatible compact summary; includes `cluster_confidence` |
-| `MetalGenie-Evo-heatmap-data.csv` | Gene-count matrix (categories × genomes) |
-| `MetalGenie-Evo-results-long.tsv` | Tidy long-format TSV — one row per ORF, all scoring columns |
-| `MetalGenie-Evo-results.gff3` | GFF3 feature file (written when `--gff_dir` or `--fna_dir` used) |
-| `MetalGenie-Evo-summary-stats.tsv` | Run-level statistics (counts, confidence tiers, per-genome summaries) |
+| `Efesto-summary.csv` | Per-ORF detailed results with cluster separators; includes `cluster_confidence` |
+| `Efesto-geneSummary-clusters.csv` | FeGenie R-script compatible compact summary; includes `cluster_confidence` |
+| `Efesto-heatmap-data.csv` | Gene-count matrix (categories × genomes) |
+| `Efesto-results-long.tsv` | Tidy long-format TSV — one row per ORF, all scoring columns |
+| `Efesto-results.gff3` | GFF3 feature file (written when `--gff_dir` or `--fna_dir` used) |
+| `Efesto-summary-stats.tsv` | Run-level statistics (counts, confidence tiers, per-genome summaries) |
 
 ## Optional outputs
 
 | File | Requires |
 |------|----------|
-| `MetalGenie-Evo-coverage-heatmap.csv` | `--bam` / `--bams` / `--depth` / `--depths` |
-| `MetalGenie-Evo-OperonStructure.tsv` | `--operon_prediction` |
-| `MetalGenie-Evo-anvio-functions.tsv` | `--anvio` |
-| `MetalGenie-Evo-anvio-gene-scores.tsv` | `--anvio` |
+| `Efesto-coverage-heatmap.csv` | `--bam` / `--bams` / `--depth` / `--depths` |
+| `Efesto-OperonStructure.tsv` | `--operon_prediction` |
+| `Efesto-anvio-functions.tsv` | `--anvio` |
+| `Efesto-anvio-gene-scores.tsv` | `--anvio` |
 
 ---
 
-## Column reference — `MetalGenie-Evo-results-long.tsv`
+## Column reference — `Efesto-results-long.tsv`
 
 One row per ORF hit. The tidy format for downstream analysis.
 
@@ -53,7 +53,7 @@ One row per ORF hit. The tidy format for downstream analysis.
 
 ---
 
-## Column reference — `MetalGenie-Evo-results.gff3`
+## Column reference — `Efesto-results.gff3`
 
 Standard GFF3 format. Written automatically when coordinate data is available.
 Loadable directly in IGV, Artemis, and genome browsers.
@@ -63,7 +63,7 @@ Loadable directly in IGV, Artemis, and genome browsers.
 | Col | Description |
 |-----|-------------|
 | seqname | Contig identifier |
-| source | `MetalGenie-Evo` |
+| source | `Efesto` |
 | feature | `gene` |
 | start / end | 1-based coordinates |
 | score | hmmsearch bitscore |
@@ -84,7 +84,7 @@ Loadable directly in IGV, Artemis, and genome browsers.
 
 ---
 
-## Column reference — `MetalGenie-Evo-summary-stats.tsv`
+## Column reference — `Efesto-summary-stats.tsv`
 
 Two-column TSV (`section<TAB>key<TAB>value`). Sections:
 
@@ -97,7 +97,7 @@ Two-column TSV (`section<TAB>key<TAB>value`). Sections:
 
 ---
 
-## Column reference — `MetalGenie-Evo-OperonStructure.tsv`
+## Column reference — `Efesto-OperonStructure.tsv`
 
 Written when `--operon_prediction` is used.
 
@@ -112,7 +112,7 @@ Written when `--operon_prediction` is used.
 
 ---
 
-## Column reference — `MetalGenie-Evo-anvio-gene-scores.tsv`
+## Column reference — `Efesto-anvio-gene-scores.tsv`
 
 Written when `--anvio` is used. Import with `anvi-import-misc-data`:
 
@@ -120,7 +120,7 @@ Written when `--anvio` is used. Import with `anvi-import-misc-data`:
 anvi-import-misc-data \
     -c CONTIGS.db \
     --target-data-table genes \
-    results/MetalGenie-Evo-anvio-gene-scores.tsv
+    results/Efesto-anvio-gene-scores.tsv
 ```
 
 | Column | Description |
@@ -149,14 +149,14 @@ anvi-import-misc-data \
 ## Working with outputs in R
 
 FeGenie's original R visualisation script (`scripts/plot_heatmap.R`) is
-compatible with `MetalGenie-Evo-heatmap-data.csv` and `MetalGenie-Evo-geneSummary-clusters.csv`.
+compatible with `Efesto-heatmap-data.csv` and `Efesto-geneSummary-clusters.csv`.
 
-For custom analysis, `MetalGenie-Evo-results-long.tsv` is the recommended
+For custom analysis, `Efesto-results-long.tsv` is the recommended
 starting point:
 
 ```r
 library(tidyverse)
-hits <- read_tsv("results/MetalGenie-Evo-results-long.tsv")
+hits <- read_tsv("results/Efesto-results-long.tsv")
 
 # High-confidence iron reduction clusters
 hits |>
