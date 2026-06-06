@@ -6,6 +6,9 @@ on:
     paths: ['docs/**']
   workflow_dispatch:
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   sync:
     runs-on: ubuntu-latest
@@ -22,12 +25,18 @@ jobs:
 
           git clone "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.wiki.git" wiki
 
-          cp docs/*.md wiki/
+          # Copy all docs except index.md (handled separately as Home.md)
+          for f in docs/*.md; do
+            fname=$(basename "$f")
+            [ "$fname" = "index.md" ] && continue
+            cp "$f" "wiki/$fname"
+          done
+
           # index.md → Home.md (wiki landing page)
           cp docs/index.md wiki/Home.md
 
           cd wiki
           git add .
-          git diff --cached --quiet && echo "No changes" && exit 0
+          git diff --cached --quiet && echo "No changes to sync" && exit 0
           git commit -m "Sync wiki from docs/ (${GITHUB_SHA::7})"
           git push
