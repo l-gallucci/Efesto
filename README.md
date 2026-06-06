@@ -1,5 +1,9 @@
 # MetalGenie-Evo
 
+<p align="center">
+  <img src="assets/logo.svg" alt="MetalGenie-Evo" width="820"/>
+</p>
+
 **MetalGenie-Evo** extends [FeGenie](https://github.com/Arkadiy-Garber/FeGenie) with coordinate-based operon clustering, a cluster confidence scoring system, an expanded curated HMM library (iron cycling + metal resistance), and integration with UniOP, antiSMASH, and Anvi'o.
 
 📖 **[Full documentation → Wiki](https://github.com/l-gallucci/MetalGenie-Evo/wiki)**
