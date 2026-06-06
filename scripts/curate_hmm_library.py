@@ -36,12 +36,12 @@ OUTPUT STRUCTURE (mirrors FeGenie iron/ exactly)
     magnetosome_formation/
     possible_iron_oxidation_and_possible_iron_reduction/
     probable_iron_reduction/
-    iron_aquisition-iron_transport/
-    iron_aquisition-heme_transport/
-    iron_aquisition-heme_oxygenase/
-    iron_aquisition-siderophore_synthesis/
-    iron_aquisition-siderophore_transport/
-    iron_aquisition-siderophore_transport_potential/
+    iron_acquisition-iron_transport/
+    iron_acquisition-heme_transport/
+    iron_acquisition-heme_oxygenase/
+    iron_acquisition-siderophore_synthesis/
+    iron_acquisition-siderophore_transport/
+    iron_acquisition-siderophore_transport_potential/
     metal_resistance-arsenic/
     metal_resistance-copper/
     metal_resistance-mercury/
@@ -62,8 +62,8 @@ USAGE
 # Full build from scratch (developer / first time)
 python scripts/curate_hmm_library.py \\
     --fegenie_dir  /path/to/FeGenie/hmms/iron/ \\
-    --flat_dir     /path/to/new_iron_hmms   iron_aquisition \\
-    --flat_dir     /path/to/others          iron_aquisition \\
+    --flat_dir     /path/to/new_iron_hmms   iron_acquisition \\
+    --flat_dir     /path/to/others          iron_acquisition \\
     --methmmdb_dir /path/to/MetHMMDB/individual/ \\
     --out_dir      hmm_library/ \\
     --log          curation_report.tsv
@@ -101,12 +101,12 @@ VALID_CATEGORIES = [
     "magnetosome_formation",
     "possible_iron_oxidation_and_possible_iron_reduction",
     "probable_iron_reduction",
-    "iron_aquisition-iron_transport",
-    "iron_aquisition-heme_transport",
-    "iron_aquisition-heme_oxygenase",
-    "iron_aquisition-siderophore_synthesis",
-    "iron_aquisition-siderophore_transport",
-    "iron_aquisition-siderophore_transport_potential",
+    "iron_acquisition-iron_transport",
+    "iron_acquisition-heme_transport",
+    "iron_acquisition-heme_oxygenase",
+    "iron_acquisition-siderophore_synthesis",
+    "iron_acquisition-siderophore_transport",
+    "iron_acquisition-siderophore_transport_potential",
     # ── MetHMMDB metal resistance ─────────────────────────────────────────────
     "metal_resistance-arsenic",
     "metal_resistance-copper",
@@ -134,123 +134,123 @@ REVIEW_NEEDED = "REVIEW_NEEDED"
 # Source: Tabuteau et al. 2025 Table S3 + KEGG annotations
 KOFAM_CAT = {
     # Biosynthesis
-    "K00216": "iron_aquisition-siderophore_synthesis",
-    "K00257": "iron_aquisition-siderophore_synthesis",
-    "K00824": "iron_aquisition-siderophore_synthesis",
-    "K01252": "iron_aquisition-siderophore_synthesis",
-    "K01582": "iron_aquisition-siderophore_synthesis",
-    "K01780": "iron_aquisition-siderophore_synthesis",
-    "K01851": "iron_aquisition-siderophore_synthesis",
-    "K01909": "iron_aquisition-siderophore_synthesis",
-    "K04759": "iron_aquisition-siderophore_synthesis",
-    "K04788": "iron_aquisition-siderophore_synthesis",   # entA
-    "K04789": "iron_aquisition-siderophore_synthesis",   # entB
-    "K04790": "iron_aquisition-siderophore_synthesis",   # entC
-    "K04791": "iron_aquisition-siderophore_synthesis",   # entD
-    "K04792": "iron_aquisition-siderophore_synthesis",   # entE
-    "K04793": "iron_aquisition-siderophore_synthesis",   # entF
-    "K05375": "iron_aquisition-siderophore_synthesis",   # iucA aerobactin
-    "K07116": "iron_aquisition-siderophore_synthesis",   # iucB
-    "K07224": "iron_aquisition-siderophore_synthesis",   # iucC
-    "K07230": "iron_aquisition-siderophore_synthesis",   # iucD
-    "K10531": "iron_aquisition-siderophore_synthesis",   # dhbA
-    "K11604": "iron_aquisition-siderophore_synthesis",
-    "K12237": "iron_aquisition-siderophore_synthesis",   # pvdH
-    "K12238": "iron_aquisition-siderophore_synthesis",   # pvdA
-    "K12239": "iron_aquisition-siderophore_synthesis",
-    "K12240": "iron_aquisition-siderophore_synthesis",
-    "K12241": "iron_aquisition-siderophore_synthesis",
-    "K12346": "iron_aquisition-siderophore_synthesis",
-    "K13745": "iron_aquisition-siderophore_synthesis",
-    "K14759": "iron_aquisition-siderophore_synthesis",
-    "K15584": "iron_aquisition-siderophore_synthesis",
-    "K15652": "iron_aquisition-siderophore_synthesis",
-    "K15653": "iron_aquisition-siderophore_synthesis",
-    "K15681": "iron_aquisition-siderophore_synthesis",
-    "K15721": "iron_aquisition-siderophore_synthesis",
-    "K16088": "iron_aquisition-siderophore_synthesis",
-    "K16089": "iron_aquisition-siderophore_synthesis",
-    "K16090": "iron_aquisition-siderophore_synthesis",
-    "K16091": "iron_aquisition-siderophore_synthesis",
-    "K19611": "iron_aquisition-siderophore_synthesis",
-    "K19791": "iron_aquisition-siderophore_synthesis",
-    "K19792": "iron_aquisition-siderophore_synthesis",
-    "K21476": "iron_aquisition-siderophore_synthesis",
-    "K21721": "iron_aquisition-siderophore_synthesis",
-    "K21949": "iron_aquisition-siderophore_synthesis",
-    "K21992": "iron_aquisition-siderophore_synthesis",
-    "K22148": "iron_aquisition-siderophore_synthesis",
-    "K22149": "iron_aquisition-siderophore_synthesis",
-    "K22150": "iron_aquisition-siderophore_synthesis",
-    "K22151": "iron_aquisition-siderophore_synthesis",
-    "K22152": "iron_aquisition-siderophore_synthesis",
-    "K22153": "iron_aquisition-siderophore_synthesis",
-    "K23120": "iron_aquisition-siderophore_synthesis",
-    "K23122": "iron_aquisition-siderophore_synthesis",
-    "K23181": "iron_aquisition-siderophore_synthesis",
-    "K23185": "iron_aquisition-siderophore_synthesis",
-    "K23227": "iron_aquisition-siderophore_synthesis",
-    "K23371": "iron_aquisition-siderophore_synthesis",
-    "K23372": "iron_aquisition-siderophore_synthesis",
-    "K23373": "iron_aquisition-siderophore_synthesis",
-    "K23374": "iron_aquisition-siderophore_synthesis",
-    "K23375": "iron_aquisition-siderophore_synthesis",
-    "K23376": "iron_aquisition-siderophore_synthesis",
-    "K23446": "iron_aquisition-siderophore_synthesis",
-    "K23447": "iron_aquisition-siderophore_synthesis",
-    "K23725": "iron_aquisition-siderophore_synthesis",
-    "K24101": "iron_aquisition-siderophore_synthesis",
-    "K24108": "iron_aquisition-siderophore_synthesis",
-    "K24109": "iron_aquisition-siderophore_synthesis",
-    "K24110": "iron_aquisition-siderophore_synthesis",
-    "K24111": "iron_aquisition-siderophore_synthesis",
-    "K24112": "iron_aquisition-siderophore_synthesis",
-    "K25109": "iron_aquisition-siderophore_synthesis",
-    "K25113": "iron_aquisition-siderophore_synthesis",
-    "K25282": "iron_aquisition-siderophore_synthesis",
-    "K25286": "iron_aquisition-siderophore_synthesis",
-    "K25287": "iron_aquisition-siderophore_synthesis",
-    "K25308": "iron_aquisition-siderophore_synthesis",
+    "K00216": "iron_acquisition-siderophore_synthesis",
+    "K00257": "iron_acquisition-siderophore_synthesis",
+    "K00824": "iron_acquisition-siderophore_synthesis",
+    "K01252": "iron_acquisition-siderophore_synthesis",
+    "K01582": "iron_acquisition-siderophore_synthesis",
+    "K01780": "iron_acquisition-siderophore_synthesis",
+    "K01851": "iron_acquisition-siderophore_synthesis",
+    "K01909": "iron_acquisition-siderophore_synthesis",
+    "K04759": "iron_acquisition-siderophore_synthesis",
+    "K04788": "iron_acquisition-siderophore_synthesis",   # entA
+    "K04789": "iron_acquisition-siderophore_synthesis",   # entB
+    "K04790": "iron_acquisition-siderophore_synthesis",   # entC
+    "K04791": "iron_acquisition-siderophore_synthesis",   # entD
+    "K04792": "iron_acquisition-siderophore_synthesis",   # entE
+    "K04793": "iron_acquisition-siderophore_synthesis",   # entF
+    "K05375": "iron_acquisition-siderophore_synthesis",   # iucA aerobactin
+    "K07116": "iron_acquisition-siderophore_synthesis",   # iucB
+    "K07224": "iron_acquisition-siderophore_synthesis",   # iucC
+    "K07230": "iron_acquisition-siderophore_synthesis",   # iucD
+    "K10531": "iron_acquisition-siderophore_synthesis",   # dhbA
+    "K11604": "iron_acquisition-siderophore_synthesis",
+    "K12237": "iron_acquisition-siderophore_synthesis",   # pvdH
+    "K12238": "iron_acquisition-siderophore_synthesis",   # pvdA
+    "K12239": "iron_acquisition-siderophore_synthesis",
+    "K12240": "iron_acquisition-siderophore_synthesis",
+    "K12241": "iron_acquisition-siderophore_synthesis",
+    "K12346": "iron_acquisition-siderophore_synthesis",
+    "K13745": "iron_acquisition-siderophore_synthesis",
+    "K14759": "iron_acquisition-siderophore_synthesis",
+    "K15584": "iron_acquisition-siderophore_synthesis",
+    "K15652": "iron_acquisition-siderophore_synthesis",
+    "K15653": "iron_acquisition-siderophore_synthesis",
+    "K15681": "iron_acquisition-siderophore_synthesis",
+    "K15721": "iron_acquisition-siderophore_synthesis",
+    "K16088": "iron_acquisition-siderophore_synthesis",
+    "K16089": "iron_acquisition-siderophore_synthesis",
+    "K16090": "iron_acquisition-siderophore_synthesis",
+    "K16091": "iron_acquisition-siderophore_synthesis",
+    "K19611": "iron_acquisition-siderophore_synthesis",
+    "K19791": "iron_acquisition-siderophore_synthesis",
+    "K19792": "iron_acquisition-siderophore_synthesis",
+    "K21476": "iron_acquisition-siderophore_synthesis",
+    "K21721": "iron_acquisition-siderophore_synthesis",
+    "K21949": "iron_acquisition-siderophore_synthesis",
+    "K21992": "iron_acquisition-siderophore_synthesis",
+    "K22148": "iron_acquisition-siderophore_synthesis",
+    "K22149": "iron_acquisition-siderophore_synthesis",
+    "K22150": "iron_acquisition-siderophore_synthesis",
+    "K22151": "iron_acquisition-siderophore_synthesis",
+    "K22152": "iron_acquisition-siderophore_synthesis",
+    "K22153": "iron_acquisition-siderophore_synthesis",
+    "K23120": "iron_acquisition-siderophore_synthesis",
+    "K23122": "iron_acquisition-siderophore_synthesis",
+    "K23181": "iron_acquisition-siderophore_synthesis",
+    "K23185": "iron_acquisition-siderophore_synthesis",
+    "K23227": "iron_acquisition-siderophore_synthesis",
+    "K23371": "iron_acquisition-siderophore_synthesis",
+    "K23372": "iron_acquisition-siderophore_synthesis",
+    "K23373": "iron_acquisition-siderophore_synthesis",
+    "K23374": "iron_acquisition-siderophore_synthesis",
+    "K23375": "iron_acquisition-siderophore_synthesis",
+    "K23376": "iron_acquisition-siderophore_synthesis",
+    "K23446": "iron_acquisition-siderophore_synthesis",
+    "K23447": "iron_acquisition-siderophore_synthesis",
+    "K23725": "iron_acquisition-siderophore_synthesis",
+    "K24101": "iron_acquisition-siderophore_synthesis",
+    "K24108": "iron_acquisition-siderophore_synthesis",
+    "K24109": "iron_acquisition-siderophore_synthesis",
+    "K24110": "iron_acquisition-siderophore_synthesis",
+    "K24111": "iron_acquisition-siderophore_synthesis",
+    "K24112": "iron_acquisition-siderophore_synthesis",
+    "K25109": "iron_acquisition-siderophore_synthesis",
+    "K25113": "iron_acquisition-siderophore_synthesis",
+    "K25282": "iron_acquisition-siderophore_synthesis",
+    "K25286": "iron_acquisition-siderophore_synthesis",
+    "K25287": "iron_acquisition-siderophore_synthesis",
+    "K25308": "iron_acquisition-siderophore_synthesis",
     # Transport / import
-    "K02012": "iron_aquisition-siderophore_transport",   # fepA
-    "K02014": "iron_aquisition-siderophore_transport",   # fepB
-    "K02016": "iron_aquisition-siderophore_transport",   # fepC
-    "K02361": "iron_aquisition-siderophore_transport",   # fepD
-    "K02362": "iron_aquisition-siderophore_transport",   # fepE
-    "K02363": "iron_aquisition-siderophore_transport",   # fepG
-    "K02364": "iron_aquisition-siderophore_transport",   # fes
-    "K03894": "iron_aquisition-siderophore_transport",   # fecA
-    "K03895": "iron_aquisition-siderophore_transport",   # fecB
-    "K03896": "iron_aquisition-siderophore_transport",   # fecC
-    "K03897": "iron_aquisition-siderophore_transport",   # fecD
-    "K04778": "iron_aquisition-siderophore_transport",   # iutA
-    "K04780": "iron_aquisition-siderophore_transport",   # fhuA
-    "K04781": "iron_aquisition-siderophore_transport",   # fhuB
-    "K04782": "iron_aquisition-siderophore_transport",   # fhuC
-    "K04783": "iron_aquisition-siderophore_transport",   # fhuD
-    "K04784": "iron_aquisition-siderophore_transport",   # fhuE
-    "K04785": "iron_aquisition-siderophore_transport",   # fhuF
-    "K04786": "iron_aquisition-siderophore_transport",   # fiu
-    "K04787": "iron_aquisition-siderophore_transport",   # cirA
-    "K07243": "iron_aquisition-siderophore_transport",   # iutA/irgA
-    "K08197": "iron_aquisition-siderophore_transport",   # viuA
+    "K02012": "iron_acquisition-siderophore_transport",   # fepA
+    "K02014": "iron_acquisition-siderophore_transport",   # fepB
+    "K02016": "iron_acquisition-siderophore_transport",   # fepC
+    "K02361": "iron_acquisition-siderophore_transport",   # fepD
+    "K02362": "iron_acquisition-siderophore_transport",   # fepE
+    "K02363": "iron_acquisition-siderophore_transport",   # fepG
+    "K02364": "iron_acquisition-siderophore_transport",   # fes
+    "K03894": "iron_acquisition-siderophore_transport",   # fecA
+    "K03895": "iron_acquisition-siderophore_transport",   # fecB
+    "K03896": "iron_acquisition-siderophore_transport",   # fecC
+    "K03897": "iron_acquisition-siderophore_transport",   # fecD
+    "K04778": "iron_acquisition-siderophore_transport",   # iutA
+    "K04780": "iron_acquisition-siderophore_transport",   # fhuA
+    "K04781": "iron_acquisition-siderophore_transport",   # fhuB
+    "K04782": "iron_acquisition-siderophore_transport",   # fhuC
+    "K04783": "iron_acquisition-siderophore_transport",   # fhuD
+    "K04784": "iron_acquisition-siderophore_transport",   # fhuE
+    "K04785": "iron_acquisition-siderophore_transport",   # fhuF
+    "K04786": "iron_acquisition-siderophore_transport",   # fiu
+    "K04787": "iron_acquisition-siderophore_transport",   # cirA
+    "K07243": "iron_acquisition-siderophore_transport",   # iutA/irgA
+    "K08197": "iron_acquisition-siderophore_transport",   # viuA
 }
 
 # NCBI Protein Family Models
 NCBI_NF_CAT = {
-    "NF037942": "iron_aquisition-siderophore_synthesis",
-    "NF040982": "iron_aquisition-siderophore_transport",
-    "NF040984": "iron_aquisition-siderophore_transport",
-    "NF040985": "iron_aquisition-siderophore_transport",
-    "NF040986": "iron_aquisition-siderophore_transport",
-    "NF040987": "iron_aquisition-siderophore_transport",
-    "NF041018": "iron_aquisition-iron_transport",
-    "NF041019": "iron_aquisition-iron_transport",
-    "NF041020": "iron_aquisition-iron_transport",
+    "NF037942": "iron_acquisition-siderophore_synthesis",
+    "NF040982": "iron_acquisition-siderophore_transport",
+    "NF040984": "iron_acquisition-siderophore_transport",
+    "NF040985": "iron_acquisition-siderophore_transport",
+    "NF040986": "iron_acquisition-siderophore_transport",
+    "NF040987": "iron_acquisition-siderophore_transport",
+    "NF041018": "iron_acquisition-iron_transport",
+    "NF041019": "iron_acquisition-iron_transport",
+    "NF041020": "iron_acquisition-iron_transport",
 }
 
 PFAM_CAT = {
-    "PF16525": "iron_aquisition-siderophore_synthesis",
+    "PF16525": "iron_acquisition-siderophore_synthesis",
 }
 
 # MetHMMDB metal keyword → category
@@ -513,7 +513,7 @@ def _kw(text, words):
     return any(w.lower() in t for w in words)
 
 
-def infer_category(stem, name, desc, source_hint="iron_aquisition",
+def infer_category(stem, name, desc, source_hint="iron_acquisition",
                    pre_defined=None):
     """
     Infer MetalGenie-Evo category for a single HMM.
@@ -544,13 +544,13 @@ def infer_category(stem, name, desc, source_hint="iron_aquisition",
             return cat, "high"
 
     # Iron acquisition keyword heuristics
-    if "iron_aquisition" in source_hint or "iron" in source_hint:
+    if "iron_acquisition" in source_hint or "iron" in source_hint:
         if _kw(combined, _HEME_KW):
-            return "iron_aquisition-heme_transport", "low"
+            return "iron_acquisition-heme_transport", "low"
         if _kw(combined, _SYNTH_KW):
-            return "iron_aquisition-siderophore_synthesis", "low"
+            return "iron_acquisition-siderophore_synthesis", "low"
         if _kw(combined, _TRANSPORT_KW):
-            return "iron_aquisition-siderophore_transport", "low"
+            return "iron_acquisition-siderophore_transport", "low"
 
     # Tabuteau custom names
     lower = stem.lower()
@@ -565,9 +565,9 @@ def infer_category(stem, name, desc, source_hint="iron_aquisition",
                        "put_fhue", "put_fitA", "put_fiua", "put_b4exx",
                        "put_b4exy", "put_q6csn3"]
     if any(s in lower for s in synth_stems):
-        return "iron_aquisition-siderophore_synthesis", "low"
+        return "iron_acquisition-siderophore_synthesis", "low"
     if any(s in lower for s in transport_stems):
-        return "iron_aquisition-siderophore_transport", "low"
+        return "iron_acquisition-siderophore_transport", "low"
 
     return REVIEW_NEEDED, "review"
 
@@ -1105,8 +1105,8 @@ Examples
 # Full build — MetHMMDB via JSON (authoritative, recommended)
 python scripts/curate_hmm_library.py \\
     --fegenie_dir  /path/to/FeGenie/hmms/iron/ \\
-    --flat_dir     /path/to/new_iron_hmms   iron_aquisition  tabuteau \\
-    --flat_dir     /path/to/others          iron_aquisition  interpro \\
+    --flat_dir     /path/to/new_iron_hmms   iron_acquisition  tabuteau \\
+    --flat_dir     /path/to/others          iron_acquisition  interpro \\
     --methmmdb_json /path/to/MetHMMDB/metadata.json \\
     --methmmdb_dir  /path/to/MetHMMDB/ \\
     --cutoff_tsv   tabuteau_TableS3.tsv \\
@@ -1137,7 +1137,7 @@ python scripts/curate_hmm_library.py --verify hmm_library/
                         metavar=("PATH", "HINT", "LABEL"),
                         help="Flat HMM dir: path  category_hint  source_label. "
                              "Repeat for multiple dirs. "
-                             "Example: --flat_dir /path/new_iron_hmms iron_aquisition tabuteau")
+                             "Example: --flat_dir /path/new_iron_hmms iron_acquisition tabuteau")
     parser.add_argument("--methmmdb_dir",
                         help="MetHMMDB repo base directory (used with --methmmdb_json "
                              "to resolve hmm_file paths, or alone for keyword-based loading)")

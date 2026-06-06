@@ -16,23 +16,32 @@ import argparse
 import datetime
 import shutil
 import sys
+import time
 from collections import defaultdict
+from itertools import groupby
 from pathlib import Path
 
 from metalgenie_evo.clustering import _orf_to_contig, build_clusters
 from metalgenie_evo.coverage import build_contig_coverage, load_bams_tsv
 from metalgenie_evo.gene_calling import run_prodigal
 from metalgenie_evo.hmmer import collect_best_hits, run_all_hmmsearches
-from metalgenie_evo.io import (build_contig_length_dict, load_gff_dir,
-                                read_fasta, read_cutoffs, read_map)
-from metalgenie_evo.operon import (count_heme, filter_cluster_fegenie,
-                                    filter_cluster_json, load_operon_rules,
-                                    second_pass)
+from metalgenie_evo.io import (build_contig_length_dict, build_nseq_map,
+                                filter_categories, load_gff_dir, load_registry,
+                                print_provenance, read_fasta, read_cutoffs,
+                                read_map, VALID_ANNOTATE_TOKENS)
+from metalgenie_evo.operon import (_DEFAULT_OPERON_RULES, build_canonical_size_map,
+                                    build_stem_gap_map, count_heme,
+                                    filter_cluster_fegenie, filter_cluster_json,
+                                    load_operon_rules, second_pass)
+from metalgenie_evo.bgc import bgc_boost_for_cluster, parse_antismash_gff
+from metalgenie_evo.scoring import (
+    cluster_confidence, co_occurrence_score, hmm_weight, uniop_pair_score)
 from metalgenie_evo.uniop import (
     _uniop_context, build_prodigal_bakta_map, run_uniop, write_operon_structure)
 from metalgenie_evo.writers import (
-    write_anvio_functions, write_coverage_heatmap, write_gene_summary,
-    write_heatmap, write_long_format, write_summary)
+    write_anvio_functions, write_anvio_misc_data, write_coverage_heatmap,
+    write_gene_summary, write_gff3, write_heatmap, write_long_format,
+    write_summary, write_summary_stats)
 
 
 def main():
@@ -60,7 +69,20 @@ def main():
                         "results to Prodigal v2.6.3. "
                         "Both require the respective Python package to be installed.")
     p.add_argument("--gff_dir", help="Prodigal GFF files for bp clustering")
-    p.add_argument("--hmm_dir", required=True)
+    p.add_argument("--hmm_dir", default=None,
+                   help="HMM library directory "
+                        "(default: bundled hmm_library/ shipped with the package)")
+    p.add_argument("--annotate", nargs="+", default=["all"],
+                   metavar="TOKEN",
+                   help="Select HMM categories to annotate. One or more tokens: "
+                        "element-level (Fe, Cu, Zn, Mn, Ni, Co, Mo, As, Hg, "
+                        "Cd, Cr, Ag, Te, Mg, multimetal) or process-level "
+                        "(Fe-metabolism, Fe-resistance, Fe-acquisition, "
+                        "Fe-reduction, Fe-oxidation, Fe-storage, Fe-regulation, "
+                        "Cu-resistance, Mn-resistance, Ni-resistance, "
+                        "As-resistance, Hg-resistance, Co-Zn-Cd-resistance, ...). "
+                        "Use 'all' to annotate everything (default). "
+                        f"Valid tokens: {', '.join(VALID_ANNOTATE_TOKENS)}")
     p.add_argument("--out", default="metalgenie_evo_out")
     p.add_argument("--min_contig_len", type=int, default=0,
                    help="Skip ORFs on contigs shorter than this (bp). 0=no filter")
@@ -83,6 +105,11 @@ def main():
                         "genomic context is unavailable.")
     p.add_argument("--threads", type=int, default=4)
     p.add_argument("--hmm_threads", type=int, default=1)
+    p.add_argument("--zero_cutoff_min_bitscore", type=float, default=30.0,
+                   help="Minimum bitscore applied to HMMs that have no calibrated "
+                        "cutoff in the registry (cutoff=0.0). These hits are "
+                        "reported as 'low_confidence' in the long-format output. "
+                        "Set to 0 to disable (not recommended). Default: 30")
     p.add_argument("--norm", action="store_true",
                    help="Normalise gene-count heatmap")
     p.add_argument("--bam", help="Single BAM file (requires samtools >=1.10)")
@@ -93,6 +120,11 @@ def main():
     p.add_argument("--norm_coverage", action="store_true",
                    help="TPM-normalise coverage heatmap")
     p.add_argument("--keep_tblout", action="store_true")
+    p.add_argument("--normalize_hmms", action="store_true",
+                   help="Convert any pre-HMMER3/f profiles in --hmm_dir to current "
+                        "format using hmmconvert before running. Needed only once "
+                        "after adding models built with HMMER < 3.1. "
+                        "Safe to run repeatedly (skips already-current files).")
     # ── Operon prediction (UniOP) ─────────────────────────────────────────────
     p.add_argument("--operon_prediction", action="store_true",
                    help="Run UniOP operon prediction and produce "
@@ -113,7 +145,23 @@ def main():
                         "gene IDs via coordinate matching. The --anvio output will use "
                         "Bakta IDs directly, compatible with Anvi'o databases built "
                         "from Bakta external gene calls.")
+    p.add_argument("--bgc_dir",
+                   help="Directory of antiSMASH GFF3 output files (one per genome, "
+                        "named <genome_stem>.gff3 or <genome_stem>.gff). Enables "
+                        "bgc_boost=1.2 in cluster_confidence for clusters overlapping "
+                        "siderophore-type BGC regions. Requires antiSMASH run with "
+                        "--output-format gff3.")
     args = p.parse_args()
+
+    if args.hmm_dir is None:
+        _bundled = Path(__file__).parents[2] / "hmm_library"
+        if _bundled.exists():
+            args.hmm_dir = str(_bundled)
+        else:
+            sys.exit("[ERROR] --hmm_dir not set and bundled hmm_library/ not found. "
+                     "Specify --hmm_dir /path/to/hmm_library explicitly.")
+
+    _run_start = time.time()
 
     out_dir    = Path(args.out)
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -157,19 +205,45 @@ def main():
         print(f"[WARN] No MetalGenie-map.txt or FeGenie-map.txt found in {args.hmm_dir} — "
               f"gene names will show as raw HMM stems in all outputs.", file=sys.stderr)
 
+    if args.normalize_hmms:
+        from metalgenie_evo.hmmer import normalize_hmm_library
+        normalize_hmm_library(args.hmm_dir)
+
     cutoffs  = read_cutoffs(str(Path(args.hmm_dir) / "HMM-bitcutoffs.txt"))
+    registry = load_registry(args.hmm_dir)
+    nseq_map = build_nseq_map(registry)
+    deprecated_stems = {
+        r["stem"] for r in registry
+        if r.get("status", "active") != "active"
+    }
     cat_hmms = defaultdict(list)
     h2c      = {}
+    n_skipped = 0
     for entry in sorted(Path(args.hmm_dir).iterdir()):
         if entry.is_dir() and not entry.name.startswith("."):
             for hf in sorted(entry.glob("*.hmm")):
+                if hf.stem in deprecated_stems:
+                    n_skipped += 1
+                    continue
                 cat_hmms[entry.name].append((hf.stem, hf))
                 h2c[hf.stem] = entry.name
+    if n_skipped:
+        print(f"[INFO] Skipped {n_skipped} deprecated HMMs (registry)")
     if not cat_hmms:
         sys.exit(f"[ERROR] No HMM dirs in {args.hmm_dir}")
+    cat_hmms  = filter_categories(cat_hmms, args.annotate)
+    if not cat_hmms:
+        sys.exit("[ERROR] --annotate filter removed all categories — check tokens")
     total_hmms = sum(len(v) for v in cat_hmms.values())
+    print_provenance(args.annotate, registry, cat_hmms)
     print(f"[INFO] {total_hmms} HMMs across {len(cat_hmms)} categories")
     operon_rules, report_all_pats, json_mode = load_operon_rules(args.hmm_dir)
+    _active_rules     = operon_rules if operon_rules else _DEFAULT_OPERON_RULES
+    gene_canonical_map = build_canonical_size_map(_active_rules)
+    stem_gap_map       = build_stem_gap_map(_active_rules, gene_map)
+
+    # BGC map: populated only when --bgc_dir is given
+    bgc_map = {}
 
     contig_lengths = {}
     if args.min_contig_len > 0 or args.relaxed_operons or args.norm_coverage:
@@ -196,9 +270,10 @@ def main():
     print(f"[INFO] Launching hmmsearch ({args.threads} threads, "
           f"{args.hmm_threads} per job)…")
     run_all_hmmsearches(faa_files, cat_hmms, cutoffs, tblout_dir,
-                        args.threads, args.hmm_threads)
+                        args.threads, args.hmm_threads,
+                        zero_cutoff_min_bitscore=args.zero_cutoff_min_bitscore)
     print("[INFO] Collecting best HMM hits…")
-    best_hit = collect_best_hits(faa_files, cat_hmms, tblout_dir)
+    best_hit = collect_best_hits(faa_files, cat_hmms, tblout_dir, cutoffs=cutoffs)
 
     print("[INFO] Clustering and filtering…")
     if args.min_contig_len > 0:
@@ -225,7 +300,8 @@ def main():
             n_filt += before - len(orf_hits)
         raw_clusters = build_clusters(
             genome, orf_hits, orf_coords,
-            args.max_gap, args.max_bp_gap, args.strand_aware)
+            args.max_gap, args.max_bp_gap, args.strand_aware,
+            stem_gap_map=stem_gap_map)
         for orf_group in raw_clusters:
             cluster_rows = []
             for orf in orf_group:
@@ -243,8 +319,10 @@ def main():
                     "bitscore":   hit["bitscore"],
                     "cutoff":     cutoffs.get(hit["hmm_stem"], 0),
                     "evalue":     hit["evalue"],
+                    "confidence": hit.get("confidence", "low_confidence"),
                     "cluster_id": cluster_id,
                     "contig_len": clen.get(contig, 0),
+                    "model_nseq": nseq_map.get(hit["hmm_stem"], ""),
                 })
             if not cluster_rows:
                 cluster_id += 1
@@ -264,10 +342,20 @@ def main():
                     args.all_results, catalog_mode=args.catalog_mode)
             filtered = second_pass(filtered, h2c, seq_dict,
                                    args.all_results, catalog_mode=args.catalog_mode)
+            gene_names = {gene_map.get(r["hmm_stem"], r["hmm_stem"]) for r in filtered}
+            matched_cs = [gene_canonical_map[g] for g in gene_names
+                          if g in gene_canonical_map]
+            canonical_size = max(set(matched_cs), key=matched_cs.count) if matched_cs else None
+            co_occ = co_occurrence_score(
+                [r["orf"] for r in filtered], orf_coords, clen,
+                canonical_size=canonical_size)
+            hmm_w  = hmm_weight(filtered)
             for r in filtered:
-                r["gene_name"]  = gene_map.get(r["hmm_stem"], r["hmm_stem"])
-                r["sequence"]   = seq_dict.get(genome, {}).get(r["orf"], "")
+                r["gene_name"]   = gene_map.get(r["hmm_stem"], r["hmm_stem"])
+                r["sequence"]    = seq_dict.get(genome, {}).get(r["orf"], "")
                 r["heme_motifs"] = count_heme(r["sequence"])
+                r["co_occ_score"] = co_occ
+                r["hmm_w"]        = hmm_w
                 final_rows.append(r)
             cluster_id += 1
 
@@ -370,6 +458,7 @@ def main():
 
     # ── UniOP operon prediction (optional) ────────────────────────────────────
     genome_operon_map = {}
+    genome_pair_probs = {}
     if args.operon_prediction:
         uniop_script = Path(args.uniop_path)
         if uniop_script.is_dir():
@@ -389,7 +478,7 @@ def main():
             fna_dir_for_uniop = Path(args.fna_dir) if args.fna_dir else None
             print(f"[INFO] Running UniOP on {len(faa_files)} genomes…")
             print(f"       UniOP script: {uniop_script}")
-            genome_operon_map = run_uniop(
+            genome_operon_map, genome_pair_probs = run_uniop(
                 faa_files,
                 fna_dir          = fna_dir_for_uniop,
                 out_dir          = out_dir,
@@ -426,10 +515,54 @@ def main():
                 print("[WARN] UniOP produced no predictions — "
                       "see MetalGenie-Evo-run.log for details.", file=sys.stderr)
 
+    # Parse BGC regions if --bgc_dir provided.
+    if args.bgc_dir:
+        bgc_map = parse_antismash_gff(args.bgc_dir, faa_files)
+
+    # Compute cluster_confidence for all clusters (uniop_w=1.0 when UniOP not run,
+    # bgc_boost=1.0 when --bgc_dir not provided).
+    for _, grp in groupby(
+            sorted(final_rows, key=lambda r: r["cluster_id"]),
+            key=lambda r: r["cluster_id"]):
+        grp     = list(grp)
+        genome  = grp[0]["genome"]
+        pp      = genome_pair_probs.get(genome, {})
+        uniop_w = uniop_pair_score([r["orf"] for r in grp], pp)
+        orf_coords_g = genome_coords.get(genome, {})
+        boost    = bgc_boost_for_cluster(
+            [r["orf"] for r in grp], orf_coords_g,
+            bgc_map.get(genome))
+        conf    = cluster_confidence(
+            grp[0]["hmm_w"], grp[0]["co_occ_score"], uniop_w, bgc_boost=boost)
+        for r in grp:
+            r["uniop_w"]            = uniop_w
+            r["bgc_boost"]          = boost
+            r["cluster_confidence"] = conf
+
     # Write long-format after UniOP so uniop_context column is included when available
     long_path = out_dir / "MetalGenie-Evo-results-long.tsv"
     print(f"[INFO] Writing {long_path.name}…")
     write_long_format(str(long_path), final_rows)
+
+    # ── GFF3 output ──────────────────────────────────────────────────────────
+    if genome_coords:
+        gff3_path = out_dir / "MetalGenie-Evo-hits.gff3"
+        print(f"[INFO] Writing {gff3_path.name}…")
+        n_gff = write_gff3(str(gff3_path), final_rows, genome_coords)
+        print(f"       {n_gff} features written "
+              f"({len(final_rows) - n_gff} skipped — no coordinate data)")
+    else:
+        print("[INFO] GFF3 output skipped: no coordinate data "
+              "(requires --fna_dir or --gff_dir)")
+
+    # ── Summary statistics ────────────────────────────────────────────────────
+    _runtime = time.time() - _run_start
+    stats_path = out_dir / "MetalGenie-Evo-summary-stats.tsv"
+    print(f"[INFO] Writing {stats_path.name}…")
+    write_summary_stats(str(stats_path), final_rows,
+                        [f.name for f in faa_files],
+                        genome_coords=genome_coords,
+                        runtime_s=_runtime)
 
     # ── Anvi'o functions output (optional) ───────────────────────────────────
     if args.anvio:
@@ -442,6 +575,13 @@ def main():
         print(f"       gene_callers_id: {id_note}")
         print(f"       Import with: anvi-import-functions -c CONTIGS.db "
               f"-i {anvio_path.name} -p MetalGenie-Evo")
+
+        misc_path = out_dir / "MetalGenie-Evo-anvio-gene-scores.tsv"
+        print(f"[INFO] Writing {misc_path.name}…")
+        write_anvio_misc_data(str(misc_path), final_rows,
+                              prodigal_to_bakta=prodigal_to_bakta)
+        print(f"       Import with: anvi-import-misc-data -c CONTIGS.db "
+              f"--target-data-table genes {misc_path.name}")
 
     # ── Write run log ─────────────────────────────────────────────────────────
     log_path = out_dir / "MetalGenie-Evo-run.log"

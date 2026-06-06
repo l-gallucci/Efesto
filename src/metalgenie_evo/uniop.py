@@ -68,9 +68,14 @@ def _parse_uniop_pred(pred_path, idx_to_orf, threshold=0.5):
       Gene A  Gene B  Prediction   (tab-separated, some rows have empty Prediction)
 
     Uses union-find to build connected components of pairs with prob > threshold.
-    Returns dict: orf_name → operon_id
+    Also collects raw pairwise probabilities for all valid pairs regardless of threshold.
+
+    Returns (orf_to_op, pair_probs):
+        orf_to_op:  {orf_name → operon_id}
+        pair_probs: {(orf_a, orf_b) → float} for all parsed pairs (canonical order: a < b)
     """
-    parent = {}
+    parent     = {}
+    pair_probs = {}
 
     def _find(x):
         root = x
@@ -98,16 +103,18 @@ def _parse_uniop_pred(pred_path, idx_to_orf, threshold=0.5):
                     prob = float(parts[2].strip())
                 except ValueError:
                     continue
-                if prob >= threshold:
-                    oa = idx_to_orf.get(ia)
-                    ob = idx_to_orf.get(ib)
-                    if oa and ob:
+                oa = idx_to_orf.get(ia)
+                ob = idx_to_orf.get(ib)
+                if oa and ob:
+                    key = (oa, ob) if oa < ob else (ob, oa)
+                    pair_probs[key] = prob
+                    if prob >= threshold:
                         parent.setdefault(oa, oa)
                         parent.setdefault(ob, ob)
                         _union(oa, ob)
     except Exception as e:
         print(f"  [WARN] Could not parse uniop.pred: {e}", file=sys.stderr)
-        return {}
+        return {}, {}
 
     comp_ids   = {}
     op_counter = 0
@@ -118,7 +125,7 @@ def _parse_uniop_pred(pred_path, idx_to_orf, threshold=0.5):
             comp_ids[root] = f"OP{op_counter:04d}"
             op_counter += 1
         orf_to_op[orf] = comp_ids[root]
-    return orf_to_op
+    return orf_to_op, pair_probs
 
 
 def make_uniop_faa(bakta_faa_path, bakta_gff_path, out_faa_path):
@@ -195,11 +202,15 @@ def run_uniop(faa_files, fna_dir, out_dir, uniop_path, fna_ext="fna",
          from GFF3 coordinates → write temp FAA → pass to UniOP with -a
       3. FNA fallback: UniOP runs Prodigal internally with -i
 
-    Returns dict: genome_faa_name → {orf_id → operon_id}
+    Returns (genome_operon_map, genome_pair_probs):
+        genome_operon_map:  {genome_faa_name → {orf_id → operon_id}}
+        genome_pair_probs:  {genome_faa_name → {(orf_a, orf_b) → float}}
+                            populated only when uniop.pred is parsed (not uniop.operon)
     """
     uniop_dir = out_dir / "_uniop"
     uniop_dir.mkdir(exist_ok=True)
-    genome_operon_map = {}
+    genome_operon_map  = {}
+    genome_pair_probs  = {}
 
     for faa in faa_files:
         stem     = faa.stem
@@ -270,7 +281,7 @@ def run_uniop(faa_files, fna_dir, out_dir, uniop_path, fna_ext="fna",
                 continue
 
         if faa_for_index is None:
-            faa_candidates = list(work_dir.glob("*.faa"))
+            faa_candidates = sorted(work_dir.glob("*.faa"))
             if not faa_candidates:
                 print(f"  [WARN] UniOP: no FAA for index in {work_dir}",
                       file=sys.stderr)
@@ -279,18 +290,21 @@ def run_uniop(faa_files, fna_dir, out_dir, uniop_path, fna_ext="fna",
 
         idx_to_orf = _parse_uniop_faa_index(str(faa_for_index))
 
-        orf_to_op = {}
+        orf_to_op  = {}
+        pair_probs = {}
         if operon_file.exists():
             orf_to_op = _parse_uniop_operon(str(operon_file), idx_to_orf)
         if not orf_to_op and pred_file.exists():
-            orf_to_op = _parse_uniop_pred(str(pred_file), idx_to_orf)
+            orf_to_op, pair_probs = _parse_uniop_pred(str(pred_file), idx_to_orf)
 
         n_operons = len(set(orf_to_op.values()))
         print(f"  [INFO] {stem}: {n_operons} operons, {len(orf_to_op)} genes assigned")
 
-        genome_operon_map[faa.name] = orf_to_op
+        genome_operon_map[faa.name]  = orf_to_op
+        if pair_probs:
+            genome_pair_probs[faa.name] = pair_probs
 
-    return genome_operon_map
+    return genome_operon_map, genome_pair_probs
 
 
 def parse_gff_coords(gff_path, source_hint=""):

@@ -616,3 +616,18 @@ Te_resistance_terC_1	Tellurium resistance protein TerC
 Te_resistance_terD_1	Tellurium resistance protein TerD
 Te_resistance_terE_1	Tellurium resistance protein TerE
 Te_resistance_terZ_1	Tellurium resistance protein TerZ
+rusticyanin_TIGR03095	rusticyanin
+cytochrome579_NF033864	cytochrome579
+IscR_TIGR02010.1	iscR
+SoxR_TIGR01950.1	soxR
+NsrR_NF008240	nsrR
+flav_long_TIGR01752.1	flav_long
+flav_short_TIGR01753.1	flav_short
+Zur_NF008646	zur
+PerR_NF052545	perR
+sufC_TIGR01978.1	sufC
+sufB_TIGR01980.1	sufB
+sufS_TIGR01979.1	sufS
+IscS_TIGR02006.1	iscS
+Dps_NF009990	dps
+modC_TIGR02142	modC
