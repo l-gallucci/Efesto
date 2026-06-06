@@ -1,6 +1,6 @@
 # Visualisation
 
-MetalGenie-Evo includes `scripts/plot_heatmap.R` for publication-ready heatmaps.
+Efesto includes `scripts/plot_heatmap.R` for publication-ready heatmaps.
 
 ---
 
@@ -35,7 +35,7 @@ Rscript scripts/plot_heatmap.R --input results/ --type static --format pdf --out
 Rscript scripts/plot_heatmap.R --input results/ --type interactive --min_count 1
 
 # Specify a single CSV
-Rscript scripts/plot_heatmap.R --input results/MetalGenie-Evo-heatmap-data.csv
+Rscript scripts/plot_heatmap.R --input results/Efesto-heatmap-data.csv
 ```
 
 ---
@@ -58,8 +58,8 @@ Rscript scripts/plot_heatmap.R --input results/MetalGenie-Evo-heatmap-data.csv
 ## Input files
 
 The script reads:
-- `MetalGenie-Evo-heatmap-data.csv` — gene-count matrix (categories × genomes)
-- `MetalGenie-Evo-coverage-heatmap.csv` — coverage matrix (same shape; optional)
+- `Efesto-heatmap-data.csv` — gene-count matrix (categories × genomes)
+- `Efesto-coverage-heatmap.csv` — coverage matrix (same shape; optional)
 
 Both are in FeGenie's original CSV format and are compatible with FeGenie's
 own R visualisation script.
@@ -68,13 +68,13 @@ own R visualisation script.
 
 ## Custom downstream analysis
 
-For custom plots, `MetalGenie-Evo-results-long.tsv` is the recommended starting
+For custom plots, `Efesto-results-long.tsv` is the recommended starting
 point (one row per ORF, all columns including `cluster_confidence` and `model_nseq`):
 
 ```r
 library(tidyverse)
 
-hits <- read_tsv("results/MetalGenie-Evo-results-long.tsv")
+hits <- read_tsv("results/Efesto-results-long.tsv")
 
 # Mean confidence by category
 hits |>

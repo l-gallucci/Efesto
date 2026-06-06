@@ -1,6 +1,6 @@
 # AntiSMASH BGC Integration
 
-MetalGenie-Evo can integrate antiSMASH biosynthetic gene cluster (BGC) predictions
+Efesto can integrate antiSMASH biosynthetic gene cluster (BGC) predictions
 to boost the confidence score of clusters that co-localise with siderophore or
 metallophore biosynthetic regions.
 
@@ -9,7 +9,7 @@ metallophore biosynthetic regions.
 ## Usage
 
 ```bash
-MetalGenie-Evo \
+Efesto \
     --faa_dir  orfs/ \
     --gff_dir  gff/ \
     --hmm_dir  hmm_library/ \
@@ -17,7 +17,7 @@ MetalGenie-Evo \
     --bgc_dir  antismash_output/
 ```
 
-`--bgc_dir` accepts a directory of antiSMASH output. MetalGenie-Evo searches for
+`--bgc_dir` accepts a directory of antiSMASH output. Efesto searches for
 GFF3/GFF files matching each genome's stem (e.g. `genome.gff3`, `genome/genome.gff3`).
 
 ---
@@ -55,7 +55,7 @@ HMM hits and operon structure alone can confirm.
 
 ## antiSMASH GFF3 file discovery
 
-MetalGenie-Evo resolves GFF files from `--bgc_dir` using the genome stem:
+Efesto resolves GFF files from `--bgc_dir` using the genome stem:
 
 1. `<bgc_dir>/<stem>.gff3`
 2. `<bgc_dir>/<stem>.gff`
@@ -72,8 +72,8 @@ If no matching file is found for a genome, that genome's clusters receive `bgc_b
 ## Interpreting results
 
 `bgc_boost` appears as a column in:
-- `MetalGenie-Evo-results-long.tsv`
-- `MetalGenie-Evo-anvio-gene-scores.tsv`
+- `Efesto-results-long.tsv`
+- `Efesto-anvio-gene-scores.tsv`
 
 A boost of 1.2 in the gene-scores TSV identifies specific ORFs overlapping a
 siderophore BGC. Use this to cross-validate HMM-based siderophore synthesis calls
@@ -83,7 +83,7 @@ with antiSMASH NRPS/PKS predictions.
 
 ## Limitations
 
-- antiSMASH must be run separately before MetalGenie-Evo; GFF3 output is expected.
+- antiSMASH must be run separately before Efesto; GFF3 output is expected.
 - Boost is applied at the cluster level — if any ORF overlaps the BGC, all ORFs
   in that cluster receive the boost.
 - The boost only applies to siderophore-annotated BGCs. Iron reduction, oxidation,

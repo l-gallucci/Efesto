@@ -2,11 +2,11 @@
 """
 curate_hmm_library.py
 =====================
-Standalone curation script for the MetalGenie-Evo HMM library.
+Standalone curation script for the Efesto HMM library.
 
 PURPOSE
 -------
-This script is NOT part of MetalGenie-Evo's runtime. It is provided so that
+This script is NOT part of Efesto's runtime. It is provided so that
 anyone can:
   1. Inspect how the bundled hmm_library/ was built
   2. Reproduce it from scratch using the original sources
@@ -130,7 +130,7 @@ REVIEW_NEEDED = "REVIEW_NEEDED"
 # CATEGORY LOOKUP TABLES
 # ═══════════════════════════════════════════════════════════════════════════════
 
-# KOfam K-numbers → MetalGenie-Evo category
+# KOfam K-numbers → Efesto category
 # Source: Tabuteau et al. 2025 Table S3 + KEGG annotations
 KOFAM_CAT = {
     # Biosynthesis
@@ -516,7 +516,7 @@ def _kw(text, words):
 def infer_category(stem, name, desc, source_hint="iron_acquisition",
                    pre_defined=None):
     """
-    Infer MetalGenie-Evo category for a single HMM.
+    Infer Efesto category for a single HMM.
     Returns (category, confidence: 'high'|'low'|'review').
     """
     combined = f"{stem} {name} {desc}"
@@ -656,7 +656,7 @@ def load_methmmdb_individual(dir_path):
     return load_flat_dir(dir_path, "metal_resistance", "methmmdb")
 
 
-# MetHMMDB metal_type field → MetalGenie-Evo category
+# MetHMMDB metal_type field → Efesto category
 _METAL_TYPE_TO_CAT = {
     "arsenic":    "metal_resistance-arsenic",
     "copper":     "metal_resistance-copper",
@@ -1097,7 +1097,7 @@ def _print_cutoff_stats(stats):
 def main():
     parser = argparse.ArgumentParser(
         prog="curate_hmm_library.py",
-        description="Build, inspect or verify the MetalGenie-Evo HMM library",
+        description="Build, inspect or verify the Efesto HMM library",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples

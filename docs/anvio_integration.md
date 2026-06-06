@@ -1,27 +1,27 @@
 # Anvi'o Integration
 
-MetalGenie-Evo produces two Anvi'o-compatible output files when run with `--anvio`.
+Efesto produces two Anvi'o-compatible output files when run with `--anvio`.
 
 ---
 
 ## Output files
 
-### `MetalGenie-Evo-anvio-functions.tsv`
+### `Efesto-anvio-functions.tsv`
 
 Import with `anvi-import-functions`. Provides gene functional annotations
 (gene name + functional category) that appear in the Anvi'o interactive interface
-under the MetalGenie-Evo annotation source.
+under the Efesto annotation source.
 
 **Columns:** `gene_callers_id`, `source`, `accession`, `function`, `e_value`
 
 ```bash
 anvi-import-functions \
     -c CONTIGS.db \
-    -i results/MetalGenie-Evo-anvio-functions.tsv \
-    -p MetalGenie-Evo
+    -i results/Efesto-anvio-functions.tsv \
+    -p Efesto
 ```
 
-### `MetalGenie-Evo-anvio-gene-scores.tsv`
+### `Efesto-anvio-gene-scores.tsv`
 
 Import with `anvi-import-misc-data` (target: genes). Provides numeric per-gene
 scores for visualisation in the Anvi'o interactive interface.
@@ -33,7 +33,7 @@ scores for visualisation in the Anvi'o interactive interface.
 anvi-import-misc-data \
     -c CONTIGS.db \
     --target-data-table genes \
-    results/MetalGenie-Evo-anvio-gene-scores.tsv
+    results/Efesto-anvio-gene-scores.tsv
 ```
 
 ---
@@ -41,8 +41,8 @@ anvi-import-misc-data \
 ## Without Bakta mapping (simple workflow)
 
 ```bash
-# 1. Run MetalGenie-Evo with FAA input (Prodigal ORFs)
-MetalGenie-Evo \
+# 1. Run Efesto with FAA input (Prodigal ORFs)
+Efesto \
     --faa_dir orfs/ \
     --hmm_dir hmm_library/ \
     --out     results/ \
@@ -51,15 +51,15 @@ MetalGenie-Evo \
 # 2. Import into Anvi'o (gene_callers_id = Prodigal ORF integer IDs)
 anvi-import-functions \
     -c CONTIGS.db \
-    -i results/MetalGenie-Evo-anvio-functions.tsv \
-    -p MetalGenie-Evo
+    -i results/Efesto-anvio-functions.tsv \
+    -p Efesto
 ```
 
 ---
 
 ## With Bakta mapping (`--bakta_gff_dir`) — recommended
 
-When using `--fna_dir` + `--bakta_gff_dir`, MetalGenie-Evo runs Prodigal internally,
+When using `--fna_dir` + `--bakta_gff_dir`, Efesto runs Prodigal internally,
 then matches each Prodigal ORF to its Bakta gene ID via coordinate overlap (±3 bp
 tolerance). The `gene_callers_id` column in both TSVs will contain Bakta IDs
 (e.g. `AMXMAG_00053`), mapping directly to Anvi'o integer IDs when the contigs
@@ -79,8 +79,8 @@ anvi-gen-contigs-database -f genome.fna -o CONTIGS.db \
     --external-gene-calls bakta_gene_calls.tsv \
     --annotation          bakta_annotation.tsv
 
-# Step 2 — Run MetalGenie-Evo with Bakta GFF3 for ID mapping
-MetalGenie-Evo \
+# Step 2 — Run Efesto with Bakta GFF3 for ID mapping
+Efesto \
     --fna_dir        assemblies/ \
     --bakta_gff_dir  bakta_output/ \
     --hmm_dir        hmm_library/ \
@@ -90,13 +90,13 @@ MetalGenie-Evo \
 # Step 3 — Import both files
 anvi-import-functions \
     -c CONTIGS.db \
-    -i results/MetalGenie-Evo-anvio-functions.tsv \
-    -p MetalGenie-Evo
+    -i results/Efesto-anvio-functions.tsv \
+    -p Efesto
 
 anvi-import-misc-data \
     -c CONTIGS.db \
     --target-data-table genes \
-    results/MetalGenie-Evo-anvio-gene-scores.tsv
+    results/Efesto-anvio-gene-scores.tsv
 ```
 
 ---
@@ -117,7 +117,7 @@ After import, in the interactive interface:
 
 Anvi'o's `anvi-import-misc-data` with `--target-data-table genes` requires a
 TSV where the first column is `gene_callers_id` (integer) and all other columns
-are numeric. MetalGenie-Evo's gene-scores TSV is formatted to satisfy this
+are numeric. Efesto's gene-scores TSV is formatted to satisfy this
 requirement. See the [Anvi'o misc-data documentation](https://anvio.org/help/main/programs/anvi-import-misc-data/)
 for details on the expected format.
 

@@ -1,6 +1,6 @@
 # Iron-Sulfur Cluster Assembly — HMM Models and Biology
 
-MetalGenie-Evo includes four HMMs targeting the bacterial iron-sulfur (Fe-S) cluster
+Efesto includes four HMMs targeting the bacterial iron-sulfur (Fe-S) cluster
 assembly machinery, placed in the `iron_sulfur_assembly` category. This document covers
 the biology of Fe-S assembly systems, the rationale for model selection, and guidance
 for interpreting results.
@@ -182,7 +182,7 @@ cysteine  ──→  IscS (cysteine desulfurase)  ──→  [Fe-S] assembled on
 
 ---
 
-## Active HMM models in MetalGenie-Evo
+## Active HMM models in Efesto
 
 | Stem | Source | nseq | Cutoff (bits) | Target gene | System |
 |------|--------|------|---------------|-------------|--------|

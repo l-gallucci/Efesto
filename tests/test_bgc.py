@@ -1,10 +1,10 @@
-"""Tests for src/metalgenie_evo/bgc.py"""
+"""Tests for src/efesto/bgc.py"""
 
 from pathlib import Path
 
 import pytest
 
-from metalgenie_evo.bgc import (
+from efesto.bgc import (
     _extract_bgc_type,
     _is_siderophore_type,
     bgc_boost_for_cluster,

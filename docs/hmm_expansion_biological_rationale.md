@@ -21,7 +21,7 @@ regulatory sensing. Three distinct assembly machineries exist in bacteria:
 | **SUF** (*sufABCDSE*) | Stress-inducible; activated under iron limitation and oxidative stress | Induced by OxyR (H₂O₂) and Fur (Fe starvation) |
 | **NIF** (*nifU, nifS, nifX...*) | Specialized for nitrogenase Fe-S assembly in diazotrophs | Regulated with *nif* operon |
 
-**MetalGenie-Evo relevance:** SUF is directly linked to iron cycling — it is induced
+**Efesto relevance:** SUF is directly linked to iron cycling — it is induced
 specifically when iron is limiting. Environmental metagenomes from iron-poor waters
 (oligotrophic oceans, iron-limited groundwaters) show SUF enrichment as a proxy for
 iron stress. ISC is constitutive housekeeping and less informative for metal cycling
@@ -96,7 +96,7 @@ metabolic strategies.
 | **Wbl/WhiB** family | [4Fe-4S] or [2Fe-2S] | O₂, NO, redox | Morphological differentiation, antibiotic resistance in Actinobacteria | *Streptomyces coelicolor*, *M. tuberculosis* |
 | **Aconitase (AcnA/AcnB)** | [4Fe-4S] → apo under iron stress | Iron limitation | Acts as RNA-binding IRP when cluster lost; post-transcriptional iron regulation | *E. coli* K-12 |
 
-**MetalGenie-Evo relevance:** FNR is a direct proxy for aerobic vs. anaerobic lifestyle —
+**Efesto relevance:** FNR is a direct proxy for aerobic vs. anaerobic lifestyle —
 its presence and cluster status determines whether an organism switches to anaerobic
 iron-coupled metabolism. IscR links Fe-S assembly to iron sensing. NsrR connects iron
 cycling to the nitrogen cycle (NO is an intermediate in denitrification). SoxR indicates
@@ -176,7 +176,7 @@ Rieske proteins carry a [2Fe-2S] cluster coordinated by two His and two Cys resi
    - Nitrobenzene degradation
    - Catechol biosynthesis (siderophore precursor via 2,3-dihydroxybenzoate pathway)
 
-**MetalGenie-Evo relevance:** The bc₁ Rieske subunit is present in virtually all
+**Efesto relevance:** The bc₁ Rieske subunit is present in virtually all
 aerobic heterotrophs — not discriminating. However, its absence (e.g., some anaerobes)
 or replacement by alternative complexes indicates metabolic lifestyle. Rieske
 dioxygenases are valuable markers of aromatic carbon cycling linked to iron cycling
@@ -211,7 +211,7 @@ dioxygenases are valuable markers of aromatic carbon cycling linked to iron cycl
 The Fur (Ferric Uptake Regulator) superfamily is the primary metalloregulatory system
 in bacteria. All members are homodimeric HTH transcription factors that use a metal
 cofactor to sense intracellular metal availability. The currently covered **Fur** paralog
-(already in MetalGenie-Evo: `iron_gene_regulation`) represses iron acquisition genes
+(already in Efesto: `iron_gene_regulation`) represses iron acquisition genes
 when Fe²⁺ is sufficient.
 
 The missing paralogs each sense a different metal or use a different mechanism:
@@ -225,7 +225,7 @@ The missing paralogs each sense a different metal or use a different mechanism:
 | **Irr** | Heme availability (not free Fe) | *hemB*, iron storage genes | *Bradyrhizobium japonicum* |
 | **BosR** | Cu²⁺-like signal | RpoS regulation, oxidative stress | *Borrelia burgdorferi* |
 
-**MetalGenie-Evo relevance:** Zur, Mur, and Nur directly link to Zn, Mn, and Ni
+**Efesto relevance:** Zur, Mur, and Nur directly link to Zn, Mn, and Ni
 cycling. PerR is a key indicator of oxidative stress management coupled to Fe/Mn
 homeostasis (relevant in environments with variable redox). Irr is critical for
 understanding Fe regulation in α-Proteobacteria (rhizobia, Agrobacterium) which
@@ -296,7 +296,7 @@ steps (MoaA–MoaE, MoeA, MogA) and subsequent assembly into enzyme-specific for
 - `modE` — transcriptional repressor, senses molybdate directly (binds ModE when
   Mo is sufficient → represses *modABC*)
 
-**MetalGenie-Evo relevance:** ModABC is a direct molybdenum uptake system, and its
+**Efesto relevance:** ModABC is a direct molybdenum uptake system, and its
 presence/absence indicates the capacity for Mo-dependent metabolism. Particularly
 relevant for:
 - N-cycling (nitrate reduction requires Mo-Nar)
@@ -365,7 +365,7 @@ BtuCD (ABC transporter). Cobalt homeostasis is directly tied to B12 biosynthesis
 - `cbtA`/`corA`/`nikABCDE` (some NikABCDE systems transport Co²⁺ as well as Ni²⁺)
 - `cbiN`, `cbiO`, `cbiQ` — cobalt-specific ABC transporter (anaerobic pathway)
 
-**MetalGenie-Evo relevance:**
+**Efesto relevance:**
 - Cobalt is already in the library as resistance (`metal_resistance-cobalt_zinc_cadmium`)
   but cobalamin biosynthesis is the main biological *use* of cobalt
 - Distinguishing cobalt resistance from cobalt utilization (B12 biosynthesis) is
@@ -444,7 +444,7 @@ maintain homeostasis through tightly regulated high-affinity uptake systems:
 - SitABCD (*E. coli/Salmonella*) — Mn/Fe (broad specificity)
 - All share the cluster A-I SBP fold; subfamily-specific models needed
 
-**MetalGenie-Evo relevance:**
+**Efesto relevance:**
 - Zinc and manganese are the most common enzyme cofactors after iron
 - ZnuABC and MntABC presence indicates need for high-affinity uptake (limiting conditions)
 - MntH (NRAMP) is ecologically relevant: NRAMP transporters are key players in
@@ -522,7 +522,7 @@ suggesting that rusticyanin/Cyt579 is only one solution to the problem of Fe²�
 at low pH. The FeGenie library captured Cyc2 but lacked rusticyanin and Cyt579.
 **Both are now added (2026-05-23).**
 
-**MetalGenie-Evo relevance:**
+**Efesto relevance:**
 - Rusticyanin + Cyt579 are diagnostic of *acidophilic* iron oxidation (acid mine drainage,
   sulfidic mine waste, bioleaching systems)
 - Their presence in a metagenome indicates Fe-S mineral weathering capacity
@@ -578,7 +578,7 @@ cytochromes in the same MHC superfamily). A single HMM trained on one can
 cross-hit the other. This is a known unresolved issue in FeGenie flagged by its
 developers.
 
-**Quantified cross-hit (measured in MetalGenie-Evo v0.x):**
+**Quantified cross-hit (measured in Efesto v0.x):**
 
 ```
 MtrA HMM (nseq=9, cutoff=140) vs MtoA consensus: 265.8 bits  — 1.9× cutoff
@@ -726,7 +726,7 @@ The balance between oxidation and reduction in oxic environments is determined b
 - Biofilm architecture (not sequence-interpretable)
 - Light availability (drives photo-Fenton; purely abiotic)
 
-MetalGenie-Evo can identify the *capacity* for both iron oxidation and iron reduction
+Efesto can identify the *capacity* for both iron oxidation and iron reduction
 genes co-occurring in a single genome or metagenome bin — the co-presence of MtrCAB
 (reduction) + Cyc2/MtoAB (oxidation) in one organism is a strong indicator of
 dual-capacity cryptic cycling potential. This is the most powerful annotation strategy
@@ -754,5 +754,5 @@ For each category, the workflow is:
 2. Check version tag (HMMER3/f) — convert if needed via `normalize_hmm_versions.py`
 3. Add to `hmm_library/<new_category>/`
 4. Add entries to `hmm_registry.tsv` with source, reference DOI, nseq, cutoff
-5. Add directory names to `_ANNOTATE_MAP` in `src/metalgenie_evo/io.py`
+5. Add directory names to `_ANNOTATE_MAP` in `src/efesto/io.py`
 6. Run Layer B clustering to check for cross-model redundancy

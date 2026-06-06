@@ -1,18 +1,18 @@
-# MetalGenie-Evo
+# Efesto
 
 <p align="center">
-  <img src="assets/logo.svg" alt="MetalGenie-Evo" width="820"/>
+  <img src="assets/logo.svg" alt="Efesto" width="820"/>
 </p>
 
-**MetalGenie-Evo** extends [FeGenie](https://github.com/Arkadiy-Garber/FeGenie) with coordinate-based operon clustering, a cluster confidence scoring system, an expanded curated HMM library (iron cycling + metal resistance), and integration with UniOP, antiSMASH, and Anvi'o.
+**Efesto** extends [FeGenie](https://github.com/Arkadiy-Garber/FeGenie) with coordinate-based operon clustering, a cluster confidence scoring system, an expanded curated HMM library (iron cycling + metal resistance), and integration with UniOP, antiSMASH, and Anvi'o.
 
-📖 **[Full documentation → Wiki](https://github.com/l-gallucci/MetalGenie-Evo/wiki)**
+📖 **[Full documentation → Wiki](https://github.com/l-gallucci/Efesto/wiki)**
 
 ---
 
 ## Citations
 
-If you use MetalGenie-Evo, cite all of the following that apply:
+If you use Efesto, cite all of the following that apply:
 
 **FeGenie** (iron cycling HMMs and operon logic):
 > Garber AI et al. (2020) *FeGenie: A Comprehensive Tool for the Identification of Iron Genes and Iron Gene Neighborhoods.* Front. Microbiol. 11:37. [doi:10.3389/fmicb.2020.00037](https://doi.org/10.3389/fmicb.2020.00037)
@@ -37,14 +37,14 @@ If you use MetalGenie-Evo, cite all of the following that apply:
 ## Installation
 
 ```bash
-git clone https://github.com/l-gallucci/MetalGenie-Evo.git
-cd MetalGenie-Evo
+git clone https://github.com/l-gallucci/Efesto.git
+cd Efesto
 mamba env create -f environment.yml
-conda activate metalgenie-evo
-MetalGenie-Evo --help
+conda activate efesto
+efesto --help
 ```
 
-→ [Full installation guide](https://github.com/l-gallucci/MetalGenie-Evo/wiki/installation) including UniOP setup and manual install options.
+→ [Full installation guide](https://github.com/l-gallucci/Efesto/wiki/installation) including UniOP setup and manual install options.
 
 ---
 
@@ -52,13 +52,13 @@ MetalGenie-Evo --help
 
 ```bash
 # From Prodigal FAA files
-MetalGenie-Evo --faa_dir orfs/ --hmm_dir hmm_library/ --out results/
+efesto --faa_dir orfs/ --hmm_dir hmm_library/ --out results/
 
 # From nucleotide assemblies (Prodigal internal)
-MetalGenie-Evo --fna_dir assemblies/ --meta --hmm_dir hmm_library/ --out results/ --threads 16
+efesto --fna_dir assemblies/ --meta --hmm_dir hmm_library/ --out results/ --threads 16
 
 # Full confidence scoring (UniOP + antiSMASH)
-MetalGenie-Evo \
+efesto \
     --faa_dir           orfs/ \
     --gff_dir           gff/ \
     --hmm_dir           hmm_library/ \
@@ -69,7 +69,7 @@ MetalGenie-Evo \
     --bgc_dir           antismash_output/
 ```
 
-→ [Full usage guide](https://github.com/l-gallucci/MetalGenie-Evo/wiki/output_formats) · [All arguments](https://github.com/l-gallucci/MetalGenie-Evo/wiki/installation)
+→ [Full usage guide](https://github.com/l-gallucci/Efesto/wiki/output_formats) · [All arguments](https://github.com/l-gallucci/Efesto/wiki/installation)
 
 ---
 
@@ -77,13 +77,13 @@ MetalGenie-Evo \
 
 466 active models across 4 sources: FeGenie (196), Tabuteau et al. (130), MetHMMDB (115), NCBIfam (15). Categories span iron oxidation, reduction, storage, regulation, stress, Fe-S assembly, siderophore synthesis/transport, heme acquisition, and broad metal resistance.
 
-→ [HMM library documentation](https://github.com/l-gallucci/MetalGenie-Evo/wiki/hmm_library)
+→ [HMM library documentation](https://github.com/l-gallucci/Efesto/wiki/hmm_library)
 
 ---
 
 ## Differences from FeGenie at a glance
 
-| Feature | FeGenie | MetalGenie-Evo |
+| Feature | FeGenie | Efesto |
 |---|---|---|
 | Operon clustering | ORF ordinal index | **bp coordinates (GFF)** + ordinal fallback |
 | Per-rule bp-gap tuning | No | **Yes (`max_bp_gap` per operon rule)** |
@@ -97,7 +97,7 @@ MetalGenie-Evo \
 | Versioned HMM registry | No | **Yes (`hmm_registry.tsv`)** |
 | Cluster confidence score | No | **Yes (HMM × co-occ × UniOP × BGC)** |
 | GFF3 output | No | **Yes (auto when coordinates available)** |
-| Summary statistics | No | **Yes (`MetalGenie-Evo-summary-stats.tsv`)** |
+| Summary statistics | No | **Yes (`Efesto-summary-stats.tsv`)** |
 | antiSMASH BGC boost | No | **Yes (`--bgc_dir`)** |
 | Coverage heatmap | `--bam` | **`--bam` / `--bams` / `--depth` / `--depths`** |
 | Coverage normalisation | No | **TPM (`--norm_coverage`)** |
@@ -115,4 +115,4 @@ MetalGenie-Evo \
 
 MIT License. See [LICENSE](LICENSE).
 
-MetalGenie-Evo is not affiliated with the original FeGenie authors.
+Efesto is not affiliated with the original FeGenie authors.

@@ -1,7 +1,7 @@
 # HMM Library Curation — Decision Log
 
 This document records the rationale for every model excluded from the active
-MetalGenie-Evo HMM library. All decisions are reflected in `hmm_library/hmm_registry.tsv`
+Efesto HMM library. All decisions are reflected in `hmm_library/hmm_registry.tsv`
 via the `status` column.
 
 ---
@@ -292,7 +292,7 @@ by separate HMMs `OmcS`, `OmcZ` already in the library).
 1. **Shewanella MtrD twilight zone (552–603 bits)** is inherent to the protein
    family — MtrA and MtrD share the decaheme c-type fold. Gene context (presence
    of MtrB + MtrC in the same cluster) is the definitive discriminator for sequences
-   in this score range. MetalGenie-Evo's UniOP/operon module provides this context.
+   in this score range. Efesto's UniOP/operon module provides this context.
 
 2. **MtoA NC margin is narrow (30.8 bits)**: The betaproteobacteria DmsE-family
    sequences at 460–505 bits (NC = 505.5, *Limnohabitans sp.*) are **confirmed

@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from metalgenie_evo.writers import (
+from efesto.writers import (
     write_gff3, write_hit_faa, write_hit_fna, write_summary_stats,
 )
 

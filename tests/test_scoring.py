@@ -1,9 +1,9 @@
-"""Tests for src/metalgenie_evo/scoring.py"""
+"""Tests for src/efesto/scoring.py"""
 
 import math
 import pytest
 
-from metalgenie_evo.scoring import (
+from efesto.scoring import (
     cluster_confidence,
     co_occurrence_score,
     distance_decay,

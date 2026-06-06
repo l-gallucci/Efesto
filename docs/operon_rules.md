@@ -1,6 +1,6 @@
 # Operon Rules
 
-MetalGenie-Evo applies operon-context filters to remove spurious single-gene hits
+Efesto applies operon-context filters to remove spurious single-gene hits
 and enforce co-occurrence requirements before reporting clusters. Two rule engines
 are available: a default FeGenie-exact port, and a configurable JSON rule engine.
 
@@ -8,7 +8,7 @@ are available: a default FeGenie-exact port, and a configurable JSON rule engine
 
 ## Default filtering (no `operon_rules.json`)
 
-Without `operon_rules.json` in `--hmm_dir`, MetalGenie-Evo uses an exact
+Without `operon_rules.json` in `--hmm_dir`, Efesto uses an exact
 reimplementation of FeGenie's per-category operon rules. Each cluster is routed
 to one handler based on which special genes are present. For iron acquisition
 categories, a per-ORF pass/break pattern is used: a gene that fails co-occurrence
@@ -91,7 +91,7 @@ and `iron_stress` are also in this list — single-gene hits are informative.
 
 ## Per-rule bp-gap override (`max_bp_gap`)
 
-When `max_bp_gap` is set in a rule, MetalGenie-Evo applies the more restrictive
+When `max_bp_gap` is set in a rule, Efesto applies the more restrictive
 of the two adjacent genes' rule-specific gaps during clustering. This makes tight
 operons (e.g. MtrMto: 2 000 bp, FoxABC: 1 000 bp) stricter than the global
 window without penalising loosely encoded systems (e.g. SIDERO_SYNTH: 5 000 bp).
@@ -130,7 +130,7 @@ analogous to Bacteroidetes PULs
 
 ### The problem
 
-MetalGenie-Evo models the Ton motor with five HMMs:
+Efesto models the Ton motor with five HMMs:
 
 | Stem | Pfam | Role |
 |------|------|------|

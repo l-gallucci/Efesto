@@ -18,15 +18,15 @@
 ## Option 1 — Conda / Mamba (recommended)
 
 ```bash
-git clone https://github.com/YOUR_ORG/MetalGenie-Evo.git
-cd MetalGenie-Evo
+git clone https://github.com/YOUR_ORG/Efesto.git
+cd Efesto
 mamba env create -f environment.yml
-conda activate metalgenie-evo
-MetalGenie-Evo --help
+conda activate efesto
+Efesto --help
 ```
 
 `environment.yml` installs all Python and non-Python dependencies and registers
-the `MetalGenie-Evo` command via `pip install -e .`.
+the `Efesto` command via `pip install -e .`.
 
 ---
 
@@ -34,7 +34,7 @@ the `MetalGenie-Evo` command via `pip install -e .`.
 
 ```bash
 conda activate YOUR_ENV
-pip install -e /path/to/MetalGenie-Evo
+pip install -e /path/to/Efesto
 # Then install HMMER and samtools separately if not already present
 conda install -c bioconda hmmer samtools
 ```
@@ -46,7 +46,7 @@ conda install -c bioconda hmmer samtools
 ```bash
 # Install HMMER system-wide or via your package manager
 # Then:
-pip install -e /path/to/MetalGenie-Evo
+pip install -e /path/to/Efesto
 ```
 
 Ensure `hmmsearch`, `hmmpress`, and (if using `--fna_dir`) `prodigal` or
@@ -73,7 +73,7 @@ Pass the path to the UniOP script with `--uniop_path /path/to/UniOP/src/UniOP`.
 
 ```bash
 # Check CLI is available
-MetalGenie-Evo --help
+Efesto --help
 
 # Verify HMM library integrity
 python scripts/curate_hmm_library.py --verify hmm_library/
@@ -89,7 +89,7 @@ pytest tests/ -v
 On first use with a library that contains pre-HMMER3/f profiles, run:
 
 ```bash
-MetalGenie-Evo --normalize_hmms --faa_dir orfs/ --hmm_dir hmm_library/ --out results/
+Efesto --normalize_hmms --faa_dir orfs/ --hmm_dir hmm_library/ --out results/
 ```
 
 `--normalize_hmms` converts any legacy profiles in-place using `hmmconvert` before

@@ -1,4 +1,4 @@
-name: metalgenie-evo
+name: efesto
 channels:
   - conda-forge
   - bioconda
@@ -23,7 +23,7 @@ dependencies:
   - r-rcolorbrewer
   - r-scales
 
-  # ── MetalGenie-Evo Python package ──────────────────────────────────────────
+  # ── Efesto Python package ───────────────────────────────────────────────────
   - pip:
     - -e .
 
@@ -31,6 +31,6 @@ dependencies:
 # UniOP is NOT on conda or pip — install manually:
 #
 #   git clone https://github.com/hongsua/UniOP.git
-#   MetalGenie-Evo ... --operon_prediction --uniop_path /path/to/UniOP/src/UniOP
+#   efesto ... --operon_prediction --uniop_path /path/to/UniOP/src/UniOP
 #
 # Su H, Zhang R, Söding J (2024) bioRxiv doi:10.1101/2024.11.11.623000
