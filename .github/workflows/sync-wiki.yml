@@ -1,20 +1,32 @@
-  name: Sync wiki
+name: Sync wiki
 
-  on:
-    push:
-      branches: [main]
-      paths: ['docs/**']
+on:
+  push:
+    branches: [main]
+    paths: ['docs/**']
 
-  jobs:
-    sync:
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v4
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
-        - name: Sync docs/ to wiki
-          uses: Andrew-Chen-Wang/github-wiki-action@v4
-          with:
-            path: docs/
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            GITHUB_WIKI_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Sync docs/ to wiki
+        run: |
+          git config --global user.name  "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+          git clone "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.wiki.git" wiki
+
+          cp docs/*.md wiki/
+          # index.md → Home.md (wiki landing page)
+          cp docs/index.md wiki/Home.md
+
+          cd wiki
+          git add .
+          git diff --cached --quiet && echo "No changes" && exit 0
+          git commit -m "Sync wiki from docs/ (${GITHUB_SHA::7})"
+          git push
