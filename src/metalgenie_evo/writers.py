@@ -3,8 +3,12 @@
 import csv
 import datetime
 from collections import defaultdict
+from pathlib import Path
 
 from metalgenie_evo.coverage import compute_tpm
+from metalgenie_evo.io import read_fasta
+
+_NT_COMP = str.maketrans("ACGTNacgtn", "TGCANtgcan")
 
 
 def _fmt_conf(r):
@@ -309,3 +313,97 @@ def write_anvio_functions(path, final_rows, prodigal_to_bakta=None):
             w.writerow([caller, source, r["hmm_stem"],
                         f"{r['gene_name']} [{r['cat']}]",
                         f"{r['evalue']:.2e}"])
+
+
+def write_hit_faa(path, final_rows):
+    """Write protein sequences for all HMM hits as FASTA with annotated headers.
+
+    Header fields: gene, category, genome, contig, bitscore, cluster_id,
+                   cluster_confidence, confidence
+    """
+    n_written = 0
+    with open(path, "w") as fh:
+        for r in final_rows:
+            seq = r.get("sequence", "")
+            if not seq:
+                continue
+            orf_id = r.get("bakta_id", r["orf"])
+            conf   = r.get("cluster_confidence")
+            conf_s = f"{conf:.3f}" if conf is not None else "NA"
+            fh.write(
+                f">{orf_id} "
+                f"gene={r['gene_name']} "
+                f"category={r['cat']} "
+                f"genome={r['genome']} "
+                f"contig={r['contig']} "
+                f"bitscore={r['bitscore']:.1f} "
+                f"cluster_id={r['cluster_id']} "
+                f"cluster_confidence={conf_s} "
+                f"confidence={r.get('confidence', 'low_confidence')}\n"
+            )
+            fh.write(seq + "\n")
+            n_written += 1
+    return n_written
+
+
+def write_hit_fna(path, final_rows, genome_coords, fna_dir, fna_ext="fna"):
+    """Write nucleotide sequences for all HMM hits as FASTA with annotated headers.
+
+    Requires genome_coords (from GFF) and fna_dir (nucleotide assembly files).
+    Hits without coordinate data or whose contig is absent from the FNA are skipped.
+    Sequences on the minus strand are reverse-complemented.
+
+    Header fields: gene, category, genome, contig, start, end, strand,
+                   bitscore, cluster_id, cluster_confidence
+    """
+    fna_dir = Path(fna_dir)
+    by_genome = defaultdict(list)
+    for r in final_rows:
+        if r["genome"] in genome_coords:
+            by_genome[r["genome"]].append(r)
+
+    n_written = 0
+    with open(path, "w") as fh:
+        for genome_faa, rows in sorted(by_genome.items()):
+            stem = Path(genome_faa).stem
+            fna_path = None
+            for ext in [fna_ext, "fna", "fasta", "fa"]:
+                candidate = fna_dir / f"{stem}.{ext}"
+                if candidate.exists():
+                    fna_path = candidate
+                    break
+            if fna_path is None:
+                continue
+            contigs  = read_fasta(str(fna_path))
+            coords_g = genome_coords[genome_faa]
+            for r in rows:
+                c = coords_g.get(r["orf"])
+                if c is None:
+                    continue
+                contig_seq = contigs.get(c["contig"], "")
+                if not contig_seq:
+                    continue
+                start  = c["start"] - 1   # GFF 1-based inclusive → 0-based
+                end    = c["end"]
+                subseq = contig_seq[start:end]
+                if c.get("strand") == "-":
+                    subseq = subseq.translate(_NT_COMP)[::-1]
+                orf_id = r.get("bakta_id", r["orf"])
+                conf   = r.get("cluster_confidence")
+                conf_s = f"{conf:.3f}" if conf is not None else "NA"
+                fh.write(
+                    f">{orf_id} "
+                    f"gene={r['gene_name']} "
+                    f"category={r['cat']} "
+                    f"genome={genome_faa} "
+                    f"contig={c['contig']} "
+                    f"start={c['start']} "
+                    f"end={c['end']} "
+                    f"strand={c.get('strand', '.')} "
+                    f"bitscore={r['bitscore']:.1f} "
+                    f"cluster_id={r['cluster_id']} "
+                    f"cluster_confidence={conf_s}\n"
+                )
+                fh.write(subseq + "\n")
+                n_written += 1
+    return n_written
