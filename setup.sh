@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
-# MetalGenie-Evo setup — verifies the installation
+# Efesto setup — verifies the installation
 # Not required if you used: conda env create -f environment.yml
 # (the environment.yml already runs pip install -e . automatically)
 set -e
 
 echo "========================================"
-echo "  MetalGenie-Evo  –  setup"
+echo "  Efesto  –  setup"
 echo "========================================"
 
 # ── Check conda environment is active ────────────────────────────────────────
@@ -14,7 +14,7 @@ if [[ -z "$CONDA_PREFIX" ]]; then
     echo ""
     echo "  Please run:"
     echo "    conda env create -f environment.yml"
-    echo "    conda activate metalgenie-evo"
+    echo "    conda activate efesto"
     exit 1
 fi
 echo "[INFO] Active environment : $CONDA_DEFAULT_ENV"
@@ -35,14 +35,14 @@ echo "[INFO] All required tools found"
 
 # ── Install package if not already installed ──────────────────────────────────
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-if ! command -v MetalGenie-Evo &>/dev/null; then
-    echo "[INFO] Installing MetalGenie-Evo..."
+if ! command -v Efesto &>/dev/null; then
+    echo "[INFO] Installing Efesto..."
     pip install -e "$REPO_DIR" --quiet
 fi
 
 # ── Verify ────────────────────────────────────────────────────────────────────
-if command -v MetalGenie-Evo &>/dev/null; then
-    echo "[INFO] MetalGenie-Evo installed successfully"
+if command -v Efesto &>/dev/null; then
+    echo "[INFO] Efesto installed successfully"
 else
     echo "[ERROR] Installation failed"
     exit 1
@@ -54,5 +54,5 @@ echo "  Setup complete!"
 echo ""
 echo "  Usage:"
 echo "    conda activate $CONDA_DEFAULT_ENV"
-echo "    MetalGenie-Evo --help"
+echo "    Efesto --help"
 echo "========================================"

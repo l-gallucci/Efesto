@@ -204,11 +204,11 @@ def main():
         sys.exit(f"[ERROR] No .{faa_ext} in {faa_dir}")
     print(f"[INFO] {len(faa_files)} genome/bin FAA files")
 
-    gene_map = read_map(str(Path(args.hmm_dir) / "MetalGenie-map.txt"))
+    gene_map = read_map(str(Path(args.hmm_dir) / "efesto-map.txt"))
     if not gene_map:
         gene_map = read_map(str(Path(args.hmm_dir) / "FeGenie-map.txt"))
     if not gene_map:
-        print(f"[WARN] No MetalGenie-map.txt or FeGenie-map.txt found in {args.hmm_dir} — "
+        print(f"[WARN] No efesto-map.txt or FeGenie-map.txt found in {args.hmm_dir} — "
               f"gene names will show as raw HMM stems in all outputs.", file=sys.stderr)
 
     if args.normalize_hmms:

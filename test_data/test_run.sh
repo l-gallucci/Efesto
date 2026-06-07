@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# MetalGenie-Evo  –  quick smoke test using synthetic data
+# Efesto  –  quick smoke test using synthetic data
 # Requires: prodigal, hmmsearch (from HMMER) in PATH
 # Usage: bash test_data/test_run.sh
 
@@ -13,7 +13,7 @@ OUT_DIR="$SCRIPT_DIR/test_output"
 HMM_DIR="$REPO_DIR/hmm_library"
 
 echo "========================================"
-echo "  MetalGenie-Evo  –  test run"
+echo "  Efesto  –  test run"
 echo "========================================"
 
 mkdir -p "$OUT_DIR"
@@ -24,8 +24,8 @@ echo "[INFO] HMM lib:    $HMM_DIR"
 echo "[INFO] Output:     $OUT_DIR"
 echo ""
 
-# Run MetalGenie-Evo
-python3 "$REPO_DIR/MetalGenie-Evo.py" \
+# Run Efesto
+efesto \
     --faa_dir    "$FAA_DIR" \
     --gff_dir    "$GFF_DIR" \
     --hmm_dir    "$HMM_DIR" \
