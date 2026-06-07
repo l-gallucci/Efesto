@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-MetalGenie-Evo  —  HMM-based annotation of iron cycling and metal resistance genes
+Efesto  —  HMM-based annotation of iron cycling and metal resistance genes
 ===================================================================================
 Built on FeGenie (Garber et al. 2020). See README for full documentation.
 
@@ -10,7 +10,7 @@ New in this version (metagenome support):
   9.  Relaxed operon thresholds  --relaxed_operons
   10. TPM coverage normalisation  --norm_coverage
   11. Contig column in all outputs
-  12. Long-format tidy output  MetalGenie-Evo-results-long.tsv
+  12. Long-format tidy output  Efesto-results-long.tsv
 """
 
 import argparse, csv, json, os, re, sys, fnmatch, shutil, subprocess
@@ -556,7 +556,7 @@ def write_coverage_heatmap(path,rows,all_genomes,genome_cov,norm_coverage=False,
 
 # ── Main ──────────────────────────────────────────────────────────────────────
 def main():
-    p=argparse.ArgumentParser(prog="MetalGenie-Evo",
+    p=argparse.ArgumentParser(prog="Efesto",
         description="HMM-based annotation of iron cycling and metal resistance genes",
         formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     ig=p.add_mutually_exclusive_group(required=True)
@@ -567,7 +567,7 @@ def main():
     p.add_argument("--meta",action="store_true",help="Prodigal metagenomic mode (-p meta)")
     p.add_argument("--gff_dir",help="Prodigal GFF files for bp clustering")
     p.add_argument("--hmm_dir",required=True)
-    p.add_argument("--out",default="metalgenie_evo_out")
+    p.add_argument("--out",default="efesto_out")
     p.add_argument("--min_contig_len",type=int,default=0,
                    help="Skip ORFs on contigs shorter than this (bp). 0=no filter")
     p.add_argument("--max_gap",type=int,default=5,help="Max ORF-index gap (index mode)")
@@ -607,7 +607,7 @@ def main():
     if not faa_files: sys.exit(f"[ERROR] No .{faa_ext} in {faa_dir}")
     print(f"[INFO] {len(faa_files)} genome/bin FAA files")
 
-    gene_map=read_map(str(Path(args.hmm_dir)/"MetalGenie-map.txt"))
+    gene_map=read_map(str(Path(args.hmm_dir)/"efesto-map.txt"))
     if not gene_map: gene_map=read_map(str(Path(args.hmm_dir)/"FeGenie-map.txt"))
     cutoffs=read_cutoffs(str(Path(args.hmm_dir)/"HMM-bitcutoffs.txt"))
     cat_hmms=defaultdict(list); h2c={}
@@ -690,12 +690,12 @@ def main():
     norm_dict={faa.name:len(seq_dict.get(faa.name,{})) for faa in faa_files} if args.norm else None
     all_genomes=sorted(f.name for f in faa_files)
 
-    for path,fn in [(out_dir/"MetalGenie-Evo-summary.csv",write_summary),
-                    (out_dir/"MetalGenie-Evo-geneSummary-clusters.csv",write_gene_summary),
-                    (out_dir/"MetalGenie-Evo-results-long.tsv",write_long_format)]:
+    for path,fn in [(out_dir/"Efesto-summary.csv",write_summary),
+                    (out_dir/"Efesto-geneSummary-clusters.csv",write_gene_summary),
+                    (out_dir/"Efesto-results-long.tsv",write_long_format)]:
         print(f"[INFO] Writing {path.name}…"); fn(str(path),final_rows)
-    print(f"[INFO] Writing MetalGenie-Evo-heatmap-data.csv…")
-    write_heatmap(str(out_dir/"MetalGenie-Evo-heatmap-data.csv"),final_rows,all_genomes,norm_dict)
+    print(f"[INFO] Writing Efesto-heatmap-data.csv…")
+    write_heatmap(str(out_dir/"Efesto-heatmap-data.csv"),final_rows,all_genomes,norm_dict)
 
     bam_map={}; depth_map={}
     if args.bams: bam_map=load_bams_tsv(args.bams)
@@ -708,8 +708,8 @@ def main():
         print("[INFO] Computing coverage…")
         gc=build_contig_coverage(faa_files,bam_map,depth_map,out_dir)
         if gc:
-            print("[INFO] Writing MetalGenie-Evo-coverage-heatmap.csv…")
-            write_coverage_heatmap(str(out_dir/"MetalGenie-Evo-coverage-heatmap.csv"),
+            print("[INFO] Writing Efesto-coverage-heatmap.csv…")
+            write_coverage_heatmap(str(out_dir/"Efesto-coverage-heatmap.csv"),
                                    final_rows,all_genomes,gc,
                                    norm_coverage=args.norm_coverage,
                                    contig_lengths=contig_lengths if args.norm_coverage else None)
@@ -720,7 +720,7 @@ def main():
 
     n_hit=len({r["genome"] for r in final_rows}); cc=defaultdict(int)
     for r in final_rows: cc[r["cat"]]+=1
-    print(f"\n{'─'*60}\n  MetalGenie-Evo  —  run complete")
+    print(f"\n{'─'*60}\n  Efesto  —  run complete")
     print(f"  {len(final_rows)} ORFs in {n_hit}/{len(faa_files)} genomes")
     print(f"\n  Hits per category:")
     for cat,n in sorted(cc.items()): print(f"    {n:5d}  {cat}")

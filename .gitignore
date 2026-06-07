@@ -27,4 +27,13 @@ build/
 
 # macOS
 .DS_Store
+
+# Wiki clone (local only)
+Efesto.wiki/
 MetalGenie-Evo.wiki/
+
+# Local curation files (contain absolute machine-specific paths)
+curation_report.tsv
+
+# Claude Code local settings
+.claude/
