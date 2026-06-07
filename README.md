@@ -1,7 +1,7 @@
 # Efesto
 
 <p align="center">
-  <img src="assets/logo.svg" alt="Efesto" width="820"/>
+  <img src="assets/EfestoLogo.png" alt="Efesto" width="820"/>
 </p>
 
 **Efesto** extends [FeGenie](https://github.com/Arkadiy-Garber/FeGenie) with coordinate-based operon clustering, a cluster confidence scoring system, an expanded curated HMM library (iron cycling + metal resistance), and integration with UniOP, antiSMASH, and Anvi'o.
