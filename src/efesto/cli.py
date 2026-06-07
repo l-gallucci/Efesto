@@ -44,7 +44,113 @@ from efesto.writers import (
     write_long_format, write_summary, write_summary_stats)
 
 
+def _check_env(uniop_path: str = "uniop") -> None:
+    import importlib
+    import subprocess
+
+    OK   = "  [OK]  "
+    WARN = "  [WARN]"
+    FAIL = "  [FAIL]"
+    pass_count = fail_count = 0
+
+    print(f"\n{'─' * 60}")
+    print("  Efesto — environment check")
+    print(f"{'─' * 60}\n")
+
+    # ── Required Python packages ───────────────────────────────────────────────
+    print("Python packages:")
+    for pkg in ("pyrodigal", "pyrodigal_gv", "numpy"):
+        try:
+            m = importlib.import_module(pkg)
+            ver = getattr(m, "__version__", "?")
+            print(f"{OK}{pkg}  {ver}")
+            pass_count += 1
+        except ImportError:
+            print(f"{FAIL}{pkg}  — not found  (conda install {pkg.replace('_', '-')})")
+            fail_count += 1
+
+    # ── Required external tools ────────────────────────────────────────────────
+    print("\nExternal tools (required):")
+    for tool, flag in [("hmmsearch", "--version"), ("hmmbuild", "--version")]:
+        path = shutil.which(tool)
+        if path:
+            try:
+                out = subprocess.check_output([tool, flag], stderr=subprocess.STDOUT,
+                                              text=True).splitlines()[0].strip()
+                print(f"{OK}{tool}  ({out})  →  {path}")
+            except Exception:
+                print(f"{OK}{tool}  →  {path}")
+            pass_count += 1
+        else:
+            print(f"{FAIL}{tool}  — not found  (conda install hmmer)")
+            fail_count += 1
+
+    # ── Optional external tools ────────────────────────────────────────────────
+    print("\nExternal tools (optional):")
+
+    samtools = shutil.which("samtools")
+    if samtools:
+        try:
+            ver = subprocess.check_output(["samtools", "--version"],
+                                          stderr=subprocess.STDOUT,
+                                          text=True).splitlines()[0].strip()
+            print(f"{OK}samtools  ({ver})  →  {samtools}")
+        except Exception:
+            print(f"{OK}samtools  →  {samtools}")
+    else:
+        print(f"{WARN}samtools  — not found  (needed for --bam / --depth only)")
+
+    rscript = shutil.which("Rscript")
+    if rscript:
+        try:
+            ver = subprocess.check_output(["Rscript", "--version"],
+                                          stderr=subprocess.STDOUT,
+                                          text=True).strip().splitlines()[-1]
+            print(f"{OK}Rscript  ({ver})  →  {rscript}")
+        except Exception:
+            print(f"{OK}Rscript  →  {rscript}")
+    else:
+        print(f"{WARN}Rscript  — not found  (needed for scripts/plot_heatmap.R only)")
+
+    # ── UniOP (manual install — no conda/pip package) ─────────────────────────
+    print("\nUniOP (manual install required — no conda/pip release):")
+    uniop_found = shutil.which(uniop_path) or (Path(uniop_path).exists()
+                                                and not Path(uniop_path).is_dir())
+    if uniop_found:
+        print(f"{OK}UniOP  →  {uniop_path}")
+        pass_count += 1
+    else:
+        print(f"{WARN}UniOP  — not found at '{uniop_path}'")
+        print( "        Install: git clone https://github.com/hongsua/UniOP.git")
+        print( "        Then use: efesto --operon_prediction --uniop_path /path/to/UniOP/src/UniOP")
+
+    # ── HMM library ───────────────────────────────────────────────────────────
+    print("\nHMM library:")
+    _bundled = Path(__file__).parents[2] / "hmm_library"
+    if _bundled.exists():
+        n_hmm = sum(1 for _ in _bundled.rglob("*.hmm"))
+        n_cat = sum(1 for d in _bundled.iterdir() if d.is_dir() and not d.name.startswith("."))
+        print(f"{OK}bundled hmm_library/  →  {n_hmm} HMMs across {n_cat} categories")
+        pass_count += 1
+    else:
+        print(f"{WARN}bundled hmm_library/ not found — pass --hmm_dir explicitly")
+
+    # ── Summary ───────────────────────────────────────────────────────────────
+    print(f"\n{'─' * 60}")
+    if fail_count == 0:
+        print(f"  All required dependencies OK  ({pass_count} checks passed)")
+    else:
+        print(f"  {fail_count} required dependency/ies MISSING — see FAIL lines above")
+    print(f"{'─' * 60}\n")
+    sys.exit(0 if fail_count == 0 else 1)
+
+
 def main():
+    if len(sys.argv) > 1 and sys.argv[1] == "checkenv":
+        uniop = next((sys.argv[i + 1] for i, a in enumerate(sys.argv)
+                      if a == "--uniop_path" and i + 1 < len(sys.argv)), "uniop")
+        _check_env(uniop)
+
     p = argparse.ArgumentParser(
         prog="Efesto",
         description="HMM-based annotation of iron cycling and metal resistance genes",
