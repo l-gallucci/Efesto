@@ -3,7 +3,7 @@
 <p align="center">
   <img src="assets/EfestoLogo.png" alt="Efesto" width="820"/>
   <br/>
-  <sub>Logo by [Elena Panariello](https://www.instagram.com/elena_panariello)</sub>
+  <sub>Logo by [https://www.instagram.com/elena_panariello](Elena Panariello)</sub>
 </p>
 
 **Efesto** extends [FeGenie](https://github.com/Arkadiy-Garber/FeGenie) with coordinate-based operon clustering, a cluster confidence scoring system, an expanded curated HMM library (iron cycling + metal resistance), and integration with UniOP, antiSMASH, and Anvi'o.
