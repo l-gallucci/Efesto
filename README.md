@@ -31,6 +31,9 @@ If you use Efesto, cite all of the following that apply:
 **NCBI Protein Family Models** (NF* HMMs):
 > Li W et al. (2021) *RefSeq: expanding the Prokaryotic Genome Annotation Pipeline reach with protein family model curation.* Nucleic Acids Research 49:D1020–D1028. [doi:10.1093/nar/gkaa1105](https://doi.org/10.1093/nar/gkaa1105)
 
+**MnOxGeneTool** (manganese oxidation HMMs):
+> Wang Y et al. (2025) *MnOxGeneTool: a tool for identifying manganese oxidation genes in (meta)genomes.* Environmental Science & Technology. [doi:10.1021/acs.est.5c01235](https://doi.org/10.1021/acs.est.5c01235)
+
 **UniOP** (operon prediction, if using `--operon_prediction`):
 > Su H, Zhang R, Söding J (2024) *UniOP: a universal operon prediction for high-throughput prokaryotic (meta-)genomic data.* bioRxiv. [doi:10.1101/2024.11.11.623000](https://doi.org/10.1101/2024.11.11.623000)
 
@@ -77,7 +80,7 @@ efesto \
 
 ## HMM library
 
-466 active models across 4 sources: FeGenie (196), Tabuteau et al. (130), MetHMMDB (115), NCBIfam (15). Categories span iron oxidation, reduction, storage, regulation, stress, Fe-S assembly, siderophore synthesis/transport, heme acquisition, and broad metal resistance.
+471 active models across 30 categories from 7 sources: FeGenie (196), Tabuteau et al. (130), MetHMMDB (105), NCBIfam (18), MnOxGeneTool (12), InterPro (8), curated (2). Categories span iron oxidation, reduction, storage, regulation, stress, Fe-S assembly, siderophore synthesis/transport, heme acquisition, a dedicated manganese pathway (acquisition, oxidation, regulation, resistance), and broad metal resistance.
 
 → [HMM library documentation](https://github.com/l-gallucci/Efesto/wiki/hmm_library)
 
