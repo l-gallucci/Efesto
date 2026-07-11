@@ -343,7 +343,6 @@ GACE_1845	GACE_1845		iron_reduction	GACE_1845	fegenie	iron_reduction/GACE_1845.h
 GACE_1846	GACE_1846		iron_reduction	GACE_1846	fegenie	iron_reduction/GACE_1846.hmm	30	52.7	2026-04-21	active	doi:10.1038/s41396-019-0570-7	
 GACE_1847	GACE_1847		iron_reduction	GACE_1847	fegenie	iron_reduction/GACE_1847.hmm	4	140.2	2026-04-21	deprecated_nseq_insufficient	doi:10.1038/s41396-019-0570-7	
 MtrA	MtrA		iron_reduction	MtrA	curated	iron_reduction/MtrA.hmm	15	580.0	2026-05-23	active	doi:10.1126/science.1096742;doi:10.3389/fmicb.2012.00037	
-MtrB_TIGR03509	MtrB_TIGR03509		iron_reduction	MtrB_TIGR03509	fegenie	iron_reduction/MtrB_TIGR03509.hmm	10	240.05	2026-04-21	deprecated_exact_duplicate	doi:10.1038/s41396-019-0570-7	
 MtrC_TIGR03507	MtrC_TIGR03507		iron_reduction	MtrC_TIGR03507	fegenie	iron_reduction/MtrC_TIGR03507.hmm	13	209.3	2026-04-21	active	doi:10.1038/s41396-019-0570-7	
 Ndh2	Ndh2		iron_reduction	Ndh2	fegenie	iron_reduction/Ndh2.hmm	25	40.0	2026-04-21	active	doi:10.1038/s41396-019-0570-7	
 OmcF	OmcF		iron_reduction	OmcF	fegenie	iron_reduction/OmcF.hmm	5	83.7	2026-04-21	active	doi:10.1038/s41396-019-0570-7	
