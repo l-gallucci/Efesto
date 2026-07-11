@@ -10,21 +10,23 @@ from pathlib import Path
 # ── HMM source provenance ─────────────────────────────────────────────────────
 
 SOURCE_REFS = {
-    "fegenie":  "doi:10.1038/s41396-019-0570-7",
-    "tabuteau": "doi:10.1111/1462-2920.70218",
-    "methmmdb": "doi:10.1101/2024.12.26.629440",
-    "interpro": "doi:10.1093/nar/gkac993",
-    "ncbifam":  "https://www.ncbi.nlm.nih.gov/genome/annotation_prok/evidence/",
-    "curated":  "see registry reference column",
+    "fegenie":       "doi:10.1038/s41396-019-0570-7",
+    "tabuteau":      "doi:10.1111/1462-2920.70218",
+    "methmmdb":      "doi:10.1101/2024.12.26.629440",
+    "interpro":      "doi:10.1093/nar/gkac993",
+    "ncbifam":       "https://www.ncbi.nlm.nih.gov/genome/annotation_prok/evidence/",
+    "mnoxgenetool":  "doi:10.1021/acs.est.5c01235",
+    "curated":       "see registry reference column",
 }
 
 SOURCE_LABELS = {
-    "fegenie":  "FeGenie (Garber et al. 2020, ISME J)",
-    "tabuteau": "Tabuteau et al. 2025 (Environ Microbiol)",
-    "methmmdb": "MetHMMDB (Kciuchcinski et al. 2025, bioRxiv)",
-    "interpro": "InterPro (Paysan-Lafosse et al. 2023, NAR)",
-    "ncbifam":  "NCBIfam (NCBI prokaryotic genome annotation)",
-    "curated":  "manually curated models",
+    "fegenie":       "FeGenie (Garber et al. 2020, ISME J)",
+    "tabuteau":      "Tabuteau et al. 2025 (Environ Microbiol)",
+    "methmmdb":      "MetHMMDB (Kciuchcinski et al. 2025, bioRxiv)",
+    "interpro":      "InterPro (Paysan-Lafosse et al. 2023, NAR)",
+    "ncbifam":       "NCBIfam (NCBI prokaryotic genome annotation)",
+    "mnoxgenetool":  "MnOxGeneTool (Wang et al. 2025, Environ Sci Technol)",
+    "curated":       "manually curated models",
 }
 
 # ── Category catalog: user-facing token → internal HMM directory names ────────
@@ -40,7 +42,8 @@ _ANNOTATE_MAP = {
                   "iron_resistance", "iron_storage", "magnetosome_formation"],
     "Cu":        ["metal_resistance-copper"],
     "Zn":        ["metal_resistance-cobalt_zinc_cadmium"],
-    "Mn":        ["metal_resistance-manganese"],
+    "Mn":        ["manganese_acquisition", "manganese_oxidation", "mn_gene_regulation",
+                  "metal_resistance-manganese"],
     "Ni":        ["metal_resistance-nickel"],
     "Co":        ["metal_resistance-cobalt_zinc_cadmium"],
     "Mo":        ["metal_resistance-molybdenum"],
@@ -68,8 +71,13 @@ _ANNOTATE_MAP = {
     "Fe-oxidation":   ["iron_oxidation"],
     "Fe-storage":     ["iron_storage"],
     "Fe-magnetosome": ["magnetosome_formation"],
-    "Cu-resistance":  ["metal_resistance-copper"],
-    "Mn-resistance":  ["metal_resistance-manganese"],
+    "Cu-resistance":    ["metal_resistance-copper"],
+    "Mn-metabolism":    ["manganese_acquisition", "manganese_oxidation", "mn_gene_regulation",
+                         "metal_resistance-manganese"],
+    "Mn-acquisition":   ["manganese_acquisition"],
+    "Mn-oxidation":     ["manganese_oxidation"],
+    "Mn-regulation":    ["mn_gene_regulation"],
+    "Mn-resistance":    ["metal_resistance-manganese"],
     "Ni-resistance":  ["metal_resistance-nickel"],
     "Mo-resistance":  ["metal_resistance-molybdenum"],
     "As-resistance":  ["metal_resistance-arsenic"],
