@@ -30,7 +30,6 @@ build/
 
 # Wiki clone (local only)
 Efesto.wiki/
-MetalGenie-Evo.wiki/
 
 # Local curation files (contain absolute machine-specific paths)
 curation_report.tsv

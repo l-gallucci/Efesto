@@ -125,6 +125,17 @@
       "min_genes":  2,
       "on_fail":    "drop",
       "max_bp_gap": 2000
+    },
+    {
+      "_comment": "Tad/Flp pilus (Chen et al. 2025, Nature, MISO): Flp pilin and CpaB assembly platform are obligate operon partners; either gene alone is a widespread, non-iron-specific adhesion/conjugation signal, so both are required",
+      "name":           "TAD_PILUS",
+      "categories":     ["iron_reduction"],
+      "genes":          ["PF04964-Flp_Fap_pilin","cpaB_TIGR03177.1"],
+      "rule":           "require_n_of",
+      "min_genes":      2,
+      "on_fail":        "passthrough_non_members",
+      "canonical_size": 2,
+      "max_bp_gap":     2000
     }
   ]
 }
