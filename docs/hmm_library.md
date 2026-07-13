@@ -13,8 +13,10 @@ with provenance, bitscore cutoffs, and curation status.
 | FeGenie | 196 | Original iron-cycling profiles from Garber et al. 2020 |
 | Tabuteau et al. 2025 | 130 | Iron acquisition profiles from KOfam, FeGenie, and NCBI NF* |
 | MetHMMDB | 115 | Metal mobility resistance gene HMMs (broad metal scope) |
-| NCBIfam / TIGRFAM | 15 | Curated iron oxidation, regulation, sulfur assembly, and molybdenum resistance models |
-| **Total active** | **466** | After deduplication (167 deprecated; 633 total) |
+| NCBIfam / TIGRFAM | 16 | Curated iron oxidation, regulation, sulfur assembly, molybdenum resistance, and Tad-pilus (CpaB) models |
+| Pfam | 1 | Flp/Fap pilin (Tad pilus), sourced directly from Pfam-A |
+| Curated (custom-built) | 2 (+2 pre-existing: MtrA, MtoA) | CbcL and DA_402 (MISO extracellular MHC) — built from literature-confirmed seed sequences, background-tested against the rest of the library |
+| **Total active** | **470** | After deduplication (167 deprecated; 637 total) |
 
 ---
 
@@ -25,7 +27,7 @@ with provenance, bitscore cutoffs, and curation status.
 | Category | Description | Notable models |
 |----------|-------------|----------------|
 | `iron_oxidation` | Enzymatic oxidation of Fe²⁺ → Fe³⁺ | MtoA, MtrA, FoxABC, Cyc2, rusticyanin, cytochrome579 |
-| `iron_reduction` | Enzymatic reduction of Fe³⁺ → Fe²⁺ | MtrA, MtrC, OmcS, OmcZ, DFE operons |
+| `iron_reduction` | Enzymatic reduction of Fe³⁺ → Fe²⁺ | MtrA, MtrC, OmcS, OmcZ, DFE operons, CbcL, DA_402, Flp/CpaB (Tad pilus) |
 | `probable_iron_reduction` | Fe reduction genes with lower specificity | CymA, omcE |
 | `possible_iron_oxidation_and_possible_iron_reduction` | Dual-assignment before Mtr/Mto disambiguation | See MtrMto operon rule |
 | `iron_storage` | Cellular iron storage proteins | Ferritin, bacterioferritin, Dps |
