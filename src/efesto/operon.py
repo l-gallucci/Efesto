@@ -59,10 +59,6 @@ _DEFAULT_OPERON_RULES = [
      "categories": ["iron_acquisition-iron_transport", "iron_acquisition-heme_oxygenase"],
      "genes": [], "rule": "require_n_cat", "min_genes": 2, "on_fail": "drop",
      "max_bp_gap": 2000},
-    {"name": "TAD_PILUS", "categories": ["iron_reduction"],
-     "genes": ["PF04964-Flp_Fap_pilin", "cpaB_TIGR03177.1"],
-     "rule": "require_n_of", "min_genes": 2, "on_fail": "passthrough_non_members",
-     "canonical_size": 2, "max_bp_gap": 2000},
 ]
 
 _REPORT_ALL_PATTERNS = ["metal_resistance-*", "iron_storage"]
@@ -75,7 +71,6 @@ _FOXEYZ_GENES = {"FoxE", "FoxY", "FoxZ"}
 _DFE1_GENES   = {"DFE_0448", "DFE_0449", "DFE_0450", "DFE_0451"}
 _DFE2_GENES   = {"DFE_0461", "DFE_0462", "DFE_0463", "DFE_0464", "DFE_0465"}
 _MTR_GENES    = {"MtrA", "MtrB_TIGR03509", "MtrC_TIGR03507", "MtoA", "CymA"}
-_TAD_GENES    = {"PF04964-Flp_Fap_pilin", "cpaB_TIGR03177.1"}
 _TRUSTED_LONE = {"FutA1-iron_ABC_transporter_iron-binding-rep",
                  "FutA2-iron_ABC_transporter_iron-binding-rep",
                  "FutC-iron_ABC_transporter_ATPase-rep",
@@ -246,13 +241,6 @@ def filter_cluster_fegenie(cluster_rows, report_all_pats, all_results=False,
         if n >= 3:
             return cluster_rows
         return non_dfe if non_dfe else []
-
-    if stems & _TAD_GENES:
-        n = n_in_gene_set(_TAD_GENES)
-        non_tad = [r for r in cluster_rows if r["hmm_stem"] not in _TAD_GENES]
-        if n >= 2:
-            return cluster_rows
-        return non_tad if non_tad else []
 
     # Cyc1 handled in second_pass, not here
 

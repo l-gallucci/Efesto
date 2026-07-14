@@ -268,17 +268,6 @@ Siderophore biosynthesis. Requires ≥ 3 distinct synthesis HMMs.
 Iron and heme transport. Requires ≥ 2 distinct HMMs from `iron_acquisition-iron_transport`
 and `iron_acquisition-heme_oxygenase`. `max_bp_gap: 2000`. On fail: drop.
 
-### TAD_PILUS
-
-Tad/Flp pilus (Chen et al. 2025, *Nature*, MISO — iron oxide respiration coupled to
-sulfide oxidation). Requires both `Flp_Fap` (Pfam PF04964 pilin subunit) and `cpaB`
-(NCBIfam TIGR03177 assembly platform) — they are obligate operon partners, and
-either gene alone is a widespread, non-metal-specific adhesion/conjugation signal
-found across unrelated bacteria (the paper itself notes the organism's *other*
-type IV pilin, `pilA`, is constitutively expressed and not a useful iron-reduction
-marker). `canonical_size: 2`, `max_bp_gap: 2000`. On fail: `passthrough_non_members`
-(a lone hit of either gene is dropped from the reported cluster).
-
 ---
 
 ## `--catalog_mode`
