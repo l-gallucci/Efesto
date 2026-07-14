@@ -3777,6 +3777,6 @@ CTQ76646.1           -          MtoA                 -             0.0031   14.5
 # Query file:      hmm_library/iron_oxidation/MtoA.hmm
 # Target file:     hmm_library/_calibration/mtr_mto/calibration_universe.faa
 # Option settings: hmmsearch --tblout hmm_library/_calibration/mtr_mto/mtoA_vs_universe.tbl --noali -E 0.01 --cpu 4 hmm_library/iron_oxidation/MtoA.hmm hmm_library/_calibration/mtr_mto/calibration_universe.faa 
-# Current dir:     /Users/lgallucc/Desktop/LocalBioinf/efesto
+# Current dir:     /Users/lgallucc/Desktop/LocalBioinf/MetalGenie-Evo
 # Date:            Sat May 23 17:44:59 2026
 # [ok]
