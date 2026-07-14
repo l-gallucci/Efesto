@@ -767,28 +767,72 @@ every other `iron_reduction`/`iron_oxidation`/`iron_storage` HMM in the library
 (highest cross-hit: 44.0 bits, DFE_0461); true positives scored 1245–1331 bits —
 a >1200-bit margin.
 
+> **Limitation:** the reference seed `Q74GH2`/`GSU0274` (verified byte-identical
+> against a fresh, independent pull of the *G. sulfurreducens* PCA RefSeq genome —
+> no sequence-fetch error) is UniProt Protein-Existence level 4 ("predicted"); the
+> "cytochrome c, and cytochrome b" name is an automated carryover from the original
+> 2003 genome submission, not an experimentally curated annotation. No database
+> cross-reference (NCBI Gene aliases, PMC full-text) explicitly ties `GSU0274` to
+> the characterized `cbcL` mutant in Zacharoff et al. 2015. Identity is inferred
+> from architecture (fused *b*+multiheme-*c* domains) and size (619 aa) matching
+> the paper's description, reinforced by the same fusion pattern recurring
+> independently across all 6 other genera in the seed set — strong circumstantial
+> evidence, not a confirmed cross-reference. Re-validate against the deposited
+> mutant sequence if a primary-source locus tag becomes available.
+
+The Extended Data Fig. 3 source data (see `DA_402` below) independently confirms
+this model's scope: *D. alkaliphilus*'s own `CbcL-like` gene is `DA_2141`
+(`WP_013164303.1`, 582 aa, only 3 heme-binding motifs — much lower than the
+9–11 CXXCH motifs in the Geobacteraceae `CbcL` seeds). `CbcL.hmm` does detect
+`DA_2141` (138.2 bits, real homology, E = 1.9×10⁻⁴⁴) but scores below the
+200-bit production cutoff, so it correctly does not fire on it. This is a
+deliberate scope boundary, not a gap: `CbcL.hmm` targets the specific,
+functionally-characterized high-heme Geobacteraceae/Desulfuromonadaceae family
+matching the primary literature identity, not every divergent `CbcL-like`
+homolog across Desulfurivibrionaceae.
+
 **`DA_402`** — the paper's own name for *D. alkaliphilus*'s most highly
 transcribed multiheme cytochrome (>100-fold upregulated under MISO growth),
 predicted extracellular and structurally homologous to *Geobacter* OmcS by
-AlphaFold/cryo-EM comparison. The paper's internal Prodigal gene index could not
-be exactly reproduced from the main-text PDF alone (no supplementary locus-tag
-table available); the candidate was instead identified directly from the
-*D. alkaliphilus* DSM 19089 genome (NCBI `NC_014216.1`) by scanning all annotated
-CDS for CXXCH heme-binding motifs and matching the paper's size/heme-count
-description. `WP_013162381.1` (locus `DAAHT2_RS00730`, UniProt `D6Z5W8`,
-"Cytochrome c-552/4 domain-containing protein", 434 aa, 5 CXXCH motifs) closely
-matches canonical OmcS (432 aa) and is distinct from the genome's separate
-OmcA/MtrC-family decaheme paralog (`WP_013164452.1`, 806 aa) that the paper
-describes as a second, unnamed extracellular MHC. Built from 7 UniProt
-homologs (UniRef50 cluster of D6Z5W8) spanning *Desulfurivibrio*,
-*Desulfurispirillum*, *Desulfurispira*, *Geoalkalibacter*, *Malonomonas* and
-*Desulfuromonas*. GA cutoff (300 bits) set the same way as CbcL — zero cross-hits
-against the rest of the library even at lenient E < 1e-3; true positives scored
-800.7–909.8 bits.
+AlphaFold/cryo-EM comparison (Extended Data Fig. 5).
 
-> **Limitation:** `DA_402`'s identity as the *exact* gene the paper refers to is
-> inferred, not confirmed against their supplementary locus-tag table. Re-validate
-> against Chen et al. 2025 Supplementary Data if/when available.
+An earlier version of this model was built from the wrong gene. The main-text
+PDF gives no locus-tag table, so the candidate was first identified by scanning
+the genome for CXXCH-rich proteins matching OmcS's size — this landed on
+`WP_013162381.1` (`DAAHT2_RS00730`), a real but unrelated multiheme cytochrome
+elsewhere in the genome. The error was caught by cross-checking against the
+paper's **Source Data for Extended Data Fig. 3** (Nature supplementary file
+`41586_2025_9467_MOESM5_ESM.xlsx`, sheet "Extended Figure 3"), which lists exact
+genome coordinates for every `DA_###` locus. `DA_402` is defined there as
+`468410–469705` (minus strand) — matching `WP_013162640.1`
+(`DAAHT2_RS02050`, "hypothetical protein", 431 aa) **exactly**, byte-for-byte
+coordinate identity, not the earlier candidate.
+
+The same source-data sheet also gives exact coordinates for the paper's other
+OmcS-like paralogs from *D. alkaliphilus* itself, independently placed in the
+same clade as `DA_402` by phylogenetic (EPA) placement in Extended Data Fig. 6c:
+`DA_403` (`WP_013162641.1`, 435 aa, adjacent gene, same operon), `DA_756`
+(`WP_013162986.1`, 358 aa) and `DA_765` (`WP_013162995.1`, 346 aa). The rebuilt
+model uses these 4 coordinate-confirmed in-genome paralogs plus one external
+UniProt homolog (`A0A8J6ULG3`, *Pelovirga terrestris*) — 5 seeds total, all with
+either exact-coordinate or cross-genus support, replacing the earlier UniRef50
+cluster built around the wrong candidate. GA cutoff (350 bits) set from a
+negative-control test against the rest of the library — highest cross-hit
+300.9 bits (`DFE_0450`, a FeGenie multiheme cytochrome with genuine partial
+homology); true positives scored 456–620 bits. Re-validated end-to-end against
+the real *D. alkaliphilus* proteome at this cutoff: hits exactly `DA_402`,
+`DA_403`, `DA_756`, `DA_765` and nothing else.
+
+`DA_402` is distinct from the genome's separate OmcA/MtrC-family decaheme
+paralog (`WP_013164452.1`, 806 aa) that the paper describes as a second,
+unnamed extracellular MHC, and from `DA_2141` (`WP_013164303.1`, 582 aa,
+labelled `CbcL-like` in the same source-data sheet) — a different MHC family
+entirely, not part of the OmcS-like clade.
+
+> **Resolved limitation (previously flagged as unconfirmed):** the exact
+> `DA_402` sequence is now confirmed against the paper's own Source Data
+> (Extended Data Fig. 3 coordinates), not inferred from motif/size matching.
+> See commit history on the `miso-inclusion` branch for the correction.
 
 **`Flp_Fap` (Pfam PF04964) and `cpaB` (NCBIfam/TIGRFAM TIGR03177)** — the paper
 reports transcriptional upregulation of tight-adherence (Tad) pilus assembly genes
@@ -819,13 +863,22 @@ reused by analogy — it is not itself described in the paper.
 ### Validation
 
 All four models were tested end-to-end against the real *D. alkaliphilus* DSM 19089
-proteome (independently fetched from NCBI, not the training data for `Flp_Fap`/`cpaB`):
-`DA_402` and `CbcL` each returned exactly one hit (or zero, for `CbcL`, correctly
-absent from this genome) at their production cutoffs; `Flp_Fap` and `cpaB` each hit
-exactly their intended gene. The `TAD_PILUS` rule was unit-tested with simulated
-cluster rows: a lone `Flp_Fap` hit is dropped, a co-occurring `Flp_Fap` + `cpaB`
-pair is kept, and standalone `CbcL`/`DA_402` hits pass through unaffected (no rule
-governs them).
+proteome (independently fetched from NCBI): `CbcL` returns zero hits (correctly
+absent from this genome — it targets the Geobacteraceae reference family, not
+this organism's own divergent `CbcL-like` paralog `DA_2141`); `DA_402` returns
+exactly its 4 coordinate-confirmed in-genome paralogs (`DA_402`, `DA_403`,
+`DA_756`, `DA_765`) at its production cutoff; `Flp_Fap` and `cpaB` each hit
+exactly their intended gene, independently confirmed against the paper's own
+Extended Data Fig. 3 source-data coordinates (`41586_2025_9467_MOESM5_ESM.xlsx`).
+The `TAD_PILUS` rule was unit-tested with simulated cluster rows: a lone
+`Flp_Fap` hit is dropped, a co-occurring `Flp_Fap` + `cpaB` pair is kept, and
+standalone `CbcL`/`DA_402` hits pass through unaffected (no rule governs them).
+
+`DA_402`'s identity was initially wrong (see the `DA_402` entry above for the
+full account) and was corrected once the paper's Source Data files became
+available — a reminder that motif/size-based inference is a weaker evidence
+tier than coordinate-level ground truth, and should be labelled as such until
+confirmed.
 
 ### Category
 
@@ -846,7 +899,7 @@ FeGenie type-IV-pilus marker) already sit there.
 | 5 | **Fur-family (Zur, PerR)** | ✅ DONE (2026-05-23) — NF008646.0 (Zur) + NF052545.1 (PerR). Mur/Nur: no clean NCBIfam equivalog found. | Zur: [doi:10.3389/fcimb.2013.00059](https://doi.org/10.3389/fcimb.2013.00059); PerR: [doi:10.1111/j.1365-2958.2008.06192.x](https://doi.org/10.1111/j.1365-2958.2008.06192.x) |
 | 6 | **ZnuABC / MntH** | ✅ ALREADY IN LIBRARY — ZnuABC in `metal_resistance-cobalt_zinc_cadmium`, MntH in `metal_resistance-non-specific`. No action needed. | — |
 | 7 | **SUF / ISC** | ✅ DONE (2026-05-23) — sufC/sufB/sufS (TIGR01978/01980/01979) + IscS (TIGR02006.1) in new `iron_sulfur_assembly` category. sufD skipped (7-bit GA-NC gap). | SUF: [doi:10.1074/jbc.M308004200](https://doi.org/10.1074/jbc.M308004200); IscS: [doi:10.1074/jbc.M401261200](https://doi.org/10.1074/jbc.M401261200) |
-| 8 | **Dps iron storage + Multicopper oxidase** | ✅ DONE (2026-05-23) — Dps (NF009990.0) added to `iron_storage`; multicopper oxidase already in `metal_resistance-copper` (CueO/Mco/MmcO). Dps overlaps with PF00210 (ferritin domain) — intentional, Dps is functionally distinct. | [doi:10.1128/MMBR.66.4.630-670.2002](https://doi.org/10.1128/MMBR.66.4.630-670.2002) |
+| 8 | **Dps iron storage + Multicopper oxidase** | ✅ DONE (2026-05-23) — Dps (NF009990.0) added to `iron_storage`; multicopper oxidase already in `metal_resistance-copper` (CueO/Mco/MmcO). Dps overlaps with PF00210 (ferritin domain) — intentional, Dps is functionally distinct. | [doi:10.1023/b:biom.0000027692.24395.76](https://doi.org/10.1023/b:biom.0000027692.24395.76) (Chiancone et al. 2004, *Biometals* — Dps as bacterial iron-storage/detoxification protein; corrected 2026-07-14, previous DOI resolved to an unrelated yeast DNA-repair paper) |
 | 9 | **ModABC (molybdate transport)** | ✅ DONE (2026-05-23) — ModA already in library; added ModC (TIGR02142.1). ModB skipped (GA-NC gap = 0.75 bits). | [doi:10.1111/mmi.14152](https://doi.org/10.1111/mmi.14152) |
 | 10 | **Cobalamin biosynthesis** | Complex (30 genes), two pathways; highest implementation cost | [doi:10.1042/BST20120066](https://doi.org/10.1042/BST20120066) |
 

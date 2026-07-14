@@ -630,9 +630,9 @@ sufC_TIGR01978.1	sufC	TIGR01978.1	iron_sulfur_assembly	sufC	ncbifam	iron_sulfur_
 sufB_TIGR01980.1	sufB	TIGR01980.1	iron_sulfur_assembly	sufB	ncbifam	iron_sulfur_assembly/sufB_TIGR01980.1.hmm	10	346.4	2026-05-23	active	ncbifam:TIGR01980.1; doi:10.1074/jbc.M308004200	
 sufS_TIGR01979.1	sufS	TIGR01979.1	iron_sulfur_assembly	sufS	ncbifam	iron_sulfur_assembly/sufS_TIGR01979.1.hmm	17	475.1	2026-05-23	active	ncbifam:TIGR01979.1; doi:10.1074/jbc.M308004200	
 IscS_TIGR02006.1	IscS	TIGR02006.1	iron_sulfur_assembly	iscS	ncbifam	iron_sulfur_assembly/IscS_TIGR02006.1.hmm	6	643.2	2026-05-23	active	ncbifam:TIGR02006.1; doi:10.1074/jbc.M401261200	
-Dps_NF009990	Dps	NF009990.0	iron_storage	dps	ncbifam	iron_storage/Dps_NF009990.hmm	32	158.0	2026-05-23	active	ncbifam:NF009990.0; doi:10.1128/MMBR.66.4.630-670.2002	
+Dps_NF009990	Dps	NF009990.0	iron_storage	dps	ncbifam	iron_storage/Dps_NF009990.hmm	32	158.0	2026-05-23	active	ncbifam:NF009990.0; doi:10.1023/b:biom.0000027692.24395.76
 modC_TIGR02142	modC	TIGR02142.1	metal_resistance-molybdenum	modC	ncbifam	metal_resistance-molybdenum/modC_TIGR02142.hmm	6	285.05	2026-05-23	active	ncbifam:TIGR02142.1; doi:10.1111/mmi.14152	
 CbcL	CbcL		iron_reduction	CbcL	curated	iron_reduction/CbcL.hmm	8	200.0	2026-07-14	active	doi:10.1016/j.bioelechem.2015.08.003;doi:10.1038/s41586-025-09467-0	
-DA_402	DA_402		iron_reduction	DA_402	curated	iron_reduction/DA_402.hmm	7	300.0	2026-07-14	active	doi:10.1038/s41586-025-09467-0	
+DA_402	DA_402		iron_reduction	DA_402	curated	iron_reduction/DA_402.hmm	5	350.0	2026-07-14	active	doi:10.1038/s41586-025-09467-0
 PF04964-Flp_Fap_pilin	Flp_Fap	PF04964.20	iron_reduction	Flp_Fap	pfam	iron_reduction/PF04964-Flp_Fap_pilin.hmm	16	32.2	2026-07-14	active	doi:10.1038/s41586-025-09467-0	
 cpaB_TIGR03177.1	pilus_cpaB	TIGR03177.1	iron_reduction	cpaB	ncbifam	iron_reduction/cpaB_TIGR03177.1.hmm	49	71.0	2026-07-14	active	doi:10.1038/s41586-025-09467-0	
