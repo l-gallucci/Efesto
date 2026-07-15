@@ -109,15 +109,20 @@ ExbB forms a pentamer with an ExbD dimer inside its transmembrane pore; this
 complex converts the electrochemical gradient into mechanical energy; TonB spans
 the periplasm and cyclically contacts TBDTs via a conserved five-residue TonB box,
 triggering plug movement and substrate release into the periplasm
-([Celia et al. 2016, *Nature*](https://doi.org/10.1038/nature17915);
-[Silale & van den Berg 2023, *Annu Rev Microbiol*](https://doi.org/10.1146/annurev-micro-032521-022308);
-[Braun 2024, *Mol Microbiol*](https://doi.org/10.1111/mmi.15249)).
+([Ratliff, Celia & Buchanan 2022, *Front Microbiol*](https://doi.org/10.3389/fmicb.2022.852955);
+[Celia et al. 2025, *Nat Commun*](https://doi.org/10.1038/s41467-025-61286-z)).
+
+> **Note (2026-07-15):** the three citations previously here (Celia et al. 2016
+> *Nature*; Silale & van den Berg 2023 *Annu Rev Microbiol*; Braun 2024
+> *Mol Microbiol*) all had dead or mismatched DOIs — none resolved to a real
+> paper matching the claimed author/year/journal. Replaced with verified papers
+> covering the same structural claim (ExbB/ExbD/TonB architecture and mechanism).
 
 **Critically, the Ton motor is substrate-agnostic.** The same TonB-ExbBD
 complex energises ALL TBDTs regardless of their cargo. In *Bacteroidetes*, TBDTs
 (SusC-like proteins) are the invariant component of every polysaccharide
 utilisation locus (PUL), and TonB-ExbBD powers their carbohydrate import —
-not iron uptake ([Bolam & Koropatkin 2012, *Curr Opin Struct Biol*](https://doi.org/10.1016/j.sbi.2012.02.008);
+not iron uptake ([Koropatkin, Cameron & Martens 2012, *Nat Rev Microbiol*](https://doi.org/10.1038/nrmicro2746);
 [Pollet et al. 2021, *Mol Microbiol*](https://doi.org/10.1111/mmi.14695)).
 During phytoplankton blooms, TonB-dependent transporters were the most highly
 expressed protein class in marine bacterioplankton (~16.7% of all detected proteins),
@@ -126,7 +131,7 @@ with the majority predicted to target polysaccharides
 In *Xanthomonas* plant pathogens, CAZyme clusters are organised in CUT systems
 (**C**arbohydrate **U**tilisation with **T**onB-dependent transporters), directly
 analogous to Bacteroidetes PULs
-([Giuseppe et al. 2023, *Essays Biochem*](https://doi.org/10.1042/EBC20220241)).
+([Giuseppe et al. 2023, *Essays Biochem*](https://doi.org/10.1042/EBC20220128)).
 
 ### The problem
 
@@ -207,7 +212,7 @@ A cluster passes the guard when at least one hit is a substrate-specific gene
 and related organisms. Unlike canonical TonB it is dedicated to the heme acquisition
 system (HasASB), acting specifically with the HasR outer membrane heme receptor.
 Its ExbB-interaction surface has a unique long periplasmic extension that discriminates
-it from canonical TonB ([Biou et al. 2022, *Commun Biol*](https://doi.org/10.1038/s42003-022-03786-y)).
+it from canonical TonB ([Biou et al. 2022, *Commun Biol*](https://doi.org/10.1038/s42003-022-03306-y)).
 HasB is therefore substrate-specific (heme) — it is listed in `neutral_energizer_stems`
 only when appearing WITHOUT HasR; when co-clustered with HasR or other heme acquisition
 genes, it is a valid heme-transport signal.

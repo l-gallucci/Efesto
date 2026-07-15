@@ -61,7 +61,7 @@ chelation. Double *isc suf* deletion is lethal.
   [doi:10.1111/j.1365-2958.2004.04025.x](https://doi.org/10.1111/j.1365-2958.2004.04025.x)
 - Py B, Barras F (2010). Building Fe/S proteins: bacterial strategies.
   *Nat Rev Microbiol* 8:436–46.
-  [doi:10.1038/nrmicro2372](https://doi.org/10.1038/nrmicro2372)
+  [doi:10.1038/nrmicro2356](https://doi.org/10.1038/nrmicro2356)
 
 ### *Bacillus subtilis* 168 — SUF only
 
@@ -274,7 +274,7 @@ indicate well-supported models.
 
 4. Py B, Barras F (2010). Building Fe/S proteins: bacterial strategies.
    *Nat Rev Microbiol* 8:436–46.
-   [doi:10.1038/nrmicro2372](https://doi.org/10.1038/nrmicro2372)
+   [doi:10.1038/nrmicro2356](https://doi.org/10.1038/nrmicro2356)
 
 5. Roche B, Aussel L, Ezraty B, et al. (2013). Iron/sulfur proteins biogenesis
    in prokaryotes. *Biochim Biophys Acta* 1827:455–69.

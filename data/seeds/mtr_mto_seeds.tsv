@@ -1,6 +1,6 @@
 accession	subfamily	organism	role	reference
-WP_011071900.1	MtrA	Shewanella oneidensis MR-1	iron_reduction	doi:10.1126/science.1096742
-AAN54830.1	MtrA	Shewanella oneidensis MR-1 (locus SO_1777)	iron_reduction	doi:10.1126/science.1096742
+WP_011071900.1	MtrA	Shewanella oneidensis MR-1	iron_reduction	doi:10.1074/jbc.M302582200
+AAN54830.1	MtrA	Shewanella oneidensis MR-1 (locus SO_1777)	iron_reduction	doi:10.1074/jbc.M302582200
 CAQ9398997.1	MtrA	Shewanella xiamenensis (MAG)	iron_reduction	doi:10.1038/s41396-019-0570-7
 WP_482097394.1	MtrA	Shewanella sp.	iron_reduction	doi:10.1038/s41396-019-0570-7
 WP_432404861.1	MtrA	Shewanella baltica	iron_reduction	doi:10.1038/s41396-019-0570-7
