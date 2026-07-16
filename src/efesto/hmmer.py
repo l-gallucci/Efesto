@@ -18,7 +18,13 @@ def normalize_hmm_library(hmm_dir):
     Converts in-place. Prints a one-line summary.
     """
     hmm_dir = Path(hmm_dir)
-    all_hmms = sorted(hmm_dir.rglob("*.hmm"))
+    # Only category dirs — skip work/staging dirs (._ prefixed) so their scratch
+    # HMMs are never mutated or counted.
+    all_hmms = sorted(
+        hf for d in hmm_dir.iterdir()
+        if d.is_dir() and not d.name.startswith((".", "_"))
+        for hf in d.glob("*.hmm")
+    )
     needs = []
     for hmm in all_hmms:
         try:

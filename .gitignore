@@ -35,5 +35,9 @@ MetalGenie-Evo.wiki/
 # Local curation files (contain absolute machine-specific paths)
 curation_report.tsv
 
+# HMM library scratch/staging dirs (not searched at runtime; large)
+hmm_library/_dedup_work/
+hmm_library/_staging/
+
 # Claude Code local settings
 .claude/

@@ -343,7 +343,6 @@ GACE_1845	GACE_1845		iron_reduction	GACE_1845	fegenie	iron_reduction/GACE_1845.h
 GACE_1846	GACE_1846		iron_reduction	GACE_1846	fegenie	iron_reduction/GACE_1846.hmm	30	52.7	2026-04-21	active	doi:10.1038/s41396-019-0570-7	
 GACE_1847	GACE_1847		iron_reduction	GACE_1847	fegenie	iron_reduction/GACE_1847.hmm	4	140.2	2026-04-21	deprecated_nseq_insufficient	doi:10.1038/s41396-019-0570-7	
 MtrA	MtrA		iron_reduction	MtrA	curated	iron_reduction/MtrA.hmm	15	580.0	2026-05-23	active	doi:10.1126/science.1096742;doi:10.3389/fmicb.2012.00037	
-MtrB_TIGR03509	MtrB_TIGR03509		iron_reduction	MtrB_TIGR03509	fegenie	iron_reduction/MtrB_TIGR03509.hmm	10	240.05	2026-04-21	deprecated_exact_duplicate	doi:10.1038/s41396-019-0570-7	
 MtrC_TIGR03507	MtrC_TIGR03507		iron_reduction	MtrC_TIGR03507	fegenie	iron_reduction/MtrC_TIGR03507.hmm	13	209.3	2026-04-21	active	doi:10.1038/s41396-019-0570-7	
 Ndh2	Ndh2		iron_reduction	Ndh2	fegenie	iron_reduction/Ndh2.hmm	25	40.0	2026-04-21	active	doi:10.1038/s41396-019-0570-7	
 OmcF	OmcF		iron_reduction	OmcF	fegenie	iron_reduction/OmcF.hmm	5	83.7	2026-04-21	active	doi:10.1038/s41396-019-0570-7	
@@ -491,7 +490,7 @@ Cu_transport_ycnJ_1	Cu_transport_ycnJ_1		metal_resistance-copper	Copper transpor
 Cu_transport_ycnJ_2	Cu_transport_ycnJ_2		metal_resistance-copper	Copper transport protein YcnJ	methmmdb	metal_resistance-copper/Cu_transport_ycnJ_2.hmm	25	0.0	2026-04-21	deprecated_dedup_lower_coverage	doi:10.1101/2024.12.26.629440	
 Mg_transport_ATPase_1	Mg_transport_ATPase_1		metal_resistance-magnesium	Magnesium-transporting ATPase, P-type 1	methmmdb	metal_resistance-magnesium/Mg_transport_ATPase_1.hmm	52	0.0	2026-04-21	active	doi:10.1101/2024.12.26.629440	
 Mg_transport_corA_1	Mg_transport_corA_1		metal_resistance-magnesium	Magnesium transport protein CorA	methmmdb	metal_resistance-magnesium/Mg_transport_corA_1.hmm	52	0.0	2026-04-21	active	doi:10.1101/2024.12.26.629440	
-Mn_binding_mntA_1	Mn_binding_mntA_1		metal_resistance-manganese	Manganese-binding lipoprotein MntA	methmmdb	metal_resistance-manganese/Mn_binding_mntA_1.hmm	25	0.0	2026-04-21	active	doi:10.1101/2024.12.26.629440	
+Mn_binding_mntA_1	Mn_binding_mntA_1		manganese_acquisition	Manganese-binding lipoprotein MntA	methmmdb	manganese_acquisition/Mn_binding_mntA_1.hmm	25	0.0	2026-04-21	active	doi:10.1101/2024.12.26.629440
 Mn_transport_ATPase_1	Mn_transport_ATPase_1		metal_resistance-manganese	Manganese-exporting P-type ATPase	methmmdb	metal_resistance-manganese/Mn_transport_ATPase_1.hmm	69	0.0	2026-04-21	active	doi:10.1101/2024.12.26.629440	
 Hg_merE_1	Hg_merE_1		metal_resistance-mercury	Broad mercury transporter MerE	methmmdb	metal_resistance-mercury/Hg_merE_1.hmm	2	0.0	2026-04-21	deprecated_nseq_insufficient	doi:10.1101/2024.12.26.629440	
 Hg_reductase_1	Hg_reductase_1		metal_resistance-mercury	Mercuric reductase	methmmdb	metal_resistance-mercury/Hg_reductase_1.hmm	80	0.0	2026-04-21	active	doi:10.1101/2024.12.26.629440	
@@ -632,6 +631,21 @@ sufS_TIGR01979.1	sufS	TIGR01979.1	iron_sulfur_assembly	sufS	ncbifam	iron_sulfur_
 IscS_TIGR02006.1	IscS	TIGR02006.1	iron_sulfur_assembly	iscS	ncbifam	iron_sulfur_assembly/IscS_TIGR02006.1.hmm	6	643.2	2026-05-23	active	ncbifam:TIGR02006.1; doi:10.1074/jbc.M401261200	
 Dps_NF009990	Dps	NF009990.0	iron_storage	dps	ncbifam	iron_storage/Dps_NF009990.hmm	32	158.0	2026-05-23	active	ncbifam:NF009990.0; doi:10.1023/b:biom.0000027692.24395.76
 modC_TIGR02142	modC	TIGR02142.1	metal_resistance-molybdenum	modC	ncbifam	metal_resistance-molybdenum/modC_TIGR02142.hmm	6	285.05	2026-05-23	active	ncbifam:TIGR02142.1; doi:10.1111/mmi.14152	
+mntH_NF001923	Mn(2+) uptake NRAMP transporter MntH	NF001923.0	manganese_acquisition	mntH	ncbifam	manganese_acquisition/mntH_NF001923.hmm	284	430.0	2026-06-08	active	ncbifam:NF001923.0; doi:10.1371/journal.ppat.1007432
+mntR_NF003025	transcriptional regulator MntR	NF003025.0	mn_gene_regulation	mntR	ncbifam	mn_gene_regulation/mntR_NF003025.hmm	52	138.0	2026-06-08	active	ncbifam:NF003025.0; doi:10.1046/j.1365-2958.2000.01863.x
+mntP_NF008546	manganese efflux pump MntP	NF008546.0	metal_resistance-manganese	mntP	ncbifam	metal_resistance-manganese/mntP_NF008546.hmm	44	214.0	2026-06-08	active	ncbifam:NF008546.0; doi:10.1128/JB.05648-11
+boxA_MnOxGeneTool	Mn(II)-oxidizing protein BoxA	 	manganese_oxidation	boxA	mnoxgenetool	manganese_oxidation/boxA_MnOxGeneTool.hmm	247	392.9	2026-06-10	active	doi:10.1021/acs.est.5c01235
+cotA_MnOxGeneTool	laccase/Mn(II) oxidase CotA	 	manganese_oxidation	cotA	mnoxgenetool	manganese_oxidation/cotA_MnOxGeneTool.hmm	730	461.5	2026-06-10	active	doi:10.1021/acs.est.5c01235; doi:10.1371/journal.pone.0060589
+mcoA_MnOxGeneTool	multicopper oxidase McoA	 	manganese_oxidation	mcoA	mnoxgenetool	manganese_oxidation/mcoA_MnOxGeneTool.hmm	1336	587.8	2026-06-10	active	doi:10.1021/acs.est.5c01235
+mnxG_B_MnOxGeneTool	manganese-oxidizing MCO MnxG (Bacillus clade)	 	manganese_oxidation	mnxG	mnoxgenetool	manganese_oxidation/mnxG_B_MnOxGeneTool.hmm	195	668.1	2026-06-10	active	doi:10.1021/acs.est.5c01235; doi:10.1128/AEM.01534-07
+mnxG_P_MnOxGeneTool	manganese-oxidizing MCO MnxG (Proteobacteria clade)	 	manganese_oxidation	mnxG	mnoxgenetool	manganese_oxidation/mnxG_P_MnOxGeneTool.hmm	1071	994.4	2026-06-10	active	doi:10.1021/acs.est.5c01235; doi:10.1073/pnas.1305146110
+mofA_MnOxGeneTool	multicopper oxidase MofA	 	manganese_oxidation	mofA	mnoxgenetool	manganese_oxidation/mofA_MnOxGeneTool.hmm	3	906.9	2026-06-10	active	doi:10.1021/acs.est.5c01235
+mokA_MnOxGeneTool	Mn(II)-oxidizing protein MokA	 	manganese_oxidation	mokA	mnoxgenetool	manganese_oxidation/mokA_MnOxGeneTool.hmm	192	390.1	2026-06-10	active	doi:10.1021/acs.est.5c01235
+mopA_A_MnOxGeneTool	heme peroxidase MopA (Alphaproteobacteria clade)	 	manganese_oxidation	mopA	mnoxgenetool	manganese_oxidation/mopA_A_MnOxGeneTool.hmm	1	1568.0	2026-06-10	active	doi:10.1021/acs.est.5c01235
+mopA_E_MnOxGeneTool	heme peroxidase MopA (Epsilonproteobacteria clade)	 	manganese_oxidation	mopA	mnoxgenetool	manganese_oxidation/mopA_E_MnOxGeneTool.hmm	1	1181.1	2026-06-10	active	doi:10.1021/acs.est.5c01235
+mopA_P_MnOxGeneTool	heme peroxidase MopA (Pseudomonadota clade)	 	manganese_oxidation	mopA	mnoxgenetool	manganese_oxidation/mopA_P_MnOxGeneTool.hmm	514	1058.5	2026-06-10	active	doi:10.1021/acs.est.5c01235
+mopA_R_MnOxGeneTool	heme peroxidase MopA (Roseobacter clade)	 	manganese_oxidation	mopA	mnoxgenetool	manganese_oxidation/mopA_R_MnOxGeneTool.hmm	15	858.3	2026-06-10	active	doi:10.1021/acs.est.5c01235
+moxA_MnOxGeneTool	Mn(II)-oxidizing peroxidase MoxA	 	manganese_oxidation	moxA	mnoxgenetool	manganese_oxidation/moxA_MnOxGeneTool.hmm	6716	384.0	2026-06-10	active	doi:10.1021/acs.est.5c01235
 CbcL	CbcL		iron_reduction	CbcL	curated	iron_reduction/CbcL.hmm	8	200.0	2026-07-14	active	doi:10.1016/j.bioelechem.2015.08.003;doi:10.1038/s41586-025-09467-0
 DA_402	DA_402		iron_reduction	DA_402	curated	iron_reduction/DA_402.hmm	5	350.0	2026-07-14	active	doi:10.1038/s41586-025-09467-0
 PF04964-Flp_Fap_pilin	Flp_Fap	PF04964.20	iron_reduction	Flp_Fap	pfam	iron_reduction/PF04964-Flp_Fap_pilin.hmm	16	32.2	2026-07-14	active	doi:10.1038/s41586-025-09467-0

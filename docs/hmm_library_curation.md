@@ -336,6 +336,35 @@ python scripts/calibrate_mtr_mto_cutoffs.py
 
 ---
 
+## Exceptions to the Layer A minimum-coverage rule (2026-07-16)
+
+**Status:** Kept `active` despite violating the ≤3-seq ("others" tier)
+deprecation threshold documented above.
+
+| Model | nseq | Category | Reason kept active |
+|---|---|---|---|
+| `mofA_MnOxGeneTool` | 3 | `manganese_oxidation` | At the threshold, not below it. MofA is a genuinely rare, narrowly-distributed Mn(II)-oxidizing multicopper oxidase clade — MnOxGeneTool's own reference database only contains 3 representative sequences for this clade. No broader alternative source exists. |
+| `mopA_A_MnOxGeneTool` | 1 | `manganese_oxidation` | Single-sequence model (Alphaproteobacteria MopA clade). Same reason: MnOxGeneTool's curated reference set has only 1 sequence for this specific clade split. |
+| `mopA_E_MnOxGeneTool` | 1 | `manganese_oxidation` | Single-sequence model (Epsilonproteobacteria MopA clade). Same reason. |
+
+**Rationale for the exception:** unlike the FeGenie/methmmdb low-nseq models
+deprecated above (which had *more diverse* alternative models available or were
+simply under-sampled duplicates), these three MopA/MofA clade splits reflect
+genuine sparsity in the manganese-oxidation literature and reference database —
+MnOxGeneTool (Wang et al. 2025, [doi:10.1021/acs.est.5c01235](https://doi.org/10.1021/acs.est.5c01235))
+deliberately keeps clade-specific subfamily models (matching the precedent of
+FeGenie's own same-name subfamily groups, see Layer A note above) rather than
+collapsing them into one over-broad MopA model. There is currently no
+alternative, better-sampled source for these three specific clades.
+
+**Known limitation:** single/near-single-sequence profiles generalise poorly
+to divergent members of the same clade not represented in the training set —
+expect these three models to under-call (false negatives), not over-call, on
+novel lineages. Revisit if MnOxGeneTool publishes an updated reference set
+with more representatives for these clades.
+
+---
+
 ## Summary of all deprecations
 
 | Status | Count | Reason |

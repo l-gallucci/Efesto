@@ -128,8 +128,10 @@ def _check_env(uniop_path: str = "uniop") -> None:
     print("\nHMM library:")
     _bundled = Path(__file__).parents[2] / "hmm_library"
     if _bundled.exists():
-        n_hmm = sum(1 for _ in _bundled.rglob("*.hmm"))
-        n_cat = sum(1 for d in _bundled.iterdir() if d.is_dir() and not d.name.startswith("."))
+        _cats = [d for d in _bundled.iterdir()
+                 if d.is_dir() and not d.name.startswith((".", "_"))]
+        n_hmm = sum(len(list(d.glob("*.hmm"))) for d in _cats)
+        n_cat = len(_cats)
         print(f"{OK}bundled hmm_library/  →  {n_hmm} HMMs across {n_cat} categories")
         pass_count += 1
     else:
@@ -325,9 +327,16 @@ def main():
     registry = load_registry(args.hmm_dir)
     nseq_map = build_nseq_map(registry)
     _skip_statuses = {"deprecated", "inactive"}
+    _active_stems = {
+        r["stem"] for r in registry
+        if r.get("status", "active") in ("active", "experimental")
+    }
+    # A stem is only deprecated if NO active/experimental row shares it — otherwise
+    # a same-stem deprecated row would silently drop the live model.
     deprecated_stems = {
         r["stem"] for r in registry
         if any(r.get("status", "active").startswith(s) for s in _skip_statuses)
+        and r["stem"] not in _active_stems
     }
     experimental_stems = {
         r["stem"] for r in registry
@@ -337,7 +346,7 @@ def main():
     h2c      = {}
     n_skipped = 0
     for entry in sorted(Path(args.hmm_dir).iterdir()):
-        if entry.is_dir() and not entry.name.startswith("."):
+        if entry.is_dir() and not entry.name.startswith((".", "_")):
             for hf in sorted(entry.glob("*.hmm")):
                 if hf.stem in deprecated_stems:
                     n_skipped += 1
