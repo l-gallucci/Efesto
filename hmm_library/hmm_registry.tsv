@@ -1,4 +1,4 @@
-stem	name	acc	category	gene_name	source	hmm_file	nseq	cutoff	added_date	status	reference	validated_in
+stem	name	acc	category	gene_name	source	hmm_file	nseq	cutoff	added_date	status	reference	validated_in	needs_confirmation
 HemO_Heme_oxygenase_Neisseria_Meningitidis_PDB_1p3t	HemO_Heme_oxygenase_Neisseria_Meningitidis_PDB_1p3t		iron_acquisition-heme_oxygenase	HemO-family-heme-oxygenase	fegenie	iron_acquisition-heme_oxygenase/HemO_Heme_oxygenase_Neisseria_Meningitidis_PDB_1p3t.hmm	25	0.0	2026-04-21	active	doi:10.1038/s41396-019-0570-7	
 HmoB_Heme_oxygenase_Bacillus_subtilis_subsp_spizizenii_str_W23_pdb_4fvc	HmoB_Heme_oxygenase_Bacillus_subtilis_subsp_spizizenii_str_W23_pdb_4fvc		iron_acquisition-heme_oxygenase	HmoB-family-heme-oxygenase	fegenie	iron_acquisition-heme_oxygenase/HmoB_Heme_oxygenase_Bacillus_subtilis_subsp_spizizenii_str_W23_pdb_4fvc.hmm	25	0.0	2026-04-21	active	doi:10.1038/s41396-019-0570-7	
 HugZ-ChuZ-heme_oxygenase-rep	HugZ-ChuZ-heme_oxygenase-rep		iron_acquisition-heme_oxygenase	HugZ-family-heme-oxygenase	fegenie	iron_acquisition-heme_oxygenase/HugZ-ChuZ-heme_oxygenase-rep.hmm	25	192.0	2026-04-21	active	doi:10.1038/s41396-019-0570-7	
@@ -650,3 +650,6 @@ CbcL	CbcL		iron_reduction	CbcL	curated	iron_reduction/CbcL.hmm	8	200.0	2026-07-1
 DA_402	DA_402		iron_reduction	DA_402	curated	iron_reduction/DA_402.hmm	5	350.0	2026-07-14	active	doi:10.1038/s41586-025-09467-0
 PF04964-Flp_Fap_pilin	Flp_Fap	PF04964.20	iron_reduction	Flp_Fap	pfam	iron_reduction/PF04964-Flp_Fap_pilin.hmm	16	32.2	2026-07-14	active	doi:10.1038/s41586-025-09467-0
 cpaB_TIGR03177.1	pilus_cpaB	TIGR03177.1	iron_reduction	cpaB	ncbifam	iron_reduction/cpaB_TIGR03177.1.hmm	49	71.0	2026-07-14	active	doi:10.1038/s41586-025-09467-0
+sufA_TIGR01997.1	sufA_proteo	TIGR01997.1	iron_sulfur_assembly	sufA	ncbifam	iron_sulfur_assembly/sufA_TIGR01997.1.hmm	4	136.2	2026-07-19	active	ncbifam:TIGR01997.1; doi:10.1074/jbc.M308004200			yes
+sufD_TIGR01981.1	sufD	TIGR01981.1	iron_sulfur_assembly	sufD	ncbifam	iron_sulfur_assembly/sufD_TIGR01981.1.hmm	30	222.0	2026-07-19	active	ncbifam:TIGR01981.1; doi:10.1074/jbc.M308004200			yes
+sufE_PF02657.22	SufE	PF02657.22	iron_sulfur_assembly	sufE	pfam	iron_sulfur_assembly/sufE_PF02657.22.hmm	250	27.0	2026-07-19	active	pfam:PF02657.22; doi:10.1074/jbc.M308004200			yes

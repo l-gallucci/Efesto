@@ -365,15 +365,64 @@ with more representatives for these clades.
 
 ---
 
+## SUF operon deployment — `sufA`/`sufD`/`sufE` flagged for confirmation (2026-07-19)
+
+**Status:** Deployed active, but marked `needs_confirmation` in the registry
+(new column) — a distinct, weaker trust tier from ordinary `active` models.
+
+`sufA` (TIGR01997.1), `sufD` (TIGR01981.1), and `sufE` (Pfam PF02657.22) were
+added to complete the `sufABCDSE` operon alongside the pre-existing `sufB`/
+`sufC`/`sufS`/`IscS`. Unlike those four, all three have a near-zero GA–NC gap
+(2.4, 7, and ~0.2 bits respectively) — confirmed empirically, not just from the
+HMM's own embedded statistics: tested `sufE` against the real *E. coli* K-12
+proteome and it cross-hits `csdE` (a related but functionally distinct,
+non-SUF-operon paralog — per TIGRFAM's own annotation of `csdE`, "not found
+next to other such genes as are its paralogs from the SUF... systems") at
+138.2 bits, essentially the same range as the true `sufE` hit (154.5 bits).
+
+**Why deployed anyway instead of left out:** `sufA`/`sufD` are true `sufB`/
+`sufC`/`sufS`-scale accessory proteins (deployed to complete the annotatable
+operon) and the weak standalone signal is compensated by the new
+`SUF_OPERON` operon co-occurrence rule (`src/efesto/operon.py`,
+`operon_rules.json`, docs in `operon_rules.md`) — a lone `needs_confirmation`
+hit unsupported by ≥ 3 total SUF genes (in practice, the calibrated anchors)
+is dropped from the reported cluster.
+
+**Why no custom HMM rebuild was attempted:** investigated first. Confirmed
+seed scarcity is a genuine data-availability limit, not a fixable curation
+mistake — Swiss-Prot review coverage for `sufA`/`sufD` is essentially just
+*E. coli* + one uncertain *B. subtilis* entry ("Uncharacterized protein
+SufA"), with no real cross-taxon diversity to build a tighter model from.
+`sufE` has more reviewed sequences but they're almost all Enterobacterales,
+which would only shift the same problem to a different sequence space.
+Synteny-bootstrapping candidate seeds (finding neighbors of confirmed
+`sufB`/`sufC`/`sufS` and assuming they're `sufD`/`sufA`/`sufE`) was
+considered and explicitly rejected — deliberate policy decision — because
+operon gene order isn't universally conserved across distant taxa and using
+genomic position to build training data for a rule that itself checks
+genomic position risks circularity.
+
+**Planned follow-up (not yet implemented):** a general low-confidence-hit
+escalation pipeline — any hit landing in a `needs_confirmation`-flagged model
+gets optionally cross-checked against eggNOG-mapper annotation (tier 2, reads
+existing output only, never auto-invoked — its reference database is tens of
+GB) and, if still unresolved, against Baktfold structural search (tier 3,
+ProstT5→Foldseek, flagged-subset scoping only). Two new multiplicative
+factors (`annot_weight`, `struct_weight`) will slot into the existing
+`cluster_confidence` formula in `scoring.py` alongside `uniop_weight`, with
+the same neutral-on-no-data policy.
+
+---
+
 ## Summary of all deprecations
 
 | Status | Count | Reason |
 |---|---|---|
 | `deprecated_nseq_insufficient` | 60 | Too few training sequences |
 | `deprecated_dedup_lower_coverage` | 87 | Name-based duplicate with lower alignment coverage |
-| `deprecated_exact_duplicate` | 1 | Byte-identical to another active model |
 | `deprecated_dedup_sequence_cluster` | 12 | Layer B: redundant at 70% id / 80% cov |
 | `deprecated_category_mismatch` | 7 | Acquisition genes in resistance; non-metal genes (ActP, MdtABC, YfmO) |
-| **Total deprecated** | **167** | |
-| **Active** | **466** | |
-| **Library total** | **633** | |
+| **Total deprecated** | **166** | |
+| `experimental` | 10 | Lower-trust tier, not yet fully validated |
+| **Active** | **478** | |
+| **Library total** | **654** | |
