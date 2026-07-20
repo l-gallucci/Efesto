@@ -295,6 +295,28 @@ def build_nseq_map(registry):
     return nseq
 
 
+def build_confirmation_map(registry):
+    """
+    Return {stem: {"gene_name": str, "kegg_ko": [str, ...]}} for every registry
+    row with needs_confirmation == "yes".
+
+    A stem with no kegg_ko value still gets an entry (empty ko list) — the
+    eggNOG/Baktfold escalation can still run, it just won't have a KO-based
+    confirm/contradict signal available and stays neutral for that part.
+    kegg_ko may be a single ID or a comma-separated list (matches eggNOG-mapper's
+    own KEGG_ko column convention of multiple IDs per hit).
+    """
+    flagged = {}
+    for r in registry:
+        stem = r.get("stem", "")
+        if not stem or (r.get("needs_confirmation") or "").strip().lower() != "yes":
+            continue
+        ko_raw = (r.get("kegg_ko") or "").strip()
+        kos = [k.strip() for k in ko_raw.split(",") if k.strip()]
+        flagged[stem] = {"gene_name": r.get("gene_name", ""), "kegg_ko": kos}
+    return flagged
+
+
 def print_provenance(annotate_tokens, registry, cat_hmms):
     """Print HMM source/reference table for the active categories."""
     active_cats = set(cat_hmms)

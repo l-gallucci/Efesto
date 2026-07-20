@@ -1,13 +1,23 @@
 """Cluster confidence scoring: co-occurrence, UniOP pairwise probability, BGC boost.
 
-Three independent evidence sources combined multiplicatively:
+Independent evidence sources combined multiplicatively:
 
-    cluster_confidence = hmm_weight × co_occ_weight × uniop_weight × bgc_boost
+    cluster_confidence = hmm_weight × co_occ_weight × uniop_weight
+                          × bgc_boost × annot_weight × struct_weight
 
 - hmm_weight:   fraction of hits with calibrated (equivalog) HMM cutoffs
 - co_occ_weight: gene completeness × distance-decay penalty × contig-edge penalty
 - uniop_weight:  minimum pairwise UniOP operon probability in the cluster (weakest link)
 - bgc_boost:    optional ×1.2 if cluster overlaps an antiSMASH siderophore BGC
+- annot_weight: eggNOG-mapper confirmation for needs_confirmation-flagged hits
+                (tier 2 — see docs/hmm_library_curation.md, "SUF operon deployment")
+- struct_weight: Baktfold structural confirmation for the same flagged hits
+                (tier 3 — placeholder parameter, always 1.0 until implemented)
+
+annot_weight and struct_weight both default to 1.0 (neutral) — same
+no-data-no-penalty policy as uniop_weight: only genes flagged
+needs_confirmation are ever affected, and only when the corresponding tool
+was actually run and returned an informative result for that specific ORF.
 
 Default call threshold: cluster_confidence ≥ 0.5
 """
@@ -122,11 +132,55 @@ def hmm_weight(cluster_rows):
     return sum(weights) / len(weights)
 
 
-def cluster_confidence(hmm_w, co_occ_w, uniop_w, bgc_boost=1.0):
+def annot_weight(cluster_rows, eggnog_hits, confirmation_map):
+    """
+    eggNOG-mapper tier-2 confirmation weight for needs_confirmation-flagged hits.
+
+    Weakest-link, same principle as uniop_weight: a single contradicted hit in
+    the cluster is enough to lower confidence, since the whole point of this
+    check is catching a specific false-positive mode (e.g. sufE HMM firing on
+    csdE, a related but non-operon paralog — see hmm_library_curation.md).
+
+    Args:
+        cluster_rows: rows with "hmm_stem" and "orf" keys
+        eggnog_hits:  {orf_id: eggnog_row_dict} from _parse_eggnog_annotations,
+                      or {} if eggNOG wasn't run / no file was provided
+        confirmation_map: {stem: {"gene_name": str, "kegg_ko": [str, ...]}}
+                      from io.build_confirmation_map — only stems in this map
+                      are ever checked; everything else is untouched by design
+
+    Returns 1.0 (neutral) when:
+        - no row in the cluster is on a needs_confirmation-flagged stem
+        - eggNOG wasn't run at all (eggnog_hits is empty)
+        - the flagged ORF has no eggNOG hit, or an uninformative one
+
+    Otherwise: 1.2 if every flagged hit in the cluster is eggNOG-confirmed,
+    0.5 if any flagged hit is eggNOG-contradicted (weakest link).
+    """
+    from efesto.eggnog import confirm_hit
+
+    verdicts = []
+    for r in cluster_rows:
+        stem = r.get("hmm_stem", "")
+        info = confirmation_map.get(stem)
+        if info is None:
+            continue
+        eggnog_row = eggnog_hits.get(r.get("orf", ""))
+        verdicts.append(confirm_hit(info["gene_name"], info["kegg_ko"], eggnog_row))
+
+    if not verdicts or all(v == "neutral" for v in verdicts):
+        return 1.0
+    if any(v == "contradicted" for v in verdicts):
+        return 0.5
+    return 1.2
+
+
+def cluster_confidence(hmm_w, co_occ_w, uniop_w, bgc_boost=1.0,
+                        annot_w=1.0, struct_w=1.0):
     """
     Combined cluster confidence score.
 
-    Returns float, capped at 1.2 (bgc_boost can push above 1.0).
+    Returns float, capped at 1.2 (bgc_boost/annot_w can push above 1.0).
     Recommended call threshold: ≥ 0.5.
 
     Args:
@@ -134,5 +188,7 @@ def cluster_confidence(hmm_w, co_occ_w, uniop_w, bgc_boost=1.0):
         co_occ_w:   co_occurrence_score(...)
         uniop_w:    uniop_pair_score(...), 1.0 if UniOP not run
         bgc_boost:  1.2 if in siderophore BGC, 1.0 otherwise
+        annot_w:    annot_weight(...), 1.0 if eggNOG not run or not applicable
+        struct_w:   Baktfold tier-3 confirmation, 1.0 until implemented
     """
-    return min(1.2, hmm_w * co_occ_w * uniop_w * bgc_boost)
+    return min(1.2, hmm_w * co_occ_w * uniop_w * bgc_boost * annot_w * struct_w)

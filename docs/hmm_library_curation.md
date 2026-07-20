@@ -402,15 +402,39 @@ operon gene order isn't universally conserved across distant taxa and using
 genomic position to build training data for a rule that itself checks
 genomic position risks circularity.
 
-**Planned follow-up (not yet implemented):** a general low-confidence-hit
-escalation pipeline — any hit landing in a `needs_confirmation`-flagged model
-gets optionally cross-checked against eggNOG-mapper annotation (tier 2, reads
-existing output only, never auto-invoked — its reference database is tens of
-GB) and, if still unresolved, against Baktfold structural search (tier 3,
-ProstT5→Foldseek, flagged-subset scoping only). Two new multiplicative
-factors (`annot_weight`, `struct_weight`) will slot into the existing
-`cluster_confidence` formula in `scoring.py` alongside `uniop_weight`, with
-the same neutral-on-no-data policy.
+**Escalation pipeline (2026-07-20) — tier 2 implemented, tier 3 pending:** a
+general low-confidence-hit escalation, not SUF-specific — any hit landing on
+a `needs_confirmation`-flagged model (currently just `sufA`/`sufD`/`sufE`,
+but the mechanism is general-purpose) that gets dropped by tier-1 operon
+filtering (`SUF_OPERON`, etc.) is collected into a small pending list and
+checked in a second pass, scoped only to that flagged subset — never the
+whole proteome:
+
+- **Tier 2 (eggNOG-mapper) — implemented.** `src/efesto/eggnog.py` parses a
+  `*.emapper.annotations` file (`--eggnog_annotations`, read-only — Efesto
+  never modifies it) or optionally runs `emapper.py` itself on just the
+  flagged subset (`--run_eggnog`, requires `--eggnog_db_dir`; never
+  auto-invoked — the reference database is tens of GB, users manage that
+  download themselves). Comparison is by KEGG Ortholog (KO) number where
+  both sides have one, falling back to a loose `Preferred_name` match
+  otherwise. A confirmed hit is re-injected into the final output as a
+  rescued single-gene cluster; a contradicted or uninformative one stays
+  dropped. New `annot_weight` factor in `scoring.py`
+  (`cluster_confidence = ... × annot_weight × struct_weight`), same
+  neutral-on-no-data policy as `uniop_weight`. `--export_flagged_faa` writes
+  the same flagged-subset FASTA independent of eggNOG, for running any other
+  tool of choice on exactly that candidate set. Verified end-to-end: a
+  synthetic isolated `sufA` hit (no operon neighbors) is correctly dropped
+  with no eggNOG data, correctly rescued when a matching eggNOG confirmation
+  is supplied, and correctly stays dropped when eggNOG contradicts it.
+- **Tier 3 (Baktfold, ProstT5→Foldseek structural search) — designed, not
+  yet implemented.** `struct_weight` exists as a placeholder parameter in
+  `cluster_confidence` (always 1.0) for forward compatibility.
+
+KO numbers verified via the KEGG REST API for all six SUF genes: `sufA`
+K05997, `sufB` K09014, `sufC` K09013, `sufD` K09015, `sufS` K11717, `sufE`
+K02426 — added as a new `kegg_ko` registry column rather than a separate
+mapping file, to avoid fragmenting model metadata across files.
 
 ---
 
