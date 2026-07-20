@@ -125,6 +125,29 @@
       "min_genes":  2,
       "on_fail":    "drop",
       "max_bp_gap": 2000
+    },
+    {
+      "_comment": "Tad/Flp pilus (Chen et al. 2025, Nature, MISO): Flp pilin and CpaB assembly platform are obligate operon partners; either gene alone is a widespread, non-iron-specific adhesion/conjugation signal, so both are required",
+      "name":           "TAD_PILUS",
+      "categories":     ["iron_reduction"],
+      "genes":          ["PF04964-Flp_Fap_pilin","cpaB_TIGR03177.1"],
+      "rule":           "require_n_of",
+      "min_genes":      2,
+      "on_fail":        "passthrough_non_members",
+      "canonical_size": 2,
+      "max_bp_gap":     2000
+    },
+    {
+      "_comment": "SUF operon (sufABCDSE): sufA/sufD/sufE have near-zero TC-NC calibration margin (confirmed: sufE cross-hits its non-operon paralog csdE at a comparable bitscore) and are marked needs_confirmation in the registry; require co-occurrence with at least 3 of the 6 SUF genes (in practice this means with the well-calibrated anchors sufB/sufC/sufS) before trusting a lone weak hit",
+      "name":           "SUF_OPERON",
+      "categories":     ["iron_sulfur_assembly"],
+      "genes":          ["sufA_TIGR01997.1","sufB_TIGR01980.1","sufC_TIGR01978.1",
+                          "sufD_TIGR01981.1","sufS_TIGR01979.1","sufE_PF02657.22"],
+      "rule":           "require_n_of",
+      "min_genes":      3,
+      "on_fail":        "passthrough_non_members",
+      "canonical_size": 6,
+      "max_bp_gap":     2000
     }
   ]
 }

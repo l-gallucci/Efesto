@@ -1,4 +1,4 @@
-stem	name	acc	category	gene_name	source	hmm_file	nseq	cutoff	added_date	status	reference	validated_in
+stem	name	acc	category	gene_name	source	hmm_file	nseq	cutoff	added_date	status	reference	validated_in	needs_confirmation	kegg_ko
 HemO_Heme_oxygenase_Neisseria_Meningitidis_PDB_1p3t	HemO_Heme_oxygenase_Neisseria_Meningitidis_PDB_1p3t		iron_acquisition-heme_oxygenase	HemO-family-heme-oxygenase	fegenie	iron_acquisition-heme_oxygenase/HemO_Heme_oxygenase_Neisseria_Meningitidis_PDB_1p3t.hmm	25	0.0	2026-04-21	active	doi:10.1038/s41396-019-0570-7	
 HmoB_Heme_oxygenase_Bacillus_subtilis_subsp_spizizenii_str_W23_pdb_4fvc	HmoB_Heme_oxygenase_Bacillus_subtilis_subsp_spizizenii_str_W23_pdb_4fvc		iron_acquisition-heme_oxygenase	HmoB-family-heme-oxygenase	fegenie	iron_acquisition-heme_oxygenase/HmoB_Heme_oxygenase_Bacillus_subtilis_subsp_spizizenii_str_W23_pdb_4fvc.hmm	25	0.0	2026-04-21	active	doi:10.1038/s41396-019-0570-7	
 HugZ-ChuZ-heme_oxygenase-rep	HugZ-ChuZ-heme_oxygenase-rep		iron_acquisition-heme_oxygenase	HugZ-family-heme-oxygenase	fegenie	iron_acquisition-heme_oxygenase/HugZ-ChuZ-heme_oxygenase-rep.hmm	25	192.0	2026-04-21	active	doi:10.1038/s41396-019-0570-7	
@@ -625,9 +625,9 @@ flav_long_TIGR01752.1	flavodoxin long-chain	TIGR01752.1	iron_stress	flav_long	nc
 flav_short_TIGR01753.1	flavodoxin short-chain	TIGR01753.1	iron_stress	flav_short	ncbifam	iron_stress/flav_short_TIGR01753.1.hmm	5	123.0	2026-05-23	active	ncbifam:TIGR01753.1; doi:10.1038/382802a0	
 Zur_NF008646	Zur	NF008646.0	metal_resistance-cobalt_zinc_cadmium	zur	ncbifam	metal_resistance-cobalt_zinc_cadmium/Zur_NF008646.hmm	86	167.0	2026-05-23	active	ncbifam:NF008646.0; doi:10.3389/fcimb.2013.00059	
 PerR_NF052545	PerR	NF052545.1	iron_gene_regulation	perR	ncbifam	iron_gene_regulation/PerR_NF052545.hmm	14	180.0	2026-05-23	active	ncbifam:NF052545.1; doi:10.1111/j.1365-2958.2008.06192.x	
-sufC_TIGR01978.1	sufC	TIGR01978.1	iron_sulfur_assembly	sufC	ncbifam	iron_sulfur_assembly/sufC_TIGR01978.1.hmm	15	212.8	2026-05-23	active	ncbifam:TIGR01978.1; doi:10.1074/jbc.M308004200	
-sufB_TIGR01980.1	sufB	TIGR01980.1	iron_sulfur_assembly	sufB	ncbifam	iron_sulfur_assembly/sufB_TIGR01980.1.hmm	10	346.4	2026-05-23	active	ncbifam:TIGR01980.1; doi:10.1074/jbc.M308004200	
-sufS_TIGR01979.1	sufS	TIGR01979.1	iron_sulfur_assembly	sufS	ncbifam	iron_sulfur_assembly/sufS_TIGR01979.1.hmm	17	475.1	2026-05-23	active	ncbifam:TIGR01979.1; doi:10.1074/jbc.M308004200	
+sufC_TIGR01978.1	sufC	TIGR01978.1	iron_sulfur_assembly	sufC	ncbifam	iron_sulfur_assembly/sufC_TIGR01978.1.hmm	15	212.8	2026-05-23	active	ncbifam:TIGR01978.1; doi:10.1074/jbc.M308004200			K09013
+sufB_TIGR01980.1	sufB	TIGR01980.1	iron_sulfur_assembly	sufB	ncbifam	iron_sulfur_assembly/sufB_TIGR01980.1.hmm	10	346.4	2026-05-23	active	ncbifam:TIGR01980.1; doi:10.1074/jbc.M308004200			K09014
+sufS_TIGR01979.1	sufS	TIGR01979.1	iron_sulfur_assembly	sufS	ncbifam	iron_sulfur_assembly/sufS_TIGR01979.1.hmm	17	475.1	2026-05-23	active	ncbifam:TIGR01979.1; doi:10.1074/jbc.M308004200			K11717
 IscS_TIGR02006.1	IscS	TIGR02006.1	iron_sulfur_assembly	iscS	ncbifam	iron_sulfur_assembly/IscS_TIGR02006.1.hmm	6	643.2	2026-05-23	active	ncbifam:TIGR02006.1; doi:10.1074/jbc.M401261200	
 Dps_NF009990	Dps	NF009990.0	iron_storage	dps	ncbifam	iron_storage/Dps_NF009990.hmm	32	158.0	2026-05-23	active	ncbifam:NF009990.0; doi:10.1023/b:biom.0000027692.24395.76
 modC_TIGR02142	modC	TIGR02142.1	metal_resistance-molybdenum	modC	ncbifam	metal_resistance-molybdenum/modC_TIGR02142.hmm	6	285.05	2026-05-23	active	ncbifam:TIGR02142.1; doi:10.1111/mmi.14152	
@@ -650,3 +650,6 @@ CbcL	CbcL		iron_reduction	CbcL	curated	iron_reduction/CbcL.hmm	8	200.0	2026-07-1
 DA_402	DA_402		iron_reduction	DA_402	curated	iron_reduction/DA_402.hmm	5	350.0	2026-07-14	active	doi:10.1038/s41586-025-09467-0
 PF04964-Flp_Fap_pilin	Flp_Fap	PF04964.20	iron_reduction	Flp_Fap	pfam	iron_reduction/PF04964-Flp_Fap_pilin.hmm	16	32.2	2026-07-14	active	doi:10.1038/s41586-025-09467-0
 cpaB_TIGR03177.1	pilus_cpaB	TIGR03177.1	iron_reduction	cpaB	ncbifam	iron_reduction/cpaB_TIGR03177.1.hmm	49	71.0	2026-07-14	active	doi:10.1038/s41586-025-09467-0
+sufA_TIGR01997.1	sufA_proteo	TIGR01997.1	iron_sulfur_assembly	sufA	ncbifam	iron_sulfur_assembly/sufA_TIGR01997.1.hmm	4	136.2	2026-07-19	active	ncbifam:TIGR01997.1; doi:10.1074/jbc.M308004200		yes	K05997
+sufD_TIGR01981.1	sufD	TIGR01981.1	iron_sulfur_assembly	sufD	ncbifam	iron_sulfur_assembly/sufD_TIGR01981.1.hmm	30	222.0	2026-07-19	active	ncbifam:TIGR01981.1; doi:10.1074/jbc.M308004200		yes	K09015
+sufE_PF02657.22	SufE	PF02657.22	iron_sulfur_assembly	sufE	pfam	iron_sulfur_assembly/sufE_PF02657.22.hmm	250	27.0	2026-07-19	active	pfam:PF02657.22; doi:10.1074/jbc.M308004200		yes	K02426

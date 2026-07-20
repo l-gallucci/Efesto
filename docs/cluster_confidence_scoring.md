@@ -7,15 +7,21 @@
 ## The formula
 
 ```
-cluster_confidence = hmm_weight × co_occ_score × uniop_weight × bgc_boost
+cluster_confidence = hmm_weight × co_occ_score × uniop_weight
+                      × bgc_boost × annot_weight × struct_weight
 ```
 
 Capped at 1.2. Recommended call threshold: ≥ 0.5.
 
-Four independent evidence sources multiplied together. Any single low score
+Six independent evidence sources multiplied together. Any single low score
 brings the whole cluster down. This is intentional: a gene system with perfect
 HMM hits but no spatial coherence is as suspicious as one with perfect spacing
 but low-confidence HMMs.
+
+`annot_weight` and `struct_weight` (added 2026-07-20) only ever affect
+clusters containing a hit on a model flagged `needs_confirmation` in the
+registry — everything else always sees 1.0 for both, identical to pre-2026-07-20
+behaviour.
 
 ---
 
@@ -131,11 +137,53 @@ bgc_boost = 1.2 if cluster overlaps a siderophore BGC (antiSMASH)
             else 1.0
 ```
 
-Optional. Requires `--bgc_dir` pointing to antiSMASH output.
-Not yet implemented in this release; bgc_boost = 1.0 for all clusters.
-Designed for future integration: a siderophore synthesis cluster inside an
-antiSMASH-predicted siderophore BGC is stronger evidence than one without BGC
-support.
+Optional. Requires `--bgc_dir` pointing to antiSMASH output; 1.0 (no boost)
+when not provided. Implemented in `src/efesto/bgc.py`
+(`bgc_boost_for_cluster`, `parse_antismash_gff`) — a siderophore synthesis
+cluster inside an antiSMASH-predicted siderophore BGC is stronger evidence
+than one without BGC support. `parse_antismash_gff` pre-filters to only
+regions whose antiSMASH `product`/`type` matches siderophore keywords before
+`bgc_boost_for_cluster` ever runs, so the boost can only trigger via genuine
+overlap with a siderophore-annotated region — antiSMASH itself only detects
+*secondary* metabolite biosynthesis (Blin et al. 2016, *Nucleic Acids Res*,
+[doi:10.1093/nar/gkw960](https://doi.org/10.1093/nar/gkw960)), a categorically
+different class of gene cluster from primary/housekeeping systems like SUF
+Fe-S assembly or Tad pilus, so cross-category false boosts are not expected
+in practice.
+
+---
+
+## Component 5 — `annot_weight`
+
+```
+annot_weight = 1.2 if every needs_confirmation-flagged hit in the cluster
+                     is eggNOG-confirmed
+             = 0.5 if any needs_confirmation-flagged hit is eggNOG-contradicted
+             = 1.0 otherwise (neutral — no flagged hit, eggNOG not run,
+                     or no informative eggNOG hit for the flagged ORF)
+```
+
+**Weakest-link, same principle as `uniop_weight`.** Only ever touches
+clusters containing a hit on a model flagged `needs_confirmation` in the
+registry (`sufA`/`sufD`/`sufE` currently — see
+`docs/hmm_library_curation.md`, "SUF operon deployment"). Confirmation is via
+`src/efesto/eggnog.py`, comparing the HMM's guessed gene identity against an
+eggNOG-mapper annotation for the same ORF (KEGG Ortholog number where both
+sides have one, falling back to a loose `Preferred_name` match otherwise).
+Catches a false-positive mode co-occurrence alone can't: a gene that
+coincidentally sits near real anchor genes without actually being what the
+HMM guessed. Requires `--eggnog_annotations` (read an existing file) or
+`--run_eggnog` (run `emapper.py` internally, scoped to just the flagged ORF
+subset) — neither is on by default.
+
+---
+
+## Component 6 — `struct_weight`
+
+Designed, not yet implemented — placeholder parameter in `cluster_confidence`,
+always 1.0. Intended as the same confirm/contradict/neutral mechanism as
+`annot_weight`, but via Baktfold (ProstT5→Foldseek structural search) instead
+of eggNOG, for the flagged hits that eggNOG can't resolve either.
 
 ---
 

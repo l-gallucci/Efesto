@@ -4,6 +4,7 @@ import math
 import pytest
 
 from efesto.scoring import (
+    annot_weight,
     cluster_confidence,
     co_occurrence_score,
     distance_decay,
@@ -162,3 +163,54 @@ class TestClusterConfidence:
 
     def test_default_bgc_boost_is_one(self):
         assert cluster_confidence(0.5, 0.6, 0.8) == pytest.approx(0.5 * 0.6 * 0.8)
+
+    def test_annot_w_applied(self):
+        assert cluster_confidence(1.0, 1.0, 1.0, annot_w=1.2) == pytest.approx(1.2)
+
+    def test_annot_w_penalty(self):
+        assert cluster_confidence(1.0, 1.0, 1.0, annot_w=0.5) == pytest.approx(0.5)
+
+    def test_default_annot_w_and_struct_w_are_neutral(self):
+        # backward compatibility: callers not passing the new kwargs get
+        # identical behaviour to before annot_w/struct_w existed
+        assert cluster_confidence(0.8, 0.9, 0.7) == pytest.approx(0.8 * 0.9 * 0.7)
+
+    def test_struct_w_applied(self):
+        assert cluster_confidence(1.0, 1.0, 1.0, struct_w=1.2) == pytest.approx(1.2)
+
+
+class TestAnnotWeight:
+    _CONFIRMATION_MAP = {"sufA_TIGR01997.1": {"gene_name": "sufA", "kegg_ko": ["K05997"]}}
+
+    def test_no_flagged_stems_in_cluster_is_neutral(self):
+        rows = [{"hmm_stem": "sufB_TIGR01980.1", "orf": "orf_1"}]
+        assert annot_weight(rows, {}, self._CONFIRMATION_MAP) == pytest.approx(1.0)
+
+    def test_flagged_stem_no_eggnog_data_is_neutral(self):
+        rows = [{"hmm_stem": "sufA_TIGR01997.1", "orf": "orf_1"}]
+        assert annot_weight(rows, {}, self._CONFIRMATION_MAP) == pytest.approx(1.0)
+
+    def test_confirmed_hit_boosts(self):
+        rows = [{"hmm_stem": "sufA_TIGR01997.1", "orf": "orf_1"}]
+        eggnog_hits = {"orf_1": {"preferred_name": "sufA", "kegg_ko": ["K05997"],
+                                 "description": ""}}
+        assert annot_weight(rows, eggnog_hits, self._CONFIRMATION_MAP) == pytest.approx(1.2)
+
+    def test_contradicted_hit_penalizes(self):
+        rows = [{"hmm_stem": "sufA_TIGR01997.1", "orf": "orf_1"}]
+        eggnog_hits = {"orf_1": {"preferred_name": "csdE", "kegg_ko": ["K05978"],
+                                 "description": ""}}
+        assert annot_weight(rows, eggnog_hits, self._CONFIRMATION_MAP) == pytest.approx(0.5)
+
+    def test_weakest_link_one_contradicted_among_confirmed(self):
+        cmap = {
+            "sufA_TIGR01997.1": {"gene_name": "sufA", "kegg_ko": ["K05997"]},
+            "sufD_TIGR01981.1": {"gene_name": "sufD", "kegg_ko": ["K09015"]},
+        }
+        rows = [{"hmm_stem": "sufA_TIGR01997.1", "orf": "orf_1"},
+                {"hmm_stem": "sufD_TIGR01981.1", "orf": "orf_2"}]
+        eggnog_hits = {
+            "orf_1": {"preferred_name": "sufA", "kegg_ko": ["K05997"], "description": ""},
+            "orf_2": {"preferred_name": "wrong", "kegg_ko": ["K99999"], "description": ""},
+        }
+        assert annot_weight(rows, eggnog_hits, cmap) == pytest.approx(0.5)

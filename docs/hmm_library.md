@@ -12,9 +12,13 @@ with provenance, bitscore cutoffs, and curation status.
 |--------|----------------|-------------|
 | FeGenie | 196 | Original iron-cycling profiles from Garber et al. 2020 |
 | Tabuteau et al. 2025 | 130 | Iron acquisition profiles from KOfam, FeGenie, and NCBI NF* |
-| MetHMMDB | 115 | Metal mobility resistance gene HMMs (broad metal scope) |
-| NCBIfam / TIGRFAM | 15 | Curated iron oxidation, regulation, sulfur assembly, and molybdenum resistance models |
-| **Total active** | **466** | After deduplication (167 deprecated; 633 total) |
+| MetHMMDB | 105 | Metal mobility resistance gene HMMs (broad metal scope) |
+| NCBIfam / TIGRFAM | 21 | Curated iron oxidation, regulation, sulfur assembly (SufA/B/C/D/S), molybdenum resistance, manganese, and Tad-pilus (CpaB) models |
+| MnOxGeneTool | 12 | Manganese oxidation genes (Wang et al. 2025) |
+| InterPro | 8 | Cross-referenced domain models |
+| Curated (custom-built) | 4 | MtrA, MtoA subfamily rebuild, plus CbcL and DA_402 (MISO extracellular MHC) — built from literature-confirmed seed sequences, background-tested against the rest of the library |
+| Pfam | 2 | Flp/Fap pilin (Tad pilus) and SufE, sourced directly from Pfam-A |
+| **Total active** | **478** | After deduplication (176 deprecated; 654 total) |
 
 ---
 
@@ -25,13 +29,13 @@ with provenance, bitscore cutoffs, and curation status.
 | Category | Description | Notable models |
 |----------|-------------|----------------|
 | `iron_oxidation` | Enzymatic oxidation of Fe²⁺ → Fe³⁺ | MtoA, MtrA, FoxABC, Cyc2, rusticyanin, cytochrome579 |
-| `iron_reduction` | Enzymatic reduction of Fe³⁺ → Fe²⁺ | MtrA, MtrC, OmcS, OmcZ, DFE operons |
+| `iron_reduction` | Enzymatic reduction of Fe³⁺ → Fe²⁺ | MtrA, MtrC, OmcS, OmcZ, DFE operons, CbcL, DA_402, Flp/CpaB (Tad pilus) |
 | `probable_iron_reduction` | Fe reduction genes with lower specificity | CymA, omcE |
 | `possible_iron_oxidation_and_possible_iron_reduction` | Dual-assignment before Mtr/Mto disambiguation | See MtrMto operon rule |
 | `iron_storage` | Cellular iron storage proteins | Ferritin, bacterioferritin, Dps |
 | `iron_gene_regulation` | Fe-responsive transcriptional regulators | Fur, DtxR, IscR, NsrR, PerR, SoxR |
 | `iron_stress` | Iron-starvation biomarkers | Flavodoxin long, flavodoxin short |
-| `iron_sulfur_assembly` | Fe-S cluster biosynthesis machinery | SufB, SufC, SufS, IscS |
+| `iron_sulfur_assembly` | Fe-S cluster biosynthesis machinery | SufA, SufB, SufC, SufD, SufS, SufE, IscS |
 | `magnetosome_formation` | Magnetosome island genes | MamA/B/E/K/P/M/Q/I/L/O |
 
 ### Iron acquisition (siderophore-centred)

@@ -25,17 +25,20 @@ from efesto.clustering import _orf_to_contig, build_clusters
 from efesto.coverage import build_contig_coverage, load_bams_tsv
 from efesto.gene_calling import run_prodigal
 from efesto.hmmer import collect_best_hits, run_all_hmmsearches
-from efesto.io import (build_contig_length_dict, build_nseq_map,
-                                filter_categories, load_gff_dir, load_registry,
-                                print_provenance, read_fasta, read_cutoffs,
-                                read_map, VALID_ANNOTATE_TOKENS)
+from efesto.io import (build_confirmation_map, build_contig_length_dict,
+                                build_nseq_map, filter_categories, load_gff_dir,
+                                load_registry, print_provenance, read_fasta,
+                                read_cutoffs, read_map, VALID_ANNOTATE_TOKENS)
 from efesto.operon import (_DEFAULT_OPERON_RULES, build_canonical_size_map,
                                     build_stem_gap_map, count_heme,
                                     filter_cluster_fegenie, filter_cluster_json,
                                     load_operon_rules, second_pass)
 from efesto.bgc import bgc_boost_for_cluster, parse_antismash_gff
+from efesto.eggnog import (_parse_eggnog_annotations, confirm_hit, run_eggnog,
+                                    write_flagged_faa)
 from efesto.scoring import (
-    cluster_confidence, co_occurrence_score, hmm_weight, uniop_pair_score)
+    annot_weight, cluster_confidence, co_occurrence_score, hmm_weight,
+    uniop_pair_score)
 from efesto.uniop import (
     _uniop_context, build_prodigal_bakta_map, run_uniop, write_operon_structure)
 from efesto.writers import (
@@ -44,7 +47,15 @@ from efesto.writers import (
     write_long_format, write_summary, write_summary_stats)
 
 
-def _check_env(uniop_path: str = "uniop") -> None:
+def _groupby_genome(rows):
+    """Group cluster-row dicts by their 'genome' key. Yields (genome, [rows])."""
+    by_genome = defaultdict(list)
+    for r in rows:
+        by_genome[r["genome"]].append(r)
+    return by_genome.items()
+
+
+def _check_env(uniop_path: str = "uniop", eggnog_path: str = "emapper.py") -> None:
     import importlib
     import subprocess
 
@@ -124,6 +135,25 @@ def _check_env(uniop_path: str = "uniop") -> None:
         print( "        Install: git clone https://github.com/hongsua/UniOP.git")
         print( "        Then use: efesto --operon_prediction --uniop_path /path/to/UniOP/src/UniOP")
 
+    # ── eggNOG-mapper (optional — tier-2 confirmation, same environment) ──────
+    print("\neggNOG-mapper (optional — conda install -c bioconda eggnog-mapper):")
+    eggnog_found = shutil.which(eggnog_path) or (Path(eggnog_path).exists()
+                                                  and not Path(eggnog_path).is_dir())
+    if eggnog_found:
+        print(f"{OK}eggNOG-mapper  →  {eggnog_path}")
+        pass_count += 1
+    else:
+        print(f"{WARN}eggNOG-mapper  — not found at '{eggnog_path}'")
+        print( "        Only needed for --run_eggnog (internal invocation).")
+        print( "        --eggnog_annotations (reading an existing file) does not "
+               "require it.")
+        print( "        Safe to install into this same environment (python is "
+               "capped <3.12 for exactly this reason):")
+        print( "        conda install -c bioconda -c conda-forge eggnog-mapper")
+        print( "        download_eggnog_data.py --data_dir /path/to/eggnog_db "
+               "  # tens of GB, one-time")
+        print( "        Then: efesto --run_eggnog --eggnog_db_dir /path/to/eggnog_db")
+
     # ── HMM library ───────────────────────────────────────────────────────────
     print("\nHMM library:")
     _bundled = Path(__file__).parents[2] / "hmm_library"
@@ -151,7 +181,9 @@ def main():
     if len(sys.argv) > 1 and sys.argv[1] == "checkenv":
         uniop = next((sys.argv[i + 1] for i, a in enumerate(sys.argv)
                       if a == "--uniop_path" and i + 1 < len(sys.argv)), "uniop")
-        _check_env(uniop)
+        eggnog = next((sys.argv[i + 1] for i, a in enumerate(sys.argv)
+                       if a == "--eggnog_path" and i + 1 < len(sys.argv)), "emapper.py")
+        _check_env(uniop, eggnog)
 
     p = argparse.ArgumentParser(
         prog="Efesto",
@@ -246,6 +278,40 @@ def main():
                         "(or nucleotide files) and UniOP installed.")
     p.add_argument("--uniop_path", default="uniop",
                    help="Path to UniOP executable (default: 'uniop', assumed in PATH)")
+    # ── eggNOG-mapper tier-2 confirmation (needs_confirmation-flagged hits only) ──
+    p.add_argument("--eggnog_annotations",
+                   help="Path to an existing eggNOG-mapper *.emapper.annotations "
+                        "file (e.g. one you already generated as part of a broader "
+                        "annotation workflow). Used to confirm/contradict hits on "
+                        "narrow-margin models flagged needs_confirmation in the "
+                        "registry (currently sufA/sufD/sufE — see "
+                        "docs/hmm_library_curation.md). Read-only: Efesto never "
+                        "modifies this file. Takes priority over --run_eggnog if "
+                        "both are given.")
+    p.add_argument("--run_eggnog", action="store_true",
+                   help="Run eggNOG-mapper internally, scoped only to the small set "
+                        "of ORFs flagged needs_confirmation (never the whole "
+                        "proteome). Requires eggnog-mapper installed (can be "
+                        "installed into this same environment — its package pins "
+                        "python<3.12, which this environment is already capped "
+                        "under, see docs/installation.md) and "
+                        "--eggnog_db_dir pointing at a downloaded eggNOG database "
+                        "(users manage that download themselves — it is tens of GB "
+                        "and not installed by Efesto). Ignored if "
+                        "--eggnog_annotations is also given.")
+    p.add_argument("--eggnog_path", default="emapper.py",
+                   help="Path to emapper.py executable (default: 'emapper.py', "
+                        "assumed in PATH). Only used with --run_eggnog.")
+    p.add_argument("--eggnog_db_dir",
+                   help="Path to a downloaded eggNOG-mapper reference database "
+                        "directory. Only used with --run_eggnog.")
+    p.add_argument("--export_flagged_faa",
+                   help="Write a FASTA of every ORF flagged needs_confirmation to "
+                        "this path, regardless of whether --run_eggnog/"
+                        "--eggnog_annotations is used. Convenience for running your "
+                        "own structure/annotation tool of choice (e.g. Baktfold, "
+                        "ESMFold) on exactly the same small candidate set Efesto "
+                        "flagged.")
     # ── Anvi'o output ─────────────────────────────────────────────────────────
     p.add_argument("--anvio", action="store_true",
                    help="Write Efesto-anvio-functions.tsv, compatible with "
@@ -326,6 +392,7 @@ def main():
     cutoffs  = read_cutoffs(str(Path(args.hmm_dir) / "HMM-bitcutoffs.txt"))
     registry = load_registry(args.hmm_dir)
     nseq_map = build_nseq_map(registry)
+    confirmation_map = build_confirmation_map(registry)
     _skip_statuses = {"deprecated", "inactive"}
     _active_stems = {
         r["stem"] for r in registry
@@ -417,6 +484,10 @@ def main():
     cluster_id = 0
     final_rows = []
     n_filt     = 0
+    # needs_confirmation hits dropped by tier-1 operon filtering (e.g. a lone
+    # sufA hit with no sufB/sufC/sufS support nearby) — candidates for the
+    # tier-2 (eggNOG) rescue pass run once after the main clustering loop.
+    pending_confirmation = []
 
     for faa in faa_files:
         genome    = faa.name
@@ -476,6 +547,11 @@ def main():
                     args.all_results, catalog_mode=args.catalog_mode)
             filtered = second_pass(filtered, h2c, seq_dict,
                                    args.all_results, catalog_mode=args.catalog_mode)
+            if confirmation_map:
+                kept_orfs = {r["orf"] for r in filtered}
+                for r in cluster_rows:
+                    if r["orf"] not in kept_orfs and r["hmm_stem"] in confirmation_map:
+                        pending_confirmation.append(dict(r))
             gene_names = {gene_map.get(r["hmm_stem"], r["hmm_stem"]) for r in filtered}
             matched_cs = [gene_canonical_map[g] for g in gene_names
                           if g in gene_canonical_map]
@@ -495,6 +571,82 @@ def main():
 
     if n_filt:
         print(f"[INFO] {n_filt} ORFs removed (short contig)")
+
+    # ── Tier-2 rescue pass: eggNOG confirmation for needs_confirmation hits ──
+    # dropped by tier-1 operon filtering (e.g. a lone sufA hit with no
+    # sufB/sufC/sufS support nearby). Scoped only to pending_confirmation —
+    # never the whole proteome. See docs/hmm_library_curation.md.
+    eggnog_hits = {}
+    if pending_confirmation:
+        print(f"[INFO] {len(pending_confirmation)} needs_confirmation hit(s) "
+              f"dropped by operon filtering — checking tier 2 (eggNOG)…")
+
+        if args.export_flagged_faa:
+            genome_faa_paths = {faa.name: faa for faa in faa_files}
+            written = 0
+            with open(args.export_flagged_faa, "w") as fh_out:
+                for genome_name, rows in _groupby_genome(pending_confirmation):
+                    faa_path = genome_faa_paths.get(genome_name)
+                    if faa_path is None:
+                        continue
+                    tmp_out = str(args.export_flagged_faa) + f".{genome_name}.tmp"
+                    n = write_flagged_faa({r["orf"] for r in rows}, faa_path, tmp_out)
+                    with open(tmp_out) as fh_in:
+                        fh_out.write(fh_in.read())
+                    Path(tmp_out).unlink(missing_ok=True)
+                    written += n
+            print(f"[INFO] Wrote {written} flagged ORF(s) to {args.export_flagged_faa}")
+
+        annotations_path = None
+        if args.eggnog_annotations:
+            annotations_path = args.eggnog_annotations
+        elif args.run_eggnog:
+            flagged_faa_tmp = out_dir / "efesto_flagged_candidates.faa"
+            genome_faa_paths = {faa.name: faa for faa in faa_files}
+            with open(flagged_faa_tmp, "w") as fh_out:
+                for genome_name, rows in _groupby_genome(pending_confirmation):
+                    faa_path = genome_faa_paths.get(genome_name)
+                    if faa_path is None:
+                        continue
+                    tmp = str(flagged_faa_tmp) + f".{genome_name}.tmp"
+                    write_flagged_faa({r["orf"] for r in rows}, faa_path, tmp)
+                    with open(tmp) as fh_in:
+                        fh_out.write(fh_in.read())
+                    Path(tmp).unlink(missing_ok=True)
+            annotations_path = run_eggnog(
+                flagged_faa_tmp, out_dir, eggnog_path=args.eggnog_path,
+                db_dir=args.eggnog_db_dir)
+
+        if annotations_path:
+            eggnog_hits = _parse_eggnog_annotations(annotations_path)
+
+        n_confirmed = 0
+        for r in pending_confirmation:
+            info = confirmation_map.get(r["hmm_stem"], {})
+            verdict = confirm_hit(info.get("gene_name", ""), info.get("kegg_ko", []),
+                                  eggnog_hits.get(r["orf"]))
+            if verdict != "confirmed":
+                continue
+            genome = r["genome"]
+            r["gene_name"]      = gene_map.get(r["hmm_stem"], r["hmm_stem"])
+            r["sequence"]       = seq_dict.get(genome, {}).get(r["orf"], "")
+            r["heme_motifs"]    = count_heme(r["sequence"])
+            r["co_occ_score"]   = 1.0  # single-gene cluster, rescued via eggNOG not operon context
+            r["hmm_w"]          = hmm_weight([r])
+            r["cluster_id"]     = cluster_id
+            r["tier2_rescued"]  = True
+            final_rows.append(r)
+            cluster_id += 1
+            n_confirmed += 1
+        if eggnog_hits:
+            print(f"[INFO] Tier 2: {n_confirmed}/{len(pending_confirmation)} "
+                  f"rescued (eggNOG-confirmed); rest stay dropped "
+                  f"(contradicted or no informative eggNOG hit)")
+        else:
+            print("[INFO] Tier 2: no eggNOG data available "
+                  "(pass --eggnog_annotations or --run_eggnog to enable) — "
+                  "all pending hits stay dropped")
+
     final_rows.sort(key=lambda r: (r["cluster_id"], r["orf"]))
     norm_dict   = ({faa.name: len(seq_dict.get(faa.name, {})) for faa in faa_files}
                    if args.norm else None)
@@ -666,11 +818,14 @@ def main():
         boost    = bgc_boost_for_cluster(
             [r["orf"] for r in grp], orf_coords_g,
             bgc_map.get(genome))
+        annot_w  = annot_weight(grp, eggnog_hits, confirmation_map)
         conf    = cluster_confidence(
-            grp[0]["hmm_w"], grp[0]["co_occ_score"], uniop_w, bgc_boost=boost)
+            grp[0]["hmm_w"], grp[0]["co_occ_score"], uniop_w,
+            bgc_boost=boost, annot_w=annot_w)
         for r in grp:
             r["uniop_w"]            = uniop_w
             r["bgc_boost"]          = boost
+            r["annot_w"]            = annot_w
             r["cluster_confidence"] = conf
 
     # Write long-format after UniOP so uniop_context column is included when available

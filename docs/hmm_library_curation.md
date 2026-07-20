@@ -365,15 +365,88 @@ with more representatives for these clades.
 
 ---
 
+## SUF operon deployment — `sufA`/`sufD`/`sufE` flagged for confirmation (2026-07-19)
+
+**Status:** Deployed active, but marked `needs_confirmation` in the registry
+(new column) — a distinct, weaker trust tier from ordinary `active` models.
+
+`sufA` (TIGR01997.1), `sufD` (TIGR01981.1), and `sufE` (Pfam PF02657.22) were
+added to complete the `sufABCDSE` operon alongside the pre-existing `sufB`/
+`sufC`/`sufS`/`IscS`. Unlike those four, all three have a near-zero GA–NC gap
+(2.4, 7, and ~0.2 bits respectively) — confirmed empirically, not just from the
+HMM's own embedded statistics: tested `sufE` against the real *E. coli* K-12
+proteome and it cross-hits `csdE` (a related but functionally distinct,
+non-SUF-operon paralog — per TIGRFAM's own annotation of `csdE`, "not found
+next to other such genes as are its paralogs from the SUF... systems") at
+138.2 bits, essentially the same range as the true `sufE` hit (154.5 bits).
+
+**Why deployed anyway instead of left out:** `sufA`/`sufD` are true `sufB`/
+`sufC`/`sufS`-scale accessory proteins (deployed to complete the annotatable
+operon) and the weak standalone signal is compensated by the new
+`SUF_OPERON` operon co-occurrence rule (`src/efesto/operon.py`,
+`operon_rules.json`, docs in `operon_rules.md`) — a lone `needs_confirmation`
+hit unsupported by ≥ 3 total SUF genes (in practice, the calibrated anchors)
+is dropped from the reported cluster.
+
+**Why no custom HMM rebuild was attempted:** investigated first. Confirmed
+seed scarcity is a genuine data-availability limit, not a fixable curation
+mistake — Swiss-Prot review coverage for `sufA`/`sufD` is essentially just
+*E. coli* + one uncertain *B. subtilis* entry ("Uncharacterized protein
+SufA"), with no real cross-taxon diversity to build a tighter model from.
+`sufE` has more reviewed sequences but they're almost all Enterobacterales,
+which would only shift the same problem to a different sequence space.
+Synteny-bootstrapping candidate seeds (finding neighbors of confirmed
+`sufB`/`sufC`/`sufS` and assuming they're `sufD`/`sufA`/`sufE`) was
+considered and explicitly rejected — deliberate policy decision — because
+operon gene order isn't universally conserved across distant taxa and using
+genomic position to build training data for a rule that itself checks
+genomic position risks circularity.
+
+**Escalation pipeline (2026-07-20) — tier 2 implemented, tier 3 pending:** a
+general low-confidence-hit escalation, not SUF-specific — any hit landing on
+a `needs_confirmation`-flagged model (currently just `sufA`/`sufD`/`sufE`,
+but the mechanism is general-purpose) that gets dropped by tier-1 operon
+filtering (`SUF_OPERON`, etc.) is collected into a small pending list and
+checked in a second pass, scoped only to that flagged subset — never the
+whole proteome:
+
+- **Tier 2 (eggNOG-mapper) — implemented.** `src/efesto/eggnog.py` parses a
+  `*.emapper.annotations` file (`--eggnog_annotations`, read-only — Efesto
+  never modifies it) or optionally runs `emapper.py` itself on just the
+  flagged subset (`--run_eggnog`, requires `--eggnog_db_dir`; never
+  auto-invoked — the reference database is tens of GB, users manage that
+  download themselves). Comparison is by KEGG Ortholog (KO) number where
+  both sides have one, falling back to a loose `Preferred_name` match
+  otherwise. A confirmed hit is re-injected into the final output as a
+  rescued single-gene cluster; a contradicted or uninformative one stays
+  dropped. New `annot_weight` factor in `scoring.py`
+  (`cluster_confidence = ... × annot_weight × struct_weight`), same
+  neutral-on-no-data policy as `uniop_weight`. `--export_flagged_faa` writes
+  the same flagged-subset FASTA independent of eggNOG, for running any other
+  tool of choice on exactly that candidate set. Verified end-to-end: a
+  synthetic isolated `sufA` hit (no operon neighbors) is correctly dropped
+  with no eggNOG data, correctly rescued when a matching eggNOG confirmation
+  is supplied, and correctly stays dropped when eggNOG contradicts it.
+- **Tier 3 (Baktfold, ProstT5→Foldseek structural search) — designed, not
+  yet implemented.** `struct_weight` exists as a placeholder parameter in
+  `cluster_confidence` (always 1.0) for forward compatibility.
+
+KO numbers verified via the KEGG REST API for all six SUF genes: `sufA`
+K05997, `sufB` K09014, `sufC` K09013, `sufD` K09015, `sufS` K11717, `sufE`
+K02426 — added as a new `kegg_ko` registry column rather than a separate
+mapping file, to avoid fragmenting model metadata across files.
+
+---
+
 ## Summary of all deprecations
 
 | Status | Count | Reason |
 |---|---|---|
 | `deprecated_nseq_insufficient` | 60 | Too few training sequences |
 | `deprecated_dedup_lower_coverage` | 87 | Name-based duplicate with lower alignment coverage |
-| `deprecated_exact_duplicate` | 1 | Byte-identical to another active model |
 | `deprecated_dedup_sequence_cluster` | 12 | Layer B: redundant at 70% id / 80% cov |
 | `deprecated_category_mismatch` | 7 | Acquisition genes in resistance; non-metal genes (ActP, MdtABC, YfmO) |
-| **Total deprecated** | **167** | |
-| **Active** | **466** | |
-| **Library total** | **633** | |
+| **Total deprecated** | **166** | |
+| `experimental` | 10 | Lower-trust tier, not yet fully validated |
+| **Active** | **478** | |
+| **Library total** | **654** | |
