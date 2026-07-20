@@ -8,10 +8,17 @@ version = "1.0.6"
 description = "Efesto: HMM-based annotation of metal cycling and resistance genes in genomes and metagenomes"
 readme = "README.md"
 license = { file = "LICENSE" }
-requires-python = ">=3.8"
+requires-python = ">=3.9"
 
-# Pure Python standard library only — external tools (hmmsearch, prodigal,
-# samtools) are installed via conda from environment.yml
+# Pure Python standard library only at import time — pyrodigal/pyrodigal-gv
+# are deferred imports (only loaded inside gene_calling.py's run_prodigal(),
+# so `pip install efesto` alone succeeds and non-gene-calling modules stay
+# testable without them installed). They ARE required at runtime for
+# --fna_dir gene calling — installed via conda from environment.yml, not
+# declared here. See note in docs/hmm_library_curation.md-adjacent packaging
+# notes if publishing a standalone PyPI/conda-forge release: either declare
+# them here too, or keep this deferred-import + conda-only pattern and
+# document it clearly for pip-only users.
 dependencies = []
 
 keywords = [

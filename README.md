@@ -37,6 +37,9 @@ If you use Efesto, cite all of the following that apply:
 **UniOP** (operon prediction, if using `--operon_prediction`):
 > Su H, Zhang R, Söding J (2024) *UniOP: a universal operon prediction for high-throughput prokaryotic (meta-)genomic data.* bioRxiv. [doi:10.1101/2024.11.11.623000](https://doi.org/10.1101/2024.11.11.623000)
 
+**eggNOG-mapper** (tier-2 confirmation for `needs_confirmation`-flagged HMM hits, if using `--eggnog_annotations` or `--run_eggnog`):
+> Cantalapiedra CP et al. (2021) *eggNOG-mapper v2: Functional Annotation, Orthology Assignments, and Domain Prediction at the Metagenomic Scale.* Mol. Biol. Evol. 38(12):5825–5829. [doi:10.1093/molbev/msab293](https://doi.org/10.1093/molbev/msab293)
+
 ---
 
 ## Installation
@@ -80,7 +83,7 @@ efesto \
 
 ## HMM library
 
-471 active models across 30 categories from 7 sources: FeGenie (196), Tabuteau et al. (130), MetHMMDB (105), NCBIfam (18), MnOxGeneTool (12), InterPro (8), curated (2). Categories span iron oxidation, reduction, storage, regulation, stress, Fe-S assembly, siderophore synthesis/transport, heme acquisition, a dedicated manganese pathway (acquisition, oxidation, regulation, resistance), and broad metal resistance.
+478 active models across 30 categories from 8 sources: FeGenie (196), Tabuteau et al. (130), MetHMMDB (105), NCBIfam (21), MnOxGeneTool (12), InterPro (8), curated (4), Pfam (2). Categories span iron oxidation, reduction, storage, regulation, stress, Fe-S assembly (SUF/ISC), siderophore synthesis/transport, heme acquisition, a dedicated manganese pathway (acquisition, oxidation, regulation, resistance), and broad metal resistance.
 
 → [HMM library documentation](https://github.com/l-gallucci/Efesto/wiki/hmm_library)
 
@@ -110,6 +113,7 @@ efesto \
 | Contig length filter | No | **Yes (`--min_contig_len`)** |
 | Long-format output | No | **Yes (`results-long.tsv` with all scoring columns)** |
 | Operon prediction | No | **Yes (UniOP, `--operon_prediction`)** |
+| Low-confidence-hit escalation | No | **Yes (eggNOG-mapper tier-2 confirmation, `--eggnog_annotations` / `--run_eggnog`)** |
 | Anvi'o integration | No | **Yes (functions + gene-scores TSVs)** |
 | R script compatibility | Yes | **Yes (same CSV format)** |
 | FeGenie filter rules | All | **All (exact port)** |

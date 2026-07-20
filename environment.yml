@@ -4,7 +4,11 @@ channels:
   - bioconda
 dependencies:
   # ── Core pipeline ───────────────────────────────────────────────────────────
-  - python>=3.9
+  # python capped at <3.12 so eggnog-mapper (optional, tier-2 confirmation —
+  # see below) can be added to THIS SAME environment later without forcing a
+  # python downgrade. Verified: a fresh solve of the full dependency set
+  # below + eggnog-mapper together resolves cleanly (conda picks 3.11.x).
+  - python>=3.9,<3.12
   - hmmer>=3.3
   - pyrodigal>=3.0
   - pyrodigal-gv>=0.3.0
@@ -34,3 +38,19 @@ dependencies:
 #   efesto ... --operon_prediction --uniop_path /path/to/UniOP/src/UniOP
 #
 # Su H, Zhang R, Söding J (2024) bioRxiv doi:10.1101/2024.11.11.623000
+
+# ── eggNOG-mapper tier-2 confirmation (optional, --run_eggnog) ──────────────
+# Only needed for narrow-margin models flagged needs_confirmation in the
+# registry (currently sufA/sufD/sufE — see docs/hmm_library_curation.md).
+# Not required for --eggnog_annotations (reading a file you already have).
+#
+# Not installed by default — its reference database is tens of GB and must
+# be downloaded separately, so this is opt-in, not part of the base env.
+# Safe to install into THIS SAME environment (python is already capped
+# <3.12 above specifically so this works without a python downgrade):
+#
+#   conda install -n efesto -c bioconda -c conda-forge eggnog-mapper
+#   download_eggnog_data.py --data_dir /path/to/eggnog_db   # tens of GB, one-time
+#   efesto ... --run_eggnog --eggnog_db_dir /path/to/eggnog_db
+#
+# Cantalapiedra CP et al. (2021) Mol Biol Evol doi:10.1093/molbev/msab293
