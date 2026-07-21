@@ -90,7 +90,7 @@ def cluster_by_coordinates(orf_set, orf_coords, max_bp_gap=5000, strand_aware=Fa
 
 
 def build_clusters(genome, orf_hits, orf_coords, max_gap, max_bp_gap, strand_aware,
-                   stem_gap_map=None):
+                   stem_gap_map=None, catalog_mode=False):
     """
     Entry point for clustering ORF hits within a genome.
 
@@ -98,7 +98,16 @@ def build_clusters(genome, orf_hits, orf_coords, max_gap, max_bp_gap, strand_awa
     overrides the global max_bp_gap per ORF pair using the more restrictive of
     the two ORFs' per-rule gaps. ORFs whose stem has no rule entry keep the
     global max_bp_gap.
+
+    catalog_mode: ORFs are deduplicated gene-catalog representatives, so a
+    shared header stem or a close numeric suffix reflects catalog bookkeeping
+    (e.g. mmseqs2 cluster IDs), not genomic proximity. Index-based and
+    coordinate-fallback clustering both assume header adjacency == genomic
+    adjacency, which does not hold here — return each ORF as its own
+    singleton cluster instead of inferring false neighbors.
     """
+    if catalog_mode:
+        return [[orf] for orf in orf_hits.keys()]
     if orf_coords:
         orf_stem_map = (
             {orf: hit["hmm_stem"] for orf, hit in orf_hits.items()}

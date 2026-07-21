@@ -186,7 +186,7 @@ def main():
         _check_env(uniop, eggnog)
 
     p = argparse.ArgumentParser(
-        prog="Efesto",
+        prog="efesto",
         description="HMM-based annotation of iron cycling and metal resistance genes",
         formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     ig = p.add_mutually_exclusive_group(required=True)
@@ -238,11 +238,16 @@ def main():
     p.add_argument("--all_results", action="store_true",
                    help="Report all HMM hits; skip all operon-context filters")
     p.add_argument("--catalog_mode", action="store_true",
-                   help="Gene catalog mode: bypass co-occurrence count rules "
-                        "(FLEET ≥5, siderophore ≥2/3, iron_transport ≥2) but "
-                        "keep bitscore cutoffs, Cyc2, and Mtr/Mto disambiguation. "
-                        "Use when input is a deduplicated gene catalog where "
-                        "genomic context is unavailable.")
+                   help="Gene catalog mode: treat each ORF as its own singleton "
+                        "cluster instead of inferring neighbors from header/index "
+                        "adjacency (a deduplicated catalog's numbering reflects "
+                        "catalog bookkeeping, not genomic position). This bypasses "
+                        "co-occurrence count rules (FLEET >=5, siderophore >=2/3, "
+                        "iron_transport >=2) and Mtr/Mto co-occurrence "
+                        "disambiguation as a side effect — hits keep their "
+                        "per-HMM default category. Bitscore cutoffs and Cyc2 still "
+                        "apply per-ORF. Use when input is a deduplicated gene "
+                        "catalog where genomic context is unavailable.")
     p.add_argument("--threads", type=int, default=4)
     p.add_argument("--hmm_threads", type=int, default=1)
     p.add_argument("--zero_cutoff_min_bitscore", type=float, default=30.0,
@@ -506,7 +511,7 @@ def main():
         raw_clusters = build_clusters(
             genome, orf_hits, orf_coords,
             args.max_gap, args.max_bp_gap, args.strand_aware,
-            stem_gap_map=stem_gap_map)
+            stem_gap_map=stem_gap_map, catalog_mode=args.catalog_mode)
         for orf_group in raw_clusters:
             cluster_rows = []
             for orf in orf_group:
