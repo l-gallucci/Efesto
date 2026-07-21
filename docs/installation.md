@@ -19,15 +19,15 @@
 ## Option 1 — Conda / Mamba (recommended)
 
 ```bash
-git clone https://github.com/YOUR_ORG/Efesto.git
+git clone https://github.com/l-gallucci/Efesto.git
 cd Efesto
 mamba env create -f environment.yml
 conda activate efesto
-Efesto --help
+efesto --help
 ```
 
 `environment.yml` installs all Python and non-Python dependencies and registers
-the `Efesto` command via `pip install -e .`.
+the `efesto` command via `pip install -e .`.
 
 ---
 
@@ -100,7 +100,7 @@ efesto ... --run_eggnog --eggnog_db_dir /path/to/eggnog_db
 
 ```bash
 # Check CLI is available
-Efesto --help
+efesto --help
 
 # Verify HMM library integrity
 python scripts/curate_hmm_library.py --verify hmm_library/
@@ -116,7 +116,7 @@ pytest tests/ -v
 On first use with a library that contains pre-HMMER3/f profiles, run:
 
 ```bash
-Efesto --normalize_hmms --faa_dir orfs/ --hmm_dir hmm_library/ --out results/
+efesto --normalize_hmms --faa_dir orfs/ --hmm_dir hmm_library/ --out results/
 ```
 
 `--normalize_hmms` converts any legacy profiles in-place using `hmmconvert` before

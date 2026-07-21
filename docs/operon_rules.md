@@ -295,7 +295,53 @@ cluster with two others. `canonical_size: 6`, `max_bp_gap: 2000`. On fail:
 
 ## `--catalog_mode`
 
-Bypasses co-occurrence count rules (FLEET ≥ 5, siderophore ≥ 2/3, iron_transport ≥ 2)
-while keeping bitscore cutoffs, Cyc2 logic, and Mtr/Mto disambiguation. Use when
-input is a deduplicated gene catalog (e.g. from CARD, KEGG) where genomic context
-is unavailable and co-occurrence cannot be meaningfully tested.
+Use when input is a deduplicated (non-redundant) gene catalog — e.g. an mmseqs2/CD-HIT
+clustered set of representative ORFs pooled across many samples/assemblies — where
+genomic context is unavailable.
+
+Without `--catalog_mode`, and without `--gff_dir`/`--fna_dir` supplying real
+coordinates, efesto falls back to grouping ORFs by parsing the trailing `_<int>`
+off each header and treating IDs numerically close together (within `--max_gap`)
+as genomic neighbors. That assumption holds for a single genome/MAG's native
+Prodigal output (`contig_1`, `contig_2`, `contig_3`… really are adjacent), but
+**not** for a gene catalog: representative sequence IDs reflect catalog/cluster
+bookkeeping, not genomic position. Two unrelated genes from different
+samples/contigs can end up with adjacent numeric IDs purely by chance of
+catalog construction, and would otherwise be merged into a fake "operon cluster."
+
+`--catalog_mode` turns off clustering entirely — every ORF is treated as its own
+singleton cluster. As a consequence it bypasses:
+- co-occurrence count rules (FLEET ≥ 5, siderophore ≥ 2/3, iron_transport ≥ 2, SUF_OPERON ≥ 3, etc.) — these need ≥2 genes in one cluster to fire at all
+- Mtr/Mto co-occurrence disambiguation — hits keep their per-HMM default category from the registry instead
+
+It keeps: bitscore cutoffs and Cyc2 logic, both of which are evaluated per-ORF
+and don't depend on cluster membership.
+
+**Before trusting any operon-context/co-occurrence feature on a catalog input**
+(i.e. before running *without* `--catalog_mode` on catalog data — don't do this,
+but if you're unsure whether your catalog's IDs happen to preserve real genomic
+order), check whether your header IDs encode real coordinates. Many gene-calling
+tools (Prodigal, pyrodigal) write full positional metadata directly in the FASTA
+defline, e.g.:
+
+```
+>SAMPLE_CONTIGID_5 # 91309 # 92004 # 1 # ID=...;partial=00;start_type=ATG;...
+```
+
+If your catalog retains this format, pick one recurring `SAMPLE_CONTIGID` stem
+with many entries and check whether its `start` coordinate increases
+monotonically with the trailing index:
+
+```bash
+grep "^>SAMPLE_CONTIGID_" your_catalog.faa | \
+  sed 's/^>//' | awk '{print $1, $3, $5}' | sort -t_ -k3 -n
+```
+
+Monotonically increasing, non-overlapping positions across the whole stem means
+that stem is a real single contig (e.g. a complete long-read assembly), and
+coordinate-based clustering would be biologically meaningful for it. Positions
+that jump backward or repeat in blocks mean the ID has been reused/relabeled
+across unrelated original contigs during catalog construction — in that case
+there is no genuine adjacency to recover for that stem, and `--catalog_mode`'s
+singleton-cluster behavior is the only safe option regardless of your header
+format.

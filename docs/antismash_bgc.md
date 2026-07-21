@@ -9,7 +9,7 @@ metallophore biosynthetic regions.
 ## Usage
 
 ```bash
-Efesto \
+efesto \
     --faa_dir  orfs/ \
     --gff_dir  gff/ \
     --hmm_dir  hmm_library/ \
