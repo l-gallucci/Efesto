@@ -42,7 +42,7 @@ anvi-import-misc-data \
 
 ```bash
 # 1. Run Efesto with FAA input (Prodigal ORFs)
-Efesto \
+efesto \
     --faa_dir orfs/ \
     --hmm_dir hmm_library/ \
     --out     results/ \
@@ -80,7 +80,7 @@ anvi-gen-contigs-database -f genome.fna -o CONTIGS.db \
     --annotation          bakta_annotation.tsv
 
 # Step 2 — Run Efesto with Bakta GFF3 for ID mapping
-Efesto \
+efesto \
     --fna_dir        assemblies/ \
     --bakta_gff_dir  bakta_output/ \
     --hmm_dir        hmm_library/ \
