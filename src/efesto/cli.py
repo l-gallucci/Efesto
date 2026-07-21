@@ -467,6 +467,9 @@ def main():
         genome_coords = load_gff_dir(gff_dir_path, faa_files)
         print(f"       {sum(1 for f in faa_files if f.name in genome_coords)}"
               f"/{len(faa_files)} with GFF")
+    elif args.catalog_mode:
+        print("[INFO] No GFF + catalog_mode: each ORF treated as its own "
+              "singleton cluster (no adjacency inferred)")
     else:
         print("[INFO] No GFF: using ORF-index clustering (FeGenie-compatible)")
 
