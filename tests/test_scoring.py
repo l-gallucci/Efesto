@@ -9,6 +9,7 @@ from efesto.scoring import (
     co_occurrence_score,
     distance_decay,
     hmm_weight,
+    topo_weight,
     uniop_pair_score,
 )
 
@@ -178,6 +179,17 @@ class TestClusterConfidence:
     def test_struct_w_applied(self):
         assert cluster_confidence(1.0, 1.0, 1.0, struct_w=1.2) == pytest.approx(1.2)
 
+    def test_default_topo_w_is_neutral(self):
+        # backward compatibility: callers not passing topo_w get identical
+        # behaviour to before it existed
+        assert cluster_confidence(0.8, 0.9, 0.7) == pytest.approx(0.8 * 0.9 * 0.7)
+
+    def test_topo_w_applied(self):
+        assert cluster_confidence(1.0, 1.0, 1.0, topo_w=1.2) == pytest.approx(1.2)
+
+    def test_topo_w_penalty(self):
+        assert cluster_confidence(1.0, 1.0, 1.0, topo_w=0.5) == pytest.approx(0.5)
+
 
 class TestAnnotWeight:
     _CONFIRMATION_MAP = {"sufA_TIGR01997.1": {"gene_name": "sufA", "kegg_ko": ["K05997"]}}
@@ -214,3 +226,49 @@ class TestAnnotWeight:
             "orf_2": {"preferred_name": "wrong", "kegg_ko": ["K99999"], "description": ""},
         }
         assert annot_weight(rows, eggnog_hits, cmap) == pytest.approx(0.5)
+
+
+class TestTopoWeight:
+    _TOPOLOGY_MAP = {"MtrA": {"expected_heme_c": 10, "expected_topology": "signal_peptide"}}
+
+    def test_no_expectation_stems_in_cluster_is_neutral(self):
+        rows = [{"hmm_stem": "MtrB", "orf": "orf_1", "heme_motifs": 0}]
+        assert topo_weight(rows, {}, self._TOPOLOGY_MAP) == pytest.approx(1.0)
+
+    def test_expectation_stem_no_phobius_data_uses_heme_only(self):
+        # Phobius wasn't run (phobius_hits={}) but heme_motifs already matches
+        # the expectation — heme_verdict alone is enough to confirm.
+        rows = [{"hmm_stem": "MtrA", "orf": "orf_1", "heme_motifs": 10}]
+        assert topo_weight(rows, {}, self._TOPOLOGY_MAP) == pytest.approx(1.2)
+
+    def test_both_signals_confirm(self):
+        rows = [{"hmm_stem": "MtrA", "orf": "orf_1", "heme_motifs": 10}]
+        phobius_hits = {"orf_1": {"signal_peptide": True, "tm_helices": 0}}
+        assert topo_weight(rows, phobius_hits, self._TOPOLOGY_MAP) == pytest.approx(1.2)
+
+    def test_heme_contradiction_penalizes(self):
+        rows = [{"hmm_stem": "MtrA", "orf": "orf_1", "heme_motifs": 0}]
+        phobius_hits = {"orf_1": {"signal_peptide": True, "tm_helices": 0}}
+        assert topo_weight(rows, phobius_hits, self._TOPOLOGY_MAP) == pytest.approx(0.5)
+
+    def test_topology_contradiction_penalizes(self):
+        rows = [{"hmm_stem": "MtrA", "orf": "orf_1", "heme_motifs": 10}]
+        phobius_hits = {"orf_1": {"signal_peptide": False, "tm_helices": 6}}
+        assert topo_weight(rows, phobius_hits, self._TOPOLOGY_MAP) == pytest.approx(0.5)
+
+    def test_weakest_link_one_contradicted_among_confirmed(self):
+        tmap = {
+            "MtrA": {"expected_heme_c": 10, "expected_topology": "signal_peptide"},
+            "MtoA": {"expected_heme_c": 10, "expected_topology": "signal_peptide"},
+        }
+        rows = [{"hmm_stem": "MtrA", "orf": "orf_1", "heme_motifs": 10},
+                {"hmm_stem": "MtoA", "orf": "orf_2", "heme_motifs": 0}]
+        phobius_hits = {
+            "orf_1": {"signal_peptide": True, "tm_helices": 0},
+            "orf_2": {"signal_peptide": True, "tm_helices": 0},
+        }
+        assert topo_weight(rows, phobius_hits, tmap) == pytest.approx(0.5)
+
+    def test_missing_heme_motifs_key_is_neutral(self):
+        rows = [{"hmm_stem": "MtrA", "orf": "orf_1"}]
+        assert topo_weight(rows, {}, self._TOPOLOGY_MAP) == pytest.approx(1.0)

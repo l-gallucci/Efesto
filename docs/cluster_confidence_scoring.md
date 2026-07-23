@@ -8,12 +8,12 @@
 
 ```
 cluster_confidence = hmm_weight × co_occ_score × uniop_weight
-                      × bgc_boost × annot_weight × struct_weight
+                      × bgc_boost × annot_weight × struct_weight × topo_weight
 ```
 
 Capped at 1.2. Recommended call threshold: ≥ 0.5.
 
-Six independent evidence sources multiplied together. Any single low score
+Seven independent evidence sources multiplied together. Any single low score
 brings the whole cluster down. This is intentional: a gene system with perfect
 HMM hits but no spatial coherence is as suspicious as one with perfect spacing
 but low-confidence HMMs.
@@ -22,6 +22,14 @@ but low-confidence HMMs.
 clusters containing a hit on a model flagged `needs_confirmation` in the
 registry — everything else always sees 1.0 for both, identical to pre-2026-07-20
 behaviour.
+
+`topo_weight` (added 2026-07-23) is different in scope from the other two:
+it checks every hit whose stem sets `expected_heme_c`/`expected_topology` in
+the registry, not just `needs_confirmation`-flagged ones — see Component 7.
+It is still gated behind `--topology_check`; without that flag it is always
+1.0, identical to pre-2026-07-23 behaviour, even though `expected_heme_c`/
+`expected_topology` and the underlying `heme_motifs` count are always present
+in the registry/output.
 
 ---
 
@@ -187,6 +195,65 @@ of eggNOG, for the flagged hits that eggNOG can't resolve either.
 
 ---
 
+## Component 7 — `topo_weight`
+
+```
+topo_weight = weakest_link( topology_verdict(...), heme_verdict(...) )
+              over all cluster rows whose stem has an expectation set
+```
+
+**Runs on every applicable hit, not just `needs_confirmation`-flagged ones.**
+Unlike `annot_weight`/`struct_weight`, this tier isn't scoped to narrow-margin
+HMM models — it's scoped to whichever registry stems declare
+`expected_heme_c`/`expected_topology` (currently MtrA/MtoA only, see
+`docs/hmm_library_curation.md`). That scoping is deliberately by *declared
+expectation*, not by *total hit count*: as more stems get expectations
+curated, the applicable set grows with curation effort, not with genome or
+metagenome size — the same scaling argument that keeps tier-2/tier-3
+tractable applies here for a different reason (cheap tool, not narrow
+subset).
+
+Two independent signals per applicable row, both from `src/efesto/topology.py`:
+
+- **`topology_verdict`** — Phobius transmembrane-helix-count and
+  signal-peptide prediction, run once per genome in a single batched call
+  (`--topology_check`, requires Phobius on `PATH` or `--phobius_path`).
+  Conservative by design: only contradicts on a clear architectural mismatch
+  (e.g. `expected_topology=signal_peptide` but Phobius predicts ≥2 TM
+  helices), stays neutral on borderline calls (a single predicted helix, or
+  a lipoprotein signal Phobius' Sec-signal model may not catch cleanly).
+- **`heme_verdict`** — compares `expected_heme_c` against `heme_motifs`,
+  the CXXCH-style motif count `operon.count_heme` already computes for
+  *every* hit today (previously purely descriptive output, now also an
+  evidence signal). Confirmed if observed ≥ 0.7 × expected (tolerates minor
+  regex undercount); contradicted only when the count is entirely absent
+  (0) against a substantial expectation (≥4) — a decaheme cytochrome hit
+  with zero heme motifs is a strong signal, a partial undercount is not.
+
+**Weakest-link across both signals and all applicable rows**, same principle
+as `annot_weight`: 1.0 neutral if no row has an applicable expectation or all
+checks come back neutral, 1.2 if every applicable verdict confirms, 0.5 if
+any contradicts.
+
+**Why this tier exists**: a standalone hit with no operon neighbors, no
+`--bam`, and no BGC/UniOP support falls back to just the raw HMM score under
+every other component — no independent corroboration at all. `topo_weight`
+is a genuinely orthogonal axis (biophysical structure prediction from
+primary sequence, not another statistical summary of the same sequence data
+an HMM profile already reads) that applies even to those standalone cases,
+since it needs neither operon context nor coverage data. A sequence composition/ML-based classifier layer and a DIAMOND/BLAST
+reciprocal-best-hit layer were both considered during design and rejected
+for the same reason: both read the same primary-sequence signal the HMM
+profile is already built from, so neither adds real independent evidence.
+
+**Gated behind `--topology_check`** (off by default). Even though
+`expected_heme_c`/`expected_topology` live in the registry unconditionally
+and `heme_motifs` is always computed, `topo_weight` is only ever invoked
+when the flag is passed — `cli.py` passes `topo_w=1.0` explicitly otherwise.
+This keeps default-run output byte-identical to pre-2026-07-23 behaviour.
+
+---
+
 ## Canonical sizes — biological basis
 
 The `canonical_size` for each gene system defines how many genes a **complete**
@@ -264,6 +331,12 @@ edge is not a confident call.
 | `uniop_pair_score(...)` | `scoring.py` | min pairwise UniOP probability |
 | `hmm_weight(...)` | `scoring.py` | mean calibrated/low_confidence weight |
 | `cluster_confidence(...)` | `scoring.py` | final product, capped at 1.2 |
+| `topo_weight(...)` | `scoring.py` | weakest-link over topology_verdict + heme_verdict |
+| `run_phobius(...)` | `topology.py` | batched Phobius call, one per genome |
+| `_parse_phobius_output(...)` | `topology.py` | returns {orf: {signal_peptide, tm_helices}} |
+| `topology_verdict(...)` | `topology.py` | confirmed/contradicted/neutral vs expected_topology |
+| `heme_verdict(...)` | `topology.py` | confirmed/contradicted/neutral vs expected_heme_c |
+| `build_topology_expectation_map(registry)` | `io.py` | {stem → {expected_heme_c, expected_topology}} |
 | `build_canonical_size_map(rules)` | `operon.py` | {gene_name → canonical_size} from rules |
 | `_parse_uniop_pred(...)` | `uniop.py` | returns (orf_to_op, pair_probs) |
 | `run_uniop(...)` | `uniop.py` | returns (genome_operon_map, genome_pair_probs) |

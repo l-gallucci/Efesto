@@ -3,7 +3,7 @@
 Independent evidence sources combined multiplicatively:
 
     cluster_confidence = hmm_weight × co_occ_weight × uniop_weight
-                          × bgc_boost × annot_weight × struct_weight
+                          × bgc_boost × annot_weight × struct_weight × topo_weight
 
 - hmm_weight:   fraction of hits with calibrated (equivalog) HMM cutoffs
 - co_occ_weight: gene completeness × distance-decay penalty × contig-edge penalty
@@ -13,11 +13,16 @@ Independent evidence sources combined multiplicatively:
                 (tier 2 — see docs/hmm_library_curation.md, "SUF operon deployment")
 - struct_weight: Baktfold structural confirmation for the same flagged hits
                 (tier 3 — placeholder parameter, always 1.0 until implemented)
+- topo_weight:  Phobius topology + heme-motif-count consistency, computed for
+                EVERY hit (not just needs_confirmation-flagged ones) — see
+                docs/cluster_confidence_scoring.md, Component 7
 
-annot_weight and struct_weight both default to 1.0 (neutral) — same
-no-data-no-penalty policy as uniop_weight: only genes flagged
-needs_confirmation are ever affected, and only when the corresponding tool
-was actually run and returned an informative result for that specific ORF.
+annot_weight, struct_weight, and topo_weight all default to 1.0 (neutral) —
+same no-data-no-penalty policy as uniop_weight: they only affect genes with
+an applicable expectation (needs_confirmation flag for the first two,
+expected_heme_c/expected_topology registry columns for topo_weight), and
+only when the corresponding tool actually ran and returned an informative
+result for that specific ORF.
 
 Default call threshold: cluster_confidence ≥ 0.5
 """
@@ -175,13 +180,64 @@ def annot_weight(cluster_rows, eggnog_hits, confirmation_map):
     return 1.2
 
 
+def topo_weight(cluster_rows, phobius_hits, topology_map):
+    """
+    Topology/motif consistency weight — weakest-link across the cluster, same
+    principle as annot_weight. Unlike annot_weight/struct_weight, this checks
+    EVERY hit whose stem has an expectation set in the registry, not just
+    needs_confirmation-flagged ones (see io.build_topology_expectation_map).
+
+    Two independent checks per applicable row: Phobius topology
+    (topology.topology_verdict) and heme-motif count
+    (topology.heme_verdict, against the heme_motifs value already computed
+    by operon.count_heme for every hit).
+
+    Args:
+        cluster_rows: rows with "hmm_stem", "orf", "heme_motifs" keys
+        phobius_hits: {orf_id: phobius_row} from
+                      topology._parse_phobius_output, or {} if Phobius
+                      wasn't run (heme_verdict still applies regardless,
+                      since heme_motifs is already computed for every hit)
+        topology_map: {stem: {"expected_heme_c": int|None,
+                       "expected_topology": str|None}} from
+                       io.build_topology_expectation_map — only stems in
+                       this map are ever checked; everything else is
+                       untouched by design
+
+    Returns 1.0 (neutral) when:
+        - no row in the cluster is on a stem with any expectation set
+        - all applicable checks come back neutral (e.g. Phobius wasn't run
+          and heme count is inconclusive)
+
+    Otherwise: 1.2 if every applicable verdict confirms, 0.5 if any
+    contradicts (weakest link).
+    """
+    from efesto.topology import heme_verdict, topology_verdict
+
+    verdicts = []
+    for r in cluster_rows:
+        stem = r.get("hmm_stem", "")
+        info = topology_map.get(stem)
+        if info is None:
+            continue
+        phobius_row = phobius_hits.get(r.get("orf", ""))
+        verdicts.append(topology_verdict(info["expected_topology"], phobius_row))
+        verdicts.append(heme_verdict(info["expected_heme_c"], r.get("heme_motifs")))
+
+    if not verdicts or all(v == "neutral" for v in verdicts):
+        return 1.0
+    if any(v == "contradicted" for v in verdicts):
+        return 0.5
+    return 1.2
+
+
 def cluster_confidence(hmm_w, co_occ_w, uniop_w, bgc_boost=1.0,
-                        annot_w=1.0, struct_w=1.0):
+                        annot_w=1.0, struct_w=1.0, topo_w=1.0):
     """
     Combined cluster confidence score.
 
-    Returns float, capped at 1.2 (bgc_boost/annot_w can push above 1.0).
-    Recommended call threshold: ≥ 0.5.
+    Returns float, capped at 1.2 (bgc_boost/annot_w/topo_w can push above
+    1.0). Recommended call threshold: ≥ 0.5.
 
     Args:
         hmm_w:      hmm_weight(cluster_rows)
@@ -190,5 +246,8 @@ def cluster_confidence(hmm_w, co_occ_w, uniop_w, bgc_boost=1.0,
         bgc_boost:  1.2 if in siderophore BGC, 1.0 otherwise
         annot_w:    annot_weight(...), 1.0 if eggNOG not run or not applicable
         struct_w:   Baktfold tier-3 confirmation, 1.0 until implemented
+        topo_w:     topo_weight(...), 1.0 if not applicable — computed for
+                    every hit, not just needs_confirmation-flagged ones
     """
-    return min(1.2, hmm_w * co_occ_w * uniop_w * bgc_boost * annot_w * struct_w)
+    return min(1.2, hmm_w * co_occ_w * uniop_w * bgc_boost
+               * annot_w * struct_w * topo_w)

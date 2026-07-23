@@ -26,7 +26,8 @@ from efesto.coverage import build_contig_coverage, load_bams_tsv
 from efesto.gene_calling import run_prodigal
 from efesto.hmmer import collect_best_hits, run_all_hmmsearches
 from efesto.io import (build_confirmation_map, build_contig_length_dict,
-                                build_nseq_map, filter_categories, load_gff_dir,
+                                build_nseq_map, build_topology_expectation_map,
+                                filter_categories, load_gff_dir,
                                 load_registry, print_provenance, read_fasta,
                                 read_cutoffs, read_map, VALID_ANNOTATE_TOKENS)
 from efesto.operon import (_DEFAULT_OPERON_RULES, build_canonical_size_map,
@@ -38,7 +39,8 @@ from efesto.eggnog import (_parse_eggnog_annotations, confirm_hit, run_eggnog,
                                     write_flagged_faa)
 from efesto.scoring import (
     annot_weight, cluster_confidence, co_occurrence_score, hmm_weight,
-    uniop_pair_score)
+    topo_weight, uniop_pair_score)
+from efesto.topology import _parse_phobius_output, run_phobius
 from efesto.uniop import (
     _uniop_context, build_prodigal_bakta_map, run_uniop, write_operon_structure)
 from efesto.writers import (
@@ -55,7 +57,8 @@ def _groupby_genome(rows):
     return by_genome.items()
 
 
-def _check_env(uniop_path: str = "uniop", eggnog_path: str = "emapper.py") -> None:
+def _check_env(uniop_path: str = "uniop", eggnog_path: str = "emapper.py",
+               phobius_path: str = "phobius.pl") -> None:
     import importlib
     import subprocess
 
@@ -154,6 +157,20 @@ def _check_env(uniop_path: str = "uniop", eggnog_path: str = "emapper.py") -> No
                "  # tens of GB, one-time")
         print( "        Then: efesto --run_eggnog --eggnog_db_dir /path/to/eggnog_db")
 
+    # ── Phobius (optional — topology/motif tier, runs on every hit) ──────────
+    print("\nPhobius (optional — manual install, no conda/pip release):")
+    phobius_found = shutil.which(phobius_path) or (Path(phobius_path).exists()
+                                                    and not Path(phobius_path).is_dir())
+    if phobius_found:
+        print(f"{OK}Phobius  →  {phobius_path}")
+        pass_count += 1
+    else:
+        print(f"{WARN}Phobius  — not found at '{phobius_path}'")
+        print( "        Only needed for --topology_check. Registry stems with "
+               "no expected_topology/expected_heme_c set are unaffected either way.")
+        print( "        Install: http://phobius.sbc.su.se/instructions.html")
+        print( "        Then use: efesto --topology_check --phobius_path /path/to/phobius.pl")
+
     # ── HMM library ───────────────────────────────────────────────────────────
     print("\nHMM library:")
     _bundled = Path(__file__).parents[2] / "hmm_library"
@@ -183,7 +200,9 @@ def main():
                       if a == "--uniop_path" and i + 1 < len(sys.argv)), "uniop")
         eggnog = next((sys.argv[i + 1] for i, a in enumerate(sys.argv)
                        if a == "--eggnog_path" and i + 1 < len(sys.argv)), "emapper.py")
-        _check_env(uniop, eggnog)
+        phobius = next((sys.argv[i + 1] for i, a in enumerate(sys.argv)
+                        if a == "--phobius_path" and i + 1 < len(sys.argv)), "phobius.pl")
+        _check_env(uniop, eggnog, phobius)
 
     p = argparse.ArgumentParser(
         prog="efesto",
@@ -317,6 +336,20 @@ def main():
                         "own structure/annotation tool of choice (e.g. Baktfold, "
                         "ESMFold) on exactly the same small candidate set Efesto "
                         "flagged.")
+    # ── Topology/motif consistency (runs on every hit, not just flagged ones) ──
+    p.add_argument("--topology_check", action="store_true",
+                   help="Run Phobius (transmembrane topology + signal-peptide "
+                        "prediction) on filtered HMM hits and compare against "
+                        "expected_topology/expected_heme_c set in the registry "
+                        "(currently MtrA/MtoA — see docs/hmm_library_curation.md). "
+                        "Unlike --run_eggnog/tier-3 struct confirmation, this is "
+                        "not limited to needs_confirmation-flagged hits — it "
+                        "checks every hit whose model declares an expectation, "
+                        "which is cheap enough to leave unscoped. Off by default. "
+                        "Requires Phobius installed (see 'efesto checkenv').")
+    p.add_argument("--phobius_path", default="phobius.pl",
+                   help="Path to phobius.pl executable (default: 'phobius.pl', "
+                        "assumed in PATH). Only used with --topology_check.")
     # ── Anvi'o output ─────────────────────────────────────────────────────────
     p.add_argument("--anvio", action="store_true",
                    help="Write Efesto-anvio-functions.tsv, compatible with "
@@ -398,6 +431,7 @@ def main():
     registry = load_registry(args.hmm_dir)
     nseq_map = build_nseq_map(registry)
     confirmation_map = build_confirmation_map(registry)
+    topology_map = build_topology_expectation_map(registry)
     _skip_statuses = {"deprecated", "inactive"}
     _active_stems = {
         r["stem"] for r in registry
@@ -655,6 +689,35 @@ def main():
                   "(pass --eggnog_annotations or --run_eggnog to enable) — "
                   "all pending hits stay dropped")
 
+    # ── Topology/motif tier: checks every hit with an expectation set ────────
+    # Not scoped to pending_confirmation like tier-2/tier-3 — cheap enough
+    # (one batched Phobius call, only over hits whose stem actually declares
+    # expected_topology/expected_heme_c) to run unconditionally. Placed after
+    # the tier-2 rescue pass so any eggNOG-rescued single-gene clusters are
+    # included too.
+    phobius_hits = {}
+    if args.topology_check and topology_map and final_rows:
+        applicable = {r["orf"]: r["sequence"] for r in final_rows
+                     if r["hmm_stem"] in topology_map and r.get("sequence")}
+        if applicable:
+            topo_faa_tmp = out_dir / "efesto_topology_candidates.faa"
+            with open(topo_faa_tmp, "w") as fh_out:
+                for orf_id, seq in applicable.items():
+                    fh_out.write(f">{orf_id}\n{seq}\n")
+            topo_out = out_dir / "efesto_topology.phobius"
+            phobius_result = run_phobius(topo_faa_tmp, topo_out,
+                                         phobius_path=args.phobius_path)
+            if phobius_result:
+                phobius_hits = _parse_phobius_output(phobius_result)
+                print(f"[INFO] Topology check: Phobius ran on {len(applicable)} "
+                      f"hit(s) with an expected_topology/expected_heme_c set")
+            else:
+                print("[WARN] --topology_check given but Phobius did not run "
+                      "— topo_weight stays neutral this run", file=sys.stderr)
+    elif args.topology_check and not topology_map:
+        print("[INFO] --topology_check given but no registry stem sets "
+              "expected_topology/expected_heme_c — nothing to check")
+
     final_rows.sort(key=lambda r: (r["cluster_id"], r["orf"]))
     norm_dict   = ({faa.name: len(seq_dict.get(faa.name, {})) for faa in faa_files}
                    if args.norm else None)
@@ -827,13 +890,20 @@ def main():
             [r["orf"] for r in grp], orf_coords_g,
             bgc_map.get(genome))
         annot_w  = annot_weight(grp, eggnog_hits, confirmation_map)
+        # Gated on args.topology_check even though topology_map/heme_motifs are
+        # always populated — without this gate, heme_verdict would silently
+        # apply to MtrA/MtoA clusters on every run, changing default behavior
+        # for users who never opted in. See verification step in the plan.
+        topo_w   = (topo_weight(grp, phobius_hits, topology_map)
+                   if args.topology_check else 1.0)
         conf    = cluster_confidence(
             grp[0]["hmm_w"], grp[0]["co_occ_score"], uniop_w,
-            bgc_boost=boost, annot_w=annot_w)
+            bgc_boost=boost, annot_w=annot_w, topo_w=topo_w)
         for r in grp:
             r["uniop_w"]            = uniop_w
             r["bgc_boost"]          = boost
             r["annot_w"]            = annot_w
+            r["topo_w"]             = topo_w
             r["cluster_confidence"] = conf
 
     # Write long-format after UniOP so uniop_context column is included when available

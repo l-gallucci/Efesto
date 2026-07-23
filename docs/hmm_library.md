@@ -69,20 +69,29 @@ with provenance, bitscore cutoffs, and curation status.
 
 ## Registry format (`hmm_library/hmm_registry.tsv`)
 
-Tab-separated, one row per model. Columns:
+Tab-separated, one row per model. Columns (17 total — this list was stale
+against the real file for a while; verify with `head -1 hmm_library/hmm_registry.tsv`
+if in doubt):
 
 | Column | Description |
 |--------|-------------|
 | `stem` | HMM file stem; must exactly match filename without `.hmm` |
 | `name` | Human-readable gene name (shown in outputs) |
-| `accession` | Pfam/TIGRFAM accession or empty |
+| `acc` | Pfam/TIGRFAM accession or empty |
 | `category` | Functional category (directory name) |
+| `gene_name` | Gene symbol used in output columns (`gene`, cluster gene-name lookups) |
+| `source` | Provenance: `fegenie`, `ncbifam`, `curated`, etc. |
 | `hmm_file` | Relative path from `hmm_library/` |
 | `nseq` | Training sequences used to build the HMM |
 | `cutoff` | Calibrated bitscore cutoff (0 = zero-cutoff fallback) |
-| `date_added` | ISO date |
-| `status` | `active` or `deprecated_*` |
+| `added_date` | ISO date |
+| `status` | `active`, `experimental`, or `deprecated_*` |
 | `reference` | DOI or citation |
+| `validated_in` | Optional cross-validation note; empty for most rows |
+| `needs_confirmation` | `"yes"` triggers tier-2 (eggNOG)/tier-3 (Baktfold) escalation — see "Low-confidence-hit escalation" below. Empty for all but a handful of narrow-margin models. |
+| `kegg_ko` | KEGG Ortholog number(s), comma-separated. Used by tier-2 confirmation; only populated for `needs_confirmation="yes"` rows today. |
+| `expected_heme_c` | Optional integer — expected heme-c (CXXCH-style) motif count, compared against `operon.count_heme`'s output for `--topology_check`. Populated only for a pilot set (MtrA/MtoA) — see `docs/cluster_confidence_scoring.md`, Component 7. |
+| `expected_topology` | Optional — one of `signal_peptide`, `multi_pass_tm`, `cytoplasmic`, compared against Phobius output for `--topology_check`. Same pilot set as `expected_heme_c`. |
 
 > **Registry rule:** `stem` must exactly match the HMM file's `NAME` field and the
 > filename without `.hmm`. Mismatches silently break cutoff lookup and gene-name mapping.
