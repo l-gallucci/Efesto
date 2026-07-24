@@ -327,6 +327,109 @@ python scripts/calibrate_mtr_mto_cutoffs.py
 
 ---
 
+## ImoA / CymA correction — MtrMto oxidation-side gene fix (2026-07-24)
+
+### Problem
+
+The `MtrMto` rule's oxidation-direction gene list was `MtoA, MtrB_TIGR03509, CymA`. This
+"CymA" traces back to Liu et al. 2012 (*Front. Microbiol.*, doi:10.3389/fmicb.2012.00037),
+who originally called the third gene in the *Sideroxydans lithotrophicus* ES-1 `mtoAB`
+locus "CymA-like" based on loose sequence similarity to *Shewanella*'s CymA — both are
+members of the broad NapC/NirT cytochrome c superfamily (Pfam PF03264), which also
+includes NirT, NapC, and TorC across unrelated respiratory pathways (nitrate/nitrite/TMAO
+respiration) in completely different organisms.
+
+A follow-up paper (Fe(II)-oxidation-specific characterization; *mBio*,
+doi:10.1128/mbio.02150-22) directly measured this:
+
+> "Slit_2495 has been putatively called CymA in the literature. However, phylogenetic
+> analysis shows that Slit_2495 is more closely related to NirT from *Pseudomonas* than
+> to CymA from *Shewanella*... we propose that Slit_2495 be named *imoA*."
+
+> "the protein sequence of ImoA is 64% identical to NirT from *Pseudomonas stutzeri* and
+> 54% identical to NapC from *E. coli*, whereas it is only 33% identical to CymA from
+> *S. oneidensis* MR-1."
+
+So the registered "CymA" model was never validated against a real CymA ortholog for the
+oxidation side of this rule — it was misnamed from the start. Real CymA (Myers & Myers
+1997, *J. Bacteriol.*, doi:10.1128/jb.179.4.1143-1152.1997) is itself a real, separate,
+well-characterized gene: a tetraheme cytochrome c required for *Shewanella*'s reduction of
+Fe(III), nitrate, and fumarate (TnphoA knockout mutant `CMTn-1` lost all three activities;
+complementation with the cloned gene restored Fe(III) reduction to 47.1 µmol/day vs.
+wild-type's 46.1, from 0.890 in the mutant — Table 2 of that paper). It's mechanistically
+upstream of MtrA (feeds electrons from the menaquinone pool toward MtrA), not itself part
+of the periplasmic MtrA-MtrB-MtrC trio, and not the correct gene for the `MtrMto` rule's
+oxidation side.
+
+The existing registry `CymA` model itself (`hmm_library/iron_reduction/CymA.hmm`) was
+FeGenie-derived with only 4 training sequences and had been deprecated as
+`deprecated_nseq_insufficient` — so in practice the "CymA" entry in the `MtrMto` gene list
+had *no active model backing it at all*, meaning the oxidation side of this rule could
+never reach 3/3 completeness regardless of what was misnamed.
+
+### Resolution — two separate models, correctly named and calibrated
+
+**ImoA** (`hmm_library/iron_oxidation/ImoA.hmm`) — new model for the real oxidation-side
+gene. Seed data availability mirrors the MtrA/MtoA situation: only 2 distinct
+ImoA-containing genomes currently exist in NCBI (same narrow-clade data scarcity as
+MtoA's own n=6).
+
+| Accession | Organism | Len | Role |
+|---|---|---|---|
+| ADE12720.1 | *Sideroxydans lithotrophicus* ES-1 | 198 | Canonical (Slit_2495, the paper's own subject) |
+| VVC82587.1 | *Sideroxydans* sp. CL21 | 198 | Genus diversity |
+
+**CymA** (`hmm_library/iron_reduction/CymA.hmm`) — rebuilt from real, verified CymA
+sequences (previous FeGenie-derived model deprecated for insufficient seed count).
+
+| Accession | Organism | Len | Role |
+|---|---|---|---|
+| Q8E8S0.1 | *Shewanella oneidensis* MR-1 | 187 | Canonical — directly cross-referenced to GenBank U75974, the exact accession from Myers & Myers 1997 |
+| CAQ9471801.1 | *Shewanella xiamenensis* (MAG) | 187 | Species diversity |
+| CAQ8020556.1 | *Shewanella* sp. (MAG) | 187 | Species diversity |
+| BGZ77281.1 | *Shewanella marina* | 188 | Species diversity |
+| BGZ62728.1 | *Shewanella algae* | 187 | Species diversity |
+
+Both built with the same `mafft --auto` → `hmmbuild` pipeline used for the MtrA/MtoA
+rebuild. Cross-validated against each other and against a confirmed-negative set (real
+NirT, NapC, TorC — P24038, P0ABL5, P33226) to verify genuine separation, not just
+self-consistency:
+
+```
+ImoA HMM   vs self (n=2):            473.5, 475.1 bits
+           vs best confounder (NirT): 300.4 bits   → ~173-bit gap
+           vs CymA seeds:            94.8–106.8 bits (clearly non-members)
+
+CymA HMM   vs self (n=5):            393.6–431.0 bits
+           vs best confounder (TorC): 119.3 bits   → ~274-bit gap
+           vs ImoA seeds:            106.2–110.2 bits (clearly non-members)
+```
+
+Both directions show real separation despite the small seed counts — the two genes are
+confirmed non-orthologous to each other, consistent with both papers' independent identity
+analyses.
+
+### TC values
+
+Following the same "TC = minimum confirmed true positive" convention as MtrA/MtoA:
+
+| Model | TC (bits) | Rationale |
+|---|---|---|
+| **ImoA** | 473 | Min confirmed ImoA (*Sideroxydans* sp. CL21, 473.5) |
+| **CymA** | 393 | Min confirmed CymA (*Shewanella marina*, 393.6) |
+
+### Known limitations
+
+Both models are registered `status=experimental` (nseq < 10, same threshold/warning
+convention as every other sparse model in this registry) — `n=2` for ImoA and `n=5` for
+CymA are genuinely small seed sets, a real data-availability limit like MtoA's own n=6, not
+a curation shortcut. The score gaps above are large enough to trust for now, but neither
+model has been validated against as broad a "universe" scan as the 3794-sequence one used
+for MtrA/MtoA — treat hits with the same caution the registry's `experimental` status flag
+already signals throughout the pipeline.
+
+---
+
 ## New categories added (2026-05-23)
 
 | Category | Models | Rationale | Key references |

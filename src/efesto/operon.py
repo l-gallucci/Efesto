@@ -38,7 +38,9 @@ _DEFAULT_OPERON_RULES = [
     {"name": "MtrMto",
      "categories": ["iron_oxidation", "iron_reduction",
                     "possible_iron_oxidation_and_possible_iron_reduction"],
-     "genes": ["MtrA", "MtrB_TIGR03509", "MtrC_TIGR03507", "MtoA", "CymA"],
+     # Oxidation-side third gene is ImoA (Slit_2495), not CymA -- see
+     # docs/hmm_library_curation.md and operon_rules.json's _comment for MtrMto.
+     "genes": ["MtrA", "MtrB_TIGR03509", "MtrC_TIGR03507", "MtoA", "ImoA"],
      "rule": "mtr_disambiguation", "on_fail": "keep_all",
      "canonical_size": 3, "max_bp_gap": 2000},
     {"name": "SIDERO_TRANSPORT",
@@ -79,7 +81,7 @@ _FOXABC_GENES = {"FoxA", "FoxB", "FoxC"}
 _FOXEYZ_GENES = {"FoxE", "FoxY", "FoxZ"}
 _DFE1_GENES   = {"DFE_0448", "DFE_0449", "DFE_0450", "DFE_0451"}
 _DFE2_GENES   = {"DFE_0461", "DFE_0462", "DFE_0463", "DFE_0464", "DFE_0465"}
-_MTR_GENES    = {"MtrA", "MtrB_TIGR03509", "MtrC_TIGR03507", "MtoA", "CymA"}
+_MTR_GENES    = {"MtrA", "MtrB_TIGR03509", "MtrC_TIGR03507", "MtoA", "ImoA"}
 _TAD_GENES    = {"PF04964-Flp_Fap_pilin", "cpaB_TIGR03177.1"}
 _SUF_GENES    = {"sufA_TIGR01997.1", "sufB_TIGR01980.1", "sufC_TIGR01978.1",
                  "sufD_TIGR01981.1", "sufS_TIGR01979.1", "sufE_PF02657.22"}
@@ -164,7 +166,7 @@ def _mtr(rows):
     updated = [dict(r) for r in rows]
     if "MtoA" in stems and "MtrB_TIGR03509" in stems and "MtrC_TIGR03507" not in stems:
         for r in updated:
-            if r["hmm_stem"] in {"MtrB_TIGR03509", "MtoA", "CymA"}:
+            if r["hmm_stem"] in {"MtrB_TIGR03509", "MtoA", "ImoA"}:
                 r["cat"] = "iron_oxidation"
     elif "MtrA" in stems and "MtrB_TIGR03509" in stems:
         for r in updated:
@@ -270,10 +272,10 @@ def filter_cluster_fegenie(cluster_rows, report_all_pats, all_results=False,
 
     # Cyc1 handled in second_pass, not here
 
-    if "CymA" in stems:
+    if "ImoA" in stems:
         if stems & {"MtrA", "MtoA", "MtrB_TIGR03509", "MtrC_TIGR03507"}:
             return _mtr(cluster_rows)
-        return [r for r in cluster_rows if r["hmm_stem"] != "CymA"] or []
+        return [r for r in cluster_rows if r["hmm_stem"] != "ImoA"] or []
 
     if stems & _MTR_GENES:
         return _mtr(cluster_rows)

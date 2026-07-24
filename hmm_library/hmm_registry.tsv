@@ -321,7 +321,8 @@ FoxZ	FoxZ		iron_oxidation	FoxZ	fegenie	iron_oxidation/FoxZ.hmm	5	150.0	2026-04-2
 MtoA	MtoA		iron_oxidation	MtoA	curated	iron_oxidation/MtoA.hmm	6	520.0	2026-05-23	active	doi:10.3389/fmicb.2012.00037;doi:10.1128/AEM.00331-11	
 MtrB_TIGR03509	MtrB_TIGR03509		iron_reduction	MtrB_TIGR03509	fegenie	iron_reduction/MtrB_TIGR03509.hmm	10	240.05	2026-04-21	active	doi:10.1038/s41396-019-0570-7	
 sulfocyanin	sulfocyanin		iron_oxidation	sulfocyanin	fegenie	iron_oxidation/sulfocyanin.hmm	6	45.4	2026-04-21	active	doi:10.1038/s41396-019-0570-7	
-CymA	CymA		iron_reduction	CymA	fegenie	iron_reduction/CymA.hmm	4	237.0	2026-04-21	deprecated_nseq_insufficient	doi:10.1038/s41396-019-0570-7	
+CymA	CymA		iron_reduction	CymA	curated	iron_reduction/CymA.hmm	5	393.0	2026-07-24	experimental	doi:10.1128/jb.179.4.1143-1152.1997
+ImoA	ImoA		iron_oxidation	ImoA	curated	iron_oxidation/ImoA.hmm	2	473.0	2026-07-24	experimental	doi:10.1128/mbio.02150-22
 DFE_0448	DFE_0448		iron_reduction	DFE_0448	fegenie	iron_reduction/DFE_0448.hmm	11	27.5	2026-04-21	active	doi:10.1038/s41396-019-0570-7	
 DFE_0449	DFE_0449		iron_reduction	DFE_0449	fegenie	iron_reduction/DFE_0449.hmm	15	30.0	2026-04-21	active	doi:10.1038/s41396-019-0570-7	
 DFE_0450	DFE_0450		iron_reduction	DFE_0450	fegenie	iron_reduction/DFE_0450.hmm	9	30.0	2026-04-21	active	doi:10.1038/s41396-019-0570-7	

@@ -74,11 +74,11 @@
       "max_bp_gap":     1000
     },
     {
-      "_comment": "Mtr/Mto disambiguation: re-assigns iron_oxidation vs iron_reduction based on subunit co-presence",
+      "_comment": "Mtr/Mto disambiguation: re-assigns iron_oxidation vs iron_reduction based on subunit co-presence. Oxidation-side third gene is ImoA (Slit_2495), not CymA -- Liu et al. 2012 originally called this gene 'CymA-like' based on loose NapC/NirT-superfamily sequence similarity, but a 2022 mBio paper (doi:10.1128/mbio.02150-22) showed it is only 33% identical to real Shewanella CymA (64%/54% identical to NirT/NapC instead) and renamed it ImoA. Real CymA (doi:10.1128/jb.179.4.1143-1152.1997) is a Shewanella reduction-pathway gene, mechanistically upstream of MtrA, not part of this operon's oxidation side -- see docs/hmm_library_curation.md.",
       "name":           "MtrMto",
       "categories":     ["iron_oxidation","iron_reduction",
                          "possible_iron_oxidation_and_possible_iron_reduction"],
-      "genes":          ["MtrA","MtrB_TIGR03509","MtrC_TIGR03507","MtoA","CymA"],
+      "genes":          ["MtrA","MtrB_TIGR03509","MtrC_TIGR03507","MtoA","ImoA"],
       "rule":           "mtr_disambiguation",
       "on_fail":        "keep_all",
       "canonical_size": 3,
