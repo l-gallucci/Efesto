@@ -188,10 +188,48 @@ subset) — neither is on by default.
 
 ## Component 6 — `struct_weight`
 
-Designed, not yet implemented — placeholder parameter in `cluster_confidence`,
-always 1.0. Intended as the same confirm/contradict/neutral mechanism as
-`annot_weight`, but via Baktfold (ProstT5→Foldseek structural search) instead
-of eggNOG, for the flagged hits that eggNOG can't resolve either.
+Implemented 2026-07-24. Same confirm/contradict/neutral mechanism as
+`annot_weight` and same scope (`needs_confirmation`-flagged hits dropped by
+tier-1 operon filtering, `pending_confirmation`), but via **Baktfold**
+(Foldseek+ProstT5 structural search, `src/efesto/baktfold.py`) instead of
+eggNOG orthology — an independent evidence axis for the flagged hits eggNOG
+can't resolve either (no KO assigned, uninformative annotation).
+
+```
+struct_weight = weakest_link( confirm_struct_hit(...) )
+                over all needs_confirmation-flagged rows in the cluster
+```
+
+**No separate ProstT5 step.** Foldseek's `easy-search` accepts a plain
+amino-acid FASTA and translates it to the 3Di structural alphabet internally
+when given `--prostt5-model` (van Kempen et al. 2023, *Nat Biotechnol*,
+doi:10.1038/s41587-023-01773-0; ProstT5 — Heinzinger et al. 2023,
+doi:10.1101/2023.07.23.550085), so `baktfold.py` never imports
+torch/transformers itself — one subprocess call handles both translation and
+search, same shape as `eggnog.run_eggnog`.
+
+**Reference structure DB is small and curated, not the full AlphaFold
+DB/PDB** — same narrow-scope philosophy as the rest of the escalation
+pipeline (see the synteny-bootstrapping rejection in
+`docs/hmm_library_curation.md`: heavy generic infrastructure was rejected
+there for the same reason). Recommended first pilot target: **MtrCAB**,
+since a real experimental structure exists (crystal structure, Edwards
+et al. 2020, *Cell* 181(3):665-673, doi:10.1016/j.cell.2020.03.032) — a
+stronger starting point than sufA/D/E, where structural data is sparser. Building that reference DB is separate curatorial follow-up work,
+the same class of effort as curating HMM seeds — not part of the
+`struct_weight` code path itself.
+
+**Comparison is a loose substring match** against the reference DB's target
+structure name (`baktfold.confirm_struct_hit`) — entries should be named so
+the expected gene name appears in the target ID (e.g. `MtrA_ref_1zzz`), the
+same naming convention used for HMM seed curation.
+
+**Gated behind `--run_struct_confirmation`** (off by default, requires
+`--foldseek_db_dir`). Mirrors `--run_eggnog`'s scope exactly: only the
+`pending_confirmation` population (hits on a `needs_confirmation`-flagged
+model, dropped by tier-1 filtering), never the whole proteome — the same
+scoping argument that keeps tier-2 tractable at genome/metagenome-catalog
+scale applies unchanged here.
 
 ---
 
@@ -205,13 +243,22 @@ topo_weight = weakest_link( topology_verdict(...), heme_verdict(...) )
 **Runs on every applicable hit, not just `needs_confirmation`-flagged ones.**
 Unlike `annot_weight`/`struct_weight`, this tier isn't scoped to narrow-margin
 HMM models — it's scoped to whichever registry stems declare
-`expected_heme_c`/`expected_topology` (currently MtrA/MtoA only, see
+`expected_heme_c`/`expected_topology` (see
 `docs/hmm_library_curation.md`). That scoping is deliberately by *declared
 expectation*, not by *total hit count*: as more stems get expectations
 curated, the applicable set grows with curation effort, not with genome or
 metagenome size — the same scaling argument that keeps tier-2/tier-3
 tractable applies here for a different reason (cheap tool, not narrow
 subset).
+
+Pilot set (2026-07-24): all 12 `status=experimental` models in the registry
+now have `expected_topology` (and, for the two cytochromes, `expected_heme_c`)
+set — MtrA/MtoA (the original pilot) plus 10 metal-transport models added in
+the same pass, each independently verified against literature before being
+registered (see `docs/hmm_library_curation.md` for per-model citations and
+confidence notes — one of the ten, `NiCoCd_resistance_nccB_1`, is flagged
+lower-confidence there because its lipoprotein membrane anchor is a genuinely
+harder call for Phobius than a classic Sec-cleaved signal peptide).
 
 Two independent signals per applicable row, both from `src/efesto/topology.py`:
 

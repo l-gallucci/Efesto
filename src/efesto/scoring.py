@@ -180,6 +180,48 @@ def annot_weight(cluster_rows, eggnog_hits, confirmation_map):
     return 1.2
 
 
+def struct_weight(cluster_rows, foldseek_hits, confirmation_map):
+    """
+    Baktfold (Foldseek+ProstT5) tier-3 confirmation weight for
+    needs_confirmation-flagged hits — same scope and weakest-link principle
+    as annot_weight, just a structural signal instead of an orthology one.
+
+    Args:
+        cluster_rows: rows with "hmm_stem" and "orf" keys
+        foldseek_hits: {orf_id: foldseek_row} from
+                       baktfold._parse_foldseek_results, or {} if Foldseek
+                       wasn't run / no file was provided
+        confirmation_map: {stem: {"gene_name": str, "kegg_ko": [str, ...]}}
+                      from io.build_confirmation_map — only stems in this map
+                      are ever checked; everything else is untouched by design
+                      (same map tier-2/annot_weight already uses)
+
+    Returns 1.0 (neutral) when:
+        - no row in the cluster is on a needs_confirmation-flagged stem
+        - Foldseek wasn't run at all (foldseek_hits is empty)
+        - the flagged ORF has no structural hit
+
+    Otherwise: 1.2 if every flagged hit in the cluster is Foldseek-confirmed,
+    0.5 if any flagged hit is Foldseek-contradicted (weakest link).
+    """
+    from efesto.baktfold import confirm_struct_hit
+
+    verdicts = []
+    for r in cluster_rows:
+        stem = r.get("hmm_stem", "")
+        info = confirmation_map.get(stem)
+        if info is None:
+            continue
+        foldseek_row = foldseek_hits.get(r.get("orf", ""))
+        verdicts.append(confirm_struct_hit(info["gene_name"], foldseek_row))
+
+    if not verdicts or all(v == "neutral" for v in verdicts):
+        return 1.0
+    if any(v == "contradicted" for v in verdicts):
+        return 0.5
+    return 1.2
+
+
 def topo_weight(cluster_rows, phobius_hits, topology_map):
     """
     Topology/motif consistency weight — weakest-link across the cluster, same

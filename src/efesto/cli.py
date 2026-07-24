@@ -35,11 +35,13 @@ from efesto.operon import (_DEFAULT_OPERON_RULES, build_canonical_size_map,
                                     filter_cluster_fegenie, filter_cluster_json,
                                     load_operon_rules, second_pass)
 from efesto.bgc import bgc_boost_for_cluster, parse_antismash_gff
+from efesto.baktfold import (_parse_foldseek_results, confirm_struct_hit,
+                                     run_foldseek)
 from efesto.eggnog import (_parse_eggnog_annotations, confirm_hit, run_eggnog,
                                     write_flagged_faa)
 from efesto.scoring import (
     annot_weight, cluster_confidence, co_occurrence_score, hmm_weight,
-    topo_weight, uniop_pair_score)
+    struct_weight, topo_weight, uniop_pair_score)
 from efesto.topology import _parse_phobius_output, run_phobius
 from efesto.uniop import (
     _uniop_context, build_prodigal_bakta_map, run_uniop, write_operon_structure)
@@ -58,7 +60,7 @@ def _groupby_genome(rows):
 
 
 def _check_env(uniop_path: str = "uniop", eggnog_path: str = "emapper.py",
-               phobius_path: str = "phobius.pl") -> None:
+               phobius_path: str = "phobius.pl", foldseek_path: str = "foldseek") -> None:
     import importlib
     import subprocess
 
@@ -171,6 +173,27 @@ def _check_env(uniop_path: str = "uniop", eggnog_path: str = "emapper.py",
         print( "        Install: http://phobius.sbc.su.se/instructions.html")
         print( "        Then use: efesto --topology_check --phobius_path /path/to/phobius.pl")
 
+    # ── Foldseek (optional — tier-3 structural confirmation, conda install) ──
+    print("\nFoldseek (optional — conda install -c bioconda -c conda-forge foldseek):")
+    foldseek_found = shutil.which(foldseek_path) or (Path(foldseek_path).exists()
+                                                      and not Path(foldseek_path).is_dir())
+    if foldseek_found:
+        print(f"{OK}Foldseek  →  {foldseek_path}")
+        pass_count += 1
+    else:
+        print(f"{WARN}Foldseek  — not found at '{foldseek_path}'")
+        print( "        Only needed for --run_struct_confirmation, scoped to the same "
+               "small needs_confirmation-flagged subset as --run_eggnog.")
+        print( "        Foldseek translates AA sequences to 3Di internally via ProstT5 "
+               "(no separate torch/transformers dependency needed):")
+        print( "        conda install -c bioconda -c conda-forge foldseek")
+        print( "        foldseek databases ProstT5 /path/to/prostt5_weights tmp  "
+               "  # one-time weights download")
+        print( "        Also requires a small curated reference-structure DB "
+               "(--foldseek_db_dir) — see docs/hmm_library_curation.md, Tier 3.")
+        print( "        Then: efesto --run_struct_confirmation "
+               "--foldseek_db_dir /path/to/db --prostt5_weights /path/to/prostt5_weights")
+
     # ── HMM library ───────────────────────────────────────────────────────────
     print("\nHMM library:")
     _bundled = Path(__file__).parents[2] / "hmm_library"
@@ -202,7 +225,9 @@ def main():
                        if a == "--eggnog_path" and i + 1 < len(sys.argv)), "emapper.py")
         phobius = next((sys.argv[i + 1] for i, a in enumerate(sys.argv)
                         if a == "--phobius_path" and i + 1 < len(sys.argv)), "phobius.pl")
-        _check_env(uniop, eggnog, phobius)
+        foldseek = next((sys.argv[i + 1] for i, a in enumerate(sys.argv)
+                         if a == "--foldseek_path" and i + 1 < len(sys.argv)), "foldseek")
+        _check_env(uniop, eggnog, phobius, foldseek)
 
     p = argparse.ArgumentParser(
         prog="efesto",
@@ -350,6 +375,30 @@ def main():
     p.add_argument("--phobius_path", default="phobius.pl",
                    help="Path to phobius.pl executable (default: 'phobius.pl', "
                         "assumed in PATH). Only used with --topology_check.")
+    # ── Baktfold tier-3 structural confirmation (needs_confirmation-flagged hits only) ──
+    p.add_argument("--run_struct_confirmation", action="store_true",
+                   help="Run Foldseek (using ProstT5 to translate sequence directly to "
+                        "the 3Di structural alphabet, no separate structure prediction "
+                        "step) on the same small needs_confirmation-flagged subset "
+                        "--run_eggnog uses. Requires --foldseek_db_dir (a small curated "
+                        "reference-structure DB — see docs/hmm_library_curation.md, "
+                        "Tier 3) and Foldseek installed. Scoped identically to "
+                        "--run_eggnog: never the whole proteome.")
+    p.add_argument("--foldseek_db_dir",
+                   help="Path to a curated Foldseek reference-structure DB (built with "
+                        "'foldseek createdb'). Only used with --run_struct_confirmation.")
+    p.add_argument("--foldseek_path", default="foldseek",
+                   help="Path to foldseek executable (default: 'foldseek', assumed in "
+                        "PATH). Only used with --run_struct_confirmation.")
+    p.add_argument("--prostt5_weights",
+                   help="Path to downloaded ProstT5 weights (via "
+                        "'foldseek databases ProstT5 <dir> <tmp>'). Only used with "
+                        "--run_struct_confirmation.")
+    p.add_argument("--foldseek_gpu", action="store_true",
+                   help="Use GPU for Foldseek's internal ProstT5 translation "
+                        "(--gpu 1). Only used with --run_struct_confirmation. "
+                        "CPU fallback works but is slow — acceptable here since this "
+                        "tier only ever touches the small flagged subset.")
     # ── Anvi'o output ─────────────────────────────────────────────────────────
     p.add_argument("--anvio", action="store_true",
                    help="Write Efesto-anvio-functions.tsv, compatible with "
@@ -619,6 +668,7 @@ def main():
     # sufB/sufC/sufS support nearby). Scoped only to pending_confirmation —
     # never the whole proteome. See docs/hmm_library_curation.md.
     eggnog_hits = {}
+    foldseek_hits = {}
     if pending_confirmation:
         print(f"[INFO] {len(pending_confirmation)} needs_confirmation hit(s) "
               f"dropped by operon filtering — checking tier 2 (eggNOG)…")
@@ -688,6 +738,43 @@ def main():
             print("[INFO] Tier 2: no eggNOG data available "
                   "(pass --eggnog_annotations or --run_eggnog to enable) — "
                   "all pending hits stay dropped")
+
+        # ── Tier-3 pass: Foldseek/ProstT5 structural confirmation ────────────
+        # Same pending_confirmation population as tier 2, run in parallel —
+        # an independent structural signal (not another rescue mechanism of
+        # its own; struct_weight only ever corroborates hits already in
+        # final_rows via tier-1 or the tier-2 rescue above, same role
+        # annot_weight already plays). See docs/hmm_library_curation.md.
+        if args.run_struct_confirmation:
+            if not args.foldseek_db_dir:
+                print("[WARN] --run_struct_confirmation given without "
+                      "--foldseek_db_dir — tier 3 skipped, struct_w stays "
+                      "neutral", file=sys.stderr)
+            else:
+                struct_faa_tmp = out_dir / "efesto_struct_candidates.faa"
+                genome_faa_paths = {faa.name: faa for faa in faa_files}
+                with open(struct_faa_tmp, "w") as fh_out:
+                    for genome_name, rows in _groupby_genome(pending_confirmation):
+                        faa_path = genome_faa_paths.get(genome_name)
+                        if faa_path is None:
+                            continue
+                        tmp = str(struct_faa_tmp) + f".{genome_name}.tmp"
+                        write_flagged_faa({r["orf"] for r in rows}, faa_path, tmp)
+                        with open(tmp) as fh_in:
+                            fh_out.write(fh_in.read())
+                        Path(tmp).unlink(missing_ok=True)
+                results_path = run_foldseek(
+                    struct_faa_tmp, args.foldseek_db_dir, out_dir,
+                    foldseek_path=args.foldseek_path,
+                    prostt5_weights=args.prostt5_weights, gpu=args.foldseek_gpu)
+                if results_path:
+                    foldseek_hits = _parse_foldseek_results(results_path)
+                    print(f"[INFO] Tier 3: Foldseek ran on "
+                          f"{len(pending_confirmation)} pending hit(s), "
+                          f"{len(foldseek_hits)} structural hit(s) found")
+                else:
+                    print("[WARN] Tier 3: Foldseek did not run — struct_w "
+                          "stays neutral this run", file=sys.stderr)
 
     # ── Topology/motif tier: checks every hit with an expectation set ────────
     # Not scoped to pending_confirmation like tier-2/tier-3 — cheap enough
@@ -896,13 +983,21 @@ def main():
         # for users who never opted in. See verification step in the plan.
         topo_w   = (topo_weight(grp, phobius_hits, topology_map)
                    if args.topology_check else 1.0)
+        # struct_weight only ever reads foldseek_hits, which stays {} unless
+        # --run_struct_confirmation ran, so this gate is defense-in-depth
+        # rather than strictly required — kept explicit for the same reason
+        # as the topo_w gate above: the off-by-default contract should be
+        # visible at the call site, not implied by data flow elsewhere.
+        struct_w = (struct_weight(grp, foldseek_hits, confirmation_map)
+                   if args.run_struct_confirmation else 1.0)
         conf    = cluster_confidence(
             grp[0]["hmm_w"], grp[0]["co_occ_score"], uniop_w,
-            bgc_boost=boost, annot_w=annot_w, topo_w=topo_w)
+            bgc_boost=boost, annot_w=annot_w, struct_w=struct_w, topo_w=topo_w)
         for r in grp:
             r["uniop_w"]            = uniop_w
             r["bgc_boost"]          = boost
             r["annot_w"]            = annot_w
+            r["struct_w"]           = struct_w
             r["topo_w"]             = topo_w
             r["cluster_confidence"] = conf
 

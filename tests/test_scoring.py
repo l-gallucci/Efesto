@@ -9,6 +9,7 @@ from efesto.scoring import (
     co_occurrence_score,
     distance_decay,
     hmm_weight,
+    struct_weight,
     topo_weight,
     uniop_pair_score,
 )
@@ -226,6 +227,41 @@ class TestAnnotWeight:
             "orf_2": {"preferred_name": "wrong", "kegg_ko": ["K99999"], "description": ""},
         }
         assert annot_weight(rows, eggnog_hits, cmap) == pytest.approx(0.5)
+
+
+class TestStructWeight:
+    _CONFIRMATION_MAP = {"MtrA": {"gene_name": "MtrA", "kegg_ko": []}}
+
+    def test_no_flagged_stems_in_cluster_is_neutral(self):
+        rows = [{"hmm_stem": "MtrB", "orf": "orf_1"}]
+        assert struct_weight(rows, {}, self._CONFIRMATION_MAP) == pytest.approx(1.0)
+
+    def test_flagged_stem_no_foldseek_data_is_neutral(self):
+        rows = [{"hmm_stem": "MtrA", "orf": "orf_1"}]
+        assert struct_weight(rows, {}, self._CONFIRMATION_MAP) == pytest.approx(1.0)
+
+    def test_confirmed_hit_boosts(self):
+        rows = [{"hmm_stem": "MtrA", "orf": "orf_1"}]
+        foldseek_hits = {"orf_1": {"target": "MtrA_ref_1zzz", "bits": 450.0, "evalue": 1e-50}}
+        assert struct_weight(rows, foldseek_hits, self._CONFIRMATION_MAP) == pytest.approx(1.2)
+
+    def test_contradicted_hit_penalizes(self):
+        rows = [{"hmm_stem": "MtrA", "orf": "orf_1"}]
+        foldseek_hits = {"orf_1": {"target": "MtoA_ref_2yyy", "bits": 400.0, "evalue": 1e-40}}
+        assert struct_weight(rows, foldseek_hits, self._CONFIRMATION_MAP) == pytest.approx(0.5)
+
+    def test_weakest_link_one_contradicted_among_confirmed(self):
+        cmap = {
+            "MtrA": {"gene_name": "MtrA", "kegg_ko": []},
+            "MtoA": {"gene_name": "MtoA", "kegg_ko": []},
+        }
+        rows = [{"hmm_stem": "MtrA", "orf": "orf_1"},
+                {"hmm_stem": "MtoA", "orf": "orf_2"}]
+        foldseek_hits = {
+            "orf_1": {"target": "MtrA_ref_1zzz", "bits": 450.0, "evalue": 1e-50},
+            "orf_2": {"target": "MtrA_ref_1zzz", "bits": 300.0, "evalue": 1e-30},
+        }
+        assert struct_weight(rows, foldseek_hits, cmap) == pytest.approx(0.5)
 
 
 class TestTopoWeight:

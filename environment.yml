@@ -54,3 +54,33 @@ dependencies:
 #   efesto ... --run_eggnog --eggnog_db_dir /path/to/eggnog_db
 #
 # Cantalapiedra CP et al. (2021) Mol Biol Evol doi:10.1093/molbev/msab293
+
+# ── Phobius topology/motif tier (optional, --topology_check) ────────────────
+# Runs on every hit whose model sets expected_heme_c/expected_topology in the
+# registry (currently MtrA/MtoA — see docs/hmm_library_curation.md), not just
+# needs_confirmation-flagged ones, but cheap enough to leave unscoped.
+#
+# Phobius is NOT on conda or pip (academic license, manual download) — same
+# situation as UniOP:
+#
+#   Download: http://phobius.sbc.su.se/instructions.html
+#   efesto ... --topology_check --phobius_path /path/to/phobius.pl
+
+# ── Baktfold tier-3 structural confirmation (optional, --run_struct_confirmation) ──
+# Same narrow scope as eggNOG tier-2: only needs_confirmation-flagged hits
+# dropped by tier-1 operon filtering. Foldseek translates amino-acid
+# sequences to the 3Di structural alphabet internally via ProstT5
+# (--prostt5-model) — no separate torch/transformers Python dependency.
+#
+# Not installed by default — Foldseek + the ProstT5 weights + a curated
+# reference-structure DB are all opt-in:
+#
+#   conda install -n efesto -c bioconda -c conda-forge foldseek
+#   foldseek databases ProstT5 /path/to/prostt5_weights tmp   # one-time, ~a few GB
+#   # + a small curated reference-structure DB (built with `foldseek createdb`) —
+#   # NOT the full AlphaFold DB/PDB; see docs/hmm_library_curation.md, Tier 3
+#   efesto ... --run_struct_confirmation --foldseek_db_dir /path/to/db \
+#              --prostt5_weights /path/to/prostt5_weights
+#
+# van Kempen M et al. (2023) Nat Biotechnol doi:10.1038/s41587-023-01773-0
+# Heinzinger M et al. (2023, ProstT5) doi:10.1101/2023.07.23.550085
