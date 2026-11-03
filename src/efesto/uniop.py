@@ -253,6 +253,7 @@ def run_uniop(faa_files, fna_dir, out_dir, uniop_path, fna_ext="fna",
             if faa_for_uniop:
                 cmd = ["python3", str(uniop_path),
                        "-a", str(faa_for_uniop.resolve()),
+                       "--faa_source", "prodigal_faa",
                        "-t", str(work_dir.resolve())]
             else:
                 fna_path = None
