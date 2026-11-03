@@ -317,6 +317,38 @@ def build_confirmation_map(registry):
     return flagged
 
 
+def build_topology_expectation_map(registry):
+    """
+    Return {stem: {"expected_heme_c": int|None, "expected_topology": str|None}}
+    for every registry row that sets expected_heme_c and/or expected_topology.
+
+    Both fields are independently optional per row — a stem can set only one
+    and stay neutral for the other, same no-data-no-penalty policy as
+    build_confirmation_map. A row with neither field set is excluded entirely;
+    topo_weight() never looks at it, so an unset stem is always neutral.
+    """
+    expectations = {}
+    for r in registry:
+        stem = r.get("stem", "")
+        if not stem:
+            continue
+        heme_raw = (r.get("expected_heme_c") or "").strip()
+        topo_raw = (r.get("expected_topology") or "").strip()
+        if not heme_raw and not topo_raw:
+            continue
+        expected_heme_c = None
+        if heme_raw:
+            try:
+                expected_heme_c = int(float(heme_raw))
+            except ValueError:
+                expected_heme_c = None
+        expectations[stem] = {
+            "expected_heme_c": expected_heme_c,
+            "expected_topology": topo_raw or None,
+        }
+    return expectations
+
+
 def print_provenance(annotate_tokens, registry, cat_hmms):
     """Print HMM source/reference table for the active categories."""
     active_cats = set(cat_hmms)

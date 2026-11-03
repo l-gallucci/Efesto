@@ -430,6 +430,53 @@ already signals throughout the pipeline.
 
 ---
 
+## Topology pilot extended to all experimental models (2026-07-24)
+
+`expected_topology` (Component 7, `docs/cluster_confidence_scoring.md`) was originally
+piloted on MtrA/MtoA only. Extended to the remaining 10 `status=experimental` models —
+every one independently verified against real literature/structural data before being
+registered, not assumed from gene-family name alone (a naive "P-type ATPase = multi-pass
+TM" blanket rule would have been wrong for at least two of these ten: `Cu_resistance_K_1`
+and the RND-system components, none of which are simple polytopic membrane proteins).
+None of the ten are cytochromes, so `expected_heme_c` stays unset for all — only
+`expected_topology` applies.
+
+| Stem | Real identity | `expected_topology` | Evidence |
+|---|---|---|---|
+| `Cr_transport_2` | ChrA (CHR superfamily chromate efflux) | `multi_pass_tm` | 13-TMS topology in *P. aeruginosa* ChrA (Díaz-Pérez et al. 2007, *FEBS J.*, doi:10.1111/j.1742-4658.2007.06141.x); consistent across TCDB family 2.A.51 and multiple independent papers. |
+| `Zn_transport_troB_1` | TroB, ABC transporter ATPase subunit | `cytoplasmic` | Cluster-9 ABC transporter architecture: TroA (periplasmic solute-binding) / TroB (ATPase) / TroC+TroD (membrane permease) — TroB is the cytoplasmic nucleotide-binding domain, not membrane-integral (Hazlett et al., *JBC*; Agrobacterium TroCBA work, *AEM* doi:10.1128/aem.00299-16). |
+| `Zn_transport_troC_1` | TroC, ABC transporter membrane permease | `multi_pass_tm` | Same system as above — TroC(+TroD) form the "heterodimeric cytoplasmic membrane permease" component. |
+| `Cu_ATPase_1` | Generic P1B-type Cu-exporting ATPase | `multi_pass_tm` | P1B-ATPases have 8 TM helices (2 N-terminal MA/MB + 6 core M1-M6) — Structural basis of ion uptake in Cu-ATPases, *Nat. Commun.* doi:10.1038/s41467-022-32751-w. |
+| `Cu_ATPase_5` | HMA5 | `multi_pass_tm` | Same P1B-ATPase structural family. |
+| `Cu_ATPase_pacS_2` | PacS | `multi_pass_tm` | Same P1B-ATPase structural family. |
+| `Cu_resistance_K_1` | CopK | `signal_peptide` | Solved structure (PDB 2K0Q, 2LEL) — small periplasmic all-β protein, secreted, zero TM helices (Bianco et al., *J. Mol. Biol.* doi via ScienceDirect S0022283608005718). **Not** membrane-integral — would have been wrong as `multi_pass_tm`. |
+| `CuNi_ATPase_1` | CtpD-like Co/Ni-exporting P1B ATPase | `multi_pass_tm` | Same P1B-ATPase family, 6-8 TM helices (*M. tuberculosis* CtpD, UniProt P9WPT3, as a directly comparable named example). |
+| `NiCoCd_resistance_nccB_1` | NccB, RND membrane-fusion protein (CzcB/AcrA family) | `signal_peptide` | **Lower confidence.** MFPs are anchored via N-terminal lipidation (palmitoylated Cys), not a classic Sec-cleaved signal sequence or a true multi-pass TM bundle (MexA/AcrA structural work, *Nat. Commun.* doi:10.1038/ncomms10731) — mapped to the closest of our three categories, but whether Phobius reliably flags a lipoprotein anchor as signal-peptide-positive in practice is genuinely uncertain; the conservative `topology_verdict` design means a misclassification here degrades to neutral, not a wrong penalty. |
+| `NiCo_resistance_cnrC_3` | CnrC, RND outer-membrane factor (CzcC/TolC family) | `signal_peptide` | OMF proteins are β-barrels, Sec-secreted with a cleaved signal peptide for OM insertion (Kittleson et al./RND efflux architecture review). Phobius models α-helical TM topology only, not β-barrels, so this presents as signal-peptide-positive with ~0 detected TM helices — genuinely `signal_peptide`, not `multi_pass_tm`, despite being a membrane protein. |
+
+All 10 verified against real *Cupriavidus metallidurans* CH34 genome data (the classic
+multi-metal-resistance reference strain, in `benchmark/genomes/`): confirmed real HMM hits
+for chromate transport, TroB, NccB, PacS, and Cu_ATPase_1 fire correctly with the new
+`expected_topology` registered and flowing through to `topo_weight` (neutral without
+Phobius installed, as expected — the registrations are wired and will activate the moment
+Phobius runs).
+
+**CymA and ImoA** (the two cytochromes among the 12 experimental models) were registered
+separately with `expected_heme_c=4` — both confirmed tetraheme via
+`operon.count_heme()` run on the real curated sequences (Q8E8S0.1 for CymA per the 1997
+paper's own count; ADE12720.1 for ImoA, computed directly with the pipeline's own
+function rather than counted by hand). `expected_topology` is deliberately left **unset**
+for both: Myers & Myers 1997 describes the whole NapC/NirT family's shared fold as a
+single *uncleaved* N-terminal hydrophobic membrane anchor with the hydrophilic
+heme-binding majority facing the periplasm — an architecture that doesn't cleanly fit any
+of the three `expected_topology` categories (`signal_peptide` implies a cleaved Sec
+signal; `multi_pass_tm` implies ≥2 helices; `cytoplasmic` implies neither). Forcing a label
+here would be less accurate than leaving it unset — `heme_verdict` alone already provides
+real signal for these two (as demonstrated in the earlier real-genome validation: both
+fired `topo_weight=1.2` from heme count alone, without Phobius).
+
+---
+
 ## New categories added (2026-05-23)
 
 | Category | Models | Rationale | Key references |
@@ -505,7 +552,8 @@ operon gene order isn't universally conserved across distant taxa and using
 genomic position to build training data for a rule that itself checks
 genomic position risks circularity.
 
-**Escalation pipeline (2026-07-20) — tier 2 implemented, tier 3 pending:** a
+**Escalation pipeline (2026-07-20, tier 3 added 2026-07-24) — all three tiers
+implemented:** a
 general low-confidence-hit escalation, not SUF-specific — any hit landing on
 a `needs_confirmation`-flagged model (currently just `sufA`/`sufD`/`sufE`,
 but the mechanism is general-purpose) that gets dropped by tier-1 operon
@@ -530,9 +578,25 @@ whole proteome:
   synthetic isolated `sufA` hit (no operon neighbors) is correctly dropped
   with no eggNOG data, correctly rescued when a matching eggNOG confirmation
   is supplied, and correctly stays dropped when eggNOG contradicts it.
-- **Tier 3 (Baktfold, ProstT5→Foldseek structural search) — designed, not
-  yet implemented.** `struct_weight` exists as a placeholder parameter in
-  `cluster_confidence` (always 1.0) for forward compatibility.
+- **Tier 3 (Baktfold, Foldseek+ProstT5 structural search) — implemented.**
+  `src/efesto/baktfold.py` runs `foldseek easy-search` on the same flagged
+  subset (`--run_struct_confirmation`, requires `--foldseek_db_dir` and
+  Foldseek installed; never auto-invoked, same opt-in policy as tier 2).
+  Foldseek translates the amino-acid sequences to the 3Di structural
+  alphabet internally via ProstT5 (`--prostt5-model`) — no separate
+  structure-prediction step or torch/transformers dependency. Comparison is
+  a loose substring match against the reference structure's name (same
+  naming convention as HMM seeds, e.g. `MtrA_ref_1zzz`). New `struct_weight`
+  factor in `scoring.py`, same weakest-link/neutral-on-no-data policy as
+  `annot_weight`. The reference structure DB is intentionally small and
+  curated — not the full AlphaFold DB/PDB, same narrow-scope reasoning as
+  the synteny-bootstrapping rejection above. Recommended first pilot target:
+  **MtrCAB**, a real experimental structure (crystal structure, Edwards
+  et al. 2020, *Cell* 181(3):665-673, doi:10.1016/j.cell.2020.03.032) —
+  a stronger starting point than
+  sufA/D/E, whose structural data is sparser. Populating that DB is separate
+  curatorial follow-up work, not part of the `struct_weight` code path.
+  See `docs/cluster_confidence_scoring.md`, Component 6.
 
 KO numbers verified via the KEGG REST API for all six SUF genes: `sufA`
 K05997, `sufB` K09014, `sufC` K09013, `sufD` K09015, `sufS` K11717, `sufE`

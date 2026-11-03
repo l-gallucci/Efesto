@@ -52,7 +52,7 @@ def write_long_format(path, rows):
     has_uniop = any("uniop_context" in r for r in rows)
     fields = ["category", "genome", "contig", "orf", "gene", "bitscore",
               "bitscore_cutoff", "confidence", "cluster_id", "heme_c_motifs",
-              "contig_len", "cluster_confidence", "model_nseq"]
+              "contig_len", "cluster_confidence", "model_nseq", "topology_weight"]
     if has_uniop:
         fields.append("uniop_context")
     with open(path, "w", newline="") as fh:
@@ -76,6 +76,7 @@ def write_long_format(path, rows):
                                       if r.get("cluster_confidence") is not None
                                       else "",
                 "model_nseq":        r.get("model_nseq", ""),
+                "topology_weight":   r.get("topo_w", ""),
             }
             if has_uniop:
                 row["uniop_context"] = r.get("uniop_context", "not_in_operon")
