@@ -51,7 +51,7 @@ except ImportError:
 #   accession  : NCBI protein accession (e.g. WP_011071012.1)
 #   subfamily  : 'MtrA' or 'MtoA'
 #   organism   : organism name for provenance
-#   role       : 'iron_reduction' or 'iron_oxidation'
+#   role       : 'Iron-Reduction' or 'Iron-Oxidation'
 #   reference  : DOI of paper confirming function
 
 SEED_TSV_HEADER = ["accession", "subfamily", "organism", "role", "reference"]
@@ -228,7 +228,7 @@ def main():
     for sub in seeds:
         hmm_path = out_dir / f"{sub}.hmm"
         hmm[sub]  = hmm_path
-        role = "iron_reduction" if sub == "MtrA" else "iron_oxidation"
+        role = "Iron-Reduction" if sub == "MtrA" else "Iron-Oxidation"
         run_hmmbuild(aln[sub], hmm_path, name=sub)
         print(f"[INFO] HMM category: {role} → {hmm_path}")
 
@@ -238,8 +238,8 @@ def main():
     print(f"\n[INFO] Staging HMMs in {out_dir}/")
     print("[INFO] Review cross-validation scores above before deploying.")
     print("[INFO] To deploy:")
-    print(f"       cp {out_dir}/MtrA.hmm hmm_library/iron_reduction/MtrA.hmm")
-    print(f"       cp {out_dir}/MtoA.hmm hmm_library/iron_oxidation/MtoA.hmm")
+    print(f"       cp {out_dir}/MtrA.hmm hmm_library/Iron-Reduction/MtrA.hmm")
+    print(f"       cp {out_dir}/MtoA.hmm hmm_library/Iron-Oxidation/MtoA.hmm")
     print("[INFO] Then update hmm_registry.tsv: nseq, cutoff, source='curated'")
     print("[INFO] Suggested commit message:")
     print("       Rebuild MtrA/MtoA subfamily HMMs: curated seeds, cross-validated")

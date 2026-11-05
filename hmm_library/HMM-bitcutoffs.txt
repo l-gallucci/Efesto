@@ -33,9 +33,6 @@ FutA2-iron_ABC_transporter_iron-binding-rep	115.0
 FutC-iron_ABC_transporter_ATPase-rep	376.0
 Iron_uptake_YfeA_Periplasmic_chelated_iron-binding_protein_Q56952_Yersinia_pestis_180610	46.6
 Iron_uptake_YfeB_Chelated_iron_transport_system_membrane_protein_Q56953_Yersinia_pestis_180610	50.9
-NF041018	790.0
-NF041019	350.0
-NF041020	290.0
 PF02421-FeoB_N	120.4
 PF03239-Iron_permease_FTR1_EfeU_Fip1_family	24.9
 PF04023-FeoA	21.0

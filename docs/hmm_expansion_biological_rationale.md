@@ -197,10 +197,10 @@ dioxygenases are valuable markers of aromatic carbon cycling linked to iron cycl
 - FNR and CRP (cAMP receptor) share the Crp/Fnr domain; require Fe-S-specific features
 - IscR and NsrR share Rrf2 domain; distinguish by co-occurrence with *isc* vs *nsr* genes
 - **Recommended category structure:**
-  - `iron_stress-fes_cluster_suf` — SUF assembly system
+  - `Iron-StressResponse-fes_cluster_suf` — SUF assembly system
   - `iron_metabolism-fes_cluster_isc` — ISC assembly system
   - `iron_metabolism-fes_sensors` — FNR, IscR, NsrR, SoxR, WhiB
-  - `iron_stress-iron_economy` — ferredoxin / flavodoxin switch
+  - `Iron-StressResponse-iron_economy` — ferredoxin / flavodoxin switch
 
 ---
 
@@ -211,7 +211,7 @@ dioxygenases are valuable markers of aromatic carbon cycling linked to iron cycl
 The Fur (Ferric Uptake Regulator) superfamily is the primary metalloregulatory system
 in bacteria. All members are homodimeric HTH transcription factors that use a metal
 cofactor to sense intracellular metal availability. The currently covered **Fur** paralog
-(already in Efesto: `iron_gene_regulation`) represses iron acquisition genes
+(already in Efesto: `Iron-Regulation`) represses iron acquisition genes
 when Fe²⁺ is sufficient.
 
 The missing paralogs each sense a different metal or use a different mechanism:
@@ -366,7 +366,7 @@ BtuCD (ABC transporter). Cobalt homeostasis is directly tied to B12 biosynthesis
 - `cbiN`, `cbiO`, `cbiQ` — cobalt-specific ABC transporter (anaerobic pathway)
 
 **Efesto relevance:**
-- Cobalt is already in the library as resistance (`metal_resistance-cobalt_zinc_cadmium`)
+- Cobalt is already in the library as resistance (`MetalResistance-CobaltZincCadmium`)
   but cobalamin biosynthesis is the main biological *use* of cobalt
 - Distinguishing cobalt resistance from cobalt utilization (B12 biosynthesis) is
   ecologically critical
@@ -548,14 +548,14 @@ at low pH. The FeGenie library captured Cyc2 but lacked rusticyanin and Cyt579.
 
 | Protein | HMM | Source | GA | LENG | NSEQ | File | Key reference |
 |---------|-----|--------|----|------|------|------|---------------|
-| Rusticyanin | TIGR03095.1 | NCBIfam/JCVI | 146.7 | 148 | 4 | `hmm_library/iron_oxidation/rusticyanin_TIGR03095.hmm` | [doi:10.1099/mic.0.26966-0](https://doi.org/10.1099/mic.0.26966-0) |
-| Cytochrome 579 | NF033864.1 | NCBIfam | 280.0 | 179 | 4 | `hmm_library/iron_oxidation/cytochrome579_NF033864.hmm` | [doi:10.1128/AEM.02799-07](https://doi.org/10.1128/AEM.02799-07) |
+| Rusticyanin | TIGR03095.1 | NCBIfam/JCVI | 146.7 | 148 | 4 | `hmm_library/Iron-Oxidation/rusticyanin_TIGR03095.hmm` | [doi:10.1099/mic.0.26966-0](https://doi.org/10.1099/mic.0.26966-0) |
+| Cytochrome 579 | NF033864.1 | NCBIfam | 280.0 | 179 | 4 | `hmm_library/Iron-Oxidation/cytochrome579_NF033864.hmm` | [doi:10.1128/AEM.02799-07](https://doi.org/10.1128/AEM.02799-07) |
 
 Note: NF033156 is *not* rusticyanin (it is a bleomycin-binding protein). Correct model
 is TIGR03095 (`rusti_cyanin` equivalog, JCVI, NSEQ=4, GA=TC=146.7, NC=68.5).
 
 Both models have NCBIfam-calibrated GA=TC cutoffs (no borderline sequences in NCBI
-training universe). Added to `iron_oxidation` category alongside Cyc1/Cyc2 (consistent
+training universe). Added to `Iron-Oxidation` category alongside Cyc1/Cyc2 (consistent
 placement — no separate subcategory created).
 
 ---
@@ -622,16 +622,12 @@ and not limited to *Sideroxydans*.
 1. **Build separate subfamily HMMs** from curated seed alignments using
    `scripts/build_mtr_mto_subfamily_hmms.py` (seeds in `data/seeds/mtr_mto_seeds.tsv`).
    Anchor on the heme-binding motifs and the distinct N-terminal signal sequences.
-   Seed accessions curated from primary literature:
-   - MtrA seeds: *Shewanella oneidensis* MR-1 WP_011071012.1, *S. loihica* PV-4
-     WP_012254745.1, *S. baltica* OS185 WP_006080780.1, *S.* sp. ANA-3 YP_875003.1
-   - MtoA seeds: *Sideroxydans lithotrophicus* ES-1 ADE57625.1,
-     *Gallionella capsiferriformans* ES-2 AEX59023.1, *Gallionellaceae* sp. KS WP_044467591.1
+   The deployed inputs are preserved in `data/seeds/curated/` and listed in `data/seeds/mtr_mto_seeds.tsv`. Verified reference anchors are MtrA `WP_011071900.1`/`AAN54830.1` (identical sequences, SO_1777) and MtoA `ADE12722.1`/`WP_013030620.1` (identical sequences, Slit_2497). Additional members are homologs with differing levels of functional evidence, not individually demonstrated iron enzymes. The earlier illustrative accession list was not the deployed seed set.
 
 2. **Use gene neighborhood** as an interim tie-breaker:
-   - `MtrC_TIGR03507` (outer-membrane cytochrome, iron_reduction-only) adjacent
+   - `MtrC_TIGR03507` (outer-membrane cytochrome, Iron-Reduction-only) adjacent
      to the hit → iron reduction assignment.
-   - `Cyc2`, `FoxA`, `FoxE` (iron_oxidation) adjacent → oxidation assignment.
+   - `Cyc2`, `FoxA`, `FoxE` (Iron-Oxidation) adjacent → oxidation assignment.
 
 3. **Set high bitscore cutoffs** after cross-validation — from `build_mtr_mto_subfamily_hmms.py`
    output, set cutoff = correct-hit minimum score − 10 bits.
@@ -640,8 +636,8 @@ and not limited to *Sideroxydans*.
    - Reduction: MtrC → MtrA → MtrB (or MtrA → MtrB → MtrC depending on strain)
    - Oxidation: MtoA → MtoB (two-gene cluster in *Sideroxydans/Gallionella*)
 
-5. **Recommended categories remain:** `iron_reduction` (MtrA/B/C, OmcA, OmcZ)
-   vs `iron_oxidation` (MtoA/B, Cyc2, FoxA-Z); existing FeGenie category split
+5. **Recommended categories remain:** `Iron-Reduction` (MtrA/B/C, OmcA, OmcZ)
+   vs `Iron-Oxidation` (MtoA/B, Cyc2, FoxA-Z); existing FeGenie category split
    is correct — only the model boundaries need improvement.
 
 ---
@@ -710,10 +706,10 @@ high turnover rates.
 **Missing (to add):**
 - **Dps** (DNA-binding protein from starved cells) — ferritin superfamily; sequesters
   Fe²⁺ using H₂O₂ as oxidant (kills two toxins: free Fe²⁺ + H₂O₂). Key Fenton prevention.
-  Category: `iron_storage` (extend existing)
+  Category: `Iron-Storage` (extend existing)
 - **Multicopper oxidases (MCO)** — CueO, CopA-linked MCO oxidize Fe²⁺ in periplasm.
   Relevant in oxic iron-rich soils where these function as iron oxidases incidentally.
-  Category: new `iron_oxidation-multicopper_oxidase`
+  Category: new `Iron-Oxidation-multicopper_oxidase`
 - **Ferrireductase (Fre/FRE homologs)** — NADH-dependent Fe³⁺ → Fe²⁺ reduction
   inside cell for iron assimilation from transferrin-like chelates. Not dissimilatory.
   Category: `iron_metabolism-assimilatory_reduction`
@@ -749,7 +745,7 @@ transcriptomics under MISO growth conditions identified the electron-transfer
 components below. Efesto's scope is metal cycling, not sulfur cycling, so the
 paper's dissimilatory sulfur-oxidation markers (DsrAB, AprAB, Sat, Sox, Sqr, FccAB)
 were intentionally **not** added — only the iron(III)-respiration side of the
-mechanism falls inside the existing `iron_reduction` category.
+mechanism falls inside the existing `Iron-Reduction` category.
 
 ### Key genes added
 
@@ -763,22 +759,11 @@ Built from 8 curated seeds (UniProt) spanning *Geobacter*, *Geotalea*,
 *Citrifermentans*, *Geoalkalibacter* and *Desulfuromonas* — the "cytochrome c, and
 cytochrome b" / "C-and b-type cytochrome L" family, consistently 616–621 aa. GA
 cutoff (200 bits) set from a negative-control test against consensus sequences of
-every other `iron_reduction`/`iron_oxidation`/`iron_storage` HMM in the library
+every other `Iron-Reduction`/`Iron-Oxidation`/`Iron-Storage` HMM in the library
 (highest cross-hit: 44.0 bits, DFE_0461); true positives scored 1245–1331 bits —
 a >1200-bit margin.
 
-> **Limitation:** the reference seed `Q74GH2`/`GSU0274` (verified byte-identical
-> against a fresh, independent pull of the *G. sulfurreducens* PCA RefSeq genome —
-> no sequence-fetch error) is UniProt Protein-Existence level 4 ("predicted"); the
-> "cytochrome c, and cytochrome b" name is an automated carryover from the original
-> 2003 genome submission, not an experimentally curated annotation. No database
-> cross-reference (NCBI Gene aliases, PMC full-text) explicitly ties `GSU0274` to
-> the characterized `cbcL` mutant in Zacharoff et al. 2015. Identity is inferred
-> from architecture (fused *b*+multiheme-*c* domains) and size (619 aa) matching
-> the paper's description, reinforced by the same fusion pattern recurring
-> independently across all 6 other genera in the seed set — strong circumstantial
-> evidence, not a confirmed cross-reference. Re-validate against the deposited
-> mutant sequence if a primary-source locus tag becomes available.
+> **Reference identity resolved (2026-11-05):** the cloning methods of [Antunes et al. 2022](https://doi.org/10.3389/fmicb.2022.898015) explicitly identify `cbcL` as `GSU0274`, GenBank `AAR33608.1`. This sequence is identical to UniProt `Q74GH2`; the deployed HMM gives 1331.3 bits at full model coverage (runtime cutoff 200). The former claim that no primary-source cross-reference existed was incorrect. The original eight-sequence training set is still incomplete: seven accessions and its MSA were not found in the current tree, ignored inputs or Git history. Genus and size summaries above are historical build descriptions, not newly verified evidence for those seven records.
 
 The Extended Data Fig. 3 source data (see `DA_402` below) independently confirms
 this model's scope: *D. alkaliphilus*'s own `CbcL-like` gene is `DA_2141`
@@ -808,11 +793,10 @@ genome coordinates for every `DA_###` locus. `DA_402` is defined there as
 (`DAAHT2_RS02050`, "hypothetical protein", 431 aa) **exactly**, byte-for-byte
 coordinate identity, not the earlier candidate.
 
-The same source-data sheet also gives exact coordinates for the paper's other
-OmcS-like paralogs from *D. alkaliphilus* itself, independently placed in the
-same clade as `DA_402` by phylogenetic (EPA) placement in Extended Data Fig. 6c:
-`DA_403` (`WP_013162641.1`, 435 aa, adjacent gene, same operon), `DA_756`
-(`WP_013162986.1`, 358 aa) and `DA_765` (`WP_013162995.1`, 346 aa). The rebuilt
+The same source-data sheet also gives exact coordinates for other
+OmcS-like paralogs from *D. alkaliphilus*:
+`DA_403` (`WP_013162641.1`, 435 aa, adjacent gene, same source-data gene cluster), `DA_756`
+(`WP_013162986.1`, 358 aa) and `DA_765` (`WP_013162995.1`, 346 aa). The Figure 6 source table names DA_402, DA_756 and DA_765; the same independent phylogenetic placement was not established here for DA_403. The rebuilt
 model uses these 4 coordinate-confirmed in-genome paralogs plus one external
 UniProt homolog (`A0A8J6ULG3`, *Pelovirga terrestris*) — 5 seeds total, all with
 either exact-coordinate or cross-genus support, replacing the earlier UniRef50
@@ -882,7 +866,7 @@ confirmed.
 
 ### Category
 
-All four models were placed in the existing `iron_reduction` category — no new
+All four models were placed in the existing `Iron-Reduction` category — no new
 category was created, matching how `OmcS`/`OmcZ`/`t4ap` (an existing, more generic
 FeGenie type-IV-pilus marker) already sit there.
 
@@ -893,13 +877,13 @@ FeGenie type-IV-pilus marker) already sit there.
 | Priority | Category | Rationale | Key references (PubMed) |
 |----------|----------|-----------|-------------------------|
 | 1 | **MtrA / MtoA disambiguation** | ✅ DONE (2026-05-23) — curated seeds, TC/GA/NC calibrated | [doi:10.1128/AEM.03493-15](https://doi.org/10.1128/AEM.03493-15) |
-| 2 | **Rusticyanin + Cytochrome 579** | ✅ DONE (2026-05-23) — TIGR03095 + NF033864 deployed to `iron_oxidation/` | [doi:10.1099/mic.0.26966-0](https://doi.org/10.1099/mic.0.26966-0); [doi:10.1128/AEM.02799-07](https://doi.org/10.1128/AEM.02799-07) |
+| 2 | **Rusticyanin + Cytochrome 579** | ✅ DONE (2026-05-23) — TIGR03095 + NF033864 deployed to `Iron-Oxidation/` | [doi:10.1099/mic.0.26966-0](https://doi.org/10.1099/mic.0.26966-0); [doi:10.1128/AEM.02799-07](https://doi.org/10.1128/AEM.02799-07) |
 | 3 | **Fe-S sensors (IscR, SoxR, NsrR)** | ✅ DONE (2026-05-23) — TIGR02010.1/TIGR01950.1/NF008240.0 deployed. FNR skipped: no clean NCBIfam equivalog (CRP-FNR domain non-specific). | IscR: [doi:10.1016/s1369-5274(03)00039-0](https://doi.org/10.1016/s1369-5274(03)00039-0); SoxR: [doi:10.1016/j.jinorgbio.2013.11.008](https://doi.org/10.1016/j.jinorgbio.2013.11.008); NsrR: [doi:10.1371/journal.pone.0003623](https://doi.org/10.1371/journal.pone.0003623) |
-| 4 | **Ferredoxin / Flavodoxin switch** | ✅ DONE (2026-05-23) — TIGR01752.1 (flav_long) + TIGR01753.1 (flav_short) added to `iron_stress`. No clean petF equivalog in NCBIfam. | [doi:10.1038/382802a0](https://doi.org/10.1038/382802a0) |
+| 4 | **Ferredoxin / Flavodoxin switch** | ✅ DONE (2026-05-23) — TIGR01752.1 (flav_long) + TIGR01753.1 (flav_short) added to `Iron-StressResponse`. No clean petF equivalog in NCBIfam. | [doi:10.1038/382802a0](https://doi.org/10.1038/382802a0) |
 | 5 | **Fur-family (Zur, PerR)** | ✅ DONE (2026-05-23) — NF008646.0 (Zur) + NF052545.1 (PerR). Mur/Nur: no clean NCBIfam equivalog found. | Zur: [doi:10.3389/fcimb.2013.00059](https://doi.org/10.3389/fcimb.2013.00059); PerR: [doi:10.1111/j.1365-2958.2008.06192.x](https://doi.org/10.1111/j.1365-2958.2008.06192.x) |
-| 6 | **ZnuABC / MntH** | ✅ ALREADY IN LIBRARY — ZnuABC in `metal_resistance-cobalt_zinc_cadmium`, MntH in `metal_resistance-non-specific`. No action needed. | — |
-| 7 | **SUF / ISC** | ✅ DONE (2026-05-23) — sufC/sufB/sufS (TIGR01978/01980/01979) + IscS (TIGR02006.1) in new `iron_sulfur_assembly` category. sufD skipped (7-bit GA-NC gap). | SUF: [doi:10.1074/jbc.M308004200](https://doi.org/10.1074/jbc.M308004200); IscS: [doi:10.1074/jbc.M401261200](https://doi.org/10.1074/jbc.M401261200) |
-| 8 | **Dps iron storage + Multicopper oxidase** | ✅ DONE (2026-05-23) — Dps (NF009990.0) added to `iron_storage`; multicopper oxidase already in `metal_resistance-copper` (CueO/Mco/MmcO). Dps overlaps with PF00210 (ferritin domain) — intentional, Dps is functionally distinct. | [doi:10.1023/b:biom.0000027692.24395.76](https://doi.org/10.1023/b:biom.0000027692.24395.76) (Chiancone et al. 2004, *Biometals* — Dps as bacterial iron-storage/detoxification protein; corrected 2026-07-14, previous DOI resolved to an unrelated yeast DNA-repair paper) |
+| 6 | **ZnuABC / MntH** | ✅ ALREADY IN LIBRARY — ZnuABC in `MetalAcquisition-Zinc`, MntH in `MetalAcquisition-IronManganese`. No action needed. | — |
+| 7 | **SUF / ISC** | ✅ DONE (2026-05-23) — sufC/sufB/sufS (TIGR01978/01980/01979) + IscS (TIGR02006.1) in new `IronSulfur-Assembly` category. sufD skipped (7-bit GA-NC gap). | SUF: [doi:10.1074/jbc.M308004200](https://doi.org/10.1074/jbc.M308004200); IscS: [doi:10.1074/jbc.M401261200](https://doi.org/10.1074/jbc.M401261200) |
+| 8 | **Dps iron storage + Multicopper oxidase** | ✅ DONE (2026-05-23) — Dps (NF009990.0) added to `Iron-Storage`; multicopper oxidase already in `MetalResistance-Copper` (CueO/Mco/MmcO). Dps overlaps with PF00210 (ferritin domain) — intentional, Dps is functionally distinct. | [doi:10.1023/b:biom.0000027692.24395.76](https://doi.org/10.1023/b:biom.0000027692.24395.76) (Chiancone et al. 2004, *Biometals* — Dps as bacterial iron-storage/detoxification protein; corrected 2026-07-14, previous DOI resolved to an unrelated yeast DNA-repair paper) |
 | 9 | **ModABC (molybdate transport)** | ✅ DONE (2026-05-23) — ModA already in library; added ModC (TIGR02142.1). ModB skipped (GA-NC gap = 0.75 bits). | [doi:10.1111/mmi.14152](https://doi.org/10.1111/mmi.14152) |
 | 10 | **Cobalamin biosynthesis** | Complex (30 genes), two pathways; highest implementation cost | [doi:10.1042/BST20120066](https://doi.org/10.1042/BST20120066) |
 
@@ -910,3 +894,11 @@ For each category, the workflow is:
 4. Add entries to `hmm_registry.tsv` with source, reference DOI, nseq, cutoff
 5. Add directory names to `_ANNOTATE_MAP` in `src/efesto/io.py`
 6. Run Layer B clustering to check for cross-model redundancy
+
+### Interpretation after the 2026-11-05 sequence audit
+
+The DA_402 coordinate mapping was independently repeated using the official Source Data workbook and NCBI IPG. The five-seed HMM build was exactly reproduced. Its transcriptomic/structural support identifies an EET candidate family; it does not demonstrate iron reduction by every paralog or external homolog. Self-seed hits and consensus negatives remain training/calibration checks, not independent validation. The curated models' numeric thresholds live in the registry/runtime cutoff file; calling them GA or TC in historical prose does not imply that GA/TC fields are embedded in the HMM headers.
+
+### Redundancy and scope follow-up (2026-11-05)
+
+CutABC/NF041018–20 were physically removed as carbon-metabolism models. A numerical comparison additionally showed the FeGenie profile labeled FpvI to be an exact scoring duplicate of FpvH; official PAO1 sequences support FpvH, and the mislabeled FpvI copy is quarantined. The seven other enabled high-consensus-similarity pairs remain available because equivalence of biological scope or coverage has not been demonstrated.

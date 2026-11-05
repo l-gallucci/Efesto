@@ -163,7 +163,7 @@ iron cycling without metal resistance misses organisms that do both.
 LaRoche et al. 1996 established flavodoxin as in situ iron stress marker in
 phytoplankton. No HMM pipeline has operationalized this for prokaryotic metagenomes.
 
-Efesto has both models in `iron_stress`, correct category, outputs
+Efesto has both models in `Iron-StressResponse`, correct category, outputs
 per-sample counts. Enables a novel quantitative iron stress metric from
 metagenomes. High value for oceanography, limnology, soil science.
 

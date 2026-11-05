@@ -41,3 +41,8 @@ hmm_library/_staging/
 
 # Claude Code local settings
 .claude/
+
+/EFESTO_HMM_GENERAZIONE_TEST_LOCAL.md
+
+# Local sequence and literature audit (only this report)
+/VERIFICA_MODELLI_SEQUENZE_20261105.md

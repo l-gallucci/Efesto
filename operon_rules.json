@@ -1,98 +1,166 @@
 {
   "_comment": "FeGenie-Evo operon rules — place this file in your --hmm_dir directory.",
-
   "report_all_categories": [
-    "metal_resistance-*",
-    "iron_storage"
+    "MetalResistance-*",
+    "MetalAcquisition-*",
+    "MetalHomeostasis-*",
+    "MetalRegulation-*",
+    "Iron-Storage",
+    "Arsenic-Oxidation",
+    "Unclassified-MetalFunction"
   ],
-
   "rules": [
     {
       "_comment": "FLEET electron shuttle: need ≥5 unique genes OR keep non-FLEET co-localisers",
-      "name":           "FLEET",
-      "categories":     ["iron_oxidation"],
-      "genes":          ["EetA","EetB","Ndh2","FmnB","FmnA","DmkA","DmkB","PplA"],
-      "rule":           "require_n_of",
-      "min_genes":      5,
-      "on_fail":        "passthrough_non_members",
+      "name": "FLEET",
+      "categories": [
+        "Iron-Oxidation"
+      ],
+      "genes": [
+        "EetA",
+        "EetB",
+        "Ndh2",
+        "FmnB",
+        "FmnA",
+        "DmkA",
+        "DmkB",
+        "PplA"
+      ],
+      "rule": "require_n_of",
+      "min_genes": 5,
+      "on_fail": "passthrough_non_members",
       "canonical_size": 8,
-      "max_bp_gap":     2000
+      "max_bp_gap": 2000
     },
     {
       "_comment": "Magnetosome island: need ≥5 unique MAM genes",
-      "name":           "MAM",
-      "categories":     ["magnetosome_formation"],
-      "genes":          ["MamA","MamB","MamE","MamK","MamP","MamM","MamQ","MamI","MamL","MamO"],
-      "rule":           "require_n_of",
-      "min_genes":      5,
-      "on_fail":        "passthrough_non_members",
+      "name": "MAM",
+      "categories": [
+        "Magnetosome-Formation"
+      ],
+      "genes": [
+        "MamA",
+        "MamB",
+        "MamE",
+        "MamK",
+        "MamP",
+        "MamM",
+        "MamQ",
+        "MamI",
+        "MamL",
+        "MamO"
+      ],
+      "rule": "require_n_of",
+      "min_genes": 5,
+      "on_fail": "passthrough_non_members",
       "canonical_size": 10,
-      "max_bp_gap":     3000
+      "max_bp_gap": 3000
     },
     {
       "_comment": "FoxABC (Acidithiobacillus Fe-oxidation): need ≥2 of the three subunits",
-      "name":           "FOXABC",
-      "categories":     ["iron_oxidation"],
-      "genes":          ["FoxA","FoxB","FoxC"],
-      "rule":           "require_n_of",
-      "min_genes":      2,
-      "on_fail":        "passthrough_non_members",
+      "name": "FOXABC",
+      "categories": [
+        "Iron-Oxidation"
+      ],
+      "genes": [
+        "FoxA",
+        "FoxB",
+        "FoxC"
+      ],
+      "rule": "require_n_of",
+      "min_genes": 2,
+      "on_fail": "passthrough_non_members",
       "canonical_size": 3,
-      "max_bp_gap":     1000
+      "max_bp_gap": 1000
     },
     {
       "_comment": "FoxEYZ: FoxE (bc1-complex subunit) is the mandatory anchor gene",
-      "name":           "FOXEYZ",
-      "categories":     ["iron_oxidation"],
-      "genes":          ["FoxE","FoxY","FoxZ"],
-      "rule":           "require_anchor",
-      "anchor":         "FoxE",
-      "on_fail":        "passthrough_non_members",
+      "name": "FOXEYZ",
+      "categories": [
+        "Iron-Oxidation"
+      ],
+      "genes": [
+        "FoxE",
+        "FoxY",
+        "FoxZ"
+      ],
+      "rule": "require_anchor",
+      "anchor": "FoxE",
+      "on_fail": "passthrough_non_members",
       "canonical_size": 3,
-      "max_bp_gap":     1000
+      "max_bp_gap": 1000
     },
     {
       "_comment": "DFE operon 1 (Desulfosporosinus): need ≥3 of 4 subunits",
-      "name":           "DFE1",
-      "categories":     ["iron_reduction","probable_iron_reduction"],
-      "genes":          ["DFE_0448","DFE_0449","DFE_0450","DFE_0451"],
-      "rule":           "require_n_of",
-      "min_genes":      3,
-      "on_fail":        "passthrough_non_members",
+      "name": "DFE1",
+      "categories": [
+        "Iron-Reduction",
+        "Iron-ReductionPotential"
+      ],
+      "genes": [
+        "DFE_0448",
+        "DFE_0449",
+        "DFE_0450",
+        "DFE_0451"
+      ],
+      "rule": "require_n_of",
+      "min_genes": 3,
+      "on_fail": "passthrough_non_members",
       "canonical_size": 4,
-      "max_bp_gap":     1000
+      "max_bp_gap": 1000
     },
     {
       "_comment": "DFE operon 2 (Desulfosporosinus): need ≥3 of 5 subunits",
-      "name":           "DFE2",
-      "categories":     ["iron_reduction","probable_iron_reduction"],
-      "genes":          ["DFE_0461","DFE_0462","DFE_0463","DFE_0464","DFE_0465"],
-      "rule":           "require_n_of",
-      "min_genes":      3,
-      "on_fail":        "passthrough_non_members",
+      "name": "DFE2",
+      "categories": [
+        "Iron-Reduction",
+        "Iron-ReductionPotential"
+      ],
+      "genes": [
+        "DFE_0461",
+        "DFE_0462",
+        "DFE_0463",
+        "DFE_0464",
+        "DFE_0465"
+      ],
+      "rule": "require_n_of",
+      "min_genes": 3,
+      "on_fail": "passthrough_non_members",
       "canonical_size": 5,
-      "max_bp_gap":     1000
+      "max_bp_gap": 1000
     },
     {
-      "_comment": "Mtr/Mto disambiguation: re-assigns iron_oxidation vs iron_reduction based on subunit co-presence. Oxidation-side third gene is ImoA (Slit_2495), not CymA -- Liu et al. 2012 originally called this gene 'CymA-like' based on loose NapC/NirT-superfamily sequence similarity, but a 2022 mBio paper (doi:10.1128/mbio.02150-22) showed it is only 33% identical to real Shewanella CymA (64%/54% identical to NirT/NapC instead) and renamed it ImoA. Real CymA (doi:10.1128/jb.179.4.1143-1152.1997) is a Shewanella reduction-pathway gene, mechanistically upstream of MtrA, not part of this operon's oxidation side -- see docs/hmm_library_curation.md.",
-      "name":           "MtrMto",
-      "categories":     ["iron_oxidation","iron_reduction",
-                         "possible_iron_oxidation_and_possible_iron_reduction"],
-      "genes":          ["MtrA","MtrB_TIGR03509","MtrC_TIGR03507","MtoA","ImoA"],
-      "rule":           "mtr_disambiguation",
-      "on_fail":        "keep_all",
+      "_comment": "Mtr/Mto disambiguation: re-assigns Iron-Oxidation vs Iron-Reduction based on subunit co-presence. Oxidation-side third gene is ImoA (Slit_2495), not CymA -- Liu et al. 2012 originally called this gene 'CymA-like' based on loose NapC/NirT-superfamily sequence similarity, but a 2022 mBio paper (doi:10.1128/mbio.02150-22) showed it is only 33% identical to real Shewanella CymA (64%/54% identical to NirT/NapC instead) and renamed it ImoA. Real CymA (doi:10.1128/jb.179.4.1143-1152.1997) is a Shewanella reduction-pathway gene, mechanistically upstream of MtrA, not part of this operon's oxidation side -- see docs/hmm_library_curation.md.",
+      "name": "MtrMto",
+      "categories": [
+        "Iron-Oxidation",
+        "Iron-Reduction",
+        "Iron-RedoxPotential"
+      ],
+      "genes": [
+        "MtrA",
+        "MtrB_TIGR03509",
+        "MtrC_TIGR03507",
+        "MtoA",
+        "ImoA"
+      ],
+      "rule": "mtr_disambiguation",
+      "on_fail": "keep_all",
       "canonical_size": 3,
-      "max_bp_gap":     2000
+      "max_bp_gap": 2000
     },
     {
       "_comment": "Siderophore transport: need ≥2 distinct transport HMMs, OR a lone trusted receptor gene",
-      "name":       "SIDERO_TRANSPORT",
-      "categories": ["iron_acquisition-siderophore_transport_potential",
-                     "iron_acquisition-heme_transport",
-                     "iron_acquisition-siderophore_transport"],
-      "genes":      [],
-      "rule":       "require_n_cat_or_lone_trusted",
-      "min_genes":  2,
+      "name": "SIDERO_TRANSPORT",
+      "categories": [
+        "Siderophore-TransportPotential",
+        "Heme-Transport",
+        "Siderophore-Transport",
+        "IronAcquisition-ComplexTransport"
+      ],
+      "genes": [],
+      "rule": "require_n_cat_or_lone_trusted",
+      "min_genes": 2,
       "trusted_lone": [
         "FutA1-iron_ABC_transporter_iron-binding-rep",
         "FutA2-iron_ABC_transporter_iron-binding-rep",
@@ -102,52 +170,69 @@
         "LbtU_LbtB-legiobactin_receptor_2",
         "IroC-salmochelin_transport-rep"
       ],
-      "on_fail":    "drop",
+      "on_fail": "drop",
       "max_bp_gap": 2000
     },
     {
       "_comment": "Siderophore biosynthesis: need ≥3 distinct synthesis HMMs in cluster",
-      "name":       "SIDERO_SYNTH",
-      "categories": ["iron_acquisition-siderophore_synthesis"],
-      "genes":      [],
-      "rule":       "require_n_cat",
-      "min_genes":  3,
-      "on_fail":    "drop",
+      "name": "SIDERO_SYNTH",
+      "categories": [
+        "Siderophore-Synthesis"
+      ],
+      "genes": [],
+      "rule": "require_n_cat",
+      "min_genes": 3,
+      "on_fail": "drop",
       "max_bp_gap": 5000
     },
     {
       "_comment": "Iron/heme transport: need ≥2 distinct transport HMMs in cluster",
-      "name":       "IRON_TRANSPORT",
-      "categories": ["iron_acquisition-iron_transport",
-                     "iron_acquisition-heme_oxygenase"],
-      "genes":      [],
-      "rule":       "require_n_cat",
-      "min_genes":  2,
-      "on_fail":    "drop",
+      "name": "IRON_TRANSPORT",
+      "categories": [
+        "IronAcquisition-Transport",
+        "Heme-Oxygenase"
+      ],
+      "genes": [],
+      "rule": "require_n_cat",
+      "min_genes": 2,
+      "on_fail": "drop",
       "max_bp_gap": 2000
     },
     {
       "_comment": "Tad/Flp pilus (Chen et al. 2025, Nature, MISO): Flp pilin and CpaB assembly platform are obligate operon partners; either gene alone is a widespread, non-iron-specific adhesion/conjugation signal, so both are required",
-      "name":           "TAD_PILUS",
-      "categories":     ["iron_reduction"],
-      "genes":          ["PF04964-Flp_Fap_pilin","cpaB_TIGR03177.1"],
-      "rule":           "require_n_of",
-      "min_genes":      2,
-      "on_fail":        "passthrough_non_members",
+      "name": "TAD_PILUS",
+      "categories": [
+        "Iron-Reduction"
+      ],
+      "genes": [
+        "PF04964-Flp_Fap_pilin",
+        "cpaB_TIGR03177.1"
+      ],
+      "rule": "require_n_of",
+      "min_genes": 2,
+      "on_fail": "passthrough_non_members",
       "canonical_size": 2,
-      "max_bp_gap":     2000
+      "max_bp_gap": 2000
     },
     {
       "_comment": "SUF operon (sufABCDSE): sufA/sufD/sufE have near-zero TC-NC calibration margin (confirmed: sufE cross-hits its non-operon paralog csdE at a comparable bitscore) and are marked needs_confirmation in the registry; require co-occurrence with at least 3 of the 6 SUF genes (in practice this means with the well-calibrated anchors sufB/sufC/sufS) before trusting a lone weak hit",
-      "name":           "SUF_OPERON",
-      "categories":     ["iron_sulfur_assembly"],
-      "genes":          ["sufA_TIGR01997.1","sufB_TIGR01980.1","sufC_TIGR01978.1",
-                          "sufD_TIGR01981.1","sufS_TIGR01979.1","sufE_PF02657.22"],
-      "rule":           "require_n_of",
-      "min_genes":      3,
-      "on_fail":        "passthrough_non_members",
+      "name": "SUF_OPERON",
+      "categories": [
+        "IronSulfur-Assembly"
+      ],
+      "genes": [
+        "sufA_TIGR01997.1",
+        "sufB_TIGR01980.1",
+        "sufC_TIGR01978.1",
+        "sufD_TIGR01981.1",
+        "sufS_TIGR01979.1",
+        "sufE_PF02657.22"
+      ],
+      "rule": "require_n_of",
+      "min_genes": 3,
+      "on_fail": "passthrough_non_members",
       "canonical_size": 6,
-      "max_bp_gap":     2000
+      "max_bp_gap": 2000
     }
   ]
 }

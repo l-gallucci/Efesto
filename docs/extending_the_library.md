@@ -126,8 +126,10 @@ for the full calibration rationale.
 1. Create `hmm_library/<new_category>/` and place HMMs there
 2. Add models to registry, bitcutoffs, and gene map (as above)
 3. Decide whether the category should bypass rules:
-   - Single-gene hits informative (e.g. `iron_stress`, `iron_sulfur_assembly`) →
+   - Single-gene hits informative (e.g. `Iron-StressResponse`, `IronSulfur-Assembly`) →
      add to `report_all_categories` in `operon_rules.json`
    - Co-occurrence required (e.g. new transport system) → add a new rule object
 4. If co-occurrence is required, define `canonical_size` for confidence scoring
 5. Run `pytest tests/` — add a test if the new category has custom logic
+
+Category names and inference use the canonical vocabulary in `src/efesto/categories.py`. Explicit decisions in `hmm_library/category_curation.tsv` override historical import heuristics; out-of-scope exclusions remain deprecated during rebuilds. See [HMM library](hmm_library.md) for acquisition/homeostasis/resistance distinctions.

@@ -5,48 +5,50 @@ import json
 import re
 from pathlib import Path
 
+from efesto.categories import canonical_category
+
 
 # ── Default operon rules (used when no operon_rules.json is present) ──────────
 _DEFAULT_OPERON_RULES = [
     # canonical_size: expected number of genes in a complete system (for completeness scoring).
     # max_bp_gap:     recommended max intergenic gap for this gene system (bp).
     #                 Used as metadata; the global --max_bp_gap is the detection window.
-    {"name": "FLEET", "categories": ["iron_oxidation"],
+    {"name": "FLEET", "categories": ["Iron-Oxidation"],
      "genes": ["EetA", "EetB", "Ndh2", "FmnB", "FmnA", "DmkA", "DmkB", "PplA"],
      "rule": "require_n_of", "min_genes": 5, "on_fail": "passthrough_non_members",
      "canonical_size": 8, "max_bp_gap": 2000},
-    {"name": "MAM", "categories": ["magnetosome_formation"],
+    {"name": "MAM", "categories": ["Magnetosome-Formation"],
      "genes": ["MamA", "MamB", "MamE", "MamK", "MamP", "MamM", "MamQ", "MamI", "MamL", "MamO"],
      "rule": "require_n_of", "min_genes": 5, "on_fail": "passthrough_non_members",
      "canonical_size": 10, "max_bp_gap": 3000},
-    {"name": "FOXABC", "categories": ["iron_oxidation"],
+    {"name": "FOXABC", "categories": ["Iron-Oxidation"],
      "genes": ["FoxA", "FoxB", "FoxC"],
      "rule": "require_n_of", "min_genes": 2, "on_fail": "passthrough_non_members",
      "canonical_size": 3, "max_bp_gap": 1000},
-    {"name": "FOXEYZ", "categories": ["iron_oxidation"],
+    {"name": "FOXEYZ", "categories": ["Iron-Oxidation"],
      "genes": ["FoxE", "FoxY", "FoxZ"],
      "rule": "require_anchor", "anchor": "FoxE", "on_fail": "passthrough_non_members",
      "canonical_size": 3, "max_bp_gap": 1000},
-    {"name": "DFE1", "categories": ["iron_reduction", "probable_iron_reduction"],
+    {"name": "DFE1", "categories": ["Iron-Reduction", "Iron-ReductionPotential"],
      "genes": ["DFE_0448", "DFE_0449", "DFE_0450", "DFE_0451"],
      "rule": "require_n_of", "min_genes": 3, "on_fail": "passthrough_non_members",
      "canonical_size": 4, "max_bp_gap": 1000},
-    {"name": "DFE2", "categories": ["iron_reduction", "probable_iron_reduction"],
+    {"name": "DFE2", "categories": ["Iron-Reduction", "Iron-ReductionPotential"],
      "genes": ["DFE_0461", "DFE_0462", "DFE_0463", "DFE_0464", "DFE_0465"],
      "rule": "require_n_of", "min_genes": 3, "on_fail": "passthrough_non_members",
      "canonical_size": 5, "max_bp_gap": 1000},
     {"name": "MtrMto",
-     "categories": ["iron_oxidation", "iron_reduction",
-                    "possible_iron_oxidation_and_possible_iron_reduction"],
+     "categories": ["Iron-Oxidation", "Iron-Reduction",
+                    "Iron-RedoxPotential"],
      # Oxidation-side third gene is ImoA (Slit_2495), not CymA -- see
      # docs/hmm_library_curation.md and operon_rules.json's _comment for MtrMto.
      "genes": ["MtrA", "MtrB_TIGR03509", "MtrC_TIGR03507", "MtoA", "ImoA"],
      "rule": "mtr_disambiguation", "on_fail": "keep_all",
      "canonical_size": 3, "max_bp_gap": 2000},
     {"name": "SIDERO_TRANSPORT",
-     "categories": ["iron_acquisition-siderophore_transport_potential",
-                    "iron_acquisition-heme_transport",
-                    "iron_acquisition-siderophore_transport"],
+     "categories": ["Siderophore-TransportPotential",
+                    "Heme-Transport",
+                    "Siderophore-Transport", "IronAcquisition-ComplexTransport"],
      "genes": [], "rule": "require_n_cat_or_lone_trusted", "min_genes": 2,
      "trusted_lone": ["FutA1-iron_ABC_transporter_iron-binding-rep",
                       "FutA2-iron_ABC_transporter_iron-binding-rep",
@@ -54,25 +56,25 @@ _DEFAULT_OPERON_RULES = [
                       "LbtU-LvtA-PiuA-PirA-RhtA", "LbtU-LbtB-legiobactin_receptor",
                       "LbtU_LbtB-legiobactin_receptor_2", "IroC-salmochelin_transport-rep"],
      "on_fail": "drop", "max_bp_gap": 2000},
-    {"name": "SIDERO_SYNTH", "categories": ["iron_acquisition-siderophore_synthesis"],
+    {"name": "SIDERO_SYNTH", "categories": ["Siderophore-Synthesis"],
      "genes": [], "rule": "require_n_cat", "min_genes": 3, "on_fail": "drop",
      "max_bp_gap": 5000},
     {"name": "IRON_TRANSPORT",
-     "categories": ["iron_acquisition-iron_transport", "iron_acquisition-heme_oxygenase"],
+     "categories": ["IronAcquisition-Transport", "Heme-Oxygenase"],
      "genes": [], "rule": "require_n_cat", "min_genes": 2, "on_fail": "drop",
      "max_bp_gap": 2000},
-    {"name": "TAD_PILUS", "categories": ["iron_reduction"],
+    {"name": "TAD_PILUS", "categories": ["Iron-Reduction"],
      "genes": ["PF04964-Flp_Fap_pilin", "cpaB_TIGR03177.1"],
      "rule": "require_n_of", "min_genes": 2, "on_fail": "passthrough_non_members",
      "canonical_size": 2, "max_bp_gap": 2000},
-    {"name": "SUF_OPERON", "categories": ["iron_sulfur_assembly"],
+    {"name": "SUF_OPERON", "categories": ["IronSulfur-Assembly"],
      "genes": ["sufA_TIGR01997.1", "sufB_TIGR01980.1", "sufC_TIGR01978.1",
                "sufD_TIGR01981.1", "sufS_TIGR01979.1", "sufE_PF02657.22"],
      "rule": "require_n_of", "min_genes": 3, "on_fail": "passthrough_non_members",
      "canonical_size": 6, "max_bp_gap": 2000},
 ]
 
-_REPORT_ALL_PATTERNS = ["metal_resistance-*", "iron_storage"]
+_REPORT_ALL_PATTERNS = ['MetalResistance-*', 'MetalAcquisition-*', 'MetalHomeostasis-*', 'MetalRegulation-*', 'Iron-Storage', 'Arsenic-Oxidation', 'Unclassified-MetalFunction']
 
 # ── FeGenie gene sets ──────────────────────────────────────────────────────────
 _FLEET_GENES  = {"EetA", "EetB", "Ndh2", "FmnB", "FmnA", "DmkA", "DmkB", "PplA"}
@@ -91,14 +93,15 @@ _TRUSTED_LONE = {"FutA1-iron_ABC_transporter_iron-binding-rep",
                  "LbtU-LvtA-PiuA-PirA-RhtA", "LbtU-LbtB-legiobactin_receptor",
                  "LbtU_LbtB-legiobactin_receptor_2", "IroC-salmochelin_transport-rep"}
 
-_SIDERO_TRANS_CATS = {"iron_acquisition-siderophore_transport_potential",
-                      "iron_acquisition-siderophore_transport",
-                      "iron_acquisition-heme_transport"}
-_SIDERO_SYNTH_CATS = {"iron_acquisition-siderophore_synthesis"}
-_IRON_TRANS_CATS   = {"iron_acquisition-iron_transport", "iron_acquisition-heme_oxygenase"}
+_SIDERO_TRANS_CATS = {"Siderophore-TransportPotential",
+                      "Siderophore-Transport",
+                      "IronAcquisition-ComplexTransport",
+                      "Heme-Transport"}
+_SIDERO_SYNTH_CATS = {"Siderophore-Synthesis"}
+_IRON_TRANS_CATS   = {"IronAcquisition-Transport", "Heme-Oxygenase"}
 _IRON_ACQ_ALL      = _SIDERO_TRANS_CATS | _SIDERO_SYNTH_CATS | _IRON_TRANS_CATS
 
-FE_REDOX = {"iron_reduction", "iron_oxidation"}
+FE_REDOX = {"Iron-Reduction", "Iron-Oxidation"}
 
 
 def build_stem_gap_map(rules, gene_map):
@@ -148,8 +151,9 @@ def load_operon_rules(hmm_dir):
     if p.exists():
         with open(p) as fh:
             data = json.load(fh)
-        rules = data.get("rules", [])
-        pats  = data.get("report_all_categories", _REPORT_ALL_PATTERNS)
+        rules = [dict(rule, categories=[canonical_category(c) for c in rule.get("categories", [])])
+                 for rule in data.get("rules", [])]
+        pats  = [canonical_category(p) for p in data.get("report_all_categories", _REPORT_ALL_PATTERNS)]
         print(f"[INFO] Loaded {len(rules)} operon rules from {p}")
         print(f"       Using JSON rule engine (model-organism mode)")
         return rules, pats, True
@@ -158,7 +162,7 @@ def load_operon_rules(hmm_dir):
 
 
 def _cm(cat, pats):
-    return any(fnmatch.fnmatch(cat, p) for p in pats)
+    return any(fnmatch.fnmatch(canonical_category(cat), canonical_category(p)) for p in pats)
 
 
 def _mtr(rows):
@@ -167,15 +171,15 @@ def _mtr(rows):
     if "MtoA" in stems and "MtrB_TIGR03509" in stems and "MtrC_TIGR03507" not in stems:
         for r in updated:
             if r["hmm_stem"] in {"MtrB_TIGR03509", "MtoA", "ImoA"}:
-                r["cat"] = "iron_oxidation"
+                r["cat"] = "Iron-Oxidation"
     elif "MtrA" in stems and "MtrB_TIGR03509" in stems:
         for r in updated:
             if r["hmm_stem"] in {"MtrA", "MtrB_TIGR03509"}:
-                r["cat"] = "iron_reduction"
+                r["cat"] = "Iron-Reduction"
     elif "MtrC_TIGR03507" in stems:
         for r in updated:
             if r["hmm_stem"] in {"MtrA", "MtrB_TIGR03509"}:
-                r["cat"] = "iron_reduction"
+                r["cat"] = "Iron-Reduction"
     return updated
 
 
@@ -186,7 +190,7 @@ def filter_cluster_fegenie(cluster_rows, report_all_pats, all_results=False,
 
     catalog_mode=True: bypass co-occurrence count rules (FLEET ≥5, MAM ≥5,
     siderophore ≥2/3, iron_transport ≥2) but keep:
-      - report_all bypass (metal_resistance-*, iron_storage)
+      - report_all bypass (MetalResistance-*, Iron-Storage)
       - Mtr/Mto disambiguation (category assignment, not count-based)
       - Cyc1/Cyc2 second-pass filters (handled separately in second_pass())
     This is appropriate for deduplicated gene catalogs where genomic context
@@ -353,7 +357,7 @@ def filter_cluster_json(cluster_rows, operon_rules, report_all_pats,
 
     def _apply(rows, rd):
         gs = set(rd.get("genes", []))
-        cs = set(rd.get("categories", []))
+        cs = {canonical_category(c) for c in rd.get("categories", [])}
         on_fail = rd.get("on_fail", "keep_all")
         rt = rd["rule"]
         sp = {r["hmm_stem"] for r in rows}
@@ -426,8 +430,8 @@ def second_pass(cluster_rows, g2c, seq_dict, all_results=False, catalog_mode=Fal
             if len(seq) >= 365 and count_heme(seq) > 0:
                 kept.append(r)
             continue
-        if cat == "iron_gene_regulation":
-            if catalog_mode or any("regulation" in g2c.get(h, "") for h in stems):
+        if cat == "Iron-Regulation":
+            if catalog_mode or any("regulation" in g2c.get(h, "").lower() for h in stems):
                 kept.append(r)
             continue
         kept.append(r)

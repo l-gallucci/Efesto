@@ -1,0 +1,30 @@
+[
+  {
+    "file": "MtrA_seeds.faa",
+    "repository_path": "hmm_library/_staging/mtr_mto/MtrA_seeds.faa",
+    "commit": "13d3e68b282a508ed209d840eb65e995c54702e4",
+    "sha256": "3509fbd2333e0233589deb9f46bafb175e91e1c5ff4023307f017d0bb3b6aa35",
+    "bytes": 6156
+  },
+  {
+    "file": "MtoA_seeds.faa",
+    "repository_path": "hmm_library/_staging/mtr_mto/MtoA_seeds.faa",
+    "commit": "13d3e68b282a508ed209d840eb65e995c54702e4",
+    "sha256": "c92f452901bd08a04200e5b91b67d104e62afff71d112f92aa03b500524e9bf9",
+    "bytes": 2651
+  },
+  {
+    "file": "MtrA_seeds.aln",
+    "repository_path": "hmm_library/_staging/mtr_mto/MtrA_seeds.aln",
+    "commit": "13d3e68b282a508ed209d840eb65e995c54702e4",
+    "sha256": "16f873d45a8e809fbea363334809697707c59300b647d02465e3a36d4bedae70",
+    "bytes": 6279
+  },
+  {
+    "file": "MtoA_seeds.aln",
+    "repository_path": "hmm_library/_staging/mtr_mto/MtoA_seeds.aln",
+    "commit": "13d3e68b282a508ed209d840eb65e995c54702e4",
+    "sha256": "bb285d43692ef12b452f61ef6b86784092319ffcaaaaaf7f035f23e5b7f94e21",
+    "bytes": 2852
+  }
+]

@@ -32,7 +32,7 @@ One row per ORF hit. The tidy format for downstream analysis.
 
 | Column | Type | Description |
 |--------|------|-------------|
-| `category` | string | Functional category (e.g. `iron_reduction`) |
+| `category` | string | Functional category (e.g. `Iron-Reduction`) |
 | `genome` | string | Source genome filename |
 | `contig` | string | Source contig identifier |
 | `orf` | string | ORF identifier (Bakta gene ID when `--bakta_gff_dir` used) |
@@ -160,7 +160,7 @@ hits <- read_tsv("results/Efesto-results-long.tsv")
 
 # High-confidence iron reduction clusters
 hits |>
-  filter(category == "iron_reduction", cluster_confidence >= 0.8) |>
+  filter(category == "Iron-Reduction", cluster_confidence >= 0.8) |>
   group_by(genome, cluster_id) |>
   summarise(genes = paste(gene, collapse=","), confidence = first(cluster_confidence))
 ```

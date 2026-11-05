@@ -1,8 +1,18 @@
 # HMM Library Curation — Decision Log
 
 This document records the rationale for every model excluded from the active
-Efesto HMM library. All decisions are reflected in `hmm_library/hmm_registry.tsv`
-via the `status` column.
+Efesto HMM library. The current registry is authoritative; historical narrative below is not a complete validation of every retained assignment.
+
+## Category cleanup — 5 November 2026
+
+All category directories and runtime references now use the canonical vocabulary in `category_aliases.tsv`. Explicit per-model decisions and evidence are in `category_curation.tsv`; current counts and review limitations are described in [HMM library](hmm_library.md).
+
+The previous audit identified 47 Tabuteau import/biosynthesis conflicts, seven live InterPro conflicts, ten live MetHMMDB iron-acquisition conflicts and the FeGenie TbpB storage assignment. Their categories have been corrected; ComGD and three glyceraldehyde dehydrogenase models are now deprecated out of scope. Additional source-supported uptake, homeostasis and stress-response assignments have been separated from resistance/iron uptake. Unresolved mechanisms remain explicitly unclassified.
+
+The Fe uptake models were imported through **MetHMMDB**, not FeGenie. Earlier text saying these moves had already been applied was inconsistent with the actual library; the migration now synchronizes directories and registry. TbpB's storage category was inherited from FeGenie. Historical deprecation thresholds and retained-model counts below describe earlier curation steps, not a fresh measurement of generalization or classifier accuracy. Low NSEQ alone does not establish an empirical false-positive rate.
+
+Current status: 652 registered, 473 active, 12 experimental, 167 deprecated. The three CutABC profiles were physically removed after the sequence/literature audit; the mislabeled duplicate FpvI was quarantined. HMM bytes, cutoffs and existing experimental statuses were preserved. `source_supported` review labels are source evidence, not independent validation.
+
 
 ---
 
@@ -60,34 +70,34 @@ identity with ≥ 80% bidirectional coverage. The representative was selected by
 
 | Deprecated model | Category | Kept representative | Reason |
 |---|---|---|---|
-| `IsdG-heme-oxygenase_fam2-rep` | iron_acquisition-heme_oxygenase | `IsdG-heme-oxygenase_fam1-rep` | fam1 has higher nseq (15 vs 8); near-identical cutoffs (102 vs 101.8) |
-| `Sid_MbtC_Mycobactin_biosynthesis_…` | iron_acquisition-siderophore_synthesis | `K04790` (tabuteau) | tabuteau model calibrated (626.5), nseq=128 vs fegenie nseq=25, cutoff=0 |
-| `Sid_AsbD_Petrobactin_biosynthesis_…` | iron_acquisition-siderophore_synthesis | `K24111` (tabuteau) | tabuteau model calibrated (97.4), nseq=39 vs fegenie nseq=25 |
-| `FpuC-FhuC-FpuD-YusV-CbrD-FepC-PvuE-FecE-HatC-ATPase` | iron_acquisition-siderophore_transport | `FpuCD-YusV-CbrD-FepC-FepE-PvuE-ABC_transporters_ATPase` | near-identical ABC ATPase models (nseq 51 vs 50); retained the one with slightly higher nseq |
-| `FecE-PvuE-FhuC-CbrD-FepC-YusV-FpuD-FpuC-PiuA-PirA-FepA-RhtA` | iron_acquisition-siderophore_transport | `PvuE-FecB-vibrioferrin_transport` | kept higher-cutoff model (350.0 vs 200.1) |
-| `CdCoZn_efflux_czcA_5` | metal_resistance-multimetal | `CdCoZn_efflux_czcA_1` | both methmmdb czcA variants; czcA_1 has more than double the nseq (50 vs 23) |
-| `Ag_efflux_silA_1` | metal_resistance-silver | `CuAg_cusA_1` (metal_resistance-multimetal) | CusA and SilA are paralogous RND efflux pumps (Cu/Ag vs Ag); the broader CuAg model with higher nseq (75 vs 25) covers both families |
-| `Ag_lipoprotein_silC_1` | metal_resistance-silver | `CuAg_cusC_1` (metal_resistance-multimetal) | CusC and SilC are paralogous OMF components of the same RND system; CuAg model retained (nseq 101 vs 24) |
+| `IsdG-heme-oxygenase_fam2-rep` | Heme-Oxygenase | `IsdG-heme-oxygenase_fam1-rep` | fam1 has higher nseq (15 vs 8); near-identical cutoffs (102 vs 101.8) |
+| `Sid_MbtC_Mycobactin_biosynthesis_…` | Siderophore-Synthesis | `K04790` (tabuteau) | tabuteau model calibrated (626.5), nseq=128 vs fegenie nseq=25, cutoff=0 |
+| `Sid_AsbD_Petrobactin_biosynthesis_…` | Siderophore-Synthesis | `K24111` (tabuteau) | tabuteau model calibrated (97.4), nseq=39 vs fegenie nseq=25 |
+| `FpuC-FhuC-FpuD-YusV-CbrD-FepC-PvuE-FecE-HatC-ATPase` | Siderophore-Transport | `FpuCD-YusV-CbrD-FepC-FepE-PvuE-ABC_transporters_ATPase` | near-identical ABC ATPase models (nseq 51 vs 50); retained the one with slightly higher nseq |
+| `FecE-PvuE-FhuC-CbrD-FepC-YusV-FpuD-FpuC-PiuA-PirA-FepA-RhtA` | Siderophore-Transport | `PvuE-FecB-vibrioferrin_transport` | kept higher-cutoff model (350.0 vs 200.1) |
+| `CdCoZn_efflux_czcA_5` | MetalResistance-MultiMetal | `CdCoZn_efflux_czcA_1` | both methmmdb czcA variants; czcA_1 has more than double the nseq (50 vs 23) |
+| `Ag_efflux_silA_1` | MetalResistance-Silver | `CuAg_cusA_1` (MetalResistance-MultiMetal) | CusA and SilA are paralogous RND efflux pumps (Cu/Ag vs Ag); the broader CuAg model with higher nseq (75 vs 25) covers both families |
+| `Ag_lipoprotein_silC_1` | MetalResistance-Silver | `CuAg_cusC_1` (MetalResistance-MultiMetal) | CusC and SilC are paralogous OMF components of the same RND system; CuAg model retained (nseq 101 vs 24) |
 
 ### B2 — Category-mismatch deprecations
 
 **Status tag:** `deprecated_category_mismatch`
 
 Models that cluster with well-characterised iron **uptake** genes but are catalogued
-under `iron_resistance` in their source database. Iron homeostasis genes are sometimes
+under `Iron-Resistance` in their source database. Iron homeostasis genes are sometimes
 annotated as "resistance" in broad databases because excess or misregulated iron can
 be toxic, but from a functional genomics perspective they are uptake/transport genes.
 Retaining them in the resistance category would inflate false-positive resistance calls.
 
 | Deprecated model | Source category | Clusters with | Evidence |
 |---|---|---|---|
-| `Fe_binding_yfeA_1` (methmmdb) | iron_resistance | FeGenie `Iron_uptake_YfeA_…` [iron_acquisition-iron_transport] | YfeA is the periplasmic substrate-binding protein of the Yfe chelated-iron ABC transporter (Yersinia pestis). It is an iron acquisition gene, not a resistance determinant. |
-| `Fe_transport_1` (methmmdb) | iron_resistance | FeGenie `Iron_uptake_YfeB_…` [iron_acquisition-iron_transport] | YfeB is the membrane permease subunit of the same Yfe system. Same rationale as above. |
-| `Cation_symport_actP_1` | metal_resistance-non-specific | — | ActP is a cation/acetate symporter involved in acetate uptake, not metal homeostasis. No homology to any metal resistance or transport function. |
-| `Multidrug_efflux_yfmO_2` | metal_resistance-non-specific | — | YfmO is a subunit of the MdtABC multidrug efflux complex. Primary function is antibiotic resistance; no evidence for metal-specific efflux. |
-| `Multidrug_resistance_mdtA_1` | metal_resistance-non-specific | — | MdtA: membrane fusion protein of MdtABC multidrug efflux. Not metal-specific. |
-| `Multidrug_resistance_mdtB_1` | metal_resistance-non-specific | — | MdtB: RND permease subunit of MdtABC. Not metal-specific. |
-| `Multidrug_resistance_mdtC_1` | metal_resistance-non-specific | — | MdtC: RND permease subunit of MdtABC. Not metal-specific. |
+| `Fe_binding_yfeA_1` (methmmdb) | Iron-Resistance | FeGenie `Iron_uptake_YfeA_…` [IronAcquisition-Transport] | YfeA is the periplasmic substrate-binding protein of the Yfe chelated-iron ABC transporter (Yersinia pestis). It is an iron acquisition gene, not a resistance determinant. |
+| `Fe_transport_1` (methmmdb) | Iron-Resistance | FeGenie `Iron_uptake_YfeB_…` [IronAcquisition-Transport] | YfeB is the membrane permease subunit of the same Yfe system. Same rationale as above. |
+| `Cation_symport_actP_1` | MetalResistance-NonSpecific | — | ActP is a cation/acetate symporter involved in acetate uptake, not metal homeostasis. No homology to any metal resistance or transport function. |
+| `Multidrug_efflux_yfmO_2` | MetalResistance-NonSpecific | — | YfmO is a subunit of the MdtABC multidrug efflux complex. Primary function is antibiotic resistance; no evidence for metal-specific efflux. |
+| `Multidrug_resistance_mdtA_1` | MetalResistance-NonSpecific | — | MdtA: membrane fusion protein of MdtABC multidrug efflux. Not metal-specific. |
+| `Multidrug_resistance_mdtB_1` | MetalResistance-NonSpecific | — | MdtB: RND permease subunit of MdtABC. Not metal-specific. |
+| `Multidrug_resistance_mdtC_1` | MetalResistance-NonSpecific | — | MdtC: RND permease subunit of MdtABC. Not metal-specific. |
 
 ### Category reclassifications (2026-05-23)
 
@@ -95,52 +105,26 @@ Models whose source category was incorrect but which are retained as active unde
 
 | Model | Old category | New category | Reason |
 |---|---|---|---|
-| `Fe_periplasmic_1`, `Fe_permease_efeU_1`, `Fe_transport_2/3`, `Fe_transport_fbpB/C_1`, `Fe_transport_fecD/E_1` | `iron_resistance` | `iron_acquisition-iron_transport` | These are iron uptake transporters (EfeU, FbpBC, FecDE, YfeCD); erroneously placed in resistance by FeGenie. [doi:10.3389/fcimb.2013.00090](https://doi.org/10.3389/fcimb.2013.00090) |
-| `Fe_ferripyoverdine_receptor_1`, `Fe_pyochelin_1` | `iron_resistance` | `iron_acquisition-siderophore_transport` | TonB-dependent outer membrane receptors for siderophore-iron complexes; acquisition, not resistance. |
-| `Transferrin_TbpB_binding_protein_Haemophilus_influenzae_P44971` | `iron_storage` | `iron_acquisition-iron_transport` | TbpB captures host transferrin for iron extraction — acquisition from host, not storage. |
-| `FMN_reductase_arsH_2`, `Quinone_reductase_arsH_1` | `metal_resistance-non-specific` | `metal_resistance-arsenic` | ArsH is the auxiliary NADPH-oxidoreductase of the *ars* operon; function is arsenic detoxification. |
-| `Metal_binding_zinT_1` | `metal_resistance-non-specific` | `metal_resistance-cobalt_zinc_cadmium` | ZinT is a periplasmic zinc-binding chaperone that assists ZnuABC zinc uptake. |
-| `Cation_efflux_fieF_1` | `metal_resistance-non-specific` | `metal_resistance-cobalt_zinc_cadmium` | FieF (YiiP) is a CDF-family Fe²⁺/Zn²⁺ efflux transporter; more specific to Zn/Fe homeostasis than "non-specific". |
-| `flavodoxin_long`, `flavodoxin_short` | `iron_gene_regulation` | `iron_stress` | Flavodoxins are electron carriers expressed under iron limitation as ferredoxin substitutes — biomarkers of iron stress, not transcriptional regulators. [doi:10.1038/382802a0](https://doi.org/10.1038/382802a0) |
-| `Zur` | `iron_gene_regulation` | `metal_resistance-cobalt_zinc_cadmium` | Zur is a zinc-sensing Fur-family repressor (Zn²⁺, not Fe²⁺). Placed with ZnuABC and other zinc homeostasis models. [doi:10.3389/fcimb.2013.00059](https://doi.org/10.3389/fcimb.2013.00059) |
+| `Fe_periplasmic_1`, `Fe_permease_efeU_1`, `Fe_transport_2/3`, `Fe_transport_fbpB/C_1`, `Fe_transport_fecD/E_1` | `Iron-Resistance` | `IronAcquisition-Transport` | These are iron uptake transporters (EfeU, FbpBC, FecDE, YfeCD); previously assigned to resistance during the MetHMMDB import. [doi:10.3389/fcimb.2013.00090](https://doi.org/10.3389/fcimb.2013.00090) |
+| `Fe_ferripyoverdine_receptor_1`, `Fe_pyochelin_1` | `Iron-Resistance` | `Siderophore-Transport` | TonB-dependent outer membrane receptors for siderophore-iron complexes; acquisition, not resistance. |
+| `Transferrin_TbpB_binding_protein_Haemophilus_influenzae_P44971` | `Iron-Storage` | `IronAcquisition-Transport` | TbpB captures host transferrin for iron extraction — acquisition from host, not storage. |
+| `FMN_reductase_arsH_2`, `Quinone_reductase_arsH_1` | `MetalResistance-NonSpecific` | `MetalResistance-Arsenic` | ArsH is the auxiliary NADPH-oxidoreductase of the *ars* operon; function is arsenic detoxification. |
+| `Metal_binding_zinT_1` | `MetalResistance-NonSpecific` | `MetalResistance-CobaltZincCadmium` | ZinT is a periplasmic zinc-binding chaperone that assists ZnuABC zinc uptake. |
+| `Cation_efflux_fieF_1` | `MetalResistance-NonSpecific` | `MetalResistance-CobaltZincCadmium` | FieF (YiiP) is a CDF-family Fe²⁺/Zn²⁺ efflux transporter; more specific to Zn/Fe homeostasis than "non-specific". |
+| `flavodoxin_long`, `flavodoxin_short` | `Iron-Regulation` | `Iron-StressResponse` | Flavodoxins are electron carriers expressed under iron limitation as ferredoxin substitutes — biomarkers of iron stress, not transcriptional regulators. [doi:10.1038/382802a0](https://doi.org/10.1038/382802a0) |
+| `Zur` | `Iron-Regulation` | `MetalResistance-CobaltZincCadmium` | Zur is a zinc-sensing Fur-family repressor (Zn²⁺, not Fe²⁺). Placed with ZnuABC and other zinc homeostasis models. [doi:10.3389/fcimb.2013.00059](https://doi.org/10.3389/fcimb.2013.00059) |
 
 ---
 
-## Models kept despite cross-category clustering
+## Reassessment of apparent cross-category redundancy (2026-11-05)
 
-The Layer B clustering (70% id / 80% cov) also identified pairs spanning unrelated
-functional categories (e.g. siderophore synthesis vs siderophore transport, or iron
-regulation vs transport). These were **not deprecated** for the following reasons:
+The former explanation of these pairs as unrelated folds with “degenerate consensuses” is withdrawn. Several category labels in that table were wrong: K02363/DhbE are related ligases, K04780/DhbF are NRPS profiles, K11604/YfeA are related binding proteins, K23181/FecB are uptake proteins, and the two FhuA profiles are receptors. Their related consensus sequences do not establish interchangeable biological scope.
 
-1. **Low-nseq hmmemit artifact.** Several FeGenie models were built from ≤ 25
-   sequences. The `hmmemit -c` consensus for such models is degenerate — it collapses
-   to the most frequent residue at each alignment column and does not represent a real
-   protein sequence. Consensus sequences from different structural families can
-   spuriously cluster at 70% identity when both are degenerate.
+A fresh audit of all 655 pre-removal profiles, including experimental models, identified eight enabled pairs at >=70% consensus identity and >=80% coverage of both sequences. The other seven pairs remain enabled pending independent evaluation; none is removed solely for a consensus match. On ten local proteomes (37,633 proteins), several pairs retain additional hits under their own thresholds. Broad ATPase-family co-hits are a specificity/threshold question, not proof of removable duplicates.
 
-2. **Distinct structural families.** Pairs flagged include NRPS adenylation domains
-   (siderophore synthesis) clustering with TonB-dependent outer-membrane receptors
-   (siderophore transport) — these are unrelated folds. Deprecating one would silently
-   remove a whole protein class.
+The exception is `Sid_FpvI_regulator_PA2387_Paeruginosa_PAO1_180620`: its emissions, transitions, STATS and checksum are identical to the FpvH profile. Both score 425.0 bits against official PA2404/NP_251094.1; neither detects the true FpvI PA2387/NP_251077.1 above cutoff 50. The duplicate exists in the pinned upstream FeGenie snapshot. FpvH is retained; the mislabeled FpvI copy is archived with `deprecated_misassigned_duplicate`. No replacement for the true FpvI is claimed. [FpvI primary study](https://doi.org/10.1128/jb.185.4.1261-1265.2003).
 
-3. **FutA1 / FutA2 (iron_acquisition-iron_transport).** These cyanobacterial
-   iron-binding ABC transporter substrate-binding proteins are paralogous (both
-   annotated as FutA), share high sequence identity, and cluster at 70%. However
-   FutA1 and FutA2 have been shown to have distinct expression patterns and iron
-   affinities in *Synechocystis* sp. PCC 6803. Both models are retained to allow
-   separate annotation.
-
-Pairs retained:
-
-| Pair | Reason kept |
-|---|---|
-| `K11604` [synthesis] + FeGenie `yfeA` [transport] | Different folds; yfeA consensus degenerate (nseq=25) |
-| `K02363` [transport] + `DhbE-PchD-…` [synthesis] | TonB receptor vs NRPS; DhbE nseq=9 (degenerate) |
-| `K04780` [transport] + `DhbF-PvdDIJL-VabF` [synthesis] | Transport permease vs NRPS; DhbF nseq=10 |
-| `K23181` [synthesis] + `FecB-PvuB-vibrioferrin` [transport] | Synthesis domain vs periplasmic binding protein |
-| `put_FhuA_V3_corr` [transport] + `PRK10044.1` [synthesis] | Outer membrane beta-barrel vs synthesis enzyme |
-| `Sid_FpvI_regulator` [regulation] + `Sid_FpvH_iron_release` [transport] | ECF sigma factor vs periplasmic iron-release protein |
-| `FutA1` + `FutA2` [both iron_transport] | Functionally distinct cyanobacterial paralogs |
+FutA1/FutA2 are biological paralogs, but neither high consensus similarity nor one shared hit establishes that their models discriminate them. Independent cyanobacterial references are required. NSEQ and positive cutoff values alone are not a ranking of model quality.
 
 ---
 
@@ -172,33 +156,33 @@ Seed file: `data/seeds/mtr_mto_seeds.tsv`
 | Accession | Subfamily | Organism | Len | Role in seed set |
 |---|---|---|---|---|
 | WP_011071900.1 | MtrA | *Shewanella oneidensis* MR-1 | 333 | Canonical MtrA |
-| AAN54830.1     | MtrA | *Shewanella oneidensis* MR-1 (SO_1777) | 333 | Original locus |
-| CAQ9398997.1   | MtrA | *Shewanella xiamenensis* (MAG) | 333 | Shewanella diversity |
+| AAN54830.1 | MtrA | *Shewanella oneidensis* MR-1 (SO_1777) | 333 | Identical-sequence duplicate; not additional diversity |
+| CAQ9398997.1 | MtrA | *Shewanella xiamenensis* (MAG) | 333 | Shewanella diversity |
 | WP_482097394.1 | MtrA | *Shewanella* sp. | 333 | Shewanella diversity |
 | WP_432404861.1 | MtrA | *Shewanella baltica* | 333 | Shewanella diversity |
-| QYX66249.1     | MtrA | *Shewanella putrefaciens* | 333 | Shewanella diversity |
+| QYX66249.1 | MtrA | *Shewanella putrefaciens* | 333 | Shewanella diversity |
 | WP_011623263.1 | MtrA | *Shewanella* sp. (unclassified) | 329 | Shewanella diversity |
-| BGZ64319.1     | MtrA | *Shewanella algae* | 329 | Shewanella diversity |
-| BGZ78722.1     | MtrA | *Shewanella marina* | 325 | Shewanella diversity |
-| XAG79646.1     | MtrA | *bacterium* 19NY03SH02 (Shewanellales) | 329 | Unclassified Shewanellales |
-| WP_233132600.1 | MtrA | *Paraferrimonas haliotis* | ~330 | Non-Shewanella iron reducer |
-| WP_095506167.1 | MtrA | *Paraferrimonas sedimenticola* | ~330 | Non-Shewanella iron reducer |
-| WP_095505338.1 | MtrA | *Paraferrimonas sedimenticola* (paralog) | ~330 | Non-Shewanella iron reducer |
-| WP_222466948.1 | MtrA | *Ferrimonas balearica* | ~330 | Non-Shewanella iron reducer |
-| WP_013344866.1 | MtrA | *Ferrimonas balearica* DSM 9799 | ~330 | Non-Shewanella iron reducer |
-| ADE12722.1     | MtoA | *Sideroxydans lithotrophicus* ES-1 (Slit_2497) | 355 | Canonical MtoA |
-| WP_013030620.1 | MtoA | *Sideroxydans lithotrophicus* | 355 | Sideroxydans diversity |
+| BGZ64319.1 | MtrA | *Shewanella algae* | 329 | Shewanella diversity |
+| BGZ78722.1 | MtrA | *Shewanella marina* | 325 | Shewanella diversity |
+| XAG79646.1 | MtrA | *bacterium* 19NY03SH02 (Shewanellales) | 329 | DmsE-family homolog; specific MtrA function inferred |
+| WP_233132600.1 | MtrA | *Paraferrimonas haliotis* | 312 | DmsE-family homolog; specific MtrA function inferred |
+| WP_095506167.1 | MtrA | *Paraferrimonas sedimenticola* | 318 | DmsE-family homolog; specific MtrA function inferred |
+| WP_095505338.1 | MtrA | *Paraferrimonas sedimenticola* (paralog) | 315 | DmsE-family homolog; specific MtrA function inferred |
+| WP_222466948.1 | MtrA | *Ferrimonas balearica* | 316 | DmsE-family homolog; specific MtrA function inferred |
+| WP_013344866.1 | MtrA | *Ferrimonas balearica* DSM 9799 | 316 | DmsE-family homolog; specific MtrA function inferred |
+| ADE12722.1 | MtoA | *Sideroxydans lithotrophicus* ES-1 (Slit_2497) | 355 | Canonical MtoA |
+| WP_013030620.1 | MtoA | *Sideroxydans lithotrophicus* | 355 | Identical-sequence duplicate; not additional diversity |
 | WP_283743965.1 | MtoA | *Sideroxydans* sp. CL21 | 359 | Sideroxydans diversity |
 | WP_283743089.1 | MtoA | *Sideroxydans* sp. CL21 | 354 | Sideroxydans diversity |
-| ADL56010.1     | MtoA | *Gallionella capsiferriformans* ES-2 | 343 | Genus diversity |
-| WP_013293942.1 | MtoA | *Gallionella capsiferriformans* | 343 | Genus diversity |
+| ADL56010.1 | MtoA | *Gallionella capsiferriformans* ES-2 | 343 | Genus diversity |
+| WP_013293942.1 | MtoA | *Gallionella capsiferriformans* | 343 | Identical-sequence duplicate; not additional diversity |
 
 **HMM build statistics:**
 
 | Model | NSEQ | EFFN | LENG |
 |---|---|---|---|
-| MtrA | 15 | ~0.43 | 333 |
-| MtoA | 6  | 0.630 | 344 |
+| MtrA | 15 | 0.487061 | 326 |
+| MtoA | 6 | 0.629883 | 344 |
 
 ### Full calibration against 3794-sequence universe
 
@@ -273,12 +257,12 @@ The following table describes expected annotation behavior for real metagenomes:
 
 | Organism type | MtrA score | MtoA score | Expected output | Notes |
 |---|---|---|---|---|
-| *Shewanella* MtrA | 600–706 | 255–292 | iron_reduction | Correctly assigned |
+| *Shewanella* MtrA | 600–706 | 255–292 | Iron-Reduction | Correctly assigned |
 | *Shewanella* MtrD (DMSO) | 530–552 | ~260 | **not annotated** | Below GA (580); gene context confirms |
-| *Ferrimonas* / *Paraferrimonas* | 603–637 | 263–273 | iron_reduction | Correctly assigned |
-| Unclassified Shewanellales MAG | 690–724 | ~292 | iron_reduction | Correctly assigned |
+| *Ferrimonas* / *Paraferrimonas* | 603–637 | 263–273 | Iron-Reduction | Correctly assigned |
+| Unclassified Shewanellales MAG | 690–724 | ~292 | Iron-Reduction | Correctly assigned |
 | *Geobacter* (uses OmcB/Z, not MtrA) | <50 | <50 | **not annotated** | Different protein family entirely |
-| *Gallionella* / *Sideroxydans* MtoA | 223–262 | 536–646 | iron_oxidation | Correctly assigned |
+| *Gallionella* / *Sideroxydans* MtoA | 223–262 | 536–646 | Iron-Oxidation | Correctly assigned |
 | betaproteobacteria DmsE-family | ~200–400 | 460–505 | **not annotated** | Below both GAs |
 | Sequences scoring 552–603 (MtrA zone) | — | — | **low_confidence** | Twilight zone; flag for review |
 | Sequences scoring 505–536 (MtoA zone) | — | — | **low_confidence** | Twilight zone; narrow margin |
@@ -339,16 +323,7 @@ members of the broad NapC/NirT cytochrome c superfamily (Pfam PF03264), which al
 includes NirT, NapC, and TorC across unrelated respiratory pathways (nitrate/nitrite/TMAO
 respiration) in completely different organisms.
 
-A follow-up paper (Fe(II)-oxidation-specific characterization; *mBio*,
-doi:10.1128/mbio.02150-22) directly measured this:
-
-> "Slit_2495 has been putatively called CymA in the literature. However, phylogenetic
-> analysis shows that Slit_2495 is more closely related to NirT from *Pseudomonas* than
-> to CymA from *Shewanella*... we propose that Slit_2495 be named *imoA*."
-
-> "the protein sequence of ImoA is 64% identical to NirT from *Pseudomonas stutzeri* and
-> 54% identical to NapC from *E. coli*, whereas it is only 33% identical to CymA from
-> *S. oneidensis* MR-1."
+A follow-up study (Jain et al. 2022; [doi:10.1128/mbio.02150-22](https://doi.org/10.1128/mbio.02150-22)) renamed Slit_2495 as ImoA and supported its distinction from CymA using phylogeny and sequence comparison. Its direct functional result is **quinol oxidation** and complementation in a Shewanella CymA background. This does not demonstrate direct Fe(II) oxidation by ImoA or establish a single physiological electron-flow direction for the Mto pathway. The Iron-Oxidation label denotes pathway association.
 
 So the registered "CymA" model was never validated against a real CymA ortholog for the
 oxidation side of this rule — it was misnamed from the start. Real CymA (Myers & Myers
@@ -361,7 +336,7 @@ upstream of MtrA (feeds electrons from the menaquinone pool toward MtrA), not it
 of the periplasmic MtrA-MtrB-MtrC trio, and not the correct gene for the `MtrMto` rule's
 oxidation side.
 
-The existing registry `CymA` model itself (`hmm_library/iron_reduction/CymA.hmm`) was
+The existing registry `CymA` model itself (`hmm_library/Iron-Reduction/CymA.hmm`) was
 FeGenie-derived with only 4 training sequences and had been deprecated as
 `deprecated_nseq_insufficient` — so in practice the "CymA" entry in the `MtrMto` gene list
 had *no active model backing it at all*, meaning the oxidation side of this rule could
@@ -369,17 +344,15 @@ never reach 3/3 completeness regardless of what was misnamed.
 
 ### Resolution — two separate models, correctly named and calibrated
 
-**ImoA** (`hmm_library/iron_oxidation/ImoA.hmm`) — new model for the real oxidation-side
-gene. Seed data availability mirrors the MtrA/MtoA situation: only 2 distinct
-ImoA-containing genomes currently exist in NCBI (same narrow-clade data scarcity as
-MtoA's own n=6).
+**ImoA** (`hmm_library/Iron-Oxidation/ImoA.hmm`) — new model for the real oxidation-side
+gene. Seed data availability mirrors the MtrA/MtoA situation: the documented build uses two distinct sequences; this is not an exhaustive inventory of ImoA-containing genomes in NCBI.
 
 | Accession | Organism | Len | Role |
 |---|---|---|---|
 | ADE12720.1 | *Sideroxydans lithotrophicus* ES-1 | 198 | Canonical (Slit_2495, the paper's own subject) |
 | VVC82587.1 | *Sideroxydans* sp. CL21 | 198 | Genus diversity |
 
-**CymA** (`hmm_library/iron_reduction/CymA.hmm`) — rebuilt from real, verified CymA
+**CymA** (`hmm_library/Iron-Reduction/CymA.hmm`) — rebuilt from real, verified CymA
 sequences (previous FeGenie-derived model deprecated for insufficient seed count).
 
 | Accession | Organism | Len | Role |
@@ -391,7 +364,7 @@ sequences (previous FeGenie-derived model deprecated for insufficient seed count
 | BGZ62728.1 | *Shewanella algae* | 187 | Species diversity |
 
 Both built with the same `mafft --auto` → `hmmbuild` pipeline used for the MtrA/MtoA
-rebuild. Cross-validated against each other and against a confirmed-negative set (real
+rebuild. Checked against each other and against a limited negative-reference set (real
 NirT, NapC, TorC — P24038, P0ABL5, P33226) to verify genuine separation, not just
 self-consistency:
 
@@ -405,9 +378,7 @@ CymA HMM   vs self (n=5):            393.6–431.0 bits
            vs ImoA seeds:            106.2–110.2 bits (clearly non-members)
 ```
 
-Both directions show real separation despite the small seed counts — the two genes are
-confirmed non-orthologous to each other, consistent with both papers' independent identity
-analyses.
+These checks show separation on the documented training sequences and selected confounders. They are not independent cross-validation or proof of specificity across the entire superfamily.
 
 ### TC values
 
@@ -415,15 +386,15 @@ Following the same "TC = minimum confirmed true positive" convention as MtrA/Mto
 
 | Model | TC (bits) | Rationale |
 |---|---|---|
-| **ImoA** | 473 | Min confirmed ImoA (*Sideroxydans* sp. CL21, 473.5) |
-| **CymA** | 393 | Min confirmed CymA (*Shewanella marina*, 393.6) |
+| **ImoA** | 473 | Minimum documented ImoA seed score (CL21 homolog, 473.5; inferred member) |
+| **CymA** | 393 | Minimum documented CymA seed score (*S. marina*, 393.6; inferred member) |
 
 ### Known limitations
 
 Both models are registered `status=experimental` (nseq < 10, same threshold/warning
 convention as every other sparse model in this registry) — `n=2` for ImoA and `n=5` for
 CymA are genuinely small seed sets, a real data-availability limit like MtoA's own n=6, not
-a curation shortcut. The score gaps above are large enough to trust for now, but neither
+a curation shortcut. The score gaps above apply to these selected references; neither
 model has been validated against as broad a "universe" scan as the 3794-sequence one used
 for MtrA/MtoA — treat hits with the same caution the registry's `experimental` status flag
 already signals throughout the pipeline.
@@ -481,8 +452,8 @@ fired `topo_weight=1.2` from heme count alone, without Phobius).
 
 | Category | Models | Rationale | Key references |
 |---|---|---|---|
-| `iron_stress` | `flavodoxin_long` (TIGR01752.1), `flavodoxin_short` (TIGR01753.1) | Iron-starvation response biomarkers. Flavodoxins substitute for ferredoxin when iron is limiting. Detecting them in metagenomes indicates Fe-stress capacity. NOT transcriptional regulators; separated from `iron_gene_regulation`. | [doi:10.1038/382802a0](https://doi.org/10.1038/382802a0) |
-| `iron_sulfur_assembly` | `sufC` (TIGR01978.1), `sufB` (TIGR01980.1), `sufS` (TIGR01979.1), `IscS` (TIGR02006.1) | Fe-S cluster biosynthesis machinery. SUF system (oxidative-stress / iron-limitation pathway); ISC system (constitutive). Allows distinguishing organisms relying on stress-tolerant SUF vs housekeeping ISC assembly. | SUF: [doi:10.1074/jbc.M308004200](https://doi.org/10.1074/jbc.M308004200); IscS: [doi:10.1074/jbc.M401261200](https://doi.org/10.1074/jbc.M401261200) |
+| `Iron-StressResponse` | `flavodoxin_long` (TIGR01752.1), `flavodoxin_short` (TIGR01753.1) | Iron-starvation response biomarkers. Flavodoxins substitute for ferredoxin when iron is limiting. Detecting them in metagenomes indicates Fe-stress capacity. NOT transcriptional regulators; separated from `Iron-Regulation`. | [doi:10.1038/382802a0](https://doi.org/10.1038/382802a0) |
+| `IronSulfur-Assembly` | `sufC` (TIGR01978.1), `sufB` (TIGR01980.1), `sufS` (TIGR01979.1), `IscS` (TIGR02006.1) | Fe-S cluster biosynthesis machinery. SUF system (oxidative-stress / iron-limitation pathway); ISC system (constitutive). Allows distinguishing organisms relying on stress-tolerant SUF vs housekeeping ISC assembly. | SUF: [doi:10.1074/jbc.M308004200](https://doi.org/10.1074/jbc.M308004200); IscS: [doi:10.1074/jbc.M401261200](https://doi.org/10.1074/jbc.M401261200) |
 
 ---
 
@@ -493,9 +464,9 @@ deprecation threshold documented above.
 
 | Model | nseq | Category | Reason kept active |
 |---|---|---|---|
-| `mofA_MnOxGeneTool` | 3 | `manganese_oxidation` | At the threshold, not below it. MofA is a genuinely rare, narrowly-distributed Mn(II)-oxidizing multicopper oxidase clade — MnOxGeneTool's own reference database only contains 3 representative sequences for this clade. No broader alternative source exists. |
-| `mopA_A_MnOxGeneTool` | 1 | `manganese_oxidation` | Single-sequence model (Alphaproteobacteria MopA clade). Same reason: MnOxGeneTool's curated reference set has only 1 sequence for this specific clade split. |
-| `mopA_E_MnOxGeneTool` | 1 | `manganese_oxidation` | Single-sequence model (Epsilonproteobacteria MopA clade). Same reason. |
+| `mofA_MnOxGeneTool` | 3 | `Manganese-Oxidation` | At the threshold, not below it. MofA is a genuinely rare, narrowly-distributed Mn(II)-oxidizing multicopper oxidase clade — MnOxGeneTool's own reference database only contains 3 representative sequences for this clade. No broader alternative source exists. |
+| `mopA_A_MnOxGeneTool` | 1 | `Manganese-Oxidation` | Single-sequence model (Alphaproteobacteria MopA clade). Same reason: MnOxGeneTool's curated reference set has only 1 sequence for this specific clade split. |
+| `mopA_E_MnOxGeneTool` | 1 | `Manganese-Oxidation` | Single-sequence model (Epsilonproteobacteria MopA clade). Same reason. |
 
 **Rationale for the exception:** unlike the FeGenie/methmmdb low-nseq models
 deprecated above (which had *more diverse* alternative models available or were
@@ -617,3 +588,19 @@ mapping file, to avoid fragmenting model metadata across files.
 | `experimental` | 10 | Lower-trust tier, not yet fully validated |
 | **Active** | **478** | |
 | **Library total** | **654** | |
+
+## Sequence and primary-literature audit (2026-11-05)
+
+Inputs and a per-sequence evidence manifest are now preserved under `data/seeds/curated/`. Five current models (MtrA, MtoA, CymA, ImoA, DA_402) were rebuilt with identical scoring matrices and HMM statistical parameters. This confirms build provenance, not independent predictive accuracy. MtrA's actual LENG is 326; its 15 input records contain 14 unique sequences. MtoA's six records contain four unique sequences. The original record multiplicities were preserved; deduplication would require rebuilding and reassessing thresholds.
+
+Six MtrA seeds are officially described only as DmsE-family proteins. Their specific MtrA orthology remains to be tested with genomic context and phylogeny. A source organism's iron-reducing phenotype is not per-protein evidence. CymA supports several respiratory acceptors. ImoA has demonstrated quinol oxidation activity; the current category records pathway association, not direct Fe(II)-oxidase activity.
+
+The CbcL anchor is confirmed: Q74GH2 is identical to GSU0274/AAR33608.1, explicitly identified by [Antunes et al. 2022](https://doi.org/10.3389/fmicb.2022.898015). It scores 1331.3 bits against CbcL (cutoff 200). Seven of the eight original seed accessions and the original alignment remain unavailable, so the full CbcL build is not yet reproducible.
+
+The 65 earlier category conflicts were reviewed against primary literature, with qualifications retained in `category_curation.tsv`. NrpY/NrpG have locus-level biosynthetic support rather than individual enzyme assays; the original Fit study supports iron acquisition but does not establish coprogen as the substrate; YfeC/D belong to an Fe/Mn uptake system. Broad KO families must not be interpreted as ligand-specific experimental identifications.
+
+NF041018/19/20 are NCBIfam CutA/B/C glyceraldehyde dehydrogenase profiles imported via the `interpro` channel. Swiss-Prot cross-references and real reference-sequence scores (1295.7/436.4/313.1 bits, respective runtime cutoffs 790/350/290) confirm their identity. Their exclusion from iron transport remains appropriate. [Kardinahl et al. 1999](https://pubmed.ncbi.nlm.nih.gov/10095793/).
+
+## CutABC physical removal (2026-11-05)
+
+NF041018, NF041019 and NF041020 were removed from the shipped library, registry and map/cutoff files after reference-sequence and primary-literature verification. These are carbon-metabolism glyceraldehyde dehydrogenase subunits. Metal cofactors provide no basis to retain them as metal transport/cycling markers. Their curation records remain as removal tombstones so rebuilding from upstream or a reviewed import report does not restore them. This removal does not remove an enabled metal-cycling model: all three were already excluded from runtime.

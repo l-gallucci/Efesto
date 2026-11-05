@@ -96,11 +96,68 @@ efesto ... --run_eggnog --eggnog_db_dir /path/to/eggnog_db
 
 ---
 
+## Installing Phobius (optional)
+
+Phobius is only needed for `--topology_check` (transmembrane topology /
+signal-peptide prediction, compared against `expected_topology` set in the
+registry — see `docs/cluster_confidence_scoring.md`, Component 7). Cheap
+enough to run on every applicable hit, but off by default. No conda or pip
+package (academic license, manual download):
+
+```bash
+# http://phobius.sbc.su.se/instructions.html — request/download the tarball,
+# then unpack it somewhere on PATH or point --phobius_path at it directly
+efesto ... --topology_check --phobius_path /path/to/phobius.pl
+```
+
+Missing Phobius doesn't break anything — `--topology_check` without it
+prints a `[WARN]` and `topo_weight` falls back to whatever the heme-motif
+signal alone provides (or neutral, for models with no `expected_heme_c`).
+
+---
+
+## Installing Foldseek (optional)
+
+Foldseek is only needed for `--run_struct_confirmation` (tier-3 structural
+confirmation, scoped identically to `--run_eggnog` — the small
+`needs_confirmation`-flagged subset only, never the whole proteome — see
+`docs/hmm_library_curation.md`, Tier 3). Foldseek translates amino-acid
+sequences to the 3Di structural alphabet internally via ProstT5
+(`--prostt5-model`), so **no separate `torch`/`transformers` Python
+dependency is needed** — install Foldseek itself and download the ProstT5
+weights once:
+
+```bash
+conda activate efesto
+conda install -c bioconda -c conda-forge foldseek
+foldseek databases ProstT5 /path/to/prostt5_weights tmp   # one-time, ~a few GB
+```
+
+You also need a small curated reference-structure DB (built with
+`foldseek createdb`) — **not** the full AlphaFold DB/PDB, see
+`docs/hmm_library_curation.md`, Tier 3, for why and for the recommended
+first pilot target (MtrCAB):
+
+```bash
+efesto ... --run_struct_confirmation \
+    --foldseek_db_dir /path/to/db --prostt5_weights /path/to/prostt5_weights
+```
+
+Missing Foldseek doesn't break anything — `--run_struct_confirmation`
+without it prints a `[WARN]` and `struct_weight` stays neutral (1.0).
+
+---
+
 ## Verifying the installation
 
 ```bash
 # Check CLI is available
 efesto --help
+
+# Check every optional dependency at once (UniOP, eggNOG-mapper, Phobius,
+# Foldseek) — reports [OK]/[WARN]/[FAIL] per tool, doesn't fail the check
+# for optional ones you haven't installed yet
+efesto checkenv
 
 # Verify HMM library integrity
 python scripts/curate_hmm_library.py --verify hmm_library/

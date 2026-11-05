@@ -7,10 +7,12 @@ import sys
 from collections import defaultdict
 from pathlib import Path
 
+from efesto.categories import CANONICAL_CATEGORIES, canonical_category
+
 # ── HMM source provenance ─────────────────────────────────────────────────────
 
 SOURCE_REFS = {
-    "fegenie":       "doi:10.1038/s41396-019-0570-7",
+    "fegenie":       "doi:10.3389/fmicb.2020.00037",
     "tabuteau":      "doi:10.1111/1462-2920.70218",
     "methmmdb":      "doi:10.1101/2024.12.26.629440",
     "interpro":      "doi:10.1093/nar/gkac993",
@@ -20,7 +22,7 @@ SOURCE_REFS = {
 }
 
 SOURCE_LABELS = {
-    "fegenie":       "FeGenie (Garber et al. 2020, ISME J)",
+    "fegenie":       "FeGenie (Garber et al. 2020, Front Microbiol)",
     "tabuteau":      "Tabuteau et al. 2025 (Environ Microbiol)",
     "methmmdb":      "MetHMMDB (Kciuchcinski et al. 2025, bioRxiv)",
     "interpro":      "InterPro (Paysan-Lafosse et al. 2023, NAR)",
@@ -34,61 +36,92 @@ SOURCE_LABELS = {
 
 _ANNOTATE_MAP = {
     # element-level selectors
-    "Fe":        ["iron_acquisition-heme_oxygenase", "iron_acquisition-heme_transport",
-                  "iron_acquisition-iron_transport", "iron_acquisition-siderophore_synthesis",
-                  "iron_acquisition-siderophore_transport",
-                  "iron_acquisition-siderophore_transport_potential",
-                  "iron_gene_regulation", "iron_oxidation", "iron_reduction",
-                  "iron_resistance", "iron_storage", "magnetosome_formation"],
-    "Cu":        ["metal_resistance-copper"],
-    "Zn":        ["metal_resistance-cobalt_zinc_cadmium"],
-    "Mn":        ["manganese_acquisition", "manganese_oxidation", "mn_gene_regulation",
-                  "metal_resistance-manganese"],
-    "Ni":        ["metal_resistance-nickel"],
-    "Co":        ["metal_resistance-cobalt_zinc_cadmium"],
-    "Mo":        ["metal_resistance-molybdenum"],
-    "As":        ["metal_resistance-arsenic"],
-    "Hg":        ["metal_resistance-mercury"],
-    "Cd":        ["metal_resistance-cobalt_zinc_cadmium"],
-    "Cr":        ["metal_resistance-chromium"],
-    "Ag":        ["metal_resistance-silver"],
-    "Te":        ["metal_resistance-tellurite"],
-    "Mg":        ["metal_resistance-magnesium"],
-    "multimetal": ["metal_resistance-multimetal", "metal_resistance-non-specific"],
+    "Fe":        ["Heme-Oxygenase", "Heme-Transport",
+                  "IronAcquisition-Transport", "Siderophore-Synthesis",
+                  "Siderophore-Transport",
+                  "Siderophore-TransportPotential",
+                  "Iron-Regulation", "Iron-Oxidation", "Iron-Reduction",
+                  "Iron-Resistance", "Iron-Storage", "Magnetosome-Formation"],
+    "Cu":        ["MetalResistance-Copper"],
+    "Zn":        ["MetalResistance-CobaltZincCadmium"],
+    "Mn":        ["Manganese-Acquisition", "Manganese-Oxidation", "Manganese-Regulation",
+                  "MetalResistance-Manganese"],
+    "Ni":        ["MetalResistance-Nickel"],
+    "Co":        ["MetalResistance-CobaltZincCadmium"],
+    "Mo":        ["MetalResistance-Molybdenum"],
+    "As":        ["MetalResistance-Arsenic"],
+    "Hg":        ["MetalResistance-Mercury"],
+    "Cd":        ["MetalResistance-CobaltZincCadmium"],
+    "Cr":        ["MetalResistance-Chromium"],
+    "Ag":        ["MetalResistance-Silver"],
+    "Te":        ["MetalResistance-Tellurite"],
+    "Mg":        ["MetalResistance-Magnesium"],
+    "multimetal": ["MetalResistance-MultiMetal", "MetalResistance-NonSpecific"],
     # process-level selectors (Fe subcategories)
-    "Fe-metabolism":  ["iron_acquisition-heme_oxygenase", "iron_acquisition-heme_transport",
-                       "iron_acquisition-iron_transport", "iron_acquisition-siderophore_synthesis",
-                       "iron_acquisition-siderophore_transport",
-                       "iron_acquisition-siderophore_transport_potential",
-                       "iron_oxidation", "iron_reduction", "iron_storage", "magnetosome_formation"],
-    "Fe-acquisition": ["iron_acquisition-heme_oxygenase", "iron_acquisition-heme_transport",
-                       "iron_acquisition-iron_transport", "iron_acquisition-siderophore_synthesis",
-                       "iron_acquisition-siderophore_transport",
-                       "iron_acquisition-siderophore_transport_potential"],
-    "Fe-resistance":  ["iron_resistance"],
-    "Fe-regulation":  ["iron_gene_regulation"],
-    "Fe-reduction":   ["iron_reduction"],
-    "Fe-oxidation":   ["iron_oxidation"],
-    "Fe-storage":     ["iron_storage"],
-    "Fe-magnetosome": ["magnetosome_formation"],
-    "Cu-resistance":    ["metal_resistance-copper"],
-    "Mn-metabolism":    ["manganese_acquisition", "manganese_oxidation", "mn_gene_regulation",
-                         "metal_resistance-manganese"],
-    "Mn-acquisition":   ["manganese_acquisition"],
-    "Mn-oxidation":     ["manganese_oxidation"],
-    "Mn-regulation":    ["mn_gene_regulation"],
-    "Mn-resistance":    ["metal_resistance-manganese"],
-    "Ni-resistance":  ["metal_resistance-nickel"],
-    "Mo-resistance":  ["metal_resistance-molybdenum"],
-    "As-resistance":  ["metal_resistance-arsenic"],
-    "Hg-resistance":  ["metal_resistance-mercury"],
-    "Co-Zn-Cd-resistance": ["metal_resistance-cobalt_zinc_cadmium"],
-    "Cr-resistance":  ["metal_resistance-chromium"],
-    "Ag-resistance":  ["metal_resistance-silver"],
-    "Te-resistance":  ["metal_resistance-tellurite"],
-    "Mg-resistance":  ["metal_resistance-magnesium"],
+    "Fe-metabolism":  ["Heme-Oxygenase", "Heme-Transport",
+                       "IronAcquisition-Transport", "Siderophore-Synthesis",
+                       "Siderophore-Transport",
+                       "Siderophore-TransportPotential",
+                       "Iron-Oxidation", "Iron-Reduction", "Iron-Storage", "Magnetosome-Formation"],
+    "Fe-acquisition": ["Heme-Oxygenase", "Heme-Transport",
+                       "IronAcquisition-Transport", "Siderophore-Synthesis",
+                       "Siderophore-Transport",
+                       "Siderophore-TransportPotential"],
+    "Fe-resistance":  ["Iron-Resistance"],
+    "Fe-regulation":  ["Iron-Regulation"],
+    "Fe-reduction":   ["Iron-Reduction"],
+    "Fe-oxidation":   ["Iron-Oxidation"],
+    "Fe-storage":     ["Iron-Storage"],
+    "Fe-magnetosome": ["Magnetosome-Formation"],
+    "Cu-resistance":    ["MetalResistance-Copper"],
+    "Mn-metabolism":    ["Manganese-Acquisition", "Manganese-Oxidation", "Manganese-Regulation",
+                         "MetalResistance-Manganese"],
+    "Mn-acquisition":   ["Manganese-Acquisition"],
+    "Mn-oxidation":     ["Manganese-Oxidation"],
+    "Mn-regulation":    ["Manganese-Regulation"],
+    "Mn-resistance":    ["MetalResistance-Manganese"],
+    "Ni-resistance":  ["MetalResistance-Nickel"],
+    "Mo-resistance":  ["MetalResistance-Molybdenum"],
+    "As-resistance":  ["MetalResistance-Arsenic"],
+    "Hg-resistance":  ["MetalResistance-Mercury"],
+    "Co-Zn-Cd-resistance": ["MetalResistance-CobaltZincCadmium"],
+    "Cr-resistance":  ["MetalResistance-Chromium"],
+    "Ag-resistance":  ["MetalResistance-Silver"],
+    "Te-resistance":  ["MetalResistance-Tellurite"],
+    "Mg-resistance":  ["MetalResistance-Magnesium"],
 }
 
+# Function-specific selectors distinguish acquisition/homeostasis from resistance.
+_ANNOTATE_MAP.update({
+    "Cu-acquisition": ["MetalAcquisition-Copper"],
+    "Cu-homeostasis": ["MetalHomeostasis-Copper"],
+    "Zn-acquisition": ["MetalAcquisition-Zinc", "MetalAcquisition-MultiMetal"],
+    "Ni-acquisition": ["MetalAcquisition-Nickel", "MetalAcquisition-CobaltNickel"],
+    "Co-acquisition": ["MetalAcquisition-CobaltNickel"],
+    "Mo-acquisition": ["MetalAcquisition-Molybdenum"],
+    "Mg-acquisition": ["MetalAcquisition-Magnesium"],
+    "As-oxidation": ["Arsenic-Oxidation"],
+    "Fe-stress": ["Iron-StressResponse"],
+    "Fe-sulfur": ["IronSulfur-Assembly", "IronSulfur-Regulation"],
+})
+_ANNOTATE_MAP["Fe-acquisition"] += ["IronAcquisition-ComplexTransport", "MetalAcquisition-IronManganese", "MetalAcquisition-MultiMetal"]
+_ANNOTATE_MAP["Fe-metabolism"] += ["IronAcquisition-ComplexTransport", "IronSulfur-Assembly", "IronSulfur-Regulation", "Iron-StressResponse", "MetalAcquisition-IronManganese", "MetalAcquisition-MultiMetal", "MetalHomeostasis-IronZinc"]
+_ANNOTATE_MAP["Fe"] += ["IronAcquisition-ComplexTransport", "IronSulfur-Assembly", "IronSulfur-Regulation", "Iron-StressResponse", "MetalAcquisition-IronManganese", "MetalAcquisition-MultiMetal", "MetalHomeostasis-IronZinc"]
+_ANNOTATE_MAP["Cu"] += ["MetalAcquisition-Copper", "MetalHomeostasis-Copper"]
+_ANNOTATE_MAP["Zn"] += ["MetalAcquisition-Zinc", "MetalAcquisition-MultiMetal", "MetalRegulation-Zinc", "MetalHomeostasis-IronZinc"]
+_ANNOTATE_MAP["Ni"] += ["MetalAcquisition-Nickel", "MetalAcquisition-CobaltNickel", "MetalAcquisition-MultiMetal"]
+_ANNOTATE_MAP["Co"] += ["MetalAcquisition-CobaltNickel", "MetalAcquisition-MultiMetal"]
+_ANNOTATE_MAP["Mn"] += ["MetalAcquisition-IronManganese", "MetalAcquisition-MultiMetal"]
+_ANNOTATE_MAP["Mn-metabolism"] += ["MetalAcquisition-IronManganese", "MetalAcquisition-MultiMetal"]
+_ANNOTATE_MAP["Mn-acquisition"] += ["MetalAcquisition-IronManganese", "MetalAcquisition-MultiMetal"]
+_ANNOTATE_MAP["Mo"] += ["MetalAcquisition-Molybdenum"]
+_ANNOTATE_MAP["Mg"] += ["MetalAcquisition-Magnesium"]
+_ANNOTATE_MAP["As"] += ["Arsenic-Oxidation"]
+_ANNOTATE_MAP["multimetal"] += ["MetalAcquisition-MultiMetal", "MetalHomeostasis-MultiMetal", "MetalRegulation-MultiMetal", "Unclassified-MetalFunction"]
+_ANNOTATE_MAP["Fe-regulation"] += ["IronSulfur-Regulation", "MetalRegulation-MultiMetal"]
+for _element in ("Fe", "Mn", "Ni", "Co", "Zn"):
+    _ANNOTATE_MAP[_element] += ["MetalRegulation-MultiMetal"]
+_ANNOTATE_MAP.update({cat: [cat] for cat in CANONICAL_CATEGORIES})
 VALID_ANNOTATE_TOKENS = sorted(_ANNOTATE_MAP) + ["all"]
 
 
@@ -249,6 +282,7 @@ def load_registry(hmm_dir):
     with open(path, newline="") as fh:
         reader = csv.DictReader(fh, delimiter="\t")
         for row in reader:
+            row["category"] = canonical_category(row.get("category", ""))
             rows.append(row)
     return rows
 
@@ -260,11 +294,15 @@ def filter_categories(cat_hmms, annotate_tokens):
     Returns full cat_hmms unchanged when tokens are empty or contain 'all'.
     Unknown tokens are warned and skipped.
     """
+    normalized = defaultdict(list)
+    for category, profiles in cat_hmms.items():
+        normalized[canonical_category(category)].extend(profiles)
+    cat_hmms = dict(normalized)
     if not annotate_tokens or "all" in annotate_tokens:
         return cat_hmms
     keep = set()
     for tok in annotate_tokens:
-        dirs = _ANNOTATE_MAP.get(tok)
+        dirs = _ANNOTATE_MAP.get(tok) or _ANNOTATE_MAP.get(canonical_category(tok))
         if dirs is None:
             print(f"[WARN] Unknown --annotate token '{tok}' — ignored. "
                   f"Valid tokens: {', '.join(VALID_ANNOTATE_TOKENS)}", file=sys.stderr)

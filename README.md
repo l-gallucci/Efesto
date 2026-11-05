@@ -40,6 +40,13 @@ If you use Efesto, cite all of the following that apply:
 **eggNOG-mapper** (tier-2 confirmation for `needs_confirmation`-flagged HMM hits, if using `--eggnog_annotations` or `--run_eggnog`):
 > Cantalapiedra CP et al. (2021) *eggNOG-mapper v2: Functional Annotation, Orthology Assignments, and Domain Prediction at the Metagenomic Scale.* Mol. Biol. Evol. 38(12):5825–5829. [doi:10.1093/molbev/msab293](https://doi.org/10.1093/molbev/msab293)
 
+**Phobius** (topology/motif consistency check, if using `--topology_check`):
+> Käll L, Krogh A, Sonnhammer ELL (2004) *A Combined Transmembrane Topology and Signal Peptide Prediction Method.* J. Mol. Biol. 338(5):1027–1036. [doi:10.1016/j.jmb.2004.03.016](https://doi.org/10.1016/j.jmb.2004.03.016)
+
+**Foldseek + ProstT5** (tier-3 structural confirmation, if using `--run_struct_confirmation`):
+> van Kempen M et al. (2023) *Fast and accurate protein structure search with Foldseek.* Nat. Biotechnol. [doi:10.1038/s41587-023-01773-0](https://doi.org/10.1038/s41587-023-01773-0)
+> Heinzinger M et al. (2024) *Bilingual language model for protein sequence and structure.* NAR Genomics and Bioinformatics. [doi:10.1093/nargab/lqae150](https://doi.org/10.1093/nargab/lqae150)
+
 ---
 
 ## Installation
@@ -103,7 +110,7 @@ efesto \
 | Additional iron HMMs | No | **Yes (Tabuteau et al. 2025)** |
 | HMM deduplication | No | **Yes (sequence-level, cross-source)** |
 | Versioned HMM registry | No | **Yes (`hmm_registry.tsv`)** |
-| Cluster confidence score | No | **Yes (HMM × co-occ × UniOP × BGC)** |
+| Cluster confidence score | No | **Yes (HMM × co-occ × UniOP × BGC × annot × struct × topo)** |
 | GFF3 output | No | **Yes (auto when coordinates available)** |
 | Summary statistics | No | **Yes (`Efesto-summary-stats.tsv`)** |
 | antiSMASH BGC boost | No | **Yes (`--bgc_dir`)** |
@@ -113,7 +120,8 @@ efesto \
 | Contig length filter | No | **Yes (`--min_contig_len`)** |
 | Long-format output | No | **Yes (`results-long.tsv` with all scoring columns)** |
 | Operon prediction | No | **Yes (UniOP, `--operon_prediction`)** |
-| Low-confidence-hit escalation | No | **Yes (eggNOG-mapper tier-2 confirmation, `--eggnog_annotations` / `--run_eggnog`)** |
+| Low-confidence-hit escalation | No | **Yes (eggNOG-mapper tier-2, `--eggnog_annotations` / `--run_eggnog`; Foldseek+ProstT5 tier-3, `--run_struct_confirmation`)** |
+| Topology/motif consistency check | No | **Yes (Phobius, `--topology_check` — every hit with an `expected_topology`/`expected_heme_c` set, not just flagged ones)** |
 | Anvi'o integration | No | **Yes (functions + gene-scores TSVs)** |
 | R script compatibility | Yes | **Yes (same CSV format)** |
 | FeGenie filter rules | All | **All (exact port)** |

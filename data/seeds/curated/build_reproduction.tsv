@@ -1,0 +1,6 @@
+model	input_basis	same_scoring_parameters	same_matrix	same_checksum	production_leng	reproduced_leng	production_cksum	reproduced_cksum	fields_different
+MtrA	recovered_original_alignment	True	True	True	326	326	766933033	766933033	""
+MtoA	recovered_original_alignment	True	True	True	344	344	1875726627	1875726627	""
+CymA	new_alignment_of_documented_official_sequences	True	True	True	187	187	2994458688	2994458688	""
+ImoA	new_alignment_of_documented_official_sequences	True	True	True	198	198	2104335861	2104335861	""
+DA_402	new_alignment_of_documented_official_sequences	True	True	True	392	392	2218572320	2218572320	""
