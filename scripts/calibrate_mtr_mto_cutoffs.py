@@ -251,8 +251,8 @@ def main():
     p = argparse.ArgumentParser(description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--out_dir",  default="hmm_library/_calibration/mtr_mto")
-    p.add_argument("--mtrA_hmm", default="hmm_library/iron_reduction/MtrA.hmm")
-    p.add_argument("--mtoA_hmm", default="hmm_library/iron_oxidation/MtoA.hmm")
+    p.add_argument("--mtrA_hmm", default="hmm_library/Iron-Reduction/MtrA.hmm")
+    p.add_argument("--mtoA_hmm", default="hmm_library/Iron-Oxidation/MtoA.hmm")
     p.add_argument("--skip_dl",  action="store_true",
                    help="Reuse existing calibration_universe.faa")
     p.add_argument("--threads",  type=int, default=4)

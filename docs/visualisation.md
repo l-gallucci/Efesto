@@ -84,6 +84,6 @@ hits |>
 
 # Iron reduction genes with high confidence
 hits |>
-  filter(str_detect(category, "iron_reduction"), cluster_confidence >= 0.8) |>
+  filter(str_detect(category, "Iron-Reduction"), cluster_confidence >= 0.8) |>
   select(genome, contig, gene, bitscore, cluster_confidence)
 ```

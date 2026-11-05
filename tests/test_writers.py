@@ -10,7 +10,7 @@ from efesto.writers import (
 )
 
 
-def _make_row(orf="orf1", genome="g1.faa", contig="c1", cat="iron_reduction",
+def _make_row(orf="orf1", genome="g1.faa", contig="c1", cat="Iron-Reduction",
               gene_name="mtrA", hmm_stem="MtrA", cluster_id=0,
               cluster_confidence=0.85, confidence="calibrated",
               bitscore=200.0, evalue=1e-50, heme_motifs=0,
@@ -181,7 +181,7 @@ class TestWriteHitFaa:
         lines = Path(out).read_text().splitlines()
         assert lines[0].startswith(">orf1")
         assert "gene=mtrA" in lines[0]
-        assert "category=iron_reduction" in lines[0]
+        assert "category=Iron-Reduction" in lines[0]
         assert "bitscore=200.0" in lines[0]
         assert "cluster_confidence=0.900" in lines[0]
         assert "confidence=calibrated" in lines[0]

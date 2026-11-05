@@ -58,7 +58,7 @@ class TestBuildConfirmationMap:
             "old_stem\told\t\tcat\told\tfegenie\told.hmm\t10\t100.0\t"
             "2026-01-01\tactive\tdoi:x\n"
             # full row with the flag set
-            "sufA_x\tsufA\t\tiron_sulfur_assembly\tsufA\tncbifam\t"
+            "sufA_x\tsufA\t\tIronSulfur-Assembly\tsufA\tncbifam\t"
             "sufA_x.hmm\t4\t136.2\t2026-07-19\tactive\tdoi:y\t\tyes\tK05997\n"
         )
         with open(p, newline="") as fh:
@@ -125,7 +125,7 @@ class TestBuildTopologyExpectationMap:
             "old_stem\told\t\tcat\told\tfegenie\told.hmm\t10\t100.0\t"
             "2026-01-01\tactive\tdoi:x\n"
             # full row with both new fields set
-            "MtrA\tMtrA\t\tiron_reduction\tMtrA\tcurated\tMtrA.hmm\t15\t580.0\t"
+            "MtrA\tMtrA\t\tIron-Reduction\tMtrA\tcurated\tMtrA.hmm\t15\t580.0\t"
             "2026-05-23\tactive\tdoi:y\t\t\t\t10\tsignal_peptide\n"
         )
         with open(p, newline="") as fh:

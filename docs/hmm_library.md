@@ -1,164 +1,107 @@
 # HMM Library
 
-Efesto ships with a curated library of profile HMMs in `hmm_library/`.
-All models are tracked in a versioned registry (`hmm_library/hmm_registry.tsv`)
-with provenance, bitscore cutoffs, and curation status.
+The shipped library contains **652 registered HMMs**: **473 active**, **12 experimental** and **167 deprecated** (485 enabled). Category cleanup: 5 November 2026. Remaining profile bytes, accessions, seed counts and numeric search cutoffs were preserved.
 
----
+## Category names and functional scope
 
-## Sources
+Names follow `Process-Function`, for example `IronAcquisition-Transport`, `Siderophore-Synthesis`, `Siderophore-Transport`, `Heme-Transport`, `Iron-Reduction` and `MetalResistance-Copper`. Acquisition, homeostasis, regulation, stress response and resistance are distinct assignments. A model assigned to a process does not establish an organism's activity or resistance phenotype.
 
-| Source | Models (active) | Description |
-|--------|----------------|-------------|
-| FeGenie | 196 | Original iron-cycling profiles from Garber et al. 2020 |
-| Tabuteau et al. 2025 | 130 | Iron acquisition profiles from KOfam, FeGenie, and NCBI NF* |
-| MetHMMDB | 105 | Metal mobility resistance gene HMMs (broad metal scope) |
-| NCBIfam / TIGRFAM | 21 | Curated iron oxidation, regulation, sulfur assembly (SufA/B/C/D/S), molybdenum resistance, manganese, and Tad-pilus (CpaB) models |
-| MnOxGeneTool | 12 | Manganese oxidation genes (Wang et al. 2025) |
-| InterPro | 8 | Cross-referenced domain models |
-| Curated (custom-built) | 4 | MtrA, MtoA subfamily rebuild, plus CbcL and DA_402 (MISO extracellular MHC) — built from literature-confirmed seed sequences, background-tested against the rest of the library |
-| Pfam | 2 | Flp/Fap pilin (Tad pilus) and SufE, sourced directly from Pfam-A |
-| **Total active** | **478** | After deduplication (176 deprecated; 654 total) |
+`IronAcquisition-ComplexTransport` contains families with alternative siderophore/heme substrates. `MetalAcquisition-MultiMetal` and `MetalAcquisition-CobaltNickel` preserve known substrate ambiguity. `Siderophore-Transport` does not assert that every family only imports: Pul3 also supports export of pulcherriminic acid. `Unclassified-MetalFunction` contains unresolved source assignments; these must not be counted as confirmed metal-resistance determinants.
 
----
+The catalog below includes inactive historical records. A category with zero enabled profiles is retained only for provenance. Synthetic potential categories used by operon disambiguation and custom libraries may also appear at runtime.
 
-## Categories
+| Category | Registered | Active | Experimental | Deprecated |
+|---|---:|---:|---:|---:|
+| `Arsenic-Oxidation` | 2 | 2 | 0 | 0 |
+| `Competence-Pilus` | 1 | 0 | 0 | 1 |
+| `Heme-Oxygenase` | 14 | 11 | 0 | 3 |
+| `Heme-Transport` | 12 | 12 | 0 | 0 |
+| `Iron-Oxidation` | 15 | 14 | 1 | 0 |
+| `Iron-Reduction` | 34 | 30 | 1 | 3 |
+| `Iron-Regulation` | 6 | 5 | 0 | 1 |
+| `Iron-Resistance` | 3 | 0 | 0 | 3 |
+| `Iron-Storage` | 3 | 3 | 0 | 0 |
+| `Iron-StressResponse` | 2 | 2 | 0 | 0 |
+| `IronAcquisition-ComplexTransport` | 3 | 3 | 0 | 0 |
+| `IronAcquisition-Transport` | 38 | 37 | 0 | 1 |
+| `IronSulfur-Assembly` | 7 | 7 | 0 | 0 |
+| `IronSulfur-Regulation` | 1 | 1 | 0 | 0 |
+| `Magnetosome-Formation` | 13 | 12 | 0 | 1 |
+| `Manganese-Acquisition` | 2 | 2 | 0 | 0 |
+| `Manganese-Oxidation` | 12 | 12 | 0 | 0 |
+| `Manganese-Regulation` | 1 | 1 | 0 | 0 |
+| `MetalAcquisition-CobaltNickel` | 2 | 2 | 0 | 0 |
+| `MetalAcquisition-Copper` | 2 | 2 | 0 | 0 |
+| `MetalAcquisition-IronManganese` | 2 | 2 | 0 | 0 |
+| `MetalAcquisition-Magnesium` | 2 | 2 | 0 | 0 |
+| `MetalAcquisition-Molybdenum` | 3 | 2 | 0 | 1 |
+| `MetalAcquisition-MultiMetal` | 7 | 5 | 2 | 0 |
+| `MetalAcquisition-Nickel` | 6 | 6 | 0 | 0 |
+| `MetalAcquisition-Zinc` | 5 | 5 | 0 | 0 |
+| `MetalHomeostasis-Copper` | 9 | 7 | 2 | 0 |
+| `MetalHomeostasis-IronZinc` | 1 | 1 | 0 | 0 |
+| `MetalRegulation-MultiMetal` | 3 | 3 | 0 | 0 |
+| `MetalRegulation-Zinc` | 1 | 1 | 0 | 0 |
+| `MetalResistance-Arsenic` | 31 | 10 | 0 | 21 |
+| `MetalResistance-Chromium` | 6 | 1 | 1 | 4 |
+| `MetalResistance-CobaltZincCadmium` | 16 | 3 | 0 | 13 |
+| `MetalResistance-Copper` | 36 | 12 | 2 | 22 |
+| `MetalResistance-Manganese` | 2 | 2 | 0 | 0 |
+| `MetalResistance-Mercury` | 31 | 4 | 0 | 27 |
+| `MetalResistance-MultiMetal` | 45 | 17 | 3 | 25 |
+| `MetalResistance-Nickel` | 1 | 0 | 0 | 1 |
+| `MetalResistance-NonSpecific` | 15 | 2 | 0 | 13 |
+| `MetalResistance-Silver` | 4 | 2 | 0 | 2 |
+| `MetalResistance-Tellurite` | 12 | 6 | 0 | 6 |
+| `Siderophore-Synthesis` | 162 | 148 | 0 | 14 |
+| `Siderophore-Transport` | 65 | 61 | 0 | 4 |
+| `Siderophore-TransportPotential` | 6 | 6 | 0 | 0 |
+| `StressResponse-Nitrosative` | 1 | 1 | 0 | 0 |
+| `StressResponse-Oxidative` | 1 | 1 | 0 | 0 |
+| `StressResponse-Redox` | 1 | 1 | 0 | 0 |
+| `Unclassified-MetalFunction` | 4 | 4 | 0 | 0 |
+| `Virulence-ActinNucleation` | 1 | 0 | 0 | 1 |
 
-### Iron cycling
+## Provenance and review status
 
-| Category | Description | Notable models |
-|----------|-------------|----------------|
-| `iron_oxidation` | Enzymatic oxidation of Fe²⁺ → Fe³⁺ | MtoA, MtrA, FoxABC, Cyc2, rusticyanin, cytochrome579 |
-| `iron_reduction` | Enzymatic reduction of Fe³⁺ → Fe²⁺ | MtrA, MtrC, OmcS, OmcZ, DFE operons, CbcL, DA_402, Flp/CpaB (Tad pilus) |
-| `probable_iron_reduction` | Fe reduction genes with lower specificity | CymA, omcE |
-| `possible_iron_oxidation_and_possible_iron_reduction` | Dual-assignment before Mtr/Mto disambiguation | See MtrMto operon rule |
-| `iron_storage` | Cellular iron storage proteins | Ferritin, bacterioferritin, Dps |
-| `iron_gene_regulation` | Fe-responsive transcriptional regulators | Fur, DtxR, IscR, NsrR, PerR, SoxR |
-| `iron_stress` | Iron-starvation biomarkers | Flavodoxin long, flavodoxin short |
-| `iron_sulfur_assembly` | Fe-S cluster biosynthesis machinery | SufA, SufB, SufC, SufD, SufS, SufE, IscS |
-| `magnetosome_formation` | Magnetosome island genes | MamA/B/E/K/P/M/Q/I/L/O |
+`source` identifies the import channel, which can differ from the original model author/database. The preceding source audit verified upstream identity for 616 profiles, using exact bytes or equivalent scoring parameters against frozen snapshots. That is not biological validation. Exact-release identity for the remaining direct NCBIfam/Pfam imports is still incomplete. The five local builds MtrA, MtoA, CymA, ImoA and DA_402 have now been reproduced exactly; CbcL has its canonical reference verified but seven original seed accessions and its MSA remain missing. See `data/seeds/curated/`.
 
-### Iron acquisition (siderophore-centred)
+`category_curation.tsv` records explicit model decisions and evidence; the importer reads this table to avoid reintroducing known assignments. `category_aliases.tsv` maps historical spellings to canonical names. `category_catalog.tsv` records the inventory at cleanup time; regenerate it when the registry changes. Category aliases rename labels only: they do not apply biological recategorization to an external library or change original FeGenie profiles.
 
-| Category | Description |
-|----------|-------------|
-| `iron_acquisition-siderophore_synthesis` | NRPS and related enzymes; NRP/PK siderophore biosynthesis |
-| `iron_acquisition-siderophore_transport` | Outer membrane TonB-dependent receptors for Fe-siderophore complexes |
-| `iron_acquisition-siderophore_transport_potential` | TonB-ExbBD motor proteins; ABC transporter permease/ATPase subunits |
-| `iron_acquisition-heme_oxygenase` | Enzymes releasing iron from heme |
-| `iron_acquisition-heme_transport` | Outer membrane heme receptors, ABC transporters |
-| `iron_acquisition-iron_transport` | ABC iron transporters (FbpABC, FeoABC, EfeU, FutABC, etc.) |
+NF041018/NF041019/NF041020 (CutABC glyceraldehyde dehydrogenase) were removed from the shipped profiles, registry and runtime maps on 5 November 2026. Exclusion tombstones in `category_curation.tsv` prevent reimport. Metal cofactors alone do not place these carbon-metabolism enzymes in scope. NF040982 (competence pilin ComGD) remains archived as `deprecated_out_of_scope`. The FeGenie profile labeled FpvI is now `deprecated_misassigned_duplicate`: its numerical parameters are identical to FpvH and the reference-sequence check supports FpvH, which remains enabled.
 
-### Metal resistance (MetHMMDB)
+Each registry row has `category_review_status`: `source_supported` means the assignment is supported by the cited source/header, `requires_review` means unresolved, and `not_individually_reviewed` means only naming has been normalized. None means an independently validated classifier. There are 211 source-supported records, 6 records requiring review (including the inactive mislabeled FpvI copy), and 435 records awaiting individual biological adjudication.
 
-| Category | Description |
-|----------|-------------|
-| `metal_resistance-arsenic` | Arsenate reductase, arsenite efflux (ArsABC, ArsH) |
-| `metal_resistance-chromium` | Chromate efflux (ChrA) |
-| `metal_resistance-cobalt_zinc_cadmium` | CzcABC RND efflux, ZnuABC uptake, ZinT, FieF, Zur |
-| `metal_resistance-copper` | CopABCD, CusSR, CopY |
-| `metal_resistance-mercury` | MerABCDEPRT |
-| `metal_resistance-molybdenum` | ModABC ABC transporter, ModC ATPase (TIGRFAM) |
-| `metal_resistance-multimetal` | CuAg/CdCoZn RND systems, broad-spectrum |
-| `metal_resistance-nickel` | NikABCDE, NicT, CznABC |
-| `metal_resistance-silver` | CuAg_CusA/C (overlapping CopA) |
-| `metal_resistance-non-specific` | Broad-spectrum and non-metal genes (after curation) |
-| `metal_resistance-tellurium` | TerABCDEZ, TehAB |
+## Registry
 
----
+`hmm_registry.tsv` is a tab-separated table with one row per model. `stem` matches the filename without `.hmm`; the internal HMM NAME can differ intentionally. `category` must match the parent directory in `hmm_file`, a path relative to the library. Other columns preserve model name, accession, source, NSEQ, cutoff, added date, status, bibliography, validation cohorts, confirmation settings and topology expectations. A blank `validated_in` is a metadata gap rather than proof of no historical validation.
 
-## Registry format (`hmm_library/hmm_registry.tsv`)
+The cleanup adds `category_original`, `category_review_status` and `category_note`. `category_original` preserves the pre-migration assignment. Review notes describe the functional evidence or the remaining uncertainty. Existing score/confirmation/topology columns retain their values.
 
-Tab-separated, one row per model. Columns (17 total — this list was stale
-against the real file for a while; verify with `head -1 hmm_library/hmm_registry.tsv`
-if in doubt):
+## Search thresholds
 
-| Column | Description |
-|--------|-------------|
-| `stem` | HMM file stem; must exactly match filename without `.hmm` |
-| `name` | Human-readable gene name (shown in outputs) |
-| `acc` | Pfam/TIGRFAM accession or empty |
-| `category` | Functional category (directory name) |
-| `gene_name` | Gene symbol used in output columns (`gene`, cluster gene-name lookups) |
-| `source` | Provenance: `fegenie`, `ncbifam`, `curated`, etc. |
-| `hmm_file` | Relative path from `hmm_library/` |
-| `nseq` | Training sequences used to build the HMM |
-| `cutoff` | Calibrated bitscore cutoff (0 = zero-cutoff fallback) |
-| `added_date` | ISO date |
-| `status` | `active`, `experimental`, or `deprecated_*` |
-| `reference` | DOI or citation |
-| `validated_in` | Optional cross-validation note; empty for most rows |
-| `needs_confirmation` | `"yes"` triggers tier-2 (eggNOG)/tier-3 (Baktfold) escalation — see "Low-confidence-hit escalation" below. Empty for all but a handful of narrow-margin models. |
-| `kegg_ko` | KEGG Ortholog number(s), comma-separated. Used by tier-2 confirmation; only populated for `needs_confirmation="yes"` rows today. |
-| `expected_heme_c` | Optional integer — expected heme-c (CXXCH-style) motif count, compared against `operon.count_heme`'s output for `--topology_check`. Populated only for a pilot set (MtrA/MtoA) — see `docs/cluster_confidence_scoring.md`, Component 7. |
-| `expected_topology` | Optional — one of `signal_peptide`, `multi_pass_tm`, `cytoplasmic`, compared against Phobius output for `--topology_check`. Same pilot set as `expected_heme_c`. |
+`HMM-bitcutoffs.txt` and `FeGenie-map.txt` were unchanged by category renaming; the later physical removal of CutABC deleted only their three entries. In particular, 129 enabled models still lack a model-specific cutoff and use the existing generic filters. Threshold calibration requires an independent labeled evaluation and is separate from category naming. Historical rounding differences between registry and runtime thresholds remain documented in the source audit.
 
-> **Registry rule:** `stem` must exactly match the HMM file's `NAME` field and the
-> filename without `.hmm`. Mismatches silently break cutoff lookup and gene-name mapping.
-> Run `python scripts/curate_hmm_library.py --verify hmm_library/` to detect drift.
+## Runtime and compatibility
 
----
+`--annotate Fe`, `Cu`, `Ni`, `Mo`, etc. include the relevant new acquisition/homeostasis categories. Function-specific selectors such as `Ni-acquisition`, `Mo-acquisition`, `Cu-homeostasis` and `As-oxidation` are available. Resistance-specific selectors retain their resistance meaning. Exact canonical category names can also be passed to `--annotate`.
 
-## Bitscore thresholds
+Legacy library-directory names and JSON rule categories are normalized on load. Unknown custom names are preserved. New output uses canonical names. Existing output files and frozen benchmark datasets are not rewritten. Comparison code normalizes spelling only; disagreements caused by biological reassignment remain visible. The private original-FeGenie adapter preserves original source categories and hashes in its manifest.
 
-`hmm_library/HMM-bitcutoffs.txt` — two-column TSV: `stem<TAB>bitscore`.
+Default co-occurrence thresholds remain unchanged. Metal acquisition/homeostasis/regulation categories preserve the bypass used for their previous metal-resistance assignments; iron/siderophore assignments follow their corrected context group. Therefore a corrected category can change downstream retention and counts even with unchanged HMM scores. Old benchmark accuracy results must be rerun before attributing them to this library version.
 
-| Models | Threshold type |
-|--------|----------------|
-| 337 calibrated models | Per-HMM gathering cutoff (GA) from TIGRFAM/Pfam or manual calibration |
-| 129 zero-cutoff models | No calibrated threshold; use `--zero_cutoff_min_bitscore` (default 30.0) |
+## Maintenance
 
-Zero-cutoff models: MetHMMDB (115) + 14 FeGenie siderophore models. Raise
-`--zero_cutoff_min_bitscore` to reduce false positives from these models.
+Verify paths and registry consistency:
 
----
-
-## Gene name mapping
-
-`hmm_library/FeGenie-map.txt` — two-column TSV: `stem<TAB>gene_name`.
-
-Gene names from this file appear in the `gene` column of all output files.
-When a model has no entry, the raw stem is used as the gene name.
-
----
-
-## Deduplication layers
-
-See [[Library curation log|hmm_library_curation]] for full decision log.
-
-| Layer | Method | Deprecated |
-|-------|--------|-----------|
-| A — Minimum nseq | Source-specific thresholds (fegenie ≤ 5, methmmdb ≤ 10) | 60 |
-| A — Name dedup | Same stem, keep higher nseq/coverage | 88 |
-| B — Sequence dedup | MMseqs2 70% id / 80% cov on hmmemit consensus | 12 |
-| Category mismatch | Manual review of cross-category hits | 7 |
-
----
-
-## Startup provenance output
-
-At startup, Efesto prints a provenance table listing active sources,
-model counts, and any models with `nseq < 10` (flagged as `low_training_data`):
-
-```
-Source          Models  Calibrated  Zero-cutoff  nseq<10
-FeGenie            196         182           14        0
-Tabuteau           130          98           32        0
-NCBIfam             15          15            0        0
-MetHMMDB           115           0          115       10
-────────────────────────────────────────────────────────
-Total              456         295          161       10
-
-WARNING: 10 models have nseq < 10 (limited training data):
-  [methmmdb] CdCoZn_efflux_czcD_1 (nseq=7), ...
+```bash
+python scripts/curate_hmm_library.py --verify hmm_library
 ```
 
-Models with `nseq < 10` are included in runs but appear as `low_confidence` in
-output. Identify them via the `model_nseq` column in `results-long.tsv`.
+Inspect a migration without changing files:
 
----
+```bash
+python scripts/migrate_categories.py --library hmm_library
+```
 
-## Normalising legacy HMM formats
-
-All models in the shipped library are in HMMER3/f format. If you add models built
-with HMMER < 3.1, run once with `--normalize_hmms` to convert them in-place.
+The maintenance script uses `--apply` to execute its preflighted plan, checks file hashes during moves and rolls back moves if registry writing fails. Running it again after migration reports zero moves. To revise functional assignments, update the explicit curation table and registry together, rerun verification and regression tests, and record the supporting evidence.

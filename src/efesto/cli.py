@@ -14,6 +14,7 @@ New in this version (metagenome support):
 
 import argparse
 import datetime
+import os
 import shutil
 import sys
 import time
@@ -25,6 +26,7 @@ from efesto.clustering import _orf_to_contig, build_clusters
 from efesto.coverage import build_contig_coverage, load_bams_tsv
 from efesto.gene_calling import run_prodigal
 from efesto.hmmer import collect_best_hits, run_all_hmmsearches
+from efesto.categories import canonical_category
 from efesto.io import (build_confirmation_map, build_contig_length_dict,
                                 build_nseq_map, build_topology_expectation_map,
                                 filter_categories, load_gff_dir,
@@ -418,7 +420,26 @@ def main():
                         "bgc_boost=1.2 in cluster_confidence for clusters overlapping "
                         "siderophore-type BGC regions. Requires antiSMASH run with "
                         "--output-format gff3.")
+    # Private benchmark interface: ordinary users cannot pass this argument.
+    if os.environ.get("EFESTO_DEV_MODE") == "1":
+        from efesto._dev import add_dev_arguments
+        add_dev_arguments(p)
     args = p.parse_args()
+    dev_catalog = None
+    dev_library = getattr(args, "_dev_fegenie_hmms", None)
+    if dev_library is not None:
+        if args.hmm_dir is not None or args.annotate != ["all"] or args.normalize_hmms:
+            p.error("Development FeGenie mode cannot combine --hmm_dir, "
+                    "--annotate subsets or --normalize_hmms")
+        out = Path(args.out)
+        if out.exists() and (not out.is_dir() or any(out.iterdir())):
+            p.error("Development comparisons require a fresh or empty --out directory")
+        from efesto._dev import load_fegenie_catalog
+        try:
+            dev_catalog = load_fegenie_catalog(dev_library)
+        except (OSError, ValueError) as error:
+            p.error(str(error))
+        args.hmm_dir = str(dev_library.expanduser().resolve())
 
     if args.hmm_dir is None:
         _bundled = Path(__file__).parents[2] / "hmm_library"
@@ -476,8 +497,15 @@ def main():
         from efesto.hmmer import normalize_hmm_library
         normalize_hmm_library(args.hmm_dir)
 
-    cutoffs  = read_cutoffs(str(Path(args.hmm_dir) / "HMM-bitcutoffs.txt"))
-    registry = load_registry(args.hmm_dir)
+    if dev_catalog is None:
+        cutoffs = read_cutoffs(str(Path(args.hmm_dir) / "HMM-bitcutoffs.txt"))
+        registry = load_registry(args.hmm_dir)
+    else:
+        from efesto._dev import write_manifest
+        _, cutoffs, registry, dev_manifest = dev_catalog
+        write_manifest(out_dir / "_dev_fegenie_manifest.json", dev_manifest, args)
+        print("[DEV] Original FeGenie profiles and integer search thresholds. "
+              "Efesto downstream rules remain in effect.")
     nseq_map = build_nseq_map(registry)
     confirmation_map = build_confirmation_map(registry)
     topology_map = build_topology_expectation_map(registry)
@@ -500,14 +528,19 @@ def main():
     cat_hmms = defaultdict(list)
     h2c      = {}
     n_skipped = 0
-    for entry in sorted(Path(args.hmm_dir).iterdir()):
-        if entry.is_dir() and not entry.name.startswith((".", "_")):
-            for hf in sorted(entry.glob("*.hmm")):
-                if hf.stem in deprecated_stems:
-                    n_skipped += 1
-                    continue
-                cat_hmms[entry.name].append((hf.stem, hf))
-                h2c[hf.stem] = entry.name
+    if dev_catalog is not None:
+        cat_hmms = dev_catalog[0]
+        h2c = {stem: category for category, hmms in cat_hmms.items()
+               for stem, _ in hmms}
+    else:
+        for entry in sorted(Path(args.hmm_dir).iterdir()):
+            if entry.is_dir() and not entry.name.startswith((".", "_")):
+                for hf in sorted(entry.glob("*.hmm")):
+                    if hf.stem in deprecated_stems:
+                        n_skipped += 1
+                        continue
+                    cat_hmms[canonical_category(entry.name)].append((hf.stem, hf))
+                    h2c[hf.stem] = canonical_category(entry.name)
     if n_skipped:
         print(f"[INFO] Skipped {n_skipped} deprecated HMMs (registry)")
     if not cat_hmms:
@@ -556,8 +589,6 @@ def main():
     else:
         print("[INFO] No GFF: using ORF-index clustering (FeGenie-compatible)")
 
-    print("[INFO] Loading protein sequences…")
-    seq_dict = {faa.name: read_fasta(str(faa)) for faa in faa_files}
     print(f"[INFO] Launching hmmsearch ({args.threads} threads, "
           f"{args.hmm_threads} per job)…")
     run_all_hmmsearches(faa_files, cat_hmms, cutoffs, tblout_dir,
@@ -566,6 +597,11 @@ def main():
     print("[INFO] Collecting best HMM hits…")
     best_hit = collect_best_hits(faa_files, cat_hmms, tblout_dir,
                                  cutoffs=cutoffs, max_evalue=args.max_evalue)
+
+    # HMMER reads the FAA files itself. Load sequences only after searches
+    # finish so that their memory does not overlap the HMMER workers' peak.
+    print("[INFO] Loading protein sequences…")
+    seq_dict = {faa.name: read_fasta(str(faa)) for faa in faa_files}
 
     print("[INFO] Clustering and filtering…")
     if args.min_contig_len > 0:

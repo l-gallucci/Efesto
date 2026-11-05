@@ -29,29 +29,29 @@ SOURCES
 OUTPUT STRUCTURE (mirrors FeGenie iron/ exactly)
 -------------------------------------------------
   hmm_library/
-    iron_reduction/
-    iron_oxidation/
-    iron_storage/
-    iron_gene_regulation/
-    magnetosome_formation/
-    possible_iron_oxidation_and_possible_iron_reduction/
-    probable_iron_reduction/
-    iron_acquisition-iron_transport/
-    iron_acquisition-heme_transport/
-    iron_acquisition-heme_oxygenase/
-    iron_acquisition-siderophore_synthesis/
-    iron_acquisition-siderophore_transport/
-    iron_acquisition-siderophore_transport_potential/
-    metal_resistance-arsenic/
-    metal_resistance-copper/
-    metal_resistance-mercury/
-    metal_resistance-cobalt_zinc_cadmium/
-    metal_resistance-chromium/
-    metal_resistance-lead/
-    metal_resistance-nickel/
-    metal_resistance-silver/
-    metal_resistance-tellurite/
-    metal_resistance-antimony/
+    Iron-Reduction/
+    Iron-Oxidation/
+    Iron-Storage/
+    Iron-Regulation/
+    Magnetosome-Formation/
+    Iron-RedoxPotential/
+    Iron-ReductionPotential/
+    IronAcquisition-Transport/
+    Heme-Transport/
+    Heme-Oxygenase/
+    Siderophore-Synthesis/
+    Siderophore-Transport/
+    Siderophore-TransportPotential/
+    MetalResistance-Arsenic/
+    MetalResistance-Copper/
+    MetalResistance-Mercury/
+    MetalResistance-CobaltZincCadmium/
+    MetalResistance-Chromium/
+    MetalResistance-Lead/
+    MetalResistance-Nickel/
+    MetalResistance-Silver/
+    MetalResistance-Tellurite/
+    MetalResistance-Antimony/
     HMM-bitcutoffs.txt
     FeGenie-map.txt
     operon_rules.json       (copied from source repo if present)
@@ -87,41 +87,45 @@ from collections import defaultdict
 from datetime import datetime
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
+from efesto.categories import CANONICAL_CATEGORIES, canonical_category
+
+
+def _load_category_curations():
+    path = Path(__file__).resolve().parents[1] / "hmm_library" / "category_curation.tsv"
+    if not path.exists():
+        return {}
+    with path.open(newline="") as fh:
+        return {row["stem"]: row for row in csv.DictReader(fh, delimiter="\t")}
+
+
+_CATEGORY_CURATIONS = _load_category_curations()
+
+
+def _apply_category_curations(models):
+    retained = []
+    for model in models:
+        decision = _CATEGORY_CURATIONS.get(model["stem"])
+        if decision and decision["status_override"] == "removed_out_of_scope":
+            continue
+        model["category"] = canonical_category(model["category"])
+        if decision:
+            model["category"] = decision["category"]
+            model["category_review_status"] = decision["review_status"]
+            model["category_note"] = decision["note"]
+            if decision["review_status"] == "requires_review":
+                model["confidence"] = "review"
+            if decision["status_override"]:
+                model["status"] = decision["status_override"]
+        retained.append(model)
+    return retained
+
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # VALID CATEGORIES
 # ═══════════════════════════════════════════════════════════════════════════════
 
-VALID_CATEGORIES = [
-    # ── FeGenie original ──────────────────────────────────────────────────────
-    "iron_reduction",
-    "iron_oxidation",
-    "iron_storage",
-    "iron_gene_regulation",
-    "magnetosome_formation",
-    "possible_iron_oxidation_and_possible_iron_reduction",
-    "probable_iron_reduction",
-    "iron_acquisition-iron_transport",
-    "iron_acquisition-heme_transport",
-    "iron_acquisition-heme_oxygenase",
-    "iron_acquisition-siderophore_synthesis",
-    "iron_acquisition-siderophore_transport",
-    "iron_acquisition-siderophore_transport_potential",
-    # ── MetHMMDB metal resistance ─────────────────────────────────────────────
-    "metal_resistance-arsenic",
-    "metal_resistance-copper",
-    "metal_resistance-mercury",
-    "metal_resistance-cobalt_zinc_cadmium",
-    "metal_resistance-chromium",
-    "metal_resistance-lead",
-    "metal_resistance-nickel",
-    "metal_resistance-silver",
-    "metal_resistance-gold",
-    "metal_resistance-tellurite",
-    "metal_resistance-antimony",
-    "metal_resistance-bismuth",
-    "metal_resistance-unknown",
-]
+VALID_CATEGORIES = sorted(CANONICAL_CATEGORIES)
 
 REVIEW_NEEDED = "REVIEW_NEEDED"
 
@@ -132,150 +136,144 @@ REVIEW_NEEDED = "REVIEW_NEEDED"
 
 # KOfam K-numbers → Efesto category
 # Source: Tabuteau et al. 2025 Table S3 + KEGG annotations
-KOFAM_CAT = {
-    # Biosynthesis
-    "K00216": "iron_acquisition-siderophore_synthesis",
-    "K00257": "iron_acquisition-siderophore_synthesis",
-    "K00824": "iron_acquisition-siderophore_synthesis",
-    "K01252": "iron_acquisition-siderophore_synthesis",
-    "K01582": "iron_acquisition-siderophore_synthesis",
-    "K01780": "iron_acquisition-siderophore_synthesis",
-    "K01851": "iron_acquisition-siderophore_synthesis",
-    "K01909": "iron_acquisition-siderophore_synthesis",
-    "K04759": "iron_acquisition-siderophore_synthesis",
-    "K04788": "iron_acquisition-siderophore_synthesis",   # entA
-    "K04789": "iron_acquisition-siderophore_synthesis",   # entB
-    "K04790": "iron_acquisition-siderophore_synthesis",   # entC
-    "K04791": "iron_acquisition-siderophore_synthesis",   # entD
-    "K04792": "iron_acquisition-siderophore_synthesis",   # entE
-    "K04793": "iron_acquisition-siderophore_synthesis",   # entF
-    "K05375": "iron_acquisition-siderophore_synthesis",   # iucA aerobactin
-    "K07116": "iron_acquisition-siderophore_synthesis",   # iucB
-    "K07224": "iron_acquisition-siderophore_synthesis",   # iucC
-    "K07230": "iron_acquisition-siderophore_synthesis",   # iucD
-    "K10531": "iron_acquisition-siderophore_synthesis",   # dhbA
-    "K11604": "iron_acquisition-siderophore_synthesis",
-    "K12237": "iron_acquisition-siderophore_synthesis",   # pvdH
-    "K12238": "iron_acquisition-siderophore_synthesis",   # pvdA
-    "K12239": "iron_acquisition-siderophore_synthesis",
-    "K12240": "iron_acquisition-siderophore_synthesis",
-    "K12241": "iron_acquisition-siderophore_synthesis",
-    "K12346": "iron_acquisition-siderophore_synthesis",
-    "K13745": "iron_acquisition-siderophore_synthesis",
-    "K14759": "iron_acquisition-siderophore_synthesis",
-    "K15584": "iron_acquisition-siderophore_synthesis",
-    "K15652": "iron_acquisition-siderophore_synthesis",
-    "K15653": "iron_acquisition-siderophore_synthesis",
-    "K15681": "iron_acquisition-siderophore_synthesis",
-    "K15721": "iron_acquisition-siderophore_synthesis",
-    "K16088": "iron_acquisition-siderophore_synthesis",
-    "K16089": "iron_acquisition-siderophore_synthesis",
-    "K16090": "iron_acquisition-siderophore_synthesis",
-    "K16091": "iron_acquisition-siderophore_synthesis",
-    "K19611": "iron_acquisition-siderophore_synthesis",
-    "K19791": "iron_acquisition-siderophore_synthesis",
-    "K19792": "iron_acquisition-siderophore_synthesis",
-    "K21476": "iron_acquisition-siderophore_synthesis",
-    "K21721": "iron_acquisition-siderophore_synthesis",
-    "K21949": "iron_acquisition-siderophore_synthesis",
-    "K21992": "iron_acquisition-siderophore_synthesis",
-    "K22148": "iron_acquisition-siderophore_synthesis",
-    "K22149": "iron_acquisition-siderophore_synthesis",
-    "K22150": "iron_acquisition-siderophore_synthesis",
-    "K22151": "iron_acquisition-siderophore_synthesis",
-    "K22152": "iron_acquisition-siderophore_synthesis",
-    "K22153": "iron_acquisition-siderophore_synthesis",
-    "K23120": "iron_acquisition-siderophore_synthesis",
-    "K23122": "iron_acquisition-siderophore_synthesis",
-    "K23181": "iron_acquisition-siderophore_synthesis",
-    "K23185": "iron_acquisition-siderophore_synthesis",
-    "K23227": "iron_acquisition-siderophore_synthesis",
-    "K23371": "iron_acquisition-siderophore_synthesis",
-    "K23372": "iron_acquisition-siderophore_synthesis",
-    "K23373": "iron_acquisition-siderophore_synthesis",
-    "K23374": "iron_acquisition-siderophore_synthesis",
-    "K23375": "iron_acquisition-siderophore_synthesis",
-    "K23376": "iron_acquisition-siderophore_synthesis",
-    "K23446": "iron_acquisition-siderophore_synthesis",
-    "K23447": "iron_acquisition-siderophore_synthesis",
-    "K23725": "iron_acquisition-siderophore_synthesis",
-    "K24101": "iron_acquisition-siderophore_synthesis",
-    "K24108": "iron_acquisition-siderophore_synthesis",
-    "K24109": "iron_acquisition-siderophore_synthesis",
-    "K24110": "iron_acquisition-siderophore_synthesis",
-    "K24111": "iron_acquisition-siderophore_synthesis",
-    "K24112": "iron_acquisition-siderophore_synthesis",
-    "K25109": "iron_acquisition-siderophore_synthesis",
-    "K25113": "iron_acquisition-siderophore_synthesis",
-    "K25282": "iron_acquisition-siderophore_synthesis",
-    "K25286": "iron_acquisition-siderophore_synthesis",
-    "K25287": "iron_acquisition-siderophore_synthesis",
-    "K25308": "iron_acquisition-siderophore_synthesis",
-    # Transport / import
-    "K02012": "iron_acquisition-siderophore_transport",   # fepA
-    "K02014": "iron_acquisition-siderophore_transport",   # fepB
-    "K02016": "iron_acquisition-siderophore_transport",   # fepC
-    "K02361": "iron_acquisition-siderophore_transport",   # fepD
-    "K02362": "iron_acquisition-siderophore_transport",   # fepE
-    "K02363": "iron_acquisition-siderophore_transport",   # fepG
-    "K02364": "iron_acquisition-siderophore_transport",   # fes
-    "K03894": "iron_acquisition-siderophore_transport",   # fecA
-    "K03895": "iron_acquisition-siderophore_transport",   # fecB
-    "K03896": "iron_acquisition-siderophore_transport",   # fecC
-    "K03897": "iron_acquisition-siderophore_transport",   # fecD
-    "K04778": "iron_acquisition-siderophore_transport",   # iutA
-    "K04780": "iron_acquisition-siderophore_transport",   # fhuA
-    "K04781": "iron_acquisition-siderophore_transport",   # fhuB
-    "K04782": "iron_acquisition-siderophore_transport",   # fhuC
-    "K04783": "iron_acquisition-siderophore_transport",   # fhuD
-    "K04784": "iron_acquisition-siderophore_transport",   # fhuE
-    "K04785": "iron_acquisition-siderophore_transport",   # fhuF
-    "K04786": "iron_acquisition-siderophore_transport",   # fiu
-    "K04787": "iron_acquisition-siderophore_transport",   # cirA
-    "K07243": "iron_acquisition-siderophore_transport",   # iutA/irgA
-    "K08197": "iron_acquisition-siderophore_transport",   # viuA
-}
+KOFAM_CAT = {'K00216': 'Siderophore-Synthesis',
+ 'K00257': 'Siderophore-Synthesis',
+ 'K00824': 'Siderophore-Synthesis',
+ 'K01252': 'Siderophore-Synthesis',
+ 'K01582': 'Siderophore-Synthesis',
+ 'K01780': 'Siderophore-Synthesis',
+ 'K01851': 'Siderophore-Synthesis',
+ 'K01909': 'Siderophore-Synthesis',
+ 'K02012': 'IronAcquisition-Transport',
+ 'K02014': 'Siderophore-Transport',
+ 'K02016': 'Siderophore-Transport',
+ 'K02361': 'Siderophore-Synthesis',
+ 'K02362': 'Siderophore-Synthesis',
+ 'K02363': 'Siderophore-Synthesis',
+ 'K02364': 'Siderophore-Synthesis',
+ 'K03894': 'Siderophore-Synthesis',
+ 'K03895': 'Siderophore-Synthesis',
+ 'K03896': 'Siderophore-Synthesis',
+ 'K03897': 'Siderophore-Synthesis',
+ 'K04759': 'IronAcquisition-Transport',
+ 'K04778': 'Siderophore-Synthesis',
+ 'K04780': 'Siderophore-Synthesis',
+ 'K04781': 'Siderophore-Synthesis',
+ 'K04782': 'Siderophore-Synthesis',
+ 'K04783': 'Siderophore-Synthesis',
+ 'K04784': 'Siderophore-Synthesis',
+ 'K04785': 'Siderophore-Synthesis',
+ 'K04786': 'Siderophore-Synthesis',
+ 'K04787': 'Siderophore-Synthesis',
+ 'K04788': 'Siderophore-Synthesis',
+ 'K04789': 'Siderophore-Synthesis',
+ 'K04790': 'Siderophore-Synthesis',
+ 'K04791': 'Siderophore-Synthesis',
+ 'K04792': 'Siderophore-Synthesis',
+ 'K04793': 'Siderophore-Synthesis',
+ 'K05375': 'Siderophore-Synthesis',
+ 'K07116': 'Siderophore-Synthesis',
+ 'K07224': 'IronAcquisition-Transport',
+ 'K07230': 'IronAcquisition-Transport',
+ 'K07243': 'IronAcquisition-Transport',
+ 'K08197': 'Siderophore-Transport',
+ 'K10531': 'Siderophore-Synthesis',
+ 'K11604': 'MetalAcquisition-IronManganese',
+ 'K12237': 'Siderophore-Synthesis',
+ 'K12238': 'Siderophore-Synthesis',
+ 'K12239': 'Siderophore-Synthesis',
+ 'K12240': 'Siderophore-Synthesis',
+ 'K12241': 'Siderophore-Synthesis',
+ 'K12346': 'MetalAcquisition-MultiMetal',
+ 'K13745': 'Siderophore-Synthesis',
+ 'K14759': 'Siderophore-Synthesis',
+ 'K15584': 'MetalAcquisition-MultiMetal',
+ 'K15652': 'Siderophore-Synthesis',
+ 'K15653': 'Siderophore-Synthesis',
+ 'K15681': 'Siderophore-Synthesis',
+ 'K15721': 'Siderophore-Transport',
+ 'K16088': 'Siderophore-Transport',
+ 'K16089': 'IronAcquisition-ComplexTransport',
+ 'K16090': 'Siderophore-Transport',
+ 'K16091': 'IronAcquisition-Transport',
+ 'K19611': 'Siderophore-Transport',
+ 'K19791': 'IronAcquisition-Transport',
+ 'K19792': 'IronAcquisition-Transport',
+ 'K21476': 'Siderophore-Synthesis',
+ 'K21721': 'Siderophore-Synthesis',
+ 'K21949': 'Siderophore-Synthesis',
+ 'K21992': 'Siderophore-Synthesis',
+ 'K22148': 'Siderophore-Synthesis',
+ 'K22149': 'Siderophore-Synthesis',
+ 'K22150': 'Siderophore-Synthesis',
+ 'K22151': 'Siderophore-Synthesis',
+ 'K22152': 'Siderophore-Synthesis',
+ 'K22153': 'Siderophore-Synthesis',
+ 'K23120': 'Siderophore-Synthesis',
+ 'K23122': 'Siderophore-Synthesis',
+ 'K23181': 'IronAcquisition-Transport',
+ 'K23185': 'Siderophore-Transport',
+ 'K23227': 'Siderophore-Transport',
+ 'K23371': 'Siderophore-Synthesis',
+ 'K23372': 'Siderophore-Synthesis',
+ 'K23373': 'Siderophore-Synthesis',
+ 'K23374': 'Siderophore-Synthesis',
+ 'K23375': 'Siderophore-Synthesis',
+ 'K23376': 'Siderophore-Synthesis',
+ 'K23446': 'Siderophore-Synthesis',
+ 'K23447': 'Siderophore-Synthesis',
+ 'K23725': 'Siderophore-Synthesis',
+ 'K24101': 'Siderophore-Synthesis',
+ 'K24108': 'Siderophore-Synthesis',
+ 'K24109': 'Siderophore-Synthesis',
+ 'K24110': 'Siderophore-Synthesis',
+ 'K24111': 'Siderophore-Synthesis',
+ 'K24112': 'Siderophore-Synthesis',
+ 'K25109': 'Siderophore-Transport',
+ 'K25113': 'IronAcquisition-ComplexTransport',
+ 'K25282': 'Siderophore-Transport',
+ 'K25286': 'Siderophore-Transport',
+ 'K25287': 'Siderophore-Transport',
+ 'K25308': 'IronAcquisition-ComplexTransport'}
 
 # NCBI Protein Family Models
-NCBI_NF_CAT = {
-    "NF037942": "iron_acquisition-siderophore_synthesis",
-    "NF040982": "iron_acquisition-siderophore_transport",
-    "NF040984": "iron_acquisition-siderophore_transport",
-    "NF040985": "iron_acquisition-siderophore_transport",
-    "NF040986": "iron_acquisition-siderophore_transport",
-    "NF040987": "iron_acquisition-siderophore_transport",
-    "NF041018": "iron_acquisition-iron_transport",
-    "NF041019": "iron_acquisition-iron_transport",
-    "NF041020": "iron_acquisition-iron_transport",
-}
+NCBI_NF_CAT = {'NF037942': 'Siderophore-Synthesis',
+ 'NF040982': 'Competence-Pilus',
+ 'NF040984': 'Virulence-ActinNucleation',
+ 'NF040985': 'Magnetosome-Formation',
+ 'NF040986': 'Magnetosome-Formation',
+ 'NF040987': 'Magnetosome-Formation',
+ 'NF041018': 'CarbonMetabolism-Dehydrogenase',
+ 'NF041019': 'CarbonMetabolism-Dehydrogenase',
+ 'NF041020': 'CarbonMetabolism-Dehydrogenase'}
 
 PFAM_CAT = {
-    "PF16525": "iron_acquisition-siderophore_synthesis",
+    "PF16525": "Siderophore-Synthesis",
 }
 
 # MetHMMDB metal keyword → category
 METAL_KW_CAT = {
-    "arsenic": "metal_resistance-arsenic",
-    "arsb": "metal_resistance-arsenic",
-    "arsc": "metal_resistance-arsenic",
-    "arsd": "metal_resistance-arsenic",
-    "arse": "metal_resistance-arsenic",
-    "copper": "metal_resistance-copper",
-    "czc": "metal_resistance-cobalt_zinc_cadmium",
-    "cobalt": "metal_resistance-cobalt_zinc_cadmium",
-    "zinc": "metal_resistance-cobalt_zinc_cadmium",
-    "cadmium": "metal_resistance-cobalt_zinc_cadmium",
-    "mercury": "metal_resistance-mercury",
-    "mer": "metal_resistance-mercury",
-    "chromate": "metal_resistance-chromium",
-    "chromium": "metal_resistance-chromium",
-    "lead": "metal_resistance-lead",
-    "nickel": "metal_resistance-nickel",
-    "silver": "metal_resistance-silver",
-    "gold": "metal_resistance-gold",
-    "tellurite": "metal_resistance-tellurite",
-    "antimony": "metal_resistance-antimony",
-    "bismuth": "metal_resistance-bismuth",
+    "arsenic": "MetalResistance-Arsenic",
+    "arsb": "MetalResistance-Arsenic",
+    "arsc": "MetalResistance-Arsenic",
+    "arsd": "MetalResistance-Arsenic",
+    "arse": "MetalResistance-Arsenic",
+    "copper": "MetalResistance-Copper",
+    "czc": "MetalResistance-CobaltZincCadmium",
+    "cobalt": "MetalResistance-CobaltZincCadmium",
+    "zinc": "MetalResistance-CobaltZincCadmium",
+    "cadmium": "MetalResistance-CobaltZincCadmium",
+    "mercury": "MetalResistance-Mercury",
+    "mer": "MetalResistance-Mercury",
+    "chromate": "MetalResistance-Chromium",
+    "chromium": "MetalResistance-Chromium",
+    "lead": "MetalResistance-Lead",
+    "nickel": "MetalResistance-Nickel",
+    "silver": "MetalResistance-Silver",
+    "gold": "MetalResistance-Gold",
+    "tellurite": "MetalResistance-Tellurite",
+    "antimony": "MetalResistance-Antimony",
+    "bismuth": "MetalResistance-Bismuth",
 }
 
 # Keyword heuristics for iron acquisition flat dirs
@@ -513,7 +511,18 @@ def _kw(text, words):
     return any(w.lower() in t for w in words)
 
 
-def infer_category(stem, name, desc, source_hint="iron_acquisition",
+def infer_category(stem, name, desc, source_hint="iron_acquisition", pre_defined=None):
+    if pre_defined and stem in pre_defined:
+        return canonical_category(pre_defined[stem]), "high"
+    if stem in _CATEGORY_CURATIONS:
+        decision = _CATEGORY_CURATIONS[stem]
+        confidence = "review" if decision["review_status"] == "requires_review" else "high"
+        return decision["category"], confidence
+    category, confidence = _infer_category(stem, name, desc, source_hint, pre_defined)
+    return canonical_category(category), confidence
+
+
+def _infer_category(stem, name, desc, source_hint="iron_acquisition",
                    pre_defined=None):
     """
     Infer Efesto category for a single HMM.
@@ -546,11 +555,11 @@ def infer_category(stem, name, desc, source_hint="iron_acquisition",
     # Iron acquisition keyword heuristics
     if "iron_acquisition" in source_hint or "iron" in source_hint:
         if _kw(combined, _HEME_KW):
-            return "iron_acquisition-heme_transport", "low"
+            return "Heme-Transport", "low"
         if _kw(combined, _SYNTH_KW):
-            return "iron_acquisition-siderophore_synthesis", "low"
+            return "Siderophore-Synthesis", "low"
         if _kw(combined, _TRANSPORT_KW):
-            return "iron_acquisition-siderophore_transport", "low"
+            return "Siderophore-Transport", "low"
 
     # Tabuteau custom names
     lower = stem.lower()
@@ -565,9 +574,9 @@ def infer_category(stem, name, desc, source_hint="iron_acquisition",
                        "put_fhue", "put_fitA", "put_fiua", "put_b4exx",
                        "put_b4exy", "put_q6csn3"]
     if any(s in lower for s in synth_stems):
-        return "iron_acquisition-siderophore_synthesis", "low"
+        return "Siderophore-Synthesis", "low"
     if any(s in lower for s in transport_stems):
-        return "iron_acquisition-siderophore_transport", "low"
+        return "Siderophore-Transport", "low"
 
     return REVIEW_NEEDED, "review"
 
@@ -621,7 +630,7 @@ def load_fegenie(fegenie_dir):
                 "cutoff":     cutoffs.get(stem, 0.0),
                 "source":     "fegenie",
             })
-    return models
+    return _apply_category_curations(models)
 
 
 def load_flat_dir(dir_path, hint, source_label):
@@ -648,7 +657,7 @@ def load_flat_dir(dir_path, hint, source_label):
             "cutoff":     cutoff,
             "source":     source_label,
         })
-    return models
+    return _apply_category_curations(models)
 
 
 def load_methmmdb_individual(dir_path):
@@ -658,38 +667,38 @@ def load_methmmdb_individual(dir_path):
 
 # MetHMMDB metal_type field → Efesto category
 _METAL_TYPE_TO_CAT = {
-    "arsenic":    "metal_resistance-arsenic",
-    "copper":     "metal_resistance-copper",
-    "mercury":    "metal_resistance-mercury",
-    "zinc":       "metal_resistance-cobalt_zinc_cadmium",
-    "cadmium":    "metal_resistance-cobalt_zinc_cadmium",
-    "cobalt":     "metal_resistance-cobalt_zinc_cadmium",
-    "chromium":   "metal_resistance-chromium",
-    "chromate":   "metal_resistance-chromium",
-    "lead":       "metal_resistance-lead",
-    "nickel":     "metal_resistance-nickel",
-    "silver":     "metal_resistance-silver",
-    "gold":       "metal_resistance-gold",
-    "tellurite":  "metal_resistance-tellurite",
-    "tellurium":  "metal_resistance-tellurite",
-    "antimony":   "metal_resistance-antimony",
-    "bismuth":    "metal_resistance-bismuth",
-    "iron":       "iron_resistance",
-    "multimetal": "metal_resistance-multimetal",
+    "arsenic":    "MetalResistance-Arsenic",
+    "copper":     "MetalResistance-Copper",
+    "mercury":    "MetalResistance-Mercury",
+    "zinc":       "MetalResistance-CobaltZincCadmium",
+    "cadmium":    "MetalResistance-CobaltZincCadmium",
+    "cobalt":     "MetalResistance-CobaltZincCadmium",
+    "chromium":   "MetalResistance-Chromium",
+    "chromate":   "MetalResistance-Chromium",
+    "lead":       "MetalResistance-Lead",
+    "nickel":     "MetalResistance-Nickel",
+    "silver":     "MetalResistance-Silver",
+    "gold":       "MetalResistance-Gold",
+    "tellurite":  "MetalResistance-Tellurite",
+    "tellurium":  "MetalResistance-Tellurite",
+    "antimony":   "MetalResistance-Antimony",
+    "bismuth":    "MetalResistance-Bismuth",
+    "iron":       "Iron-Resistance",
+    "multimetal": "MetalResistance-MultiMetal",
 }
 
 
 def _metal_type_to_category(metal_type_list):
     """
     Convert MetHMMDB metal_type list (e.g. ["Arsenic"]) to a category string.
-    Multiple metals → "metal_resistance-multimetal".
-    Unknown → "metal_resistance-unknown".
+    Multiple metals → "MetalResistance-MultiMetal".
+    Unknown → "MetalResistance-Unknown".
     """
     if not metal_type_list:
-        return "metal_resistance-unknown"
+        return "MetalResistance-Unknown"
     metals = [m.lower().strip() for m in metal_type_list]
     if len(metals) > 1:
-        return "metal_resistance-multimetal"
+        return "MetalResistance-MultiMetal"
     return _METAL_TYPE_TO_CAT.get(metals[0], f"metal_resistance-{metals[0]}")
 
 
@@ -801,7 +810,7 @@ def load_methmmdb_json(json_path, hmm_base_dir):
             for s in missing_files:
                 print(f"         missing: {s}", file=sys.stderr)
 
-    return models, related_graph
+    return _apply_category_curations(models), related_graph
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -954,10 +963,12 @@ REPORT_FIELDS = ["stem", "hmm_file", "name", "acc", "desc", "nseq",
                  "category", "confidence", "gene_name", "cutoff", "source"]
 
 REG_FIELDS = ["stem", "name", "acc", "category", "gene_name", "source",
-              "hmm_file", "nseq", "cutoff", "added_date", "status"]
+              "hmm_file", "nseq", "cutoff", "added_date", "status",
+              "category_review_status", "category_note"]
 
 
 def write_library(out_dir, accepted, dup_log, log_path=None):
+    accepted = _apply_category_curations([dict(model) for model in accepted])
     out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
 
@@ -965,6 +976,11 @@ def write_library(out_dir, accepted, dup_log, log_path=None):
     cutoff_lines, map_lines, registry_rows = [], [], []
 
     for m in accepted:
+        m = dict(m)
+        m["category"] = canonical_category(m["category"])
+        decision = _CATEGORY_CURATIONS.get(m["stem"])
+        if decision and decision["status_override"]:
+            m["status"] = decision["status_override"]
         if m["category"] == REVIEW_NEEDED:
             continue   # never write unreviewed HMMs
 
@@ -992,11 +1008,13 @@ def write_library(out_dir, accepted, dup_log, log_path=None):
             "category":   m["category"],
             "gene_name":  m.get("gene_name", m["stem"]),
             "source":     m["source"],
-            "hmm_file":   m.get("hmm_file", ""),
+            "hmm_file":   str(dest.relative_to(out_dir)),
             "nseq":       str(m.get("nseq", 0)),
             "cutoff":     str(m.get("cutoff", 0)),
             "added_date": today,
-            "status":     "active",
+            "status":     m.get("status", "active"),
+            "category_review_status": m.get("category_review_status", "not_individually_reviewed"),
+            "category_note": m.get("category_note", ""),
         })
 
     (out_dir / "HMM-bitcutoffs.txt").write_text("\n".join(cutoff_lines) + "\n")

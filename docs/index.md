@@ -15,7 +15,7 @@ curated HMM library, and integration with external tools (UniOP, antiSMASH, Anvi
 
 ### HMM library
 - [[HMM library overview|hmm_library]] — categories, sources, model counts, registry format
-- [[Iron-sulfur assembly models|iron_sulfur_assembly]] — SUF / ISC biology and HMM details
+- [[Iron-sulfur assembly models|IronSulfur-Assembly]] — SUF / ISC biology and HMM details
 - [[Library curation log|hmm_library_curation]] — deduplication decisions, deprecation rationale
 - [[Biological rationale for new models|hmm_expansion_biological_rationale]] — all new categories
 

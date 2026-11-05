@@ -1,7 +1,7 @@
 # Iron-Sulfur Cluster Assembly — HMM Models and Biology
 
 Efesto includes four HMMs targeting the bacterial iron-sulfur (Fe-S) cluster
-assembly machinery, placed in the `iron_sulfur_assembly` category. This document covers
+assembly machinery, placed in the `IronSulfur-Assembly` category. This document covers
 the biology of Fe-S assembly systems, the rationale for model selection, and guidance
 for interpreting results.
 
@@ -167,7 +167,7 @@ cysteine  ──→  IscS (cysteine desulfurase)  ──→  [Fe-S] assembled on
   the nascent cluster.
 - **HscA-HscB** are dedicated chaperones that bind holo-IscU and use ATP hydrolysis
   to release the cluster for downstream transfer.
-- **IscR** (a [2Fe-2S]-containing regulator, not included in `iron_sulfur_assembly`)
+- **IscR** (a [2Fe-2S]-containing regulator, not included in `IronSulfur-Assembly`)
   represses the *isc* operon when Fe-S clusters are sufficient; it autoregulates
   assembly based on cluster occupancy.
 
@@ -219,7 +219,7 @@ All four models are from the NCBIfam/TIGRFAM database with curated bitscore cuto
 
 ## Interpreting results
 
-### Category: `iron_sulfur_assembly`
+### Category: `IronSulfur-Assembly`
 
 Models in this category are placed under `report_all_categories` — they pass
 operon-context filtering unconditionally. Every cluster containing an Fe-S
@@ -240,12 +240,12 @@ single-gene hit is informative.
 ### Co-occurrence with regulatory models
 
 Iron-sulfur assembly is tightly co-regulated with iron homeostasis:
-- **IscR** (`iron_gene_regulation`) represses the ISC operon and induces SUF when
+- **IscR** (`Iron-Regulation`) represses the ISC operon and induces SUF when
   clusters are limiting. IscR hits co-located with `IscS` indicate Fe-S-sensing
   feedback regulation.
-- **Fur** (`iron_gene_regulation`) represses the SUF operon under iron sufficiency.
+- **Fur** (`Iron-Regulation`) represses the SUF operon under iron sufficiency.
   Fur + SUF co-occurrence confirms iron-responsive regulation.
-- **Flavodoxins** (`iron_stress`) substitute for ferredoxin (an Fe-S protein) under
+- **Flavodoxins** (`Iron-StressResponse`) substitute for ferredoxin (an Fe-S protein) under
   iron limitation. SUF + flavodoxin co-occurrence is strong evidence for active
   iron-stress response.
 

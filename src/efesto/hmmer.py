@@ -5,7 +5,8 @@ import sys
 import subprocess
 import tempfile
 from collections import defaultdict
-from concurrent.futures import ProcessPoolExecutor, as_completed
+from concurrent.futures import FIRST_COMPLETED, ThreadPoolExecutor, wait
+from itertools import islice
 from pathlib import Path
 
 _CURRENT_HMM_TAG = "HMMER3/f"
@@ -93,28 +94,44 @@ def parse_tblout(path, max_evalue=1e-5):
 
 def run_all_hmmsearches(faa_files, cat_hmms, cutoffs, out_tmp,
                         threads_total, hmm_threads=1, zero_cutoff_min_bitscore=30):
-    jobs = [
+    # Python only launches/waits for external HMMER processes. Threads avoid
+    # an extra Python interpreter per concurrent search (or inherited parent
+    # memory on fork-based platforms).
+    faa_files = tuple(faa_files)
+    jobs = (
         (str(hmm_path), str(faa),
          str(out_tmp / f"{faa.name}__{stem}.tblout"),
          cutoffs.get(stem, 0), hmm_threads, zero_cutoff_min_bitscore)
         for faa in faa_files
         for cat, hmm_list in cat_hmms.items()
         for stem, hmm_path in hmm_list
-    ]
-    n_workers = max(1, threads_total // hmm_threads)
-    total = len(jobs)
+    )
+    total = len(faa_files) * sum(len(hmms) for hmms in cat_hmms.values())
+    # HMMER's per-search working matrices dominate peak RSS. Limit their
+    # overlap by default, while respecting a smaller requested CPU budget.
+    n_workers = min(2, max(1, threads_total // hmm_threads), max(1, total))
+    print(f"[INFO] HMMsearch concurrency: {n_workers} searches, "
+          f"{hmm_threads} HMMER workers each")
     done = errors = 0
-    with ProcessPoolExecutor(max_workers=n_workers) as pool:
-        futures = {pool.submit(_hmmsearch_job, j): j for j in jobs}
-        for fut in as_completed(futures):
-            done += 1
-            _, ok, err = fut.result()
-            if not ok:
-                errors += 1
-                print(f"\n  [WARN] hmmsearch: {err[:80]}", file=sys.stderr)
-            sys.stdout.write(
-                f"\r[INFO] hmmsearch: {done}/{total}  ({errors} errors)  ")
-            sys.stdout.flush()
+    with ThreadPoolExecutor(max_workers=n_workers) as pool:
+        # Keep at most two jobs per worker in flight, rather than retaining
+        # a Future and a job tuple for every genome/profile combination.
+        pending = {pool.submit(_hmmsearch_job, job)
+                   for job in islice(jobs, 2 * n_workers)}
+        while pending:
+            completed, pending = wait(pending, return_when=FIRST_COMPLETED)
+            for fut in completed:
+                done += 1
+                _, ok, err = fut.result()
+                if not ok:
+                    errors += 1
+                    print(f"\n  [WARN] hmmsearch: {err[:80]}", file=sys.stderr)
+                sys.stdout.write(
+                    f"\r[INFO] hmmsearch: {done}/{total}  ({errors} errors)  ")
+                sys.stdout.flush()
+                job = next(jobs, None)
+                if job is not None:
+                    pending.add(pool.submit(_hmmsearch_job, job))
     print()
 
 

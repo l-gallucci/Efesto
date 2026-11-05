@@ -19,6 +19,7 @@ dependencies:
   - samtools>=1.15
 
   # ── Visualisation — scripts/plot_heatmap.R (optional) ─────────────────────
+  - matplotlib-base>=3.7
   - r-base>=4.1
   - r-pheatmap
   - r-plotly
@@ -83,4 +84,4 @@ dependencies:
 #              --prostt5_weights /path/to/prostt5_weights
 #
 # van Kempen M et al. (2023) Nat Biotechnol doi:10.1038/s41587-023-01773-0
-# Heinzinger M et al. (2023, ProstT5) doi:10.1101/2023.07.23.550085
+# Heinzinger M et al. (2024, ProstT5) doi:10.1093/nargab/lqae150

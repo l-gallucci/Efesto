@@ -2,14 +2,14 @@
 
 Efesto applies operon-context filters to remove spurious single-gene hits
 and enforce co-occurrence requirements before reporting clusters. Two rule engines
-are available: a default FeGenie-exact port, and a configurable JSON rule engine.
+are available: a default FeGenie-derived engine, and a configurable JSON rule engine.
 
 ---
 
 ## Default filtering (no `operon_rules.json`)
 
 Without `operon_rules.json` in `--hmm_dir`, Efesto uses an exact
-reimplementation of FeGenie's per-category operon rules. Each cluster is routed
+implementation of the FeGenie-derived operon rules, adapted to the canonical categories. Each cluster is routed
 to one handler based on which special genes are present. For iron acquisition
 categories, a per-ORF pass/break pattern is used: a gene that fails co-occurrence
 is silently skipped, but other genes in the same cluster are still reported.
@@ -27,15 +27,16 @@ The file must be in the same directory as the HMM files.
 
 ```json
 {
-  "report_all_categories": ["metal_resistance-*", "iron_storage"],
+  "report_all_categories": ["MetalResistance-*", "MetalAcquisition-*",
+                            "MetalHomeostasis-*", "MetalRegulation-*",
+                            "Iron-Storage", "Arsenic-Oxidation",
+                            "Unclassified-MetalFunction"],
   "rules": [ ... ]
 }
 ```
 
 **`report_all_categories`** — glob patterns. Clusters whose entire category set
-matches bypass all rules and are reported unconditionally. MetHMMDB categories
-(`metal_resistance-*`) and `iron_storage` bypass by default. `iron_sulfur_assembly`
-and `iron_stress` are also in this list — single-gene hits are informative.
+matches bypass all rules and are reported unconditionally. MetalResistance, MetalAcquisition, MetalHomeostasis and MetalRegulation categories bypass by default, together with Iron-Storage, Arsenic-Oxidation and Unclassified-MetalFunction. The bypass preserves reporting of metal models whose mechanism was corrected from resistance to uptake/homeostasis; it is not a statement of biological validation. IronSulfur-Assembly and Iron-StressResponse are not automatic bypass categories in the default list.
 
 ### Rule object schema
 
@@ -75,7 +76,7 @@ and `iron_stress` are also in this list — single-gene hits are informative.
 | `require_anchor` | A specific `anchor` gene must be present in the cluster |
 | `require_n_cat` | Cluster must contain ≥ `min_genes` distinct HMMs from `categories` |
 | `require_n_cat_or_lone_trusted` | As `require_n_cat`, or lone hit in `trusted_lone` list |
-| `mtr_disambiguation` | Re-assigns `iron_oxidation` vs `iron_reduction` based on MtrA/MtoA co-presence |
+| `mtr_disambiguation` | Re-assigns `Iron-Oxidation` vs `Iron-Reduction` based on MtrA/MtoA co-presence |
 
 ---
 
@@ -140,7 +141,7 @@ Efesto models the Ton motor with five HMMs:
 | `PF01618-MotA_TolQ_ExbB_proton_channel_family` | PF01618 | ExbB / MotA / TolQ proton channel |
 | `PF02472-ExbD` | PF02472 | ExbD periplasmic signalling |
 
-All five are in `iron_acquisition-siderophore_transport_potential`. The `SIDERO_TRANSPORT`
+All five are in `Siderophore-TransportPotential`. The `SIDERO_TRANSPORT`
 rule requires `min_genes: 2` from `siderophore_transport_potential`. Therefore:
 
 ```
@@ -160,9 +161,9 @@ receptor), the rule treats it as a fail → `drop`.
 ```json
 {
   "name":       "SIDERO_TRANSPORT",
-  "categories": ["iron_acquisition-siderophore_transport_potential",
-                 "iron_acquisition-heme_transport",
-                 "iron_acquisition-siderophore_transport"],
+  "categories": ["Siderophore-TransportPotential",
+                 "Heme-Transport",
+                 "Siderophore-Transport"],
   "rule":       "require_n_cat_or_lone_trusted",
   "min_genes":  2,
   "neutral_energizer_stems": [
@@ -248,7 +249,7 @@ subunits respectively. `max_bp_gap: 1000`.
 
 ### MtrMto
 
-Mtr/Mto disambiguation. Re-assigns `iron_oxidation` vs `iron_reduction` based
+Mtr/Mto disambiguation. Re-assigns `Iron-Oxidation` vs `Iron-Reduction` based
 on co-presence of MtrA, MtrB, MtrC (reduction) vs MtoA (oxidation) and CymA.
 `canonical_size: 3`, `max_bp_gap: 2000`. On fail: keep all.
 
@@ -265,8 +266,8 @@ Siderophore biosynthesis. Requires ≥ 3 distinct synthesis HMMs.
 
 ### IRON_TRANSPORT
 
-Iron and heme transport. Requires ≥ 2 distinct HMMs from `iron_acquisition-iron_transport`
-and `iron_acquisition-heme_oxygenase`. `max_bp_gap: 2000`. On fail: drop.
+Iron and heme transport. Requires ≥ 2 distinct HMMs from `IronAcquisition-Transport`
+and `Heme-Oxygenase`. `max_bp_gap: 2000`. On fail: drop.
 
 ### TAD_PILUS
 
