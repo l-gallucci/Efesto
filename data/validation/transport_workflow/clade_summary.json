@@ -1,0 +1,52 @@
+{
+  "mnt_candidates": {
+    "anchors": [
+      "A3SI43",
+      "AEA80752.1",
+      "Q9KRF4"
+    ],
+    "smallest_unrooted_split_size": 23,
+    "support": "100/100",
+    "leaves": [
+      "A0A058ZKB6",
+      "A0A090IDA6",
+      "A0A0B3XXR4",
+      "A0A0P7JSZ1",
+      "A0A1G6B5R3",
+      "A0A2R8B3J6",
+      "A0A4S3MST0",
+      "A0A545TU38",
+      "A0ABN0XFG4",
+      "A0ABT3J8U8",
+      "A0ABV5Z7H1",
+      "A3SI43",
+      "AEA80752.1",
+      "D5BT12",
+      "F2JU36",
+      "K2JGL1",
+      "Q2CE27",
+      "Q3IGV7",
+      "Q480U8",
+      "Q5DZ78",
+      "Q6LFS2",
+      "Q87QI5",
+      "Q9KRF4"
+    ],
+    "not_a_functional_validation": true,
+    "contains_direction_uncertain_VP1164": true
+  },
+  "ln_references": {
+    "anchors": [
+      "C5B163",
+      "Dandare2025_TableS2_LutH"
+    ],
+    "smallest_unrooted_split_size": 3,
+    "support": "78.1/94",
+    "leaves": [
+      "A0A1I4H1Q2",
+      "C5B163",
+      "Dandare2025_TableS2_LutH"
+    ],
+    "not_a_functional_validation": true
+  }
+}

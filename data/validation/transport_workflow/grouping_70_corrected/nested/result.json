@@ -1,0 +1,1427 @@
+{
+  "protocol": "Efesto hybrid curation/grouped nested HMM calibration v1",
+  "objective": "MCC",
+  "score_type": "full_sequence",
+  "max_evalue": 1e-05,
+  "outer_folds": 3,
+  "inner_folds": 2,
+  "support": {
+    "marine_MntX": {
+      "development_records": 3,
+      "development_groups": 3,
+      "external_records": 0
+    }
+  },
+  "folds": [
+    {
+      "fold": 0,
+      "cutoffs": {
+        "marine_MntX": 229.4
+      },
+      "metrics": {
+        "marine_MntX": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "tn": 45,
+          "precision": 1.0,
+          "recall": 1.0,
+          "fpr": 0.0,
+          "f1": 1.0,
+          "mcc": 1.0,
+          "mcc_defined": true
+        }
+      },
+      "train_groups": [
+        "sensitivity_A0A378VP91",
+        "sensitivity_A0KG66",
+        "sensitivity_A0LFC9",
+        "sensitivity_A0PZ39",
+        "sensitivity_A0RLB0",
+        "sensitivity_A1VAL2",
+        "sensitivity_A1WR47",
+        "sensitivity_A3CX65",
+        "sensitivity_A5ESV8",
+        "sensitivity_A5IRZ2",
+        "sensitivity_A5UJ57",
+        "sensitivity_A5WBC5",
+        "sensitivity_A6L8E9",
+        "sensitivity_A6VQU4",
+        "sensitivity_A7IMS5",
+        "sensitivity_A8ERN6",
+        "sensitivity_A8MEV0",
+        "sensitivity_A9GV45",
+        "sensitivity_A9KRD5",
+        "sensitivity_ACG76368.1",
+        "sensitivity_AEA80752.1",
+        "sensitivity_B0TI68",
+        "sensitivity_B1I6K8",
+        "sensitivity_B4EYC2",
+        "sensitivity_B7KGD8",
+        "sensitivity_O27840",
+        "sensitivity_P65544",
+        "sensitivity_Q0AJY9",
+        "sensitivity_Q0AUC1",
+        "sensitivity_Q0B8F7",
+        "sensitivity_Q0VLM2",
+        "sensitivity_Q1H1K6",
+        "sensitivity_Q1QZ83",
+        "sensitivity_Q2NTC7",
+        "sensitivity_Q2RFW3",
+        "sensitivity_Q2RXQ8",
+        "sensitivity_Q38UX8",
+        "sensitivity_Q3A2U7",
+        "sensitivity_Q47ZC7",
+        "sensitivity_Q58004",
+        "sensitivity_Q5LG69",
+        "sensitivity_Q6APV5",
+        "sensitivity_Q8GH68",
+        "sensitivity_Q8UEM1",
+        "sensitivity_Q8ZSB0",
+        "sensitivity_Q9K6F9",
+        "sensitivity_Q9KRF4",
+        "sensitivity_Q9RTP8",
+        "sensitivity_Q9V2F1"
+      ],
+      "test_groups": [
+        "sensitivity_A0AIM7",
+        "sensitivity_A1A3E3",
+        "sensitivity_A2SPZ1",
+        "sensitivity_A3DFC2",
+        "sensitivity_A3SI43",
+        "sensitivity_A4ITK4",
+        "sensitivity_A4J9B4",
+        "sensitivity_A4QE56",
+        "sensitivity_A5CYC0",
+        "sensitivity_A5FQH9",
+        "sensitivity_A5G348",
+        "sensitivity_A6L3M0",
+        "sensitivity_A7I5W4",
+        "sensitivity_A7N307",
+        "sensitivity_A8GFM8",
+        "sensitivity_A8ZZT5",
+        "sensitivity_B2KED0",
+        "sensitivity_B2T9B0",
+        "sensitivity_B2VCK3",
+        "sensitivity_B7V6V8",
+        "sensitivity_B8I1G8",
+        "sensitivity_B8J1I9",
+        "sensitivity_C0QC85",
+        "sensitivity_C6BYL0",
+        "sensitivity_I6YET7",
+        "sensitivity_Q07V52",
+        "sensitivity_Q0BW85",
+        "sensitivity_Q21FI6",
+        "sensitivity_Q24Y92",
+        "sensitivity_Q2FPH2",
+        "sensitivity_Q30X24",
+        "sensitivity_Q3A931",
+        "sensitivity_Q46FW1",
+        "sensitivity_Q48262",
+        "sensitivity_Q492G8",
+        "sensitivity_Q553K4",
+        "sensitivity_Q5WB61",
+        "sensitivity_Q65W61",
+        "sensitivity_Q8DUY3",
+        "sensitivity_Q8EM65",
+        "sensitivity_Q8R7S2",
+        "sensitivity_Q8RII2",
+        "sensitivity_Q8XSF6",
+        "sensitivity_Q98I99"
+      ],
+      "raw_score_competition": {
+        "marine_MntX": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "tn": 45,
+          "precision": 1.0,
+          "recall": 1.0,
+          "fpr": 0.0,
+          "f1": 1.0,
+          "mcc": 1.0,
+          "mcc_defined": true
+        }
+      }
+    },
+    {
+      "fold": 1,
+      "cutoffs": {
+        "marine_MntX": 238.4
+      },
+      "metrics": {
+        "marine_MntX": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "tn": 44,
+          "precision": 1.0,
+          "recall": 1.0,
+          "fpr": 0.0,
+          "f1": 1.0,
+          "mcc": 1.0,
+          "mcc_defined": true
+        }
+      },
+      "train_groups": [
+        "sensitivity_A0AIM7",
+        "sensitivity_A0LFC9",
+        "sensitivity_A1A3E3",
+        "sensitivity_A1VAL2",
+        "sensitivity_A1WR47",
+        "sensitivity_A2SPZ1",
+        "sensitivity_A3DFC2",
+        "sensitivity_A3SI43",
+        "sensitivity_A4ITK4",
+        "sensitivity_A4J9B4",
+        "sensitivity_A4QE56",
+        "sensitivity_A5CYC0",
+        "sensitivity_A5FQH9",
+        "sensitivity_A5G348",
+        "sensitivity_A6L3M0",
+        "sensitivity_A6VQU4",
+        "sensitivity_A7I5W4",
+        "sensitivity_A7N307",
+        "sensitivity_A8ERN6",
+        "sensitivity_A8GFM8",
+        "sensitivity_A8MEV0",
+        "sensitivity_A8ZZT5",
+        "sensitivity_ACG76368.1",
+        "sensitivity_B0TI68",
+        "sensitivity_B2KED0",
+        "sensitivity_B2T9B0",
+        "sensitivity_B2VCK3",
+        "sensitivity_B4EYC2",
+        "sensitivity_B7KGD8",
+        "sensitivity_B7V6V8",
+        "sensitivity_B8I1G8",
+        "sensitivity_B8J1I9",
+        "sensitivity_C0QC85",
+        "sensitivity_C6BYL0",
+        "sensitivity_I6YET7",
+        "sensitivity_O27840",
+        "sensitivity_P65544",
+        "sensitivity_Q07V52",
+        "sensitivity_Q0AJY9",
+        "sensitivity_Q0BW85",
+        "sensitivity_Q21FI6",
+        "sensitivity_Q24Y92",
+        "sensitivity_Q2FPH2",
+        "sensitivity_Q2NTC7",
+        "sensitivity_Q2RFW3",
+        "sensitivity_Q30X24",
+        "sensitivity_Q38UX8",
+        "sensitivity_Q3A931",
+        "sensitivity_Q46FW1",
+        "sensitivity_Q48262",
+        "sensitivity_Q492G8",
+        "sensitivity_Q553K4",
+        "sensitivity_Q5WB61",
+        "sensitivity_Q65W61",
+        "sensitivity_Q8DUY3",
+        "sensitivity_Q8EM65",
+        "sensitivity_Q8GH68",
+        "sensitivity_Q8R7S2",
+        "sensitivity_Q8RII2",
+        "sensitivity_Q8XSF6",
+        "sensitivity_Q98I99",
+        "sensitivity_Q9KRF4",
+        "sensitivity_Q9RTP8"
+      ],
+      "test_groups": [
+        "sensitivity_A0A378VP91",
+        "sensitivity_A0KG66",
+        "sensitivity_A0PZ39",
+        "sensitivity_A0RLB0",
+        "sensitivity_A3CX65",
+        "sensitivity_A5ESV8",
+        "sensitivity_A5IRZ2",
+        "sensitivity_A5UJ57",
+        "sensitivity_A5WBC5",
+        "sensitivity_A6L8E9",
+        "sensitivity_A7IMS5",
+        "sensitivity_A9GV45",
+        "sensitivity_A9KRD5",
+        "sensitivity_AEA80752.1",
+        "sensitivity_B1I6K8",
+        "sensitivity_Q0AUC1",
+        "sensitivity_Q0B8F7",
+        "sensitivity_Q0VLM2",
+        "sensitivity_Q1H1K6",
+        "sensitivity_Q1QZ83",
+        "sensitivity_Q2RXQ8",
+        "sensitivity_Q3A2U7",
+        "sensitivity_Q47ZC7",
+        "sensitivity_Q58004",
+        "sensitivity_Q5LG69",
+        "sensitivity_Q6APV5",
+        "sensitivity_Q8UEM1",
+        "sensitivity_Q8ZSB0",
+        "sensitivity_Q9K6F9",
+        "sensitivity_Q9V2F1"
+      ],
+      "raw_score_competition": {
+        "marine_MntX": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "tn": 44,
+          "precision": 1.0,
+          "recall": 1.0,
+          "fpr": 0.0,
+          "f1": 1.0,
+          "mcc": 1.0,
+          "mcc_defined": true
+        }
+      }
+    },
+    {
+      "fold": 2,
+      "cutoffs": {
+        "marine_MntX": 253.0
+      },
+      "metrics": {
+        "marine_MntX": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "tn": 44,
+          "precision": 1.0,
+          "recall": 1.0,
+          "fpr": 0.0,
+          "f1": 1.0,
+          "mcc": 1.0,
+          "mcc_defined": true
+        }
+      },
+      "train_groups": [
+        "sensitivity_A0A378VP91",
+        "sensitivity_A0AIM7",
+        "sensitivity_A0KG66",
+        "sensitivity_A0PZ39",
+        "sensitivity_A0RLB0",
+        "sensitivity_A1A3E3",
+        "sensitivity_A2SPZ1",
+        "sensitivity_A3CX65",
+        "sensitivity_A3DFC2",
+        "sensitivity_A3SI43",
+        "sensitivity_A4ITK4",
+        "sensitivity_A4J9B4",
+        "sensitivity_A4QE56",
+        "sensitivity_A5CYC0",
+        "sensitivity_A5ESV8",
+        "sensitivity_A5FQH9",
+        "sensitivity_A5G348",
+        "sensitivity_A5IRZ2",
+        "sensitivity_A5UJ57",
+        "sensitivity_A5WBC5",
+        "sensitivity_A6L3M0",
+        "sensitivity_A6L8E9",
+        "sensitivity_A7I5W4",
+        "sensitivity_A7IMS5",
+        "sensitivity_A7N307",
+        "sensitivity_A8GFM8",
+        "sensitivity_A8ZZT5",
+        "sensitivity_A9GV45",
+        "sensitivity_A9KRD5",
+        "sensitivity_AEA80752.1",
+        "sensitivity_B1I6K8",
+        "sensitivity_B2KED0",
+        "sensitivity_B2T9B0",
+        "sensitivity_B2VCK3",
+        "sensitivity_B7V6V8",
+        "sensitivity_B8I1G8",
+        "sensitivity_B8J1I9",
+        "sensitivity_C0QC85",
+        "sensitivity_C6BYL0",
+        "sensitivity_I6YET7",
+        "sensitivity_Q07V52",
+        "sensitivity_Q0AUC1",
+        "sensitivity_Q0B8F7",
+        "sensitivity_Q0BW85",
+        "sensitivity_Q0VLM2",
+        "sensitivity_Q1H1K6",
+        "sensitivity_Q1QZ83",
+        "sensitivity_Q21FI6",
+        "sensitivity_Q24Y92",
+        "sensitivity_Q2FPH2",
+        "sensitivity_Q2RXQ8",
+        "sensitivity_Q30X24",
+        "sensitivity_Q3A2U7",
+        "sensitivity_Q3A931",
+        "sensitivity_Q46FW1",
+        "sensitivity_Q47ZC7",
+        "sensitivity_Q48262",
+        "sensitivity_Q492G8",
+        "sensitivity_Q553K4",
+        "sensitivity_Q58004",
+        "sensitivity_Q5LG69",
+        "sensitivity_Q5WB61",
+        "sensitivity_Q65W61",
+        "sensitivity_Q6APV5",
+        "sensitivity_Q8DUY3",
+        "sensitivity_Q8EM65",
+        "sensitivity_Q8R7S2",
+        "sensitivity_Q8RII2",
+        "sensitivity_Q8UEM1",
+        "sensitivity_Q8XSF6",
+        "sensitivity_Q8ZSB0",
+        "sensitivity_Q98I99",
+        "sensitivity_Q9K6F9",
+        "sensitivity_Q9V2F1"
+      ],
+      "test_groups": [
+        "sensitivity_A0LFC9",
+        "sensitivity_A1VAL2",
+        "sensitivity_A1WR47",
+        "sensitivity_A6VQU4",
+        "sensitivity_A8ERN6",
+        "sensitivity_A8MEV0",
+        "sensitivity_ACG76368.1",
+        "sensitivity_B0TI68",
+        "sensitivity_B4EYC2",
+        "sensitivity_B7KGD8",
+        "sensitivity_O27840",
+        "sensitivity_P65544",
+        "sensitivity_Q0AJY9",
+        "sensitivity_Q2NTC7",
+        "sensitivity_Q2RFW3",
+        "sensitivity_Q38UX8",
+        "sensitivity_Q8GH68",
+        "sensitivity_Q9KRF4",
+        "sensitivity_Q9RTP8"
+      ],
+      "raw_score_competition": {
+        "marine_MntX": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "tn": 44,
+          "precision": 1.0,
+          "recall": 1.0,
+          "fpr": 0.0,
+          "f1": 1.0,
+          "mcc": 1.0,
+          "mcc_defined": true
+        }
+      }
+    }
+  ],
+  "outer_pooled": {
+    "marine_MntX": {
+      "tp": 3,
+      "fp": 0,
+      "fn": 0,
+      "tn": 133,
+      "precision": 1.0,
+      "recall": 1.0,
+      "fpr": 0.0,
+      "f1": 1.0,
+      "mcc": 1.0,
+      "mcc_defined": true
+    }
+  },
+  "group_bootstrap": {
+    "marine_MntX": {
+      "mcc": {
+        "interval95": [
+          1.0,
+          1.0
+        ],
+        "valid_resamples": 486
+      },
+      "precision": {
+        "interval95": [
+          1.0,
+          1.0
+        ],
+        "valid_resamples": 486
+      },
+      "recall": {
+        "interval95": [
+          1.0,
+          1.0
+        ],
+        "valid_resamples": 486
+      },
+      "fpr": {
+        "interval95": [
+          0.0,
+          0.0
+        ],
+        "valid_resamples": 500
+      }
+    }
+  },
+  "outer_predictions": [
+    {
+      "id": "A3SI43",
+      "group": "sensitivity_A3SI43",
+      "truth": "marine_MntX",
+      "predicted": "marine_MntX",
+      "evidence": "experimental_anchor"
+    },
+    {
+      "id": "A5CYC0",
+      "group": "sensitivity_A5CYC0",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q8EM65",
+      "group": "sensitivity_Q8EM65",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q07V52",
+      "group": "sensitivity_Q07V52",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q8R7S2",
+      "group": "sensitivity_Q8R7S2",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A5FQH9",
+      "group": "sensitivity_A5FQH9",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q8DUY3",
+      "group": "sensitivity_Q8DUY3",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q24Y92",
+      "group": "sensitivity_Q24Y92",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A3DFC2",
+      "group": "sensitivity_A3DFC2",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "C6BYL0",
+      "group": "sensitivity_C6BYL0",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "B7V6V8",
+      "group": "sensitivity_B7V6V8",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A7N307",
+      "group": "sensitivity_A7N307",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q8XSF6",
+      "group": "sensitivity_Q8XSF6",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A1A3E3",
+      "group": "sensitivity_A1A3E3",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q0BW85",
+      "group": "sensitivity_Q0BW85",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q5WB61",
+      "group": "sensitivity_Q5WB61",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "B2VCK3",
+      "group": "sensitivity_B2VCK3",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "B2VDY7",
+      "group": "sensitivity_B2VCK3",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A4ITK4",
+      "group": "sensitivity_A4ITK4",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q48262",
+      "group": "sensitivity_Q48262",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q492G8",
+      "group": "sensitivity_Q492G8",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q98I99",
+      "group": "sensitivity_Q98I99",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "C0QC85",
+      "group": "sensitivity_C0QC85",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "B8I1G8",
+      "group": "sensitivity_B8I1G8",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A6L3M0",
+      "group": "sensitivity_A6L3M0",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A0AIM7",
+      "group": "sensitivity_A0AIM7",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q21FI6",
+      "group": "sensitivity_Q21FI6",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q2FPH2",
+      "group": "sensitivity_Q2FPH2",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A2SPZ1",
+      "group": "sensitivity_A2SPZ1",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A8GFM8",
+      "group": "sensitivity_A8GFM8",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q65W61",
+      "group": "sensitivity_Q65W61",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "B2KED0",
+      "group": "sensitivity_B2KED0",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A4QE56",
+      "group": "sensitivity_A4QE56",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A7I5W4",
+      "group": "sensitivity_A7I5W4",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A5G348",
+      "group": "sensitivity_A5G348",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q553K4",
+      "group": "sensitivity_Q553K4",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q46FW1",
+      "group": "sensitivity_Q46FW1",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "B2T9B0",
+      "group": "sensitivity_B2T9B0",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A8ZZT5",
+      "group": "sensitivity_A8ZZT5",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "I6YET7",
+      "group": "sensitivity_I6YET7",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "O69443",
+      "group": "sensitivity_I6YET7",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A4J9B4",
+      "group": "sensitivity_A4J9B4",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q8RII2",
+      "group": "sensitivity_Q8RII2",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q3A931",
+      "group": "sensitivity_Q3A931",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "B8J1I9",
+      "group": "sensitivity_B8J1I9",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q30X24",
+      "group": "sensitivity_Q30X24",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "AEA80752.1",
+      "group": "sensitivity_AEA80752.1",
+      "truth": "marine_MntX",
+      "predicted": "marine_MntX",
+      "evidence": "experimental_anchor"
+    },
+    {
+      "id": "A9KRD5",
+      "group": "sensitivity_A9KRD5",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q9K6F9",
+      "group": "sensitivity_Q9K6F9",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A6L8E9",
+      "group": "sensitivity_A6L8E9",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A5IRZ2",
+      "group": "sensitivity_A5IRZ2",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q2FUR9",
+      "group": "sensitivity_A5IRZ2",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A9GV45",
+      "group": "sensitivity_A9GV45",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A3CX65",
+      "group": "sensitivity_A3CX65",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q0B8F7",
+      "group": "sensitivity_Q0B8F7",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A0PZ39",
+      "group": "sensitivity_A0PZ39",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q97TN5",
+      "group": "sensitivity_A0PZ39",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q47ZC7",
+      "group": "sensitivity_Q47ZC7",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q6APV5",
+      "group": "sensitivity_Q6APV5",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q9V2F1",
+      "group": "sensitivity_Q9V2F1",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A0KG66",
+      "group": "sensitivity_A0KG66",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q1QZ83",
+      "group": "sensitivity_Q1QZ83",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q1R175",
+      "group": "sensitivity_Q1QZ83",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q0VLM2",
+      "group": "sensitivity_Q0VLM2",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q8UEM1",
+      "group": "sensitivity_Q8UEM1",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q2RXQ8",
+      "group": "sensitivity_Q2RXQ8",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A0A378VP91",
+      "group": "sensitivity_A0A378VP91",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A1KRP4",
+      "group": "sensitivity_A0A378VP91",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q1H1K6",
+      "group": "sensitivity_Q1H1K6",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q8ZSB0",
+      "group": "sensitivity_Q8ZSB0",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A7IMS5",
+      "group": "sensitivity_A7IMS5",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A5UJ57",
+      "group": "sensitivity_A5UJ57",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q2NGB4",
+      "group": "sensitivity_A5UJ57",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q58004",
+      "group": "sensitivity_Q58004",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q5LG69",
+      "group": "sensitivity_Q5LG69",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q0AUC1",
+      "group": "sensitivity_Q0AUC1",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A0RLB0",
+      "group": "sensitivity_A0RLB0",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "P94395",
+      "group": "sensitivity_A0RLB0",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "P96593",
+      "group": "sensitivity_A0RLB0",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "B5E9H5",
+      "group": "sensitivity_Q3A2U7",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "C6E019",
+      "group": "sensitivity_Q3A2U7",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q3A2U7",
+      "group": "sensitivity_Q3A2U7",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A5ESV8",
+      "group": "sensitivity_A5ESV8",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "B0U3E5",
+      "group": "sensitivity_A5ESV8",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "B2FNG8",
+      "group": "sensitivity_A5ESV8",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q87EJ9",
+      "group": "sensitivity_A5ESV8",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q89K67",
+      "group": "sensitivity_A5ESV8",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q8P3J6",
+      "group": "sensitivity_A5ESV8",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "experimental_different_family"
+    },
+    {
+      "id": "Q8P8R8",
+      "group": "sensitivity_A5ESV8",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A5WBC5",
+      "group": "sensitivity_A5WBC5",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "B1I6K8",
+      "group": "sensitivity_B1I6K8",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q9KRF4",
+      "group": "sensitivity_Q9KRF4",
+      "truth": "marine_MntX",
+      "predicted": "marine_MntX",
+      "evidence": "experimental_anchor"
+    },
+    {
+      "id": "O27840",
+      "group": "sensitivity_O27840",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A8ERN6",
+      "group": "sensitivity_A8ERN6",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A1ABY9",
+      "group": "sensitivity_Q2NTC7",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A1ADR7",
+      "group": "sensitivity_Q2NTC7",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A1JLC3",
+      "group": "sensitivity_Q2NTC7",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A1JM85",
+      "group": "sensitivity_Q2NTC7",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A4WBH9",
+      "group": "sensitivity_Q2NTC7",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A4WD10",
+      "group": "sensitivity_Q2NTC7",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A6TAZ2",
+      "group": "sensitivity_Q2NTC7",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A6TC38",
+      "group": "sensitivity_Q2NTC7",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A7MNM2",
+      "group": "sensitivity_Q2NTC7",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A7MP48",
+      "group": "sensitivity_Q2NTC7",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A8ADJ8",
+      "group": "sensitivity_Q2NTC7",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A8AFN4",
+      "group": "sensitivity_Q2NTC7",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A9MVT2",
+      "group": "sensitivity_Q2NTC7",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "B4TQE4",
+      "group": "sensitivity_Q2NTC7",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "C6D9J9",
+      "group": "sensitivity_Q2NTC7",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "C6DG20",
+      "group": "sensitivity_Q2NTC7",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "P45468",
+      "group": "sensitivity_Q2NTC7",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q0T2A8",
+      "group": "sensitivity_Q2NTC7",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q0T515",
+      "group": "sensitivity_Q2NTC7",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q2NTC7",
+      "group": "sensitivity_Q2NTC7",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "B3W6P3",
+      "group": "sensitivity_Q8GH68",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q03DK0",
+      "group": "sensitivity_Q8GH68",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q03TH5",
+      "group": "sensitivity_Q8GH68",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q8GH68",
+      "group": "sensitivity_Q8GH68",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "B1WQP0",
+      "group": "sensitivity_B7KGD8",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "B7K3S3",
+      "group": "sensitivity_B7KGD8",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "B7KGD8",
+      "group": "sensitivity_B7KGD8",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q38UX8",
+      "group": "sensitivity_Q38UX8",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A1WR47",
+      "group": "sensitivity_A1WR47",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "B4EYC2",
+      "group": "sensitivity_B4EYC2",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q7N3L4",
+      "group": "sensitivity_B4EYC2",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A6VQU4",
+      "group": "sensitivity_A6VQU4",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A1VAL2",
+      "group": "sensitivity_A1VAL2",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "P65544",
+      "group": "sensitivity_P65544",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q2RFW3",
+      "group": "sensitivity_Q2RFW3",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q9RTP8",
+      "group": "sensitivity_Q9RTP8",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A8MEV0",
+      "group": "sensitivity_A8MEV0",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A0LFC9",
+      "group": "sensitivity_A0LFC9",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A0RRL1",
+      "group": "sensitivity_ACG76368.1",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "ACG76368.1",
+      "group": "sensitivity_ACG76368.1",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "experimental_hard_negative"
+    },
+    {
+      "id": "B0TI68",
+      "group": "sensitivity_B0TI68",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q0AJY9",
+      "group": "sensitivity_Q0AJY9",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    }
+  ],
+  "final_cutoffs": {
+    "marine_MntX": 240.2
+  },
+  "external_test": null,
+  "external_predictions": [],
+  "unlabelled_predictions": [],
+  "promotion": {
+    "eligible": false,
+    "reasons": [
+      "sparse_independent_positive_groups",
+      "no_independent_external_positive_test"
+    ]
+  },
+  "inputs": {
+    "/Users/lgallucc/.codex/visualizations/2026/11/03/01a1a03e-eafa-7a90-a2d1-a0f561f55ca1/Efesto/transport_workflow_20261108/datasets/mnt_pilot/references.faa": "7a4f9a5763138808034c8fc00eed74c77b53882eefe448dadd4be53174d4420a",
+    "/Users/lgallucc/.codex/visualizations/2026/11/03/01a1a03e-eafa-7a90-a2d1-a0f561f55ca1/Efesto/transport_workflow_20261108/results/grouping_70_corrected/manifest.tsv": "8eab555ef8183013bb1c127cbaaa7fac6a0f7233c15c2d22c50d85c02c267fdf"
+  }
+}

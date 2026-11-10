@@ -1,0 +1,37 @@
+{
+  "import_date": "2026-11-08",
+  "profiles": [
+    {
+      "stem": "mbnA_TIGR04071",
+      "accession": "TIGR04071.2",
+      "nseq": 21,
+      "sequence_cutoff": 24.0,
+      "cutoff_source": "embedded_GA_unchanged",
+      "source_url": "https://www.ebi.ac.uk/interpro/api/entry/ncbifam/TIGR04071/?annotation=hmm",
+      "sha256": "51615618e6a7b88bdf72e6388e922c43a85dc022b1f298dbfec28c3677ab36f9",
+      "scope": "MbnA-family domain; includes precursor peptides and C-terminal domains of some sigma factors. Not a standalone proof of methanobactin synthesis."
+    },
+    {
+      "stem": "mbnB_TIGR04159",
+      "accession": "TIGR04159.2",
+      "nseq": 16,
+      "sequence_cutoff": 325.0,
+      "cutoff_source": "embedded_GA_unchanged",
+      "source_url": "https://www.ebi.ac.uk/interpro/api/entry/ncbifam/TIGR04159/?annotation=hmm",
+      "sha256": "331af3bf65e17d440093aa85a0dba9024bc0208c4fe144bf625cf6d12e54da67",
+      "scope": "Specific full-length MbnB subfamily, rather than generic MNIO/DUF692. In normal context output the MbnA/B/C profile set is required."
+    },
+    {
+      "stem": "mbnC_TIGR04160",
+      "accession": "TIGR04160.2",
+      "nseq": 18,
+      "sequence_cutoff": 185.0,
+      "cutoff_source": "embedded_GA_unchanged",
+      "source_url": "https://www.ebi.ac.uk/interpro/api/entry/ncbifam/TIGR04160/?annotation=hmm",
+      "sha256": "6e4a5dfd9fd1f6dc1e0a500f7be5f6808b99cdd17935468d3b4123dc68916866",
+      "scope": "Specific MbnC subfamily, rather than broader TIGR04061. In normal context output the MbnA/B/C profile set is required."
+    }
+  ],
+  "no_new_training": true,
+  "no_cutoff_relaxation": true
+}

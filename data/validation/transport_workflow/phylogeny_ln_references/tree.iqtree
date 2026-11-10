@@ -1,0 +1,368 @@
+IQ-TREE 2.3.5 built Jun 27 2024
+
+Input file name: /Users/lgallucc/.codex/visualizations/2026/11/03/01a1a03e-eafa-7a90-a2d1-a0f561f55ca1/Efesto/transport_workflow_20261108/results/phylogeny_ln_references/trimmed.faa
+Type of analysis: tree reconstruction + ultrafast bootstrap (1000 replicates)
+Random seed number: 17
+
+REFERENCES
+----------
+
+To cite IQ-TREE please use:
+
+Bui Quang Minh, Heiko A. Schmidt, Olga Chernomor, Dominik Schrempf,
+Michael D. Woodhams, Arndt von Haeseler, and Robert Lanfear (2020)
+IQ-TREE 2: New models and efficient methods for phylogenetic inference
+in the genomic era. Mol. Biol. Evol., in press.
+https://doi.org/10.1093/molbev/msaa015
+
+Since you used ultrafast bootstrap (UFBoot) please also cite: 
+
+Diep Thi Hoang, Olga Chernomor, Arndt von Haeseler, Bui Quang Minh,
+and Le Sy Vinh (2018) UFBoot2: Improving the ultrafast bootstrap
+approximation. Mol. Biol. Evol., 35:518–522.
+https://doi.org/10.1093/molbev/msx281
+
+SEQUENCE ALIGNMENT
+------------------
+
+Input data: 64 sequences with 635 amino-acid sites
+Number of constant sites: 1 (= 0.15748% of all sites)
+Number of invariant (constant or ambiguous constant) sites: 1 (= 0.15748% of all sites)
+Number of parsimony informative sites: 627
+Number of distinct site patterns: 635
+
+SUBSTITUTION PROCESS
+--------------------
+
+Model of substitution: LG+G4
+
+State frequencies: (model)
+
+Model of rate heterogeneity: Gamma with 4 categories
+Gamma shape alpha: 2.8689
+
+ Category  Relative_rate  Proportion
+  1         0.3789         0.2500
+  2         0.7240         0.2500
+  3         1.0818         0.2500
+  4         1.8154         0.2500
+Relative rates are computed as MEAN of the portion of the Gamma distribution falling in the category.
+
+MAXIMUM LIKELIHOOD TREE
+-----------------------
+
+Log-likelihood of the tree: -62417.8551 (s.e. 608.4262)
+Unconstrained log-likelihood (without tree): -4098.0519
+Number of free parameters (#branches + #model parameters): 126
+Akaike information criterion (AIC) score: 125087.7102
+Corrected Akaike information criterion (AICc) score: 125150.7102
+Bayesian information criterion (BIC) score: 125648.8669
+
+Total tree length (sum of branch lengths): 53.7303
+Sum of internal branch lengths: 15.2146 (28.3167% of tree length)
+
+WARNING: 2 near-zero internal branches (<0.0016) should be treated with caution
+         Such branches are denoted by '**' in the figure below
+
+NOTE: Tree is UNROOTED although outgroup taxon 'A0A4P9UKZ7' is drawn at root
+Numbers in parentheses are SH-aLRT support (%) / ultrafast bootstrap support (%)
+
++**A0A4P9UKZ7
+|
+|                                           +--C5B163
+|                                     +-----| (100/100)
+|                                     |     +--A0A1I4H1Q2
+|                                  +--| (78.1/94)
+|                                  |  +-----Dandare2025_TableS2_LutH
+|                        +---------| (100/100)
+|                        |         +---A0A1I4JG84
+|                     +--| (54.3/47)
+|                     |  +--------------A0A1I4CJ38
+|                  +--| (90.4/49)
+|                  |  |        +----A0A1I3Z1T4
+|                  |  +--------| (100/100)
+|                  |           +------A0A2D2CVU3
+|             +----| (99.9/100)
+|             |    |              +------------P05825
+|             |    |           +--| (41.1/49)
+|             |    |           |  |  +--------------------------P53373
+|             |    |           |  +--| (90.3/94)
+|             |    |           |     +-----------A0A4P9URI3
+|             |    |        +--| (93.9/72)
+|             |    |        |  |                         +--O52903
+|             |    |        |  |                      +--| (99.9/100)
+|             |    |        |  |                      |  |              +--A1AIE8
+|             |    |        |  |                      |  |           +--| (98.4/100)
+|             |    |        |  |                      |  |           |  +**Q0TA90
+|             |    |        |  |                      |  |        +--| (98.7/100)
+|             |    |        |  |                      |  |        |  +--Q32AE6
+|             |    |        |  |                      |  |     +--| (37.7/85)
+|             |    |        |  |                      |  |     |  |     +--A7ZUI6
+|             |    |        |  |                      |  |     |  |  +--| (93.6/100)
+|             |    |        |  |                      |  |     |  |  |  +**A8A774
+|             |    |        |  |                      |  |     |  +**| (0/54)
+|             |    |        |  |                      |  |     |     +**Q3YV10
+|             |    |        |  |                      |  |  +--| (100/100)
+|             |    |        |  |                      |  |  |  |  +--Q0SY25
+|             |    |        |  |                      |  |  |  +--| (74.2/96)
+|             |    |        |  |                      |  |  |     +--Q83IS4
+|             |    |        |  |                      |  +--| (72.7/92)
+|             |    |        |  |                      |     |     +--P37409
+|             |    |        |  |                      |     |  +**| (0/92)
+|             |    |        |  |                      |     |  |  +**Q57H87
+|             |    |        |  |                      |     +--| (100/100)
+|             |    |        |  |                      |        +--Q8Z314
+|             |    |        |  |                   +--| (100/100)
+|             |    |        |  |                   |  |  +--A7ML93
+|             |    |        |  |                   |  +--| (100/100)
+|             |    |        |  |                   |     +--A4WG45
+|             |    |        |  |                +--| (85.2/97)
+|             |    |        |  |                |  |  +--Q7MYE3
+|             |    |        |  |                |  +--| (99.6/100)
+|             |    |        |  |                |     |  +--A4TRG0
+|             |    |        |  |                |     +--| (99.7/100)
+|             |    |        |  |                |        +--A7FD14
+|             |    |        |  |          +-----| (100/100)
+|             |    |        |  |          |     +--Q6CZB5
+|             |    |        |  |       +--| (97.9/100)
+|             |    |        |  |       |  |     +------Q6LLU3
+|             |    |        |  |       |  |  +--| (21.7/66)
+|             |    |        |  |       |  |  |  +------Q7MQ42
+|             |    |        |  |       |  +--| (89.7/80)
+|             |    |        |  |       |     |     +-----A5F4P6
+|             |    |        |  |       |     |  +--| (97/98)
+|             |    |        |  |       |     |  |  |      +--A7MXY8
+|             |    |        |  |       |     |  |  +------| (100/100)
+|             |    |        |  |       |     |  |         +--Q87KN9
+|             |    |        |  |       |     +--| (48.7/73)
+|             |    |        |  |       |        +------Q8DD41
+|             |    |        |  |  +----| (99.8/100)
+|             |    |        |  |  |    +----------A0A4P9UKH2
+|             |    |        |  +--| (65.4/44)
+|             |    |        |     |                  +**Q6U607
+|             |    |        |     +------------------| (100/100)
+|             |    |        |                        +--P14542
+|             |    |     +--| (45.4/67)
+|             |    |     |  |          +-----------A0A1I3YT03
+|             |    |     |  |   +------| (100/100)
+|             |    |     |  |   |      |   +-------A0A4P9UQ58
+|             |    |     |  |   |      +---| (99.1/100)
+|             |    |     |  |   |          +-----A0A4P9UVK5
+|             |    |     |  +---| (99.4/99)
+|             |    |     |      |      +-------------A0A4P9UT15
+|             |    |     |      +------| (100/100)
+|             |    |     |             +---------A0A2D2CWB9
+|             |    |  +--| (85.9/82)
+|             |    |  |  +------------------A0A2D2CWB4
+|             |    +--| (94.1/84)
+|             |       |                  +-------P06971
+|             |       |              +---| (100/100)
+|             |       |              |   |  +-------A0A1I4GBC3
+|             |       |              |   +--| (98.1/100)
+|             |       |              |      +------A0A1I4HF28
+|             |       |           +--| (38/87)
+|             |       |           |  |              +----A0A4P9UJ97
+|             |       |           |  |           +--| (99.2/100)
+|             |       |           |  |           |  +-----A0A4P9UND7
+|             |       |           |  |        +--| (70.9/94)
+|             |       |           |  |        |  |     +----A0A2D2CVW9
+|             |       |           |  |        |  |  +--| (100/100)
+|             |       |           |  |        |  |  |  +---A0A2D2CVZ0
+|             |       |           |  |        |  +--| (91.4/96)
+|             |       |           |  |        |     +--------A0A2D2CWH5
+|             |       |           |  |     +--| (97.9/100)
+|             |       |           |  |     |  +-------A0A2D2CWW0
+|             |       |           |  |  +--| (95.6/99)
+|             |       |           |  |  |  +---------A0A1I4E850
+|             |       |           |  +--| (43.6/88)
+|             |       |           |     +-----------------A0A2D2CVN9
+|             |       |        +--| (51.1/66)
+|             |       |        |  +--------------------------------A0A2D2CVM8
+|             |       |     +--| (97.7/91)
+|             |       |     |  |      +-------P42512
+|             |       |     |  +------| (100/100)
+|             |       |     |         |  +------P48632
+|             |       |     |         +--| (60.4/97)
+|             |       |     |            +-------P16869
+|             |       |  +--| (30.2/70)
+|             |       |  |  +---------------A0A1I4I526
+|             |       +--| (67.2/81)
+|             |          +-----------------------A0A1I3YK53
+|          +--| (48.2/95)
+|          |  +------------P13036
++----------| (100/100)
+|          +-------------A0A4P9UTK5
+|
++**Dandare2025_TableS2_LanA
+
+Tree in newick format:
+
+(A0A4P9UKZ7:0.0000010000,((((((((C5B163:0.1129483832,A0A1I4H1Q2:0.0456140170)100/100:0.5318027151,Dandare2025_TableS2_LutH:0.5582672545)78.1/94:0.1370048797,A0A1I4JG84:0.4132313763)100/100:0.9045995329,A0A1I4CJ38:1.3236611454)54.3/47:0.1468756423,(A0A1I3Z1T4:0.4503446150,A0A2D2CVU3:0.6843963994)100/100:0.8008250270)90.4/49:0.1515249316,(((((P05825:1.1529960823,(P53373:2.3863062151,A0A4P9URI3:1.1172563572)90.3/94:0.3313800280)41.1/49:0.1321846349,(((((((O52903:0.0605305452,(((((A1AIE8:0.0016609152,Q0TA90:0.0000010000)98.4/100:0.0101303289,Q32AE6:0.0066949145)98.7/100:0.0117577101,((A7ZUI6:0.0016667192,A8A774:0.0000010000)93.6/100:0.0033361892,Q3YV10:0.0000010000)0/54:0.0000010000)37.7/85:0.0016384521,(Q0SY25:0.0016736870,Q83IS4:0.0016671437)74.2/96:0.0017000376)100/100:0.0710580575,((P37409:0.0033323883,Q57H87:0.0000010000)0/92:0.0004932096,Q8Z314:0.0028480152)100/100:0.0654454961)72.7/92:0.0242288588)99.9/100:0.0940604228,(A7ML93:0.0495466724,A4WG45:0.0347204974)100/100:0.0904848995)100/100:0.1063741550,(Q7MYE3:0.2901186416,(A4TRG0:0.1209293431,A7FD14:0.1539483344)99.7/100:0.0889678467)99.6/100:0.0720787774)85.2/97:0.0591229632,Q6CZB5:0.1651557286)100/100:0.5450594743,((Q6LLU3:0.6197265249,Q7MQ42:0.6727146681)21.7/66:0.1141677249,((A5F4P6:0.5953324476,(A7MXY8:0.0646129562,Q87KN9:0.0419060988)100/100:0.6135600860)97/98:0.1675854963,Q8DD41:0.6886051177)48.7/73:0.0633711768)89.7/80:0.1657880397)97.9/100:0.2370859827,A0A4P9UKH2:1.0406327586)99.8/100:0.4406965021,(Q6U607:0.0000026524,P14542:0.0220465118)100/100:1.6863460460)65.4/44:0.1026572605)93.9/72:0.1711593939,((A0A1I3YT03:1.0694393699,(A0A4P9UQ58:0.7698950593,A0A4P9UVK5:0.5597404072)99.1/100:0.3848448148)100/100:0.6733907768,(A0A4P9UT15:1.2960984261,A0A2D2CWB9:0.9166197468)100/100:0.6877562956)99.4/99:0.3826930290)45.4/67:0.0815961735,A0A2D2CWB4:1.7431239916)85.9/82:0.1047039978,((((((P06971:0.7119689225,(A0A1I4GBC3:0.6987851285,A0A1I4HF28:0.6446178463)98.1/100:0.2156575748)100/100:0.3549186161,(((((A0A4P9UJ97:0.4998205764,A0A4P9UND7:0.5744502512)99.2/100:0.1706357383,((A0A2D2CVW9:0.4406475296,A0A2D2CVZ0:0.3753565672)100/100:0.2296568362,A0A2D2CWH5:0.8051766260)91.4/96:0.1104857419)70.9/94:0.1077236495,A0A2D2CWW0:0.7842585689)97.9/100:0.1789823618,A0A1I4E850:0.9294315698)95.6/99:0.1625961876,A0A2D2CVN9:1.6579841072)43.6/88:0.0704077491)38/87:0.0550349946,A0A2D2CVM8:2.9094600423)51.1/66:0.1069406314,(P42512:0.7845382188,(P48632:0.6388712798,P16869:0.7720851390)60.4/97:0.1552562340)100/100:0.6159234016)97.7/91:0.2037868661,A0A1I4I526:1.4651181796)30.2/70:0.1323392928,A0A1I3YK53:2.1296852284)67.2/81:0.1087118312)94.1/84:0.1391897013)99.9/100:0.4555449460,P13036:1.2189901242)48.2/95:0.1511992500,A0A4P9UTK5:1.2344326500)100/100:1.0301173680,Dandare2025_TableS2_LanA:0.0000010000);
+
+CONSENSUS TREE
+--------------
+
+Consensus tree is constructed from 1000 bootstrap trees
+Log-likelihood of consensus tree: -75179.816306
+Robinson-Foulds distance between ML tree and consensus tree: 62
+
+Branches with support >0.000000% are kept (extended consensus)
+Branch lengths are optimized by maximum likelihood on original alignment
+Numbers in parentheses are bootstrap supports (%)
+
++---------------------------------------A0A4P9UKZ7
+|
+|  +----------------------------------------C5B163
++--| (100)
+|  +-----------------------------------------Dandare2025_TableS2_LanA
+|  |
+|  +---------------------------------------Dandare2025_TableS2_LutH
+|  |
+|  |             +-----------------P05825
+|  +-------------| (4)
+|  |             +-------------------------------------P53373
+|  |
+|  +-------------------------------------P06971
+|  |
+|  +------------------------------------------P13036
+|  |
+|  +--O52903
+|  |
+|  |  +--A7ML93
+|  +--| (100)
+|  |  +--A4WG45
+|  |
+|  +--A1AIE8
+|  |
+|  +-------------------------------------Q6U607
+|  |
+|  +--------------------------------------------A0A1I3YK53
+|  |
+|  |                 +---------------------------------------A0A2D2CVM8
+|  +-----------------| (1)
+|  |                 +-----------------------------A0A2D2CVN9
+|  |
+|  |                                    +--------A0A4P9UJ97
+|  +------------------------------------| (100)
+|  |                                    +---------A0A4P9UND7
+|  |                                    |
+|  |                                    +------A0A2D2CVW9
+|  |                                    |
+|  |                                    +-----A0A2D2CVZ0
+|  |                                    |
+|  |                                    +----------A0A2D2CWH5
+|  |                                    |
+|  |                                    +-----------A0A2D2CWW0
+|  |
+|  +----Q6CZB5
+|  |
+|  +------------------Q6LLU3
+|  |
+|  +------Q7MYE3
+|  |
+|  |                             +---------P42512
+|  +-----------------------------| (4)
+|  |                             +--------P48632
+|  |
+|  |  +--P37409
+|  +--| (92)
+|  |  +--Q57H87
+|  |
+|  +--Q0SY25
+|  |
+|  +----------------A5F4P6
+|  |
+|  +-----A4TRG0
+|  |
+|  +--A7ZUI6
+|  |
+|  +-------------------------------------------A0A1I3YT03
+|  |
+|  +-------------------------A0A4P9UKH2
+|  |
+|  +--Q32AE6
+|  |
+|  +-----------------A7MXY8
+|  |
+|  +--A8A774
+|  |
+|  +-----------------------------------------A0A1I3Z1T4
+|  |
+|  +--Q3YV10
+|  |
+|  +-------------------------------------------A0A1I4CJ38
+|  |
+|  +--------------------------------------------A0A2D2CVU3
+|  |
+|  +--Q8Z314
+|  |
+|  +--Q83IS4
+|  |
+|  +-------------------Q7MQ42
+|  |
+|  +----------------------------------------------A0A1I4E850
+|  |
+|  +----------------------------------------A0A4P9UQ58
+|  |
+|  +-----------------Q87KN9
+|  |
+|  +-------------------------------------------A0A1I4GBC3
+|  |
+|  +--------------------------------------A0A4P9URI3
+|  |
+|  +-------------------Q8DD41
+|  |
+|  +--------------------------------------A0A1I4H1Q2
+|  |
+|  +---------------------------------------A0A2D2CWB4
+|  |
+|  +-------------------------------------------------A0A4P9UT15
+|  |
+|  +-------------------------------------P14542
+|  |
+|  +--------------------------------------------A0A1I4HF28
+|  |
+|  +--------------------------------------------A0A2D2CWB9
+|  |
+|  +---------------------------------------------A0A4P9UTK5
+|  |
+|  +---------------------------------------P16869
+|  |
+|  +------------------------------------A0A1I4I526
+|  |
+|  +-------------------------------------A0A4P9UVK5
+|  |
+|  +--Q0TA90
+|  |
+|  +-------------------------------------A0A1I4JG84
+|
++---A7FD14
+
+
+Consensus tree in newick format: 
+
+(A0A4P9UKZ7:3.2368588208,(C5B163:3.3072104505,Dandare2025_TableS2_LanA:3.4126996665,Dandare2025_TableS2_LutH:3.2400547722,(P05825:1.4508653985,P53373:3.1077407436)4:1.1854405515,P06971:3.0509353539,P13036:3.4419602174,O52903:0.1472312080,(A7ML93:0.0371906634,A4WG45:0.0448889085)100:0.2341382450,A1AIE8:0.0235183517,Q6U607:3.0980118543,A0A1I3YK53:3.6761981657,(A0A2D2CVM8:3.2003372274,A0A2D2CVN9:2.4418594511)1:1.4439792198,(A0A4P9UJ97:0.7202823046,A0A4P9UND7:0.8055671322,A0A2D2CVW9:0.5767656049,A0A2D2CVZ0:0.5188791714,A0A2D2CWH5:0.9341145628,A0A2D2CWW0:0.9753454586)100:2.9626755170,Q6CZB5:0.4565793674,Q6LLU3:1.5271550855,Q7MYE3:0.5974316443,(P42512:0.8125480614,P48632:0.7901966438)4:2.4757386409,(P37409:0.0032798584,Q57H87:0.0000020945)92:0.1285060194,Q0SY25:0.0034126634,A5F4P6:1.4184048249,A4TRG0:0.4830900824,A7ZUI6:0.0065556366,A0A1I3YT03:3.5551800777,A0A4P9UKH2:2.1045732890,Q32AE6:0.0198773574,A7MXY8:1.4839609986,A8A774:0.0048993313,A0A1I3Z1T4:3.3951187550,Q3YV10:0.0016034159,A0A1I4CJ38:3.5653353115,A0A2D2CVU3:3.6728244467,Q8Z314:0.1289052727,Q83IS4:0.0033989671,Q7MQ42:1.6274764592,A0A1I4E850:3.7651636363,A0A4P9UQ58:3.2926611629,Q87KN9:1.4953758201,A0A1I4GBC3:3.5569685236,A0A4P9URI3:3.1861762102,Q8DD41:1.6205390774,A0A1I4H1Q2:3.1831174536,A0A2D2CWB4:3.2696685679,A0A4P9UT15:4.0271209665,P14542:3.1013865452,A0A1I4HF28:3.6163494074,A0A2D2CWB9:3.6608900710,A0A4P9UTK5:3.6933112507,P16869:3.2485239427,A0A1I4I526:3.0232526986,A0A4P9UVK5:3.1150600597,Q0TA90:0.0234236534,A0A1I4JG84:3.0488404647)100:0.1554508923,A7FD14:0.3554220070);
+
+ALISIM COMMAND
+--------------
+To simulate an alignment of the same length as the original alignment, using the tree and model parameters estimated from this analysis, you can use the following command:
+
+--alisim simulated_MSA -t /Users/lgallucc/.codex/visualizations/2026/11/03/01a1a03e-eafa-7a90-a2d1-a0f561f55ca1/Efesto/transport_workflow_20261108/results/phylogeny_ln_references/tree.treefile -m "LG+G4{2.86891}" --length 635
+
+To mimic the alignment used to produce this analysis, i.e. simulate an alignment of the same length as the original alignment, using the tree and model parameters estimated from this analysis *and* copying the same gap positions as the original alignment, you can use the following command:
+
+iqtree -s /Users/lgallucc/.codex/visualizations/2026/11/03/01a1a03e-eafa-7a90-a2d1-a0f561f55ca1/Efesto/transport_workflow_20261108/results/phylogeny_ln_references/trimmed.faa --alisim mimicked_MSA
+
+To simulate any number of alignments in either of the two commandlines above, use the --num-alignments options, for example mimic 100 alignments you would use the command line:
+
+iqtree -s /Users/lgallucc/.codex/visualizations/2026/11/03/01a1a03e-eafa-7a90-a2d1-a0f561f55ca1/Efesto/transport_workflow_20261108/results/phylogeny_ln_references/trimmed.faa --alisim mimicked_MSA --num-alignments 100
+
+For more information on using AliSim, please visit: www.iqtree.org/doc/AliSim
+
+TIME STAMP
+----------
+
+Date and time: Mon Nov  9 12:46:37 2026
+Total CPU time used: 171.520217 seconds (0h:2m:51s)
+Total wall-clock time used: 120.839977 seconds (0h:2m:0s)
+

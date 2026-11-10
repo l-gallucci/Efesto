@@ -1,0 +1,12 @@
+{
+  "LutH_experiment_linked_sequences": 3,
+  "LutH_independent_groups": 2,
+  "AM1_PA1_global_identity": 0.9964243146603099,
+  "LanA_independent_groups": 1,
+  "LutAEF_independent_experimental_locus_groups": 1,
+  "generic_TonB_reference_hits": 4,
+  "generic_TonB_other_receptor_hits": 44,
+  "generic_TonB_other_receptor_count": 45,
+  "nested_validation": "not_executed: fewer than three independent positive groups per target",
+  "no_generic_domain_imported_as_Ln_specific": true
+}

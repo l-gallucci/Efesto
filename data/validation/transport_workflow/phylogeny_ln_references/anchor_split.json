@@ -1,0 +1,14 @@
+{
+  "anchors": [
+    "C5B163",
+    "Dandare2025_TableS2_LutH"
+  ],
+  "smallest_unrooted_split_size": 3,
+  "support": "78.1/94",
+  "leaves": [
+    "A0A1I4H1Q2",
+    "C5B163",
+    "Dandare2025_TableS2_LutH"
+  ],
+  "not_a_functional_validation": true
+}

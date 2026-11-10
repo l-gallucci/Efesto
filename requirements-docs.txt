@@ -1,0 +1,2 @@
+# Website build only; not an Efesto runtime dependency.
+mkdocs==1.6.1

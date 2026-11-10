@@ -121,6 +121,16 @@ _ANNOTATE_MAP["multimetal"] += ["MetalAcquisition-MultiMetal", "MetalHomeostasis
 _ANNOTATE_MAP["Fe-regulation"] += ["IronSulfur-Regulation", "MetalRegulation-MultiMetal"]
 for _element in ("Fe", "Mn", "Ni", "Co", "Zn"):
     _ANNOTATE_MAP[_element] += ["MetalRegulation-MultiMetal"]
+# Ln profiles describe binding/handling; they are not generic EF-hand hits.
+_ANNOTATE_MAP.update({
+    "Ln": ["MetalHomeostasis-Lanthanides"],
+    "Ln-homeostasis": ["MetalHomeostasis-Lanthanides"],
+    "W": ["MetalAcquisition-Tungsten", "MetalAcquisition-MolybdenumTungsten"],
+    "W-acquisition": ["MetalAcquisition-Tungsten", "MetalAcquisition-MolybdenumTungsten"],
+    "metallophores": ["Metallophore-Synthesis", "Siderophore-Synthesis"],
+})
+_ANNOTATE_MAP["Mo"] += ["MetalAcquisition-MolybdenumTungsten"]
+_ANNOTATE_MAP["Mo-acquisition"] += ["MetalAcquisition-MolybdenumTungsten"]
 _ANNOTATE_MAP.update({cat: [cat] for cat in CANONICAL_CATEGORIES})
 VALID_ANNOTATE_TOKENS = sorted(_ANNOTATE_MAP) + ["all"]
 

@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "date": "2026-11-08",
+  "purpose": "Development validation, not automatic model activation",
+  "curation": "Experimental function anchors; ambiguous homologs unlabelled. Broad family hits are not ground truth for a metal/transport direction.",
+  "grouping": "Connected sequence clusters at >=80% identity and >=80% bilateral coverage, union with genus groups for background controls; exact aliases collapsed. Record source seed overlap separately.",
+  "grouping_sensitivity": [0.7, 0.9],
+  "alignment": "MAFFT --auto, rebuilt using training members only in every fold",
+  "phylogeny": "MAFFT, remove columns with >=50% gaps for exploratory trees only, IQ-TREE LG+G4, SH-aLRT 1000, UFBoot 1000, seed 17, max 2 threads",
+  "cutoff": "Full-sequence HMMER score, MCC optimization using inner out-of-fold predictions, evalue <=1e-5; ties prefer fewer FP then lower cutoff",
+  "nested_pilot": {"outer": 3, "inner": 2, "warning": "Only three experimental positive lineages for MntX; exploratory stability test, not a population accuracy estimate"},
+  "final_test": "No independent external positive set currently available for MntX. Do not invent it from inferred homologs. Promotion is blocked while this limitation remains.",
+  "competition": "Evaluate raw-score and score-above-cutoff assignments for multi-class development libraries; preselected output uses margin, runtime Efesto is unchanged",
+  "uncertainty": "Group bootstrap 500 resamples; report valid resamples, small-group limitation and confusion counts",
+  "fragments": "25%, 50%, 75% N-terminal, central, C-terminal segments; diagnostic coverage response only, not independent validation",
+  "promotion": "Always manual. Require adequate label provenance, homologous confounders, external validation and context review; a functionally unsupported clade remains unclassified.",
+  "non_changes": "No commit/push, no automatic modification to shipped profiles or thresholds. Official profile baseline is retained unless replacement gain is demonstrated."
+}

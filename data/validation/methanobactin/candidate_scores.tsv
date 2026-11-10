@@ -1,0 +1,16 @@
+model	protein	score	ga	pass	description
+TIGR04071	WP_161912153.1	55.8	24.0	True	WP_161912153.1 MULTISPECIES: methanobactin [unclassified Methylosinus]
+TIGR04071	E3YBA4	53.5	24.0	True	Methylosinus trichosporium (strain ATCC 35070 / NCIMB 11131 / ACM 3311 / UNIQEM 75 / OB3b)
+TIGR04159	A0A2D2D5M1	432.8	325.0	True	Methylosinus trichosporium (strain ATCC 35070 / NCIMB 11131 / ACM 3311 / UNIQEM 75 / OB3b)
+TIGR04159	WP_024881683.1	432.2	325.0	True	WP_024881683.1 MULTISPECIES: methanobactin biosynthesis protein MbnB [Methylosinus]
+TIGR04159	A0A086ASD2	21.3	325.0	False	Chryseobacterium sp. JM1
+TIGR04159	WP_034727520.1	21.3	325.0	False	WP_034727520.1 MNIO family chryseobactin maturase [Chryseobacterium sp. JM1]
+TIGR04160	A0A2D2CY73	261.1	185.0	True	Methylosinus trichosporium (strain ATCC 35070 / NCIMB 11131 / ACM 3311 / UNIQEM 75 / OB3b)
+TIGR04160	WP_003614727.1	261.1	185.0	True	WP_003614727.1 MULTISPECIES: methanobactin biosynthesis protein MbnC [Methylosinus]
+TIGR04160	WP_024881684.1	255.4	185.0	True	WP_024881684.1 MULTISPECIES: methanobactin biosynthesis protein MbnC [Methylosinus]
+NF040705	E3YBA4	18.7	350.0	False	Methylosinus trichosporium (strain ATCC 35070 / NCIMB 11131 / ACM 3311 / UNIQEM 75 / OB3b)
+NF040705	WP_161912153.1	18.4	350.0	False	WP_161912153.1 MULTISPECIES: methanobactin [unclassified Methylosinus]
+PF11449	Q9KRF4	561.6	32.5	True	Vibrio cholerae serotype O1 (strain ATCC 39315 / El Tor Inaba N16961)
+PF11449	D5BT12	486.8	32.5	True	Puniceispirillum marinum (strain IMCC1322)
+PF11449	A3SI43	351.2	32.5	True	Roseovarius nubinhibens (strain ATCC BAA-591 / DSM 15170 / ISM)
+PF11449	Q2CE27	321.3	32.5	True	Oceanicola granulosus (strain ATCC BAA-861 / DSM 15982 / KCTC 12143 / HTCC2516)

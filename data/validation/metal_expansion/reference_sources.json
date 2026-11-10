@@ -1,0 +1,178 @@
+[
+  {
+    "accession": "C5B159",
+    "source_url": "https://rest.uniprot.org/uniprotkb/C5B159.json",
+    "length": 92,
+    "sha256": "f8b2a41b3d2ab3777c1eda109860cffbb3e71425dc9cba1e1c94b5934761e389",
+    "downloaded_description": "Histidine kinase",
+    "note": "LanD assignment from Larrinaga et al. 2024 and Pfam PF41493; UniProt generic Histidine kinase description is not used as ground truth."
+  },
+  {
+    "accession": "C5B164",
+    "source_url": "https://rest.uniprot.org/uniprotkb/C5B164.json",
+    "length": 133,
+    "sha256": "59c81c77c852df4108ad1571848a48dc2a5ec4ba6fb7e7dc38b166a11d27dffe",
+    "downloaded_description": "Lanmodulin",
+    "note": "Reference sequence, not automatically independent of historical HMM training."
+  },
+  {
+    "accession": "O30142",
+    "source_url": "https://rest.uniprot.org/uniprotkb/O30142.json",
+    "length": 342,
+    "sha256": "9bd357ce74a478d242d859ea0331a16ddedf33d6760bfcc2e2d52523ea1d7ef7",
+    "downloaded_description": "Molybdate/tungstate-binding protein WtpA",
+    "note": "Reference sequence, not automatically independent of historical HMM training."
+  },
+  {
+    "accession": "O57890",
+    "source_url": "https://rest.uniprot.org/uniprotkb/O57890.json",
+    "length": 340,
+    "sha256": "1035b3bc34a1c027bb3e8378cd24166bf63b053db72d63d2845c6b92a88b81f6",
+    "downloaded_description": "Molybdate/tungstate-binding protein WtpA",
+    "note": "Reference sequence, not automatically independent of historical HMM training."
+  },
+  {
+    "accession": "O76734",
+    "source_url": "https://rest.uniprot.org/uniprotkb/O76734.json",
+    "length": 579,
+    "sha256": "bc0cf2cfdca975f5770471b81fbd1bdb17f89840528fbe2f8aa142d9a5968486",
+    "downloaded_description": "General transcriptional corepressor tupA",
+    "note": "Reference sequence, not automatically independent of historical HMM training."
+  },
+  {
+    "accession": "P02599",
+    "source_url": "https://rest.uniprot.org/uniprotkb/P02599.json",
+    "length": 152,
+    "sha256": "7738d7c751e31a88e72585ed281e98c6edb6b32571a2fe009a70293e95456587",
+    "downloaded_description": "Calmodulin",
+    "note": "Reference sequence, not automatically independent of historical HMM training."
+  },
+  {
+    "accession": "P09833",
+    "source_url": "https://rest.uniprot.org/uniprotkb/P09833.json",
+    "length": 352,
+    "sha256": "9b46ce59e7ebfd5e8bc3f429e210edc53b5a7aa058625285d8cbf0b4ba32642f",
+    "downloaded_description": "Molybdenum import ATP-binding protein ModC",
+    "note": "Reference sequence, not automatically independent of historical HMM training."
+  },
+  {
+    "accession": "P0AF01",
+    "source_url": "https://rest.uniprot.org/uniprotkb/P0AF01.json",
+    "length": 229,
+    "sha256": "9692a86cad427e89fa615bb7e92d8b011971cb98e40df0d48058cef2cfe1786c",
+    "downloaded_description": "Molybdenum transport system permease protein ModB",
+    "note": "Reference sequence, not automatically independent of historical HMM training."
+  },
+  {
+    "accession": "P0DP23",
+    "source_url": "https://rest.uniprot.org/uniprotkb/P0DP23.json",
+    "length": 149,
+    "sha256": "4a9f2f38a0afe61f9cd35d05788764536c1b394551a521687d0e537ad2760ff5",
+    "downloaded_description": "Calmodulin-1",
+    "note": "Reference sequence, not automatically independent of historical HMM training."
+  },
+  {
+    "accession": "P37329",
+    "source_url": "https://rest.uniprot.org/uniprotkb/P37329.json",
+    "length": 257,
+    "sha256": "76e2f55754904af9530e87368deea550c448b11ad2be91f1937bfddf36988502",
+    "downloaded_description": "Molybdate-binding protein ModA",
+    "note": "Reference sequence, not automatically independent of historical HMM training."
+  },
+  {
+    "accession": "Q0P885",
+    "source_url": "https://rest.uniprot.org/uniprotkb/Q0P885.json",
+    "length": 269,
+    "sha256": "a96f6a0e337c1dcaf25a55377545808a110da63725615044517f802cf21a5f1c",
+    "downloaded_description": "Tungstate-binding protein TupA",
+    "note": "Reference sequence, not automatically independent of historical HMM training."
+  },
+  {
+    "accession": "Q0P886",
+    "source_url": "https://rest.uniprot.org/uniprotkb/Q0P886.json",
+    "length": 239,
+    "sha256": "5d477f20ca3bcdf1f14d542608db5a9e779655c21df79fc1e7988d23ab29e88b",
+    "downloaded_description": "Tungstate uptake system permease protein TupB",
+    "note": "Reference sequence, not automatically independent of historical HMM training."
+  },
+  {
+    "accession": "Q0P887",
+    "source_url": "https://rest.uniprot.org/uniprotkb/Q0P887.json",
+    "length": 331,
+    "sha256": "53a9c1ef379772ba79500e521fb74adb4d8350d3ba9981835d4bf05f31e88402",
+    "downloaded_description": "Tungstate uptake system ATP-binding protein TupC",
+    "note": "Reference sequence, not automatically independent of historical HMM training."
+  },
+  {
+    "accession": "Q58586",
+    "source_url": "https://rest.uniprot.org/uniprotkb/Q58586.json",
+    "length": 346,
+    "sha256": "f7b5010d77434bce1a3d51ac1c7abc43e5a071165ec46331480c6af58b438e2e",
+    "downloaded_description": "Molybdate/tungstate-binding protein WtpA",
+    "note": "Reference sequence, not automatically independent of historical HMM training."
+  },
+  {
+    "accession": "Q5JEB6",
+    "source_url": "https://rest.uniprot.org/uniprotkb/Q5JEB6.json",
+    "length": 354,
+    "sha256": "7e85ff9aa788f55f50394bfaa92ed24944ba39d6b02fea454e5f67d4b57c6093",
+    "downloaded_description": "Molybdate/tungstate-binding protein WtpA",
+    "note": "Reference sequence, not automatically independent of historical HMM training."
+  },
+  {
+    "accession": "Q8U4K3",
+    "source_url": "https://rest.uniprot.org/uniprotkb/Q8U4K3.json",
+    "length": 344,
+    "sha256": "707921f870eaae445f469709bd564a13c0a2fb20030fd841e570144a47087d9f",
+    "downloaded_description": "Molybdate/tungstate import ATP-binding protein WtpC",
+    "note": "Reference sequence, not automatically independent of historical HMM training."
+  },
+  {
+    "accession": "Q8U4K4",
+    "source_url": "https://rest.uniprot.org/uniprotkb/Q8U4K4.json",
+    "length": 249,
+    "sha256": "2190817ef7eba7261c20f1a5882c40e6a3f587dcedebe7a267b33909fc9443ec",
+    "downloaded_description": "Molybdate/tungstate transport system permease protein WtpB",
+    "note": "Reference sequence, not automatically independent of historical HMM training."
+  },
+  {
+    "accession": "Q8U4K5",
+    "source_url": "https://rest.uniprot.org/uniprotkb/Q8U4K5.json",
+    "length": 345,
+    "sha256": "c02ad0bcecaa6ceb72de220a6413c9ea1f954913a0273ce6b01bf7e4b4bdfa66",
+    "downloaded_description": "Molybdate/tungstate-binding protein WtpA",
+    "note": "Reference sequence, not automatically independent of historical HMM training."
+  },
+  {
+    "accession": "Q9V2C4",
+    "source_url": "https://rest.uniprot.org/uniprotkb/Q9V2C4.json",
+    "length": 344,
+    "sha256": "95e43d8b9b603fe022bb723ab0c0bf75eaf7861f83099ae4824ff4002b0824c8",
+    "downloaded_description": "Molybdate/tungstate-binding protein WtpA",
+    "note": "Reference sequence, not automatically independent of historical HMM training."
+  },
+  {
+    "accession": "ZP_00160423.2",
+    "source_url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=protein&id=ZP_00160423.2&rettype=fasta&retmode=text",
+    "length": 232,
+    "sha256": "8f6aa668c383de456d006004129b81bae8ae2075564a82065ec172f48331d9f8",
+    "downloaded_description": "",
+    "note": "Vup-associated references named in Pratte & Thiel 2006. Historical A/B labels conflict with sequence topology/profile correspondence; retained as locus-level negative controls without silently relabeling individual genes."
+  },
+  {
+    "accession": "ZP_00160424.1",
+    "source_url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=protein&id=ZP_00160424.1&rettype=fasta&retmode=text",
+    "length": 293,
+    "sha256": "90274a59ed4f5fae704de7b2515fa2c2d35a1f3d9539cd92360d7c26d632ff4a",
+    "downloaded_description": "",
+    "note": "Vup-associated references named in Pratte & Thiel 2006. Historical A/B labels conflict with sequence topology/profile correspondence; retained as locus-level negative controls without silently relabeling individual genes."
+  },
+  {
+    "accession": "ZP_00351494.1",
+    "source_url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=protein&id=ZP_00351494.1&rettype=fasta&retmode=text",
+    "length": 367,
+    "sha256": "64a623751089479edaf6e8e0b3682ec038ee46bf33316343fa50833298a1bcef",
+    "downloaded_description": "",
+    "note": "Vup-associated references named in Pratte & Thiel 2006. Historical A/B labels conflict with sequence topology/profile correspondence; retained as locus-level negative controls without silently relabeling individual genes."
+  }
+]

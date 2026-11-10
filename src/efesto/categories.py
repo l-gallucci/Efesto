@@ -46,7 +46,11 @@ def canonical_category(name):
     return LEGACY_CATEGORY_NAMES.get(name, name)
 
 
-CANONICAL_CATEGORIES = frozenset(['Arsenic-Oxidation',
+CANONICAL_CATEGORIES = frozenset(['Metallophore-Synthesis',
+ 'MetalHomeostasis-Lanthanides',
+ 'MetalAcquisition-Tungsten',
+ 'MetalAcquisition-MolybdenumTungsten',
+ 'Arsenic-Oxidation',
  'CarbonMetabolism-Dehydrogenase',
  'Competence-Pilus',
  'Heme-Oxygenase',

@@ -1,58 +1,57 @@
-# Efesto Documentation
+# Efesto
 
-Efesto is a profile HMM annotation pipeline for iron-cycling and metal resistance
-genes in genomes and metagenomes. It extends [FeGenie](https://github.com/Arkadiy-Garber/FeGenie)
-with coordinate-aware operon clustering, a cluster confidence scoring system, an expanded
-curated HMM library, and integration with external tools (UniOP, antiSMASH, Anvi'o).
+![Efesto logo](img/logo.png){ .project-logo }
 
----
+**Profile HMM annotation of metal cycling, acquisition, homeostasis and resistance genes.**
 
-## Contents
+Efesto searches proteins from genomes, MAGs and gene catalogs, then combines
+family matches with genomic context and optional annotation evidence. It extends
+[FeGenie](https://github.com/Arkadiy-Garber/FeGenie) with an expanded library,
+coordinate-based clustering and integrations with UniOP, antiSMASH and anvi'o.
 
-### Getting started
-- [[Installation|installation]]
-- [Usage — quick start](https://github.com/l-gallucci/Efesto#usage)
+## Start here
 
-### HMM library
-- [[HMM library overview|hmm_library]] — categories, sources, model counts, registry format
-- [[Iron-sulfur assembly models|IronSulfur-Assembly]] — SUF / ISC biology and HMM details
-- [[Library curation log|hmm_library_curation]] — deduplication decisions, deprecation rationale
-- [[Biological rationale for new models|hmm_expansion_biological_rationale]] — all new categories
+1. [Install Efesto](installation.md).
+2. [Choose a workflow](workflows.md) for assemblies, existing proteins or a gene catalog.
+3. Read the [pipeline overview](pipeline.md) and [output reference](output_formats.md).
+4. Check [interpretation and limitations](interpretation.md) before making biological claims.
 
-### Pipeline logic
-- [[Operon rules|operon_rules]] — rule engine, JSON schema, TonB/ExbBD energizer-guard
-- [[Cluster confidence scoring|cluster_confidence_scoring]] — formula and all four components
-- [[AntiSMASH BGC integration|antismash_bgc]] — siderophore BGC boost
+## Available and in development
 
-### Outputs and integration
-- [[Output formats|output_formats]] — all files, all columns
-- [[Anvi'o integration|anvio_integration]] — functions import, gene-scores import
-- [[Visualisation|visualisation]] — R heatmap script
+{{catalog_summary}}
 
-### Development
-- [[Extending the HMM library|extending_the_library]] — adding models, curation workflow
-- [[Publication plan|publication_plan]] — manuscript roadmap
+Registered `active` and `experimental` profiles are enabled in ordinary runs;
+deprecated profiles are skipped. This runtime status is distinct from independent
+biological validation. See the [current catalog](hmm_library.md).
 
----
+MntX-specific, LutH/LanA and Vup classifiers remain under development and are
+**not enabled**. Their [status](development.md), [methods](hmm_methodology.md) and
+[validation results](validation.md) are documented separately from the user workflow.
 
-## Quick orientation
+## Quick start
 
-```
-Input: FAA/FNA + GFF  →  hmmsearch  →  genomic clustering  →  operon rules
-  →  confidence scoring  →  GFF3 + TSV + summary stats + optional Anvi'o TSVs
+```bash
+efesto --fna_dir genomes/ --fna_ext fasta --meta --out efesto_out --threads 4
 ```
 
-Key design decisions:
-- **One hit per ORF** (highest bitscore wins across all HMMs).
-- **Operon clustering** uses bp coordinates (GFF mode) or Prodigal ordinal index (fallback).
-- **Confidence score** is multiplicative: `hmm_weight × co_occ_score × uniop_pair_score × bgc_boost`.
-- **TonB-ExbBD** are energy-transducer proteins, not substrate-specific; a cluster of only
-  Ton-motor proteins is dropped by the `SIDERO_TRANSPORT` rule (see [[Operon rules|operon_rules]]).
-- **Zero-cutoff models** (MetHMMDB + 14 FeGenie siderophore models) use `--zero_cutoff_min_bitscore`
-  as a bitscore floor instead of a calibrated threshold.
+For proteins that already have gene coordinates:
 
----
+```bash
+efesto --faa_dir proteins/ --gff_dir gff/ --out efesto_out --threads 4
+```
 
-## Citing Efesto
+The default nucleotide gene caller is Pyrodigal-GV. The HMM library is located
+relative to the installed source checkout; use `--hmm_dir` for a custom library.
+See [installation](installation.md) and [workflows](workflows.md).
 
-If you use Efesto, cite all sources that apply to your run. See [README — Citations](https://github.com/l-gallucci/Efesto#citations).
+## Interpretation
+
+A family hit supports genetic potential. It does not demonstrate expression,
+metal specificity for every homolog, a complete pathway or a resistance phenotype.
+Cluster confidence is a heuristic evidence score, not a probability of correctness.
+
+[References and citations](references.md) ·
+[Source code](https://github.com/l-gallucci/Efesto) ·
+[MIT license](https://github.com/l-gallucci/Efesto/blob/main/LICENSE)
+
+Logo: [Elena Panariello](https://www.instagram.com/elena_panariello/).

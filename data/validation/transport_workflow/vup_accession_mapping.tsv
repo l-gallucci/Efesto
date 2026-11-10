@@ -1,0 +1,4 @@
+historical	historical_length	current	current_locus	current_length	matches	identity_longer_sequence	old_is_exact_subsequence	current_coded_by
+ZP_00160423.2	232	ABA23644.1	Ava_4039	250	232	0.928	False	complement(CP000117.1:5024290..5025042)
+ZP_00160424.1	293	ABA23645.1	Ava_4040	293	293	1.0	True	complement(CP000117.1:5025133..5026014)
+ZP_00351494.1	367	ABA23643.1	Ava_4038	384	367	0.9557291666666666	True	complement(CP000117.1:5023139..5024293)

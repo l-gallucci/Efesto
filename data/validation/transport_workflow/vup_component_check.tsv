@@ -1,0 +1,7 @@
+accession	length	profile_component	bitscore	Tup_GA	passes_Tup_GA
+ZP_00160423.2	232	permease	167.5	320	False
+ZP_00160424.1	293	binding	214.8	400	False
+ZP_00351494.1	367	ATPase	88.8	400	False
+ABA23643.1	384	ATPase	88.7	400	False
+ABA23644.1	250	permease	165.6	320	False
+ABA23645.1	293	binding	214.8	400	False

@@ -141,7 +141,7 @@ KOFAM_CAT = {'K00216': 'Siderophore-Synthesis',
  'K00824': 'Siderophore-Synthesis',
  'K01252': 'Siderophore-Synthesis',
  'K01582': 'Siderophore-Synthesis',
- 'K01780': 'Siderophore-Synthesis',
+ 'K01780': 'Metallophore-Synthesis',
  'K01851': 'Siderophore-Synthesis',
  'K01909': 'Siderophore-Synthesis',
  'K02012': 'IronAcquisition-Transport',
@@ -209,8 +209,8 @@ KOFAM_CAT = {'K00216': 'Siderophore-Synthesis',
  'K22151': 'Siderophore-Synthesis',
  'K22152': 'Siderophore-Synthesis',
  'K22153': 'Siderophore-Synthesis',
- 'K23120': 'Siderophore-Synthesis',
- 'K23122': 'Siderophore-Synthesis',
+ 'K23120': 'Metallophore-Synthesis',
+ 'K23122': 'Metallophore-Synthesis',
  'K23181': 'IronAcquisition-Transport',
  'K23185': 'Siderophore-Transport',
  'K23227': 'Siderophore-Transport',
@@ -522,6 +522,9 @@ def infer_category(stem, name, desc, source_hint="iron_acquisition", pre_defined
     return canonical_category(category), confidence
 
 
+METAL_EXPANSION_CATEGORIES = {'TIGR04071': 'Metallophore-Synthesis', 'TIGR04159': 'Metallophore-Synthesis', 'TIGR04160': 'Metallophore-Synthesis', 'NF053806': 'MetalHomeostasis-Lanthanides', 'PF41493': 'MetalHomeostasis-Lanthanides', 'TIGR03730': 'MetalAcquisition-MolybdenumTungsten', 'NF040839': 'MetalAcquisition-MolybdenumTungsten', 'NF040840': 'MetalAcquisition-MolybdenumTungsten', 'NF041772': 'MetalAcquisition-Tungsten', 'NF041773': 'MetalAcquisition-Tungsten', 'NF041774': 'MetalAcquisition-Tungsten'}
+
+
 def _infer_category(stem, name, desc, source_hint="iron_acquisition",
                    pre_defined=None):
     """
@@ -536,6 +539,11 @@ def _infer_category(stem, name, desc, source_hint="iron_acquisition",
     ko = re.match(r"^(K\d{5})", stem)
     if ko and ko.group(1) in KOFAM_CAT:
         return KOFAM_CAT[ko.group(1)], "high"
+
+    # Reviewed accession assignments must precede generic transporter heuristics.
+    accession = re.search(r"NF\d{6}|TIGR\d{5}|PF\d{5}", stem)
+    if accession and accession.group() in METAL_EXPANSION_CATEGORIES:
+        return METAL_EXPANSION_CATEGORIES[accession.group()], "high"
 
     # NCBI NF
     nf = re.match(r"^(NF\d+)", stem)
@@ -998,7 +1006,7 @@ def write_library(out_dir, accepted, dup_log, log_path=None):
             continue
 
         if m.get("cutoff"):
-            cutoff_lines.append(f"{m['stem']}\t{float(m['cutoff']):.1f}")
+            cutoff_lines.append(f"{m['stem']}\t{float(m['cutoff'])}")
         map_lines.append(f"{m['stem']}\t{m.get('gene_name', m['stem'])}")
 
         registry_rows.append({
