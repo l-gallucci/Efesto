@@ -1,0 +1,144 @@
+LOCUS       NZ_AAEA01000009         3101 bp    DNA     linear   BCT 04-OCT-2004
+DEFINITION  Anabaena variabilis ATCC 29413 Avar01_9, whole genome shotgun
+            sequence.
+ACCESSION   NZ_AAEA01000009 REGION: 17900..21000
+VERSION     NZ_AAEA01000009.1
+DBLINK      Project: 10642
+KEYWORDS    WGS; RefSeq.
+SOURCE      Anabaena variabilis ATCC 29413 (Anabaena flos-aquae UTEX 1444)
+  ORGANISM  Anabaena variabilis ATCC 29413
+            Bacteria; Cyanobacteria; Nostocales; Nostocaceae; Anabaena.
+REFERENCE   1  (bases 1 to 3101)
+  AUTHORS   NCBI Microbial Genomes Annotation Project.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (04-OCT-2004) National Center for Biotechnology
+            Information, NIH, Bethesda, MD 20894, USA
+COMMENT     URL -- http://www.jgi.doe.gov
+            Contact: Paul Richardson
+            microbes@cuba.jgi-psf.org.
+            Protein-coding genes were predicted using GeneMark and GeneMarkHMM
+            programs (kindly provided by M. Borodovsky). Functional annotation
+            is based on CDD (Conserved Domain Database) and COG (Clusters of
+            Orthologous Groups) assignments, it has not yet been subject to
+            manual review. DNA sequence and predicted proteins are available
+            for BLAST at http://www.ncbi.nlm.nih.gov/sutils/genom_table.cgi.
+FEATURES             Location/Qualifiers
+     source          1..3101
+                     /organism="Anabaena variabilis ATCC 29413"
+                     /mol_type="genomic DNA"
+                     /strain="ATCC 29413"
+                     /db_xref="ATCC:29413"
+                     /db_xref="taxon:240292"
+                     /synonym="Anabaena flos-aquae UTEX 1444"
+     gene            <1..24
+                     /locus_tag="Avar03003110"
+     CDS             <1..24
+                     /locus_tag="Avar03003110"
+                     /codon_start=1
+                     /product="COG1309: Transcriptional regulator"
+                     /protein_id="ZP_00160422.1"
+                     /db_xref="COG:COG1309"
+                     /translation="MTKLKTKRKSVYDRILQTASDLFYREGIRNVGIDRIIAESGVAK
+                     MSLYNHFKSKDALIEAWLRQEDEKWCRWLKTTVEQQTSEPAKQLLAIFDALREWFESP
+                     DFRGCAFINASVELANPDHPGYRVALEHQHAIYHYIKTLAQAAALTSPEQLARQLLLL
+                     VQGAIVVAMMEGSWSTASQAKKAALILIQTASTSTLRPSA"
+     gene            complement(59..1162)
+                     /locus_tag="Avar03003111"
+     CDS             complement(59..1162)
+                     /locus_tag="Avar03003111"
+                     /codon_start=1
+                     /product="COG3839: ABC-type sugar transport systems,
+                     ATPase components"
+                     /protein_id="ZP_00351494.1"
+                     /db_xref="COG:COG3839"
+                     /translation="MKSQENQEEINQYILNMRQVNVDSKSRKNLLSIDNFAVRPGELV
+                     AVVGPNGAGKSTLLRTINMLQSYCGEMQLFGQDARQVNQTALRRRSALVFQETLLLDD
+                     TVFNNVARVLQFRGVPKHQIKHRVYTALETFGCEHLAHRQARALSGGEGKRVCIACGL
+                     VADPELLLLDEPSAYLDVAIRPQIIEKIRQWAEARGAAVILVSHNFTDILNFADRAIA
+                     LFDGGIIQDDKLEMLIRRPANQQLARLVGMDNVIPCQIEPEHRGYLIKLANTMEFSYY
+                     GEINAPITACCLSGDAFHIDDTRSAIPQQPGSVSIQGRVERIVRGVGTYTIKVKVGEQ
+                     TLTARVPRNDVSENVYHHSLIKLAFHPRDAHFV"
+     gene            complement(1210..1908)
+                     /locus_tag="Avar03003112"
+     CDS             complement(1210..1908)
+                     /locus_tag="Avar03003112"
+                     /codon_start=1
+                     /product="COG4662: ABC-type tungstate transport system,
+                     periplasmic component"
+                     /protein_id="ZP_00160423.2"
+                     /db_xref="COG:COG4662"
+                     /translation="MDTIIDGANKALELLISGDRDVIEVMTMTLLVSGVATTISVLLG
+                     VPLGLWLALEDFIGKPVLNSVVNFGMGLPPVVVGLVVSLFLWRSGPLGDLDLMYTTTA
+                     MIIAQTIIAFPIVAGFSFAAILSINPKLRWQLLSMGATPWQAHWLLIKEARLGLIAAI
+                     IAGFGRVISEVGASMMVGGNIKGQTRVLTTAIVTEVEKGNFEVAMAIAYILLFITYSI
+                     VVSLTILQHDKKML"
+     gene            complement(2053..2934)
+                     /locus_tag="Avar03003113"
+     CDS             complement(2053..2934)
+                     /locus_tag="Avar03003113"
+                     /codon_start=1
+                     /product="COG2998: ABC-type tungstate transport system,
+                     permease component"
+                     /protein_id="ZP_00160424.1"
+                     /db_xref="COG:COG2998"
+                     /translation="MVQRRFVIAALASCLAVVTADIGNFLTPQANAQSPTNRNVIVAM
+                     TTSIEDSGLLDDLVPAFEKTTGYRLKKVAVGTGQALALAEKGEVDMLFVNSPKAERKV
+                     LQGGAVTNRRLVMHNDFVIVGPGNPDKAKIRGSKNVVQAFNAIAKNQALFVSRGDDSG
+                     TNKLEKDLWQQANINPAGSWYQQTGSGMARTLQVANQKLGYTLADRATYLFQKKNLDS
+                     LQVLVEGDRKLLNLYHVMQVNPQKFPRVNSAGAKAFIDFVLSPEGQRIIAAHGRKELG
+                     QPLFFADGGKSEKDYGF"
+ORIGIN      
+        1 tcaactctgc gcccctctgc gtaaaactcc gcgcccctcc gcgtttaaaa actcccactc
+       61 atacaaaatg agcatctctt ggatgaaaag ccaacttaat caaactgtga tggtaaacat
+      121 tctctgacac atcattacga ggaactctag ccgttaaagt ttgttctccc accttcacct
+      181 tgatggtata agttcccaca ccccgcacaa tccgttctac cctgccttga atagagactg
+      241 atcctggctg ttgcggaatt gcagaacgtg tatcgtcaat atggaacgca tcgccggata
+      301 gacaacaggc tgtgatgggt gcattgattt cgccataata agaaaactcc atagtgttag
+      361 ctaacttaat caaataacca cggtgttctg gttctatttg acaagggatg acgttatcca
+      421 taccgacaag tctggcgagt tgttggttag ctggacgacg gataagcatt tctaacttat
+      481 cgtcttggat aattccaccg tcaaataatg cgatcgcgcg atcggcaaaa ttcaagatat
+      541 ctgtaaagtt atggctgact aatatcaccg cagcccctct agcttccgcc cattggcgaa
+      601 ttttctcgat gatttgcgga cgaatcgcca catctaagta ggcggaaggc tcatctaata
+      661 acagcaattc tggatcagct accaacccac aggcaataca cacccgctta ccttcgccac
+      721 cagaaagggc gcgggcttgt cgatgtgcta aatgttcaca gccgaatgtt tccagggcag
+      781 tatataccct atgcttaatt tggtgcttgg gtacaccgcg aaactgtaag actctggcaa
+      841 cattattaaa tacagtgtca tccaacagta atgtttcttg aaacaccaat gcagaacgac
+      901 gacgcaaggc tgtttgattc acttgacgag catcctgtcc aaataattgc atttccccac
+      961 aataggattg caacatattg atggttctta acagggtgct tttacccgca ccattagggc
+     1021 caactacagc gactaattcc cctggacgca cagcgaaatt atcaattgat agaagatttt
+     1081 tgcggctttt actatcaacg ttcacctgac gcatattcag gatatattga ttgatttcct
+     1141 cctgattttc ctgtgatttc ataggagggg attctaaatt gataaacgac cttaacttat
+     1201 gcaatttact cataacatct tcttatcgtg ctgcaagata gtcagcgaca ccacaatgct
+     1261 gtaggtgatg aacaggagaa tgtacgcgat cgccatcgcc acctcaaagt tacctttttc
+     1321 tacttctgtg acaatagctg tagttaaaac tcgcgtctgt cctttgatat ttccccccac
+     1381 catcatcgat gcgccaactt ccgaaatgac gcgaccaaaa cccgcaataa tggcagctat
+     1441 caagcctaat cgtgcttcct taattaataa ccaatgagct tgccaaggtg tcgcccccat
+     1501 tgataataat tgccaacgta gtttcggatt aatactgagg atggcagcaa aactaaaacc
+     1561 cgcaactatc gggaaagcaa taatagtttg agcgataatc atggctgtgg ttgtgtacat
+     1621 taaatccaag tcacccaaag ggccagaacg ccacaaaaat agactcacca ccaagccaac
+     1681 caccacaggc ggtaatccca ttccgaagtt aacgacgctg ttcaatacag gtttcccgat
+     1741 gaaatcttct aaagccaacc acaaacccaa aggtacaccc aacaacacac taatagttgt
+     1801 cgccactcca gagactagca atgtcatcgt cattacctcg ataacatcgc gatcgccact
+     1861 aattaataac tctagagcct tattcgctcc atcaatgatt gtatccacga gtttcttatg
+     1921 aatcgaaaat aaacgtgatg tcctctctaa cctaaccccc aaccccttcc ctacaagggg
+     1981 aaggggagta gaaaataaag cctctctcct tgtaggggag aggtttggag aggggtttta
+     2041 agaataagta atctaaaacc cataatcctt ttcactctta cccccatcag caaaaaacaa
+     2101 tggctgtcca agttctttcc taccgtgagc agcaattatt ctctgtcctt caggagataa
+     2161 aacaaaatca ataaaagcct tagctcctgc actattaact ctggggaatt tctgcggatt
+     2221 tacttgcatt acatggtaca gatttaataa tttcctgtct ccttctacca acacctgcaa
+     2281 agaatcaaga ttctttttct gaaatagata ggtggctcta tctgctaatg tatatcctag
+     2341 tttttgatta gcaacctgta aagttctcgc cattcctgaa cctgtttgtt gataccaact
+     2401 accagcaggg ttaatattag cttgttgcca taagtctttt tctaatttat tcgtccctga
+     2461 atcatcacct cttgatacaa ataatgcttg atttttggca attgcattaa acgcttggac
+     2521 aacatttttg ctacctcgaa tcttggcttt gtcaggatta cccggcccta caattacaaa
+     2581 gtcattgtgc ataactaaac ggcggttagt cactgcacca ccttgtaaaa ctttgcgttc
+     2641 ggctttgggt gaattgacaa atagcatgtc aacttcgcct ttttctgcta aggctaatgc
+     2701 ttgtccagtt cctacggcaa cttttttgag tcgatagcct gttgttttct caaatgctgg
+     2761 aactaaatca tcaagtaatc cgctatcttc gatgctagtt gtcatggcga caatgacatt
+     2821 gcgatttgta ggagattgag cgttggcttg tggtgttaaa aaattaccaa tgtcagcagt
+     2881 tacaactgct aaacaagaag ctaaagctgc aattacgaat cttctttgaa ccatataccc
+     2941 tctcaggatt tacacagatt aaaccaaacg ataattttgg ttgattttta tagttggtaa
+     3001 attaaatatg ctttgaattt ttttataaaa atctgagtct ttttactaac tcagcaagta
+     3061 tggaacgcag atgtagacgc gcaagcggct tgccgcaggc t
+//
+

@@ -1,0 +1,1466 @@
+{
+  "protocol": "Efesto hybrid curation/grouped nested HMM calibration v1",
+  "objective": "MCC",
+  "score_type": "full_sequence",
+  "max_evalue": 1e-05,
+  "outer_folds": 3,
+  "inner_folds": 2,
+  "support": {
+    "marine_MntX": {
+      "development_records": 3,
+      "development_groups": 3,
+      "external_records": 0
+    }
+  },
+  "folds": [
+    {
+      "fold": 0,
+      "cutoffs": {
+        "marine_MntX": 229.4
+      },
+      "metrics": {
+        "marine_MntX": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "tn": 45,
+          "precision": 1.0,
+          "recall": 1.0,
+          "fpr": 0.0,
+          "f1": 1.0,
+          "mcc": 1.0,
+          "mcc_defined": true
+        }
+      },
+      "train_groups": [
+        "group_A0A378VP91",
+        "group_A0AIM7",
+        "group_A0KG66",
+        "group_A0LFC9",
+        "group_A0PZ39",
+        "group_A0RLB0",
+        "group_A1VAL2",
+        "group_A1WR47",
+        "group_A2SPZ1",
+        "group_A3CX65",
+        "group_A3DFC2",
+        "group_A4ITK4",
+        "group_A5CYC0",
+        "group_A5ESV8",
+        "group_A5FQH9",
+        "group_A5G348",
+        "group_A5IRZ2",
+        "group_A5WBC5",
+        "group_A6L3M0",
+        "group_A7I5W4",
+        "group_A7N307",
+        "group_A8GFM8",
+        "group_A8MEV0",
+        "group_A8ZZT5",
+        "group_A9KRD5",
+        "group_ACG76368.1",
+        "group_AEA80752.1",
+        "group_B0TI68",
+        "group_B0U3E5",
+        "group_B1I6K8",
+        "group_B1WQP0",
+        "group_B2T9B0",
+        "group_B2VCK3",
+        "group_B4EYC2",
+        "group_B7KGD8",
+        "group_B7V6V8",
+        "group_B8J1I9",
+        "group_C0QC85",
+        "group_C6BYL0",
+        "group_C6D9J9",
+        "group_I6YET7",
+        "group_O27840",
+        "group_P65544",
+        "group_Q03TH5",
+        "group_Q07V52",
+        "group_Q0B8F7",
+        "group_Q0VLM2",
+        "group_Q1H1K6",
+        "group_Q2FPH2",
+        "group_Q2NGB4",
+        "group_Q2NTC7",
+        "group_Q2RXQ8",
+        "group_Q30X24",
+        "group_Q38UX8",
+        "group_Q3A2U7",
+        "group_Q3A931",
+        "group_Q47ZC7",
+        "group_Q492G8",
+        "group_Q58004",
+        "group_Q5LG69",
+        "group_Q5WB61",
+        "group_Q65W61",
+        "group_Q6APV5",
+        "group_Q7N3L4",
+        "group_Q8DUY3",
+        "group_Q8EM65",
+        "group_Q8GH68",
+        "group_Q8P3J6",
+        "group_Q8R7S2",
+        "group_Q8RII2",
+        "group_Q8UEM1",
+        "group_Q98I99",
+        "group_Q9K6F9",
+        "group_Q9KRF4",
+        "group_Q9RTP8",
+        "group_Q9V2F1"
+      ],
+      "test_groups": [
+        "group_A1A3E3",
+        "group_A3SI43",
+        "group_A4J9B4",
+        "group_A4QE56",
+        "group_A5UJ57",
+        "group_A6L8E9",
+        "group_A6VQU4",
+        "group_A7IMS5",
+        "group_A7MNM2",
+        "group_A8ERN6",
+        "group_A9GV45",
+        "group_B2FNG8",
+        "group_B2KED0",
+        "group_B3W6P3",
+        "group_B5E9H5",
+        "group_B7K3S3",
+        "group_B8I1G8",
+        "group_Q03DK0",
+        "group_Q0AJY9",
+        "group_Q0AUC1",
+        "group_Q0BW85",
+        "group_Q1QZ83",
+        "group_Q21FI6",
+        "group_Q24Y92",
+        "group_Q2RFW3",
+        "group_Q46FW1",
+        "group_Q48262",
+        "group_Q553K4",
+        "group_Q8XSF6",
+        "group_Q8ZSB0"
+      ],
+      "raw_score_competition": {
+        "marine_MntX": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "tn": 45,
+          "precision": 1.0,
+          "recall": 1.0,
+          "fpr": 0.0,
+          "f1": 1.0,
+          "mcc": 1.0,
+          "mcc_defined": true
+        }
+      }
+    },
+    {
+      "fold": 1,
+      "cutoffs": {
+        "marine_MntX": 238.4
+      },
+      "metrics": {
+        "marine_MntX": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "tn": 44,
+          "precision": 1.0,
+          "recall": 1.0,
+          "fpr": 0.0,
+          "f1": 1.0,
+          "mcc": 1.0,
+          "mcc_defined": true
+        }
+      },
+      "train_groups": [
+        "group_A0A378VP91",
+        "group_A0AIM7",
+        "group_A0KG66",
+        "group_A0LFC9",
+        "group_A0RLB0",
+        "group_A1A3E3",
+        "group_A1VAL2",
+        "group_A1WR47",
+        "group_A2SPZ1",
+        "group_A3CX65",
+        "group_A3SI43",
+        "group_A4ITK4",
+        "group_A4J9B4",
+        "group_A4QE56",
+        "group_A5CYC0",
+        "group_A5FQH9",
+        "group_A5G348",
+        "group_A5IRZ2",
+        "group_A5UJ57",
+        "group_A5WBC5",
+        "group_A6L3M0",
+        "group_A6L8E9",
+        "group_A6VQU4",
+        "group_A7IMS5",
+        "group_A7MNM2",
+        "group_A8ERN6",
+        "group_A8ZZT5",
+        "group_A9GV45",
+        "group_B1I6K8",
+        "group_B1WQP0",
+        "group_B2FNG8",
+        "group_B2KED0",
+        "group_B3W6P3",
+        "group_B4EYC2",
+        "group_B5E9H5",
+        "group_B7K3S3",
+        "group_B7KGD8",
+        "group_B7V6V8",
+        "group_B8I1G8",
+        "group_B8J1I9",
+        "group_C0QC85",
+        "group_C6BYL0",
+        "group_Q03DK0",
+        "group_Q03TH5",
+        "group_Q07V52",
+        "group_Q0AJY9",
+        "group_Q0AUC1",
+        "group_Q0BW85",
+        "group_Q1QZ83",
+        "group_Q21FI6",
+        "group_Q24Y92",
+        "group_Q2NTC7",
+        "group_Q2RFW3",
+        "group_Q30X24",
+        "group_Q3A2U7",
+        "group_Q3A931",
+        "group_Q46FW1",
+        "group_Q48262",
+        "group_Q492G8",
+        "group_Q553K4",
+        "group_Q5LG69",
+        "group_Q6APV5",
+        "group_Q7N3L4",
+        "group_Q8P3J6",
+        "group_Q8XSF6",
+        "group_Q8ZSB0",
+        "group_Q98I99",
+        "group_Q9K6F9",
+        "group_Q9KRF4",
+        "group_Q9RTP8"
+      ],
+      "test_groups": [
+        "group_A0PZ39",
+        "group_A3DFC2",
+        "group_A5ESV8",
+        "group_A7I5W4",
+        "group_A7N307",
+        "group_A8GFM8",
+        "group_A8MEV0",
+        "group_A9KRD5",
+        "group_ACG76368.1",
+        "group_AEA80752.1",
+        "group_B0TI68",
+        "group_B0U3E5",
+        "group_B2T9B0",
+        "group_B2VCK3",
+        "group_C6D9J9",
+        "group_I6YET7",
+        "group_O27840",
+        "group_P65544",
+        "group_Q0B8F7",
+        "group_Q0VLM2",
+        "group_Q1H1K6",
+        "group_Q2FPH2",
+        "group_Q2NGB4",
+        "group_Q2RXQ8",
+        "group_Q38UX8",
+        "group_Q47ZC7",
+        "group_Q58004",
+        "group_Q5WB61",
+        "group_Q65W61",
+        "group_Q8DUY3",
+        "group_Q8EM65",
+        "group_Q8GH68",
+        "group_Q8R7S2",
+        "group_Q8RII2",
+        "group_Q8UEM1",
+        "group_Q9V2F1"
+      ],
+      "raw_score_competition": {
+        "marine_MntX": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "tn": 44,
+          "precision": 1.0,
+          "recall": 1.0,
+          "fpr": 0.0,
+          "f1": 1.0,
+          "mcc": 1.0,
+          "mcc_defined": true
+        }
+      }
+    },
+    {
+      "fold": 2,
+      "cutoffs": {
+        "marine_MntX": 253.0
+      },
+      "metrics": {
+        "marine_MntX": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "tn": 44,
+          "precision": 1.0,
+          "recall": 1.0,
+          "fpr": 0.0,
+          "f1": 1.0,
+          "mcc": 1.0,
+          "mcc_defined": true
+        }
+      },
+      "train_groups": [
+        "group_A0PZ39",
+        "group_A1A3E3",
+        "group_A3DFC2",
+        "group_A3SI43",
+        "group_A4J9B4",
+        "group_A4QE56",
+        "group_A5ESV8",
+        "group_A5UJ57",
+        "group_A6L8E9",
+        "group_A6VQU4",
+        "group_A7I5W4",
+        "group_A7IMS5",
+        "group_A7MNM2",
+        "group_A7N307",
+        "group_A8ERN6",
+        "group_A8GFM8",
+        "group_A8MEV0",
+        "group_A9GV45",
+        "group_A9KRD5",
+        "group_ACG76368.1",
+        "group_AEA80752.1",
+        "group_B0TI68",
+        "group_B0U3E5",
+        "group_B2FNG8",
+        "group_B2KED0",
+        "group_B2T9B0",
+        "group_B2VCK3",
+        "group_B3W6P3",
+        "group_B5E9H5",
+        "group_B7K3S3",
+        "group_B8I1G8",
+        "group_C6D9J9",
+        "group_I6YET7",
+        "group_O27840",
+        "group_P65544",
+        "group_Q03DK0",
+        "group_Q0AJY9",
+        "group_Q0AUC1",
+        "group_Q0B8F7",
+        "group_Q0BW85",
+        "group_Q0VLM2",
+        "group_Q1H1K6",
+        "group_Q1QZ83",
+        "group_Q21FI6",
+        "group_Q24Y92",
+        "group_Q2FPH2",
+        "group_Q2NGB4",
+        "group_Q2RFW3",
+        "group_Q2RXQ8",
+        "group_Q38UX8",
+        "group_Q46FW1",
+        "group_Q47ZC7",
+        "group_Q48262",
+        "group_Q553K4",
+        "group_Q58004",
+        "group_Q5WB61",
+        "group_Q65W61",
+        "group_Q8DUY3",
+        "group_Q8EM65",
+        "group_Q8GH68",
+        "group_Q8R7S2",
+        "group_Q8RII2",
+        "group_Q8UEM1",
+        "group_Q8XSF6",
+        "group_Q8ZSB0",
+        "group_Q9V2F1"
+      ],
+      "test_groups": [
+        "group_A0A378VP91",
+        "group_A0AIM7",
+        "group_A0KG66",
+        "group_A0LFC9",
+        "group_A0RLB0",
+        "group_A1VAL2",
+        "group_A1WR47",
+        "group_A2SPZ1",
+        "group_A3CX65",
+        "group_A4ITK4",
+        "group_A5CYC0",
+        "group_A5FQH9",
+        "group_A5G348",
+        "group_A5IRZ2",
+        "group_A5WBC5",
+        "group_A6L3M0",
+        "group_A8ZZT5",
+        "group_B1I6K8",
+        "group_B1WQP0",
+        "group_B4EYC2",
+        "group_B7KGD8",
+        "group_B7V6V8",
+        "group_B8J1I9",
+        "group_C0QC85",
+        "group_C6BYL0",
+        "group_Q03TH5",
+        "group_Q07V52",
+        "group_Q2NTC7",
+        "group_Q30X24",
+        "group_Q3A2U7",
+        "group_Q3A931",
+        "group_Q492G8",
+        "group_Q5LG69",
+        "group_Q6APV5",
+        "group_Q7N3L4",
+        "group_Q8P3J6",
+        "group_Q98I99",
+        "group_Q9K6F9",
+        "group_Q9KRF4",
+        "group_Q9RTP8"
+      ],
+      "raw_score_competition": {
+        "marine_MntX": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "tn": 44,
+          "precision": 1.0,
+          "recall": 1.0,
+          "fpr": 0.0,
+          "f1": 1.0,
+          "mcc": 1.0,
+          "mcc_defined": true
+        }
+      }
+    }
+  ],
+  "outer_pooled": {
+    "marine_MntX": {
+      "tp": 3,
+      "fp": 0,
+      "fn": 0,
+      "tn": 133,
+      "precision": 1.0,
+      "recall": 1.0,
+      "fpr": 0.0,
+      "f1": 1.0,
+      "mcc": 1.0,
+      "mcc_defined": true
+    }
+  },
+  "group_bootstrap": {
+    "marine_MntX": {
+      "mcc": {
+        "interval95": [
+          1.0,
+          1.0
+        ],
+        "valid_resamples": 476
+      },
+      "precision": {
+        "interval95": [
+          1.0,
+          1.0
+        ],
+        "valid_resamples": 476
+      },
+      "recall": {
+        "interval95": [
+          1.0,
+          1.0
+        ],
+        "valid_resamples": 476
+      },
+      "fpr": {
+        "interval95": [
+          0.0,
+          0.0
+        ],
+        "valid_resamples": 500
+      }
+    }
+  },
+  "outer_predictions": [
+    {
+      "id": "A3SI43",
+      "group": "group_A3SI43",
+      "truth": "marine_MntX",
+      "predicted": "marine_MntX",
+      "evidence": "experimental_anchor"
+    },
+    {
+      "id": "Q48262",
+      "group": "group_Q48262",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A1A3E3",
+      "group": "group_A1A3E3",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q553K4",
+      "group": "group_Q553K4",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A6L8E9",
+      "group": "group_A6L8E9",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "B2KED0",
+      "group": "group_B2KED0",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A9GV45",
+      "group": "group_A9GV45",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A1ABY9",
+      "group": "group_A7MNM2",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A1ADR7",
+      "group": "group_A7MNM2",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A4WBH9",
+      "group": "group_A7MNM2",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A4WD10",
+      "group": "group_A7MNM2",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A6TAZ2",
+      "group": "group_A7MNM2",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A6TC38",
+      "group": "group_A7MNM2",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A7MNM2",
+      "group": "group_A7MNM2",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A7MP48",
+      "group": "group_A7MNM2",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A8ADJ8",
+      "group": "group_A7MNM2",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A8AFN4",
+      "group": "group_A7MNM2",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A9MVT2",
+      "group": "group_A7MNM2",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "B4TQE4",
+      "group": "group_A7MNM2",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "P45468",
+      "group": "group_A7MNM2",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q0T2A8",
+      "group": "group_A7MNM2",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q0T515",
+      "group": "group_A7MNM2",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q2RFW3",
+      "group": "group_Q2RFW3",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q8ZSB0",
+      "group": "group_Q8ZSB0",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A8ERN6",
+      "group": "group_A8ERN6",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q8XSF6",
+      "group": "group_Q8XSF6",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "B5E9H5",
+      "group": "group_B5E9H5",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "C6E019",
+      "group": "group_B5E9H5",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A7IMS5",
+      "group": "group_A7IMS5",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A5UJ57",
+      "group": "group_A5UJ57",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q0AJY9",
+      "group": "group_Q0AJY9",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q03DK0",
+      "group": "group_Q03DK0",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "B8I1G8",
+      "group": "group_B8I1G8",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A4QE56",
+      "group": "group_A4QE56",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "B2FNG8",
+      "group": "group_B2FNG8",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q24Y92",
+      "group": "group_Q24Y92",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A6VQU4",
+      "group": "group_A6VQU4",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q21FI6",
+      "group": "group_Q21FI6",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q46FW1",
+      "group": "group_Q46FW1",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q0AUC1",
+      "group": "group_Q0AUC1",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "B7K3S3",
+      "group": "group_B7K3S3",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A4J9B4",
+      "group": "group_A4J9B4",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q1QZ83",
+      "group": "group_Q1QZ83",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q1R175",
+      "group": "group_Q1QZ83",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "B3W6P3",
+      "group": "group_B3W6P3",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q0BW85",
+      "group": "group_Q0BW85",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "AEA80752.1",
+      "group": "group_AEA80752.1",
+      "truth": "marine_MntX",
+      "predicted": "marine_MntX",
+      "evidence": "experimental_anchor"
+    },
+    {
+      "id": "Q2FPH2",
+      "group": "group_Q2FPH2",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A7N307",
+      "group": "group_A7N307",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q65W61",
+      "group": "group_Q65W61",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q8R7S2",
+      "group": "group_Q8R7S2",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q2NGB4",
+      "group": "group_Q2NGB4",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q8DUY3",
+      "group": "group_Q8DUY3",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q0B8F7",
+      "group": "group_Q0B8F7",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "B2VCK3",
+      "group": "group_B2VCK3",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "B2VDY7",
+      "group": "group_B2VCK3",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q9V2F1",
+      "group": "group_Q9V2F1",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "I6YET7",
+      "group": "group_I6YET7",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "O69443",
+      "group": "group_I6YET7",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q0VLM2",
+      "group": "group_Q0VLM2",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A3DFC2",
+      "group": "group_A3DFC2",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "P65544",
+      "group": "group_P65544",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q8GH68",
+      "group": "group_Q8GH68",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A0PZ39",
+      "group": "group_A0PZ39",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q97TN5",
+      "group": "group_A0PZ39",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q5WB61",
+      "group": "group_Q5WB61",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "B2T9B0",
+      "group": "group_B2T9B0",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q8EM65",
+      "group": "group_Q8EM65",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q38UX8",
+      "group": "group_Q38UX8",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A1JLC3",
+      "group": "group_C6D9J9",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A1JM85",
+      "group": "group_C6D9J9",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "C6D9J9",
+      "group": "group_C6D9J9",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "C6DG20",
+      "group": "group_C6D9J9",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A0RRL1",
+      "group": "group_ACG76368.1",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "ACG76368.1",
+      "group": "group_ACG76368.1",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "experimental_hard_negative"
+    },
+    {
+      "id": "O27840",
+      "group": "group_O27840",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q2RXQ8",
+      "group": "group_Q2RXQ8",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q58004",
+      "group": "group_Q58004",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "B0U3E5",
+      "group": "group_B0U3E5",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q87EJ9",
+      "group": "group_B0U3E5",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A7I5W4",
+      "group": "group_A7I5W4",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q1H1K6",
+      "group": "group_Q1H1K6",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q47ZC7",
+      "group": "group_Q47ZC7",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A5ESV8",
+      "group": "group_A5ESV8",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q89K67",
+      "group": "group_A5ESV8",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A8MEV0",
+      "group": "group_A8MEV0",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A8GFM8",
+      "group": "group_A8GFM8",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A9KRD5",
+      "group": "group_A9KRD5",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q8RII2",
+      "group": "group_Q8RII2",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q8UEM1",
+      "group": "group_Q8UEM1",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "B0TI68",
+      "group": "group_B0TI68",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q9KRF4",
+      "group": "group_Q9KRF4",
+      "truth": "marine_MntX",
+      "predicted": "marine_MntX",
+      "evidence": "experimental_anchor"
+    },
+    {
+      "id": "A0KG66",
+      "group": "group_A0KG66",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q2NTC7",
+      "group": "group_Q2NTC7",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "B1WQP0",
+      "group": "group_B1WQP0",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A5IRZ2",
+      "group": "group_A5IRZ2",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q2FUR9",
+      "group": "group_A5IRZ2",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q30X24",
+      "group": "group_Q30X24",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q98I99",
+      "group": "group_Q98I99",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q03TH5",
+      "group": "group_Q03TH5",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q9K6F9",
+      "group": "group_Q9K6F9",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q07V52",
+      "group": "group_Q07V52",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A0RLB0",
+      "group": "group_A0RLB0",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "P94395",
+      "group": "group_A0RLB0",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "P96593",
+      "group": "group_A0RLB0",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A2SPZ1",
+      "group": "group_A2SPZ1",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A5CYC0",
+      "group": "group_A5CYC0",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "C6BYL0",
+      "group": "group_C6BYL0",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q3A2U7",
+      "group": "group_Q3A2U7",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "B7KGD8",
+      "group": "group_B7KGD8",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A8ZZT5",
+      "group": "group_A8ZZT5",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A4ITK4",
+      "group": "group_A4ITK4",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q3A931",
+      "group": "group_Q3A931",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A0A378VP91",
+      "group": "group_A0A378VP91",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A1KRP4",
+      "group": "group_A0A378VP91",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "C0QC85",
+      "group": "group_C0QC85",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "B4EYC2",
+      "group": "group_B4EYC2",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q7N3L4",
+      "group": "group_Q7N3L4",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A6L3M0",
+      "group": "group_A6L3M0",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A0AIM7",
+      "group": "group_A0AIM7",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q5LG69",
+      "group": "group_Q5LG69",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A5FQH9",
+      "group": "group_A5FQH9",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A3CX65",
+      "group": "group_A3CX65",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A1WR47",
+      "group": "group_A1WR47",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q8P3J6",
+      "group": "group_Q8P3J6",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "experimental_different_family"
+    },
+    {
+      "id": "Q8P8R8",
+      "group": "group_Q8P3J6",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A5G348",
+      "group": "group_A5G348",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A1VAL2",
+      "group": "group_A1VAL2",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "B7V6V8",
+      "group": "group_B7V6V8",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "B1I6K8",
+      "group": "group_B1I6K8",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q9RTP8",
+      "group": "group_Q9RTP8",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A0LFC9",
+      "group": "group_A0LFC9",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q492G8",
+      "group": "group_Q492G8",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "Q6APV5",
+      "group": "group_Q6APV5",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "A5WBC5",
+      "group": "group_A5WBC5",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    },
+    {
+      "id": "B8J1I9",
+      "group": "group_B8J1I9",
+      "truth": "background",
+      "predicted": "background",
+      "evidence": "reviewed_different_transport_family"
+    }
+  ],
+  "final_cutoffs": {
+    "marine_MntX": 240.2
+  },
+  "external_test": null,
+  "external_predictions": [],
+  "unlabelled_predictions": [],
+  "promotion": {
+    "eligible": false,
+    "reasons": [
+      "sparse_independent_positive_groups",
+      "no_independent_external_positive_test"
+    ]
+  },
+  "inputs": {
+    "datasets/mnt_pilot/references.faa": "7a4f9a5763138808034c8fc00eed74c77b53882eefe448dadd4be53174d4420a",
+    "datasets/mnt_pilot/manifest.tsv": "0a8eb0eb4da5e05537f1a7425440749ec70674adce231b41a1cb7504110609fc"
+  }
+}

@@ -1,0 +1,15 @@
+/* The same Read the Docs layout as Echidna, using Efesto's blue palette. */
+.wy-side-nav-search, .wy-nav-top { background: #2d5684; }
+a { color: #285d91; }
+.wy-menu-vertical a { color: #dedede; }
+.wy-menu-vertical li.current a { color: #404040; }
+.wy-nav-content { max-width: 1100px; }
+.project-logo { display: block; width: 190px; max-width: 65%; height: auto; margin: 0 auto 1.3rem; }
+.rst-content table { width: 100%; }
+.rst-content pre { overflow-x: auto; }
+.rst-content .admonition { margin-top: 1rem; }
+/* Wrap explanatory tables and long model identifiers on narrow screens. */
+.rst-content table td,
+.rst-content table th { white-space: normal !important; overflow-wrap: anywhere; }
+.rst-content table td code { white-space: normal !important; overflow-wrap: anywhere; }
+.rst-content .wy-table-responsive { overflow-x: auto; }

@@ -233,12 +233,12 @@ def main():
 
     p = argparse.ArgumentParser(
         prog="efesto",
-        description="HMM-based annotation of iron cycling and metal resistance genes",
+        description="Profile HMM annotation of metal cycling, acquisition and resistance genes",
         formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     ig = p.add_mutually_exclusive_group(required=True)
-    ig.add_argument("--faa_dir", help="Directory of ORF .faa files (Prodigal output)")
+    ig.add_argument("--faa_dir", help="Directory of protein .faa files (matching GFF recommended)")
     ig.add_argument("--fna_dir",
-                    help="Directory of nucleotide assemblies — Prodigal run internally")
+                    help="Directory of nucleotide assemblies — Pyrodigal-based gene calling")
     p.add_argument("--faa_ext", default="faa")
     p.add_argument("--fna_ext", default="fna")
     p.add_argument("--meta", action="store_true",
@@ -251,10 +251,10 @@ def main():
                    help="Gene prediction tool (default: pyrodigal-gv). "
                         "pyrodigal-gv: bacterial + viral models, best for mixed "
                         "or viral datasets. "
-                        "pyrodigal: bacterial/archaeal models only, identical "
-                        "results to Prodigal v2.6.3. "
+                        "pyrodigal: bacterial/archaeal models with "
+                        "Prodigal-compatible output. "
                         "Both require the respective Python package to be installed.")
-    p.add_argument("--gff_dir", help="Prodigal GFF files for bp clustering")
+    p.add_argument("--gff_dir", help="Matching CDS GFF files for base-pair clustering")
     p.add_argument("--hmm_dir", default=None,
                    help="HMM library directory "
                         "(default: bundled hmm_library/ shipped with the package)")
@@ -262,7 +262,7 @@ def main():
                    metavar="TOKEN",
                    help="Select HMM categories to annotate. One or more tokens: "
                         "element-level (Fe, Cu, Zn, Mn, Ni, Co, Mo, As, Hg, "
-                        "Cd, Cr, Ag, Te, Mg, multimetal) or process-level "
+                        "Cd, Cr, Ag, Te, Mg, Ln, W, multimetal) or process-level "
                         "(Fe-metabolism, Fe-resistance, Fe-acquisition, "
                         "Fe-reduction, Fe-oxidation, Fe-storage, Fe-regulation, "
                         "Cu-resistance, Mn-resistance, Ni-resistance, "
@@ -282,7 +282,7 @@ def main():
     p.add_argument("--relaxed_threshold", type=int, default=10000,
                    help="Contig length (bp) threshold for relaxed operon rules")
     p.add_argument("--all_results", action="store_true",
-                   help="Report all HMM hits; skip all operon-context filters")
+                   help="Report best HMM hits per ORF without operon-context filtering")
     p.add_argument("--catalog_mode", action="store_true",
                    help="Gene catalog mode: treat each ORF as its own singleton "
                         "cluster instead of inferring neighbors from header/index "
@@ -302,11 +302,8 @@ def main():
                         "reported as 'low_confidence' in the long-format output. "
                         "Set to 0 to disable (not recommended). Default: 30")
     p.add_argument("--max_evalue", type=float, default=1e-5,
-                   help="Maximum E-value for accepting an hmmsearch hit. "
-                        "Recommended by MetHMMDB developers for uncalibrated models. "
-                        "For calibrated models the bitscore cutoff is the primary gate "
-                        "so this value mainly affects zero-cutoff (methmmdb) hits. "
-                        "Default: 1e-5")
+                   help="Maximum E-value for every accepted hmmsearch hit, "
+                        "in addition to the applicable full-sequence bitscore gate.")
     p.add_argument("--norm", action="store_true",
                    help="Normalise gene-count heatmap")
     p.add_argument("--bam", help="Single BAM file (requires samtools >=1.10)")
@@ -406,20 +403,19 @@ def main():
                    help="Write Efesto-anvio-functions.tsv, compatible with "
                         "anvi-import-functions. gene_callers_id column contains ORF "
                         "names — map to integer IDs from your Anvi'o contigs database "
-                        "before importing (see README).")
+                        "before importing (see docs/anvio_integration.md).")
     p.add_argument("--bakta_gff_dir",
                    help="Directory of Bakta GFF3 files. When provided together with "
-                        "--fna_dir, Efesto runs Prodigal internally for HMM "
-                        "search and UniOP, then maps Prodigal ORF names back to Bakta "
-                        "gene IDs via coordinate matching. The --anvio output will use "
-                        "Bakta IDs directly, compatible with Anvi'o databases built "
-                        "from Bakta external gene calls.")
+                        "--fna_dir, Efesto runs its Pyrodigal-based caller for HMM "
+                        "search and UniOP, then maps ORF names to Bakta locus tags "
+                        "via coordinate matching. Anvi'o import still requires mapping "
+                        "these labels to the target database's integer gene IDs.")
     p.add_argument("--bgc_dir",
                    help="Directory of antiSMASH GFF3 output files (one per genome, "
                         "named <genome_stem>.gff3 or <genome_stem>.gff). Enables "
                         "bgc_boost=1.2 in cluster_confidence for clusters overlapping "
-                        "siderophore-type BGC regions. Requires antiSMASH run with "
-                        "--output-format gff3.")
+                        "siderophore/metallophore BGC regions. Supply GFF3 "
+                        "containing region/cluster features with product/type labels.")
     # Private benchmark interface: ordinary users cannot pass this argument.
     if os.environ.get("EFESTO_DEV_MODE") == "1":
         from efesto._dev import add_dev_arguments

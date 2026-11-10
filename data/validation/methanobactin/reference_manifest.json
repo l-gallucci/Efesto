@@ -1,0 +1,5902 @@
+[
+  {
+    "accession": "Q15012",
+    "length": 233,
+    "organism": "Homo sapiens",
+    "source_file": "phase2_reference_mbn_reviewed.json",
+    "genes": [
+      {
+        "geneName": {
+          "value": "LAPTM4A"
+        },
+        "synonyms": [
+          {
+            "value": "KIAA0108"
+          },
+          {
+            "value": "LAPTM4"
+          },
+          {
+            "value": "MBNT"
+          },
+          {
+            "value": "MTRP"
+          }
+        ],
+        "orfNames": [
+          {
+            "value": "UNQ1846/PRO3574"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "1f549785cef7e14b5fdc145499e6c5c30acd9ce7a1168acc14baeea5a436405f"
+  },
+  {
+    "accession": "E3YBA4",
+    "length": 30,
+    "organism": "Methylosinus trichosporium (strain ATCC 35070 / NCIMB 11131 / ACM 3311 / UNIQEM 75 / OB3b)",
+    "source_file": "phase3_reference_mbn_OB3b.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000312",
+              "source": "EMBL",
+              "id": "EFS20503.1"
+            }
+          ],
+          "value": "mbnA"
+        },
+        "orfNames": [
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000312",
+                "source": "EMBL",
+                "id": "ATQ67692.1"
+              }
+            ],
+            "value": "CQW49_07165"
+          },
+          {
+            "value": "MettrDRAFT_4473"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "bd45173a145b1ad74f810d05b479f315459a0a2c98d1913c0efb202ac355bdea"
+  },
+  {
+    "accession": "A0A2D2D5M1",
+    "length": 276,
+    "organism": "Methylosinus trichosporium (strain ATCC 35070 / NCIMB 11131 / ACM 3311 / UNIQEM 75 / OB3b)",
+    "source_file": "phase3_reference_mbn_OB3b.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000312",
+              "source": "EMBL",
+              "id": "ATQ70273.1"
+            }
+          ],
+          "value": "mbnB"
+        },
+        "orfNames": [
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000312",
+                "source": "EMBL",
+                "id": "ATQ70273.1"
+              }
+            ],
+            "value": "CQW49_07160"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "21f0f9a00b6221ee9945a85d0d7bbfa4a04d1eb37211e01aff5d05278f9a47a9"
+  },
+  {
+    "accession": "A0A2D2CY73",
+    "length": 195,
+    "organism": "Methylosinus trichosporium (strain ATCC 35070 / NCIMB 11131 / ACM 3311 / UNIQEM 75 / OB3b)",
+    "source_file": "phase3_reference_mbn_OB3b.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000313",
+              "source": "EMBL",
+              "id": "ATQ67691.1"
+            }
+          ],
+          "value": "mbnC"
+        },
+        "orfNames": [
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000313",
+                "source": "EMBL",
+                "id": "ATQ67691.1"
+              }
+            ],
+            "value": "CQW49_07155"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "07538fcf4bdd5b79c9bbdc18cf359fa6a8228efb65b1f328d24d6f87c9465336"
+  },
+  {
+    "accession": "Q9KRF4",
+    "length": 415,
+    "organism": "Vibrio cholerae serotype O1 (strain ATCC 39315 / El Tor Inaba N16961)",
+    "source_file": "phase3_reference_mnt_loci.json",
+    "genes": [
+      {
+        "orderedLocusNames": [
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000313",
+                "source": "EMBL",
+                "id": "AAF94838.1"
+              }
+            ],
+            "value": "VC_1688"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "bb914f9f6233e190ec290cececd0657d72b8437645c210ae82e3626ea5d2ba71"
+  },
+  {
+    "accession": "Q2CE27",
+    "length": 381,
+    "organism": "Oceanicola granulosus (strain ATCC BAA-861 / DSM 15982 / KCTC 12143 / HTCC2516)",
+    "source_file": "phase3_reference_mnt_loci.json",
+    "genes": [
+      {
+        "orfNames": [
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000313",
+                "source": "EMBL",
+                "id": "EAR50911.1"
+              }
+            ],
+            "value": "OG2516_13601"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "76f4f46407854cdcf14d76a20504dc556e49be545179911ec7f22a12ea91c15a"
+  },
+  {
+    "accession": "D5BT12",
+    "length": 398,
+    "organism": "Puniceispirillum marinum (strain IMCC1322)",
+    "source_file": "phase3_reference_mnt_loci.json",
+    "genes": [
+      {
+        "orderedLocusNames": [
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000313",
+                "source": "EMBL",
+                "id": "ADE39409.1"
+              }
+            ],
+            "value": "SAR116_1166"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "2b6ae3fcbc68052e3e60ab214bc68bbd507bcf28881ad368ddbe6344816f7581"
+  },
+  {
+    "accession": "A3SI43",
+    "length": 387,
+    "organism": "Roseovarius nubinhibens (strain ATCC BAA-591 / DSM 15170 / ISM)",
+    "source_file": "phase3_reference_mnt_loci.json",
+    "genes": [
+      {
+        "orfNames": [
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000313",
+                "source": "EMBL",
+                "id": "EAP77024.1"
+              }
+            ],
+            "value": "ISM_02005"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "38820828f362ee2a3b066b1ef63a05a9fe101b5a493fe92c9c2523a27418ab7e"
+  },
+  {
+    "accession": "A0A086ASD2",
+    "length": 363,
+    "organism": "Chryseobacterium sp. JM1",
+    "source_file": "phase3_reference_MNIO.json",
+    "genes": [
+      {
+        "orfNames": [
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000313",
+                "source": "EMBL",
+                "id": "KFF19596.1"
+              }
+            ],
+            "value": "IW22_14845"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "b94f25df5131f3c51baef969572a69a3092bd7ed3e93442eac78bbe02cdbb359"
+  },
+  {
+    "accession": "P76264",
+    "length": 188,
+    "organism": "Escherichia coli (strain K12)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            },
+            {
+              "evidenceCode": "ECO:0000303",
+              "source": "PubMed",
+              "id": "21908668"
+            }
+          ],
+          "value": "mntP"
+        },
+        "synonyms": [
+          {
+            "value": "yebN"
+          }
+        ],
+        "orderedLocusNames": [
+          {
+            "value": "b1821"
+          },
+          {
+            "value": "JW5830"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "9ac4f5201009b82c18a50570dbc37a954d8f116aa6cbe8d619e91ba4d37661e7"
+  },
+  {
+    "accession": "Q553K4",
+    "length": 629,
+    "organism": "Dictyostelium discoideum",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000303",
+              "source": "PubMed",
+              "id": "22992462"
+            }
+          ],
+          "value": "nramp2"
+        },
+        "synonyms": [
+          {
+            "value": "mntH"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000303",
+                "source": "PubMed",
+                "id": "28680861"
+              }
+            ],
+            "value": "nrampB"
+          }
+        ],
+        "orfNames": [
+          {
+            "value": "DDB_G0275815"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "639345ee5567b4037ea3cead79f46e1c6a3514e490fcac7457b9b6d44b585498"
+  },
+  {
+    "accession": "P0A769",
+    "length": 412,
+    "organism": "Escherichia coli (strain K12)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_00221"
+            }
+          ],
+          "value": "mntH"
+        },
+        "synonyms": [
+          {
+            "value": "yfeP"
+          }
+        ],
+        "orderedLocusNames": [
+          {
+            "value": "b2392"
+          },
+          {
+            "value": "JW2388"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "ace32991f233ee003806cb436a843b48d2feb2cbd445d7251061bf0af232195d"
+  },
+  {
+    "accession": "P9WIZ5",
+    "length": 428,
+    "organism": "Mycobacterium tuberculosis (strain ATCC 25618 / H37Rv)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_00221"
+            },
+            {
+              "evidenceCode": "ECO:0000303",
+              "source": "PubMed",
+              "id": "26337157"
+            }
+          ],
+          "value": "mntH"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "Rv0924c"
+          }
+        ],
+        "orfNames": [
+          {
+            "value": "MTCY21C12.18c"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "112d46bb65aa66ecd7623aeb8013f89d3731105f0c748f081bd7476744b6f606"
+  },
+  {
+    "accession": "Q2FUR9",
+    "length": 338,
+    "organism": "Staphylococcus aureus (strain NCTC 8325 / PS 47)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000303",
+              "source": "PubMed",
+              "id": "20662775"
+            }
+          ],
+          "value": "nixA"
+        },
+        "orderedLocusNames": [
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000312",
+                "source": "EMBL",
+                "id": "ABD32018.1"
+              }
+            ],
+            "value": "SAOUHSC_03033"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "8a6099d78199d45917a2f73ea1401c9193967aad185b2380bc3076f9d1fd959c"
+  },
+  {
+    "accession": "P96593",
+    "length": 425,
+    "organism": "Bacillus subtilis (strain 168)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_00221"
+            },
+            {
+              "evidenceCode": "ECO:0000303",
+              "source": "PubMed",
+              "id": "10760146"
+            }
+          ],
+          "value": "mntH"
+        },
+        "synonyms": [
+          {
+            "value": "ydaR"
+          }
+        ],
+        "orderedLocusNames": [
+          {
+            "value": "BSU04360"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "f66bd459f3e2f72302c01b67dd80081a12cbfd95cea35b53b01a4d4ad3a9f643"
+  },
+  {
+    "accession": "Q9V2F1",
+    "length": 257,
+    "organism": "Pyrococcus abyssi (strain GE5 / Orsay)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "value": "mntP"
+        },
+        "synonyms": [
+          {
+            "value": "mtaP"
+          }
+        ],
+        "orderedLocusNames": [
+          {
+            "value": "PYRAB01230"
+          }
+        ],
+        "orfNames": [
+          {
+            "value": "PAB2264"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "3d0ac077b46d161f066e1b96b721bae5cdd4218d7c8414da18b9cf483324304e"
+  },
+  {
+    "accession": "Q9RTP8",
+    "length": 436,
+    "organism": "Deinococcus radiodurans (strain ATCC 13939 / DSM 20539 / JCM 16871 / CCUG 27074 / LMG 4051 / NBRC 15346 / NCIMB 9279 / VKM B-1422 / R1)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_00221"
+            }
+          ],
+          "value": "mntH"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "DR_1709"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "5febd52911015213bb1152471e0b300984aa9b5fa2c7878057dce98e66e4b8f4"
+  },
+  {
+    "accession": "Q8Y773",
+    "length": 448,
+    "organism": "Listeria monocytogenes serovar 1/2a (strain ATCC BAA-679 / EGD-e)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_00221"
+            }
+          ],
+          "value": "mntH"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "lmo1424"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "e29663a1460e03f28377d4d718da8643668fd9a85ff9c17c2546e03ea2210c2a"
+  },
+  {
+    "accession": "Q9RPF4",
+    "length": 413,
+    "organism": "Salmonella typhimurium (strain LT2 / SGSC1412 / ATCC 700720)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_00221"
+            }
+          ],
+          "value": "mntH"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "STM2408"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "877292ecf53b76d91e951946b05f07f9192a3402ada45faa191292a7f368a11d"
+  },
+  {
+    "accession": "Q48262",
+    "length": 331,
+    "organism": "Helicobacter pylori (strain ATCC 700392 / 26695)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "value": "nixA"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "HP_1077"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "fb14e836554196d1915c95ff5d67bb412bf0f4d2ae5102657e4d6296ff7b8783"
+  },
+  {
+    "accession": "Q9ZM74",
+    "length": 331,
+    "organism": "Helicobacter pylori (strain J99 / ATCC 700824)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "value": "nixA"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "jhp_0348"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "12cb1f78a360ba1a31fa5178fddadc5885278cab357f937f54dd638a13d54050"
+  },
+  {
+    "accession": "P39154",
+    "length": 185,
+    "organism": "Bacillus subtilis (strain 168)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "synonyms": [
+          {
+            "value": "ywlD"
+          }
+        ],
+        "orderedLocusNames": [
+          {
+            "value": "BSU36940"
+          }
+        ],
+        "orfNames": [
+          {
+            "value": "ipc-30d"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "5e477e2b78cd2ac054c4443760285b0455c6291e83096eb15c4b885fb334719b"
+  },
+  {
+    "accession": "A0PZ39",
+    "length": 185,
+    "organism": "Clostridium novyi (strain NT)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "NT01CX_1560"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "dbe0709f22e1c241740ad08369794dae668a315742cefd3043d4663c754a04f6"
+  },
+  {
+    "accession": "A1JM85",
+    "length": 189,
+    "organism": "Yersinia enterocolitica serotype O:8 / biotype 1B (strain NCTC 13174 / 8081)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "YE1772"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "41b44521b5bde2f91d5f6291d8a8c8de0f7ff22be05424ff0adaba3218dff35c"
+  },
+  {
+    "accession": "A5CYC0",
+    "length": 180,
+    "organism": "Pelotomaculum thermopropionicum (strain DSM 13744 / JCM 10971 / SI)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "PTH_2827"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "6c15a73135d6ed3c93456bc69bc6697071fc244467b7bdd07a695561112c2af5"
+  },
+  {
+    "accession": "A6VQU4",
+    "length": 187,
+    "organism": "Actinobacillus succinogenes (strain ATCC 55618 / DSM 22257 / CCUG 43843 / 130Z)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "Asuc_1994"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "4667358456f783fd922d553a3a8d87e8e2058b8787dfb747052f81fc6ffa1133"
+  },
+  {
+    "accession": "A9MVT2",
+    "length": 188,
+    "organism": "Salmonella paratyphi B (strain ATCC BAA-1250 / SPB7)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "synonyms": [
+          {
+            "value": "yebN"
+          }
+        ],
+        "orderedLocusNames": [
+          {
+            "value": "SPAB_01380"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "4c46f0c5bd7cfa87f3c83f6e4eb36711b9fb0d1c8895c335bdcd1ec22eed81df"
+  },
+  {
+    "accession": "A9VSC2",
+    "length": 182,
+    "organism": "Bacillus mycoides (strain KBAB4)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "BcerKBAB4_5122"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "2e874a34a8ea28fbc93912272f49b76ddd07d9ff7b63cce89884a1d40ddd486d"
+  },
+  {
+    "accession": "B1I6K8",
+    "length": 180,
+    "organism": "Desulforudis audaxviator (strain MP104C)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "Daud_2150"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "d811b1498ca1628614722dac438cbb852fa22b51ebed040ec9fd3f37b4fedb45"
+  },
+  {
+    "accession": "B1JPQ2",
+    "length": 189,
+    "organism": "Yersinia pseudotuberculosis serotype O:3 (strain YPIII)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "YPK_2468"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "ecc3da2f8d2d670d11ec5a02bb7417c65cde2572cdbc1f16c86cdec526caf55b"
+  },
+  {
+    "accession": "B2I611",
+    "length": 194,
+    "organism": "Xylella fastidiosa (strain M23)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "XfasM23_1382"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "1d48368d4a78420178ca758ee9868b088eb0896b973f2a031911141400cc5c58"
+  },
+  {
+    "accession": "B2K0F1",
+    "length": 189,
+    "organism": "Yersinia pseudotuberculosis serotype IB (strain PB1/+)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "YPTS_1753"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "ecc3da2f8d2d670d11ec5a02bb7417c65cde2572cdbc1f16c86cdec526caf55b"
+  },
+  {
+    "accession": "B2KED0",
+    "length": 185,
+    "organism": "Elusimicrobium minutum (strain Pei191)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "Emin_1326"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "6662690b83c6171f6cb78c6efb013e808e3fd6980947a6a5826abdf666a326a3"
+  },
+  {
+    "accession": "B2U461",
+    "length": 188,
+    "organism": "Shigella boydii serotype 18 (strain CDC 3083-94 / BS512)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "synonyms": [
+          {
+            "value": "yebN"
+          }
+        ],
+        "orderedLocusNames": [
+          {
+            "value": "SbBS512_E2088"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "9ac4f5201009b82c18a50570dbc37a954d8f116aa6cbe8d619e91ba4d37661e7"
+  },
+  {
+    "accession": "B5E9H5",
+    "length": 188,
+    "organism": "Citrifermentans bemidjiense (strain ATCC BAA-1014 / DSM 16622 / JCM 12645 / Bem)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "Gbem_1700"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "365e996402d0787c54e3e8c5bb4081c720895276bb86b836931168d80a4bf05d"
+  },
+  {
+    "accession": "B7JGQ0",
+    "length": 182,
+    "organism": "Bacillus cereus (strain AH820)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "BCAH820_5416"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "2e1fd35d0e0b16a633cdc805768344c296c908296fb66397a5296b7d685b3be7"
+  },
+  {
+    "accession": "B7KGD8",
+    "length": 189,
+    "organism": "Gloeothece citriformis (strain PCC 7424)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "PCC7424_2187"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "5ae14c5dc88df39d5e8a8770630b846e97032282a32823f053d0e8569394136b"
+  },
+  {
+    "accession": "B7NSA0",
+    "length": 188,
+    "organism": "Escherichia coli O7:K1 (strain IAI39 / ExPEC)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "synonyms": [
+          {
+            "value": "yebN"
+          }
+        ],
+        "orderedLocusNames": [
+          {
+            "value": "ECIAI39_1231"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "5ac6359b7ae9b0ceb3173d5078703f358802e5555ef1a73147d0b4ced442b13f"
+  },
+  {
+    "accession": "B7USJ7",
+    "length": 188,
+    "organism": "Escherichia coli O127:H6 (strain E2348/69 / EPEC)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "synonyms": [
+          {
+            "value": "yebN"
+          }
+        ],
+        "orderedLocusNames": [
+          {
+            "value": "E2348C_1945"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "8d7fd85e8b3bfdf414f47496596b14d4c08c55c80dc4652e47bbe694d395b92f"
+  },
+  {
+    "accession": "B7V6V8",
+    "length": 189,
+    "organism": "Pseudomonas aeruginosa (strain LESB58)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "PLES_21541"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "05e84245dee121ccdc4e6f1bd4eb8d24cd2041bee09021f7bdc88a28c1a72c33"
+  },
+  {
+    "accession": "C6DG20",
+    "length": 190,
+    "organism": "Pectobacterium carotovorum subsp. carotovorum (strain PC1)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "PC1_1922"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "4887ec5ff5dd4502eeedd7723f8e836536a4a1fa60cb5746b939fcdd45d0991e"
+  },
+  {
+    "accession": "O27840",
+    "length": 184,
+    "organism": "Methanothermobacter thermautotrophicus (strain ATCC 29096 / DSM 1053 / JCM 10044 / NBRC 100330 / Delta H)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "MTH_1812"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "a8b777a8baf85a381826542aff98797d9bcb7f89d550ab743f8d212636d39582"
+  },
+  {
+    "accession": "Q0AJY9",
+    "length": 181,
+    "organism": "Nitrosomonas eutropha (strain DSM 101675 / C91 / Nm57)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "Neut_0042"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "9f6fe417c186272495ca87c3add8a2fba3c2335c90f80a8c9c0bce53f1a3959a"
+  },
+  {
+    "accession": "Q0TH12",
+    "length": 188,
+    "organism": "Escherichia coli O6:K15:H31 (strain 536 / UPEC)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "synonyms": [
+          {
+            "value": "yebN"
+          }
+        ],
+        "orderedLocusNames": [
+          {
+            "value": "ECP_1764"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "9ac4f5201009b82c18a50570dbc37a954d8f116aa6cbe8d619e91ba4d37661e7"
+  },
+  {
+    "accession": "Q0VLM2",
+    "length": 186,
+    "organism": "Alcanivorax borkumensis (strain ATCC 700651 / DSM 11573 / NCIMB 13689 / SK2)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "ABO_2478"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "2ba9cd1d96c5d15bfdc326033d91982241d73a82b8521a1685202967254263da"
+  },
+  {
+    "accession": "Q1R175",
+    "length": 196,
+    "organism": "Chromohalobacter israelensis (strain ATCC BAA-138 / DSM 3043 / CIP 106854 / NCIMB 13768 / 1H11)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "Csal_0169"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "d8e45905c32adc838b9cf2c9109575058128b633be5ff1ee27f314ec0aec197d"
+  },
+  {
+    "accession": "Q2NTC7",
+    "length": 195,
+    "organism": "Sodalis glossinidius (strain morsitans)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "SG1323"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "cb702d285eaaff2b1f6dc3b33a28761488c6913809affa5aa240bf3f8a72d66f"
+  },
+  {
+    "accession": "Q3Z2G2",
+    "length": 188,
+    "organism": "Shigella sonnei (strain Ss046)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "synonyms": [
+          {
+            "value": "yebN"
+          }
+        ],
+        "orderedLocusNames": [
+          {
+            "value": "SSON_1339"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "e72b960b97b035ee4eca7fcf5339fccbe55667d2c7670196e5c3892d39c7c807"
+  },
+  {
+    "accession": "Q5F600",
+    "length": 188,
+    "organism": "Neisseria gonorrhoeae (strain ATCC 700825 / FA 1090)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "NGO_1768"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "262fa44adb76e85d9c8286c2792db0e39fbd97b37520a9403e431fb05a2c68f1"
+  },
+  {
+    "accession": "Q5H629",
+    "length": 194,
+    "organism": "Xanthomonas oryzae pv. oryzae (strain KACC10331 / KXO85)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "XOO0337"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "5ff5aa160a40240f5264066691ba2268d0db7c4748ec6bb5c6cf9bf981b87363"
+  },
+  {
+    "accession": "Q5KUH7",
+    "length": 183,
+    "organism": "Geobacillus kaustophilus (strain HTA426)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "GK3374"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "62c62621038a3f446debae1488c463dea3fca3c851b6a5d49049e2129de3c79b"
+  },
+  {
+    "accession": "Q5PI77",
+    "length": 188,
+    "organism": "Salmonella paratyphi A (strain ATCC 9150 / SARB42)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "synonyms": [
+          {
+            "value": "yebN"
+          }
+        ],
+        "orderedLocusNames": [
+          {
+            "value": "SPA1039"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "4c46f0c5bd7cfa87f3c83f6e4eb36711b9fb0d1c8895c335bdcd1ec22eed81df"
+  },
+  {
+    "accession": "Q65DW1",
+    "length": 186,
+    "organism": "Bacillus licheniformis (strain ATCC 14580 / DSM 13 / JCM 2505 / CCUG 7422 / NBRC 12200 / NCIMB 9375 / NCTC 10341 / NRRL NRS-1264 / Gibson 46)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "BLi03939"
+          },
+          {
+            "value": "BL03987"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "e5ab681647ed41fc52a5c65c9cd5380447d3014fd902d4220993d8fca6c6bc29"
+  },
+  {
+    "accession": "Q81JX6",
+    "length": 182,
+    "organism": "Bacillus anthracis",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "BA_5567"
+          },
+          {
+            "value": "GBAA_5567"
+          },
+          {
+            "value": "BAS5173"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "2e1fd35d0e0b16a633cdc805768344c296c908296fb66397a5296b7d685b3be7"
+  },
+  {
+    "accession": "Q8G782",
+    "length": 194,
+    "organism": "Bifidobacterium longum (strain NCC 2705)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "BL0390"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "2ae4ed5733c1968ddfe896eb8b22b54e609c2a47d7c920ea48c4ddfe2a8b23f8"
+  },
+  {
+    "accession": "Q8NQG6",
+    "length": 190,
+    "organism": "Corynebacterium glutamicum (strain ATCC 13032 / DSM 20300 / JCM 1318 / BCRC 11384 / CCUG 27702 / LMG 3730 / NBRC 12168 / NCIMB 10025 / NRRL B-2784 / 534)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "Cgl1469"
+          },
+          {
+            "value": "cg1660"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "e01ba099bad0ab24ffbc9555c8b95be7d8d35265a6b05a00cedd6ebf0fa099b1"
+  },
+  {
+    "accession": "Q8P3J6",
+    "length": 193,
+    "organism": "Xanthomonas campestris pv. campestris (strain ATCC 33913 / DSM 3586 / NCPPB 528 / LMG 568 / P 25)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "XCC4075"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "0182ad24522183f14125a56f6e5f0d8cff58ac6ae8e3ef3bb47d1762a80dea1a"
+  },
+  {
+    "accession": "Q8PEZ6",
+    "length": 194,
+    "organism": "Xanthomonas citri pv. citri (strain 306)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "XAC4192"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "c693687b9cea7210c60d967e46ae470b656852037d50c18edfaf5585687a416e"
+  },
+  {
+    "accession": "Q8PZ51",
+    "length": 186,
+    "organism": "Methanosarcina mazei (strain ATCC BAA-159 / DSM 3647 / Goe1 / Go1 / JCM 11833 / OCM 88)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "MM_0643"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "6e03c70b83ae6ccbbfda617f827a898368bafe066b64d9536c98cfd4389dbd1f"
+  },
+  {
+    "accession": "Q9JX59",
+    "length": 188,
+    "organism": "Neisseria meningitidis serogroup A / serotype 4A (strain DSM 15465 / Z2491)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "NMA0052"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "1ccbe0bf18a12af34fe263bd844f31206a44035992cedc9091e00512fb2f43f3"
+  },
+  {
+    "accession": "Q9PB87",
+    "length": 194,
+    "organism": "Xylella fastidiosa (strain 9a5c)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "XF_2257"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "02dfd84ff97922e2ec8efe9baa42d2b0892138e4d927c569614b86f0310fff8c"
+  },
+  {
+    "accession": "A1A3E3",
+    "length": 188,
+    "organism": "Bifidobacterium adolescentis (strain ATCC 15703 / DSM 20083 / NCTC 11814 / E194a)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "BAD_1445"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "06fc21676304f75605d9fdcad21551e4af068f8b8bcfe41c3ecdf5a2708ca621"
+  },
+  {
+    "accession": "A3DFC2",
+    "length": 198,
+    "organism": "Acetivibrio thermocellus (strain ATCC 27405 / DSM 1237 / JCM 9322 / NBRC 103400 / NCIMB 10682 / NRRL B-4536 / VPI 7372)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "Cthe_1420"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "0d46d41ea97d4371cb4b914e9927ede0d8613ab47c124afc81875fdb559e33c9"
+  },
+  {
+    "accession": "A5ESV8",
+    "length": 185,
+    "organism": "Bradyrhizobium sp. (strain BTAi1 / ATCC BAA-1182)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "BBta_7389"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "be2908b3e6f7fbcf9588f318463260a43e4c17f42502e248906498c95b954ee8"
+  },
+  {
+    "accession": "A5UJ57",
+    "length": 184,
+    "organism": "Methanobrevibacter smithii (strain ATCC 35061 / DSM 861 / OCM 144 / PS)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "Msm_0030"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "6bfad9780e0dfb3725e7050da8c9c7c323746d2958b893e78ca99d6ec0f051f0"
+  },
+  {
+    "accession": "A6L3M0",
+    "length": 190,
+    "organism": "Phocaeicola vulgatus (strain ATCC 8482 / DSM 1447 / JCM 5826 / CCUG 4940 / NBRC 14291 / NCTC 11154)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "BVU_2631"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "f61fb9f0f7ab6b6d805283c4caad03979a2e092dc0fad85798644fdc0d33a893"
+  },
+  {
+    "accession": "A7I3T2",
+    "length": 182,
+    "organism": "Campylobacter hominis (strain ATCC BAA-381 / DSM 21671 / CCUG 45161 / LMG 19568 / NCTC 13146 / CH001A)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "CHAB381_1654"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "e50209657958471e4da0a4802b62efe8903e358bcac6b79084eb8f6f8d02dcce"
+  },
+  {
+    "accession": "A7I5W4",
+    "length": 185,
+    "organism": "Methanoregula boonei (strain DSM 21154 / JCM 14090 / 6A8)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "Mboo_0607"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "97300a13d275efd20f9e0a3ec1e10467d90cdc3520861d980d052de15aeca321"
+  },
+  {
+    "accession": "A7ZB16",
+    "length": 185,
+    "organism": "Campylobacter concisus (strain 13826)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "Ccon26_00530"
+          }
+        ],
+        "orfNames": [
+          {
+            "value": "CCC13826_1800"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "dbf329fe950b9bd1b924c1479212bde0d2671b33bb88146c5312f9b1aeb4143f"
+  },
+  {
+    "accession": "A8GFM8",
+    "length": 189,
+    "organism": "Serratia proteamaculans (strain 568)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "Spro_2817"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "8ce2baac54d9de361be92be017d4ad2734656526da4cf7e7de77d947aaf393e8"
+  },
+  {
+    "accession": "A9KRD5",
+    "length": 190,
+    "organism": "Lachnoclostridium phytofermentans (strain ATCC 700394 / DSM 18823 / ISDg)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "Cphy_1637"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "b2300c24dbcf680920a0dc9ddcc11e6515e266016bb0e92e5903855045863904"
+  },
+  {
+    "accession": "B3DU18",
+    "length": 194,
+    "organism": "Bifidobacterium longum (strain DJO10A)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "BLD_1192"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "2ae4ed5733c1968ddfe896eb8b22b54e609c2a47d7c920ea48c4ddfe2a8b23f8"
+  },
+  {
+    "accession": "B7MBM7",
+    "length": 188,
+    "organism": "Escherichia coli O45:K1 (strain S88 / ExPEC)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "synonyms": [
+          {
+            "value": "yebN"
+          }
+        ],
+        "orderedLocusNames": [
+          {
+            "value": "ECS88_1873"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "9ac4f5201009b82c18a50570dbc37a954d8f116aa6cbe8d619e91ba4d37661e7"
+  },
+  {
+    "accession": "B7MVV0",
+    "length": 188,
+    "organism": "Escherichia coli O81 (strain ED1a)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "synonyms": [
+          {
+            "value": "yebN"
+          }
+        ],
+        "orderedLocusNames": [
+          {
+            "value": "ECED1_2024"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "9ac4f5201009b82c18a50570dbc37a954d8f116aa6cbe8d619e91ba4d37661e7"
+  },
+  {
+    "accession": "B9IRV7",
+    "length": 182,
+    "organism": "Bacillus cereus (strain Q1)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "BCQ_5165"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "0dff08a56487ae94b99601faa0373beb050abc5242316a44e3271cdff1eed898"
+  },
+  {
+    "accession": "C4ZZH7",
+    "length": 188,
+    "organism": "Escherichia coli (strain K12 / MC4100 / BW2952)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "synonyms": [
+          {
+            "value": "yebN"
+          }
+        ],
+        "orderedLocusNames": [
+          {
+            "value": "BWG_1634"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "9ac4f5201009b82c18a50570dbc37a954d8f116aa6cbe8d619e91ba4d37661e7"
+  },
+  {
+    "accession": "C6BYL0",
+    "length": 185,
+    "organism": "Maridesulfovibrio salexigens (strain ATCC 14822 / DSM 2638 / NCIMB 8403 / VKM B-1763)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "Desal_2561"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "6255c63c8eebd08b6d687470d30ecbe19a0d755efcf143006f0177fa08bd07cd"
+  },
+  {
+    "accession": "Q0T515",
+    "length": 188,
+    "organism": "Shigella flexneri serotype 5b (strain 8401)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "synonyms": [
+          {
+            "value": "yebN"
+          }
+        ],
+        "orderedLocusNames": [
+          {
+            "value": "SFV_1407"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "7336e50adf9fde403bde9fdebfb916ff98fcc15ac70e5fcebc5dce0b1f061795"
+  },
+  {
+    "accession": "Q21C99",
+    "length": 184,
+    "organism": "Rhodopseudomonas palustris (strain BisB18)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "RPC_0412"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "4cef0ec5b779ab45fe384679c5ba2c5535998ebc93118b68fac5055ce11521c5"
+  },
+  {
+    "accession": "Q2FPH2",
+    "length": 192,
+    "organism": "Methanospirillum hungatei JF-1 (strain ATCC 27890 / DSM 864 / NBRC 100397 / JF-1)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "Mhun_0168"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "5828d42aa649f412de88965ebab6041be7bb9bdda6d53421bcc7bc8392d169ae"
+  },
+  {
+    "accession": "Q32F38",
+    "length": 188,
+    "organism": "Shigella dysenteriae serotype 1 (strain Sd197)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "synonyms": [
+          {
+            "value": "yebN"
+          }
+        ],
+        "orderedLocusNames": [
+          {
+            "value": "SDY_1967"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "9ac4f5201009b82c18a50570dbc37a954d8f116aa6cbe8d619e91ba4d37661e7"
+  },
+  {
+    "accession": "Q46FW1",
+    "length": 186,
+    "organism": "Methanosarcina barkeri (strain Fusaro / DSM 804)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "Mbar_A0247"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "9b0cf6dfdfbb3e809e0a7ba5565be86db827a7039118b052c3b350061a440797"
+  },
+  {
+    "accession": "Q47ZC7",
+    "length": 181,
+    "organism": "Colwellia psychrerythraea (strain 34H / ATCC BAA-681)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "CPS_3146"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "6e66075e707f2587e199c37986d9a739b543fadaa180a53993812e20e2519af1"
+  },
+  {
+    "accession": "Q4ZVP9",
+    "length": 190,
+    "organism": "Pseudomonas syringae pv. syringae (strain B728a)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "Psyr_1725"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "04ca92d141b03409ed948245f3e3f775951f2b0ab3ddab2e1d5c0649850370b7"
+  },
+  {
+    "accession": "Q5HWZ9",
+    "length": 187,
+    "organism": "Campylobacter jejuni (strain RM1221)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "CJE0162"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "b83bdbdd7f51001589c8e71b94492ccff417a4b7b6253ec9864039cf793a921c"
+  },
+  {
+    "accession": "Q64X43",
+    "length": 194,
+    "organism": "Bacteroides fragilis (strain YCH46)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "BF1183"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "57a81077d523dd26bfba9761b75c70436c3acd00e860f10aed54970ba5688ad7"
+  },
+  {
+    "accession": "Q6HAV9",
+    "length": 182,
+    "organism": "Bacillus thuringiensis subsp. konkukian (strain 97-27)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "BT9727_5008"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "e7846217141d2d2e4d7c80cb915ac7bc8bf38ee8909f208aa00c3d2a88807b01"
+  },
+  {
+    "accession": "Q7N3L4",
+    "length": 193,
+    "organism": "Photorhabdus laumondii subsp. laumondii (strain DSM 15139 / CIP 105565 / TT01)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "plu2701"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "f797916fc832ab8b48a85abca6771cdcc901c75d9bcc58ed9285afc08cc5dcc5"
+  },
+  {
+    "accession": "Q8EM65",
+    "length": 182,
+    "organism": "Oceanobacillus iheyensis (strain DSM 14371 / CIP 107618 / JCM 11309 / KCTC 3954 / HTE831)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "OB2993"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "ce4c86838b71ea652de498ffa50ca96842420deb2205596a4b911d124c7714e9"
+  },
+  {
+    "accession": "Q8RII2",
+    "length": 183,
+    "organism": "Fusobacterium nucleatum subsp. nucleatum (strain ATCC 25586 / DSM 15643 / BCRC 10681 / CIP 101130 / JCM 8532 / KCTC 2640 / LMG 13131 / VPI 4355)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "FN1615"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "a1ade20f9a977655f5337ed84ab76767dbc4f0edf3e62395179c48fcc71359e7"
+  },
+  {
+    "accession": "Q8TJN1",
+    "length": 186,
+    "organism": "Methanosarcina acetivorans (strain ATCC 35395 / DSM 2834 / JCM 12185 / C2A)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "MA_3749"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "c2a8b864095672ab2b27728968725ceb0c7baa036781739b3163c7e83ecd2b97"
+  },
+  {
+    "accession": "Q8XN03",
+    "length": 213,
+    "organism": "Clostridium perfringens (strain 13 / Type A)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "CPE0535"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "4a73a442f3360982f59fa221114ca057c31066a429a25580bfae939ed3c2210f"
+  },
+  {
+    "accession": "Q9HZT7",
+    "length": 189,
+    "organism": "Pseudomonas aeruginosa (strain ATCC 15692 / DSM 22644 / CIP 104116 / JCM 14847 / LMG 12228 / 1C / PRS 101 / PAO1)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "PA2910"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "9a0261a6df4c0f8cd72c218c9c89139b5359522cbe1e0546b5678c6bc99941d9"
+  },
+  {
+    "accession": "A1KRP4",
+    "length": 188,
+    "organism": "Neisseria meningitidis serogroup C / serotype 2a (strain ATCC 700532 / DSM 15464 / FAM18)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "NMC0207"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "b1a8164e08c853a2569b7d312b595ce7aad7370b63873fa337e438a647ab614e"
+  },
+  {
+    "accession": "A1VAL2",
+    "length": 201,
+    "organism": "Nitratidesulfovibrio vulgaris (strain DP4)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "Dvul_0455"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "52b5f24ae51cb22556c2f21d00e1ed3e3cba139a3be5c0dd0c0232ce460e3fd5"
+  },
+  {
+    "accession": "A3CX65",
+    "length": 185,
+    "organism": "Methanoculleus marisnigri (strain ATCC 35101 / DSM 1498 / JR1)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "Memar_2039"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "080049334a460e2fad6856b50b0c15dd201aebb9944f9736d308525437b63b7a"
+  },
+  {
+    "accession": "A4ITK4",
+    "length": 183,
+    "organism": "Geobacillus thermodenitrificans (strain NG80-2)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "GTNG_3319"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "9c16279b2b9218dcaf3e1b55b9735503b426467338d14e8378bc2721a319158a"
+  },
+  {
+    "accession": "A4WBH9",
+    "length": 188,
+    "organism": "Enterobacter sp. (strain 638)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "Ent638_2390"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "bf4e8335b1806838050e9129540bf2ae53280b1127d59e651ab85926b21f78fa"
+  },
+  {
+    "accession": "A5FQH9",
+    "length": 193,
+    "organism": "Dehalococcoides mccartyi (strain ATCC BAA-2100 / JCM 16839 / KCTC 5957 / BAV1)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "DehaBAV1_0963"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "899d33c20793357f2bb328e0ea7b913109bf925b47b861f436bc3ffad12aff11"
+  },
+  {
+    "accession": "A5WBC5",
+    "length": 195,
+    "organism": "Psychrobacter sp. (strain PRwf-1)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "PsycPRwf_0006"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "5db1ada652138baec31999bd8a4cf4826c3c9e3d738fb93ce94a51b0d0e88d70"
+  },
+  {
+    "accession": "A6L8E9",
+    "length": 188,
+    "organism": "Parabacteroides distasonis (strain ATCC 8503 / DSM 20701 / CIP 104284 / JCM 5825 / NCTC 11152)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "BDI_0173"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "8083c67522a95376f5379e34e366b82520d5754dc1e5b226616b9a1fe4286d03"
+  },
+  {
+    "accession": "A7FJB3",
+    "length": 189,
+    "organism": "Yersinia pseudotuberculosis serotype O:1b (strain IP 31758)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "YpsIP31758_2372"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "ecc3da2f8d2d670d11ec5a02bb7417c65cde2572cdbc1f16c86cdec526caf55b"
+  },
+  {
+    "accession": "A7GW20",
+    "length": 184,
+    "organism": "Campylobacter curvus (strain 525.92)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "Ccur92_01080"
+          }
+        ],
+        "orfNames": [
+          {
+            "value": "CCV52592_0090"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "f65c383f5117867a3558eb2a838aa160a1ccc1a67d85e3df341aab25f8529072"
+  },
+  {
+    "accession": "A7IMS5",
+    "length": 188,
+    "organism": "Xanthobacter versatilis",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "Xaut_4096"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "412c1260a71182822919dcf813a6cf2294fcb818e2c7f3658df17329629e3330"
+  },
+  {
+    "accession": "A7MNM2",
+    "length": 187,
+    "organism": "Cronobacter sakazakii (strain ATCC BAA-894)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "ESA_01430"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "1c5f9e8d896a4ff4475e2786f83ac2f7e6b8daa435e6474fc4ffade888208b61"
+  },
+  {
+    "accession": "A7Z9R3",
+    "length": 185,
+    "organism": "Bacillus velezensis (strain DSM 23117 / BGSC 10A6 / LMG 26770 / FZB42)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "RBAM_034100"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "edda22560ec2aa89daf84295bba47865f6a0b90fed2f7633967c15e551f7a67b"
+  },
+  {
+    "accession": "A8AFN4",
+    "length": 188,
+    "organism": "Citrobacter koseri (strain ATCC BAA-895 / CDC 4225-83 / SGSC4696)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "CKO_01156"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "eedb82ef5e8519dab0acfedf17ab6ea1d5d89b32d9f37fec95a0a3d95d116414"
+  },
+  {
+    "accession": "A8MEV0",
+    "length": 188,
+    "organism": "Alkaliphilus oremlandii (strain OhILAs)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "Clos_0882"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "1681bafa7f15bf5045daa714b8477626bc829fffb5d00927248866c30de88723"
+  },
+  {
+    "accession": "A8ZZT5",
+    "length": 189,
+    "organism": "Desulfosudis oleivorans (strain DSM 6200 / JCM 39069 / Hxd3)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "Dole_1531"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "930a38ace86b60e807fb4de3c0ec19a01a16930764ec331888b03de314d6d590"
+  },
+  {
+    "accession": "B1J0R7",
+    "length": 188,
+    "organism": "Escherichia coli (strain ATCC 8739 / DSM 1576 / NBRC 3972 / NCIMB 8545 / WDCM 00012 / Crooks)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "synonyms": [
+          {
+            "value": "yebN"
+          }
+        ],
+        "orderedLocusNames": [
+          {
+            "value": "EcolC_1811"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "9ac4f5201009b82c18a50570dbc37a954d8f116aa6cbe8d619e91ba4d37661e7"
+  },
+  {
+    "accession": "B1LD52",
+    "length": 188,
+    "organism": "Escherichia coli (strain SMS-3-5 / SECEC)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "synonyms": [
+          {
+            "value": "yebN"
+          }
+        ],
+        "orderedLocusNames": [
+          {
+            "value": "EcSMS35_1366"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "9ac4f5201009b82c18a50570dbc37a954d8f116aa6cbe8d619e91ba4d37661e7"
+  },
+  {
+    "accession": "B2T9B0",
+    "length": 189,
+    "organism": "Paraburkholderia phytofirmans (strain DSM 17436 / LMG 22146 / PsJN)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "Bphyt_6717"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "c1c20c13f42daaeefeb93c52419f4e71abb99a44380f619844c663c20139b2ba"
+  },
+  {
+    "accession": "B4SV75",
+    "length": 188,
+    "organism": "Salmonella newport (strain SL254)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "synonyms": [
+          {
+            "value": "yebN"
+          }
+        ],
+        "orderedLocusNames": [
+          {
+            "value": "SNSL254_A1974"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "4c46f0c5bd7cfa87f3c83f6e4eb36711b9fb0d1c8895c335bdcd1ec22eed81df"
+  },
+  {
+    "accession": "B5XQ52",
+    "length": 188,
+    "organism": "Klebsiella variicola (strain 342)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "KPK_1956"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "40d83aea52c2f6246fa776d951222f22facd1c7449094b90799974c7d9c6a2bd"
+  },
+  {
+    "accession": "B7GTW5",
+    "length": 192,
+    "organism": "Bifidobacterium longum subsp. infantis (strain ATCC 15697 / DSM 20088 / JCM 1222 / NCTC 11817 / S12)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "Blon_0280"
+          },
+          {
+            "value": "BLIJ_0284"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "994880c6cf40e8979df1058a22a6ae996a82838e438efcd0c3492c167ea8372b"
+  },
+  {
+    "accession": "B7IQX7",
+    "length": 182,
+    "organism": "Bacillus cereus (strain G9842)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "BCG9842_B5505"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "0bcbabc654b8500c92797480b468558ad8d20e30cb6a3ecf69632028e2aa1439"
+  },
+  {
+    "accession": "B7LPM5",
+    "length": 188,
+    "organism": "Escherichia fergusonii (strain ATCC 35469 / DSM 13698 / CCUG 18766 / IAM 14443 / JCM 21226 / LMG 7866 / NBRC 102419 / NCTC 12128 / CDC 0568-73)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "synonyms": [
+          {
+            "value": "yebN"
+          }
+        ],
+        "orderedLocusNames": [
+          {
+            "value": "EFER_1254"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "225131597bddfd087dba332c333bdbb6a8d600acdb2606a705f508ed33a397e4"
+  },
+  {
+    "accession": "C3LFJ8",
+    "length": 182,
+    "organism": "Bacillus anthracis (strain CDC 684 / NRRL 3495)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "BAMEG_5613"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "2e1fd35d0e0b16a633cdc805768344c296c908296fb66397a5296b7d685b3be7"
+  },
+  {
+    "accession": "Q0SVL9",
+    "length": 213,
+    "organism": "Clostridium perfringens (strain SM101 / Type A)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "CPR_0503"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "a1a1147a8ceaa9e1312b5aed2787b1b63b7d2843cd8237e9303dd48e4785e755"
+  },
+  {
+    "accession": "Q1C8X9",
+    "length": 189,
+    "organism": "Yersinia pestis bv. Antiqua (strain Antiqua)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "YPA_1126"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "ecc3da2f8d2d670d11ec5a02bb7417c65cde2572cdbc1f16c86cdec526caf55b"
+  },
+  {
+    "accession": "Q1RAW9",
+    "length": 188,
+    "organism": "Escherichia coli (strain UTI89 / UPEC)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "synonyms": [
+          {
+            "value": "yebN"
+          }
+        ],
+        "orderedLocusNames": [
+          {
+            "value": "UTI89_C2019"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "9ac4f5201009b82c18a50570dbc37a954d8f116aa6cbe8d619e91ba4d37661e7"
+  },
+  {
+    "accession": "Q24Y92",
+    "length": 188,
+    "organism": "Desulfitobacterium hafniense (strain Y51)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "DSY1211"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "1425ee4527accf32a48d818b10b38a8abcbe3c13f0a4add59fde21c050c2d2c4"
+  },
+  {
+    "accession": "Q2NGB4",
+    "length": 180,
+    "organism": "Methanosphaera stadtmanae (strain ATCC 43021 / DSM 3091 / JCM 11832 / MCB-3)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "Msp_0741"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "f6db3667fed7b9e37c93e8240de29f9063a938190000417eadcae8d08a9012aa"
+  },
+  {
+    "accession": "Q2RFW3",
+    "length": 194,
+    "organism": "Moorella thermoacetica (strain ATCC 39073 / JCM 9320)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "Moth_2394"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "48bfb4ddbd94422e356c86ebcc8b87e9883d63c8ee00bdef37ee84751014ec19"
+  },
+  {
+    "accession": "Q3A2U7",
+    "length": 188,
+    "organism": "Syntrophotalea carbinolica (strain DSM 2380 / NBRC 103641 / GraBd1)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "Pcar_2070"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "0d9fef504982e0b5bfaf9afa796eb6d1ceff0d00d7eec029a9bd5d0879b74e0a"
+  },
+  {
+    "accession": "Q4UP19",
+    "length": 193,
+    "organism": "Xanthomonas campestris pv. campestris (strain 8004)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "XC_4166"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "0182ad24522183f14125a56f6e5f0d8cff58ac6ae8e3ef3bb47d1762a80dea1a"
+  },
+  {
+    "accession": "Q66BY6",
+    "length": 189,
+    "organism": "Yersinia pseudotuberculosis serotype I (strain IP32953)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "YPTB1630"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "ecc3da2f8d2d670d11ec5a02bb7417c65cde2572cdbc1f16c86cdec526caf55b"
+  },
+  {
+    "accession": "Q727E5",
+    "length": 201,
+    "organism": "Nitratidesulfovibrio vulgaris (strain ATCC 29579 / DSM 644 / CCUG 34227 / NCIMB 8303 / VKM B-1760 / Hildenborough)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "DVU_2910"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "52b5f24ae51cb22556c2f21d00e1ed3e3cba139a3be5c0dd0c0232ce460e3fd5"
+  },
+  {
+    "accession": "Q7UCL3",
+    "length": 188,
+    "organism": "Shigella flexneri",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "synonyms": [
+          {
+            "value": "yebN"
+          }
+        ],
+        "orderedLocusNames": [
+          {
+            "value": "SF1405"
+          },
+          {
+            "value": "S1520"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "7336e50adf9fde403bde9fdebfb916ff98fcc15ac70e5fcebc5dce0b1f061795"
+  },
+  {
+    "accession": "Q898D6",
+    "length": 183,
+    "organism": "Clostridium tetani (strain Massachusetts / E88)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "CTC_00526"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "0b393ea3bfbb557e98185a9ca023a4f3a7ca00b96ec04aa63bd229ad3cf02d25"
+  },
+  {
+    "accession": "Q8XCP1",
+    "length": 188,
+    "organism": "Escherichia coli O157:H7",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "synonyms": [
+          {
+            "value": "yebN"
+          }
+        ],
+        "orderedLocusNames": [
+          {
+            "value": "Z2864"
+          },
+          {
+            "value": "ECs2531"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "9ac4f5201009b82c18a50570dbc37a954d8f116aa6cbe8d619e91ba4d37661e7"
+  },
+  {
+    "accession": "Q8Z670",
+    "length": 188,
+    "organism": "Salmonella typhi",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "synonyms": [
+          {
+            "value": "yebN"
+          }
+        ],
+        "orderedLocusNames": [
+          {
+            "value": "STY1963"
+          },
+          {
+            "value": "t1044"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "4c46f0c5bd7cfa87f3c83f6e4eb36711b9fb0d1c8895c335bdcd1ec22eed81df"
+  },
+  {
+    "accession": "Q9K1E1",
+    "length": 188,
+    "organism": "Neisseria meningitidis serogroup B (strain ATCC BAA-335 / MC58)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "NMB0215"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "f58c3866461b74b3b89dcc6df28640c2d34ee67ff915d3cbf37e374f746c80c9"
+  },
+  {
+    "accession": "A0RLB0",
+    "length": 182,
+    "organism": "Bacillus thuringiensis (strain Al Hakam)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "BALH_4823"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "2e1fd35d0e0b16a633cdc805768344c296c908296fb66397a5296b7d685b3be7"
+  },
+  {
+    "accession": "A0RRL1",
+    "length": 181,
+    "organism": "Campylobacter fetus subsp. fetus (strain 82-40)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "CFF8240_1725"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "58ea1a9689285331728233e2e1aee4275f7b8c3f73ac0d512464301a0d8a0862"
+  },
+  {
+    "accession": "A2SPZ1",
+    "length": 185,
+    "organism": "Methanocorpusculum labreanum (strain ATCC 43576 / DSM 4855 / Z)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "Mlab_0221"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "f257421de9b2a6653948172a6696a0e3e268e41e2bdfbeb4455083629f01a933"
+  },
+  {
+    "accession": "A4J9B4",
+    "length": 180,
+    "organism": "Desulforamulus reducens (strain ATCC BAA-1160 / DSM 100696 / MI-1)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "Dred_3165"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "e1c68d5d818e7452c6f2020bee5b6ad2a43a3fb2df2f320fdf362a18d692d9ce"
+  },
+  {
+    "accession": "A4TKE7",
+    "length": 189,
+    "organism": "Yersinia pestis (strain Pestoides F)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "YPDSF_1370"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "ecc3da2f8d2d670d11ec5a02bb7417c65cde2572cdbc1f16c86cdec526caf55b"
+  },
+  {
+    "accession": "A6TAZ2",
+    "length": 188,
+    "organism": "Klebsiella pneumoniae subsp. pneumoniae (strain ATCC 700721 / MGH 78578)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "KPN78578_23020"
+          }
+        ],
+        "orfNames": [
+          {
+            "value": "KPN_02337"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "a5ac2a1dcaa68d8c0fa1a3da9fb9b9559b254a692fe2951b85a27b6bf2a66180"
+  },
+  {
+    "accession": "A7FTG8",
+    "length": 201,
+    "organism": "Clostridium botulinum (strain ATCC 19397 / Type A)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "CLB_1318"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "1e396d3aee2fc5bbc15c74650add7e2da84d9ef67bc92acf3065d1314ea08d0c"
+  },
+  {
+    "accession": "A7H1P4",
+    "length": 187,
+    "organism": "Campylobacter jejuni subsp. doylei (strain ATCC BAA-1458 / RM4099 / 269.97)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "JJD26997_0180"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "298eb5e7e94d1dfebb0ef6bc11365e4f4efac5466608a3b7d6464129f1cd56a6"
+  },
+  {
+    "accession": "A9R5Y7",
+    "length": 189,
+    "organism": "Yersinia pestis bv. Antiqua (strain Angola)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "YpAngola_A1655"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "ecc3da2f8d2d670d11ec5a02bb7417c65cde2572cdbc1f16c86cdec526caf55b"
+  },
+  {
+    "accession": "B1XH88",
+    "length": 188,
+    "organism": "Escherichia coli (strain K12 / DH10B)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "synonyms": [
+          {
+            "value": "yebN"
+          }
+        ],
+        "orderedLocusNames": [
+          {
+            "value": "ECDH10B_1959"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "9ac4f5201009b82c18a50570dbc37a954d8f116aa6cbe8d619e91ba4d37661e7"
+  },
+  {
+    "accession": "B4EYC2",
+    "length": 194,
+    "organism": "Proteus mirabilis (strain HI4320)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "PMI1608"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "f532bf481efe27353d19fbfe176fbb29e3cf53798244c3d9978cef9bb92d2b1f"
+  },
+  {
+    "accession": "B4TKG5",
+    "length": 188,
+    "organism": "Salmonella heidelberg (strain SL476)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "synonyms": [
+          {
+            "value": "yebN"
+          }
+        ],
+        "orderedLocusNames": [
+          {
+            "value": "SeHA_C2035"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "0f3c6d3bdb5bbd7cb42752472930c2fb9d57b2ab739820f6af76346841bec7e6"
+  },
+  {
+    "accession": "B4TY04",
+    "length": 188,
+    "organism": "Salmonella schwarzengrund (strain CVM19633)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "synonyms": [
+          {
+            "value": "yebN"
+          }
+        ],
+        "orderedLocusNames": [
+          {
+            "value": "SeSA_A1978"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "4c46f0c5bd7cfa87f3c83f6e4eb36711b9fb0d1c8895c335bdcd1ec22eed81df"
+  },
+  {
+    "accession": "B5FTJ9",
+    "length": 188,
+    "organism": "Salmonella dublin (strain CT_02021853)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "synonyms": [
+          {
+            "value": "yebN"
+          }
+        ],
+        "orderedLocusNames": [
+          {
+            "value": "SeD_A1481"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "4c46f0c5bd7cfa87f3c83f6e4eb36711b9fb0d1c8895c335bdcd1ec22eed81df"
+  },
+  {
+    "accession": "B6IBP8",
+    "length": 188,
+    "organism": "Escherichia coli (strain SE11)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "synonyms": [
+          {
+            "value": "yebN"
+          }
+        ],
+        "orderedLocusNames": [
+          {
+            "value": "ECSE_1995"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "9ac4f5201009b82c18a50570dbc37a954d8f116aa6cbe8d619e91ba4d37661e7"
+  },
+  {
+    "accession": "B7HFM2",
+    "length": 182,
+    "organism": "Bacillus cereus (strain B4264)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "BCB4264_A5447"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "2ce123e10594a179d7425b3424bebe526865d0fd0b12bfe94a48ac5ef6914e9b"
+  },
+  {
+    "accession": "B7K3S3",
+    "length": 187,
+    "organism": "Rippkaea orientalis (strain PCC 8801 / RF-1)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "PCC8801_2453"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "3ee924f04b52570b853ff4311956dfe8780a56fb702c6e9e3ec001716f5151a1"
+  },
+  {
+    "accession": "B7NBG8",
+    "length": 188,
+    "organism": "Escherichia coli O17:K52:H18 (strain UMN026 / ExPEC)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "synonyms": [
+          {
+            "value": "yebN"
+          }
+        ],
+        "orderedLocusNames": [
+          {
+            "value": "ECUMN_2114"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "9ac4f5201009b82c18a50570dbc37a954d8f116aa6cbe8d619e91ba4d37661e7"
+  },
+  {
+    "accession": "B8J1I9",
+    "length": 193,
+    "organism": "Desulfovibrio desulfuricans (strain ATCC 27774 / DSM 6949 / MB)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "Ddes_1699"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "e921e29321c0c364ab3e46ec5aadcc002b0e34fcaaf1eed214c6faaf205d3e50"
+  },
+  {
+    "accession": "C5D9N0",
+    "length": 184,
+    "organism": "Geobacillus sp. (strain WCH70)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "GWCH70_3318"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "73845add82351a51c45d2ab6480d75dec7c4cb38772c7cdcd183329045737fdc"
+  },
+  {
+    "accession": "Q02P72",
+    "length": 189,
+    "organism": "Pseudomonas aeruginosa (strain UCBPP-PA14)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "PA14_26450"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "9a0261a6df4c0f8cd72c218c9c89139b5359522cbe1e0546b5678c6bc99941d9"
+  },
+  {
+    "accession": "Q07V52",
+    "length": 194,
+    "organism": "Rhodopseudomonas palustris (strain BisA53)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "RPE_0223"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "36021131a72e7a666af8728a2df82d1363ebe4755b1cffef1b7ee75d50ec111d"
+  },
+  {
+    "accession": "Q0AUC1",
+    "length": 195,
+    "organism": "Syntrophomonas wolfei subsp. wolfei (strain DSM 2245B / Goettingen)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "Swol_2394"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "c25267eea22ad5aabf7f41e1b32689818992e2c2622678daaec5011ebfcfebb7"
+  },
+  {
+    "accession": "Q21FI6",
+    "length": 181,
+    "organism": "Saccharophagus degradans (strain 2-40 / ATCC 43961 / DSM 17024)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "Sde_3288"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "ad66e7eccfb02ea401bcb94aea4c02e127b5da315e3d44ce96e2bb30e8462a09"
+  },
+  {
+    "accession": "Q3ZY72",
+    "length": 193,
+    "organism": "Dehalococcoides mccartyi (strain CBDB1)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "cbdbA1062"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "899d33c20793357f2bb328e0ea7b913109bf925b47b861f436bc3ffad12aff11"
+  },
+  {
+    "accession": "Q48FX8",
+    "length": 189,
+    "organism": "Pseudomonas savastanoi pv. phaseolicola (strain 1448A / Race 6)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "PSPPH_3559"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "1500ef76f8c1d0dca75583d47231aa672d02b0adac6a81fa80f62c4cb1b32fee"
+  },
+  {
+    "accession": "Q4FVS9",
+    "length": 197,
+    "organism": "Psychrobacter arcticus (strain DSM 17307 / VKM B-2377 / 273-4)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "Psyc_0005"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "1401b2ade25b1040ae328389fbc8e695e2d08408062072bdaa57088f2057f6ad"
+  },
+  {
+    "accession": "Q4KDD4",
+    "length": 190,
+    "organism": "Pseudomonas fluorescens (strain ATCC BAA-477 / NRRL B-23932 / Pf-5)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "PFL_2642"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "f4dad531ce5ef3f7f7b286a46c41b27f967eb4a68918f01591eb62a7b244cfde"
+  },
+  {
+    "accession": "Q5LG69",
+    "length": 194,
+    "organism": "Bacteroides fragilis (strain ATCC 25285 / DSM 2151 / CCUG 4856 / JCM 11019 / LMG 10263 / NCTC 9343 / Onslow / VPI 2553 / EN-2)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "BF1149"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "57a81077d523dd26bfba9761b75c70436c3acd00e860f10aed54970ba5688ad7"
+  },
+  {
+    "accession": "Q5WB61",
+    "length": 180,
+    "organism": "Shouchella clausii (strain KSM-K16)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "ABC3868"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "3259294c733dff0ec19f4766927b00e42ed7d8315fc95ab732c3aef6b6f9b31d"
+  },
+  {
+    "accession": "Q65W61",
+    "length": 188,
+    "organism": "Mannheimia succiniciproducens (strain KCTC 0769BP / MBEL55E)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "MS0192"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "388c5b1bcc2e89f232ea06466267338c577b0baa4e85e12af3efed8e818e8353"
+  },
+  {
+    "accession": "Q814U5",
+    "length": 182,
+    "organism": "Bacillus cereus (strain ATCC 14579 / DSM 31 / CCUG 7414 / JCM 2152 / NBRC 15305 / NCIMB 9373 / NCTC 2599 / NRRL B-3711)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "BC_5324"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "2ce123e10594a179d7425b3424bebe526865d0fd0b12bfe94a48ac5ef6914e9b"
+  },
+  {
+    "accession": "Q89Z16",
+    "length": 193,
+    "organism": "Bacteroides thetaiotaomicron (strain ATCC 29148 / DSM 2079 / JCM 5827 / CCUG 10774 / NCTC 10582 / VPI-5482 / E50)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "BT_4561"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "f4c753802cc4f92bfc237c6aabb3bab3acf8a5b818acc244d85bbb6c2901df3e"
+  },
+  {
+    "accession": "Q97KG9",
+    "length": 183,
+    "organism": "Clostridium acetobutylicum (strain ATCC 824 / DSM 792 / JCM 1419 / IAM 19013 / LMG 5710 / NBRC 13948 / NRRL B-527 / VKM B-1787 / 2291 / W)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "CA_C0950"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "e5ab46e68159120387bbaea3359af43de32718f706d036bc7f31a45094256065"
+  },
+  {
+    "accession": "Q9K6F9",
+    "length": 181,
+    "organism": "Halalkalibacterium halodurans (strain ATCC BAA-125 / DSM 18197 / FERM 7344 / JCM 9153 / C-125)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "BH3770"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "3ffe6337a16411ffe601b277f1fcce8068ee638a5748e25b9283a6981d57a559"
+  },
+  {
+    "accession": "Q9PIW1",
+    "length": 187,
+    "organism": "Campylobacter jejuni subsp. jejuni serotype O:2 (strain ATCC 700819 / NCTC 11168)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "Cj0167c"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "b83bdbdd7f51001589c8e71b94492ccff417a4b7b6253ec9864039cf793a921c"
+  },
+  {
+    "accession": "A0LFC9",
+    "length": 182,
+    "organism": "Syntrophobacter fumaroxidans (strain DSM 10017 / MPOB)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "Sfum_0431"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "fdcdd1182a301457d97ac4994b3a0fa250b18a6e6b9aa3e9e95c01faed056c9b"
+  },
+  {
+    "accession": "A1ABY9",
+    "length": 188,
+    "organism": "Escherichia coli O1:K1 / APEC",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "synonyms": [
+          {
+            "value": "yebN"
+          }
+        ],
+        "orderedLocusNames": [
+          {
+            "value": "Ecok1_16850"
+          }
+        ],
+        "orfNames": [
+          {
+            "value": "APECO1_878"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "9ac4f5201009b82c18a50570dbc37a954d8f116aa6cbe8d619e91ba4d37661e7"
+  },
+  {
+    "accession": "A1VXQ0",
+    "length": 187,
+    "organism": "Campylobacter jejuni subsp. jejuni serotype O:23/36 (strain 81-176)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "CJJ81176_0202"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "b83bdbdd7f51001589c8e71b94492ccff417a4b7b6253ec9864039cf793a921c"
+  },
+  {
+    "accession": "A4QE56",
+    "length": 190,
+    "organism": "Corynebacterium glutamicum (strain R)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "cgR_1530"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "e011d61f75ce7c033c077beb54b3c81b4697941e0c62944376d583df71fb1a86"
+  },
+  {
+    "accession": "A7ZMU3",
+    "length": 188,
+    "organism": "Escherichia coli O139:H28 (strain E24377A / ETEC)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "synonyms": [
+          {
+            "value": "yebN"
+          }
+        ],
+        "orderedLocusNames": [
+          {
+            "value": "EcE24377A_2050"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "9ac4f5201009b82c18a50570dbc37a954d8f116aa6cbe8d619e91ba4d37661e7"
+  },
+  {
+    "accession": "A8A118",
+    "length": 188,
+    "organism": "Escherichia coli O9:H4 (strain HS)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "synonyms": [
+          {
+            "value": "yebN"
+          }
+        ],
+        "orderedLocusNames": [
+          {
+            "value": "EcHS_A1911"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "9ac4f5201009b82c18a50570dbc37a954d8f116aa6cbe8d619e91ba4d37661e7"
+  },
+  {
+    "accession": "A8ERN6",
+    "length": 179,
+    "organism": "Aliarcobacter butzleri (strain RM4018)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "Abu_0335"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "4ff5b53321d34996fe8c35bfee60279bc8b7d6b318388c0de222bb6f3eef7d25"
+  },
+  {
+    "accession": "A8FIC5",
+    "length": 184,
+    "organism": "Bacillus pumilus (strain SAFR-032)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "BPUM_3339"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "e98058a35ef5e12678f8c03c76efb235cb21eeb11abcd65ec0edea7fe703d128"
+  },
+  {
+    "accession": "A8FJX5",
+    "length": 187,
+    "organism": "Campylobacter jejuni subsp. jejuni serotype O:6 (strain 81116 / NCTC 11828)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "C8J_0163"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "b83bdbdd7f51001589c8e71b94492ccff417a4b7b6253ec9864039cf793a921c"
+  },
+  {
+    "accession": "A9GV45",
+    "length": 192,
+    "organism": "Sorangium cellulosum (strain So ce56)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "sce0548"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "9bd3bcd6c23beb24d7907d650ef2fb36a251f906b92b14b0604d4659aa2faea3"
+  },
+  {
+    "accession": "B0RYW0",
+    "length": 193,
+    "organism": "Xanthomonas campestris pv. campestris (strain B100)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "xcc-b100_4276"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "10fb8cf46811c46b0342ac1c7cfb50ba05202eca7dcf1f6dfa48903b1b9aad2e"
+  },
+  {
+    "accession": "B0TI68",
+    "length": 213,
+    "organism": "Heliobacterium modesticaldum (strain ATCC 51547 / Ice1)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "Helmi_08630"
+          }
+        ],
+        "orfNames": [
+          {
+            "value": "HM1_1086"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "69af0bcad11b2c2c9a1e76d2c5237eeec0a45d1f92b5e5a87a3d229e8724c9da"
+  },
+  {
+    "accession": "B0U3E5",
+    "length": 194,
+    "organism": "Xylella fastidiosa (strain M12)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "Xfasm12_1452"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "7428126d0bcfc36b42f1d49ac20ef6d08658ee225ba59b29f5b5218f05a2d1a3"
+  },
+  {
+    "accession": "B1L008",
+    "length": 201,
+    "organism": "Clostridium botulinum (strain Loch Maree / Type A3)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "CLK_0733"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "0c38c70c716fbe61c8bcd00bd90f9950f2a1b30de98adb5e3e17202000f62957"
+  },
+  {
+    "accession": "B1WQP0",
+    "length": 188,
+    "organism": "Crocosphaera subtropica (strain ATCC 51142 / BH68)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "cce_3994"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "98fe29de6a8d1688e4af239965960a6126d1850780c283bc307cb18d74dd75e8"
+  },
+  {
+    "accession": "B2FNG8",
+    "length": 191,
+    "organism": "Stenotrophomonas maltophilia (strain K279a)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "Smlt4626"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "fdf3a589d8d66d5763036a8b06654037c66c879025d41f99418da33bcd4eacd4"
+  },
+  {
+    "accession": "B2VCK3",
+    "length": 190,
+    "organism": "Erwinia tasmaniensis (strain DSM 17950 / CFBP 7177 / CIP 109463 / NCPPB 4357 / Et1/99)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "ETA_33770"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "418fc7c123e534503faa0629cb244d332239e25c73979e369fd3845d024da9c7"
+  },
+  {
+    "accession": "B4SNQ6",
+    "length": 191,
+    "organism": "Stenotrophomonas maltophilia (strain R551-3)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "Smal_3977"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "7a33af2e92e48c6a6ab4a3fc48352b911780617614f98bb20dbc54adc15c4537"
+  },
+  {
+    "accession": "B5F3Q8",
+    "length": 188,
+    "organism": "Salmonella agona (strain SL483)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "synonyms": [
+          {
+            "value": "yebN"
+          }
+        ],
+        "orderedLocusNames": [
+          {
+            "value": "SeAg_B1297"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "4c46f0c5bd7cfa87f3c83f6e4eb36711b9fb0d1c8895c335bdcd1ec22eed81df"
+  },
+  {
+    "accession": "B5YQW3",
+    "length": 188,
+    "organism": "Escherichia coli O157:H7 (strain EC4115 / EHEC)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "synonyms": [
+          {
+            "value": "yebN"
+          }
+        ],
+        "orderedLocusNames": [
+          {
+            "value": "ECH74115_2553"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "9ac4f5201009b82c18a50570dbc37a954d8f116aa6cbe8d619e91ba4d37661e7"
+  },
+  {
+    "accession": "B7HY84",
+    "length": 182,
+    "organism": "Bacillus cereus (strain AH187)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "BCAH187_A5502"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "077dadfc0e20bb07fb3dab8499f27b44185d5e6295da696fc16e5bd3c5f2204f"
+  },
+  {
+    "accession": "B7L6V0",
+    "length": 188,
+    "organism": "Escherichia coli (strain 55989 / EAEC)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "synonyms": [
+          {
+            "value": "yebN"
+          }
+        ],
+        "orderedLocusNames": [
+          {
+            "value": "EC55989_1995"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "9ac4f5201009b82c18a50570dbc37a954d8f116aa6cbe8d619e91ba4d37661e7"
+  },
+  {
+    "accession": "B7M296",
+    "length": 188,
+    "organism": "Escherichia coli O8 (strain IAI1)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "synonyms": [
+          {
+            "value": "yebN"
+          }
+        ],
+        "orderedLocusNames": [
+          {
+            "value": "ECIAI1_1891"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "9ac4f5201009b82c18a50570dbc37a954d8f116aa6cbe8d619e91ba4d37661e7"
+  },
+  {
+    "accession": "B8I1G8",
+    "length": 189,
+    "organism": "Ruminiclostridium cellulolyticum (strain ATCC 35319 / DSM 5812 / JCM 6584 / H10)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "Ccel_1412"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "1d94c260af34bc83cef95119ba6e219120b21e7c48f6d5d1b3f3bf66d2b10f10"
+  },
+  {
+    "accession": "C0QC85",
+    "length": 188,
+    "organism": "Desulforapulum autotrophicum (strain ATCC 43914 / DSM 3382 / VKM B-1955 / HRM2)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "HRM2_40440"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "b9043f0143ae70696b19d3825d2eb59b90b6f71172d1719194001fe166db27a3"
+  },
+  {
+    "accession": "C1F0Q1",
+    "length": 182,
+    "organism": "Bacillus cereus (strain 03BB102)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "BCA_5473"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "2e1fd35d0e0b16a633cdc805768344c296c908296fb66397a5296b7d685b3be7"
+  },
+  {
+    "accession": "C3P286",
+    "length": 182,
+    "organism": "Bacillus anthracis (strain A0248)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "BAA_5594"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "2e1fd35d0e0b16a633cdc805768344c296c908296fb66397a5296b7d685b3be7"
+  },
+  {
+    "accession": "C6E019",
+    "length": 187,
+    "organism": "Geobacter sp. (strain M21)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "GM21_2522"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "69318a9e77e04a4eef105bc77d26588a600b99a773d5183f0f5f19bd7a40a9f8"
+  },
+  {
+    "accession": "Q0TTS0",
+    "length": 213,
+    "organism": "Clostridium perfringens (strain ATCC 13124 / DSM 756 / JCM 1290 / NCIMB 6125 / NCTC 8237 / Type A)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "CPF_0516"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "70765a2b234db554f56df911457de6d916bfe381aa20fadeec5373290da2a352"
+  },
+  {
+    "accession": "Q1CH33",
+    "length": 189,
+    "organism": "Yersinia pestis bv. Antiqua (strain Nepal516)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "YPN_2369"
+          }
+        ],
+        "orfNames": [
+          {
+            "value": "YP516_2667"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "ecc3da2f8d2d670d11ec5a02bb7417c65cde2572cdbc1f16c86cdec526caf55b"
+  },
+  {
+    "accession": "Q1H1K6",
+    "length": 189,
+    "organism": "Methylobacillus flagellatus (strain ATCC 51484 / DSM 6875 / VKM B-1610 / KT)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "Mfla_1363"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "71fac87c3ae1edd2b523326a79e1f1377063c9c1023f8fa0a6725f5102bf2d78"
+  },
+  {
+    "accession": "Q2P8R3",
+    "length": 194,
+    "organism": "Xanthomonas oryzae pv. oryzae (strain MAFF 311018)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "XOO0309"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "5ff5aa160a40240f5264066691ba2268d0db7c4748ec6bb5c6cf9bf981b87363"
+  },
+  {
+    "accession": "Q2RXQ8",
+    "length": 193,
+    "organism": "Rhodospirillum rubrum (strain ATCC 11170 / ATH 1.1.1 / DSM 467 / LMG 4362 / NCIMB 8255 / S1)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "Rru_A0282"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "3c04bee5efc801d71e3a46b228a8f24f95746ff2a710365fb38c82025369e811"
+  },
+  {
+    "accession": "Q30X24",
+    "length": 190,
+    "organism": "Oleidesulfovibrio alaskensis (strain ATCC BAA-1058 / DSM 17464 / G20)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "Dde_2978"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "36f20170e55195bf132d08ee5b8a7bd377d46c81ac425cb6daaa2e045ed839b7"
+  },
+  {
+    "accession": "Q3A931",
+    "length": 180,
+    "organism": "Carboxydothermus hydrogenoformans (strain ATCC BAA-161 / DSM 6008 / Z-2901)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "CHY_2560"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "6b3a7cb3312dc089cc44bab34b3863dea458d70604543308f6cf1c5db8ca9c62"
+  },
+  {
+    "accession": "Q3BMJ1",
+    "length": 194,
+    "organism": "Xanthomonas euvesicatoria pv. vesicatoria (strain 85-10)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "XCV4291"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "e78844d87e043c8402371b225a66910873ca5f28eff4700167dd758d58fb1467"
+  },
+  {
+    "accession": "Q3Z7F0",
+    "length": 193,
+    "organism": "Dehalococcoides mccartyi (strain ATCC BAA-2266 / KCTC 15142 / 195)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "DET1134"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "bae6a93b68cd2357435aa9eeb311920021b818d9d9b2482fc649ab5cdcb4a9e5"
+  },
+  {
+    "accession": "Q57NH7",
+    "length": 188,
+    "organism": "Salmonella choleraesuis (strain SC-B67)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "synonyms": [
+          {
+            "value": "yebN"
+          }
+        ],
+        "orderedLocusNames": [
+          {
+            "value": "SCH_1828"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "4c46f0c5bd7cfa87f3c83f6e4eb36711b9fb0d1c8895c335bdcd1ec22eed81df"
+  },
+  {
+    "accession": "Q630S4",
+    "length": 182,
+    "organism": "Bacillus cereus (strain ZK / E33L)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "BCE33L5024"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "0dff08a56487ae94b99601faa0373beb050abc5242316a44e3271cdff1eed898"
+  },
+  {
+    "accession": "Q6APV5",
+    "length": 193,
+    "organism": "Desulfotalea psychrophila (strain LSv54 / DSM 12343)",
+    "source_file": "phase2_reference_mnt_controls.json",
+    "genes": [
+      {
+        "geneName": {
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000255",
+              "source": "HAMAP-Rule",
+              "id": "MF_01521"
+            }
+          ],
+          "value": "mntP"
+        },
+        "orderedLocusNames": [
+          {
+            "value": "DP0890"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "2f63f24ea854192f19782af5a5b65f3934d8fde0de0df68de857213f2112430e"
+  },
+  {
+    "accession": "C5B156",
+    "length": 422,
+    "organism": "Methylorubrum extorquens (strain ATCC 14718 / DSM 1338 / JCM 2805 / NCIMB 9133 / AM1)",
+    "source_file": "phase3_reference_lut_AM1.json",
+    "genes": [
+      {
+        "orderedLocusNames": [
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000313",
+                "source": "EMBL",
+                "id": "ACS39620.1"
+              }
+            ],
+            "value": "MexAM1_META1p1778"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "6cdb8c8b8d1c73c21432725ab0ee3ff5f6b1c9d2a526685d39018ca01f09feb8"
+  },
+  {
+    "accession": "C5B160",
+    "length": 249,
+    "organism": "Methylorubrum extorquens (strain ATCC 14718 / DSM 1338 / JCM 2805 / NCIMB 9133 / AM1)",
+    "source_file": "phase3_reference_lut_AM1.json",
+    "genes": [
+      {
+        "orderedLocusNames": [
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000313",
+                "source": "EMBL",
+                "id": "ACS39624.1"
+              }
+            ],
+            "value": "MexAM1_META1p1782"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "c75e028802f784dcaa748fc7c0e016b175698241cd117d441fd2e3240ffcc79d"
+  },
+  {
+    "accession": "C5B163",
+    "length": 839,
+    "organism": "Methylorubrum extorquens (strain ATCC 14718 / DSM 1338 / JCM 2805 / NCIMB 9133 / AM1)",
+    "source_file": "phase3_reference_lut_AM1.json",
+    "genes": [
+      {
+        "orderedLocusNames": [
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000313",
+                "source": "EMBL",
+                "id": "ACS39627.1"
+              }
+            ],
+            "value": "MexAM1_META1p1785"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "5e656f75ec2c9ddd6c47819436cea27fa14f1696d12d86ebbb3776d8107a697e"
+  },
+  {
+    "accession": "C5B157",
+    "length": 328,
+    "organism": "Methylorubrum extorquens (strain ATCC 14718 / DSM 1338 / JCM 2805 / NCIMB 9133 / AM1)",
+    "source_file": "phase3_reference_lut_AM1.json",
+    "genes": [
+      {
+        "orderedLocusNames": [
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000313",
+                "source": "EMBL",
+                "id": "ACS39621.1"
+              }
+            ],
+            "value": "MexAM1_META1p1779"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "bd9202a5ef3ee576b3b7d84308370733c268b353b0ba95893bbdc6bf45516267"
+  },
+  {
+    "accession": "C5B161",
+    "length": 297,
+    "organism": "Methylorubrum extorquens (strain ATCC 14718 / DSM 1338 / JCM 2805 / NCIMB 9133 / AM1)",
+    "source_file": "phase3_reference_lut_AM1.json",
+    "genes": [
+      {
+        "orderedLocusNames": [
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000313",
+                "source": "EMBL",
+                "id": "ACS39625.1"
+              }
+            ],
+            "value": "MexAM1_META1p1783"
+          }
+        ]
+      }
+    ],
+    "sequence_sha256": "76735630dc7ec71730aa886d2dc120d99b02248300f0fe15c154951107a95a84"
+  },
+  {
+    "accession": "WP_003614727.1",
+    "length": 195,
+    "source_file": "phase3_WP_003614727.1.fasta",
+    "description": "WP_003614727.1 MULTISPECIES: methanobactin biosynthesis protein MbnC [Methylosinus]",
+    "sequence_sha256": "07538fcf4bdd5b79c9bbdc18cf359fa6a8228efb65b1f328d24d6f87c9465336"
+  },
+  {
+    "accession": "WP_024881683.1",
+    "length": 277,
+    "source_file": "phase3_WP_024881683.1.fasta",
+    "description": "WP_024881683.1 MULTISPECIES: methanobactin biosynthesis protein MbnB [Methylosinus]",
+    "sequence_sha256": "9e9ae9bbcfd5214335af6f290f378f1b10e2e3074481da60174693732a4e3f14"
+  },
+  {
+    "accession": "WP_161912153.1",
+    "length": 32,
+    "source_file": "phase3_WP_161912153.1.fasta",
+    "description": "WP_161912153.1 MULTISPECIES: methanobactin [unclassified Methylosinus]",
+    "sequence_sha256": "bfe35de245c12bb2824caaa859a9a834a2c79a1fa8cb01ae1eae681b2014c5f8"
+  },
+  {
+    "accession": "WP_034727520.1",
+    "length": 363,
+    "source_file": "phase3_WP_034727520.1.fasta",
+    "description": "WP_034727520.1 MNIO family chryseobactin maturase [Chryseobacterium sp. JM1]",
+    "sequence_sha256": "b94f25df5131f3c51baef969572a69a3092bd7ed3e93442eac78bbe02cdbb359"
+  },
+  {
+    "accession": "WP_024881684.1",
+    "length": 194,
+    "source_file": "phase3_WP_024881684.1.fasta",
+    "description": "WP_024881684.1 MULTISPECIES: methanobactin biosynthesis protein MbnC [Methylosinus]",
+    "sequence_sha256": "6016a7f03d6982b816344254e6bd9b1504a082ffec842ec80f2bd82a440daf12"
+  },
+  {
+    "accession": "8HI8_1_TglI",
+    "length": 269,
+    "source_file": "phase3_8HI8_1.json",
+    "description": "TglI experimental structural construct; no artificial tag trimming",
+    "sequence_sha256": "95b71b2b052508dc4990b6700178439b73d593fa7a6a03a487631f59faa99f04"
+  },
+  {
+    "accession": "8HI8_2_TglH",
+    "length": 304,
+    "source_file": "phase3_8HI8_2.json",
+    "description": "TglH experimental structural construct; no artificial tag trimming",
+    "sequence_sha256": "086dd8418d32178a7f8d52f35b70b826e9f8cb0b27b921cdcbf6a28ef0c4604f"
+  }
+]

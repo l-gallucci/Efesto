@@ -1,0 +1,24 @@
+{
+  "iqtree": [
+    "/Users/lgallucc/software/iqtree-2.3.5-macOS-arm/bin/iqtree2",
+    "-s",
+    "/Users/lgallucc/.codex/visualizations/2026/11/03/01a1a03e-eafa-7a90-a2d1-a0f561f55ca1/Efesto/transport_workflow_20261108/results/phylogeny_ln_references/trimmed.faa",
+    "-m",
+    "LG+G4",
+    "-B",
+    "1000",
+    "--alrt",
+    "1000",
+    "-T",
+    "2",
+    "--seed",
+    "17",
+    "--prefix",
+    "/Users/lgallucc/.codex/visualizations/2026/11/03/01a1a03e-eafa-7a90-a2d1-a0f561f55ca1/Efesto/transport_workflow_20261108/results/phylogeny_ln_references/tree",
+    "-redo"
+  ],
+  "selected_count": 64,
+  "untrimmed_columns": 1542,
+  "retained_columns": 635,
+  "selection": "forced anchors plus deterministic genus-balanced sample; unknowns not labelled by tree"
+}

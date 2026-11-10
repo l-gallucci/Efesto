@@ -46,3 +46,7 @@ hmm_library/_staging/
 
 # Local sequence and literature audit (only this report)
 /VERIFICA_MODELLI_SEQUENZE_20261105.md
+
+# Documentation website
+/site/
+/.venv-docs/

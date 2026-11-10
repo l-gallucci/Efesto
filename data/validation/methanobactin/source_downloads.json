@@ -1,0 +1,98 @@
+[
+  {
+    "url": "https://www.ebi.ac.uk/interpro/api/entry/ncbifam/TIGR04071/?annotation=hmm",
+    "file": "phase2_TIGR04071.hmm.download",
+    "sha256": "cc18e4375c48f0e960b4830d3be74b1b7c1ecbfe2bc2ce2ab9c44fe0342b4f70",
+    "bytes": 3301
+  },
+  {
+    "url": "https://www.ebi.ac.uk/interpro/api/entry/ncbifam/TIGR04159/?annotation=hmm",
+    "file": "phase2_TIGR04159.hmm.download",
+    "sha256": "450cce73567d26b9f9f48c135f128966b71cf3545e69e284ef94ce1267085068",
+    "bytes": 20472
+  },
+  {
+    "url": "https://www.ebi.ac.uk/interpro/api/entry/ncbifam/TIGR04160/?annotation=hmm",
+    "file": "phase2_TIGR04160.hmm.download",
+    "sha256": "6b27bba02ae2842b57fb20143fab1e50977b1d7c95ad576ca5c62509bd944c5c",
+    "bytes": 15942
+  },
+  {
+    "url": "https://rest.uniprot.org/uniprotkb/search?query=%28gene_exact%3AmbnA+OR+gene_exact%3AmbnB+OR+gene_exact%3AmbnC+OR+gene_exact%3AmbnT+OR+gene_exact%3AmbnM+OR+gene_exact%3AmbnF%29+AND+reviewed%3Atrue&format=json&size=200",
+    "file": "phase2_reference_mbn_reviewed.json",
+    "sha256": "debcf33c5fd054d682477883e328852cc317706daed00405396528b2221cf554",
+    "bytes": 74881
+  },
+  {
+    "url": "https://rest.uniprot.org/uniprotkb/search?query=%28gene_exact%3AmntE+OR+gene_exact%3AmntP+OR+gene_exact%3AmntH+OR+gene_exact%3AnixA+OR+gene_exact%3AmnoP%29+AND+reviewed%3Atrue&format=json&size=200",
+    "file": "phase2_reference_mnt_controls.json",
+    "sha256": "2de45764588ab0c1bbfaa1126fb7144693a539d9cf284ad596d1c73986893f2a",
+    "bytes": 1640592
+  },
+  {
+    "url": "https://rest.uniprot.org/uniprotkb/search?query=%28gene%3AmbnA+OR+gene%3AmbnB+OR+gene%3AmbnC+OR+gene%3AmbnM+OR+gene%3AmbnF%29+AND+organism_id%3A595536&format=json&size=200",
+    "file": "phase3_reference_mbn_OB3b.json",
+    "sha256": "d7339283a275a54741b446a271c97e91fbf4757e944a9803068e7b43bf2017b8",
+    "bytes": 61288
+  },
+  {
+    "url": "https://rest.uniprot.org/uniprotkb/search?query=%28gene%3AISM_02005+OR+gene%3AOG2516_13601+OR+gene%3ASAR11G3_00277+OR+gene%3AVC1688+OR+gene%3AVC_1688+OR+gene%3ASAR116_1166%29&format=json&size=200",
+    "file": "phase3_reference_mnt_loci.json",
+    "sha256": "da5bc624783614fb1ca8fd005faa3833906e1a6dc50b09baefe59f8c2e080437",
+    "bytes": 25913
+  },
+  {
+    "url": "https://rest.uniprot.org/uniprotkb/search?query=organism_id%3A272630+AND+%28gene%3AMexAM1_META1p1778+OR+gene%3AMexAM1_META1p1779+OR+gene%3AMexAM1_META1p1782+OR+gene%3AMexAM1_META1p1783+OR+gene%3AMexAM1_META1p1785%29&format=json&size=200",
+    "file": "phase3_reference_lut_AM1.json",
+    "sha256": "71f277e0ca49e23860a4513ac6a7d27c3a14a8b3f8e6a352a5ffc177db3f15a5",
+    "bytes": 42126
+  },
+  {
+    "url": "https://rest.uniprot.org/uniprotkb/search?query=%28gene%3AtglH+OR+gene%3AchrH+OR+gene%3AmovX+OR+xref%3Arefseq-WP_034727520.1%29&format=json&size=200",
+    "file": "phase3_reference_MNIO.json",
+    "sha256": "ae5cc840e0c9b4e6189ba8f4d512f52071de450c8df3e5561a8d67d26e05b326",
+    "bytes": 3950
+  },
+  {
+    "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=protein&id=WP_003614727.1&rettype=fasta&retmode=text",
+    "file": "phase3_WP_003614727.1.fasta",
+    "sha256": "e78e95c9b4ad04f7086c44a8decf5663c5d57b550e123898bf838fe4d0b3b757",
+    "bytes": 284
+  },
+  {
+    "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=protein&id=WP_024881683.1&rettype=fasta&retmode=text",
+    "file": "phase3_WP_024881683.1.fasta",
+    "sha256": "6bad3069bd373d03a5375312d9c9c5791bbe6c4bc624fa2ad6db4a570ac63b8c",
+    "bytes": 367
+  },
+  {
+    "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=protein&id=WP_024881684.1&rettype=fasta&retmode=text",
+    "file": "phase3_WP_024881684.1.fasta",
+    "sha256": "aa4b668c996c4c9c42e519f5d16848bfef1faed1f4139857b7e1dd625fc581fb",
+    "bytes": 283
+  },
+  {
+    "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=protein&id=WP_161912153.1&rettype=fasta&retmode=text",
+    "file": "phase3_WP_161912153.1.fasta",
+    "sha256": "d538d1626c9bc7e4956e58317a304f3f1f39ab947b51d8ccd824b6be039a0415",
+    "bytes": 106
+  },
+  {
+    "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=protein&id=WP_034727520.1&rettype=fasta&retmode=text",
+    "file": "phase3_WP_034727520.1.fasta",
+    "sha256": "1e12cabd57d7f660f3d91f6a652fe3b64d92502f07c49a33db8320ffb6aae916",
+    "bytes": 448
+  },
+  {
+    "url": "https://data.rcsb.org/rest/v1/core/polymer_entity/8HI8/1",
+    "file": "phase3_8HI8_1.json",
+    "sha256": "7d2c58e3854ba5ee2c022962dac9d2d4099f1a4612333d12f9051f3c78a510d7",
+    "bytes": 14261
+  },
+  {
+    "url": "https://data.rcsb.org/rest/v1/core/polymer_entity/8HI8/2",
+    "file": "phase3_8HI8_2.json",
+    "sha256": "d16b70e597314ac3276cd5ed96634e49ec68ee84dcc8047fc650ba1f8709c2d8",
+    "bytes": 15319
+  }
+]

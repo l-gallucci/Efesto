@@ -1,0 +1,28 @@
+{
+  "MntX": {
+    "stage": "grouped_nested_pilot_complete",
+    "positive_groups": 3,
+    "external_positive_groups": 0,
+    "promotion": false
+  },
+  "LutH": {
+    "stage": "reference_mapping_phylogeny_and_domain_baseline_complete",
+    "positive_groups": 2,
+    "promotion": false
+  },
+  "LanA": {
+    "stage": "reference_mapping_phylogeny_and_domain_baseline_complete",
+    "positive_groups": 1,
+    "promotion": false
+  },
+  "LutAEF": {
+    "stage": "AM1_reference_locus_verified",
+    "positive_groups": 1,
+    "promotion": false
+  },
+  "VupABC": {
+    "stage": "historical_mapping_resolved_and_component_baseline_complete",
+    "positive_locus_groups": 1,
+    "promotion": false
+  }
+}

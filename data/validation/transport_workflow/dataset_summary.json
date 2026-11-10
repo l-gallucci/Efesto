@@ -1,0 +1,13 @@
+{
+  "mnt_family": 757,
+  "mnt_similarity_groups": 489,
+  "mnt_experimental_anchors": [
+    "A3SI43",
+    "AEA80752.1",
+    "Q9KRF4"
+  ],
+  "mnt_pilot_records": 136,
+  "mnt_background_records": 133,
+  "vup_tup_records": 123,
+  "ln_records": 402
+}

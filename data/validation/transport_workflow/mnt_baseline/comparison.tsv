@@ -1,0 +1,891 @@
+id	evidence	label	official_score	official_pass	new_score	new_pass	new_score_is_held_out	organism
+A3SI43	experimental_anchor	marine_MntX	351.2	True	649.2	True	False	Roseovarius nubinhibens (strain ATCC BAA-591 / DSM 15170 / ISM)
+AEA80752.1	experimental_anchor	marine_MntX	335.6	True	620.2	True	False	Candidatus Pelagibacter sp. IMCC9063
+Q9KRF4	experimental_anchor	marine_MntX	561.6	True	645.3	True	False	Vibrio cholerae serotype O1 (strain ATCC 39315 / El Tor Inaba N16961)
+ACG76368.1	experimental_hard_negative	background	-2.4	False	-1.9	False	False	Campylobacter jejuni
+Q8P3J6	experimental_different_family	background	0.5	False	-1.2	False	False	Xanthomonas campestris pv. campestris (strain ATCC 33913 / DSM 3586 / NCPPB 528 / LMG 568 / P 25)
+A0A378VP91	reviewed_different_transport_family	background	1.3	False	-2.6	False	False	Neisseria lactamica
+A0AIM7	reviewed_different_transport_family	background	-2.0	False	-3.9	False	False	Listeria welshimeri serovar 6b (strain ATCC 35897 / DSM 20650 / CCUG 15529 / CIP 8149 / NCTC 11857 / SLCC 5334 / V8)
+A0KG66	reviewed_different_transport_family	background	0.2	False	-4.7	False	False	Aeromonas hydrophila subsp. hydrophila (strain ATCC 7966 / DSM 30187 / BCRC 13018 / CCUG 14551 / JCM 1027 / KCTC 2358 / NCIMB 9240 / NCTC 8049)
+A0LFC9	reviewed_different_transport_family	background	-2.0	False	-1.6	False	False	Syntrophobacter fumaroxidans (strain DSM 10017 / MPOB)
+A0PZ39	reviewed_different_transport_family	background	4.8	False	1.3	False	False	Clostridium novyi (strain NT)
+A0RLB0	reviewed_different_transport_family	background	-0.6	False	-1.2	False	False	Bacillus thuringiensis (strain Al Hakam)
+A0RRL1	reviewed_different_transport_family	background	1.7	False	-2.1	False	False	Campylobacter fetus subsp. fetus (strain 82-40)
+A1A3E3	reviewed_different_transport_family	background	5.6	False	-0.8	False	False	Bifidobacterium adolescentis (strain ATCC 15703 / DSM 20083 / NCTC 11814 / E194a)
+A1ABY9	reviewed_different_transport_family	background	2.4	False	-1.5	False	False	Escherichia coli O1:K1 / APEC
+A1ADR7	reviewed_different_transport_family	background	0.7	False	-6.1	False	False	Escherichia coli O1:K1 / APEC
+A1JLC3	reviewed_different_transport_family	background	0.5	False	-1.1	False	False	Yersinia enterocolitica serotype O:8 / biotype 1B (strain NCTC 13174 / 8081)
+A1JM85	reviewed_different_transport_family	background	2.4	False	-0.9	False	False	Yersinia enterocolitica serotype O:8 / biotype 1B (strain NCTC 13174 / 8081)
+A1KRP4	reviewed_different_transport_family	background	1.8	False	-1.8	False	False	Neisseria meningitidis serogroup C / serotype 2a (strain ATCC 700532 / DSM 15464 / FAM18)
+A1VAL2	reviewed_different_transport_family	background	-0.3	False	-0.2	False	False	Nitratidesulfovibrio vulgaris (strain DP4)
+A1WR47	reviewed_different_transport_family	background	1.8	False	-10.0	False	False	Verminephrobacter eiseniae (strain EF01-2)
+A2SPZ1	reviewed_different_transport_family	background	-3.6	False	0.6	False	False	Methanocorpusculum labreanum (strain ATCC 43576 / DSM 4855 / Z)
+A3CX65	reviewed_different_transport_family	background	-0.6	False	-1.5	False	False	Methanoculleus marisnigri (strain ATCC 35101 / DSM 1498 / JR1)
+A3DFC2	reviewed_different_transport_family	background	2.4	False	1.1	False	False	Acetivibrio thermocellus (strain ATCC 27405 / DSM 1237 / JCM 9322 / NBRC 103400 / NCIMB 10682 / NRRL B-4536 / VPI 7372)
+A4ITK4	reviewed_different_transport_family	background	-1.4	False	1.0	False	False	Geobacillus thermodenitrificans (strain NG80-2)
+A4J9B4	reviewed_different_transport_family	background	-0.7	False	-2.1	False	False	Desulforamulus reducens (strain ATCC BAA-1160 / DSM 100696 / MI-1)
+A4QE56	reviewed_different_transport_family	background	0.5	False	-4.0	False	False	Corynebacterium glutamicum (strain R)
+A4WBH9	reviewed_different_transport_family	background	2.6	False	-1.0	False	False	Enterobacter sp. (strain 638)
+A4WD10	reviewed_different_transport_family	background	1.3	False	-4.5	False	False	Enterobacter sp. (strain 638)
+A5CYC0	reviewed_different_transport_family	background	-1.1	False	-1.8	False	False	Pelotomaculum thermopropionicum (strain DSM 13744 / JCM 10971 / SI)
+A5ESV8	reviewed_different_transport_family	background	0.7	False	-1.7	False	False	Bradyrhizobium sp. (strain BTAi1 / ATCC BAA-1182)
+A5FQH9	reviewed_different_transport_family	background	0.6	False	-1.3	False	False	Dehalococcoides mccartyi (strain ATCC BAA-2100 / JCM 16839 / KCTC 5957 / BAV1)
+A5G348	reviewed_different_transport_family	background	-2.6	False	-11.1	False	False	Acidiphilium cryptum (strain JF-5)
+A5IRZ2	reviewed_different_transport_family	background	-3.8	False	-3.0	False	False	Staphylococcus aureus (strain JH9)
+A5UJ57	reviewed_different_transport_family	background	1.1	False	-6.1	False	False	Methanobrevibacter smithii (strain ATCC 35061 / DSM 861 / OCM 144 / PS)
+A5WBC5	reviewed_different_transport_family	background	2.6	False	-1.2	False	False	Psychrobacter sp. (strain PRwf-1)
+A6L3M0	reviewed_different_transport_family	background	0.2	False	0.3	False	False	Phocaeicola vulgatus (strain ATCC 8482 / DSM 1447 / JCM 5826 / CCUG 4940 / NBRC 14291 / NCTC 11154)
+A6L8E9	reviewed_different_transport_family	background	-0.5	False	-0.8	False	False	Parabacteroides distasonis (strain ATCC 8503 / DSM 20701 / CIP 104284 / JCM 5825 / NCTC 11152)
+A6TAZ2	reviewed_different_transport_family	background	1.2	False	-1.6	False	False	Klebsiella pneumoniae subsp. pneumoniae (strain ATCC 700721 / MGH 78578)
+A6TC38	reviewed_different_transport_family	background	-0.1	False	-5.6	False	False	Klebsiella pneumoniae subsp. pneumoniae (strain ATCC 700721 / MGH 78578)
+A6VQU4	reviewed_different_transport_family	background	1.6	False	-0.4	False	False	Actinobacillus succinogenes (strain ATCC 55618 / DSM 22257 / CCUG 43843 / 130Z)
+A7I5W4	reviewed_different_transport_family	background	-3.0	False	-0.3	False	False	Methanoregula boonei (strain DSM 21154 / JCM 14090 / 6A8)
+A7IMS5	reviewed_different_transport_family	background	4.1	False	-0.6	False	False	Xanthobacter versatilis
+A7MNM2	reviewed_different_transport_family	background	-0.1	False	-2.0	False	False	Cronobacter sakazakii (strain ATCC BAA-894)
+A7MP48	reviewed_different_transport_family	background	0.7	False	-3.4	False	False	Cronobacter sakazakii (strain ATCC BAA-894)
+A7N307	reviewed_different_transport_family	background	-5.8	False	-8.1	False	False	Vibrio campbellii (strain ATCC BAA-1116)
+A8ADJ8	reviewed_different_transport_family	background	0.6	False	-3.7	False	False	Citrobacter koseri (strain ATCC BAA-895 / CDC 4225-83 / SGSC4696)
+A8AFN4	reviewed_different_transport_family	background	2.4	False	-1.4	False	False	Citrobacter koseri (strain ATCC BAA-895 / CDC 4225-83 / SGSC4696)
+A8ERN6	reviewed_different_transport_family	background	-0.1	False	-0.4	False	False	Aliarcobacter butzleri (strain RM4018)
+A8GFM8	reviewed_different_transport_family	background	3.3	False	-1.7	False	False	Serratia proteamaculans (strain 568)
+A8MEV0	reviewed_different_transport_family	background	1.3	False	-1.1	False	False	Alkaliphilus oremlandii (strain OhILAs)
+A8ZZT5	reviewed_different_transport_family	background	0.0	False	-0.8	False	False	Desulfosudis oleivorans (strain DSM 6200 / JCM 39069 / Hxd3)
+A9GV45	reviewed_different_transport_family	background	-1.2	False	-1.2	False	False	Sorangium cellulosum (strain So ce56)
+A9KRD5	reviewed_different_transport_family	background	2.4	False	-1.4	False	False	Lachnoclostridium phytofermentans (strain ATCC 700394 / DSM 18823 / ISDg)
+A9MVT2	reviewed_different_transport_family	background	2.2	False	-1.3	False	False	Salmonella paratyphi B (strain ATCC BAA-1250 / SPB7)
+B0TI68	reviewed_different_transport_family	background	3.3	False	-1.4	False	False	Heliobacterium modesticaldum (strain ATCC 51547 / Ice1)
+B0U3E5	reviewed_different_transport_family	background	3.2	False	1.2	False	False	Xylella fastidiosa (strain M12)
+B1I6K8	reviewed_different_transport_family	background	1.3	False	-0.5	False	False	Desulforudis audaxviator (strain MP104C)
+B1WQP0	reviewed_different_transport_family	background	2.2	False	-1.1	False	False	Crocosphaera subtropica (strain ATCC 51142 / BH68)
+B2FNG8	reviewed_different_transport_family	background	1.1	False	-2.1	False	False	Stenotrophomonas maltophilia (strain K279a)
+B2KED0	reviewed_different_transport_family	background	-0.5	False	-0.3	False	False	Elusimicrobium minutum (strain Pei191)
+B2T9B0	reviewed_different_transport_family	background	1.4	False	-0.9	False	False	Paraburkholderia phytofirmans (strain DSM 17436 / LMG 22146 / PsJN)
+B2VCK3	reviewed_different_transport_family	background	0.6	False	-1.8	False	False	Erwinia tasmaniensis (strain DSM 17950 / CFBP 7177 / CIP 109463 / NCPPB 4357 / Et1/99)
+B2VDY7	reviewed_different_transport_family	background	-1.8	False	-2.5	False	False	Erwinia tasmaniensis (strain DSM 17950 / CFBP 7177 / CIP 109463 / NCPPB 4357 / Et1/99)
+B3W6P3	reviewed_different_transport_family	background	-1.3	False	-2.5	False	False	Lacticaseibacillus casei (strain BL23)
+B4EYC2	reviewed_different_transport_family	background	1.4	False	-0.4	False	False	Proteus mirabilis (strain HI4320)
+B4TQE4	reviewed_different_transport_family	background	0.2	False	-5.7	False	False	Salmonella schwarzengrund (strain CVM19633)
+B5E9H5	reviewed_different_transport_family	background	2.6	False	-2.8	False	False	Citrifermentans bemidjiense (strain ATCC BAA-1014 / DSM 16622 / JCM 12645 / Bem)
+B7K3S3	reviewed_different_transport_family	background	1.2	False	-2.7	False	False	Rippkaea orientalis (strain PCC 8801 / RF-1)
+B7KGD8	reviewed_different_transport_family	background	0.6	False	-2.4	False	False	Gloeothece citriformis (strain PCC 7424)
+B7V6V8	reviewed_different_transport_family	background	0.6	False	0.1	False	False	Pseudomonas aeruginosa (strain LESB58)
+B8I1G8	reviewed_different_transport_family	background	0.0	False	-0.8	False	False	Ruminiclostridium cellulolyticum (strain ATCC 35319 / DSM 5812 / JCM 6584 / H10)
+B8J1I9	reviewed_different_transport_family	background	1.7	False	-4.3	False	False	Desulfovibrio desulfuricans (strain ATCC 27774 / DSM 6949 / MB)
+C0QC85	reviewed_different_transport_family	background	-0.3	False	3.8	False	False	Desulforapulum autotrophicum (strain ATCC 43914 / DSM 3382 / VKM B-1955 / HRM2)
+C6BYL0	reviewed_different_transport_family	background	-0.8	False	0.1	False	False	Maridesulfovibrio salexigens (strain ATCC 14822 / DSM 2638 / NCIMB 8403 / VKM B-1763)
+C6D9J9	reviewed_different_transport_family	background	1.5	False	-0.1	False	False	Pectobacterium carotovorum subsp. carotovorum (strain PC1)
+C6DG20	reviewed_different_transport_family	background	0.7	False	1.6	False	False	Pectobacterium carotovorum subsp. carotovorum (strain PC1)
+C6E019	reviewed_different_transport_family	background	2.5	False	-1.9	False	False	Geobacter sp. (strain M21)
+I6YET7	reviewed_different_transport_family	background	-1.9	False	-3.9	False	False	Mycobacterium tuberculosis (strain ATCC 25618 / H37Rv)
+O27840	reviewed_different_transport_family	background	0.5	False	-0.6	False	False	Methanothermobacter thermautotrophicus (strain ATCC 29096 / DSM 1053 / JCM 10044 / NBRC 100330 / Delta H)
+O69443	reviewed_different_transport_family	background	-1.3	False	-1.4	False	False	Mycobacterium bovis (strain ATCC BAA-935 / AF2122/97)
+P45468	reviewed_different_transport_family	background	-2.3	False	-4.2	False	False	Escherichia coli (strain K12)
+P65544	reviewed_different_transport_family	background	-2.2	False	-1.3	False	False	Brucella melitensis biotype 1 (strain ATCC 23456 / CCUG 17765 / NCTC 10094 / 16M)
+P94395	reviewed_different_transport_family	background	10.7	False	-7.4	False	False	Bacillus subtilis (strain 168)
+P96593	reviewed_different_transport_family	background	-6.7	False	0.7	False	False	Bacillus subtilis (strain 168)
+Q03DK0	reviewed_different_transport_family	background	-0.7	False	1.0	False	False	Pediococcus pentosaceus (strain ATCC 25745 / CCUG 21536 / LMG 10740 / 183-1w)
+Q03TH5	reviewed_different_transport_family	background	-1.0	False	0.9	False	False	Levilactobacillus brevis (strain ATCC 367 / BCRC 12310 / CIP 105137 / JCM 1170 / LMG 11437 / NCIMB 947 / NCTC 947)
+Q07V52	reviewed_different_transport_family	background	-0.0	False	4.6	False	False	Rhodopseudomonas palustris (strain BisA53)
+Q0AJY9	reviewed_different_transport_family	background	-2.8	False	-2.1	False	False	Nitrosomonas eutropha (strain DSM 101675 / C91 / Nm57)
+Q0AUC1	reviewed_different_transport_family	background	0.1	False	0.1	False	False	Syntrophomonas wolfei subsp. wolfei (strain DSM 2245B / Goettingen)
+Q0B8F7	reviewed_different_transport_family	background	-9.5	False	-7.3	False	False	Burkholderia ambifaria (strain ATCC BAA-244 / DSM 16087 / CCUG 44356 / LMG 19182 / AMMD)
+Q0BW85	reviewed_different_transport_family	background	-4.2	False	-6.8	False	False	Granulibacter bethesdensis (strain ATCC BAA-1260 / CGDNIH1)
+Q0T2A8	reviewed_different_transport_family	background	0.8	False	-5.1	False	False	Shigella flexneri serotype 5b (strain 8401)
+Q0T515	reviewed_different_transport_family	background	2.4	False	-1.7	False	False	Shigella flexneri serotype 5b (strain 8401)
+Q0VLM2	reviewed_different_transport_family	background	1.8	False	-0.1	False	False	Alcanivorax borkumensis (strain ATCC 700651 / DSM 11573 / NCIMB 13689 / SK2)
+Q1H1K6	reviewed_different_transport_family	background	0.1	False	-0.3	False	False	Methylobacillus flagellatus (strain ATCC 51484 / DSM 6875 / VKM B-1610 / KT)
+Q1QZ83	reviewed_different_transport_family	background	-0.8	False	-1.8	False	False	Chromohalobacter israelensis (strain ATCC BAA-138 / DSM 3043 / CIP 106854 / NCIMB 13768 / 1H11)
+Q1R175	reviewed_different_transport_family	background	-0.3	False	1.7	False	False	Chromohalobacter israelensis (strain ATCC BAA-138 / DSM 3043 / CIP 106854 / NCIMB 13768 / 1H11)
+Q21FI6	reviewed_different_transport_family	background	9.0	False	-1.0	False	False	Saccharophagus degradans (strain 2-40 / ATCC 43961 / DSM 17024)
+Q24Y92	reviewed_different_transport_family	background	0.1	False	1.4	False	False	Desulfitobacterium hafniense (strain Y51)
+Q2FPH2	reviewed_different_transport_family	background	0.7	False	-0.6	False	False	Methanospirillum hungatei JF-1 (strain ATCC 27890 / DSM 864 / NBRC 100397 / JF-1)
+Q2FUR9	reviewed_different_transport_family	background	0.6	False	-1.3	False	False	Staphylococcus aureus (strain NCTC 8325 / PS 47)
+Q2NGB4	reviewed_different_transport_family	background	0.8	False	-1.0	False	False	Methanosphaera stadtmanae (strain ATCC 43021 / DSM 3091 / JCM 11832 / MCB-3)
+Q2NTC7	reviewed_different_transport_family	background	1.3	False	2.0	False	False	Sodalis glossinidius (strain morsitans)
+Q2RFW3	reviewed_different_transport_family	background	-0.8	False	1.3	False	False	Moorella thermoacetica (strain ATCC 39073 / JCM 9320)
+Q2RXQ8	reviewed_different_transport_family	background	1.5	False	-1.2	False	False	Rhodospirillum rubrum (strain ATCC 11170 / ATH 1.1.1 / DSM 467 / LMG 4362 / NCIMB 8255 / S1)
+Q30X24	reviewed_different_transport_family	background	1.8	False	-0.2	False	False	Oleidesulfovibrio alaskensis (strain ATCC BAA-1058 / DSM 17464 / G20)
+Q38UX8	reviewed_different_transport_family	background	-3.4	False	-3.1	False	False	Latilactobacillus sakei subsp. sakei (strain 23K)
+Q3A2U7	reviewed_different_transport_family	background	3.6	False	-0.8	False	False	Syntrophotalea carbinolica (strain DSM 2380 / NBRC 103641 / GraBd1)
+Q3A931	reviewed_different_transport_family	background	2.9	False	1.2	False	False	Carboxydothermus hydrogenoformans (strain ATCC BAA-161 / DSM 6008 / Z-2901)
+Q46FW1	reviewed_different_transport_family	background	1.6	False	-0.1	False	False	Methanosarcina barkeri (strain Fusaro / DSM 804)
+Q47ZC7	reviewed_different_transport_family	background	-1.2	False	-8.1	False	False	Colwellia psychrerythraea (strain 34H / ATCC BAA-681)
+Q48262	reviewed_different_transport_family	background	2.1	False	-0.8	False	False	Helicobacter pylori (strain ATCC 700392 / 26695)
+Q492G8	reviewed_different_transport_family	background	-1.8	False	-1.1	False	False	Blochmanniella pennsylvanica (strain BPEN)
+Q553K4	reviewed_different_transport_family	background	-5.6	False	-8.9	False	False	Dictyostelium discoideum
+Q58004	reviewed_different_transport_family	background	1.6	False	-2.3	False	False	Methanocaldococcus jannaschii (strain ATCC 43067 / DSM 2661 / JAL-1 / JCM 10045 / NBRC 100440)
+Q5LG69	reviewed_different_transport_family	background	0.1	False	-0.2	False	False	Bacteroides fragilis (strain ATCC 25285 / DSM 2151 / CCUG 4856 / JCM 11019 / LMG 10263 / NCTC 9343 / Onslow / VPI 2553 / EN-2)
+Q5WB61	reviewed_different_transport_family	background	-2.3	False	-1.3	False	False	Shouchella clausii (strain KSM-K16)
+Q65W61	reviewed_different_transport_family	background	1.5	False	0.4	False	False	Mannheimia succiniciproducens (strain KCTC 0769BP / MBEL55E)
+Q6APV5	reviewed_different_transport_family	background	3.8	False	1.0	False	False	Desulfotalea psychrophila (strain LSv54 / DSM 12343)
+Q7N3L4	reviewed_different_transport_family	background	3.0	False	-0.9	False	False	Photorhabdus laumondii subsp. laumondii (strain DSM 15139 / CIP 105565 / TT01)
+Q87EJ9	reviewed_different_transport_family	background	-1.5	False	-3.1	False	False	Xylella fastidiosa (strain Temecula1 / ATCC 700964)
+Q89K67	reviewed_different_transport_family	background	1.7	False	-1.9	False	False	Bradyrhizobium diazoefficiens (strain JCM 10833 / BCRC 13528 / IAM 13628 / NBRC 14792 / USDA 110)
+Q8DUY3	reviewed_different_transport_family	background	6.4	False	1.6	False	False	Streptococcus mutans serotype c (strain ATCC 700610 / UA159)
+Q8EM65	reviewed_different_transport_family	background	-1.6	False	-2.8	False	False	Oceanobacillus iheyensis (strain DSM 14371 / CIP 107618 / JCM 11309 / KCTC 3954 / HTE831)
+Q8GH68	reviewed_different_transport_family	background	4.0	False	2.6	False	False	Lactiplantibacillus plantarum (strain ATCC BAA-793 / NCIMB 8826 / WCFS1)
+Q8P8R8	reviewed_different_transport_family	background	0.1	False	-6.9	False	False	Xanthomonas campestris pv. campestris (strain ATCC 33913 / DSM 3586 / NCPPB 528 / LMG 568 / P 25)
+Q8R7S2	reviewed_different_transport_family	background	5.0	False	-9.0	False	False	Caldanaerobacter subterraneus subsp. tengcongensis (strain DSM 15242 / JCM 11007 / NBRC 100824 / MB4)
+Q8RII2	reviewed_different_transport_family	background	0.3	False	-0.9	False	False	Fusobacterium nucleatum subsp. nucleatum (strain ATCC 25586 / DSM 15643 / BCRC 10681 / CIP 101130 / JCM 8532 / KCTC 2640 / LMG 13131 / VPI 4355)
+Q8UEM1	reviewed_different_transport_family	background	-0.4	False	-1.4	False	False	Agrobacterium fabrum (strain C58 / ATCC 33970)
+Q8XSF6	reviewed_different_transport_family	background	0.3	False	-2.5	False	False	Ralstonia nicotianae (strain ATCC BAA-1114 / GMI1000)
+Q8ZSB0	reviewed_different_transport_family	background	-0.7	False	-2.6	False	False	Nostoc sp. (strain PCC 7120 / SAG 25.82 / UTEX 2576)
+Q97TN5	reviewed_different_transport_family	background	-3.1	False	3.9	False	False	Clostridium acetobutylicum (strain ATCC 824 / DSM 792 / JCM 1419 / IAM 19013 / LMG 5710 / NBRC 13948 / NRRL B-527 / VKM B-1787 / 2291 / W)
+Q98I99	reviewed_different_transport_family	background	2.6	False	1.1	False	False	Mesorhizobium japonicum (strain LMG 29417 / CECT 9101 / MAFF 303099)
+Q9K6F9	reviewed_different_transport_family	background	-1.3	False	-1.1	False	False	Halalkalibacterium halodurans (strain ATCC BAA-125 / DSM 18197 / FERM 7344 / JCM 9153 / C-125)
+Q9RTP8	reviewed_different_transport_family	background	-4.6	False	-0.4	False	False	Deinococcus radiodurans (strain ATCC 13939 / DSM 20539 / JCM 16871 / CCUG 27074 / LMG 4051 / NBRC 15346 / NCIMB 9279 / VKM B-1422 / R1)
+Q9V2F1	reviewed_different_transport_family	background	-2.1	False	-2.4	False	False	Pyrococcus abyssi (strain GE5 / Orsay)
+A0A058ZKB6	unlabelled_homolog	unknown	336.2	True	508.2	True	False	Actibacterium atlanticum
+A0A066RQY8	unlabelled_homolog	unknown	501.4	True	448.9	True	False	Photobacterium galatheae
+A0A090IDA6	unlabelled_homolog	unknown	573.8	True	484.2	True	False	Aliivibrio wodanis
+A0A090S6E4	unlabelled_homolog	unknown	511.3	True	466.4	True	False	Vibrio maritimus
+A0A090T6T7	unlabelled_homolog	unknown	89.8	True	77.4	False	False	Vibrio maritimus
+A0A090T861	unlabelled_homolog	unknown	243.0	True	229.0	False	False	Vibrio maritimus
+A0A090TVE0	unlabelled_homolog	unknown	95.0	True	93.7	False	False	Vibrio maritimus
+A0A099LMK3	unlabelled_homolog	unknown	522.9	True	482.6	True	False	Vibrio navarrensis
+A0A0A6PMJ2	unlabelled_homolog	unknown	131.8	True	117.8	False	False	Candidatus Thiomargarita nelsonii
+A0A0A7EI41	unlabelled_homolog	unknown	408.6	True	382.7	True	False	Pseudoalteromonas piratica
+A0A0B3XXR4	unlabelled_homolog	unknown	409.4	True	370.6	True	False	Alteromonas marina
+A0A0B7MQS3	unlabelled_homolog	unknown	320.7	True	257.3	True	False	Syntrophaceticus schinkii
+A0A0C2P6C7	unlabelled_homolog	unknown	537.0	True	480.0	True	False	Vibrio renipiscarius
+A0A0D8IAV9	unlabelled_homolog	unknown	302.2	True	240.8	True	False	Andreesenella acetica
+A0A0D8J1L2	unlabelled_homolog	unknown	71.3	True	60.3	False	False	Ruthenibacterium lactatiformans
+A0A0E3QUC9	unlabelled_homolog	unknown	70.4	True	55.2	False	False	Methanosarcina barkeri MS
+A0A0E3SEQ4	unlabelled_homolog	unknown	63.3	True	59.3	False	False	Methanosarcina horonobensis HB-1 = JCM 15518
+A0A0F4NK26	unlabelled_homolog	unknown	510.6	True	476.9	True	False	Vibrio galatheae
+A0A0F4PW98	unlabelled_homolog	unknown	417.6	True	367.0	True	False	Pseudoalteromonas ruthenica
+A0A0F4QUL4	unlabelled_homolog	unknown	444.5	True	382.4	True	False	Pseudoalteromonas rubra
+A0A0F5VBD5	unlabelled_homolog	unknown	495.0	True	450.5	True	False	Photobacterium halotolerans
+A0A0G7ZM72	unlabelled_homolog	unknown	173.6	True	140.3	False	False	Candidatus Hepatoplasma crinochetorum
+A0A0G7ZMU6	unlabelled_homolog	unknown	119.0	True	87.6	False	False	Candidatus Hepatoplasma crinochetorum
+A0A0J1H2Z7	unlabelled_homolog	unknown	515.6	True	444.1	True	False	Photobacterium aquae
+A0A0J1H3Q7	unlabelled_homolog	unknown	507.1	True	446.1	True	False	Photobacterium ganghwense
+A0A0J1JKZ3	unlabelled_homolog	unknown	518.8	True	439.2	True	False	Photobacterium aphoticum
+A0A0J8D4S4	unlabelled_homolog	unknown	69.6	True	64.4	False	False	Clostridium cylindrosporum DSM 605
+A0A0J8DEA6	unlabelled_homolog	unknown	81.8	True	66.5	False	False	Clostridium cylindrosporum DSM 605
+A0A0J8Y295	unlabelled_homolog	unknown	517.2	True	445.9	True	False	Photobacterium swingsii
+A0A0J9EDE7	unlabelled_homolog	unknown	341.8	True	477.2	True	False	Candidatus Rhodobacter oscarellae
+A0A0L6W432	unlabelled_homolog	unknown	87.1	True	72.6	False	False	Thermincola carboxydiphila
+A0A0M0HUW2	unlabelled_homolog	unknown	530.7	True	478.8	True	False	Vibrio nereis
+A0A0M0HVX8	unlabelled_homolog	unknown	505.9	True	471.3	True	False	Vibrio hepatarius
+A0A0M3DHN4	unlabelled_homolog	unknown	288.1	True	223.0	False	False	Paraclostridium benzoelyticum
+A0A0N1EN88	unlabelled_homolog	unknown	474.8	True	388.3	True	False	Pseudoalteromonas porphyrae
+A0A0N8HMQ0	unlabelled_homolog	unknown	542.8	True	494.9	True	False	Vibrio alginolyticus
+A0A0P7JSZ1	unlabelled_homolog	unknown	348.8	True	509.8	True	False	Aliiroseovarius crassostreae
+A0A0Q2V020	unlabelled_homolog	unknown	513.2	True	518.2	True	False	Vibrio furnissii
+A0A0R2HMX2	unlabelled_homolog	unknown	86.8	True	69.2	False	False	Kandleria vitulina DSM 20405
+A0A0S2K0U6	unlabelled_homolog	unknown	434.9	True	372.7	True	False	Pseudoalteromonas phenolica
+A0A0W1RBY5	unlabelled_homolog	unknown	423.5	True	241.7	True	False	Haloprofundus marisrubri
+A0A109D938	unlabelled_homolog	unknown	499.3	True	448.3	True	False	Vibrio toranzoniae
+A0A117J5E3	unlabelled_homolog	unknown	81.7	True	70.8	False	False	Tractidigestivibacter scatoligenes
+A0A128ESS8	unlabelled_homolog	unknown	493.2	True	437.8	True	False	Grimontia celer
+A0A128F4U6	unlabelled_homolog	unknown	489.2	True	431.8	True	False	Grimontia marina
+A0A133U8G1	unlabelled_homolog	unknown	132.6	True	103.8	False	False	candidate division MSBL1 archaeon SCGC-AAA259B11
+A0A140DUZ1	unlabelled_homolog	unknown	92.5	True	74.2	False	False	Faecalibaculum rodentium
+A0A151AFF5	unlabelled_homolog	unknown	414.4	True	253.4	True	False	Halalkalicoccus paucihalophilus
+A0A162SFU9	unlabelled_homolog	unknown	40.0	True	43.6	False	False	Clostridium magnum DSM 2767
+A0A166UJZ6	unlabelled_homolog	unknown	444.1	True	376.6	True	False	Pseudoalteromonas luteoviolacea DSM 6061
+A0A172RW78	unlabelled_homolog	unknown	80.0	True	73.9	False	False	Denitrobacterium detoxificans
+A0A178JDU7	unlabelled_homolog	unknown	531.8	True	485.7	True	False	Vibrio europaeus
+A0A178K1F2	unlabelled_homolog	unknown	521.9	True	454.0	True	False	Photobacterium jeanii
+A0A1B1NQ62	unlabelled_homolog	unknown	540.3	True	482.7	True	False	Vibrio scophthalmi
+A0A1B4V367	unlabelled_homolog	unknown	400.5	True	387.1	True	False	Sulfurifustis variabilis
+A0A1B9QZW3	unlabelled_homolog	unknown	530.4	True	493.5	True	False	Vibrio genomosp. F10
+A0A1C3EJX0	unlabelled_homolog	unknown	475.8	True	421.5	True	False	Veronia pacifica
+A0A1C3IPI6	unlabelled_homolog	unknown	502.6	True	446.7	True	False	Vibrio atlanticus
+A0A1C3JAX9	unlabelled_homolog	unknown	504.9	True	447.0	True	False	Vibrio celticus
+A0A1C5G850	unlabelled_homolog	unknown	263.2	True	206.4	False	False	Micromonospora echinofusca
+A0A1C5HZ41	unlabelled_homolog	unknown	264.5	True	219.2	False	False	Micromonospora echinaurantiaca
+A0A1C6SS80	unlabelled_homolog	unknown	267.1	True	211.0	False	False	Micromonospora nigra
+A0A1C7II93	unlabelled_homolog	unknown	62.0	True	59.8	False	False	Blautia pseudococcoides
+A0A1D9NXT3	unlabelled_homolog	unknown	73.7	True	55.5	False	False	Butyrivibrio hungatei
+A0A1E5CXH6	unlabelled_homolog	unknown	537.3	True	488.4	True	False	Vibrio genomosp. F6 str. FF-238
+A0A1E7ZEX8	unlabelled_homolog	unknown	427.0	True	390.1	True	False	Alteromonas confluentis
+A0A1G5FK88	unlabelled_homolog	unknown	77.3	True	55.5	False	False	Butyrivibrio hungatei
+A0A1G5J3A4	unlabelled_homolog	unknown	296.9	True	240.6	True	False	Alkaliphilus peptidifermentans DSM 18978
+A0A1G6B5R3	unlabelled_homolog	unknown	396.5	True	406.9	True	False	Bauldia litoralis
+A0A1G6N7P9	unlabelled_homolog	unknown	74.5	True	52.1	False	False	Parafannyhessea umbonata
+A0A1G6NDV8	unlabelled_homolog	unknown	415.6	True	242.0	True	False	Natrinema hispanicum
+A0A1G7BIH5	unlabelled_homolog	unknown	372.0	True	347.8	True	False	Rhodospira trueperi
+A0A1G7QTH6	unlabelled_homolog	unknown	411.9	True	409.9	True	False	Limimonas halophila
+A0A1G7WMZ0	unlabelled_homolog	unknown	521.9	True	488.9	True	False	Vibrio xiamenensis
+A0A1G8KY77	unlabelled_homolog	unknown	322.7	True	470.1	True	False	Lutimaribacter saemankumensis
+A0A1G9AKX5	unlabelled_homolog	unknown	349.0	True	503.3	True	False	Meinhardsimonia xiamenensis
+A0A1G9H293	unlabelled_homolog	unknown	291.3	True	235.1	False	False	Natronincola ferrireducens
+A0A1H0C5X6	unlabelled_homolog	unknown	335.7	True	480.5	True	False	Lutimaribacter pacificus
+A0A1H1BP28	unlabelled_homolog	unknown	385.5	True	242.0	True	False	Halopelagius longus
+A0A1H5Z3N0	unlabelled_homolog	unknown	483.6	True	442.3	True	False	Vibrio hangzhouensis
+A0A1H6S3R6	unlabelled_homolog	unknown	122.7	True	104.3	False	False	Alkalibacterium gilvum
+A0A1H6W0Y5	unlabelled_homolog	unknown	402.8	True	238.7	False	False	Halohasta litchfieldiae
+A0A1H6ZBT8	unlabelled_homolog	unknown	267.1	True	220.9	False	False	Micromonospora phaseoli
+A0A1H7Y048	unlabelled_homolog	unknown	75.3	True	56.5	False	False	Syntrophus gentianae
+A0A1H7YZH8	unlabelled_homolog	unknown	331.8	True	473.4	True	False	Loktanella fryxellensis
+A0A1H8U2M1	unlabelled_homolog	unknown	402.4	True	258.0	True	False	Halogranum amylolyticum
+A0A1H9I9T7	unlabelled_homolog	unknown	423.4	True	247.3	True	False	Natrinema salaciae
+A0A1I0BU36	unlabelled_homolog	unknown	173.2	True	141.4	False	False	Anaerobranca gottschalkii DSM 13577
+A0A1I0CT29	unlabelled_homolog	unknown	152.3	True	129.3	False	False	Anaerobranca gottschalkii DSM 13577
+A0A1I0G703	unlabelled_homolog	unknown	88.8	True	67.7	False	False	Thomasclavelia cocleata
+A0A1I0NMY7	unlabelled_homolog	unknown	63.3	True	53.2	False	False	[Clostridium] fimetarium
+A0A1I0QL40	unlabelled_homolog	unknown	422.9	True	244.9	True	False	Natrinema salifodinae
+A0A1I1I7Q4	unlabelled_homolog	unknown	415.8	True	238.9	False	False	Natronobacterium haloterrestre
+A0A1I1M2S8	unlabelled_homolog	unknown	456.0	True	390.5	True	False	Pseudoalteromonas denitrificans DSM 6059
+A0A1I2NJA1	unlabelled_homolog	unknown	376.6	True	237.5	False	False	Halopelagius inordinatus
+A0A1I4F020	unlabelled_homolog	unknown	410.2	True	269.8	True	False	Halogranum rubrum
+A0A1I4FPN1	unlabelled_homolog	unknown	332.9	True	474.2	True	False	Loktanella salsilacus
+A0A1I5NMW8	unlabelled_homolog	unknown	118.4	True	113.1	False	False	Halolactibacillus halophilus
+A0A1I5WQK2	unlabelled_homolog	unknown	75.9	True	53.2	False	False	Butyrivibrio proteoclasticus
+A0A1I6GPC3	unlabelled_homolog	unknown	387.4	True	253.3	True	False	Halogeometricum rufum
+A0A1I6GRY8	unlabelled_homolog	unknown	391.1	True	252.2	True	False	Halogeometricum limi
+A0A1I6NXR1	unlabelled_homolog	unknown	422.0	True	254.2	True	False	Halostagnicola kamekurae
+A0A1M4PRL4	unlabelled_homolog	unknown	290.8	True	227.8	False	False	[Clostridium] ultunense Esp
+A0A1M4V5E2	unlabelled_homolog	unknown	65.4	True	47.2	False	False	Caloramator proteoclasticus DSM 10124
+A0A1M5AX19	unlabelled_homolog	unknown	327.5	True	479.7	True	False	Loktanella atrilutea
+A0A1M5KSD3	unlabelled_homolog	unknown	268.3	True	216.7	False	False	Asaccharospora irregularis DSM 2635
+A0A1M5M4H6	unlabelled_homolog	unknown	426.4	True	380.4	True	False	Marisediminitalea aggregata
+A0A1M5ZPA5	unlabelled_homolog	unknown	69.8	True	51.9	False	False	Butyrivibrio fibrisolvens DSM 3071
+A0A1M6CVD6	unlabelled_homolog	unknown	317.7	True	467.0	True	False	Wenxinia saemankumensis
+A0A1M6L252	unlabelled_homolog	unknown	285.9	True	209.9	False	False	Dethiosulfatibacter aminovorans DSM 17477
+A0A1M6L547	unlabelled_homolog	unknown	132.9	True	120.9	False	False	Tangfeifania diversioriginum
+A0A1M6M8U3	unlabelled_homolog	unknown	325.9	True	249.1	True	False	Tepidibacter formicigenes DSM 15518
+A0A1M6MVE9	unlabelled_homolog	unknown	195.1	True	161.7	False	False	Anaerobranca californiensis DSM 14826
+A0A1M6NFH7	unlabelled_homolog	unknown	116.5	True	96.7	False	False	Malonomonas rubra DSM 5091
+A0A1M6P4H9	unlabelled_homolog	unknown	86.6	True	80.5	False	False	Hathewaya proteolytica DSM 3090
+A0A1M6Q4S8	unlabelled_homolog	unknown	327.8	True	246.4	True	False	Paramaledivibacter caminithermalis (strain DSM 15212 / CIP 107654 / DViRD3)
+A0A1M7CSQ5	unlabelled_homolog	unknown	406.1	True	255.8	True	False	Haladaptatus paucihalophilus DX253
+A0A1N5WJQ8	unlabelled_homolog	unknown	262.2	True	211.8	False	False	Micromonospora cremea
+A0A1N6EUG6	unlabelled_homolog	unknown	116.0	True	103.6	False	False	Carnobacterium alterfunditum
+A0A1N6Y1A2	unlabelled_homolog	unknown	399.9	True	249.5	True	False	Haladaptatus litoreus
+A0A1N7D5G0	unlabelled_homolog	unknown	258.7	True	200.7	False	False	Micromonospora avicenniae
+A0A1Q8QXH4	unlabelled_homolog	unknown	42.0	True	43.2	False	False	Desulfosporosinus metallidurans
+A0A1Q9GFJ4	unlabelled_homolog	unknown	506.4	True	447.1	True	False	Photobacterium proteolyticum
+A0A1S1MW56	unlabelled_homolog	unknown	386.5	True	366.1	True	False	Pseudoalteromonas amylolytica
+A0A1S1N9D7	unlabelled_homolog	unknown	360.9	True	357.4	True	False	Pseudoalteromonas byunsanensis
+A0A1S8B0Y9	unlabelled_homolog	unknown	418.0	True	247.2	True	False	Natrinema saccharevitans
+A0A1T4L887	unlabelled_homolog	unknown	90.5	True	66.3	False	False	Anaerorhabdus furcosa
+A0A1T4PD99	unlabelled_homolog	unknown	298.7	True	235.9	False	False	Cetobacterium ceti
+A0A1T4QTL5	unlabelled_homolog	unknown	291.0	True	276.8	True	False	Cetobacterium ceti
+A0A1T4W6M0	unlabelled_homolog	unknown	480.1	True	430.8	True	False	Enterovibrio nigricans DSM 22720
+A0A1T4X1L4	unlabelled_homolog	unknown	74.7	True	64.3	False	False	Gemmiger formicilis
+A0A1T5KJ09	unlabelled_homolog	unknown	322.6	True	234.4	False	False	Maledivibacter halophilus
+A0A1U7NGS0	unlabelled_homolog	unknown	74.5	True	58.7	False	False	Ileibacterium valens
+A0A1U7NN52	unlabelled_homolog	unknown	83.2	True	65.1	False	False	Dubosiella newyorkensis
+A0A1X2JNC9	unlabelled_homolog	unknown	287.0	True	224.4	False	False	Paraclostridium bifermentans
+A0A1X7MV03	unlabelled_homolog	unknown	117.6	True	98.2	False	False	Carnobacterium iners
+A0A1Y3U4V7	unlabelled_homolog	unknown	62.7	True	63.3	False	False	Enorma massiliensis
+A0A1Y3XSK0	unlabelled_homolog	unknown	68.3	True	67.1	False	False	[Collinsella] massiliensis
+A0A1Y4LX25	unlabelled_homolog	unknown	87.0	True	55.5	False	False	Faecalitalea cylindroides
+A0A1Y4SV14	unlabelled_homolog	unknown	92.9	True	76.3	False	False	Massiliimicrobium timonense
+A0A1Z2XU27	unlabelled_homolog	unknown	66.6	True	44.1	False	False	Acutalibacter muris
+A0A238JNC4	unlabelled_homolog	unknown	342.8	True	497.2	True	False	Actibacterium lipolyticum
+A0A239ECF6	unlabelled_homolog	unknown	306.5	True	253.2	True	False	Anaerovirgula multivorans
+A0A240EM81	unlabelled_homolog	unknown	521.1	True	468.7	True	False	Vibrio thalassae
+A0A244CM93	unlabelled_homolog	unknown	396.6	True	359.9	True	False	Pseudoalteromonas ulvae
+A0A252F7P9	unlabelled_homolog	unknown	74.4	True	66.3	False	False	Butyricicoccus porcorum
+A0A256INW5	unlabelled_homolog	unknown	390.9	True	219.9	False	False	Halorubrum halodurans
+A0A267MM54	unlabelled_homolog	unknown	321.1	True	234.3	False	False	Anaeromicrobium sediminis
+A0A285N957	unlabelled_homolog	unknown	389.9	True	227.8	False	False	Natronoarchaeum philippinense
+A0A2A5JSM6	unlabelled_homolog	unknown	432.5	True	365.7	True	False	Pseudoalteromonas piscicida
+A0A2A5QY01	unlabelled_homolog	unknown	429.2	True	249.7	True	False	Natrinema ejinorense
+A0A2A6ZDN6	unlabelled_homolog	unknown	75.9	True	58.9	False	False	Faecalibacterium langellae
+A0A2I3BYX6	unlabelled_homolog	unknown	542.8	True	494.9	True	False	Vibrio alginolyticus (strain ATCC 17749 / DSM 2171 / NBRC 15630 / NCIMB 1903 / NCTC 12160 / XII-53)
+A0A2J9UWN9	unlabelled_homolog	unknown	542.2	True	576.1	True	False	Vibrio mimicus
+A0A2K2U5H2	unlabelled_homolog	unknown	60.1	True	54.1	False	False	Rubneribacter badeniensis
+A0A2K2UDZ5	unlabelled_homolog	unknown	61.8	True	62.2	False	False	Enteroscipio rubneri
+A0A2K4X9M1	unlabelled_homolog	unknown	498.8	True	388.5	True	False	Pseudoalteromonas carrageenovora IAM 12662
+A0A2K4ZIB5	unlabelled_homolog	unknown	69.8	True	62.9	False	False	Acetatifactor muris
+A0A2N8Z8V0	unlabelled_homolog	unknown	539.2	True	484.9	True	False	Vibrio tapetis subsp. tapetis
+A0A2R8AHJ4	unlabelled_homolog	unknown	344.0	True	480.4	True	False	Aliiroseovarius pelagivivens
+A0A2R8B3J6	unlabelled_homolog	unknown	330.6	True	488.5	True	False	Albidovulum aquaemixtae
+A0A2S5JG71	unlabelled_homolog	unknown	324.4	True	452.6	True	False	Albidovulum inexpectatum
+A0A2S7VEV9	unlabelled_homolog	unknown	505.2	True	448.1	True	False	Vibrio chagasii
+A0A2S8SEU0	unlabelled_homolog	unknown	319.6	True	439.1	True	False	Albidovulum denitrificans
+A0A2T3JIT9	unlabelled_homolog	unknown	557.4	True	461.9	True	False	Photobacterium frigidiphilum
+A0A2T3LCP5	unlabelled_homolog	unknown	556.7	True	461.9	True	False	Photobacterium indicum
+A0A2V2F826	unlabelled_homolog	unknown	78.2	True	52.3	False	False	Dielma fastidiosa
+A0A2Z4UE30	unlabelled_homolog	unknown	62.9	True	61.3	False	False	Blautia argi
+A0A317FZQ4	unlabelled_homolog	unknown	74.1	True	57.2	False	False	Butyrivibrio fibrisolvens
+A0A327JL34	unlabelled_homolog	unknown	416.4	True	392.4	True	False	Rhodobium orientis
+A0A329UK14	unlabelled_homolog	unknown	90.8	True	68.3	False	False	Faecalibacterium hattorii
+A0A346NHJ3	unlabelled_homolog	unknown	383.1	True	339.2	True	False	Salinimonas sediminis
+A0A347UIM4	unlabelled_homolog	unknown	320.2	True	428.2	True	False	Profundibacter amoris
+A0A366D661	unlabelled_homolog	unknown	463.5	True	387.0	True	False	Marinomonas aquiplantarum
+A0A366J669	unlabelled_homolog	unknown	478.4	True	409.1	True	False	Marinomonas rhizomae
+A0A369LAI7	unlabelled_homolog	unknown	76.7	True	66.0	False	False	Senegalimassilia anaerobia
+A0A369LXI4	unlabelled_homolog	unknown	54.5	True	51.2	False	False	Gordonibacter pamelaeae
+A0A369T8U8	unlabelled_homolog	unknown	394.7	True	409.5	True	False	Ferruginivarius sediminum
+A0A371J6N6	unlabelled_homolog	unknown	266.9	True	213.2	False	False	Romboutsia weinsteinii
+A0A380LJR2	unlabelled_homolog	unknown	84.7	True	64.2	False	False	Faecalicoccus pleomorphus
+A0A398CSL8	unlabelled_homolog	unknown	100.7	True	83.3	False	False	Candidatus Cryosericum terrychapinii
+A0A398D436	unlabelled_homolog	unknown	96.4	True	78.0	False	False	Candidatus Cryosericum odellii
+A0A398DKM0	unlabelled_homolog	unknown	99.7	True	82.5	False	False	Candidatus Cryosericum septentrionale
+A0A3A3YSQ9	unlabelled_homolog	unknown	214.1	True	167.0	False	False	Vallicoccus soli
+A0A3A6PMN7	unlabelled_homolog	unknown	411.7	True	253.0	True	False	Halonotius aquaticus
+A0A3A6QT81	unlabelled_homolog	unknown	397.0	True	248.6	True	False	Halonotius pteroides
+A0A3A6R1E4	unlabelled_homolog	unknown	531.6	True	491.6	True	False	Vibrio sinensis
+A0A3A9AXZ4	unlabelled_homolog	unknown	64.6	True	46.1	False	False	Parablautia intestinalis
+A0A3E0DJH6	unlabelled_homolog	unknown	468.4	True	398.6	True	False	Marinomonas pollencensis
+A0A3E0TZQ0	unlabelled_homolog	unknown	460.0	True	414.5	True	False	Thalassotalea euphylliae
+A0A3E1KB09	unlabelled_homolog	unknown	425.3	True	400.7	True	False	Wenzhouxiangella sediminis
+A0A3E5EQD1	unlabelled_homolog	unknown	86.7	True	71.8	False	False	Dorea formicigenerans
+A0A3G9KAN2	unlabelled_homolog	unknown	54.4	True	49.6	False	False	Parolsenella catena
+A0A3N0A8E2	unlabelled_homolog	unknown	78.8	True	67.5	False	False	Parvibacter caecicola
+A0A3N0AFM8	unlabelled_homolog	unknown	64.8	True	61.0	False	False	Slackia faecicanis
+A0A3N0AST9	unlabelled_homolog	unknown	77.3	True	64.5	False	False	Adlercreutzia equolifaciens subsp. celatus DSM 18785
+A0A3N0AZF4	unlabelled_homolog	unknown	73.6	True	61.8	False	False	Slackia equolifaciens
+A0A3N0I4R6	unlabelled_homolog	unknown	84.3	True	68.0	False	False	Absicoccus porci
+A0A3N0ID58	unlabelled_homolog	unknown	69.6	True	61.7	False	False	Slackia isoflavoniconvertens
+A0A3N0IXA6	unlabelled_homolog	unknown	55.5	True	48.6	False	False	Eggerthella sinensis
+A0A3P3RJ93	unlabelled_homolog	unknown	391.3	True	249.6	True	False	Halocatena pleomorpha
+A0A3Q0L6I7	unlabelled_homolog	unknown	532.0	True	470.8	True	False	Vibrio vulnificus (strain CMCP6)
+A0A3R7DBR7	unlabelled_homolog	unknown	424.0	True	247.2	True	False	Halopiger aswanensis
+A0A3R9G1Q0	unlabelled_homolog	unknown	525.5	True	470.2	True	False	Vibrio pectenicida
+A0A3S0PN56	unlabelled_homolog	unknown	528.0	True	472.8	True	False	Vibrio aquaticus
+A0A3S3QTI0	unlabelled_homolog	unknown	510.9	True	452.4	True	False	Photobacterium chitinilyticum
+A0A414NFY6	unlabelled_homolog	unknown	60.9	True	57.6	False	False	Collinsella intestinalis
+A0A414S449	unlabelled_homolog	unknown	88.5	True	71.6	False	False	Dorea longicatena
+A0A415DYI2	unlabelled_homolog	unknown	61.0	True	42.1	False	False	Emergencia timonensis
+A0A420F729	unlabelled_homolog	unknown	268.6	True	203.1	False	False	Micromonospora globbae
+A0A423PQB5	unlabelled_homolog	unknown	357.9	True	336.9	True	False	Salinisphaera orenii subsp. orenii MK-B5
+A0A494WE99	unlabelled_homolog	unknown	69.7	True	60.9	False	False	Clostridium scindens (strain ATCC 35704 / DSM 5676 / VPI 13733 / 19)
+A0A495JQH2	unlabelled_homolog	unknown	268.5	True	219.1	False	False	Micromonospora pisi
+A0A4P6PB34	unlabelled_homolog	unknown	419.0	True	370.1	True	False	Litorilituus sediminis
+A0A4P9TE36	unlabelled_homolog	unknown	414.8	True	243.4	True	False	Natrinema pallidum
+A0A4Q0YSE1	unlabelled_homolog	unknown	475.8	True	432.1	True	False	Veronia nyctiphanis
+A0A4Q2JX29	unlabelled_homolog	unknown	67.2	True	61.5	False	False	Senegalimassilia faecalis
+A0A4Q2KEK4	unlabelled_homolog	unknown	65.2	True	52.9	False	False	Candidatus Borkfalkia ceftriaxoniphila
+A0A4Q5KZI7	unlabelled_homolog	unknown	575.1	True	485.1	True	False	Aliivibrio finisterrensis
+A0A4Q7PIJ0	unlabelled_homolog	unknown	70.3	True	58.1	False	False	Cuneatibacter caecimuris
+A0A4R1QMS3	unlabelled_homolog	unknown	66.1	True	48.8	False	False	Kineothrix alysoides
+A0A4R2KPV0	unlabelled_homolog	unknown	333.4	True	488.0	True	False	Rhodovulum euryhalinum
+A0A4R2LYE5	unlabelled_homolog	unknown	64.4	True	38.2	False	False	Frisingicoccus caecimuris
+A0A4R2Q0T9	unlabelled_homolog	unknown	332.0	True	494.6	True	False	Rhodovulum marinum
+A0A4R2RCT1	unlabelled_homolog	unknown	329.9	True	485.9	True	False	Rhodovulum bhavnagarense
+A0A4R2T2U0	unlabelled_homolog	unknown	290.9	True	236.6	False	False	Serpentinicella alkaliphila
+A0A4R3IEC6	unlabelled_homolog	unknown	504.2	True	452.7	True	False	Reinekea marinisedimentorum
+A0A4R3JSY5	unlabelled_homolog	unknown	69.9	True	67.4	False	False	Faecalimonas umbilicata
+A0A4R3KQD1	unlabelled_homolog	unknown	40.2	True	29.0	False	False	Keratinibaculum paraultunense
+A0A4R3KRQ5	unlabelled_homolog	unknown	41.8	True	29.0	False	False	Keratinibaculum paraultunense
+A0A4R3STW6	unlabelled_homolog	unknown	104.6	True	85.1	False	False	Longicatena caecimuris
+A0A4R3Z6I7	unlabelled_homolog	unknown	70.7	True	60.2	False	False	Longibaculum muris
+A0A4R4FDH4	unlabelled_homolog	unknown	64.0	True	56.8	False	False	Extibacter muris
+A0A4R6MID0	unlabelled_homolog	unknown	439.3	True	335.0	True	False	Marinomonas balearica
+A0A4R6X954	unlabelled_homolog	unknown	450.2	True	375.9	True	False	Marinomonas communis
+A0A4S2F313	unlabelled_homolog	unknown	70.7	True	51.8	False	False	Muricaecibacterium torontonense
+A0A4S3MST0	unlabelled_homolog	unknown	341.8	True	486.4	True	False	Aliigemmobacter aestuarii
+A0A4U0ZI24	unlabelled_homolog	unknown	412.3	True	372.9	True	False	Alteromonas portus
+A0A4U1Y7J2	unlabelled_homolog	unknown	502.5	True	446.4	True	False	Vibrio kanaloae
+A0A4U8Q8G7	unlabelled_homolog	unknown	89.3	True	70.7	False	False	Robinsoniella peoriensis
+A0A4U9RIK7	unlabelled_homolog	unknown	309.9	True	247.2	True	False	Hathewaya histolytica
+A0A4V3UYU6	unlabelled_homolog	unknown	334.8	True	455.0	True	False	Thalassobius vesicularis
+A0A4V6KCB4	unlabelled_homolog	unknown	90.8	True	81.8	False	False	Hathewaya histolytica
+A0A4V6NJL4	unlabelled_homolog	unknown	327.7	True	487.7	True	False	Rhodovulum steppense
+A0A4Y8WIZ2	unlabelled_homolog	unknown	527.2	True	475.4	True	False	Vibrio ouci
+A0A510XZT6	unlabelled_homolog	unknown	499.1	True	387.8	True	False	Pseudoalteromonas espejiana
+A0A511ASK3	unlabelled_homolog	unknown	110.5	True	103.2	False	False	Alkalibacterium kapii
+A0A511AYN3	unlabelled_homolog	unknown	111.3	True	103.7	False	False	Alkalibacterium kapii
+A0A511X3Q1	unlabelled_homolog	unknown	122.1	True	115.9	False	False	Halolactibacillus alkaliphilus
+A0A521FIM5	unlabelled_homolog	unknown	332.6	True	472.0	True	False	Thalassovita litoralis
+A0A544QSP6	unlabelled_homolog	unknown	403.8	True	249.5	True	False	Halonotius roseus
+A0A545SR35	unlabelled_homolog	unknown	350.1	True	494.1	True	False	Aliiroseovarius halocynthiae
+A0A545TU38	unlabelled_homolog	unknown	386.8	True	376.9	True	False	Denitrobaculum tricleocarpae
+A0A550JBN6	unlabelled_homolog	unknown	117.2	True	95.7	False	False	Trichloromonas acetexigens
+A0A561WU55	unlabelled_homolog	unknown	262.6	True	213.8	False	False	Micromonospora palomenae
+A0A562JKX4	unlabelled_homolog	unknown	73.8	True	61.3	False	False	Sedimentibacter saalensis
+A0A564UJ61	unlabelled_homolog	unknown	79.3	True	66.1	False	False	Faecalibacterium prausnitzii
+A0A564WR75	unlabelled_homolog	unknown	54.0	True	49.2	False	False	Blautia wexlerae
+A0A5B2VC25	unlabelled_homolog	unknown	345.7	True	336.5	True	False	Salinarimonas soli
+A0A5B8FY60	unlabelled_homolog	unknown	324.2	True	435.9	True	False	Paroceanicella profunda
+A0A5C4MFA7	unlabelled_homolog	unknown	216.9	True	177.6	False	False	Mumia zhuanghuii
+A0A5C5GHE6	unlabelled_homolog	unknown	327.0	True	448.6	True	False	Pelagovum pacificum
+A0A5M6IAN1	unlabelled_homolog	unknown	380.4	True	363.5	True	False	Roseospira marina
+A0A5M9P1R7	unlabelled_homolog	unknown	504.8	True	447.8	True	False	Vibrio gigantis
+A0A5P9CJW5	unlabelled_homolog	unknown	528.1	True	475.4	True	False	Vibrio aquimaris
+A0A5P9P832	unlabelled_homolog	unknown	433.0	True	246.4	True	False	Natronorubrum aibiense
+A0A5Q0GVB4	unlabelled_homolog	unknown	228.9	True	189.1	False	False	Saccharothrix syringae
+A0A5S3XPD6	unlabelled_homolog	unknown	460.1	True	384.8	True	False	Pseudoalteromonas citrea
+A0A6B0GPN9	unlabelled_homolog	unknown	423.8	True	247.9	True	False	Halomarina oriensis
+A0A6C2UKK1	unlabelled_homolog	unknown	115.4	True	90.5	False	False	Pontiella sulfatireligans
+A0A6F8SIR9	unlabelled_homolog	unknown	77.0	True	65.3	False	False	Adlercreutzia hattorii
+A0A6I6JYK5	unlabelled_homolog	unknown	127.4	True	112.2	False	False	Maribellus comscasis
+A0A6L5X890	unlabelled_homolog	unknown	55.5	True	51.3	False	False	Porcincola intestinalis
+A0A6L5Y4K8	unlabelled_homolog	unknown	48.7	True	41.7	False	False	Hornefia butyriciproducens
+A0A6L5YJP9	unlabelled_homolog	unknown	88.4	True	59.9	False	False	Waltera intestinalis
+A0A6L8LYG4	unlabelled_homolog	unknown	524.3	True	473.9	True	False	Vibrio tetraodonis subsp. pristinus
+A0A6M1KZC6	unlabelled_homolog	unknown	264.6	True	219.5	False	False	Verrucosispora sioxanthis
+A0A6M1REH1	unlabelled_homolog	unknown	486.1	True	430.1	True	False	Grimontia sedimenti
+A0A6N4TFI4	unlabelled_homolog	unknown	96.5	True	74.3	False	False	Amedibacterium intestinale
+A0A6N6NQU7	unlabelled_homolog	unknown	82.2	True	84.6	False	False	Ellagibacter isourolithinifaciens
+A0A6N7J0K9	unlabelled_homolog	unknown	56.3	True	51.6	False	False	Candidatus Weimeria bifida
+A0A6N7VJD5	unlabelled_homolog	unknown	92.1	True	71.1	False	False	Holdemanella porci
+A0A6N7X8F7	unlabelled_homolog	unknown	66.9	True	70.8	False	False	Olsenella porci
+A0A6N8IF97	unlabelled_homolog	unknown	56.3	True	52.0	False	False	Gordonibacter urolithinfaciens
+A0A6N8JKN7	unlabelled_homolog	unknown	79.9	True	60.3	False	False	Adlercreutzia mucosicola
+A0A6N8U873	unlabelled_homolog	unknown	72.7	True	70.8	False	False	Copranaerobaculum intestinale
+A0A7C8FWN8	unlabelled_homolog	unknown	84.0	True	66.6	False	False	Adlercreutzia muris
+A0A7D5KZN1	unlabelled_homolog	unknown	421.1	True	235.7	False	False	Natrinema halophilum
+A0A7D6CNP0	unlabelled_homolog	unknown	421.8	True	242.0	True	False	Natrinema zhouii
+A0A7G9FVX9	unlabelled_homolog	unknown	86.2	True	64.7	False	False	Simiaoa sunii
+A0A7G9G497	unlabelled_homolog	unknown	92.1	True	85.2	False	False	Qiania dongpingensis
+A0A7G9W6D7	unlabelled_homolog	unknown	302.5	True	252.4	True	False	Alkalicella caledoniensis
+A0A7K0G6V4	unlabelled_homolog	unknown	61.6	True	66.0	False	False	Enorma shizhengliae
+A0A7K1T3F5	unlabelled_homolog	unknown	77.1	True	61.2	False	False	Adlercreutzia rubneri
+A0A7M2RG02	unlabelled_homolog	unknown	69.7	True	54.8	False	False	Blautia liquoris
+A0A7U4QKA5	unlabelled_homolog	unknown	116.0	True	108.7	False	False	Desulfofervidus auxilii
+A0A7W2ITU9	unlabelled_homolog	unknown	540.5	True	479.9	True	False	Vibrio marinisediminis
+A0A7W6S240	unlabelled_homolog	unknown	383.3	True	346.4	True	False	Roseospira goensis
+A0A7W6W8C3	unlabelled_homolog	unknown	364.8	True	334.0	True	False	Roseospira visakhapatnamensis
+A0A7W7SX34	unlabelled_homolog	unknown	274.8	True	223.7	False	False	Micromonospora polyrhachis
+A0A7W8CZ35	unlabelled_homolog	unknown	81.2	True	70.6	False	False	Catenisphaera adipataccumulans
+A0A7X1ZJE4	unlabelled_homolog	unknown	372.7	True	367.6	True	False	Roseospira navarrensis
+A0A7X2T4E2	unlabelled_homolog	unknown	71.7	True	41.4	False	False	Floccifex porci
+A0A7X2TFH1	unlabelled_homolog	unknown	95.1	True	67.4	False	False	Stecheria intestinalis
+A0A7X2TPP9	unlabelled_homolog	unknown	75.7	True	68.4	False	False	Bilifractor porci
+A0A7X3MJ70	unlabelled_homolog	unknown	56.5	True	44.6	False	False	Sporofaciens musculi
+A0A7X8YFI8	unlabelled_homolog	unknown	531.4	True	493.5	True	False	Vibrio agarilyticus
+A0A7X9YHZ5	unlabelled_homolog	unknown	59.7	True	48.3	False	False	Collinsella acetigenes
+A0A7Y0DPS1	unlabelled_homolog	unknown	491.6	True	382.9	True	False	Pseudoalteromonas arctica
+A0A7Y9H453	unlabelled_homolog	unknown	241.7	True	210.5	False	False	Nocardioides cavernae
+A0A830F5I5	unlabelled_homolog	unknown	430.6	True	237.5	False	False	Halocalculus aciditolerans
+A0A830F5Z4	unlabelled_homolog	unknown	412.8	True	237.9	False	False	Halarchaeum grantii
+A0A837NBF3	unlabelled_homolog	unknown	457.7	True	407.4	True	False	Idiomarina zobellii
+A0A838XAC4	unlabelled_homolog	unknown	65.8	True	60.8	False	False	Aeromicrobium phoceense
+A0A838XI42	unlabelled_homolog	unknown	91.6	True	72.2	False	False	Aeromicrobium phoceense
+A0A840CEY8	unlabelled_homolog	unknown	329.6	True	488.8	True	False	Actibacterium naphthalenivorans
+A0A841KY40	unlabelled_homolog	unknown	73.6	True	65.0	False	False	Anaerosolibacter carboniphilus
+A0A842JFE0	unlabelled_homolog	unknown	57.0	True	55.5	False	False	Gordonibacter massiliensis
+A0A844BDA9	unlabelled_homolog	unknown	325.7	True	470.2	True	False	Rhodovulum strictum
+A0A845QGQ5	unlabelled_homolog	unknown	50.7	True	43.3	False	False	Anaerotruncus colihominis
+A0A849BQS1	unlabelled_homolog	unknown	116.0	True	113.6	False	False	Pseudokineococcus marinus
+A0A849BWA5	unlabelled_homolog	unknown	133.7	True	106.7	False	False	Pseudokineococcus marinus
+A0A850HHF3	unlabelled_homolog	unknown	67.7	True	55.8	False	False	Dorea phocaeensis
+A0A853IDU3	unlabelled_homolog	unknown	493.7	True	425.0	True	False	Spartinivicinus marinus
+A0A8A2U571	unlabelled_homolog	unknown	426.9	True	247.0	True	False	Natrinema longum
+A0A8A4TQP2	unlabelled_homolog	unknown	364.2	True	373.5	True	False	Sulfidibacter corallicola
+A0A8A7KFK3	unlabelled_homolog	unknown	64.1	True	50.1	False	False	Iocasia frigidifontis
+A0A8G1ECK0	unlabelled_homolog	unknown	310.3	True	437.6	True	False	Neotabrizicola shimadae
+A0A8I0MW39	unlabelled_homolog	unknown	429.9	True	360.6	True	False	Pseudoalteromonas peptidolytica F12-50-A1
+A0A8I2H9N4	unlabelled_homolog	unknown	433.2	True	365.5	True	False	Pseudoalteromonas maricaloris
+A0A8J3A740	unlabelled_homolog	unknown	227.6	True	168.8	False	False	Egicoccus halophilus
+A0A8J6IPM4	unlabelled_homolog	unknown	78.0	True	67.8	False	False	Neobittarella massiliensis
+A0A8J6TQZ9	unlabelled_homolog	unknown	62.3	True	57.3	False	False	Massiliimalia timonensis
+A0A8J8C7X9	unlabelled_homolog	unknown	400.0	True	231.9	False	False	Haloarcula limicola
+A0A8J8GIE0	unlabelled_homolog	unknown	419.7	True	242.5	True	False	Haloterrigena gelatinilytica
+A0A8T4H006	unlabelled_homolog	unknown	390.9	True	256.3	True	False	Halolamina salifodinae
+A0A8T6YRG3	unlabelled_homolog	unknown	430.5	True	362.1	True	False	Pseudoalteromonas galatheae
+A0A8T8E5J9	unlabelled_homolog	unknown	422.7	True	243.4	True	False	Haloterrigena salifodinae
+A0A8U0A597	unlabelled_homolog	unknown	400.7	True	250.3	True	False	Halocatena salina
+A0A8U0HV30	unlabelled_homolog	unknown	402.9	True	248.2	True	False	Halorussus limi
+A0A8U0IE93	unlabelled_homolog	unknown	394.9	True	223.8	False	False	Halorussus gelatinilyticus
+A0A919BN89	unlabelled_homolog	unknown	439.6	True	394.6	True	False	Thalassotalea marina
+A0A921NSE8	unlabelled_homolog	unknown	312.2	True	454.7	True	False	Profundibacterium mesophilum KAUST100406-0324
+A0A923I7V9	unlabelled_homolog	unknown	75.0	True	54.3	False	False	Anaerofilum hominis
+A0A923LDH3	unlabelled_homolog	unknown	69.3	True	73.0	False	False	Anaerosacchariphilus hominis
+A0A923LV91	unlabelled_homolog	unknown	69.2	True	55.0	False	False	Agathobaculum faecis
+A0A926F7G2	unlabelled_homolog	unknown	71.4	True	56.8	False	False	Qingrenia yutianensis
+A0A926HV15	unlabelled_homolog	unknown	103.7	True	66.3	False	False	Feifania hominis
+A0A926I2M3	unlabelled_homolog	unknown	70.9	True	62.2	False	False	Fumia xinanensis
+A0A934JT90	unlabelled_homolog	unknown	478.8	True	401.1	True	False	Marinomonas transparens
+A0A934QG05	unlabelled_homolog	unknown	404.9	True	406.4	True	False	Rhodovibrio salinarum
+A0A938WZQ0	unlabelled_homolog	unknown	71.3	True	54.9	False	False	Mordavella massiliensis
+A0A975DGP6	unlabelled_homolog	unknown	169.7	True	167.4	False	False	Pseudoalteromonas xiamenensis
+A0A975DH14	unlabelled_homolog	unknown	192.1	True	171.3	False	False	Pseudoalteromonas xiamenensis
+A0A975UB87	unlabelled_homolog	unknown	513.2	True	497.2	True	False	Vibrio ostreae
+A0A9E6MPL3	unlabelled_homolog	unknown	58.4	True	61.0	False	False	Xiamenia xianingshaonis
+A0A9J6NYQ8	unlabelled_homolog	unknown	323.1	True	246.6	True	False	Oceanirhabdus seepicola
+A0A9Q4Q1G4	unlabelled_homolog	unknown	418.9	True	252.0	True	False	Natrinema salsiterrestre
+A0A9Q9CHH1	unlabelled_homolog	unknown	80.5	True	66.8	False	False	Turicibacter bilis
+A0A9R0CEP9	unlabelled_homolog	unknown	255.9	True	209.7	False	False	Clostridioides difficile (strain R20291)
+A0A9W4QRM1	unlabelled_homolog	unknown	474.2	True	378.6	True	False	Pseudoalteromonas haloplanktis
+A0A9W4R1E0	unlabelled_homolog	unknown	399.2	True	360.5	True	False	Pseudoalteromonas holothuriae
+A0A9W6GP53	unlabelled_homolog	unknown	345.7	True	293.2	True	False	Propionigenium maris DSM 9537
+A0A9X0I4R2	unlabelled_homolog	unknown	261.4	True	224.8	False	False	Micromonospora maris
+A0A9X1WC40	unlabelled_homolog	unknown	489.7	True	436.5	True	False	Vibrio gelatinilyticus
+A0A9X1XJA3	unlabelled_homolog	unknown	509.5	True	469.0	True	False	Vibrio amylolyticus
+A0A9X3CI62	unlabelled_homolog	unknown	534.3	True	485.3	True	False	Vibrio paucivorans
+A0A9X3CKC8	unlabelled_homolog	unknown	500.0	True	456.8	True	False	Vibrio qingdaonensis
+A0A9X5BI62	unlabelled_homolog	unknown	67.4	True	51.2	False	False	Parablautia muri
+A0A9X8UJY0	unlabelled_homolog	unknown	82.9	True	52.3	False	False	Harryflintia acetispora
+A0AA34XNV7	unlabelled_homolog	unknown	503.5	True	448.0	True	False	Vibrio syngnathi
+A0AA37IXP6	unlabelled_homolog	unknown	75.0	True	62.5	False	False	Faecalibacterium gallinarum
+A0AA37W4D3	unlabelled_homolog	unknown	481.0	True	383.0	True	False	Pseudoalteromonas tetraodonis GFC
+A0AA42C7E6	unlabelled_homolog	unknown	125.9	True	107.9	False	False	Gaoshiqia sediminis
+A0AA43RJQ3	unlabelled_homolog	unknown	66.0	True	53.7	False	False	Phoenicibacter congonensis
+A0AA86XK90	unlabelled_homolog	unknown	504.6	True	447.4	True	False	Vibrio coralliirubri
+A0AAC9UFH4	unlabelled_homolog	unknown	507.4	True	385.2	True	False	Pseudoalteromonas nigrifaciens
+A0AAE3A0T0	unlabelled_homolog	unknown	86.0	True	54.8	False	False	Waltera acetigignens
+A0AAE3AK74	unlabelled_homolog	unknown	81.4	True	53.2	False	False	Hominenteromicrobium mulieris
+A0AAE3DCA6	unlabelled_homolog	unknown	58.7	True	43.5	False	False	Hominiventricola filiformis
+A0AAE3HDQ9	unlabelled_homolog	unknown	303.5	True	239.0	False	False	Irregularibacter muris
+A0AAE3IH35	unlabelled_homolog	unknown	79.8	True	60.8	False	False	Hominimerdicola aceti
+A0AAE3J666	unlabelled_homolog	unknown	92.9	True	82.3	False	False	Fusicatenibacter faecihominis
+A0AAE3T7M1	unlabelled_homolog	unknown	342.7	True	513.4	True	False	Psychromarinibacter sediminicola
+A0AAF0PDQ0	unlabelled_homolog	unknown	416.0	True	248.0	True	False	Natrinema thermotolerans
+A0AAI9K4H5	unlabelled_homolog	unknown	70.9	True	62.3	False	False	Coprococcus eutactus
+A0AAN0N7G9	unlabelled_homolog	unknown	503.3	True	445.5	True	False	Vibrio cyclitrophicus ZF270
+A0AAN0SBU9	unlabelled_homolog	unknown	532.2	True	480.1	True	False	Vibrio coralliilyticus
+A0AAN0VH62	unlabelled_homolog	unknown	341.5	True	501.9	True	False	Planktomarina temperata RCA23
+A0AAN0Y212	unlabelled_homolog	unknown	517.1	True	477.5	True	False	Vibrio natriegens NBRC 15636 = ATCC 14048 = DSM 759
+A0AAP2RFW4	unlabelled_homolog	unknown	88.3	True	81.6	False	False	Lientehia hominis
+A0AAP3QX20	unlabelled_homolog	unknown	79.8	True	60.8	False	False	Ruminococcus bicirculans
+A0AAP4BAM4	unlabelled_homolog	unknown	79.2	True	76.4	False	False	Fusibacillus kribbianus
+A0AAP9KAE0	unlabelled_homolog	unknown	540.2	True	489.2	True	False	Vibrio owensii
+A0AAQ2UE65	unlabelled_homolog	unknown	63.7	True	50.0	False	False	Roseburia intestinalis L1-82
+A0AAU7VNZ4	unlabelled_homolog	unknown	311.5	True	239.5	False	False	Proteinivorax tanatarense
+A0AAU8BNU3	unlabelled_homolog	unknown	518.8	True	481.4	True	False	Vibrio chaetopteri
+A0AAU8HSN5	unlabelled_homolog	unknown	312.8	True	243.3	True	False	Proteinivorax hydrogeniformans
+A0AAU8WGG7	unlabelled_homolog	unknown	558.1	True	620.7	True	False	Vibrio tarriae
+A0AAU9D2L6	unlabelled_homolog	unknown	70.0	True	51.7	False	False	Leptogranulimonas caecicola
+A0AAV3SKC9	unlabelled_homolog	unknown	391.9	True	230.7	False	False	Halococcus dombrowskii
+A0AAV3T2E2	unlabelled_homolog	unknown	411.0	True	243.4	True	False	Salarchaeum japonicum
+A0AAV3T6I9	unlabelled_homolog	unknown	410.6	True	229.2	False	False	Natronoarchaeum mannanilyticum
+A0AAV3UD70	unlabelled_homolog	unknown	400.4	True	244.4	True	False	Haladaptatus pallidirubidus
+A0AAV5AYY7	unlabelled_homolog	unknown	54.3	True	44.7	False	False	Granulimonas faecalis
+A0AAW3JUM3	unlabelled_homolog	unknown	73.6	True	75.1	False	False	Butyribacter intestini
+A0AAW4W0H9	unlabelled_homolog	unknown	64.6	True	53.0	False	False	Agathobaculum butyriciproducens
+A0AAX1QPY4	unlabelled_homolog	unknown	561.4	True	630.2	True	False	Vibrio paracholerae
+A0AB35U6I4	unlabelled_homolog	unknown	84.2	True	70.7	False	False	Grylomicrobium aquisgranense
+A0AB35XZL9	unlabelled_homolog	unknown	78.9	True	65.1	False	False	Faecalibacterium taiwanense
+A0AB73T9H9	unlabelled_homolog	unknown	78.8	True	65.9	False	False	Murimonas intestini
+A0ABD5NQI3	unlabelled_homolog	unknown	434.2	True	257.4	True	False	Halovivax cerinus
+A0ABD5PH65	unlabelled_homolog	unknown	397.1	True	260.0	True	False	Halobium salinum
+A0ABD5Q3I4	unlabelled_homolog	unknown	385.1	True	231.5	False	False	Halorussus aquaticus
+A0ABD5QIC9	unlabelled_homolog	unknown	406.5	True	240.2	True	False	Saliphagus infecundisoli
+A0ABD5RFI8	unlabelled_homolog	unknown	428.7	True	244.8	True	False	Salinirubrum litoreum
+A0ABD5RSB9	unlabelled_homolog	unknown	386.0	True	231.5	False	False	Halomarina salina
+A0ABD5S566	unlabelled_homolog	unknown	122.5	True	99.0	False	False	Halobium palmae
+A0ABD5S5B3	unlabelled_homolog	unknown	171.3	True	117.6	False	False	Halobium palmae
+A0ABD5SPY8	unlabelled_homolog	unknown	150.2	True	103.6	False	False	Natrinema soli
+A0ABD5SXN0	unlabelled_homolog	unknown	252.5	True	144.8	False	False	Natrinema soli
+A0ABD5U2U1	unlabelled_homolog	unknown	383.6	True	245.1	True	False	Halopelagius fulvigenes
+A0ABD5U5X4	unlabelled_homolog	unknown	403.0	True	240.5	True	False	Halomarina ordinaria
+A0ABD5YNX0	unlabelled_homolog	unknown	404.4	True	245.7	True	False	Halocatena marina
+A0ABD5YZ11	unlabelled_homolog	unknown	388.5	True	243.9	True	False	Halospeciosus flavus
+A0ABD5ZKR4	unlabelled_homolog	unknown	416.1	True	248.5	True	False	Halosegnis marinus
+A0ABD6A5W3	unlabelled_homolog	unknown	404.1	True	239.4	False	False	Halomarina halobia
+A0ABD6B229	unlabelled_homolog	unknown	223.0	True	120.9	False	False	Halolamina salina
+A0ABD6B2C9	unlabelled_homolog	unknown	139.0	True	92.8	False	False	Halolamina salina
+A0ABD6B3D1	unlabelled_homolog	unknown	393.9	True	248.0	True	False	Halomarina rubra
+A0ABD6BKF7	unlabelled_homolog	unknown	426.0	True	247.6	True	False	Haloarchaeobius amylolyticus
+A0ABD6BRC1	unlabelled_homolog	unknown	377.1	True	208.6	False	False	Halolamina litorea
+A0ABD6DAA1	unlabelled_homolog	unknown	410.4	True	244.9	True	False	Halohasta litorea
+A0ABM5YLX1	unlabelled_homolog	unknown	416.8	True	380.2	True	False	Alteromonas stellipolaris
+A0ABM6EQ80	unlabelled_homolog	unknown	306.6	True	244.0	True	False	Andreesenella formicacetica
+A0ABM6LSE3	unlabelled_homolog	unknown	453.1	True	404.9	True	False	Idiomarina piscisalsi
+A0ABM6N336	unlabelled_homolog	unknown	481.2	True	382.0	True	False	Pseudoalteromonas issachenkonii
+A0ABM6NCQ4	unlabelled_homolog	unknown	432.0	True	364.9	True	False	Pseudoalteromonas piscicida
+A0ABM6S858	unlabelled_homolog	unknown	542.3	True	494.2	True	False	Vibrio diabolicus
+A0ABM8ZHB9	unlabelled_homolog	unknown	513.2	True	483.5	True	False	Vibrio hippocampi
+A0ABM8ZY69	unlabelled_homolog	unknown	491.1	True	423.5	True	False	Vibrio stylophorae
+A0ABM9RPU0	unlabelled_homolog	unknown	285.1	True	228.7	False	False	Paraclostridium sordellii
+A0ABM9WSW4	unlabelled_homolog	unknown	540.6	True	493.3	True	False	Vibrio antiquarius
+A0ABM9YX37	unlabelled_homolog	unknown	524.4	True	471.1	True	False	Vibrio orientalis CIP 102891 = ATCC 33934
+A0ABN0XFG4	unlabelled_homolog	unknown	312.8	True	358.3	True	False	Bowmanella denitrificans
+A0ABN1M357	unlabelled_homolog	unknown	282.7	True	226.9	False	False	Paraclostridium tenue
+A0ABN4KW09	unlabelled_homolog	unknown	512.8	True	517.0	True	False	Vibrio fluvialis
+A0ABN6MBA8	unlabelled_homolog	unknown	62.3	True	47.4	False	False	Raoultibacter timonensis
+A0ABN6YTJ8	unlabelled_homolog	unknown	65.4	True	64.0	False	False	Claveliimonas bilis
+A0ABN8TS09	unlabelled_homolog	unknown	490.9	True	483.5	True	False	Vibrio aestuarianus
+A0ABP1WPF7	unlabelled_homolog	unknown	504.0	True	446.4	True	False	Vibrio crassostreae
+A0ABP2HZY8	unlabelled_homolog	unknown	62.8	True	58.8	False	False	Turicibacter sanguinis PC909
+A0ABP8S6L7	unlabelled_homolog	unknown	250.0	True	195.4	False	False	Micromonospora coerulea
+A0ABP9ZYB6	unlabelled_homolog	unknown	381.1	True	399.0	True	False	Thalassolituus maritimus
+A0ABQ0B8V6	unlabelled_homolog	unknown	62.7	True	61.5	False	False	Blautia hominis
+A0ABQ0BWB8	unlabelled_homolog	unknown	65.7	True	68.6	False	False	Blautia parvula
+A0ABQ0JA99	unlabelled_homolog	unknown	491.4	True	442.6	True	False	Vibrio variabilis
+A0ABQ0U9I2	unlabelled_homolog	unknown	501.3	True	393.3	True	False	Pseudoalteromonas atlantica
+A0ABQ1DZT1	unlabelled_homolog	unknown	64.6	True	53.8	False	False	Butyricicoccus faecihominis
+A0ABQ1TRV0	unlabelled_homolog	unknown	449.8	True	349.9	True	False	Pseudoalteromonas gelatinilytica
+A0ABQ3IND0	unlabelled_homolog	unknown	351.9	True	503.4	True	False	Aliiroseovarius zhejiangensis
+A0ABQ4E1W0	unlabelled_homolog	unknown	267.5	True	224.0	False	False	Plantactinospora endophytica
+A0ABQ4I0R0	unlabelled_homolog	unknown	264.1	True	214.7	False	False	Micromonospora andamanensis
+A0ABQ4IKW4	unlabelled_homolog	unknown	261.4	True	222.9	False	False	Micromonospora gifhornensis
+A0ABQ4J9M5	unlabelled_homolog	unknown	264.3	True	217.8	False	False	Micromonospora qiuiae
+A0ABQ5LTU9	unlabelled_homolog	unknown	332.6	True	448.2	True	False	Sinisalibacter aestuarii
+A0ABQ5XZY7	unlabelled_homolog	unknown	541.7	True	493.3	True	False	Vibrio hyugaensis
+A0ABQ6AGH7	unlabelled_homolog	unknown	553.9	True	461.7	True	False	Aliivibrio sifiae
+A0ABQ6F286	unlabelled_homolog	unknown	521.9	True	450.5	True	False	Vibrio zhanjiangensis
+A0ABQ6RLB8	unlabelled_homolog	unknown	490.1	True	379.9	True	False	Pseudoalteromonas fuliginea
+A0ABR4YC33	unlabelled_homolog	unknown	535.6	True	475.7	True	False	Vibrio variabilis
+A0ABR5W4J8	unlabelled_homolog	unknown	520.6	True	480.8	True	False	Vibrio cidicii
+A0ABR6U4J6	unlabelled_homolog	unknown	245.0	True	219.0	False	False	Nocardioides deserti
+A0ABR7FFH8	unlabelled_homolog	unknown	65.7	True	67.3	False	False	Blautia celeris
+A0ABR7FZ22	unlabelled_homolog	unknown	87.5	True	50.8	False	False	Lachnospira hominis
+A0ABR7GJT4	unlabelled_homolog	unknown	59.5	True	52.0	False	False	Agathobaculum hominis
+A0ABR7GYD9	unlabelled_homolog	unknown	69.3	True	73.0	False	False	Roseburia difficilis
+A0ABR7IIS9	unlabelled_homolog	unknown	51.1	True	39.5	False	False	Blautia difficilis
+A0ABR7JTP1	unlabelled_homolog	unknown	280.7	True	217.2	False	False	Romboutsia faecis
+A0ABR7K2G9	unlabelled_homolog	unknown	279.0	True	223.3	False	False	Paeniclostridium hominis
+A0ABR7KL52	unlabelled_homolog	unknown	88.1	True	67.6	False	False	Holdemanella hominis
+A0ABR7N841	unlabelled_homolog	unknown	65.9	True	51.7	False	False	Jingyaoa shaoxingensis
+A0ABR7UY61	unlabelled_homolog	unknown	143.9	True	125.9	False	False	Maribacter aquimaris
+A0ABR9BLL7	unlabelled_homolog	unknown	496.5	True	445.8	True	False	Photobacterium arenosum
+A0ABR9DY36	unlabelled_homolog	unknown	491.4	True	386.9	True	False	Pseudoalteromonas aliena SW19
+A0ABR9EB50	unlabelled_homolog	unknown	459.5	True	369.9	True	False	Pseudoalteromonas aurantia 208
+A0ABR9FJ87	unlabelled_homolog	unknown	463.0	True	382.8	True	False	Pseudoalteromonas prydzensis
+A0ABR9QQY4	unlabelled_homolog	unknown	70.3	True	55.4	False	False	Thermophilibacter gallinarum
+A0ABR9R323	unlabelled_homolog	unknown	79.9	True	56.8	False	False	Gemmiger gallinarum
+A0ABR9RK94	unlabelled_homolog	unknown	70.7	True	66.3	False	False	Claveliimonas monacensis
+A0ABS0GXM6	unlabelled_homolog	unknown	271.1	True	226.7	False	False	Plantactinospora alkalitolerans
+A0ABS1DHY8	unlabelled_homolog	unknown	401.8	True	405.4	True	False	Rhodovibrio sodomensis
+A0ABS1T4Y5	unlabelled_homolog	unknown	80.1	True	62.1	False	False	Clostridium rhizosphaerae
+A0ABS1UNM0	unlabelled_homolog	unknown	261.4	True	224.4	False	False	Micromonospora fiedleri
+A0ABS2EAH8	unlabelled_homolog	unknown	64.0	True	63.6	False	False	Faecalicatena fissicatena
+A0ABS2F240	unlabelled_homolog	unknown	81.0	True	53.9	False	False	Olsenella profusa
+A0ABS2FQ83	unlabelled_homolog	unknown	75.9	True	62.2	False	False	Faecalicoccus acidiformans
+A0ABS2GM04	unlabelled_homolog	unknown	72.0	True	76.0	False	False	Hydrogenoanaerobacterium saccharovorans
+A0ABS3A031	unlabelled_homolog	unknown	527.2	True	482.7	True	False	Vibrio neptunius
+A0ABS4E874	unlabelled_homolog	unknown	265.0	True	209.1	False	False	Metaclostridioides mangenotii
+A0ABS6ESK0	unlabelled_homolog	unknown	82.0	True	57.9	False	False	Butyricicoccus intestinisimiae
+A0ABS8BSB8	unlabelled_homolog	unknown	341.2	True	484.3	True	False	Loktanella gaetbuli
+A0ABS8DL67	unlabelled_homolog	unknown	53.9	True	53.0	False	False	Bariatricus massiliensis
+A0ABS8EU13	unlabelled_homolog	unknown	76.8	True	61.9	False	False	Hominisplanchenecus faecis
+A0ABS8F7Z1	unlabelled_homolog	unknown	82.8	True	63.8	False	False	Faecalibacterium butyricigenerans
+A0ABS8FF59	unlabelled_homolog	unknown	80.4	True	65.1	False	False	Faecalibacterium hominis
+A0ABS8W8H6	unlabelled_homolog	unknown	495.9	True	455.8	True	False	Motilimonas cestriensis
+A0ABS9CKF9	unlabelled_homolog	unknown	81.3	True	59.6	False	False	Anaeromassilibacillus senegalensis
+A0ABS9RD68	unlabelled_homolog	unknown	94.7	True	70.3	False	False	Hoskinsella hominis
+A0ABS9WGA2	unlabelled_homolog	unknown	76.1	True	58.6	False	False	Adlercreutzia faecimuris
+A0ABT1S1M2	unlabelled_homolog	unknown	89.7	True	62.9	False	False	Neglectibacter timonensis
+A0ABT1Z678	unlabelled_homolog	unknown	75.0	True	66.2	False	False	Tractidigestivibacter montrealensis
+A0ABT2J9B6	unlabelled_homolog	unknown	198.8	True	166.9	False	False	Actinophytocola gossypii
+A0ABT2NNV1	unlabelled_homolog	unknown	330.8	True	455.4	True	False	Albidovulum sediminis
+A0ABT2RQ54	unlabelled_homolog	unknown	73.3	True	66.1	False	False	Dorea acetigenes
+A0ABT2RUD1	unlabelled_homolog	unknown	65.1	True	62.0	False	False	Laedolimicola ammoniilytica
+A0ABT2S5V3	unlabelled_homolog	unknown	74.8	True	69.7	False	False	Dorea ammoniilytica
+A0ABT2SK81	unlabelled_homolog	unknown	66.2	True	51.8	False	False	Muricoprocola aceti
+A0ABT2T2H0	unlabelled_homolog	unknown	68.5	True	51.6	False	False	Suilimivivens aceti
+A0ABT2U1B7	unlabelled_homolog	unknown	69.2	True	55.0	False	False	Agathobaculum ammoniilyticum
+A0ABT2X993	unlabelled_homolog	unknown	334.7	True	483.6	True	False	Albidovulum salinarum
+A0ABT2YWD6	unlabelled_homolog	unknown	476.9	True	394.8	True	False	Marinomonas sargassi
+A0ABT2Z2P9	unlabelled_homolog	unknown	329.6	True	446.1	True	False	Albidovulum sediminicola
+A0ABT2ZAY5	unlabelled_homolog	unknown	327.1	True	450.5	True	False	Albidovulum marisflavi
+A0ABT2ZJD3	unlabelled_homolog	unknown	328.4	True	481.4	True	False	Albidovulum litorale
+A0ABT3H6Q5	unlabelled_homolog	unknown	414.9	True	393.7	True	False	Rhodobium gokarnense
+A0ABT3J8U8	unlabelled_homolog	unknown	334.7	True	484.3	True	False	Defluviimonas salinarum
+A0ABT3Q1P1	unlabelled_homolog	unknown	404.1	True	243.0	True	False	Fodinibius salicampi
+A0ABT4D0Y5	unlabelled_homolog	unknown	329.2	True	247.3	True	False	Clostridium aestuarii
+A0ABT4W560	unlabelled_homolog	unknown	356.4	True	520.3	True	False	Aliiroseovarius salicola
+A0ABT5QK39	unlabelled_homolog	unknown	476.7	True	416.8	True	False	Enterovibrio qingdaonensis
+A0ABT5UGI5	unlabelled_homolog	unknown	492.3	True	424.9	True	False	Spartinivicinus poritis
+A0ABT6TW54	unlabelled_homolog	unknown	448.8	True	363.6	True	False	Pseudoalteromonas shioyasakiensis
+A0ABT6ZKV3	unlabelled_homolog	unknown	64.4	True	51.6	False	False	Kribbibacterium absianum
+A0ABT7DPG6	unlabelled_homolog	unknown	56.0	True	51.8	False	False	Gordonibacter faecis
+A0ABT7E5I0	unlabelled_homolog	unknown	268.3	True	215.1	False	False	Romboutsia sedimentorum
+A0ABT7EGP0	unlabelled_homolog	unknown	440.5	True	374.7	True	False	Pseudoalteromonas obscura
+A0ABT7QLM0	unlabelled_homolog	unknown	365.1	True	368.1	True	False	Candidatus Doriopsillibacter californiensis
+A0ABT7UEC4	unlabelled_homolog	unknown	73.0	True	57.6	False	False	Amedibacillus dolichus
+A0ABT7UKA1	unlabelled_homolog	unknown	98.7	True	84.1	False	False	Massiliimicrobium timonense
+A0ABT7URJ8	unlabelled_homolog	unknown	66.3	True	64.4	False	False	Allofournierella massiliensis
+A0ABT7V4D2	unlabelled_homolog	unknown	84.1	True	66.4	False	False	Thermophilibacter provencensis
+A0ABT7V719	unlabelled_homolog	unknown	55.6	True	50.7	False	False	Enorma phocaeensis
+A0ABT7XC71	unlabelled_homolog	unknown	55.4	True	54.7	False	False	Collinsella ihumii
+A0ABT8BRY8	unlabelled_homolog	unknown	524.5	True	484.0	True	False	Vibrio ostreicida
+A0ABT8EUX2	unlabelled_homolog	unknown	235.8	True	213.7	False	False	Nocardioides abyssi
+A0ABT8FKL5	unlabelled_homolog	unknown	243.6	True	219.2	False	False	Nocardioides oceani
+A0ABT9FCU8	unlabelled_homolog	unknown	483.0	True	377.1	True	False	Pseudoalteromonas marina
+A0ABT9GGA8	unlabelled_homolog	unknown	498.2	True	386.9	True	False	Pseudoalteromonas distincta
+A0ABU0JUX5	unlabelled_homolog	unknown	81.9	True	78.7	False	False	Hathewaya limosa
+A0ABU0MX37	unlabelled_homolog	unknown	285.7	True	224.3	False	False	Paraclostridium ghonii
+A0ABU1B8B2	unlabelled_homolog	unknown	469.4	True	382.6	True	False	Pseudoalteromonas haloplanktis
+A0ABU2D0E7	unlabelled_homolog	unknown	69.2	True	55.5	False	False	Methanosarcina baikalica
+A0ABU2FJF3	unlabelled_homolog	unknown	379.9	True	218.5	False	False	Haloarcula onubensis
+A0ABU2FXC5	unlabelled_homolog	unknown	384.3	True	251.8	True	False	Halogeometricum luteum
+A0ABU2GCA7	unlabelled_homolog	unknown	379.4	True	255.0	True	False	Halogeometricum salsisoli
+A0ABU2WSW8	unlabelled_homolog	unknown	264.9	True	207.9	False	False	Micromonospora reichwaldensis
+A0ABU3BDQ5	unlabelled_homolog	unknown	430.1	True	390.7	True	False	Spectribacter acetivorans
+A0ABU3BWW1	unlabelled_homolog	unknown	432.5	True	389.9	True	False	Spectribacter hydrogenoxidans
+A0ABU3TWP5	unlabelled_homolog	unknown	77.1	True	58.8	False	False	Faecalibacterium wellingii
+A0ABU4W871	unlabelled_homolog	unknown	298.5	True	246.9	True	False	Candidatus Cetobacterium colombiensis
+A0ABU4WL97	unlabelled_homolog	unknown	81.2	True	67.8	False	False	Absicoccus intestinalis
+A0ABU5KCR3	unlabelled_homolog	unknown	246.3	True	211.6	False	False	Nocardioides renjunii
+A0ABU6II37	unlabelled_homolog	unknown	68.6	True	64.9	False	False	Adlercreutzia wanghongyangiae
+A0ABU6IZ25	unlabelled_homolog	unknown	73.2	True	65.8	False	False	Adlercreutzia shanghongiae
+A0ABU7RLR2	unlabelled_homolog	unknown	272.3	True	225.7	False	False	Plantactinospora sonchi
+A0ABU7SK45	unlabelled_homolog	unknown	265.2	True	219.3	False	False	Plantactinospora veratri
+A0ABU8ERI6	unlabelled_homolog	unknown	402.8	True	372.3	True	False	Pseudoalteromonas spongiae
+A0ABU8SNW5	unlabelled_homolog	unknown	452.4	True	362.4	True	False	Pseudoalteromonas lipolytica
+A0ABU9FPH2	unlabelled_homolog	unknown	505.1	True	445.2	True	False	Vibrio echinoideorum
+A0ABU9G6Z4	unlabelled_homolog	unknown	58.3	True	47.8	False	False	Marinomonas arenicola
+A0ABU9G9X7	unlabelled_homolog	unknown	460.8	True	387.5	True	False	Marinomonas arenicola
+A0ABU9H4S7	unlabelled_homolog	unknown	497.4	True	387.0	True	False	Pseudoalteromonas issachenkonii
+A0ABU9THH8	unlabelled_homolog	unknown	497.2	True	393.0	True	False	Pseudoalteromonas arctica
+A0ABU9U3Y0	unlabelled_homolog	unknown	476.7	True	388.4	True	False	Pseudoalteromonas neustonica
+A0ABV0L499	unlabelled_homolog	unknown	472.7	True	385.7	True	False	Marinomonas primoryensis
+A0ABV1AVE2	unlabelled_homolog	unknown	77.8	True	61.0	False	False	Faecalibacterium tardum
+A0ABV1BMX4	unlabelled_homolog	unknown	78.7	True	65.0	False	False	Faecalibacterium faecis
+A0ABV1C6H0	unlabelled_homolog	unknown	77.9	True	63.4	False	False	Faecalibacterium intestinale
+A0ABV1DPM8	unlabelled_homolog	unknown	65.1	True	68.8	False	False	Blautia caccae
+A0ABV1EE19	unlabelled_homolog	unknown	74.6	True	64.3	False	False	Coprococcus ammoniilyticus
+A0ABV1FEM7	unlabelled_homolog	unknown	66.6	True	69.5	False	False	Laedolimicola intestinihominis
+A0ABV1GB48	unlabelled_homolog	unknown	67.9	True	54.4	False	False	Ruthenibacterium intestinale
+A0ABV1GSG5	unlabelled_homolog	unknown	71.9	True	50.5	False	False	Lachnospira hominis
+A0ABV1I8T0	unlabelled_homolog	unknown	70.9	True	62.3	False	False	Coprococcus aceti
+A0ABV1IGU2	unlabelled_homolog	unknown	67.0	True	58.7	False	False	Paratractidigestivibacter faecalis
+A0ABV1ILV7	unlabelled_homolog	unknown	81.1	True	63.8	False	False	Faecalibacterium longum
+A0ABV1JAX2	unlabelled_homolog	unknown	62.6	True	50.9	False	False	Raoultibacter massiliensis
+A0ABV2B171	unlabelled_homolog	unknown	367.3	True	360.3	True	False	Salinisphaera dokdonensis CL-ES53
+A0ABV3XX97	unlabelled_homolog	unknown	325.6	True	501.5	True	False	Rhodovulum iodosum
+A0ABV4L1R8	unlabelled_homolog	unknown	486.6	True	414.3	True	False	Enterovibrio norvegicus
+A0ABV4LP35	unlabelled_homolog	unknown	501.3	True	445.1	True	False	Vibrio splendidus
+A0ABV4M2Q9	unlabelled_homolog	unknown	537.3	True	488.4	True	False	Vibrio cortegadensis
+A0ABV4MJG4	unlabelled_homolog	unknown	529.1	True	483.5	True	False	Vibrio bivalvicida
+A0ABV4N1N5	unlabelled_homolog	unknown	505.8	True	446.0	True	False	Vibrio pomeroyi
+A0ABV4NEM6	unlabelled_homolog	unknown	507.4	True	444.8	True	False	Vibrio gallaecicus
+A0ABV5CR39	unlabelled_homolog	unknown	282.6	True	233.8	False	False	Polymorphospora lycopeni
+A0ABV5HJI0	unlabelled_homolog	unknown	502.2	True	471.8	True	False	Vibrio olivae
+A0ABV5HVL6	unlabelled_homolog	unknown	340.1	True	478.6	True	False	Roseovarius ramblicola
+A0ABV5Z7H1	unlabelled_homolog	unknown	410.9	True	364.5	True	False	Balneatrix alpica
+A0ABV7CHH5	unlabelled_homolog	unknown	413.0	True	377.7	True	False	Pseudoalteromonas fenneropenaei
+A0ABV7EJC7	unlabelled_homolog	unknown	364.9	True	349.9	True	False	Salinisphaera aquimarina
+A0ABV7WBP1	unlabelled_homolog	unknown	178.9	True	141.0	False	False	Aquipuribacter hungaricus
+A0ABW1KPF3	unlabelled_homolog	unknown	268.3	True	221.7	False	False	Plantactinospora solaniradicis
+A0ABW3A4W8	unlabelled_homolog	unknown	132.8	True	106.9	False	False	Micromonospora azadirachtae
+A0ABW3A7P8	unlabelled_homolog	unknown	130.7	True	104.8	False	False	Micromonospora azadirachtae
+A0ABW3YK53	unlabelled_homolog	unknown	34.5	True	25.5	False	False	Micromonospora sonneratiae
+A0ABW4AZY6	unlabelled_homolog	unknown	427.5	True	352.5	True	False	Rhodanobacter aciditrophus
+A0ABW7IGI4	unlabelled_homolog	unknown	517.5	True	460.2	True	False	Vibrio barjaei
+A0ABW8AV09	unlabelled_homolog	unknown	87.6	True	71.5	False	False	Dorea amylophila
+A0ABW8KZL1	unlabelled_homolog	unknown	471.4	True	383.7	True	False	Pseudoalteromonas rhizosphaerae
+A0ABW9WW38	unlabelled_homolog	unknown	63.3	True	52.5	False	False	Bittarella massiliensis
+A0ABX0GY29	unlabelled_homolog	unknown	242.8	True	205.1	False	False	Motilibacter deserti
+A0ABX1HZF3	unlabelled_homolog	unknown	539.2	True	492.2	True	False	Vibrio chemaguriensis
+A0ABX1R2H9	unlabelled_homolog	unknown	436.7	True	381.5	True	False	Alteromonas ponticola
+A0ABX2GJH8	unlabelled_homolog	unknown	49.2	True	44.7	False	False	Blautia wexlerae
+A0ABX2GVL8	unlabelled_homolog	unknown	76.8	True	61.9	False	False	Faecalicatena fissicatena
+A0ABX2I762	unlabelled_homolog	unknown	65.0	True	64.7	False	False	Blautia hansenii
+A0ABX2INH7	unlabelled_homolog	unknown	332.4	True	460.4	True	False	Parasulfitobacter algicola
+A0ABX3AZY1	unlabelled_homolog	unknown	554.8	True	479.9	True	False	Aliivibrio logei 5S-186
+A0ABX3BAS8	unlabelled_homolog	unknown	501.4	True	446.8	True	False	Vibrio tasmaniensis 1F-267
+A0ABX3D881	unlabelled_homolog	unknown	544.6	True	494.4	True	False	Vibrio rotiferianus
+A0ABX4FRH7	unlabelled_homolog	unknown	515.9	True	443.6	True	False	Photobacterium sanguinicancri
+A0ABX5DFD8	unlabelled_homolog	unknown	524.1	True	462.4	True	False	Vibrio mediterranei
+A0ABX6J7W7	unlabelled_homolog	unknown	64.7	True	65.1	False	False	Blautia producta ATCC 27340 = DSM 2950
+A0ABX7V8E2	unlabelled_homolog	unknown	441.3	True	378.9	True	False	Pseudoalteromonas viridis
+A0ABX9MCF0	unlabelled_homolog	unknown	98.1	True	83.9	False	False	Candidatus Cryosericum hinesii
+A0ABY1GTA8	unlabelled_homolog	unknown	445.6	True	369.9	True	False	Pseudoalteromonas lipolytica
+A0ABY2VTI6	unlabelled_homolog	unknown	460.7	True	384.1	True	False	Pseudoalteromonas aurantia
+A0ABY3FIC4	unlabelled_homolog	unknown	469.3	True	382.8	True	False	Pseudoalteromonas neustonica
+A0ABY4WPX5	unlabelled_homolog	unknown	494.5	True	435.3	True	False	Grimontia kaedaensis
+A0ABY5G3I5	unlabelled_homolog	unknown	97.0	True	89.4	False	False	Vibrio pelagius
+A0ABY5GPV1	unlabelled_homolog	unknown	496.7	True	444.1	True	False	Photobacterium atrarenae
+A0ABY5HZ25	unlabelled_homolog	unknown	95.2	True	72.8	False	False	Allocoprobacillus halotolerans
+A0ABY5LFT2	unlabelled_homolog	unknown	526.1	True	473.3	True	False	Vibrio japonicus
+A0ABY8EL72	unlabelled_homolog	unknown	331.1	True	245.0	True	False	Tepidibacter hydrothermalis
+A0ABZ0UAJ3	unlabelled_homolog	unknown	65.0	True	65.1	False	False	Blautia producta
+A0ABZ3EVG4	unlabelled_homolog	unknown	67.8	True	51.1	False	False	Kineothrix sedimenti
+A0AC59FZA3	unlabelled_homolog	unknown	266.7	True	221.1	False	False	Clostridioides difficile ATCC 9689 = DSM 1296
+A0AC61R0W5	unlabelled_homolog	unknown	98.2	True	63.5	False	False	Hominisplanchenecus murintestinalis
+A0AC61RAA2	unlabelled_homolog	unknown	68.8	True	46.7	False	False	Dubosiella muris
+A0ACA6QNY8	unlabelled_homolog	unknown	540.6	True	493.3	True	False	Vibrio antiquarius
+A0ACA8DW85	unlabelled_homolog	unknown	497.4	True	390.6	True	False	Pseudoalteromonas agarivorans DSM 14585
+A0ACC4NWA7	unlabelled_homolog	unknown	531.9	True	473.4	True	False	Vibrio caribbeanicus
+A0ACC6IGH7	unlabelled_homolog	unknown	199.0	True	168.6	False	False	Nocardioides zeae
+A0ACC6R479	unlabelled_homolog	unknown	495.3	True	390.0	True	False	Pseudoalteromonas undina
+A0ACC9CZ10	unlabelled_homolog	unknown	78.4	True	64.3	False	False	Faecalibacterium langellae
+A0ACD7B1N9	unlabelled_homolog	unknown	409.2	True	372.6	True	False	Alteromonas macleodii ATCC 27126
+A0ACD8FYC4	unlabelled_homolog	unknown	67.9	True	54.4	False	False	Owariibacterium komagatae
+A0ACD8G354	unlabelled_homolog	unknown	69.2	True	55.0	False	False	Agathobaculum massiliense
+A0ACE2T758	unlabelled_homolog	unknown	469.5	True	381.7	True	False	Pseudoalteromonas ostreae
+A0ACE4LDD2	unlabelled_homolog	unknown	77.9	True	61.7	False	False	Coprococcus eutactus ATCC 27759
+A0ACE9VGZ4	unlabelled_homolog	unknown	480.1	True	386.4	True	False	Pseudoalteromonas undina
+A0ACF9R939	unlabelled_homolog	unknown	531.9	True	476.5	True	False	Photobacterium sp. (strain ATCC 43367)
+A0ACG1XZ76	unlabelled_homolog	unknown	62.5	True	54.7	False	False	Roseburia inulinivorans DSM 16841
+A0ACG1YHW5	unlabelled_homolog	unknown	505.3	True	450.2	True	False	Vibrio lentus
+A0ACG2L3R8	unlabelled_homolog	unknown	441.5	True	371.7	True	False	Pseudoalteromonas umbrosa
+A0ACG2L9R6	unlabelled_homolog	unknown	444.5	True	378.2	True	False	Pseudoalteromonas ardens
+A0ACG3LKM5	unlabelled_homolog	unknown	264.8	True	220.0	False	False	Micromonospora palythoicola
+A0ACG4FIT6	unlabelled_homolog	unknown	343.9	True	498.5	True	False	Loktanella agnita
+A0ACG5N1P2	unlabelled_homolog	unknown	75.3	True	64.1	False	False	Coprococcus eutactus
+A0ACG7YEV9	unlabelled_homolog	unknown	81.2	True	68.1	False	False	Faecalibacterium duncaniae
+A0ACG9UWP9	unlabelled_homolog	unknown	495.1	True	472.0	True	False	Photobacterium sp. (strain ATCC 43367)
+A0ACH3HBK2	unlabelled_homolog	unknown	444.5	True	374.8	True	False	Pseudoalteromonas mariniglutinosa
+A0ACN3LS25	unlabelled_homolog	unknown	63.6	True	54.5	False	False	Candidatus Desulfosporosinus nitrosoreducens
+A0ACN7C9P1	unlabelled_homolog	unknown	215.1	True	190.6	False	False	Nocardioides dongxiaopingii
+A4CCC9	unlabelled_homolog	unknown	373.1	True	363.7	True	False	Pseudoalteromonas tunicata D2
+A4EAQ2	unlabelled_homolog	unknown	71.8	True	50.7	False	False	Collinsella aerofaciens (strain ATCC 25986 / DSM 3979 / JCM 10188 / KCTC 3647 / NCTC 11838 / VPI 1003)
+B0N1N1	unlabelled_homolog	unknown	84.5	True	67.7	False	False	Thomasclavelia ramosa DSM 1402
+B1C5D8	unlabelled_homolog	unknown	83.0	True	73.5	False	False	Thomasclavelia spiroformis DSM 1552
+B1CBJ6	unlabelled_homolog	unknown	77.1	True	55.6	False	False	Anaerofustis stercorihominis DSM 17244
+B6EQ60	unlabelled_homolog	unknown	555.7	True	480.3	True	False	Aliivibrio salmonicida (strain LFI1238)
+B6GE41	unlabelled_homolog	unknown	59.9	True	55.2	False	False	Collinsella stercoris DSM 13279
+B7AR03	unlabelled_homolog	unknown	75.9	True	67.7	False	False	[Bacteroides] pectinophilus ATCC 43243
+B7CB43	unlabelled_homolog	unknown	88.8	True	66.6	False	False	Holdemanella biformis DSM 3989
+C0C4M2	unlabelled_homolog	unknown	62.9	True	54.2	False	False	[Clostridium] hylemonae DSM 15053
+C0QA76	unlabelled_homolog	unknown	115.3	True	96.3	False	False	Desulforapulum autotrophicum (strain ATCC 43914 / DSM 3382 / VKM B-1955 / HRM2)
+C4Z4E4	unlabelled_homolog	unknown	86.1	True	53.8	False	False	Lachnospira eligens (strain ATCC 27750 / DSM 3376 / VPI C15-48 / C15-B4)
+C7H4B3	unlabelled_homolog	unknown	81.2	True	68.1	False	False	Faecalibacterium duncaniae
+C9L9K0	unlabelled_homolog	unknown	70.0	True	59.1	False	False	Blautia hansenii DSM 20583
+D0Z500	unlabelled_homolog	unknown	470.7	True	409.6	True	False	Photobacterium damselae subsp. damselae CIP 102761
+D0Z567	unlabelled_homolog	unknown	470.8	True	408.9	True	False	Photobacterium damselae subsp. damselae CIP 102761
+D1PJQ3	unlabelled_homolog	unknown	71.1	True	53.4	False	False	Subdoligranulum variabile DSM 15176
+D2RRU4	unlabelled_homolog	unknown	426.8	True	245.9	True	False	Haloterrigena turkmenica (strain ATCC 51198 / DSM 5511 / JCM 9101 / NCIMB 13204 / VKM B-1734 / 4k)
+D4K0F8	unlabelled_homolog	unknown	79.7	True	65.8	False	False	Faecalibacterium prausnitzii L2-6
+D5BT12	unlabelled_homolog	unknown	486.8	True	391.1	True	False	Puniceispirillum marinum (strain IMCC1322)
+D5X847	unlabelled_homolog	unknown	86.8	True	72.4	False	False	Thermincola potens (strain JR)
+D6E8S2	unlabelled_homolog	unknown	54.5	True	51.2	False	False	Gordonibacter pamelaeae 7-10-1-b
+D8JAA8	unlabelled_homolog	unknown	401.1	True	244.6	True	False	Halalkalicoccus jeotgali (strain DSM 18796 / CECT 7217 / JCM 14584 / KCTC 4019 / B3)
+E0S2H9	unlabelled_homolog	unknown	64.8	True	44.6	False	False	Butyrivibrio proteoclasticus (strain ATCC 51982 / DSM 14932 / B316)
+E4NSZ6	unlabelled_homolog	unknown	456.7	True	225.6	False	False	Halogeometricum borinquense (strain ATCC 700274 / DSM 11551 / JCM 10706 / KCTC 4070 / PR3)
+E7GCI8	unlabelled_homolog	unknown	76.1	True	58.9	False	False	Coprobacillus cateniformis
+E8LZD4	unlabelled_homolog	unknown	512.7	True	481.7	True	False	Vibrio brasiliensis LMG 20546
+F2JI66	unlabelled_homolog	unknown	92.0	True	67.4	False	False	Cellulosilyticum lentocellum (strain ATCC 49066 / DSM 5427 / NCIMB 11756 / RHM5)
+F2JU36	unlabelled_homolog	unknown	511.8	True	379.6	True	False	Marinomonas mediterranea (strain ATCC 700492 / JCM 21426 / NBRC 103028 / MMB-1)
+F5Z9L6	unlabelled_homolog	unknown	163.9	True	163.1	False	False	Alteromonas naphthalenivorans
+F5Z9L7	unlabelled_homolog	unknown	207.4	True	184.6	False	False	Alteromonas naphthalenivorans
+F6CYQ8	unlabelled_homolog	unknown	467.1	True	392.6	True	False	Marinomonas posidonica (strain CECT 7376 / NCIMB 14433 / IVIA-Po-181)
+F8D7I2	unlabelled_homolog	unknown	425.9	True	249.4	True	False	Halopiger xanaduensis (strain DSM 18323 / JCM 14033 / SH-6)
+F9S3J3	unlabelled_homolog	unknown	539.3	True	491.0	True	False	Vibrio ichthyoenteri ATCC 700023
+F9T387	unlabelled_homolog	unknown	526.7	True	484.6	True	False	Vibrio tubiashii ATCC 19109
+G1WFG9	unlabelled_homolog	unknown	60.8	True	44.7	False	False	Collinsella tanakaei YIT 12063
+G2T2F8	unlabelled_homolog	unknown	67.6	True	53.3	False	False	Roseburia hominis (strain DSM 16839 / JCM 17582 / NCIMB 14029 / A2-183)
+H1XW65	unlabelled_homolog	unknown	131.5	True	114.6	False	False	Caldithrix abyssi (strain DSM 13497 / VKM B-2286 / LF13)
+I0AIM1	unlabelled_homolog	unknown	129.6	True	112.2	False	False	Ignavibacterium album (strain DSM 19864 / JCM 16511 / NBRC 101810 / Mat9-16)
+I5ARQ1	unlabelled_homolog	unknown	55.6	True	44.1	False	False	Eubacterium cellulosolvens (strain ATCC 43171 / JCM 9499 / 6)
+K0YXR0	unlabelled_homolog	unknown	70.1	True	70.7	False	False	Slackia piriformis YIT 12062
+K2JGL1	unlabelled_homolog	unknown	335.7	True	475.0	True	False	Celeribacter baekdonensis B30
+L0I5R0	unlabelled_homolog	unknown	458.9	True	257.2	True	False	Halovivax ruber (strain DSM 18193 / JCM 13892 / XH-70)
+L0JHP8	unlabelled_homolog	unknown	412.3	True	243.4	True	False	Natrinema pellirubrum (strain DSM 15624 / CIP 106293 / JCM 10476 / NCIMB 786 / 157)
+L8JGH7	unlabelled_homolog	unknown	515.8	True	451.7	True	False	Photobacterium marinum
+L9XTP5	unlabelled_homolog	unknown	418.8	True	247.5	True	False	Natronococcus jeotgali DSM 18795
+L9XWE4	unlabelled_homolog	unknown	417.7	True	242.5	True	False	Natrinema versiforme JCM 10478
+L9Z307	unlabelled_homolog	unknown	417.6	True	245.8	True	False	Natrinema gari JCM 14663
+L9ZFH1	unlabelled_homolog	unknown	417.3	True	240.0	False	False	Natrinema altunense (strain JCM 12890 / CGMCC 1.3731 / AJ2)
+L9ZRZ3	unlabelled_homolog	unknown	416.2	True	243.6	True	False	Natrialba taiwanensis DSM 12281
+M0AMA6	unlabelled_homolog	unknown	413.5	True	241.4	True	False	Natrialba asiatica (strain ATCC 700177 / DSM 12278 / JCM 9576 / FERM P-10747 / NBRC 102637 / 172P1)
+M0B815	unlabelled_homolog	unknown	412.9	True	245.3	True	False	Natrialba aegyptia DSM 13077
+M0BGB0	unlabelled_homolog	unknown	452.6	True	257.3	True	False	Halovivax asiaticus JCM 14624
+M0C8G5	unlabelled_homolog	unknown	413.5	True	238.2	False	False	Natrinema limicola JCM 13563
+M0CEL4	unlabelled_homolog	unknown	422.5	True	246.8	True	False	Haloterrigena salina JCM 13891
+M0CVK7	unlabelled_homolog	unknown	244.4	True	189.0	False	False	Natrinema limicola JCM 13563
+M0CW22	unlabelled_homolog	unknown	207.7	True	144.7	False	False	Halogeometricum pallidum JCM 14848
+M0CWR4	unlabelled_homolog	unknown	169.8	True	119.2	False	False	Halogeometricum pallidum JCM 14848
+M0IN00	unlabelled_homolog	unknown	428.1	True	238.4	False	False	Haloferax mucosum ATCC BAA-1512
+M0LRC5	unlabelled_homolog	unknown	420.5	True	242.6	True	False	Natronobacterium lacisalsi AJ5
+M0LYV1	unlabelled_homolog	unknown	406.6	True	237.1	False	False	Halococcus hamelinensis 100A6
+M0MMN3	unlabelled_homolog	unknown	390.7	True	229.2	False	False	Halococcus morrhuae DSM 1307
+M0MR88	unlabelled_homolog	unknown	383.4	True	225.4	False	False	Halococcus saccharolyticus DSM 5350
+M0N2U2	unlabelled_homolog	unknown	390.0	True	227.1	False	False	Halococcus thailandensis JCM 13552
+M0ND95	unlabelled_homolog	unknown	384.7	True	223.9	False	False	Halococcus salifodinae DSM 8989
+N9WL76	unlabelled_homolog	unknown	103.3	True	76.6	False	False	[Clostridium] innocuum 2959
+Q187C9	unlabelled_homolog	unknown	266.6	True	220.6	False	False	Clostridioides difficile (strain 630)
+Q2CE27	unlabelled_homolog	unknown	321.3	True	466.0	True	False	Oceanicola granulosus (strain ATCC BAA-861 / DSM 15982 / KCTC 12143 / HTCC2516)
+Q2RPI6	unlabelled_homolog	unknown	65.4	True	74.9	False	False	Rhodospirillum rubrum (strain ATCC 11170 / ATH 1.1.1 / DSM 467 / LMG 4362 / NCIMB 8255 / S1)
+Q2S0X9	unlabelled_homolog	unknown	388.4	True	223.8	False	False	Salinibacter ruber (strain DSM 13855 / M31)
+Q3A471	unlabelled_homolog	unknown	113.7	True	101.5	False	False	Syntrophotalea carbinolica (strain DSM 2380 / NBRC 103641 / GraBd1)
+Q3IGV7	unlabelled_homolog	unknown	507.2	True	382.4	True	False	Pseudoalteromonas translucida (strain TAC 125)
+Q480U8	unlabelled_homolog	unknown	437.0	True	390.4	True	False	Colwellia psychrerythraea (strain 34H / ATCC BAA-681)
+Q5DZ78	unlabelled_homolog	unknown	571.5	True	483.5	True	False	Aliivibrio fischeri (strain ATCC 700601 / ES114)
+Q6LFS2	unlabelled_homolog	unknown	558.4	True	460.9	True	False	Photobacterium profundum (strain SS9)
+Q87QI5	direction_unresolved_expression_only	unknown	545.7	True	491.7	True	False	Vibrio parahaemolyticus serotype O3:K6 (strain RIMD 2210633)
+R1IRW1	unlabelled_homolog	unknown	485.7	True	431.2	True	False	Grimontia indica
+R7RRL7	unlabelled_homolog	unknown	69.2	True	57.6	False	False	Thermobrachium celere DSM 8682
+R9KWU8	unlabelled_homolog	unknown	84.8	True	70.9	False	False	Adlercreutzia caecimuris B7
+U3A744	unlabelled_homolog	unknown	512.4	True	476.6	True	False	Vibrio proteolyticus NBRC 13287
+U7VAD0	unlabelled_homolog	unknown	289.1	True	237.6	False	False	Cetobacterium somerae ATCC BAA-474
+V4GW26	unlabelled_homolog	unknown	387.4	True	217.5	False	False	Candidatus Halobonum tyrrellensis G22
+V4H9V2	unlabelled_homolog	unknown	418.5	True	249.5	True	False	Candidatus Halobonum tyrrellensis G22
+V5WER6	unlabelled_homolog	unknown	115.5	True	108.0	False	False	Salinispira pacifica
+W0JT78	unlabelled_homolog	unknown	420.5	True	244.4	True	False	Halostagnicola larsenii XH-48
+W1RTZ5	unlabelled_homolog	unknown	479.6	True	410.9	True	False	Marinomonas profundimaris
+W8GN93	unlabelled_homolog	unknown	118.0	True	83.2	False	False	Candidatus Hepatoplasma crinochetorum Av
+W8GS43	unlabelled_homolog	unknown	166.1	True	134.9	False	False	Candidatus Hepatoplasma crinochetorum Av

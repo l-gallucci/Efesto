@@ -1,0 +1,842 @@
+[
+  {
+    "url": "https://rest.uniprot.org/uniprotkb/stream?query=xref%3Apfam-PF11449&format=json",
+    "file": "mnt_family.json",
+    "sha256": "23c5b874ef6de6952cd00562d73ecf86cbe1f17747229b94b4642e2c8bb4cbd1",
+    "bytes": 4244593,
+    "retrieved_utc": "2026-11-08T21:15:48.321812+00:00",
+    "etag": null
+  },
+  {
+    "url": "https://rest.uniprot.org/uniprotkb/stream?query=gene%3AarsP+AND+reviewed%3Atrue&format=json",
+    "file": "arsP_reviewed.json",
+    "sha256": "5021e624e752b001ce3e3846e8f158ed4aeb93a4c9a72fdb35a0c5b14a0eea84",
+    "bytes": 14,
+    "retrieved_utc": "2026-11-08T21:15:49.004542+00:00",
+    "etag": null
+  },
+  {
+    "url": "https://rest.uniprot.org/uniprotkb/stream?query=%28gene_exact%3AfepA+OR+gene_exact%3AfhuA+OR+gene_exact%3AbtuB+OR+gene_exact%3AfecA+OR+gene_exact%3AfpvA+OR+gene_exact%3AfptA+OR+gene_exact%3AfhuE+OR+gene_exact%3AiutA%29+AND+reviewed%3Atrue&format=json",
+    "file": "tonb_controls.json",
+    "sha256": "d453dd1ddb3105921f5309b8537d4be0faaee80ce3f62fd0656e2e37977b8a62",
+    "bytes": 975446,
+    "retrieved_utc": "2026-11-08T21:15:50.265943+00:00",
+    "etag": null
+  },
+  {
+    "url": "https://rest.uniprot.org/uniprotkb/stream?query=%28gene%3AlutH+OR+gene%3AEQU24_02055+OR+gene%3AMBURv2_130812+OR+gene%3ACQW49_RS02145+OR+gene%3AMext_1853%29&format=json",
+    "file": "lut_receptors.json",
+    "sha256": "8b7e17e7dd2da4c5ed5f609a0f1068b28dd1325754d91788d2dba86ec5778a89",
+    "bytes": 20819,
+    "retrieved_utc": "2026-11-08T21:15:50.975730+00:00",
+    "etag": null
+  },
+  {
+    "url": "https://rest.uniprot.org/uniprotkb/stream?query=%28gene_exact%3AmntX+OR+gene_exact%3AmntP+OR+gene_exact%3AmntE+OR+gene_exact%3AmntH+OR+gene_exact%3AnixA+OR+gene_exact%3AmnoP%29+AND+reviewed%3Atrue&format=json",
+    "file": "mnt_other_controls.json",
+    "sha256": "8a3ce4a368e6d24d3651a1ec8972541791d86e89d398d39bb3094b84f1ea3ffb",
+    "bytes": 2813973,
+    "retrieved_utc": "2026-11-08T21:15:52.405229+00:00",
+    "etag": null
+  },
+  {
+    "url": "https://rest.uniprot.org/uniprotkb/stream?query=organism_id%3A240292+AND+%28gene%3AAva_4037+OR+gene%3AAva_4038+OR+gene%3AAva_4039+OR+gene%3AAva_4040+OR+gene%3AAva_4041+OR+gene%3AAva_4042%29&format=json",
+    "file": "vup_loci.json",
+    "sha256": "6e5deffec006c71b4da7fc01555597e53634c36e5c14f5af7e3ac5c9f0c53383",
+    "bytes": 43341,
+    "retrieved_utc": "2026-11-08T21:15:53.233629+00:00",
+    "etag": null
+  },
+  {
+    "url": "https://www.ebi.ac.uk/interpro/api/entry/pfam/PF11449/?annotation=alignment:seed",
+    "file": "PF11449_seed.download",
+    "sha256": "e24eec6ff6d7c46434f43d453a4bcd08ea45c61b0d7dc5017829bf47a97704e3",
+    "bytes": 2590,
+    "retrieved_utc": "2026-11-08T21:15:53.987513+00:00",
+    "etag": null
+  },
+  {
+    "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13274385/fullTextXML",
+    "file": "mnt_vibrio_2026.xml",
+    "sha256": "005b57ebf502c489d509fc4ca0a41160459edd4cded31164573da73889f90742",
+    "bytes": 146098,
+    "retrieved_utc": "2026-11-08T21:16:36.649943+00:00",
+    "etag": null
+  },
+  {
+    "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=protein&id=ZP_00160423.2&rettype=gp&retmode=text",
+    "file": "ZP_00160423.2.gp",
+    "sha256": "0c77a4ae8d988e168383104f5a7f36269b2f3b0c31da3d831786cca8102efa29",
+    "bytes": 2835,
+    "retrieved_utc": "2026-11-08T21:17:40.154305+00:00",
+    "etag": null
+  },
+  {
+    "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=protein&id=ZP_00160424.1&rettype=gp&retmode=text",
+    "file": "ZP_00160424.1.gp",
+    "sha256": "f7b8eacff1c2cccfeaf19846cca360ba2631b265c1bd8bf80c57ba8f6b4a230e",
+    "bytes": 2820,
+    "retrieved_utc": "2026-11-08T21:17:41.256229+00:00",
+    "etag": null
+  },
+  {
+    "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=protein&id=ZP_00351494.1&rettype=gp&retmode=text",
+    "file": "ZP_00351494.1.gp",
+    "sha256": "9080496f731665512b470e87a3ed263ff051850c4c964d5f6f3a4b5ed0909f20",
+    "bytes": 2913,
+    "retrieved_utc": "2026-11-08T21:17:42.385486+00:00",
+    "etag": null
+  },
+  {
+    "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=protein&term=SAR11G3_00277&retmode=json",
+    "file": "mnt_SAR11_search.json",
+    "sha256": "6d2c72afb436af5209ce1d149575da4879fd06b3109077269ceb4cd1c18ff64c",
+    "bytes": 307,
+    "retrieved_utc": "2026-11-08T21:17:43.102483+00:00",
+    "etag": null
+  },
+  {
+    "url": "https://rest.uniprot.org/uniprotkb/stream?query=gene%3AXCC4075+OR+%28gene%3AyebN+AND+organism_name%3ANeisseria%29&format=json",
+    "file": "mnt_export_anchors.json",
+    "sha256": "8df1a7ab001aad7c72036aae86444cf948b6098805a49e64f5f55e829a2a188b",
+    "bytes": 25237,
+    "retrieved_utc": "2026-11-08T21:40:51.968153+00:00",
+    "etag": null
+  },
+  {
+    "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=protein&id=ABA23643.1&rettype=gp&retmode=text",
+    "file": "ABA23643.1.gp",
+    "sha256": "41448fb243590a4df347d56bb01d39a46ce98f9de3ee5a7b73d63a7b0285022e",
+    "bytes": 3068,
+    "retrieved_utc": "2026-11-08T21:40:53.501682+00:00",
+    "etag": null
+  },
+  {
+    "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=protein&id=ABA23644.1&rettype=gp&retmode=text",
+    "file": "ABA23644.1.gp",
+    "sha256": "37cc1a5cf8871d83794d2f79dd7367cb448dacd4f23a6a31222567f05f379d6c",
+    "bytes": 2914,
+    "retrieved_utc": "2026-11-08T21:40:54.964196+00:00",
+    "etag": null
+  },
+  {
+    "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=protein&id=ABA23645.1&rettype=gp&retmode=text",
+    "file": "ABA23645.1.gp",
+    "sha256": "1f0a18fe455446c26ece3e641049e070ff16a61655322c9a4cdbbfdc0fbb28d8",
+    "bytes": 3043,
+    "retrieved_utc": "2026-11-08T21:40:56.449503+00:00",
+    "etag": null
+  },
+  {
+    "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=NZ_AAEA01000009.1&seq_start=17900&seq_stop=21000&rettype=gb&retmode=text",
+    "file": "vup_historical_region.gb",
+    "sha256": "49227c7342ad0d54f9e4445fa9b781791269bd41e1f3b41e48ef90d4118d102f",
+    "bytes": 8906,
+    "retrieved_utc": "2026-11-08T21:40:57.414172+00:00",
+    "etag": null
+  },
+  {
+    "url": "https://rest.uniprot.org/uniprotkb/stream?query=gene%3AVP1164&format=json",
+    "file": "mnt_vp1164.json",
+    "sha256": "abc19e0f3b7530ae98ad866d4898b67e29a031e9d82bc5485d3cf066b77083d9",
+    "bytes": 13262,
+    "retrieved_utc": "2026-11-08T21:40:58.114796+00:00",
+    "etag": null
+  },
+  {
+    "url": "https://rest.uniprot.org/uniprotkb/stream?query=xref%3Apfam-PF03773+AND+reviewed%3Atrue&format=json",
+    "file": "arsP_family_reviewed.json",
+    "sha256": "099a14f2fddddcb80f4296c3cb8af6e097504e0d9fa5227892a9908fa29c9be5",
+    "bytes": 48238,
+    "retrieved_utc": "2026-11-08T21:40:59.288995+00:00",
+    "etag": null
+  },
+  {
+    "url": "https://rest.uniprot.org/uniprotkb/stream?query=organism_id%3A240292+AND+%28gene%3AAva_4035+OR+gene%3AAva_4036+OR+gene%3AAva_4043+OR+gene%3AAva_4044+OR+gene%3AAva_4045%29&format=json",
+    "file": "vup_loci_extended.json",
+    "sha256": "92b5c442385f3e0882c769172ec36858129e25d34c24cb8a525b4a050df47b1d",
+    "bytes": 27797,
+    "retrieved_utc": "2026-11-08T21:41:00.164495+00:00",
+    "etag": null
+  },
+  {
+    "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=protein&id=327486347&rettype=gp&retmode=text",
+    "file": "mnt_SAR11.gp",
+    "sha256": "1645d93d7edd9bb4bc6f1a54455dd27b27305f72894e07b34f50bfa03aa2b8ec",
+    "bytes": 2494,
+    "retrieved_utc": "2026-11-08T21:41:01.282473+00:00",
+    "etag": null
+  },
+  {
+    "url": "https://www.ebi.ac.uk/interpro/api/entry/pfam/PF03773/?annotation=hmm",
+    "file": "PF03773.hmm.download",
+    "sha256": "4a7818ced502b693dbb1e27bb009e55342a97c4a681eaacd7bd3bece9252df89",
+    "bytes": 26885,
+    "retrieved_utc": "2026-11-08T21:41:02.033374+00:00",
+    "etag": null
+  },
+  {
+    "url": "https://www.ebi.ac.uk/interpro/api/entry/pfam/PF02659/?annotation=hmm",
+    "file": "PF02659.hmm.download",
+    "sha256": "2d3f7142ab5ecf54bbdc676fe7e11bd8baad56fdd7de9373e188dbff428885fc",
+    "bytes": 14409,
+    "retrieved_utc": "2026-11-08T21:41:02.741075+00:00",
+    "etag": null
+  },
+  {
+    "url": "https://www.ebi.ac.uk/interpro/api/entry/pfam/PF00593/?annotation=hmm",
+    "file": "PF00593.hmm.download",
+    "sha256": "91a813e94cfd6ff6ff7e5780827ccf203b61f3a64cf35a98392a2bf5c5755d57",
+    "bytes": 53296,
+    "retrieved_utc": "2026-11-08T21:41:03.549412+00:00",
+    "etag": null
+  },
+  {
+    "url": "https://www.ebi.ac.uk/interpro/api/entry/pfam/PF07715/?annotation=hmm",
+    "file": "PF07715.hmm.download",
+    "sha256": "503d5be3af25a1618a1b97f05766bb22fd447f70a6727541a5f7b6fddd5af1aa",
+    "bytes": 12452,
+    "retrieved_utc": "2026-11-08T21:41:04.231134+00:00",
+    "etag": null
+  },
+  {
+    "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=protein&id=ACG76368.1&rettype=gp&retmode=text",
+    "file": "ACG76368.1.gp",
+    "sha256": "f7b0ff94eb4387c433cc6c2f3f5ae030725dafd503944606d17906058217c85e",
+    "bytes": 2084,
+    "retrieved_utc": "2026-11-08T21:44:07.755125+00:00",
+    "etag": null
+  },
+  {
+    "url": "https://rest.uniprot.org/uniprotkb/stream?query=xref%3Apfam-PF00593+AND+%28organism_name%3AMethylorubrum+OR+organism_name%3AMethylotuvimicrobium+OR+organism_name%3AMethylosinus%29&format=json",
+    "file": "ln_TonB_candidates.json",
+    "sha256": "539c42b1af827896be7d38f66364e057c69fd3d8a6ee284ffb5605dfa2a2892d",
+    "bytes": 3476045,
+    "retrieved_utc": "2026-11-08T21:44:09.248590+00:00",
+    "etag": null
+  },
+  {
+    "url": "https://rest.uniprot.org/uniprotkb/stream?query=organism_id%3A595536+AND+%28gene%3ACQW49_02145+OR+gene%3ACQW49_RS02145+OR+gene%3ACQW49_02130%29&format=json",
+    "file": "lut_OB3b.json",
+    "sha256": "b00525e681394c6c9e3ad8bf2026135d41436c74b67463758b8336bed15403c6",
+    "bytes": 16732,
+    "retrieved_utc": "2026-11-08T21:44:09.977354+00:00",
+    "etag": null
+  },
+  {
+    "url": "https://rest.uniprot.org/uniprotkb/stream?query=organism_name%3A%22Methylobacterium+extorquens+PA1%22+AND+protein_name%3ATonB&format=json",
+    "file": "lut_PA1.json",
+    "sha256": "5021e624e752b001ce3e3846e8f158ed4aeb93a4c9a72fdb35a0c5b14a0eea84",
+    "bytes": 14,
+    "retrieved_utc": "2026-11-08T21:44:10.673617+00:00",
+    "etag": null
+  },
+  {
+    "url": "https://rest.uniprot.org/uniprotkb/stream?query=gene%3AMext_1853+OR+gene%3AMext_1854+OR+gene%3AMext_1855+OR+gene%3AMext_1856+OR+gene%3AMext_1857&format=json",
+    "file": "PA1_locus.json",
+    "sha256": "5021e624e752b001ce3e3846e8f158ed4aeb93a4c9a72fdb35a0c5b14a0eea84",
+    "bytes": 14,
+    "retrieved_utc": "2026-11-08T22:20:26.522233+00:00",
+    "etag": null
+  },
+  {
+    "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=protein&term=CQW49_RS02145&retmode=json",
+    "file": "OB3b_lut_search.json",
+    "sha256": "2bed9118f98653b8f1843ea970878970e2b878cc2dc2eb014b5e161458092689",
+    "bytes": 355,
+    "retrieved_utc": "2026-11-08T22:20:27.263216+00:00",
+    "etag": null
+  },
+  {
+    "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=protein&term=Mext_1853&retmode=json",
+    "file": "PA1_1853_search.json",
+    "sha256": "7b44ba668b256025dc9e37a952cbe7a7eec79794192a25ae901ab15ac461d590",
+    "bytes": 299,
+    "retrieved_utc": "2026-11-09T11:55:43.553561+00:00",
+    "etag": null
+  },
+  {
+    "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=protein&term=Mext_1854&retmode=json",
+    "file": "PA1_1854_search.json",
+    "sha256": "4d62240258acc9f20bf123f27a3a49543cb9a64b3a12eca882f5a3b9d6279415",
+    "bytes": 299,
+    "retrieved_utc": "2026-11-09T11:55:44.253482+00:00",
+    "etag": null
+  },
+  {
+    "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=9888264&retmode=xml",
+    "file": "OB3b_lut_paper.xml",
+    "sha256": "c95c2e0a95f97a41899128f82ff703a99eb22e392caaac727a7deb8ac2b59e85",
+    "bytes": 10908,
+    "retrieved_utc": "2026-11-09T11:55:45.099638+00:00",
+    "etag": null
+  },
+  {
+    "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=6850437&retmode=xml",
+    "file": "PA1_paper.xml",
+    "sha256": "20bc98e98d9ebb7bff6ef55c59315452dbb7e4a66e7f3855cb75949774fa5782",
+    "bytes": 168008,
+    "retrieved_utc": "2026-11-09T11:55:46.163272+00:00",
+    "etag": null
+  },
+  {
+    "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=7391723&retmode=xml",
+    "file": "AM1_lut_paper.xml",
+    "sha256": "d92e334abba5dabc5c18feac36860ecb43afcaae282e7a8790e90a6ec95553c0",
+    "bytes": 164650,
+    "retrieved_utc": "2026-11-09T11:55:47.165095+00:00",
+    "etag": null
+  },
+  {
+    "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=protein&id=163662885&rettype=gp&retmode=text",
+    "file": "PA1_TonB.gp",
+    "sha256": "e314f4476ccf730cf2602d08b92e3ba06ccf1adffa44dd0635bff7dbd3eec699",
+    "bytes": 4539,
+    "retrieved_utc": "2026-11-09T20:13:13.876878+00:00",
+    "etag": null
+  },
+  {
+    "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=protein&id=163662886&rettype=gp&retmode=text",
+    "file": "PA1_LanM.gp",
+    "sha256": "d027d41e2155e8d928208d2bb0f62423079f5b6224f7bdb26b444de702f60e25",
+    "bytes": 3970,
+    "retrieved_utc": "2026-11-09T20:13:15.807266+00:00",
+    "etag": null
+  },
+  {
+    "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=gene&term=CQW49_RS02145&retmode=json",
+    "file": "OB3b_gene_search.json",
+    "sha256": "2bed9118f98653b8f1843ea970878970e2b878cc2dc2eb014b5e161458092689",
+    "bytes": 355,
+    "retrieved_utc": "2026-11-09T20:13:16.518089+00:00",
+    "etag": null
+  },
+  {
+    "url": "https://www.ebi.ac.uk/interpro/api/entry/interpro/IPR052738/",
+    "file": "tungstate_interpro.json",
+    "sha256": "52ee9781a9323530b9e52a1b9c57b10a99c29c0f6498b26601d702e9638c2de4",
+    "bytes": 1499
+  },
+  {
+    "url": "https://www.ebi.ac.uk/interpro/api/entry/ncbifam/?search=tungstate&page_size=100",
+    "file": "tungstate_families.json",
+    "sha256": "fa4a4ab7e7372ceb05d44db715ecba7b83d3c8defe37500bcace70e584950be3",
+    "bytes": 1472
+  },
+  {
+    "url": "https://www.ebi.ac.uk/interpro/api/entry/ncbifam/?search=lanthanide&page_size=100",
+    "file": "lanthanide_families.json",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "url": "https://www.ebi.ac.uk/interpro/api/entry/ncbifam/?search=lanmodulin&page_size=100",
+    "file": "lanmodulin_families.json",
+    "sha256": "4066fad91d7ac74c4b83bc0fbbf884097a1efeac783d52f925fa295c618d91f0",
+    "bytes": 216
+  },
+  {
+    "url": "https://www.ebi.ac.uk/interpro/api/entry/pfam/?search=lanthanide&page_size=100",
+    "file": "lanthanide_pfam.json",
+    "sha256": "e8f84aa14bbd79274fcd115aa56474834eed7918abe0b2a23cb4ac85b01dae3f",
+    "bytes": 237
+  },
+  {
+    "url": "https://www.ebi.ac.uk/interpro/api/entry/ncbifam/NF003196/",
+    "file": "NF003196.json",
+    "sha256": "656fdd491bab20c8affe00202e2e210e4108826cb5ee99413aada03202979a6c",
+    "bytes": 830
+  },
+  {
+    "url": "https://www.ebi.ac.uk/interpro/api/entry/ncbifam/NF003196/?annotation=hmm",
+    "file": "NF003196.hmm.download",
+    "sha256": "6bcd1391d2600c19ee8e39465d3527420217c4b562c7a679b4368746e000989a",
+    "bytes": 29662
+  },
+  {
+    "url": "https://www.ebi.ac.uk/interpro/api/entry/ncbifam/NF040839/",
+    "file": "NF040839.json",
+    "sha256": "36ad091b248cbae494fb969c004dbd5ca2620352c0973e700c95227e3b2f61a1",
+    "bytes": 1188
+  },
+  {
+    "url": "https://www.ebi.ac.uk/interpro/api/entry/ncbifam/NF040839/?annotation=hmm",
+    "file": "NF040839.hmm.download",
+    "sha256": "a0748ac142a728e770e52b5e1d90721af651d92489708b50515105aaa73c5102",
+    "bytes": 20293
+  },
+  {
+    "url": "https://www.ebi.ac.uk/interpro/api/entry/ncbifam/NF040840/",
+    "file": "NF040840.json",
+    "sha256": "934873b8917a1b9324dcfaf9fa1f04e956a346f14ddd8bc139d7153cefffd294",
+    "bytes": 1280
+  },
+  {
+    "url": "https://www.ebi.ac.uk/interpro/api/entry/ncbifam/NF040840/?annotation=hmm",
+    "file": "NF040840.hmm.download",
+    "sha256": "038663b57326c4cc6d03ff2213fd5b326c85cb860db706dd8485be470acc79de",
+    "bytes": 26283
+  },
+  {
+    "url": "https://www.ebi.ac.uk/interpro/api/entry/ncbifam/NF041772/",
+    "file": "NF041772.json",
+    "sha256": "5339e85678d3703ae842d85e2f7c24f035dbe6ac3af47bebbf39edd6766fd820",
+    "bytes": 722
+  },
+  {
+    "url": "https://www.ebi.ac.uk/interpro/api/entry/ncbifam/NF041772/?annotation=hmm",
+    "file": "NF041772.hmm.download",
+    "sha256": "901ce03b60c8b4eacb3d6888d50f6b5ab66509ce7a164416f44e273eb2df7b03",
+    "bytes": 18571
+  },
+  {
+    "url": "https://www.ebi.ac.uk/interpro/api/entry/ncbifam/NF041773/?annotation=hmm",
+    "file": "NF041773.hmm.download",
+    "sha256": "f419e83cd47f3ed7da7d44a070e771a9c9f29e71ada106933b80dd0407e0bb41",
+    "bytes": 14882
+  },
+  {
+    "url": "https://www.ebi.ac.uk/interpro/api/entry/ncbifam/NF041774/",
+    "file": "NF041774.json",
+    "sha256": "b8431aa79a134c7546f85e268059ba8892edfaa092df6ba262544580aeabf79c",
+    "bytes": 1361
+  },
+  {
+    "url": "https://www.ebi.ac.uk/interpro/api/entry/ncbifam/NF041774/?annotation=hmm",
+    "file": "NF041774.hmm.download",
+    "sha256": "116904c7ed91088dbcfde862966a8bd2513e120468307a4e72ddb68b6100697f",
+    "bytes": 26695
+  },
+  {
+    "url": "https://www.ebi.ac.uk/interpro/api/entry/ncbifam/TIGR03730/",
+    "file": "TIGR03730.json",
+    "sha256": "9c7397fd630338b3d0adbe881233fbea60bd68a1a796d25ab7046515c93b7b44",
+    "bytes": 1895
+  },
+  {
+    "url": "https://www.ebi.ac.uk/interpro/api/entry/ncbifam/TIGR03730/?annotation=hmm",
+    "file": "TIGR03730.hmm.download",
+    "sha256": "213adb427928a4933843ccbb611256ab9def2a81b29afaef61fdf701223410c1",
+    "bytes": 23700
+  },
+  {
+    "url": "https://www.ebi.ac.uk/interpro/api/entry/ncbifam/NF053806/",
+    "file": "NF053806.json",
+    "sha256": "95cd2b590e8c002a7ab45c8c591d397ecd695dc6e911d28f584aa9b94b33fefd",
+    "bytes": 1639
+  },
+  {
+    "url": "https://www.ebi.ac.uk/interpro/api/entry/ncbifam/NF053806/?annotation=hmm",
+    "file": "NF053806.hmm.download",
+    "sha256": "4f1e61826ee197217fc06cce8c8e8040f0d71c2d08d860f51de287153ee8adc3",
+    "bytes": 10996
+  },
+  {
+    "url": "https://www.ebi.ac.uk/interpro/api/entry/ncbifam/?search=lutH&page_size=100",
+    "file": "search_lutH.json",
+    "sha256": "6c65de84b9874ac2d5511e2bdc157f9d1281f77b9352a41ac8a8a76ee23c0f8b",
+    "bytes": 238
+  },
+  {
+    "url": "https://www.ebi.ac.uk/interpro/api/entry/ncbifam/?search=lutA&page_size=100",
+    "file": "search_lutA.json",
+    "sha256": "2699c0b1fb4cad95228633d4b35a634c4b02f119ae356d4be09201819df93901",
+    "bytes": 19939
+  },
+  {
+    "url": "https://www.ebi.ac.uk/interpro/api/entry/ncbifam/?search=lanthanum&page_size=100",
+    "file": "search_lanthanum.json",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "url": "https://www.ebi.ac.uk/interpro/api/entry/ncbifam/?search=lanpepsy&page_size=100",
+    "file": "search_lanpepsy.json",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "url": "https://www.ebi.ac.uk/interpro/api/entry/ncbifam/?search=lanthanide&page_size=100",
+    "file": "search_lanthanide.json",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "url": "https://rest.uniprot.org/uniprotkb/search?query=gene_exact%3AlanM+AND+reviewed%3Atrue&format=json&size=200",
+    "file": "reference_lanM.json",
+    "sha256": "557e0145d5efa87d9b7994732eb9a8d58b7805b208b6cd799ebe13fbab65433e",
+    "bytes": 25966
+  },
+  {
+    "url": "https://rest.uniprot.org/uniprotkb/search?query=gene_exact%3AlanM&format=json&size=200",
+    "file": "reference_lanM_all.json",
+    "sha256": "d1fcee442515eedb050233d41193ce40464bd64f38edc3cd3b4a38504522f0e5",
+    "bytes": 1391256
+  },
+  {
+    "url": "https://rest.uniprot.org/uniprotkb/search?query=gene_exact%3AtupA+AND+reviewed%3Atrue&format=json&size=200",
+    "file": "reference_tupA.json",
+    "sha256": "d1e9aac681d9e727f0b6b57876c1cfbc2ad82b6f797c502c9ab2c2047da26423",
+    "bytes": 27795
+  },
+  {
+    "url": "https://rest.uniprot.org/uniprotkb/search?query=gene_exact%3AwtpA+AND+reviewed%3Atrue&format=json&size=200",
+    "file": "reference_wtpA.json",
+    "sha256": "0687faf24c6e3a2726750003416af3743ab360b0523aad4a903f1cf5bba1dbd1",
+    "bytes": 104183
+  },
+  {
+    "url": "https://rest.uniprot.org/uniprotkb/search?query=%28gene_exact%3AtupA+OR+gene_exact%3AtupB+OR+gene_exact%3AtupC%29+AND+%28organism_id%3A207559+OR+organism_id%3A243277+OR+organism_id%3A243231+OR+organism_id%3A192222%29&format=json&size=200",
+    "file": "reference_tupABC.json",
+    "sha256": "7e35226ad8cea21aa0dc59b4e9960235d3cbde3c0611ec2d20835cda386abc18",
+    "bytes": 57574
+  },
+  {
+    "url": "https://rest.uniprot.org/uniprotkb/search?query=%28gene_exact%3AwtpA+OR+gene_exact%3AwtpB+OR+gene_exact%3AwtpC%29+AND+organism_id%3A2261&format=json&size=200",
+    "file": "reference_wtpABC.json",
+    "sha256": "5021e624e752b001ce3e3846e8f158ed4aeb93a4c9a72fdb35a0c5b14a0eea84",
+    "bytes": 14
+  },
+  {
+    "url": "https://rest.uniprot.org/uniprotkb/search?query=%28gene_exact%3AvupA+OR+gene_exact%3AvupB+OR+gene_exact%3AvupC%29&format=json&size=200",
+    "file": "reference_vupABC.json",
+    "sha256": "4307bf713c6fd1fe8d0a08493f4b6d3a4dc7cafda9a77efe73722f4db7899bc5",
+    "bytes": 438
+  },
+  {
+    "url": "https://rest.uniprot.org/uniprotkb/search?query=%28gene_exact%3AmodA+OR+gene_exact%3AmodB+OR+gene_exact%3AmodC%29+AND+reviewed%3Atrue&format=json&size=200",
+    "file": "reference_modABC.json",
+    "sha256": "d8b037b2f679d329b0051c8e2dd5501e98179806fcee38f9ee0675835f771ae3",
+    "bytes": 1160721
+  },
+  {
+    "url": "https://rest.uniprot.org/uniprotkb/search?query=%28gene_exact%3AlutH+OR+gene_exact%3AlutA+OR+gene_exact%3AlutE+OR+gene_exact%3AlutF%29&format=json&size=200",
+    "file": "reference_lut.json",
+    "sha256": "9dd73096ebcea236d2dca70f85e2e9e6c6c07d562b943be521268f9983e96230",
+    "bytes": 1439689
+  },
+  {
+    "url": "https://rest.uniprot.org/uniprotkb/search?query=gene_exact%3AlanA&format=json&size=200",
+    "file": "reference_lanA.json",
+    "sha256": "412125bc1089f58b1718d600c432094526988502ee45f04460b000206a002260",
+    "bytes": 1023486
+  },
+  {
+    "url": "https://rest.uniprot.org/uniprotkb/search?query=%28gene_exact%3AcalM+OR+gene_exact%3AcalA+OR+gene_exact%3AcalB+OR+gene_exact%3AefhP%29+AND+reviewed%3Atrue&format=json&size=200",
+    "file": "reference_calcium_negatives.json",
+    "sha256": "60a81bef8be54aab8092da8312d8e2c302d0134bc05b3fbc1dffcaeabb5f42b3",
+    "bytes": 924354
+  },
+  {
+    "url": "https://rest.uniprot.org/uniprotkb/C5B164.json",
+    "file": "reference_C5B164.json",
+    "sha256": "419dd4585524bc3cd055a43a900a6e6bda91e1d7a0076b8e28a6f7ae4cfa52dc",
+    "bytes": 25952
+  },
+  {
+    "url": "https://www.ebi.ac.uk/interpro/api/entry/ncbifam/NF041773/",
+    "file": "NF041773.json",
+    "sha256": "6396f7507582b63a1c3aa7215b699407d3406b61ef26d678d06d460fa7b48348",
+    "bytes": 705
+  },
+  {
+    "url": "https://www.ebi.ac.uk/interpro/api/entry/pfam/PF41493/",
+    "file": "PF41493.json",
+    "sha256": "a6377ca63c53331988816707e1cae0bf6984833a51155f46c383ff4fbf8a6db4",
+    "bytes": 2215
+  },
+  {
+    "url": "https://www.ebi.ac.uk/interpro/api/entry/pfam/PF41493/?annotation=hmm",
+    "file": "PF41493.hmm.download",
+    "sha256": "7908e481dadd251ce4197d0720f345a3518fc69e46b4a3d18fc5d1b0b678fcce",
+    "bytes": 5892
+  },
+  {
+    "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=protein&id=ZP_00160423&rettype=fasta&retmode=text",
+    "file": "ZP_00160423.fasta",
+    "sha256": "762e19e83c145198ccd2289d32cd82432b87bd03718afb0a15603a85a71d0320",
+    "bytes": 353
+  },
+  {
+    "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=protein&id=ZP_00160424&rettype=fasta&retmode=text",
+    "file": "ZP_00160424.fasta",
+    "sha256": "b161c934b0acabaa0a8c132f53b0b2452b620f24ae71b4e36bf59ee6f4c9db31",
+    "bytes": 412
+  },
+  {
+    "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=protein&id=ZP_00351494&rettype=fasta&retmode=text",
+    "file": "ZP_00351494.fasta",
+    "sha256": "bcf403d67fd89f738c516bf37a832e31236daffcde574404c0a2e80d16a0d2fd",
+    "bytes": 483
+  },
+  {
+    "url": "https://rest.uniprot.org/uniprotkb/search?query=%28gene_exact%3AwtpA+OR+gene_exact%3AwtpB+OR+gene_exact%3AwtpC+OR+gene_exact%3AmodB+OR+gene_exact%3AmodC%29+AND+organism_id%3A186497&format=json&size=100",
+    "file": "reference_wtpABC_Pfur.json",
+    "sha256": "c15843776dd5572c943b0012d4d60a26166b6ce9ed66bc3de89edad856f34ed9",
+    "bytes": 43240
+  },
+  {
+    "url": "https://rest.uniprot.org/uniprotkb/search?query=organism_id%3A272630+AND+%28gene%3AMexAM1_META1p1781+OR+gene%3AlanD+OR+gene%3AMETA1p1781%29&format=json&size=100",
+    "file": "reference_LanD.json",
+    "sha256": "99ee90faec7baa2a50e5e7aa851f6102543887b962982c2329cd6cead6d4dcac",
+    "bytes": 6680
+  },
+  {
+    "url": "https://rest.uniprot.org/uniprotkb/search?query=organism_id%3A207559+AND+%28gene%3ADde_0234+OR+gene%3ADde_0235+OR+gene%3ADde_0236%29&format=json&size=100",
+    "file": "reference_tup_Dalaskensis.json",
+    "sha256": "5e6ad3201104477b46ed454c88334808728361fd8e7ed0a29e368abacc69a489",
+    "bytes": 20920
+  },
+  {
+    "url": "https://www.ebi.ac.uk/interpro/api/entry/ncbifam/?search=methanobactin&page_size=100",
+    "file": "phase2_ncbifam_methanobactin.json",
+    "sha256": "f4a0c40d3ec1000458c7e1d8f04ca4f4d09aefeed40720fa0ba466e3da27a11c",
+    "bytes": 1411
+  },
+  {
+    "url": "https://www.ebi.ac.uk/interpro/api/entry/ncbifam/?search=MntX&page_size=100",
+    "file": "phase2_ncbifam_MntX.json",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "url": "https://www.ebi.ac.uk/interpro/api/entry/ncbifam/?search=manganese&page_size=100",
+    "file": "phase2_ncbifam_manganese.json",
+    "sha256": "bc349536db26e3e2edf5f46a5e6fe30c308ec57049a612ff0f996f167b54e610",
+    "bytes": 4610
+  },
+  {
+    "url": "https://www.ebi.ac.uk/interpro/api/entry/pfam/?search=methanobactin&page_size=100",
+    "file": "phase2_pfam_methanobactin.json",
+    "sha256": "bed62dd48003118cfb3122f05d98e11eae3bbbccf0ff5151e40293798ef76c44",
+    "bytes": 446
+  },
+  {
+    "url": "https://www.ebi.ac.uk/interpro/api/entry/pfam/?search=MntX&page_size=100",
+    "file": "phase2_pfam_MntX.json",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "url": "https://www.ebi.ac.uk/interpro/api/entry/pfam/PF11449/",
+    "file": "phase2_PF11449.json",
+    "sha256": "3a9ad6da2613e07780f28d875e93f0d3e5c67be56e34ef74e7690591dac7e212",
+    "bytes": 967
+  },
+  {
+    "url": "https://www.ebi.ac.uk/interpro/api/entry/pfam/PF11449/?annotation=hmm",
+    "file": "phase2_PF11449.hmm.download",
+    "sha256": "aebd01a4fb3ab016cb23558410330e4f71b66d7787ec1c628aaffcdc79f20ab8",
+    "bytes": 30142
+  },
+  {
+    "url": "https://www.genome.jp/ftp/db/kofam/",
+    "file": "phase2_kofam_index.html",
+    "sha256": "5c23785ec888ae6b3932fe508f20340a95a7f15ad0d0c92c10fe1885bae1083a",
+    "bytes": 1558
+  },
+  {
+    "url": "https://www.genome.jp/ftp/db/kofam/ko_list.gz",
+    "file": "phase2_ko_list.gz",
+    "sha256": "0da0b968886270c4a611e0c874e5a7264097641cf0a85d50a623b45ec6467982",
+    "bytes": 917028
+  },
+  {
+    "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12482762/fullTextXML",
+    "file": "phase2_lanthanome.xml",
+    "sha256": "fe67d0bf3d58bce800a2c196590d546360dd305182958da5c5a292dc41e0425d",
+    "bytes": 156122
+  },
+  {
+    "url": "https://www.ebi.ac.uk/interpro/api/entry/ncbifam/TIGR04071/",
+    "file": "phase2_TIGR04071.json",
+    "sha256": "8e7f4f010a8287615c73412bafaa474451d56e3cff0339b1d94afb49e8971b47",
+    "bytes": 3128
+  },
+  {
+    "url": "https://www.ebi.ac.uk/interpro/api/entry/ncbifam/TIGR04071/?annotation=hmm",
+    "file": "phase2_TIGR04071.hmm.download",
+    "sha256": "cc18e4375c48f0e960b4830d3be74b1b7c1ecbfe2bc2ce2ab9c44fe0342b4f70",
+    "bytes": 3301
+  },
+  {
+    "url": "https://www.ebi.ac.uk/interpro/api/entry/ncbifam/TIGR04159/",
+    "file": "phase2_TIGR04159.json",
+    "sha256": "543ee457588d56c30fd01a0bc9064d5effcae0d7404818e5eb266876568cab9d",
+    "bytes": 2158
+  },
+  {
+    "url": "https://www.ebi.ac.uk/interpro/api/entry/ncbifam/TIGR04159/?annotation=hmm",
+    "file": "phase2_TIGR04159.hmm.download",
+    "sha256": "450cce73567d26b9f9f48c135f128966b71cf3545e69e284ef94ce1267085068",
+    "bytes": 20472
+  },
+  {
+    "url": "https://www.ebi.ac.uk/interpro/api/entry/ncbifam/TIGR04160/",
+    "file": "phase2_TIGR04160.json",
+    "sha256": "401a2817088a00b876aab244b93a12a45fbb4a099f32bffb8b41e2811ea27dd7",
+    "bytes": 3517
+  },
+  {
+    "url": "https://www.ebi.ac.uk/interpro/api/entry/ncbifam/TIGR04160/?annotation=hmm",
+    "file": "phase2_TIGR04160.hmm.download",
+    "sha256": "6b27bba02ae2842b57fb20143fab1e50977b1d7c95ad576ca5c62509bd944c5c",
+    "bytes": 15942
+  },
+  {
+    "url": "https://www.ebi.ac.uk/interpro/api/entry/ncbifam/NF040705/",
+    "file": "phase2_NF040705.json",
+    "sha256": "2894f1551fc4c0a5b2213b0471588ad338868ed2a82f976fee4b543d9bf183a0",
+    "bytes": 1647
+  },
+  {
+    "url": "https://www.ebi.ac.uk/interpro/api/entry/ncbifam/NF040705/?annotation=hmm",
+    "file": "phase2_NF040705.hmm.download",
+    "sha256": "3bbe4c61b7d123bf49e789ecfca402133482dc006e5f9e9a1c1ae2165a9bb568",
+    "bytes": 19378
+  },
+  {
+    "url": "https://www.ebi.ac.uk/interpro/api/entry/ncbifam/NF045577/",
+    "file": "phase2_NF045577.json",
+    "sha256": "9520933c93cd457df40651770889b56c21811b45e636d7f2fb83a4f33dc7c6de",
+    "bytes": 1682
+  },
+  {
+    "url": "https://www.ebi.ac.uk/interpro/api/entry/ncbifam/NF045577/?annotation=hmm",
+    "file": "phase2_NF045577.hmm.download",
+    "sha256": "c2946a9da3916d36af347831e02c9031d3cb18401de8315392ba1e152fd11716",
+    "bytes": 39532
+  },
+  {
+    "url": "https://www.ebi.ac.uk/interpro/api/entry/ncbifam/NF045578/",
+    "file": "phase2_NF045578.json",
+    "sha256": "ead1d5da08b0ff65a8915715978b61623bef2670a59c46e560dbe1adc34ad2f8",
+    "bytes": 1380
+  },
+  {
+    "url": "https://www.ebi.ac.uk/interpro/api/entry/ncbifam/NF045578/?annotation=hmm",
+    "file": "phase2_NF045578.hmm.download",
+    "sha256": "5f16796a6c0da469730ec2a6110967ff7f622a1fc5b75b343249abe75a738a71",
+    "bytes": 34053
+  },
+  {
+    "url": "https://rest.uniprot.org/uniprotkb/search?query=%28gene_exact%3AmbnA+OR+gene_exact%3AmbnB+OR+gene_exact%3AmbnC+OR+gene_exact%3AmbnT+OR+gene_exact%3AmbnM+OR+gene_exact%3AmbnF%29+AND+reviewed%3Atrue&format=json&size=200",
+    "file": "phase2_reference_mbn_reviewed.json",
+    "sha256": "debcf33c5fd054d682477883e328852cc317706daed00405396528b2221cf554",
+    "bytes": 74881
+  },
+  {
+    "url": "https://rest.uniprot.org/uniprotkb/search?query=%28gene_exact%3AmbnA+OR+gene_exact%3AmbnB+OR+gene_exact%3AmbnC+OR+gene_exact%3AmbnT%29+AND+taxonomy_id%3A228252&format=json&size=200",
+    "file": "phase2_reference_mbn_all.json",
+    "sha256": "50e2ab65e5f3a3a555eeac41dbbad647496e015b014c084006487f9aab6435cd",
+    "bytes": 386
+  },
+  {
+    "url": "https://rest.uniprot.org/uniprotkb/search?query=gene_exact%3AmntX&format=json&size=200",
+    "file": "phase2_reference_mntX.json",
+    "sha256": "702658108ade3a022be04150e641b4431f708d4fee01b2341efcd51754b469e5",
+    "bytes": 229
+  },
+  {
+    "url": "https://rest.uniprot.org/uniprotkb/search?query=%28gene_exact%3AmntE+OR+gene_exact%3AmntP+OR+gene_exact%3AmntH+OR+gene_exact%3AnixA+OR+gene_exact%3AmnoP%29+AND+reviewed%3Atrue&format=json&size=200",
+    "file": "phase2_reference_mnt_controls.json",
+    "sha256": "2de45764588ab0c1bbfaa1126fb7144693a539d9cf284ad596d1c73986893f2a",
+    "bytes": 1640592
+  },
+  {
+    "url": "https://rest.uniprot.org/uniprotkb/search?query=%28protein_name%3Apearl+OR+protein_name%3Achryseobasin+OR+gene_exact%3AtglH+OR+gene_exact%3AchrH+OR+gene_exact%3AmovB%29+AND+reviewed%3Atrue&format=json&size=200",
+    "file": "phase2_reference_MNIO_controls.json",
+    "sha256": "6b4326470ee2488e9bada25ece83c991a340f366b57af83e342c9d9e4eaced2c",
+    "bytes": 15814
+  },
+  {
+    "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC3182930/fullTextXML",
+    "file": "phase2_mnt_export.xml",
+    "sha256": "0c1b27f8cba503c68c303f629ca431ff4bac3880a5b61936cce9729ff590f991",
+    "bytes": 162776
+  },
+  {
+    "url": "https://www.genome.jp/ftp/db/kofam/archives/",
+    "file": "phase2_kofam_archives.html",
+    "sha256": "4fab8447e8722762b3ceb9873d3254344c813c2d19e8435508b1f652ad1bdf9c",
+    "bytes": 18480
+  },
+  {
+    "url": "https://rest.uniprot.org/uniprotkb/search?query=%28gene%3AmbnA+OR+gene%3AmbnB+OR+gene%3AmbnC+OR+gene%3AmbnM+OR+gene%3AmbnF%29+AND+organism_id%3A595536&format=json&size=200",
+    "file": "phase3_reference_mbn_OB3b.json",
+    "sha256": "d7339283a275a54741b446a271c97e91fbf4757e944a9803068e7b43bf2017b8",
+    "bytes": 61288
+  },
+  {
+    "url": "https://rest.uniprot.org/uniprotkb/search?query=%28gene%3AISM_02005+OR+gene%3AOG2516_13601+OR+gene%3ASAR11G3_00277+OR+gene%3AVC1688+OR+gene%3AVC_1688+OR+gene%3ASAR116_1166%29&format=json&size=200",
+    "file": "phase3_reference_mnt_loci.json",
+    "sha256": "da5bc624783614fb1ca8fd005faa3833906e1a6dc50b09baefe59f8c2e080437",
+    "bytes": 25913
+  },
+  {
+    "url": "https://rest.uniprot.org/uniprotkb/search?query=organism_id%3A272630+AND+%28gene%3AMexAM1_META1p1778+OR+gene%3AMexAM1_META1p1779+OR+gene%3AMexAM1_META1p1782+OR+gene%3AMexAM1_META1p1783+OR+gene%3AMexAM1_META1p1785%29&format=json&size=200",
+    "file": "phase3_reference_lut_AM1.json",
+    "sha256": "71f277e0ca49e23860a4513ac6a7d27c3a14a8b3f8e6a352a5ffc177db3f15a5",
+    "bytes": 42126
+  },
+  {
+    "url": "https://rest.uniprot.org/uniprotkb/search?query=%28gene%3AtglH+OR+gene%3AchrH+OR+gene%3AmovX+OR+xref%3Arefseq-WP_034727520.1%29&format=json&size=200",
+    "file": "phase3_reference_MNIO.json",
+    "sha256": "ae5cc840e0c9b4e6189ba8f4d512f52071de450c8df3e5561a8d67d26e05b326",
+    "bytes": 3950
+  },
+  {
+    "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=protein&id=WP_003614727.1&rettype=fasta&retmode=text",
+    "file": "phase3_WP_003614727.1.fasta",
+    "sha256": "e78e95c9b4ad04f7086c44a8decf5663c5d57b550e123898bf838fe4d0b3b757",
+    "bytes": 284
+  },
+  {
+    "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=protein&id=WP_024881683.1&rettype=fasta&retmode=text",
+    "file": "phase3_WP_024881683.1.fasta",
+    "sha256": "6bad3069bd373d03a5375312d9c9c5791bbe6c4bc624fa2ad6db4a570ac63b8c",
+    "bytes": 367
+  },
+  {
+    "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=protein&id=WP_024881684.1&rettype=fasta&retmode=text",
+    "file": "phase3_WP_024881684.1.fasta",
+    "sha256": "aa4b668c996c4c9c42e519f5d16848bfef1faed1f4139857b7e1dd625fc581fb",
+    "bytes": 283
+  },
+  {
+    "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=protein&id=WP_161912153.1&rettype=fasta&retmode=text",
+    "file": "phase3_WP_161912153.1.fasta",
+    "sha256": "d538d1626c9bc7e4956e58317a304f3f1f39ab947b51d8ccd824b6be039a0415",
+    "bytes": 106
+  },
+  {
+    "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=protein&id=WP_034727520.1&rettype=fasta&retmode=text",
+    "file": "phase3_WP_034727520.1.fasta",
+    "sha256": "1e12cabd57d7f660f3d91f6a652fe3b64d92502f07c49a33db8320ffb6aae916",
+    "bytes": 448
+  },
+  {
+    "url": "https://data.rcsb.org/rest/v1/core/polymer_entity/8HI8/1",
+    "file": "phase3_8HI8_1.json",
+    "sha256": "7d2c58e3854ba5ee2c022962dac9d2d4099f1a4612333d12f9051f3c78a510d7",
+    "bytes": 14261
+  },
+  {
+    "url": "https://data.rcsb.org/rest/v1/core/polymer_entity/8HI8/2",
+    "file": "phase3_8HI8_2.json",
+    "sha256": "d16b70e597314ac3276cd5ed96634e49ec68ee84dcc8047fc650ba1f8709c2d8",
+    "bytes": 15319
+  },
+  {
+    "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12482762/supplementaryFiles",
+    "file": "phase3_lanthanome_supplement.zip",
+    "sha256": "c826ad3dcf210592a5710d19169062ec5877dac8554bbb134ccb12ce8c262706",
+    "bytes": 16023733
+  },
+  {
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3578558/?report=xml",
+    "file": "phase3_mntX.html",
+    "sha256": "ddd8e020c3d07a6d95a1cd703f9c2d2642a94eba3b709cfcce2a6ee444b4770e",
+    "bytes": 206730
+  }
+]

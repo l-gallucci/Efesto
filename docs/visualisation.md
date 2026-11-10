@@ -1,6 +1,6 @@
 # Visualisation
 
-Efesto includes `scripts/plot_heatmap.R` for publication-ready heatmaps.
+Efesto includes `scripts/plot_heatmap.R` for static and interactive heatmaps.
 
 ---
 
@@ -82,8 +82,11 @@ hits |>
   summarise(mean_conf = mean(cluster_confidence, na.rm=TRUE), n = n()) |>
   arrange(desc(mean_conf))
 
-# Iron reduction genes with high confidence
+# Iron-reduction annotations in an illustrative score bin
 hits |>
   filter(str_detect(category, "Iron-Reduction"), cluster_confidence >= 0.8) |>
   select(genome, contig, gene, bitscore, cluster_confidence)
 ```
+
+The 0.8 threshold above is an illustrative reporting bin, not a calibrated
+probability. See [interpretation](interpretation.md) before comparing samples.

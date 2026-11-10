@@ -1,0 +1,88 @@
+{
+  "import_date": "2026-11-06",
+  "profiles": [
+    {
+      "stem": "lanM_NF053806",
+      "accession": "NF053806.1",
+      "sequence_cutoff": 135.0,
+      "cutoff_source": "embedded_GA_unchanged",
+      "nseq": 10,
+      "source_url": "https://www.ebi.ac.uk/interpro/api/entry/ncbifam/NF053806/?annotation=hmm",
+      "sha256": "57307f9cd2a621d563586628dcfba2c7ac1d3ae4ff341194776f195f1b5c571c",
+      "scope": "Lanmodulin family: lanthanide binding/handling, not a membrane importer or proof of lanthanide-dependent growth. Canonical C5B164 passes inherited GA."
+    },
+    {
+      "stem": "lanD_PF41493",
+      "accession": "PF41493.1",
+      "sequence_cutoff": 27.0,
+      "cutoff_source": "embedded_GA_unchanged",
+      "nseq": 17,
+      "source_url": "https://www.ebi.ac.uk/interpro/api/entry/pfam/PF41493/?annotation=hmm",
+      "sha256": "223b8e9c75c42bf19a1959ccf7063966a81a765daace261acdc2b0049e6e75f9",
+      "scope": "Landiscernin lanthanide-chaperone domain. Binding and LanM interaction supported; physiological sorting/export model remains proposed. Canonical C5B159 passes GA despite an obsolete generic UniProt description."
+    },
+    {
+      "stem": "wtpA_TIGR03730",
+      "accession": "TIGR03730.1",
+      "sequence_cutoff": 242.75,
+      "cutoff_source": "embedded_GA_unchanged",
+      "nseq": 14,
+      "source_url": "https://www.ebi.ac.uk/interpro/api/entry/ncbifam/TIGR03730/?annotation=hmm",
+      "sha256": "636862535579b50663cef7bf665c72490e58f2eb990b7fbbcf5e129a58473a56",
+      "scope": "WtpA substrate-binding family; W-preferred Mo/W uptake. Source explicitly restricts this model to selected archaeal homologs; not a universal WtpA detector. NF003196 was not added because it recognizes the same six reference WtpA proteins."
+    },
+    {
+      "stem": "wtpB_NF040839",
+      "accession": "NF040839.1",
+      "sequence_cutoff": 340.0,
+      "cutoff_source": "embedded_GA_unchanged",
+      "nseq": 14,
+      "source_url": "https://www.ebi.ac.uk/interpro/api/entry/ncbifam/NF040839/?annotation=hmm",
+      "sha256": "0a0d93a27b54358b932cd356f4bb138847365e5ca4eb5620af9460b55f6b03b9",
+      "scope": "WtpABC permease family. Mo/W scope; does not alone prove a complete transporter or W-only specificity. P. furiosus Q8U4K4 passes inherited GA."
+    },
+    {
+      "stem": "wtpC_NF040840",
+      "accession": "NF040840.2",
+      "sequence_cutoff": 440.0,
+      "cutoff_source": "embedded_GA_unchanged",
+      "nseq": 13,
+      "source_url": "https://www.ebi.ac.uk/interpro/api/entry/ncbifam/NF040840/?annotation=hmm",
+      "sha256": "3fc69968c8ae629280edd9ed55a55839ba6d4851bd1f3f3bbec1682ae142e2dd",
+      "scope": "WtpABC ATP-binding family; not generic ABC evidence for tungsten transport. P. furiosus Q8U4K3 passes inherited GA."
+    },
+    {
+      "stem": "tupA_NF041772",
+      "accession": "NF041772.1",
+      "sequence_cutoff": 400.0,
+      "cutoff_source": "embedded_GA_unchanged",
+      "nseq": 11,
+      "source_url": "https://www.ebi.ac.uk/interpro/api/entry/ncbifam/NF041772/?annotation=hmm",
+      "sha256": "f6d3097f1d5743c6fbbccb47a1cf9025320501d81a28e2930414528af514be16",
+      "scope": "Restricted TupA coverage: C. jejuni Q0P885=487.3 passes GA400, but characterized D. alaskensis Q316W1=356.8 and P. acidaminophilum Q93KD6=235.5 fail. No cutoff relaxation. Negative detection is not evidence of absence of tungsten acquisition."
+    },
+    {
+      "stem": "tupB_NF041773",
+      "accession": "NF041773.1",
+      "sequence_cutoff": 320.0,
+      "cutoff_source": "embedded_GA_unchanged",
+      "nseq": 10,
+      "source_url": "https://www.ebi.ac.uk/interpro/api/entry/ncbifam/NF041773/?annotation=hmm",
+      "sha256": "4437acac9069647b6190a803973c3ec47fc93fc84ee6469bd6df0db0d8dde62b",
+      "scope": "TupABC permease family; C. jejuni Q0P886 passes inherited GA. Related Vup-associated reference sequences do not pass; not an independent population specificity benchmark."
+    },
+    {
+      "stem": "tupC_NF041774",
+      "accession": "NF041774.1",
+      "sequence_cutoff": 400.0,
+      "cutoff_source": "embedded_GA_unchanged",
+      "nseq": 16,
+      "source_url": "https://www.ebi.ac.uk/interpro/api/entry/ncbifam/NF041774/?annotation=hmm",
+      "sha256": "e4573a58072f5c7db7c42d64a977bc61688a0ae80e285c3010923822abe1f389",
+      "scope": "TupABC ATP-binding family; C. jejuni Q0P887 passes inherited GA. A lone ATPase hit does not establish a complete transporter."
+    }
+  ],
+  "excluded_redundant_candidate": "NF003196.0: same six reviewed WtpA references as TIGR03730.1; not claimed identical HMMs",
+  "no_new_training": true,
+  "no_cutoff_relaxation": true
+}

@@ -1,0 +1,67 @@
+site_name: Efesto
+site_description: HMM annotation of metal cycling, acquisition and resistance genes
+site_url: https://l-gallucci.github.io/Efesto/
+repo_url: https://github.com/l-gallucci/Efesto
+repo_name: GitHub
+edit_uri: ''
+docs_dir: docs
+site_dir: site
+strict: true
+
+theme:
+  name: readthedocs
+  highlightjs: true
+  navigation_depth: 3
+  collapse_navigation: false
+
+nav:
+  - Home: index.md
+  - Getting started:
+      - Installation: installation.md
+      - Workflows and examples: workflows.md
+      - Pipeline: pipeline.md
+      - Command reference: command-reference.md
+  - Results:
+      - Output files: output_formats.md
+      - Interpretation: interpretation.md
+      - Confidence scoring: cluster_confidence_scoring.md
+      - Visualisation: visualisation.md
+  - HMM library:
+      - Catalog and categories: hmm_library.md
+      - Curation and provenance: hmm_library_curation.md
+      - Biological scope: hmm_expansion_biological_rationale.md
+      - Fe-S assembly: iron_sulfur_assembly.md
+      - Lanthanides, tungsten and metallophores: metal_expansion.md
+      - Custom libraries: extending_the_library.md
+  - Integrations:
+      - Operon rules and UniOP: operon_rules.md
+      - antiSMASH: antismash_bgc.md
+      - Anvi'o: anvio_integration.md
+  - Research and development:
+      - Current status: development.md
+      - HMM methodology: hmm_methodology.md
+      - Validation results: validation.md
+  - Project:
+      - Performance and memory: performance.md
+      - Architecture: architecture.md
+      - References: references.md
+      - Website maintenance: website.md
+
+plugins:
+  - search
+hooks:
+  - scripts/docs_hooks.py
+markdown_extensions:
+  - admonition
+  - attr_list
+  - toc:
+      permalink: true
+extra_css:
+  - stylesheets/extra.css
+validation:
+  nav:
+    omitted_files: warn
+  links:
+    not_found: warn
+    unrecognized_links: warn
+    anchors: warn

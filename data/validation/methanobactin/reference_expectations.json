@@ -1,0 +1,41 @@
+{
+  "mbnA_TIGR04071": {
+    "positive": [
+      "E3YBA4",
+      "WP_161912153.1"
+    ],
+    "negative": [
+      "A0A2D2D5M1",
+      "WP_034727520.1",
+      "8HI8_2_TglH",
+      "A3SI43"
+    ]
+  },
+  "mbnB_TIGR04159": {
+    "positive": [
+      "A0A2D2D5M1",
+      "WP_024881683.1"
+    ],
+    "negative": [
+      "E3YBA4",
+      "WP_034727520.1",
+      "8HI8_2_TglH",
+      "8HI8_1_TglI",
+      "A3SI43"
+    ]
+  },
+  "mbnC_TIGR04160": {
+    "positive": [
+      "A0A2D2CY73",
+      "WP_003614727.1",
+      "WP_024881684.1"
+    ],
+    "negative": [
+      "E3YBA4",
+      "WP_034727520.1",
+      "8HI8_2_TglH",
+      "8HI8_1_TglI",
+      "A3SI43"
+    ]
+  }
+}

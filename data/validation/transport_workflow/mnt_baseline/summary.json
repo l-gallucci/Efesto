@@ -1,0 +1,16 @@
+{
+  "official_GA": 32.5,
+  "new_development_cutoff": 240.2,
+  "experimental_positive_lineages": 3,
+  "held_out_recall_3_of_3_Wilson95": [
+    0.4385029682449546,
+    1.0
+  ],
+  "official_candidate_hits": 757,
+  "new_candidate_hits": 364,
+  "candidate_count": 757,
+  "official_fragments_pass": 24,
+  "new_fragments_pass": 18,
+  "fragment_count": 27,
+  "caveat": "Unlabelled candidate coverage and training-sequence fragment response are diagnostics, not sensitivity/precision. Official seed overlap is documented separately."
+}

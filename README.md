@@ -1,55 +1,18 @@
 # Efesto
 
-<p align="center">
-  <img src="assets/EfestoLogo.png" alt="Efesto" width="820"/>
-  <br/>
-  <sub>Logo by [Elena Panariello] (https://www.instagram.com/elena_panariello)</sub>
-</p>
+<p align="center"><img src="assets/EfestoLogo.png" alt="Efesto" width="280"></p>
 
-**Efesto** extends [FeGenie](https://github.com/Arkadiy-Garber/FeGenie) with coordinate-based operon clustering, a cluster confidence scoring system, an expanded curated HMM library (iron cycling + metal resistance), and integration with UniOP, antiSMASH, and Anvi'o.
+**Profile HMM annotation of metal cycling, acquisition, homeostasis and resistance genes.**
 
-📖 **[Full documentation → Wiki](https://github.com/l-gallucci/Efesto/wiki)**
+Efesto combines an expanded HMM library with genomic-context filtering and optional
+UniOP, antiSMASH, eggNOG-mapper, structural and topology evidence. It builds on
+[FeGenie](https://github.com/Arkadiy-Garber/FeGenie).
 
----
+**[Documentation](https://l-gallucci.github.io/Efesto/)** ·
+[Installation](docs/installation.md) · [Workflows](docs/workflows.md) ·
+[Outputs](docs/output_formats.md) · [Development status](docs/development.md)
 
-## Citations
-
-If you use Efesto, cite all of the following that apply:
-
-**FeGenie** (iron cycling HMMs and operon logic):
-> Garber AI et al. (2020) *FeGenie: A Comprehensive Tool for the Identification of Iron Genes and Iron Gene Neighborhoods.* Front. Microbiol. 11:37. [doi:10.3389/fmicb.2020.00037](https://doi.org/10.3389/fmicb.2020.00037)
-
-**MetHMMDB** (metal resistance gene HMMs):
-> Kciuchcinski K et al. (2025) *Fast and accurate detection of metal resistance genes using MetHMMDB.* bioRxiv. [doi:10.1101/2024.12.26.629440](https://doi.org/10.1101/2024.12.26.629440)
-
-**Tabuteau et al.** (additional iron acquisition HMMs):
-> Tabuteau S et al. (2025) *Metagenomic profiling and genome-centric analysis reveal iron acquisition systems in cheese-associated bacteria and fungi.* Environmental Microbiology 27(12):e70218. [doi:10.1111/1462-2920.70218](https://doi.org/10.1111/1462-2920.70218)
-
-**KOfam** (KEGG Ortholog HMMs used in Tabuteau et al.):
-> Aramaki T et al. (2020) *KofamKOALA: KEGG Ortholog assignment based on profile HMM and adaptive score threshold.* Bioinformatics 36:2251–2252. [doi:10.1093/bioinformatics/btz859](https://doi.org/10.1093/bioinformatics/btz859)
-
-**NCBI Protein Family Models** (NF* HMMs):
-> Li W et al. (2021) *RefSeq: expanding the Prokaryotic Genome Annotation Pipeline reach with protein family model curation.* Nucleic Acids Research 49:D1020–D1028. [doi:10.1093/nar/gkaa1105](https://doi.org/10.1093/nar/gkaa1105)
-
-**MnOxGeneTool** (manganese oxidation HMMs):
-> Wang Y et al. (2025) *MnOxGeneTool: a tool for identifying manganese oxidation genes in (meta)genomes.* Environmental Science & Technology. [doi:10.1021/acs.est.5c01235](https://doi.org/10.1021/acs.est.5c01235)
-
-**UniOP** (operon prediction, if using `--operon_prediction`):
-> Su H, Zhang R, Söding J (2024) *UniOP: a universal operon prediction for high-throughput prokaryotic (meta-)genomic data.* bioRxiv. [doi:10.1101/2024.11.11.623000](https://doi.org/10.1101/2024.11.11.623000)
-
-**eggNOG-mapper** (tier-2 confirmation for `needs_confirmation`-flagged HMM hits, if using `--eggnog_annotations` or `--run_eggnog`):
-> Cantalapiedra CP et al. (2021) *eggNOG-mapper v2: Functional Annotation, Orthology Assignments, and Domain Prediction at the Metagenomic Scale.* Mol. Biol. Evol. 38(12):5825–5829. [doi:10.1093/molbev/msab293](https://doi.org/10.1093/molbev/msab293)
-
-**Phobius** (topology/motif consistency check, if using `--topology_check`):
-> Käll L, Krogh A, Sonnhammer ELL (2004) *A Combined Transmembrane Topology and Signal Peptide Prediction Method.* J. Mol. Biol. 338(5):1027–1036. [doi:10.1016/j.jmb.2004.03.016](https://doi.org/10.1016/j.jmb.2004.03.016)
-
-**Foldseek + ProstT5** (tier-3 structural confirmation, if using `--run_struct_confirmation`):
-> van Kempen M et al. (2023) *Fast and accurate protein structure search with Foldseek.* Nat. Biotechnol. [doi:10.1038/s41587-023-01773-0](https://doi.org/10.1038/s41587-023-01773-0)
-> Heinzinger M et al. (2024) *Bilingual language model for protein sequence and structure.* NAR Genomics and Bioinformatics. [doi:10.1093/nargab/lqae150](https://doi.org/10.1093/nargab/lqae150)
-
----
-
-## Installation
+## Install
 
 ```bash
 git clone https://github.com/l-gallucci/Efesto.git
@@ -57,79 +20,63 @@ cd Efesto
 mamba env create -f environment.yml
 conda activate efesto
 efesto --help
+efesto checkenv
 ```
 
-→ [Full installation guide](https://github.com/l-gallucci/Efesto/wiki/installation) including UniOP setup and manual install options.
+Keep the source checkout and `hmm_library/` available. Optional tools and reference
+databases need their own installation; see [installation](docs/installation.md).
 
----
-
-## Quick start
+## Run
 
 ```bash
-# From Prodigal FAA files
-efesto --faa_dir orfs/ --hmm_dir hmm_library/ --out results/
+# Genomes or MAGs, one assembly per file
+efesto --fna_dir genomes/ --fna_ext fasta --meta --out efesto_out --threads 4
 
-# From nucleotide assemblies (Prodigal internal)
-efesto --fna_dir assemblies/ --meta --hmm_dir hmm_library/ --out results/ --threads 16
+# Existing proteins and matching CDS coordinates
+efesto --faa_dir proteins/ --gff_dir gff/ --out efesto_out --threads 4
 
-# Full confidence scoring (UniOP + antiSMASH)
-efesto \
-    --faa_dir           orfs/ \
-    --gff_dir           gff/ \
-    --hmm_dir           hmm_library/ \
-    --out               results/ \
-    --threads           16 \
-    --operon_prediction \
-    --uniop_path        /path/to/UniOP/src/UniOP \
-    --bgc_dir           antismash_output/
+# Gene catalog without genomic-neighbor information
+efesto --faa_dir catalog/ --catalog_mode --out catalog_out --threads 4
 ```
 
-→ [Full usage guide](https://github.com/l-gallucci/Efesto/wiki/output_formats) · [All arguments](https://github.com/l-gallucci/Efesto/wiki/installation)
+The default gene caller is Pyrodigal-GV; `--gene_caller pyrodigal` selects the
+alternative. Internal FAA files use Prodigal-compatible headers. Supply matching
+GFF coordinates for existing proteins; arbitrary locus tags do not encode adjacency.
+Use a fresh output directory after changing inputs, models or search settings.
 
----
+## Results
 
-## HMM library
+Main outputs include `Efesto-results-long.tsv`, summary/count tables and matched
+protein sequences. GFF3 and nucleotide matches require appropriate coordinate/source
+data. See the [output reference](docs/output_formats.md).
 
-478 active models across 30 categories from 8 sources: FeGenie (196), Tabuteau et al. (130), MetHMMDB (105), NCBIfam (21), MnOxGeneTool (12), InterPro (8), curated (4), Pfam (2). Categories span iron oxidation, reduction, storage, regulation, stress, Fe-S assembly (SUF/ISC), siderophore synthesis/transport, heme acquisition, a dedicated manganese pathway (acquisition, oxidation, regulation, resistance), and broad metal resistance.
+A hit indicates family-related genetic potential, not measured expression, metal
+specificity, pathway activity or resistance. Cluster confidence is a heuristic
+score, not a probability. See [interpretation](docs/interpretation.md).
 
-→ [HMM library documentation](https://github.com/l-gallucci/Efesto/wiki/hmm_library)
+## Library and research status
 
----
+The [catalog](docs/hmm_library.md) describes runtime categories and profile status;
+the website generates current counts from the registry. Active and experimental
+profiles run by default, while deprecated profiles are skipped. Unregistered
+research candidates are kept outside the runtime library.
 
-## Differences from FeGenie at a glance
+MntX, Lut/LanA and Vup classifier development is documented separately, including
+small-sample and independent-validation limitations. See [development](docs/development.md)
+and [validation](docs/validation.md).
 
-| Feature | FeGenie | Efesto |
-|---|---|---|
-| Operon clustering | ORF ordinal index | **bp coordinates (GFF)** + ordinal fallback |
-| Per-rule bp-gap tuning | No | **Yes (`max_bp_gap` per operon rule)** |
-| Strand awareness | No | **Yes (`--strand_aware`)** |
-| Parallelism | Sequential | **ProcessPoolExecutor** |
-| Operon filter logic | Hardcoded Python | **Exact port + JSON override** |
-| Result caching | No | **Yes (tblout cache)** |
-| MetHMMDB support | No | **Yes** |
-| Additional iron HMMs | No | **Yes (Tabuteau et al. 2025)** |
-| HMM deduplication | No | **Yes (sequence-level, cross-source)** |
-| Versioned HMM registry | No | **Yes (`hmm_registry.tsv`)** |
-| Cluster confidence score | No | **Yes (HMM × co-occ × UniOP × BGC × annot × struct × topo)** |
-| GFF3 output | No | **Yes (auto when coordinates available)** |
-| Summary statistics | No | **Yes (`Efesto-summary-stats.tsv`)** |
-| antiSMASH BGC boost | No | **Yes (`--bgc_dir`)** |
-| Coverage heatmap | `--bam` | **`--bam` / `--bams` / `--depth` / `--depths`** |
-| Coverage normalisation | No | **TPM (`--norm_coverage`)** |
-| Integrated Prodigal | No | **Yes (`--fna_dir --meta`)** |
-| Contig length filter | No | **Yes (`--min_contig_len`)** |
-| Long-format output | No | **Yes (`results-long.tsv` with all scoring columns)** |
-| Operon prediction | No | **Yes (UniOP, `--operon_prediction`)** |
-| Low-confidence-hit escalation | No | **Yes (eggNOG-mapper tier-2, `--eggnog_annotations` / `--run_eggnog`; Foldseek+ProstT5 tier-3, `--run_struct_confirmation`)** |
-| Topology/motif consistency check | No | **Yes (Phobius, `--topology_check` — every hit with an `expected_topology`/`expected_heme_c` set, not just flagged ones)** |
-| Anvi'o integration | No | **Yes (functions + gene-scores TSVs)** |
-| R script compatibility | Yes | **Yes (same CSV format)** |
-| FeGenie filter rules | All | **All (exact port)** |
+## Differences from FeGenie
 
----
+Efesto adds coordinate/strand-aware clustering, canonical categories, a versioned
+registry, context/scoring integrations and additional output formats. HMMER searches
+are coordinated by Python threads with at most two concurrent searches by default;
+gene prediction has separate workers. These changes do not by themselves establish
+higher annotation accuracy. See [pipeline](docs/pipeline.md) and
+[performance](docs/performance.md).
 
-## License
+## Cite and license
 
-MIT License. See [LICENSE](LICENSE).
-
+Cite applicable model and tool sources in [References](docs/references.md).
+The code is distributed under the [MIT license](LICENSE).
+Logo: [Elena Panariello](https://www.instagram.com/elena_panariello/).
 Efesto is not affiliated with the original FeGenie authors.

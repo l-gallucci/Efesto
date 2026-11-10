@@ -1,5 +1,5 @@
 {
-  "_comment": "FeGenie-Evo operon rules — place this file in your --hmm_dir directory.",
+  "_comment": "FeGenie-Evo operon rules \u2014 place this file in your --hmm_dir directory.",
   "report_all_categories": [
     "MetalResistance-*",
     "MetalAcquisition-*",
@@ -11,7 +11,7 @@
   ],
   "rules": [
     {
-      "_comment": "FLEET electron shuttle: need ≥5 unique genes OR keep non-FLEET co-localisers",
+      "_comment": "FLEET electron shuttle: need \u22655 unique genes OR keep non-FLEET co-localisers",
       "name": "FLEET",
       "categories": [
         "Iron-Oxidation"
@@ -33,7 +33,7 @@
       "max_bp_gap": 2000
     },
     {
-      "_comment": "Magnetosome island: need ≥5 unique MAM genes",
+      "_comment": "Magnetosome island: need \u22655 unique MAM genes",
       "name": "MAM",
       "categories": [
         "Magnetosome-Formation"
@@ -57,7 +57,7 @@
       "max_bp_gap": 3000
     },
     {
-      "_comment": "FoxABC (Acidithiobacillus Fe-oxidation): need ≥2 of the three subunits",
+      "_comment": "FoxABC (Acidithiobacillus Fe-oxidation): need \u22652 of the three subunits",
       "name": "FOXABC",
       "categories": [
         "Iron-Oxidation"
@@ -91,7 +91,7 @@
       "max_bp_gap": 1000
     },
     {
-      "_comment": "DFE operon 1 (Desulfosporosinus): need ≥3 of 4 subunits",
+      "_comment": "DFE operon 1 (Desulfosporosinus): need \u22653 of 4 subunits",
       "name": "DFE1",
       "categories": [
         "Iron-Reduction",
@@ -110,7 +110,7 @@
       "max_bp_gap": 1000
     },
     {
-      "_comment": "DFE operon 2 (Desulfosporosinus): need ≥3 of 5 subunits",
+      "_comment": "DFE operon 2 (Desulfosporosinus): need \u22653 of 5 subunits",
       "name": "DFE2",
       "categories": [
         "Iron-Reduction",
@@ -130,7 +130,7 @@
       "max_bp_gap": 1000
     },
     {
-      "_comment": "Mtr/Mto disambiguation: re-assigns Iron-Oxidation vs Iron-Reduction based on subunit co-presence. Oxidation-side third gene is ImoA (Slit_2495), not CymA -- Liu et al. 2012 originally called this gene 'CymA-like' based on loose NapC/NirT-superfamily sequence similarity, but a 2022 mBio paper (doi:10.1128/mbio.02150-22) showed it is only 33% identical to real Shewanella CymA (64%/54% identical to NirT/NapC instead) and renamed it ImoA. Real CymA (doi:10.1128/jb.179.4.1143-1152.1997) is a Shewanella reduction-pathway gene, mechanistically upstream of MtrA, not part of this operon's oxidation side -- see docs/hmm_library_curation.md.",
+      "_comment": "Mtr/Mto contextual disambiguation. ImoA is excluded: quinol oxidation/complementation does not establish native Fe(II) oxidation.",
       "name": "MtrMto",
       "categories": [
         "Iron-Oxidation",
@@ -141,8 +141,7 @@
         "MtrA",
         "MtrB_TIGR03509",
         "MtrC_TIGR03507",
-        "MtoA",
-        "ImoA"
+        "MtoA"
       ],
       "rule": "mtr_disambiguation",
       "on_fail": "keep_all",
@@ -150,7 +149,7 @@
       "max_bp_gap": 2000
     },
     {
-      "_comment": "Siderophore transport: need ≥2 distinct transport HMMs, OR a lone trusted receptor gene",
+      "_comment": "Siderophore transport: need \u22652 distinct transport HMMs, OR a lone trusted receptor gene",
       "name": "SIDERO_TRANSPORT",
       "categories": [
         "Siderophore-TransportPotential",
@@ -174,7 +173,7 @@
       "max_bp_gap": 2000
     },
     {
-      "_comment": "Siderophore biosynthesis: need ≥3 distinct synthesis HMMs in cluster",
+      "_comment": "Siderophore biosynthesis: need \u22653 distinct synthesis HMMs in cluster",
       "name": "SIDERO_SYNTH",
       "categories": [
         "Siderophore-Synthesis"
@@ -186,7 +185,7 @@
       "max_bp_gap": 5000
     },
     {
-      "_comment": "Iron/heme transport: need ≥2 distinct transport HMMs in cluster",
+      "_comment": "Iron/heme transport: need \u22652 distinct transport HMMs in cluster",
       "name": "IRON_TRANSPORT",
       "categories": [
         "IronAcquisition-Transport",
@@ -233,6 +232,81 @@
       "on_fail": "passthrough_non_members",
       "canonical_size": 6,
       "max_bp_gap": 2000
+    },
+    {
+      "name": "CNT_CORE_K23120",
+      "categories": [
+        "Metallophore-Synthesis"
+      ],
+      "genes": [
+        "K01780",
+        "K23120",
+        "K23122"
+      ],
+      "rule": "require_anchor",
+      "anchor": "K23120",
+      "on_fail": "passthrough_non_members",
+      "max_bp_gap": 5000
+    },
+    {
+      "name": "CNT_CORE_K23122",
+      "categories": [
+        "Metallophore-Synthesis"
+      ],
+      "genes": [
+        "K01780",
+        "K23120",
+        "K23122"
+      ],
+      "rule": "require_anchor",
+      "anchor": "K23122",
+      "on_fail": "passthrough_non_members",
+      "max_bp_gap": 5000
+    },
+    {
+      "name": "MBN_CORE_TIGR04071",
+      "categories": [
+        "Metallophore-Synthesis"
+      ],
+      "genes": [
+        "mbnA_TIGR04071",
+        "mbnB_TIGR04159",
+        "mbnC_TIGR04160"
+      ],
+      "rule": "require_anchor",
+      "anchor": "mbnA_TIGR04071",
+      "on_fail": "passthrough_non_members",
+      "max_bp_gap": 5000
+    },
+    {
+      "name": "MBN_CORE_TIGR04159",
+      "categories": [
+        "Metallophore-Synthesis"
+      ],
+      "genes": [
+        "mbnA_TIGR04071",
+        "mbnB_TIGR04159",
+        "mbnC_TIGR04160"
+      ],
+      "rule": "require_anchor",
+      "anchor": "mbnB_TIGR04159",
+      "on_fail": "passthrough_non_members",
+      "max_bp_gap": 5000
+    },
+    {
+      "name": "MBN_CORE_TIGR04160",
+      "categories": [
+        "Metallophore-Synthesis"
+      ],
+      "genes": [
+        "mbnA_TIGR04071",
+        "mbnB_TIGR04159",
+        "mbnC_TIGR04160"
+      ],
+      "rule": "require_anchor",
+      "anchor": "mbnC_TIGR04160",
+      "on_fail": "passthrough_non_members",
+      "max_bp_gap": 5000
     }
   ]
 }
