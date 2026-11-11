@@ -36,12 +36,3 @@ If you use Efesto, cite all of the following that apply:
 **Foldseek + ProstT5** (tier-3 structural confirmation, if using `--run_struct_confirmation`):
 > van Kempen M et al. (2023) *Fast and accurate protein structure search with Foldseek.* Nat. Biotechnol. [doi:10.1038/s41587-023-01773-0](https://doi.org/10.1038/s41587-023-01773-0)
 > Heinzinger M et al. (2024) *Bilingual language model for protein sequence and structure.* NAR Genomics and Bioinformatics. [doi:10.1093/nargab/lqae150](https://doi.org/10.1093/nargab/lqae150)
-
-
-## Development methods
-
-- [Mankowski et al., supplied carbon-fixation preprint](https://doi.org/10.64898/2026.09.02.748891).
-- [Tanabe and Dahl, HMS-S-S](https://doi.org/10.1111/1755-0998.13642).
-
-An imported profile is not a newly trained Efesto model. Experimental model status
-and registry source support do not imply an independent classifier benchmark.

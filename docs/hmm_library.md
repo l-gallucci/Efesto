@@ -11,12 +11,8 @@ an older installed checkout.
 | Registry status | Ordinary run |
 |---|---|
 | `active` | Enabled unless removed by category selection |
-| `experimental` | Enabled, with interpretation limitations; not equivalent to an unregistered development candidate |
+| `experimental` | Enabled, with model-specific interpretation limitations |
 | `deprecated*` / `inactive*` | Excluded before search |
-
-Models outside the library/registry, including the current MntX development
-candidate, are not enabled merely because their files exist in validation data.
-See [development status](development.md).
 
 ## Categories
 
@@ -40,7 +36,7 @@ Examples: `--annotate Fe Cu Zn`, `--annotate Ln W`, or an exact canonical catego
 such as `Metallophore-Synthesis`. `all` is the default. See the complete valid
 list in the [command reference](command-reference.md).
 
-- `Ln` selects LanM/LanD homeostasis profiles, not Lut/LanA transport candidates.
+- `Ln` selects LanM/LanD homeostasis profiles.
 - `W` includes Tup and shared Mo/W families; `Mo` also includes shared Mo/W.
 - `metallophores` includes metallophore and siderophore synthesis categories.
 - Resistance-specific selectors preserve their resistance meaning.

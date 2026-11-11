@@ -16,17 +16,13 @@ coordinate-based clustering and integrations with UniOP, antiSMASH and anvi'o.
 3. Read the [pipeline overview](pipeline.md) and [output reference](output_formats.md).
 4. Check [interpretation and limitations](interpretation.md) before making biological claims.
 
-## Available and in development
+## HMM library
 
 {{catalog_summary}}
 
 Registered `active` and `experimental` profiles are enabled in ordinary runs;
 deprecated profiles are skipped. This runtime status is distinct from independent
 biological validation. See the [current catalog](hmm_library.md).
-
-MntX-specific, LutH/LanA and Vup classifiers remain under development and are
-**not enabled**. Their [status](development.md), [methods](hmm_methodology.md) and
-[validation results](validation.md) are documented separately from the user workflow.
 
 ## Quick start
 

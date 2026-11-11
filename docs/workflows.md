@@ -48,8 +48,8 @@ efesto --faa_dir proteins/ --gff_dir gff/ --annotate Fe Cu Zn --out metal_out
 ```
 
 Other selectors include `Ln`, `W`, `metallophores` and canonical category names.
-`Ln` currently selects LanM/LanD handling profiles, not a validated Lut/LanA uptake
-classifier. `W` includes Tup and shared Mo/W families. See [library scope](hmm_library.md).
+`Ln` selects LanM/LanD handling profiles. `W` includes Tup and shared Mo/W
+families. See [library scope](hmm_library.md).
 
 ## Reuse Bakta labels and external annotations
 

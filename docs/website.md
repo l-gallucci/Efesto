@@ -16,13 +16,12 @@ After reviewing, committing and pushing the changes yourself:
 Pull requests build and check the site without publishing. Pushes to `main` build,
 check and deploy; a failed build prevents deployment. This workflow publishes an
 artifact directly and does not create commits or push a `gh-pages` branch.
-The previous separate GitHub Wiki synchronization is retired.
 
 ## Maintain sources
 
 | Content | Source |
 |---|---|
-| User guides and research pages | Markdown in `docs/` |
+| User guides and library reference | Markdown in `docs/` |
 | Sidebar and theme | `mkdocs.yml` |
 | CLI reference | Generated from the public `efesto --help` at build time |
 | Library counts and tables | Generated from `hmm_registry.tsv` |

@@ -50,3 +50,6 @@ hmm_library/_staging/
 # Documentation website
 /site/
 /.venv-docs/
+
+# Local model-development notes (only this report)
+/EFESTO_DEVELOPMENT_NOTES_LOCAL.md

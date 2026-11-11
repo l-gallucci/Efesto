@@ -10,7 +10,7 @@ UniOP, antiSMASH, eggNOG-mapper, structural and topology evidence. It builds on
 
 **[Documentation](https://l-gallucci.github.io/Efesto/)** ·
 [Installation](docs/installation.md) · [Workflows](docs/workflows.md) ·
-[Outputs](docs/output_formats.md) · [Development status](docs/development.md)
+[Outputs](docs/output_formats.md) · [HMM library](docs/hmm_library.md)
 
 ## Install
 
@@ -54,16 +54,12 @@ A hit indicates family-related genetic potential, not measured expression, metal
 specificity, pathway activity or resistance. Cluster confidence is a heuristic
 score, not a probability. See [interpretation](docs/interpretation.md).
 
-## Library and research status
+## HMM library
 
-The [catalog](docs/hmm_library.md) describes runtime categories and profile status;
-the website generates current counts from the registry. Active and experimental
-profiles run by default, while deprecated profiles are skipped. Unregistered
-research candidates are kept outside the runtime library.
-
-MntX, Lut/LanA and Vup classifier development is documented separately, including
-small-sample and independent-validation limitations. See [development](docs/development.md)
-and [validation](docs/validation.md).
+The [catalog](docs/hmm_library.md) describes runtime categories, sources and profile
+status. The website generates current counts from the registry. Active and
+experimental profiles run by default, while deprecated profiles are skipped.
+See [curation and provenance](docs/hmm_library_curation.md) for interpretation limits.
 
 ## Differences from FeGenie
 

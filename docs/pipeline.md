@@ -22,8 +22,7 @@ to `1e-5` and applies to all accepted hits.
 
 One best HMM hit is retained per ORF using the highest raw bitscore across accepted
 matches. This rule can conceal competing-family matches; inspect retained tblout
-files when investigating paralog assignments. Development score-margin experiments
-have not changed this runtime assignment rule.
+files when investigating paralog assignments.
 
 ## Clusters and context
 

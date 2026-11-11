@@ -44,11 +44,4 @@ matches MbnA-like domains fused to some sigma factors: `mbnA-domain` is not an
 automatic claim of a standalone precursor. Co-occurrence remains predicted
 biosynthetic potential, not demonstrated product, expression or copper uptake.
 
-MbnT is not assigned from a generic TonB profile. MbnF/MbnM and other optional
-components have not been added by this expansion.
-
-## Development candidates
-
-MntX, Lut/LanA and Vup classifiers are not enabled. The current MntX candidate is
-outside `hmm_library`; the ordinary run does not use its development cutoff.
-See [current status](development.md) and [validation](validation.md).
+MbnT is not assigned from a generic TonB profile.

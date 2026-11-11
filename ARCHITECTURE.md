@@ -50,13 +50,5 @@ pairs, qualifying BGC overlap and applicable optional confirmation. Missing opti
 evidence is neutral. The score is capped at 1.2 and is not a correctness probability.
 There is no global confidence≥0.5 retention gate in ordinary runs.
 
-## Development boundary
-
-Experimental runtime profiles are distinct from candidates kept only in validation
-data. The current MntX development candidate is not registered or searched by the
-ordinary CLI. Research scripts and model evaluations do not modify the production
-library automatically. Independent functional validation remains separate from
-software tests and reproduction of historical model builds.
-
-See [the user pipeline](docs/pipeline.md), [confidence scoring](docs/cluster_confidence_scoring.md)
-and [development status](docs/development.md).
+See [the user pipeline](docs/pipeline.md) and
+[confidence scoring](docs/cluster_confidence_scoring.md).

@@ -1,7 +1,7 @@
 # Curation and provenance
 
 The current inventory and runtime status come from the [registry-backed catalog](hmm_library.md).
-This page describes present decisions rather than historical deployment proposals.
+This page describes the shipped library and its interpretation limits.
 
 ## Evidence records
 
@@ -13,7 +13,7 @@ This page describes present decisions rather than historical deployment proposal
 | `HMM-bitcutoffs.txt` | Runtime full-sequence thresholds |
 | `FeGenie-map.txt` | Filename-stem to readable-label map |
 | `data/seeds/curated/` | Recovered seed provenance and build-reproduction records |
-| `data/validation/` | Targeted panels and development results |
+| `data/validation/` | Targeted reference and regression panels |
 
 These files are in the [source repository](https://github.com/l-gallucci/Efesto).
 A source-supported category, reproducible build and independently tested classifier
@@ -53,8 +53,3 @@ family with limited independent functional evidence.
 Broad flavodoxin, pilin and SufE-related profiles require restrained interpretation.
 SufE/CsdE and other near paralogs cannot be distinguished by a generic domain alone.
 See [Fe-S assembly](iron_sulfur_assembly.md) and [interpretation](interpretation.md).
-
-Historical scripts that rescore their own training sequences do not perform an
-independent cross-validation merely because a function is named `cross_validate`.
-The [development methodology](hmm_methodology.md) separates training, calibration
-and evaluation explicitly.
