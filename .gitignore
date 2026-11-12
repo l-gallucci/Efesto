@@ -50,3 +50,9 @@ hmm_library/_staging/
 # Documentation website
 /site/
 /.venv-docs/
+
+# Local notes, reference paper and benchmark outputs
+/CHECKPOINT.md
+/AMankowskiBioArxiv2026.pdf
+/EFESTO_DEVELOPMENT_NOTES_LOCAL.md
+/benchmark/
