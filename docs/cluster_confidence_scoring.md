@@ -58,3 +58,9 @@ The statistics output groups scores into high (≥0.8), medium (0.5–<0.8) and 
 (<0.5) bins. These are descriptive tiers, not experimentally validated probability
 bands. Report optional tools, unavailable evidence and any downstream threshold
 with your results.
+
+Summary CSVs, the long-format TSV, GFF and anvi'o scores are written after the
+final confidence calculation. UniOP reads pairwise probabilities from
+`uniop.pred` even when `uniop.operon` supplies membership. A probability of zero
+is retained as evidence, not treated as missing. Coverage normalisation does not
+change any annotation-confidence component.

@@ -35,13 +35,13 @@ echo "[INFO] All required tools found"
 
 # ── Install package if not already installed ──────────────────────────────────
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-if ! command -v Efesto &>/dev/null; then
+if ! command -v efesto &>/dev/null; then
     echo "[INFO] Installing Efesto..."
     pip install -e "$REPO_DIR" --quiet
 fi
 
 # ── Verify ────────────────────────────────────────────────────────────────────
-if command -v Efesto &>/dev/null; then
+if command -v efesto &>/dev/null; then
     echo "[INFO] Efesto installed successfully"
 else
     echo "[ERROR] Installation failed"
@@ -54,5 +54,5 @@ echo "  Setup complete!"
 echo ""
 echo "  Usage:"
 echo "    conda activate $CONDA_DEFAULT_ENV"
-echo "    Efesto --help"
+echo "    efesto --help"
 echo "========================================"

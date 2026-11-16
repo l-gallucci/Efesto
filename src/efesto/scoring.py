@@ -12,7 +12,7 @@ Independent evidence sources combined multiplicatively:
 - annot_weight: eggNOG-mapper confirmation for needs_confirmation-flagged hits
                 (tier 2 — see docs/hmm_library_curation.md, "SUF operon deployment")
 - struct_weight: Baktfold structural confirmation for the same flagged hits
-                (tier 3 — placeholder parameter, always 1.0 until implemented)
+                (tier 3 — optional Foldseek/ProstT5 structural confirmation)
 - topo_weight:  Phobius topology + heme-motif-count consistency, computed for
                 EVERY hit (not just needs_confirmation-flagged ones) — see
                 docs/cluster_confidence_scoring.md, Component 7
@@ -24,7 +24,8 @@ expected_heme_c/expected_topology registry columns for topo_weight), and
 only when the corresponding tool actually ran and returned an informative
 result for that specific ORF.
 
-Default call threshold: cluster_confidence ≥ 0.5
+The score is a heuristic evidence summary, not a calibrated probability.
+It does not itself filter output rows.
 """
 
 import math
@@ -109,15 +110,17 @@ def uniop_pair_score(cluster_orfs, pair_probs):
     Args:
         cluster_orfs: iterable of ORF names
         pair_probs:   {(orf_a, orf_b): float} from _parse_uniop_pred;
-                      empty when uniop.operon (not uniop.pred) was parsed
+                      read independently of the operon membership file
     """
-    if not pair_probs or len(list(cluster_orfs)) <= 1:
-        return 1.0
     orfs = list(cluster_orfs)
+    if not pair_probs or len(orfs) <= 1:
+        return 1.0
     scores = []
     for i, a in enumerate(orfs):
         for b in orfs[i + 1:]:
-            p = pair_probs.get((a, b)) or pair_probs.get((b, a))
+            p = pair_probs.get((a, b))
+            if p is None:
+                p = pair_probs.get((b, a))
             if p is not None:
                 scores.append(p)
     return min(scores) if scores else 1.0

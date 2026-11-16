@@ -7,7 +7,7 @@ New in this version (metagenome support):
   7.  Integrated Prodigal  --fna_dir triggers internal ORF prediction
   8.  Contig length filter  --min_contig_len
   9.  Relaxed operon thresholds  --relaxed_operons
-  10. TPM coverage normalisation  --norm_coverage
+  10. Coverage-per-million normalisation  --norm_coverage
   11. Contig column in all outputs
   12. Long-format tidy output  Efesto-results-long.tsv
 """
@@ -22,6 +22,8 @@ from collections import defaultdict
 from itertools import groupby
 from pathlib import Path
 
+from efesto import __version__
+from efesto.resources import bundled_hmm_library
 from efesto.clustering import _orf_to_contig, build_clusters
 from efesto.coverage import build_contig_coverage, load_bams_tsv
 from efesto.gene_calling import run_prodigal
@@ -199,8 +201,8 @@ def _check_env(uniop_path: str = "uniop", eggnog_path: str = "emapper.py",
 
     # ── HMM library ───────────────────────────────────────────────────────────
     print("\nHMM library:")
-    _bundled = Path(__file__).parents[2] / "hmm_library"
-    if _bundled.exists():
+    _bundled = bundled_hmm_library()
+    if _bundled is not None:
         _cats = [d for d in _bundled.iterdir()
                  if d.is_dir() and not d.name.startswith((".", "_"))]
         n_hmm = sum(len(list(d.glob("*.hmm"))) for d in _cats)
@@ -240,6 +242,7 @@ def main():
     ig.add_argument("--faa_dir", help="Directory of protein .faa files (matching GFF recommended)")
     ig.add_argument("--fna_dir",
                     help="Directory of nucleotide assemblies — Pyrodigal-based gene calling")
+    p.add_argument("--version", action="version", version=f"Efesto {__version__}")
     p.add_argument("--faa_ext", default="faa")
     p.add_argument("--fna_ext", default="fna")
     p.add_argument("--meta", action="store_true",
@@ -313,7 +316,7 @@ def main():
                    help="Pre-computed depth file (jgi/BBMap/samtools/plain)")
     p.add_argument("--depths", help="TSV: genome<TAB>depth_path")
     p.add_argument("--norm_coverage", action="store_true",
-                   help="TPM-normalise coverage heatmap")
+                   help="Scale contig mean depths to coverage per million within each genome/sample")
     p.add_argument("--keep_tblout", action="store_true")
     p.add_argument("--normalize_hmms", action="store_true",
                    help="Convert any pre-HMMER3/f profiles in --hmm_dir to current "
@@ -441,8 +444,8 @@ def main():
         args.hmm_dir = str(dev_library.expanduser().resolve())
 
     if args.hmm_dir is None:
-        _bundled = Path(__file__).parents[2] / "hmm_library"
-        if _bundled.exists():
+        _bundled = bundled_hmm_library()
+        if _bundled is not None:
             args.hmm_dir = str(_bundled)
         else:
             sys.exit("[ERROR] --hmm_dir not set and bundled hmm_library/ not found. "
@@ -566,7 +569,7 @@ def main():
     bgc_map = {}
 
     contig_lengths = {}
-    if args.min_contig_len > 0 or args.relaxed_operons or args.norm_coverage:
+    if args.min_contig_len > 0 or args.relaxed_operons:
         print("[INFO] Loading contig lengths…")
         contig_lengths = build_contig_length_dict(
             faa_files,
@@ -884,13 +887,6 @@ def main():
 
     write_id_map(out_dir / "Efesto-protein-id-map.tsv", pending_confirmation, final_rows)
 
-    # summary and gene-summary don't carry uniop_context — write now
-    for path, fn in [(out_dir / "Efesto-summary.csv", write_summary),
-                     (out_dir / "Efesto-geneSummary-clusters.csv", write_gene_summary)]:
-        print(f"[INFO] Writing {path.name}…")
-        fn(str(path), final_rows)
-    # long-format is written after UniOP so uniop_context column is populated
-
     print("[INFO] Writing Efesto-heatmap-data.csv…")
     write_heatmap(str(out_dir / "Efesto-heatmap-data.csv"),
                   final_rows, all_genomes, norm_dict)
@@ -1031,6 +1027,12 @@ def main():
             r["topo_w"]             = topo_w
             r["cluster_confidence"] = conf
 
+    # All tabular confidence fields use the same final evidence calculation.
+    for path, fn in [(out_dir / "Efesto-summary.csv", write_summary),
+                     (out_dir / "Efesto-geneSummary-clusters.csv", write_gene_summary)]:
+        print(f"[INFO] Writing {path.name}…")
+        fn(str(path), final_rows)
+
     # Write long-format after UniOP so uniop_context column is included when available
     long_path = out_dir / "Efesto-results-long.tsv"
     print(f"[INFO] Writing {long_path.name}…")
@@ -1100,6 +1102,7 @@ def main():
         cc2[r["cat"]] += 1
     with open(log_path, "w") as lf:
         lf.write("Efesto run log\n")
+        lf.write(f"Version       : {__version__}\n")
         lf.write(f"Date          : "
                  f"{datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
         lf.write(f"Command       : {' '.join(sys.argv)}\n")

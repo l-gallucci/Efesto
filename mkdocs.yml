@@ -42,7 +42,6 @@ nav:
       - Architecture: architecture.md
       - References: references.md
       - Source conditions: third-party-notices.md
-      - Website maintenance: website.md
 
 plugins:
   - search

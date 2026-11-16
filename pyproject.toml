@@ -1,25 +1,25 @@
 [build-system]
-requires = ["setuptools>=61"]
+requires = ["setuptools>=77"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "efesto"
-version = "1.0.6"
+version = "1.0.0"
 description = "Efesto: HMM-based annotation of metal cycling and resistance genes in genomes and metagenomes"
 readme = "README.md"
-license = { file = "LICENSE" }
+license = "MIT AND LicenseRef-ThirdParty-Models"
+license-files = ["LICENSE", "THIRD_PARTY_NOTICES.md"]
 requires-python = ">=3.9"
 
-# Pure Python standard library only at import time — pyrodigal/pyrodigal-gv
-# are deferred imports (only loaded inside gene_calling.py's run_prodigal(),
-# so `pip install efesto` alone succeeds and non-gene-calling modules stay
-# testable without them installed). They ARE required at runtime for
-# --fna_dir gene calling — installed via conda from environment.yml, not
-# declared here. See note in docs/hmm_library_curation.md-adjacent packaging
-# notes if publishing a standalone PyPI/conda-forge release: either declare
-# them here too, or keep this deferred-import + conda-only pattern and
-# document it clearly for pip-only users.
+# HMMER and other executables are installed separately. Gene calling is an
+# optional pip extra; FAA-only runs use the standard-library core.
 dependencies = []
+authors = [
+    { name = "Luigi Gallucci" },
+    { name = "Anke Meyerdierks" },
+    { name = "Rudolf Amann" },
+]
+
 
 keywords = [
     "bioinformatics", "metagenomics", "iron cycling",
@@ -28,17 +28,27 @@ keywords = [
 
 classifiers = [
     "Programming Language :: Python :: 3",
-    "License :: OSI Approved :: MIT License",
     "Operating System :: POSIX",
     "Topic :: Scientific/Engineering :: Bio-Informatics",
     "Intended Audience :: Science/Research",
 ]
+
+[project.optional-dependencies]
+gene-calling = ["pyrodigal>=3.0", "pyrodigal-gv>=0.3.0"]
+
+[project.urls]
+Repository = "https://github.com/l-gallucci/Efesto"
+Documentation = "https://l-gallucci.github.io/Efesto/"
+Issues = "https://github.com/l-gallucci/Efesto/issues"
+
 
 [project.scripts]
 efesto = "efesto.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+include = ["efesto", "efesto.*"]
+namespaces = false
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

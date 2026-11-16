@@ -77,3 +77,23 @@ class TestParseUniopPred:
         idx = {1: "a", 2: "b", 3: "c"}
         _, pair_probs = _parse_uniop_pred(str(p), idx)
         assert len(pair_probs) == 3
+
+
+@pytest.mark.parametrize('probability', ['NaN', 'inf', '-0.1', '1.1'])
+def test_invalid_probabilities_not_used(tmp_path, probability):
+    path=_write_pred(tmp_path,[f'1\t2\t{probability}'])
+    assert _parse_uniop_pred(path,{1:'a',2:'b'})==({}, {})
+
+
+@pytest.mark.parametrize('use_operon',[True,False])
+def test_pair_probabilities_read_with_or_without_membership(tmp_path,use_operon):
+    from efesto.uniop import run_uniop
+    faa=tmp_path/'sample.faa';faa.write_text('>a\nMAA\n>b\nMKK\n')
+    work=tmp_path/'_uniop/sample';work.mkdir(parents=True)
+    # Existing empty membership also exercises fallback assembly from pred.
+    (work/'uniop.operon').write_text('idx_genes,idx_op\n'+('"[1, 2]",7\n' if use_operon else ''))
+    (work/'uniop.pred').write_text('Gene A\tGene B\tPrediction\n1\t2\t0.8\n')
+    ops,probs=run_uniop([faa],None,tmp_path,'unused',prodigal_faa_dir=tmp_path)
+    assert probs=={'sample.faa':{('a','b'):.8}}
+    assert ops['sample.faa']['a']==ops['sample.faa']['b']
+    if use_operon:assert ops['sample.faa']['a']=='OP0007'

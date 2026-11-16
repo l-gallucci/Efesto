@@ -53,6 +53,11 @@ Efesto passes Prodigal-compatible FAA headers with `--faa_source prodigal_faa`;
 its own caller remains Pyrodigal/Pyrodigal-GV. The `prodigal_faa` source name is
 an input-format declaration, not a request to switch Efesto's gene caller.
 
+`uniop.operon` provides membership; `uniop.pred` provides pairwise probabilities.
+Efesto reads both when available, retaining membership from the operon file and
+using the prediction file for confidence. Zero probabilities remain zero. The
+prediction file is also used to assemble fallback membership when needed.
+
 When usable pairwise scores are unavailable, the UniOP confidence contribution
 is neutral. Cached or failed runs can affect evidence availability; inspect the
 log and retained UniOP working directories. See [output files](output_formats.md).

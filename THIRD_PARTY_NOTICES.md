@@ -18,6 +18,10 @@ non-commercial academic use and directs commercial users to contact its authors.
 This notice does not establish that every bundled third-party asset may be
 redistributed under MIT.
 
+The package metadata uses `LicenseRef-ThirdParty-Models` to refer to the
+source-specific terms described here and in the original distributions; it is
+not a new license or a grant of additional rights.
+
 ## Find the original sources
 
 | Source | Original reference or provider |

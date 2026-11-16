@@ -1,6 +1,7 @@
 """UniOP operon prediction: running, parsing, and output writing."""
 
 import csv
+import math
 import re
 import subprocess
 import sys
@@ -64,10 +65,10 @@ def _parse_uniop_operon(operon_path, idx_to_orf):
 
 def _parse_uniop_pred(pred_path, idx_to_orf, threshold=0.5):
     """
-    Parse uniop.pred (fallback when uniop.operon is empty):
+    Parse uniop.pred for pairwise scores and fallback operon membership:
       Gene A  Gene B  Prediction   (tab-separated, some rows have empty Prediction)
 
-    Uses union-find to build connected components of pairs with prob > threshold.
+    Uses union-find to build connected components of pairs with prob >= threshold.
     Also collects raw pairwise probabilities for all valid pairs regardless of threshold.
 
     Returns (orf_to_op, pair_probs):
@@ -102,6 +103,9 @@ def _parse_uniop_pred(pred_path, idx_to_orf, threshold=0.5):
                     ib   = int(parts[1].strip())
                     prob = float(parts[2].strip())
                 except ValueError:
+                    continue
+                if not math.isfinite(prob) or not 0 <= prob <= 1:
+                    print(f"  [WARN] Invalid UniOP probability {parts[2]!r}; pair skipped", file=sys.stderr)
                     continue
                 oa = idx_to_orf.get(ia)
                 ob = idx_to_orf.get(ib)
@@ -205,7 +209,7 @@ def run_uniop(faa_files, fna_dir, out_dir, uniop_path, fna_ext="fna",
     Returns (genome_operon_map, genome_pair_probs):
         genome_operon_map:  {genome_faa_name → {orf_id → operon_id}}
         genome_pair_probs:  {genome_faa_name → {(orf_a, orf_b) → float}}
-                            populated only when uniop.pred is parsed (not uniop.operon)
+                            read from uniop.pred even when uniop.operon is present
     """
     uniop_dir = out_dir / "_uniop"
     uniop_dir.mkdir(exist_ok=True)
@@ -295,8 +299,10 @@ def run_uniop(faa_files, fna_dir, out_dir, uniop_path, fna_ext="fna",
         pair_probs = {}
         if operon_file.exists():
             orf_to_op = _parse_uniop_operon(str(operon_file), idx_to_orf)
-        if not orf_to_op and pred_file.exists():
-            orf_to_op, pair_probs = _parse_uniop_pred(str(pred_file), idx_to_orf)
+        if pred_file.exists():
+            predicted_ops, pair_probs = _parse_uniop_pred(str(pred_file), idx_to_orf)
+            if not orf_to_op:
+                orf_to_op = predicted_ops
 
         n_operons = len(set(orf_to_op.values()))
         print(f"  [INFO] {stem}: {n_operons} operons, {len(orf_to_op)} genes assigned")

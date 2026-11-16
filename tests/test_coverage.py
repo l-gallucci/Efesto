@@ -65,3 +65,29 @@ def test_bam_fallback_streams_and_checks_status(tmp_path,monkeypatch,code):
     assert calls[0][0]==['samtools','depth','-aa','test.bam']
     assert calls[0][1]['stdout']==subprocess.PIPE
     assert calls[0][1]['stderr']!=subprocess.PIPE
+
+
+
+def test_equal_depth_is_equal_abundance_despite_contig_length():
+    info={'short':{'depth':10.,'length':1000}, 'long':{'depth':10.,'length':2000}}
+    result=coverage.compute_coverage_per_million(info)
+    assert result=={'short':500000.,'long':500000.}
+    assert coverage.compute_tpm(info,{'short':500,'long':9000})==result
+
+
+def test_normalisation_zero_and_empty_inputs():
+    assert coverage.compute_coverage_per_million({})=={}
+    assert coverage.compute_coverage_per_million({'a':{'depth':0.}})=={'a':0.}
+    assert sum(coverage.compute_coverage_per_million({'a':{'depth':10},'b':{'depth':20}}).values())==pytest.approx(1e6)
+
+
+def test_heatmap_normalises_without_contig_lengths_once_per_genome(tmp_path,monkeypatch):
+    from efesto import writers
+    calls=[];original=writers.compute_coverage_per_million
+    def count(info):calls.append(info);return original(info)
+    monkeypatch.setattr(writers,'compute_coverage_per_million',count)
+    rows=[{'genome':'g.faa','contig':'a','cat':'Fe'}, {'genome':'g.faa','contig':'b','cat':'Fe'}]
+    path=tmp_path/'out.csv'
+    writers.write_coverage_heatmap(path,rows,['g.faa'],{'g.faa':{'a':{'depth':10},'b':{'depth':30}}},True)
+    assert len(calls)==1
+    assert path.read_text()=='# coverage metric: coverage_per_million_sum\nX,g.faa\nFe,1000000.0000\n'

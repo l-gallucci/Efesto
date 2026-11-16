@@ -16,8 +16,10 @@ packages, and installs the local checkout with `pip install -e .`.
 The package requires Python 3.9 or later; the supplied environment constrains
 Python below 3.12 to accommodate optional eggNOG-mapper installations.
 
-Keep the source checkout, including `hmm_library/`, available. If the library is
-not discovered, pass `--hmm_dir /path/to/Efesto/hmm_library` explicitly.
+Editable installations read `hmm_library/` from the checkout, so keep that
+checkout available. Regular wheel/source-package installations include the same
+library inside the installed Python package and discover it automatically.
+`--hmm_dir` can still select a custom library explicitly.
 
 ## Install into an existing environment
 
@@ -30,6 +32,25 @@ python -m pip install -e /path/to/Efesto
 optional gene-calling packages. For FAA-only runs, gene calling is unnecessary.
 HMMER executables must be on `PATH`; Pyrodigal and Pyrodigal-GV are Python imports,
 not a requirement to install a separate `prodigal` executable.
+
+## Install a release wheel
+
+Install HMMER in the target environment, then install the downloaded release file:
+
+```bash
+conda install -c conda-forge -c bioconda hmmer
+python -m pip install /path/to/efesto-1.0.0-py3-none-any.whl
+efesto --version
+```
+
+The wheel includes the registered HMM profiles, cutoff and gene maps, category
+metadata, and source notices. It does not need the Git checkout at runtime.
+For nucleotide inputs, install Pyrodigal/Pyrodigal-GV with conda as above or use
+`python -m pip install 'efesto[gene-calling] @ file:///absolute/path/to/efesto-1.0.0-py3-none-any.whl'`.
+The optional JSON context-rule example is packaged separately under
+`efesto/data/examples/operon_rules.json`; it does not activate the JSON engine
+unless copied into the selected HMM library. HMMER and optional external tools
+remain separate installations.
 
 ## Optional tools
 

@@ -101,3 +101,24 @@ Legacy caches without metadata are recomputed. An HMMER failure stops annotation
 with a nonzero exit status; a partial table is never installed as a valid cache.
 Fix the error and rerun to reuse any completed, valid searches. Use a fresh output
 directory when comparing runs so older result files cannot be mistaken for new ones.
+
+## Coverage normalisation
+
+Without `--norm_coverage`, the category matrix sums contig mean depth once per
+retained gene hit (`mean_depth_sum`). With that flag it uses
+`coverage_per_million_sum`:
+
+```text
+contig_value = mean_depth / sum(all supplied contig mean depths) × 1,000,000
+category_value = sum(contig_value for each retained hit in the category)
+```
+
+Mean depth is already normalised for length. Equal mean depths therefore receive
+equal values even if contig lengths differ. Normalisation is performed once per
+genome/sample coverage input and does not require contig lengths. All-zero inputs
+produce zero values. This is a DNA coverage measure, not transcript TPM.
+
+Several retained genes on one contig contribute separately, and genes can share
+categories, so the **category matrix is not constrained to sum to one million**.
+Inputs normalised separately per MAG do not estimate that MAG's abundance in the
+whole community. Keep the same coverage-input scope when making comparisons.

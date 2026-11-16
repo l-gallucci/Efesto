@@ -308,3 +308,12 @@ class TestTopoWeight:
     def test_missing_heme_motifs_key_is_neutral(self):
         rows = [{"hmm_stem": "MtrA", "orf": "orf_1"}]
         assert topo_weight(rows, {}, self._TOPOLOGY_MAP) == pytest.approx(1.0)
+
+
+@pytest.mark.parametrize('pair', [('a','b'),('b','a')])
+def test_uniop_zero_probability_is_not_missing(pair):
+    assert uniop_pair_score(['a','b'],{pair:0.0})==0.0
+
+
+def test_uniop_score_accepts_generator():
+    assert uniop_pair_score(iter(['a','b']),{('a','b'):.4})==.4

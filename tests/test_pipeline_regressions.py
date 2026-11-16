@@ -84,3 +84,40 @@ def test_failed_hmmer_stops_cli_and_is_retried(tmp_path):
         assert 'simulated HMMER failure' in result.stderr
         assert not (tmp_path/'out/Efesto-results-long.tsv').exists()
         assert not list((tmp_path/'out/_tblout_cache').glob('*.tblout'))
+
+
+@pytest.mark.skipif(not shutil.which('hmmsearch'),reason='HMMER required')
+@pytest.mark.parametrize('probability',[0.0,0.2])
+def test_final_confidence_consistent_in_csv_tsv_and_anvio(tmp_path,probability):
+    lib=setup_library(tmp_path,'MtrA')
+    seed=next(iter(read_fasta(ROOT/'data/seeds/curated/MtrA_seeds.faa').values()))
+    (tmp_path/'faa/a.faa').write_text('>ctg_1\n'+seed+'\n>ctg_2\n'+seed+'\n')
+    (tmp_path/'gff/a.gff').write_text('##sequence-region ctg 1 10000\nctg\tcaller\tCDS\t100\t300\t.\t+\t0\tID=ctg_1\nctg\tcaller\tCDS\t400\t600\t.\t+\t0\tID=ctg_2\n')
+    # Use an independently low UniOP score, even though an operon exists.
+    work=tmp_path/'out/_uniop/a';work.mkdir(parents=True)
+    (work/'cached.faa').write_text((tmp_path/'faa/a.faa').read_text())
+    (work/'uniop.operon').write_text('idx_genes,idx_op\n"[1, 2]",0\n')
+    (work/'uniop.pred').write_text(f'Gene A\tGene B\tPrediction\n1\t2\t{probability}\n')
+    depth=tmp_path/'depth.tsv';depth.write_text('ctg\t10\n')
+    options=('--all_results','--keep_tblout','--anvio','--operon_prediction','--depth',str(depth))
+    control=run_cli(tmp_path,lib,*options)
+    assert control.returncode==0,control.stderr
+    out=tmp_path/'out'
+    tsv=list(csv.DictReader((out/'Efesto-results-long.tsv').open(),delimiter='\t'))
+    baseline={r['orf']:r['cluster_confidence'] for r in tsv}
+    assert len(baseline)==2
+    if probability:
+        assert all(0 < float(v) < probability for v in baseline.values())
+    else:
+        assert all(float(v)==0.0 for v in baseline.values())
+    for name in ('Efesto-summary.csv','Efesto-geneSummary-clusters.csv'):
+        rr=[r for r in csv.DictReader((out/name).open()) if r.get('orf') in baseline]
+        assert {r['orf']:r['cluster_confidence'] for r in rr}==baseline
+    aa=list(csv.DictReader((out/'Efesto-anvio-gene-scores.tsv').open(),delimiter='\t'))
+    assert all(float(r['uniop_weight'])==probability for r in aa)
+    assert all(abs(float(r['cluster_confidence'])-float(baseline[r['gene_callers_id']]))<.001 for r in aa)
+    normalised=run_cli(tmp_path,lib,*options,'--norm_coverage')
+    assert normalised.returncode==0,normalised.stderr
+    rr=list(csv.DictReader((out/'Efesto-results-long.tsv').open(),delimiter='\t'))
+    assert {r['orf']:r['cluster_confidence'] for r in rr}==baseline
+    assert 'coverage_per_million_sum' in (out/'Efesto-coverage-heatmap.csv').read_text()

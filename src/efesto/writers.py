@@ -8,7 +8,7 @@ import datetime
 from collections import defaultdict
 from pathlib import Path
 
-from efesto.coverage import compute_tpm
+from efesto.coverage import compute_coverage_per_million
 from efesto.io import read_fasta
 
 _NT_COMP = str.maketrans("ACGTNacgtn", "TGCANtgcan")
@@ -108,19 +108,19 @@ def write_heatmap(path, rows, all_genomes, norm_dict=None):
 def write_coverage_heatmap(path, rows, all_genomes, genome_cov,
                            norm_coverage=False, contig_lengths=None):
     all_cats = sorted({r["cat"] for r in rows})
+    normalised = ({genome: compute_coverage_per_million(genome_cov.get(genome, {}))
+                   for genome in all_genomes} if norm_coverage else {})
     cm = defaultdict(lambda: defaultdict(float))
     for r in rows:
         info = genome_cov.get(r["genome"], {}).get(r["contig"], {})
         if not info:
             continue
-        if norm_coverage and contig_lengths:
-            tpm = compute_tpm(genome_cov.get(r["genome"], {}),
-                              contig_lengths.get(r["genome"], {}))
-            val = tpm.get(r["contig"], 0.0)
+        if norm_coverage:
+            val = normalised.get(r["genome"], {}).get(r["contig"], 0.0)
         else:
             val = info.get("depth", 0.0)
         cm[r["cat"]][r["genome"]] += val
-    label = "TPM" if norm_coverage else "mean_depth_sum"
+    label = "coverage_per_million_sum" if norm_coverage else "mean_depth_sum"
     with open(path, "w") as fh:
         fh.write(f"# coverage metric: {label}\n")
         fh.write("X," + ",".join(all_genomes) + "\n")

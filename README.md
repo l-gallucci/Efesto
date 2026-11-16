@@ -23,7 +23,8 @@ efesto --help
 efesto checkenv
 ```
 
-Keep the source checkout and `hmm_library/` available. Optional tools and reference
+Editable installs need the checkout and its `hmm_library/`. Release wheels bundle
+the library and run independently of the checkout. Optional tools and reference
 databases need their own installation; see [installation](docs/installation.md).
 
 ## Run
@@ -72,7 +73,8 @@ higher annotation accuracy. See [pipeline](docs/pipeline.md) and
 
 ## Cite and license
 
-Cite applicable model and tool sources in [References](docs/references.md).
+Cite Efesto using [CITATION.cff](CITATION.cff), plus the applicable model and tool
+sources in [References](docs/references.md).
 The code is distributed under the [MIT license](LICENSE).
 Logo: [Elena Panariello](https://www.instagram.com/elena_panariello/).
 Efesto is not affiliated with the original FeGenie authors.

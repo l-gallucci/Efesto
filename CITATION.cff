@@ -1,0 +1,41 @@
+cff-version: 1.2.0
+message: >-
+  If you use Efesto, please cite this software and the original sources
+  relevant to the HMM profiles and external tools used in your analysis.
+type: software
+title: "Efesto: annotation of metal cycling, acquisition and resistance genes"
+version: 1.0.0
+authors:
+  - given-names: Luigi
+    family-names: Gallucci
+    orcid: "https://orcid.org/0009-0004-0892-6796"
+    affiliation: >-
+      Department of Molecular Ecology, Max Planck Institute for Marine
+      Microbiology, Bremen, Germany
+  - given-names: Anke
+    family-names: Meyerdierks
+    orcid: "https://orcid.org/0000-0002-8834-5446"
+    affiliation: >-
+      Department of Molecular Ecology, Max Planck Institute for Marine
+      Microbiology, Bremen, Germany
+  - given-names: Rudolf
+    family-names: Amann
+    orcid: "https://orcid.org/0000-0002-0846-7372"
+    affiliation: >-
+      Department of Molecular Ecology, Max Planck Institute for Marine
+      Microbiology, Bremen, Germany
+repository-code: "https://github.com/l-gallucci/Efesto"
+url: "https://l-gallucci.github.io/Efesto/"
+abstract: >-
+  Efesto annotates metal cycling, acquisition and resistance genes in genomes
+  and metagenomes using profile HMMs, gene neighbourhoods and optional evidence
+  from operon prediction, orthology, topology and structural comparisons.
+  Efesto code is MIT-licensed. Imported HMM profiles and third-party resources
+  retain their original conditions; see THIRD_PARTY_NOTICES.md.
+keywords:
+  - bioinformatics
+  - metagenomics
+  - metal cycling
+  - iron cycling
+  - hidden Markov models
+  - functional annotation

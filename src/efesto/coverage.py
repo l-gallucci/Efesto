@@ -152,10 +152,20 @@ def build_contig_coverage(faa_files, bam_map, depth_map, out_dir):
     return gc
 
 
-def compute_tpm(genome_cov, contig_lens):
-    rates = {}
-    for c, info in genome_cov.items():
-        length  = contig_lens.get(c, info.get("length", 1)) or 1
-        rates[c] = info["depth"] / length
-    total = sum(rates.values()) or 1.0
-    return {c: (r / total) * 1e6 for c, r in rates.items()}
+def compute_coverage_per_million(genome_cov):
+    """Scale contig mean depths to 1e6 within one genome/sample input.
+
+    Mean depth is already length-normalised. This is a DNA coverage metric,
+    not transcript TPM, and must not divide by contig length a second time.
+    Category outputs sum the assigned value once per retained gene hit.
+    """
+    depths = {contig: _number(info["depth"]) for contig, info in genome_cov.items()}
+    total = math.fsum(depths.values())
+    if total == 0:
+        return {contig: 0.0 for contig in depths}
+    return {contig: depth / total * 1e6 for contig, depth in depths.items()}
+
+
+def compute_tpm(genome_cov, contig_lens=None):
+    """Compatibility alias; returns coverage per million, independent of length."""
+    return compute_coverage_per_million(genome_cov)

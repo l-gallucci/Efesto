@@ -236,7 +236,7 @@ pretty_category <- function(x) {
 
 palette_for_type <- function(type) {
   if (type == "coverage") {
-    # Blue-purple gradient for coverage/TPM
+    # Blue-purple gradient for coverage
     colorRampPalette(c("#F7FBFF", "#C6DBEF", "#6BAED6", "#2171B5", "#08306B"))(100)
   } else {
     # White → warm orange → dark red for gene counts
@@ -266,7 +266,7 @@ make_static <- function(mat, title, type, out_base, caption,
   rownames(mat) <- pretty_category(rownames(mat))
 
   # Legend label
-  legend_title <- if (type == "coverage") "TPM / Depth" else "Gene count"
+  legend_title <- if (type == "coverage") "Coverage / depth" else "Gene count"
 
   # Value breaks: log1p scaling for counts, linear for coverage
   if (type == "count" && max(mat) > 10) {
@@ -352,7 +352,7 @@ make_interactive <- function(mat, title, type, out_base, caption,
     cbar_title  <- "log(n + 1)"
   } else {
     display_mat <- mat
-    cbar_title  <- if (type == "coverage") "TPM / Depth" else "Gene count"
+    cbar_title  <- if (type == "coverage") "Coverage / depth" else "Gene count"
   }
 
   colorscale <- if (type == "coverage") {
