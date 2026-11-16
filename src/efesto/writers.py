@@ -1,5 +1,8 @@
 """Output writers: CSV/TSV summary files and heatmaps."""
 
+from efesto.identifiers import export_ids, scoped_id
+from urllib.parse import quote
+
 import csv
 import datetime
 from collections import defaultdict
@@ -137,6 +140,12 @@ def write_gff3(path, final_rows, genome_coords):
     Attributes per feature:
         ID, gene, category, hmm_stem, cluster_id, cluster_confidence, confidence
     """
+    identifiers = export_ids(final_rows)
+    contig_owners = defaultdict(set)
+    for genome, coords in genome_coords.items():
+        for coord in coords.values():
+            contig_owners[coord["contig"]].add(genome)
+    scope_contigs = any(len(owners) > 1 for owners in contig_owners.values())
     n_written = 0
     with open(path, "w") as fh:
         fh.write("##gff-version 3\n")
@@ -146,14 +155,19 @@ def write_gff3(path, final_rows, genome_coords):
             if coords is None:
                 continue
             contig = coords["contig"]
+            seqid = quote(scoped_id(r["genome"], contig) if scope_contigs else contig, safe="._:-")
             start  = coords["start"]
             end    = coords["end"]
             strand = coords.get("strand", ".")
             conf   = r.get("cluster_confidence")
             conf_s = f"{conf:.3f}" if conf is not None else "."
-            orf_id = r.get("bakta_id", r["orf"])
+            orf_id = identifiers[(r["genome"], r["orf"])]
             attrs  = (
-                f"ID={orf_id}"
+                f"ID={quote(orf_id, safe='._:-')}"
+                f";genome={quote(r['genome'], safe='')}"
+                f";original_contig={quote(contig, safe='')}"
+                f";original_orf={quote(r['orf'], safe='')}"
+                f";bakta_id={quote(r.get('bakta_id') or r['orf'], safe='')}"
                 f";gene={r['gene_name']}"
                 f";category={r['cat']}"
                 f";hmm_stem={r['hmm_stem']}"
@@ -162,7 +176,7 @@ def write_gff3(path, final_rows, genome_coords):
                 f";confidence={r.get('confidence', 'low_confidence')}"
             )
             fh.write(
-                f"{contig}\tEfesto\tCDS\t{start}\t{end}"
+                f"{seqid}\tEfesto\tCDS\t{start}\t{end}"
                 f"\t.\t{strand}\t.\t{attrs}\n"
             )
             n_written += 1
@@ -250,19 +264,11 @@ def write_anvio_misc_data(path, final_rows, prodigal_to_bakta=None):
         gene_callers_id  cluster_confidence  co_occ_score  hmm_weight
                          uniop_weight  bgc_boost
 
-    gene_callers_id is the Bakta gene ID when --bakta_gff_dir was used, otherwise
-    the Prodigal ORF name. For anvi'o import, integer gene_callers_ids are required:
-
-        anvi-import-misc-data -c CONTIGS.db \\
-            --target-data-table genes \\
-            Efesto-anvio-gene-scores.tsv
-
-    Prodigal users must first map ORF names to integer IDs:
-        anvi-export-gene-calls -c CONTIGS.db -o gene_calls.tsv
-    then join on the orf name in column 'contig'_'start'_'stop'_'direction'.
-    Bakta users with external gene calls imported via anvi-import-external-gene-calls
-    can use the Bakta locus tags directly.
+    Exported labels follow export_ids(): original/Bakta IDs when unique,
+    otherwise genome-scoped IDs. They still require mapping to the integer
+    gene_callers_ids of the target anvi'o database; see docs/anvio_integration.md.
     """
+    identifiers = export_ids(final_rows)
     fields = ["gene_callers_id", "cluster_confidence", "co_occ_score",
               "hmm_weight", "uniop_weight", "bgc_boost"]
     seen = set()
@@ -270,11 +276,11 @@ def write_anvio_misc_data(path, final_rows, prodigal_to_bakta=None):
         w = csv.writer(fh, delimiter="\t")
         w.writerow(fields)
         for r in final_rows:
-            orf = r["orf"]
-            if orf in seen:
+            key = (r["genome"], r["orf"])
+            if key in seen:
                 continue
-            seen.add(orf)
-            caller = r.get("bakta_id") or orf
+            seen.add(key)
+            caller = identifiers[key]
             conf   = r.get("cluster_confidence")
             w.writerow([
                 caller,
@@ -294,20 +300,20 @@ def write_anvio_functions(path, final_rows, prodigal_to_bakta=None):
     Functions table for anvi-import-functions (tab-delimited):
       gene_callers_id    source    accession    function    e_value
 
-    gene_callers_id is taken from r["bakta_id"] if set (populated by the
-    main loop when --bakta_gff_dir is provided), otherwise falls back to
-    r["orf"] (Prodigal name — requires manual mapping before Anvi'o import).
+    Exported labels follow the same collision-safe mapping as the score table.
+    Map labels to the target database's integer IDs before anvi'o import.
     """
+    identifiers = export_ids(final_rows)
     with open(path, "w", newline="") as fh:
         w = csv.writer(fh, delimiter="\t")
         w.writerow(["gene_callers_id", "source", "accession", "function", "e_value"])
         seen = set()
         for r in final_rows:
-            orf = r["orf"]
-            if orf in seen:
+            key = (r["genome"], r["orf"])
+            if key in seen:
                 continue
-            seen.add(orf)
-            caller = r.get("bakta_id") or orf
+            seen.add(key)
+            caller = identifiers[key]
             source = ("Efesto-low_confidence"
                       if r.get("confidence") == "low_confidence"
                       else "Efesto")
@@ -322,13 +328,14 @@ def write_hit_faa(path, final_rows):
     Header fields: gene, category, genome, contig, bitscore, cluster_id,
                    cluster_confidence, confidence
     """
+    identifiers = export_ids(final_rows)
     n_written = 0
     with open(path, "w") as fh:
         for r in final_rows:
             seq = r.get("sequence", "")
             if not seq:
                 continue
-            orf_id = r.get("bakta_id", r["orf"])
+            orf_id = identifiers[(r["genome"], r["orf"])]
             conf   = r.get("cluster_confidence")
             conf_s = f"{conf:.3f}" if conf is not None else "NA"
             fh.write(
@@ -357,6 +364,7 @@ def write_hit_fna(path, final_rows, genome_coords, fna_dir, fna_ext="fna"):
     Header fields: gene, category, genome, contig, start, end, strand,
                    bitscore, cluster_id, cluster_confidence
     """
+    identifiers = export_ids(final_rows)
     fna_dir = Path(fna_dir)
     by_genome = defaultdict(list)
     for r in final_rows:
@@ -389,7 +397,7 @@ def write_hit_fna(path, final_rows, genome_coords, fna_dir, fna_ext="fna"):
                 subseq = contig_seq[start:end]
                 if c.get("strand") == "-":
                     subseq = subseq.translate(_NT_COMP)[::-1]
-                orf_id = r.get("bakta_id", r["orf"])
+                orf_id = identifiers[(r["genome"], r["orf"])]
                 conf   = r.get("cluster_confidence")
                 conf_s = f"{conf:.3f}" if conf is not None else "NA"
                 fh.write(

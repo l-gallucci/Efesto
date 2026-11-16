@@ -25,7 +25,8 @@ from pathlib import Path
 from efesto.clustering import _orf_to_contig, build_clusters
 from efesto.coverage import build_contig_coverage, load_bams_tsv
 from efesto.gene_calling import run_prodigal
-from efesto.hmmer import collect_best_hits, run_all_hmmsearches
+from efesto.hmmer import HMMSearchError, collect_best_hits, run_all_hmmsearches
+from efesto.identifiers import ProteinIdentifiers, scoped_id, write_id_map
 from efesto.categories import canonical_category
 from efesto.io import (build_confirmation_map, build_contig_length_dict,
                                 build_nseq_map, build_topology_expectation_map,
@@ -421,6 +422,8 @@ def main():
         from efesto._dev import add_dev_arguments
         add_dev_arguments(p)
     args = p.parse_args()
+    if args.threads < 1 or args.hmm_threads < 1:
+        p.error("--threads and --hmm_threads must be positive")
     dev_catalog = None
     dev_library = getattr(args, "_dev_fegenie_hmms", None)
     if dev_library is not None:
@@ -587,9 +590,12 @@ def main():
 
     print(f"[INFO] Launching hmmsearch ({args.threads} threads, "
           f"{args.hmm_threads} per job)…")
-    run_all_hmmsearches(faa_files, cat_hmms, cutoffs, tblout_dir,
-                        args.threads, args.hmm_threads,
-                        zero_cutoff_min_bitscore=args.zero_cutoff_min_bitscore)
+    try:
+        run_all_hmmsearches(faa_files, cat_hmms, cutoffs, tblout_dir,
+                            args.threads, args.hmm_threads,
+                            zero_cutoff_min_bitscore=args.zero_cutoff_min_bitscore)
+    except (HMMSearchError, OSError, ValueError) as error:
+        p.exit(1, f"[ERROR] {error}\n")
     print("[INFO] Collecting best HMM hits…")
     best_hit = collect_best_hits(faa_files, cat_hmms, tblout_dir,
                                  cutoffs=cutoffs, max_evalue=args.max_evalue)
@@ -598,6 +604,7 @@ def main():
     # finish so that their memory does not overlap the HMMER workers' peak.
     print("[INFO] Loading protein sequences…")
     seq_dict = {faa.name: read_fasta(str(faa)) for faa in faa_files}
+    identifiers = ProteinIdentifiers(seq_dict)
 
     print("[INFO] Clustering and filtering…")
     if args.min_contig_len > 0:
@@ -619,12 +626,22 @@ def main():
             continue
         orf_coords = genome_coords.get(genome, {})
         clen       = contig_lengths.get(genome, {})
-        if args.min_contig_len > 0 and clen:
+        if args.min_contig_len > 0:
             before   = len(orf_hits)
-            orf_hits = {
-                o: h for o, h in orf_hits.items()
-                if clen.get(_orf_to_contig(o), args.min_contig_len + 1) >= args.min_contig_len
-            }
+            missing_lengths = set()
+            kept_hits = {}
+            for orf, hit in orf_hits.items():
+                contig = orf_coords.get(orf, {}).get("contig") or _orf_to_contig(orf)
+                length = clen.get(contig)
+                if length is None:
+                    missing_lengths.add(contig)
+                if length is None or length >= args.min_contig_len:
+                    kept_hits[orf] = hit
+            if missing_lengths:
+                print(f"[WARN] {genome}: contig length unavailable for "
+                      f"{len(missing_lengths)} hit-bearing contig(s); these hits "
+                      "were retained without length filtering.", file=sys.stderr)
+            orf_hits = kept_hits
             n_filt += before - len(orf_hits)
         raw_clusters = build_clusters(
             genome, orf_hits, orf_coords,
@@ -702,23 +719,12 @@ def main():
     eggnog_hits = {}
     foldseek_hits = {}
     if pending_confirmation:
+        write_id_map(out_dir / "Efesto-protein-id-map.tsv", pending_confirmation, final_rows)
         print(f"[INFO] {len(pending_confirmation)} needs_confirmation hit(s) "
               f"dropped by operon filtering — checking tier 2 (eggNOG)…")
 
         if args.export_flagged_faa:
-            genome_faa_paths = {faa.name: faa for faa in faa_files}
-            written = 0
-            with open(args.export_flagged_faa, "w") as fh_out:
-                for genome_name, rows in _groupby_genome(pending_confirmation):
-                    faa_path = genome_faa_paths.get(genome_name)
-                    if faa_path is None:
-                        continue
-                    tmp_out = str(args.export_flagged_faa) + f".{genome_name}.tmp"
-                    n = write_flagged_faa({r["orf"] for r in rows}, faa_path, tmp_out)
-                    with open(tmp_out) as fh_in:
-                        fh_out.write(fh_in.read())
-                    Path(tmp_out).unlink(missing_ok=True)
-                    written += n
+            written = identifiers.write_fasta(args.export_flagged_faa, pending_confirmation)
             print(f"[INFO] Wrote {written} flagged ORF(s) to {args.export_flagged_faa}")
 
         annotations_path = None
@@ -726,29 +732,24 @@ def main():
             annotations_path = args.eggnog_annotations
         elif args.run_eggnog:
             flagged_faa_tmp = out_dir / "efesto_flagged_candidates.faa"
-            genome_faa_paths = {faa.name: faa for faa in faa_files}
-            with open(flagged_faa_tmp, "w") as fh_out:
-                for genome_name, rows in _groupby_genome(pending_confirmation):
-                    faa_path = genome_faa_paths.get(genome_name)
-                    if faa_path is None:
-                        continue
-                    tmp = str(flagged_faa_tmp) + f".{genome_name}.tmp"
-                    write_flagged_faa({r["orf"] for r in rows}, faa_path, tmp)
-                    with open(tmp) as fh_in:
-                        fh_out.write(fh_in.read())
-                    Path(tmp).unlink(missing_ok=True)
+            identifiers.write_fasta(flagged_faa_tmp, pending_confirmation)
             annotations_path = run_eggnog(
                 flagged_faa_tmp, out_dir, eggnog_path=args.eggnog_path,
                 db_dir=args.eggnog_db_dir)
 
         if annotations_path:
-            eggnog_hits = _parse_eggnog_annotations(annotations_path)
+            try:
+                eggnog_hits = identifiers.group_hits(
+                    _parse_eggnog_annotations(annotations_path), pending_confirmation,
+                    allow_raw=bool(args.eggnog_annotations))
+            except ValueError as error:
+                p.exit(1, f"[ERROR] {error}\n")
 
         n_confirmed = 0
         for r in pending_confirmation:
             info = confirmation_map.get(r["hmm_stem"], {})
             verdict = confirm_hit(info.get("gene_name", ""), info.get("kegg_ko", []),
-                                  eggnog_hits.get(r["orf"]))
+                                  eggnog_hits.get(r["genome"], {}).get(r["orf"]))
             if verdict != "confirmed":
                 continue
             genome = r["genome"]
@@ -784,26 +785,17 @@ def main():
                       "neutral", file=sys.stderr)
             else:
                 struct_faa_tmp = out_dir / "efesto_struct_candidates.faa"
-                genome_faa_paths = {faa.name: faa for faa in faa_files}
-                with open(struct_faa_tmp, "w") as fh_out:
-                    for genome_name, rows in _groupby_genome(pending_confirmation):
-                        faa_path = genome_faa_paths.get(genome_name)
-                        if faa_path is None:
-                            continue
-                        tmp = str(struct_faa_tmp) + f".{genome_name}.tmp"
-                        write_flagged_faa({r["orf"] for r in rows}, faa_path, tmp)
-                        with open(tmp) as fh_in:
-                            fh_out.write(fh_in.read())
-                        Path(tmp).unlink(missing_ok=True)
+                identifiers.write_fasta(struct_faa_tmp, pending_confirmation)
                 results_path = run_foldseek(
                     struct_faa_tmp, args.foldseek_db_dir, out_dir,
                     foldseek_path=args.foldseek_path,
                     prostt5_weights=args.prostt5_weights, gpu=args.foldseek_gpu)
                 if results_path:
-                    foldseek_hits = _parse_foldseek_results(results_path)
+                    foldseek_hits = identifiers.group_hits(
+                        _parse_foldseek_results(results_path), pending_confirmation)
                     print(f"[INFO] Tier 3: Foldseek ran on "
                           f"{len(pending_confirmation)} pending hit(s), "
-                          f"{len(foldseek_hits)} structural hit(s) found")
+                          f"{sum(map(len, foldseek_hits.values()))} structural hit(s) found")
                 else:
                     print("[WARN] Tier 3: Foldseek did not run — struct_w "
                           "stays neutral this run", file=sys.stderr)
@@ -816,7 +808,7 @@ def main():
     # included too.
     phobius_hits = {}
     if args.topology_check and topology_map and final_rows:
-        applicable = {r["orf"]: r["sequence"] for r in final_rows
+        applicable = {scoped_id(r["genome"], r["orf"]): r["sequence"] for r in final_rows
                      if r["hmm_stem"] in topology_map and r.get("sequence")}
         if applicable:
             topo_faa_tmp = out_dir / "efesto_topology_candidates.faa"
@@ -827,7 +819,8 @@ def main():
             phobius_result = run_phobius(topo_faa_tmp, topo_out,
                                          phobius_path=args.phobius_path)
             if phobius_result:
-                phobius_hits = _parse_phobius_output(phobius_result)
+                phobius_hits = identifiers.group_hits(
+                    _parse_phobius_output(phobius_result), final_rows)
                 print(f"[INFO] Topology check: Phobius ran on {len(applicable)} "
                       f"hit(s) with an expected_topology/expected_heme_c set")
             else:
@@ -874,7 +867,7 @@ def main():
                 r["bakta_id"] = r["orf"]
         n_total = len(final_rows)
         print(f"[INFO] Bakta IDs applied: {n_mapped}/{n_total} HMM hits mapped "
-              f"({n_mapped / n_total * 100:.1f}%)")
+              f"({(n_mapped / n_total * 100) if n_total else 0:.1f}%)")
         if n_mapped == 0:
             print(f"[WARN] No HMM hits could be mapped to Bakta IDs. "
                   f"Check that Prodigal GFF basenames match FAA basenames.",
@@ -888,6 +881,8 @@ def main():
         for r in final_rows:
             r["bakta_id"] = r["orf"]
         print("[INFO] No Bakta mapping — orf column contains Prodigal ORF names")
+
+    write_id_map(out_dir / "Efesto-protein-id-map.tsv", pending_confirmation, final_rows)
 
     # summary and gene-summary don't carry uniop_context — write now
     for path, fn in [(out_dir / "Efesto-summary.csv", write_summary),
@@ -916,7 +911,10 @@ def main():
             depth_map[faa.stem] = args.depth
     if bam_map or depth_map:
         print("[INFO] Computing coverage…")
-        gc = build_contig_coverage(faa_files, bam_map, depth_map, out_dir)
+        try:
+            gc = build_contig_coverage(faa_files, bam_map, depth_map, out_dir)
+        except (OSError, ValueError, RuntimeError) as error:
+            p.exit(1, f"[ERROR] Coverage: {error}\n")
         if gc:
             print("[INFO] Writing Efesto-coverage-heatmap.csv…")
             write_coverage_heatmap(
@@ -1008,19 +1006,19 @@ def main():
         boost    = bgc_boost_for_cluster(
             [r["orf"] for r in grp], orf_coords_g,
             bgc_map.get(genome))
-        annot_w  = annot_weight(grp, eggnog_hits, confirmation_map)
+        annot_w  = annot_weight(grp, eggnog_hits.get(genome, {}), confirmation_map)
         # Gated on args.topology_check even though topology_map/heme_motifs are
         # always populated — without this gate, heme_verdict would silently
         # apply to MtrA/MtoA clusters on every run, changing default behavior
         # for users who never opted in. See verification step in the plan.
-        topo_w   = (topo_weight(grp, phobius_hits, topology_map)
+        topo_w   = (topo_weight(grp, phobius_hits.get(genome, {}), topology_map)
                    if args.topology_check else 1.0)
         # struct_weight only ever reads foldseek_hits, which stays {} unless
         # --run_struct_confirmation ran, so this gate is defense-in-depth
         # rather than strictly required — kept explicit for the same reason
         # as the topo_w gate above: the off-by-default contract should be
         # visible at the call site, not implied by data flow elsewhere.
-        struct_w = (struct_weight(grp, foldseek_hits, confirmation_map)
+        struct_w = (struct_weight(grp, foldseek_hits.get(genome, {}), confirmation_map)
                    if args.run_struct_confirmation else 1.0)
         conf    = cluster_confidence(
             grp[0]["hmm_w"], grp[0]["co_occ_score"], uniop_w,

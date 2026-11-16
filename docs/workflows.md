@@ -48,8 +48,8 @@ efesto --faa_dir proteins/ --gff_dir gff/ --annotate Fe Cu Zn --out metal_out
 ```
 
 Other selectors include `Ln`, `W`, `metallophores` and canonical category names.
-`Ln` currently selects LanM/LanD handling profiles, not a validated Lut/LanA uptake
-classifier. `W` includes Tup and shared Mo/W families. See [library scope](hmm_library.md).
+`Ln` selects LanM/LanD handling profiles. `W` includes Tup and shared Mo/W
+families. See [library scope](hmm_library.md).
 
 ## Reuse Bakta labels and external annotations
 
@@ -73,3 +73,34 @@ Use a **new output directory** after changing the input, library, thresholds or
 software version. Existing cached searches or gene calls can otherwise be reused.
 Record the command, source revision, library and tool versions together with
 `Efesto-run.log`. `--keep_tblout` retains raw HMM search tables for inspection.
+
+## Depth-table inputs
+
+`--depth` accepts one sample per file. Supported formats are JGI mean-depth
+outputs, samtools coverage tables, BBMap-style mean coverage tables, two-column
+`contig mean_depth` tables, and native three-column `samtools depth` output:
+
+```text
+contigA  1  10
+contigA  2  20
+```
+
+The example has mean depth **15**, computed from the third column. To include
+zero-depth positions and reference contigs with no aligned reads, generate the
+file with `samtools depth -aa sample.bam > sample.depth.tsv`. A sparse depth file
+is averaged over its reported positions only; omitted bases are not inferred.
+Use one BAM per file. Multiple depth columns, duplicate positions and invalid
+numeric values are rejected. Parsing is streamed to keep memory proportional to
+the number of contigs rather than the number of positions. In a positional table,
+the recorded length is the largest reported position; assembly/GFF lengths remain
+the preferred length source.
+
+A three-column **contig mean_depth length** table needs an explicit header such
+as `contig depth length`; without that header, three columns mean native
+`contig position depth`. BAM inputs first use `samtools coverage`; if unavailable,
+Efesto streams `samtools depth -aa` and checks its exit status.
+
+The short-contig filter resolves each ORF to its GFF contig before consulting
+contig lengths. This supports Bakta locus tags and other IDs that do not encode
+a contig name. If coordinates are absent, Efesto falls back to the ORF naming
+convention. Hits whose contig length is unknown are retained with a warning.

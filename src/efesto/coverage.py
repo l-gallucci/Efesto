@@ -1,111 +1,123 @@
-"""BAM/depth-file coverage loading and TPM normalisation."""
+"""Streaming BAM/depth-file coverage loading and TPM normalisation."""
 
-import os
+import math
 import subprocess
 import sys
+import tempfile
 from collections import defaultdict
 
 
-def compute_coverage_from_bam(bam_path, out_dir, label):
-    result = {}
-    df = out_dir / f"{label}.coverage"
-    r = subprocess.run(
-        ["samtools", "coverage", "-H", "-o", str(df), bam_path],
-        capture_output=True, text=True)
-    if r.returncode == 0 and df.exists():
-        with open(df) as fh:
-            for line in fh:
-                if line.startswith("#"):
-                    continue
-                p = line.rstrip().split("\t")
-                if len(p) >= 7:
-                    try:
-                        result[p[0]] = {
-                            "depth":  float(p[6]),
-                            "reads":  int(p[3]),
-                            "length": int(p[2]) - int(p[1]) + 1,
-                        }
-                    except (ValueError, IndexError):
-                        pass
-        return result
+def _number(value):
+    value = float(value)
+    if not math.isfinite(value) or value < 0:
+        raise ValueError("coverage values must be finite and non-negative")
+    return value
 
-    print(f"  [WARN] samtools coverage failed for {label}, trying depth",
-          file=sys.stderr)
-    r = subprocess.run(["samtools", "depth", "-a", bam_path],
-                       capture_output=True, text=True)
-    if r.returncode != 0:
-        print(f"  [ERROR] samtools depth failed: {r.stderr[:80]}", file=sys.stderr)
-        return {}
-    sums   = defaultdict(float)
-    counts = defaultdict(int)
-    for line in r.stdout.splitlines():
-        p = line.split("\t")
-        if len(p) >= 3:
-            try:
-                sums[p[0]]   += float(p[2])
-                counts[p[0]] += 1
-            except ValueError:
-                pass
-    for c in sums:
-        n = counts[c]
-        result[c] = {"depth": sums[c] / n if n else 0.0, "reads": 0, "length": n}
+
+def _parse_depth_lines(lines, source):
+    """Read one sample: native depth positions, mean-depth tables, or coverage."""
+    result, sums, counts, last_pos = {}, defaultdict(float), defaultdict(int), {}
+    mode = None
+    columns = None
+    for number, line in enumerate(lines, 1):
+        if not line.strip():
+            continue
+        parts = line.strip().split()
+        header = [p.lstrip("#").lower() for p in parts]
+        first = header[0]
+        if first == "contigname" and "totalavgdepth" in header:
+            mode, columns = "mean", (header.index("totalavgdepth"), header.index("contiglen"))
+            continue
+        if "meandepth" in header and first == "rname":
+            mode = "coverage"
+            continue
+        if first in ("chrom", "chr", "contig", "#chrom") and len(header) >= 3 and header[1] in ("pos", "position"):
+            if len(header) != 3:
+                raise ValueError(f"{source}:{number}: expected depth from one BAM (three columns)")
+            mode = "positions"
+            continue
+        if first in ("id", "contig", "contigname", "rname") and len(header) >= 2 and header[1] in ("avg_fold", "depth", "mean_depth", "meandepth"):
+            mode = "mean"
+            columns = (1, header.index("length") if "length" in header else None)
+            continue
+        if line.lstrip().startswith("#"):
+            continue
+        try:
+            if mode is None:
+                if len(parts) == 2:
+                    mode, columns = "mean", (1, None)
+                elif len(parts) == 3:
+                    mode = "positions"
+                elif len(parts) >= 7:
+                    mode = "coverage"
+                else:
+                    raise ValueError("unsupported depth format; expected one sample")
+            contig = parts[0]
+            if mode == "positions":
+                if len(parts) != 3:
+                    raise ValueError("expected contig, position, depth for one BAM")
+                pos = int(parts[1])
+                if pos < 1 or pos <= last_pos.get(contig, 0):
+                    raise ValueError("positions must be positive and increasing within each contig")
+                depth = _number(parts[2])
+                last_pos[contig] = pos
+                sums[contig] += depth
+                counts[contig] += 1
+            else:
+                if contig in result:
+                    raise ValueError("duplicate contig in mean-depth table")
+                if mode == "coverage":
+                    if len(parts) < 7:
+                        raise ValueError("incomplete samtools coverage row")
+                    start, end = int(parts[1]), int(parts[2])
+                    if start < 1 or end < start:
+                        raise ValueError("invalid coverage interval")
+                    depth, reads, length = _number(parts[6]), int(parts[3]), end - start + 1
+                else:
+                    dcol, lcol = columns
+                    depth, reads = _number(parts[dcol]), 0
+                    length = int(parts[lcol]) if lcol is not None else 0
+                if length < 0 or reads < 0:
+                    raise ValueError("length and read counts cannot be negative")
+                result[contig] = {"depth": depth, "reads": reads, "length": length}
+        except (ValueError, IndexError) as error:
+            raise ValueError(f"{source}:{number}: {error}") from error
+    for contig, total in sums.items():
+        result[contig] = {"depth": total / counts[contig], "reads": 0,
+                          "length": last_pos[contig]}
     return result
+
+
+def compute_coverage_from_bam(bam_path, out_dir, label):
+    table = out_dir / f"{label}.coverage"
+    result = subprocess.run(
+        ["samtools", "coverage", "-H", "-o", str(table), str(bam_path)],
+        capture_output=True, text=True)
+    if result.returncode == 0 and table.is_file():
+        return load_depth_file(table)
+    print(f"  [WARN] samtools coverage failed for {label}, trying depth", file=sys.stderr)
+    # Stream stdout and spool stderr to disk: neither the full per-base table
+    # nor a full pipe of diagnostic output can accumulate in Python memory.
+    with tempfile.TemporaryFile(mode="w+") as errors:
+        process = subprocess.Popen(["samtools", "depth", "-aa", str(bam_path)],
+                                   stdout=subprocess.PIPE, stderr=errors, text=True)
+        try:
+            with process.stdout:
+                coverage = _parse_depth_lines(process.stdout, str(bam_path))
+        except BaseException:
+            process.kill()
+            process.wait()
+            raise
+        code = process.wait()
+        if code:
+            errors.seek(0)
+            raise RuntimeError(f"samtools depth failed for {label} (exit {code}): {errors.read(2000).strip()}")
+    return coverage
 
 
 def load_depth_file(path):
-    result = {}
-    if not os.path.isfile(path):
-        print(f"  [WARN] Depth file not found: {path}", file=sys.stderr)
-        return result
-    with open(path) as fh:
-        lines = [l.rstrip() for l in fh if l.strip()]
-    if not lines:
-        return result
-    cols = lines[0].split("\t")
-
-    def _row(d=0.0, r=0, l=0):
-        return {"depth": float(d), "reads": int(r), "length": int(l)}
-
-    if cols[0].lower() in ("contigname", "#contigname"):
-        for line in lines[1:]:
-            p = line.split("\t")
-            if len(p) >= 3 and p[0] != "contigName":
-                try:
-                    result[p[0]] = _row(p[2], 0, int(p[1]))
-                except (ValueError, IndexError):
-                    pass
-        return result
-
-    if cols[0].lower() == "rname" or (len(cols) >= 7 and cols[6].lower() == "meandepth"):
-        for line in lines[1:]:
-            p = line.split("\t")
-            if len(p) >= 7:
-                try:
-                    result[p[0]] = _row(p[6], p[3], int(p[2]) - int(p[1]) + 1)
-                except (ValueError, IndexError):
-                    pass
-        return result
-
-    if cols[0].startswith("#"):
-        for line in lines[1:]:
-            if line.startswith("#"):
-                continue
-            p = line.split("\t")
-            if len(p) >= 3:
-                try:
-                    result[p[0]] = _row(p[1], 0, int(p[2]))
-                except (ValueError, IndexError):
-                    pass
-        return result
-
-    for line in lines:
-        p = line.split("\t")
-        if len(p) >= 2:
-            try:
-                result[p[0]] = _row(p[1])
-            except ValueError:
-                pass
-    return result
+    with open(path) as handle:
+        return _parse_depth_lines(handle, str(path))
 
 
 def load_bams_tsv(path):

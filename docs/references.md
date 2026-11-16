@@ -37,11 +37,8 @@ If you use Efesto, cite all of the following that apply:
 > van Kempen M et al. (2023) *Fast and accurate protein structure search with Foldseek.* Nat. Biotechnol. [doi:10.1038/s41587-023-01773-0](https://doi.org/10.1038/s41587-023-01773-0)
 > Heinzinger M et al. (2024) *Bilingual language model for protein sequence and structure.* NAR Genomics and Bioinformatics. [doi:10.1093/nargab/lqae150](https://doi.org/10.1093/nargab/lqae150)
 
+## Conditions of use
 
-## Development methods
-
-- [Mankowski et al., supplied carbon-fixation preprint](https://doi.org/10.64898/2026.09.02.748891).
-- [Tanabe and Dahl, HMS-S-S](https://doi.org/10.1111/1755-0998.13642).
-
-An imported profile is not a newly trained Efesto model. Experimental model status
-and registry source support do not imply an independent classifier benchmark.
+Citation does not replace permission or source-specific conditions. Consult
+[Third-party sources and conditions of use](../THIRD_PARTY_NOTICES.md), especially
+before non-academic or commercial use.

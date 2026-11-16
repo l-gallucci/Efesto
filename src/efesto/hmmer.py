@@ -4,6 +4,10 @@ import os
 import sys
 import subprocess
 import tempfile
+import hashlib
+import json
+import shutil
+from functools import lru_cache
 from collections import defaultdict
 from concurrent.futures import FIRST_COMPLETED, ThreadPoolExecutor, wait
 from itertools import islice
@@ -58,17 +62,88 @@ def normalize_hmm_library(hmm_dir):
           + (f"  ({len(failed)} failed)" if failed else ""))
 
 
+class HMMSearchError(RuntimeError):
+    """One or more required searches failed; results must not be published."""
+
+
+@lru_cache(maxsize=4096)
+def _digest_at_stat(path, size, mtime_ns, ctime_ns):
+    # The stat tuple invalidates this memo within a run; large FAA inputs are
+    # hashed once rather than once for each profile.
+    with open(path, "rb") as handle:
+        digest = hashlib.sha256()
+        for block in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(block)
+        return digest.hexdigest()
+
+
+def _fingerprint(path):
+    path = Path(path).resolve()
+    stat = path.stat()
+    return {"path": str(path), "sha256": _digest_at_stat(
+        str(path), stat.st_size, stat.st_mtime_ns, stat.st_ctime_ns)}
+
+
+def _cache_signature(hmm, faa, cutoff, threads):
+    binary = shutil.which("hmmsearch")
+    if not binary:
+        raise FileNotFoundError("hmmsearch executable not found in PATH")
+    return {"schema": 1, "hmm": _fingerprint(hmm), "faa": _fingerprint(faa),
+            "binary": _fingerprint(binary), "cutoff": cutoff, "threads": threads}
+
+
+def _complete_table(path):
+    if not path.is_file():
+        return False
+    with path.open("rb") as handle:
+        handle.seek(max(0, path.stat().st_size - 1024))
+        return handle.read().rstrip().endswith(b"# [ok]")
+
+
 def _hmmsearch_job(args_tuple):
     hmm_file, faa_file, tblout_path, bitscore_cutoff, threads, fallback_bitscore = args_tuple
-    if Path(tblout_path).exists():
+    target = Path(tblout_path)
+    metadata = target.with_name(target.name + ".cache.json")
+    temporary = None
+    effective_cutoff = max(bitscore_cutoff if bitscore_cutoff > 0 else fallback_bitscore, 0)
+    try:
+        signature = _cache_signature(hmm_file, faa_file, effective_cutoff, threads)
+        try:
+            cached = json.loads(metadata.read_text())
+            if (isinstance(cached, dict) and _complete_table(target) and cached.get("inputs") == signature
+                    and cached.get("tblout_sha256") == _fingerprint(target)["sha256"]):
+                return tblout_path, True, ""
+        except (OSError, ValueError):
+            pass
+        # Invalidate stale output before launching: failures cannot leave a
+        # final file that a later collector might mistake for a valid result.
+        target.unlink(missing_ok=True)
+        metadata.unlink(missing_ok=True)
+        with tempfile.NamedTemporaryFile(dir=target.parent, prefix=target.name + ".",
+                                         suffix=".tmp", delete=False) as handle:
+            temporary = Path(handle.name)
+        cmd = ["hmmsearch", "--cpu", str(threads),
+               "-T", str(effective_cutoff), "--tblout", str(temporary), "--noali",
+               "-o", os.devnull, hmm_file, faa_file]
+        result = subprocess.run(cmd, capture_output=True, text=True)
+        if result.returncode != 0:
+            return tblout_path, False, f"{hmm_file} / {faa_file}: exit {result.returncode}: {result.stderr.strip()}"
+        if not _complete_table(temporary):
+            return tblout_path, False, f"{hmm_file} / {faa_file}: incomplete HMMER tblout (missing # [ok])"
+        digest = _fingerprint(temporary)["sha256"]
+        temporary.replace(target)
+        with tempfile.NamedTemporaryFile(mode="w", dir=target.parent,
+                                         prefix=metadata.name + ".", suffix=".tmp",
+                                         delete=False) as handle:
+            temporary = Path(handle.name)
+            json.dump({"inputs": signature, "tblout_sha256": digest}, handle)
+        temporary.replace(metadata)
         return tblout_path, True, ""
-    effective_cutoff = bitscore_cutoff if bitscore_cutoff > 0 else fallback_bitscore
-    cmd = ["hmmsearch", "--cpu", str(threads),
-           "-T", str(max(effective_cutoff, 0)),
-           "--tblout", tblout_path, "--noali",
-           "-o", "/dev/null", hmm_file, faa_file]
-    r = subprocess.run(cmd, capture_output=True, text=True)
-    return tblout_path, r.returncode == 0, r.stderr if r.returncode else ""
+    except OSError as error:
+        return tblout_path, False, f"{hmm_file} / {faa_file}: {error}"
+    finally:
+        if temporary is not None:
+            temporary.unlink(missing_ok=True)
 
 
 def parse_tblout(path, max_evalue=1e-5):
@@ -97,6 +172,8 @@ def run_all_hmmsearches(faa_files, cat_hmms, cutoffs, out_tmp,
     # Python only launches/waits for external HMMER processes. Threads avoid
     # an extra Python interpreter per concurrent search (or inherited parent
     # memory on fork-based platforms).
+    if threads_total < 1 or hmm_threads < 1:
+        raise ValueError("Thread counts must be positive")
     faa_files = tuple(faa_files)
     jobs = (
         (str(hmm_path), str(faa),
@@ -125,7 +202,7 @@ def run_all_hmmsearches(faa_files, cat_hmms, cutoffs, out_tmp,
                 _, ok, err = fut.result()
                 if not ok:
                     errors += 1
-                    print(f"\n  [WARN] hmmsearch: {err[:80]}", file=sys.stderr)
+                    print(f"\n  [WARN] hmmsearch: {err[:4000]}", file=sys.stderr)
                 sys.stdout.write(
                     f"\r[INFO] hmmsearch: {done}/{total}  ({errors} errors)  ")
                 sys.stdout.flush()
@@ -133,6 +210,9 @@ def run_all_hmmsearches(faa_files, cat_hmms, cutoffs, out_tmp,
                 if job is not None:
                     pending.add(pool.submit(_hmmsearch_job, job))
     print()
+    if errors:
+        raise HMMSearchError(f"{errors}/{total} HMMER searches failed; no final annotation was generated. "
+                             "Fix the reported errors and rerun; valid searches can be reused with --keep_tblout.")
 
 
 def collect_best_hits(faa_files, cat_hmms, out_tmp, cutoffs=None, max_evalue=1e-5):

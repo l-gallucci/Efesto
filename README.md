@@ -10,7 +10,7 @@ UniOP, antiSMASH, eggNOG-mapper, structural and topology evidence. It builds on
 
 **[Documentation](https://l-gallucci.github.io/Efesto/)** ·
 [Installation](docs/installation.md) · [Workflows](docs/workflows.md) ·
-[Outputs](docs/output_formats.md) · [Development status](docs/development.md)
+[Outputs](docs/output_formats.md) · [HMM library](docs/hmm_library.md)
 
 ## Install
 
@@ -54,16 +54,12 @@ A hit indicates family-related genetic potential, not measured expression, metal
 specificity, pathway activity or resistance. Cluster confidence is a heuristic
 score, not a probability. See [interpretation](docs/interpretation.md).
 
-## Library and research status
+## HMM library
 
-The [catalog](docs/hmm_library.md) describes runtime categories and profile status;
-the website generates current counts from the registry. Active and experimental
-profiles run by default, while deprecated profiles are skipped. Unregistered
-research candidates are kept outside the runtime library.
-
-MntX, Lut/LanA and Vup classifier development is documented separately, including
-small-sample and independent-validation limitations. See [development](docs/development.md)
-and [validation](docs/validation.md).
+The [catalog](docs/hmm_library.md) describes runtime categories, sources and profile
+status. The website generates current counts from the registry. Active and
+experimental profiles run by default, while deprecated profiles are skipped.
+See [curation and provenance](docs/hmm_library_curation.md) for interpretation limits.
 
 ## Differences from FeGenie
 
@@ -80,3 +76,11 @@ Cite applicable model and tool sources in [References](docs/references.md).
 The code is distributed under the [MIT license](LICENSE).
 Logo: [Elena Panariello](https://www.instagram.com/elena_panariello/).
 Efesto is not affiliated with the original FeGenie authors.
+
+## Source terms
+
+Efesto is intended for academic, non-commercial research. The MIT license covers
+Efesto's own code; imported profiles, reference data and external tools retain
+their original conditions. For non-academic or commercial use, always consult the
+original sources and obtain any required permissions. See
+[Third-party sources and conditions of use](THIRD_PARTY_NOTICES.md).

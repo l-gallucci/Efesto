@@ -36,7 +36,6 @@ analysis thresholds.
 | LanM / LanD | Lanthanide binding and handling, not a complete uptake system |
 | Cnt families | Opine-type metallophore potential; not a unique product or metal assignment |
 | MbnA/B/C | Predicted biosynthetic potential; the short precursor may be missed by gene calling |
-| MntX, Lut/LanA, Vup candidates | Development results, not enabled runtime classifiers |
 
 ## Comparisons and publication
 
@@ -45,5 +44,5 @@ raw family assignment from the effects of genomic-context rules. Changes in
 category naming or retention can change summaries without changing HMM scores.
 
 A metagenomic case study demonstrates applicability; it is not automatically a
-labelled accuracy benchmark. The [validation page](validation.md) separates
-software checks, targeted reference panels and missing independent validation.
+labelled accuracy benchmark. Software checks and targeted reference panels do not
+establish independent biological accuracy.

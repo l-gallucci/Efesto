@@ -13,7 +13,8 @@ from mkdocs.structure.files import File
 
 ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / 'docs'
-GENERATED = {'architecture.md': ROOT / 'ARCHITECTURE.md'}
+GENERATED = {'architecture.md': ROOT / 'ARCHITECTURE.md',
+             'third-party-notices.md': ROOT / 'THIRD_PARTY_NOTICES.md'}
 LINK = re.compile(r'(!?\[[^\]]*\]\()([^\s)]+)([^)]*\))')
 EXPANSION = (
     'lanM_NF053806', 'lanD_PF41493',

@@ -60,7 +60,13 @@ def read_gff(path):
             if start < 1 or end < start:
                 raise ValueError("Invalid CDS coordinates in " + str(path))
             value = (start, end, parts[6])
-            coords[(parts[0], identity)].add(value)
+            if all(k in attrs for k in ("genome", "original_contig", "original_orf")):
+                key = tuple(unquote(attrs[k]) for k in ("genome", "original_contig", "original_orf"))
+                coords[key].add(value)
+                if attrs.get("bakta_id"):
+                    coords[(*key[:2], unquote(attrs["bakta_id"]))].add(value)
+            else:
+                coords[(parts[0], identity)].add(value)
             # Prodigal names FASTA records contig_index and uses seqnum_index
             # in GFF ID. Restrict this alias to its explicit source/ID schema.
             if parts[1].lower().startswith(("prodigal", "pyrodigal")) and re.fullmatch(r"\d+_\d+", identity):
@@ -89,7 +95,8 @@ def attach_coordinates(rows, results_dir, gff_dir=None):
                 if cache[genome]:
                     break
         key = (row["contig"], row["orf"])
-        values = cache[genome].get(key) or global_coords.get(key, set())
+        values = (cache[genome].get(key) or
+                  global_coords.get((genome, *key)) or global_coords.get(key, set()))
         if len(values) == 1:
             row["_coordinates"] = next(iter(values))
         elif len(values) > 1:

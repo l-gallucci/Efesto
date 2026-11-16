@@ -21,9 +21,8 @@ Keep these external keys synchronized.
 
 For each model, record the source/version, sequence provenance, NSEQ, category,
 cutoff score type, runtime status, references and review limitations. `active`
-and `experimental` are enabled states. An unregistered file is not an adequate
-way to mark a model as development-only: keep such candidates outside the
-runtime library.
+and `experimental` are enabled states. Keep the selected library consistent with
+its registry, cutoff table and gene map.
 
 ## Verify and use
 
@@ -50,4 +49,4 @@ a complete system must not be inferred by counting duplicate copies of one compo
 Review biological specificity, aliases, real sequence controls and model
 competition before deployment. Similar HMM consensus sequences identify a
 redundancy candidate, not proof that models are functionally interchangeable.
-See [methodology](hmm_methodology.md) and [curation](hmm_library_curation.md).
+See [curation](hmm_library_curation.md).

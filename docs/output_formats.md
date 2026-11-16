@@ -68,3 +68,36 @@ The statistics table uses `section`, `metric`, `value` and `notes` columns. Conf
 tiers are ≥0.8, 0.5–<0.8 and <0.5. These are reporting bins; the normal run does
 not apply a global 0.5 confidence filter. Apply any analysis threshold explicitly
 and report it. See [interpretation](interpretation.md).
+
+## Protein identities across genomes
+
+A protein is identified by **genome + original ORF ID**. The long-format table
+keeps genome and the original/mapped ORF label in separate columns; the ID map
+records the original ORF even when a Bakta label is displayed. Combined FASTA, GFF and Anvi'o exports preserve
+original/Bakta labels when unique. If labels collide, every exported protein ID
+in that run uses `genome::original_orf`, for example
+`sampleA.faa::contig_1`. Reserved characters in each component are percent-encoded.
+
+`Efesto-protein-id-map.tsv` links `query_id`, `export_id`, `genome`, `orf`,
+`bakta_id` and `contig`. Dropped confirmation candidates have an empty `export_id`.
+Queries sent to optional confirmation/topology tools always use scoped IDs.
+External eggNOG annotations with original unscoped IDs remain usable only when
+those IDs identify a single protein across **all** input genomes. Ambiguous IDs
+stop the run with an explanation; use the scoped candidate FASTA to annotate them.
+
+Merged GFF files also scope contig names when they occur in multiple genomes.
+The `genome`, `original_contig` and `original_orf` attributes preserve the original
+coordinate system. Use the source assembly contig names for extraction, or rename
+assembly headers to the corresponding scoped names when importing this merged
+GFF into a viewer. Anvi'o still requires mapping exported labels to that target
+database's integer gene IDs.
+
+## Search cache and failures
+
+With `--keep_tblout`, Efesto retains completed HMMER tables and adjacent
+`.cache.json` files. Reuse requires matching protein/profile contents, score
+threshold, HMMER executable and thread setting, plus a complete, unchanged table.
+Legacy caches without metadata are recomputed. An HMMER failure stops annotation
+with a nonzero exit status; a partial table is never installed as a valid cache.
+Fix the error and rerun to reuse any completed, valid searches. Use a fresh output
+directory when comparing runs so older result files cannot be mistaken for new ones.

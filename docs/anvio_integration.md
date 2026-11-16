@@ -16,6 +16,9 @@ efesto --faa_dir proteins/ --gff_dir gff/ --out efesto_out --anvio
 The column name `gene_callers_id` does **not** mean that Efesto has converted
 protein labels to the integer IDs in an anvi'o contigs database. It normally
 contains the original ORF label, or a mapped Bakta locus tag when available.
+When labels repeat across proteins, Efesto uses `genome::original_orf` in both
+exports and records the correspondence in `Efesto-protein-id-map.tsv`. Match
+using genome and coordinates; a repeated original ORF name is not a unique key.
 
 Export the gene calls from the actual target database and build a mapping using
 matching contigs, coordinates and strand:
