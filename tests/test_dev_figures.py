@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+# Copyright (c) 2026 Efesto contributors.
+
 """Private exports must preserve counts, grouping, and coordinate uncertainty."""
 import csv
 import importlib.util

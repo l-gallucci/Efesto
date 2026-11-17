@@ -1,5 +1,5 @@
 site_name: Efesto
-site_description: HMM annotation of metal cycling, acquisition and resistance genes
+site_description: Metal-related gene annotation integrating profile HMMs from multiple sources
 site_url: https://l-gallucci.github.io/Efesto/
 repo_url: https://github.com/l-gallucci/Efesto
 repo_name: GitHub
@@ -24,7 +24,7 @@ nav:
   - Results:
       - Output files: output_formats.md
       - Interpretation: interpretation.md
-      - Confidence scoring: cluster_confidence_scoring.md
+      - Evidence and decisions: evidence.md
       - Visualisation: visualisation.md
   - HMM library:
       - Catalog and categories: hmm_library.md
@@ -38,6 +38,7 @@ nav:
       - antiSMASH: antismash_bgc.md
       - Anvi'o: anvio_integration.md
   - Project:
+      - Scope and changes vs FeGenie: comparison.md
       - Performance and memory: performance.md
       - Architecture: architecture.md
       - References: references.md

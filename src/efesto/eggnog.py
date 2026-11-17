@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+# Copyright (c) 2026 Efesto contributors.
+
 """eggNOG-mapper tier-2 confirmation: parsing, running, and comparison logic.
 
 Used only for HMM hits on models flagged needs_confirmation in the registry
@@ -13,6 +16,8 @@ import subprocess
 import sys
 from pathlib import Path
 
+
+from efesto._external import python_script_command
 
 def _parse_eggnog_annotations(path):
     """
@@ -88,7 +93,7 @@ def confirm_hit(expected_gene_name, expected_kos, eggnog_row):
       - eggnog_row is None (no eggNOG hit for this ORF)
       - eggNOG assigned no KEGG_ko and no Preferred_name (uninformative hit)
       - expected_kos is empty (registry has no KO for this model — can't compare)
-    Never penalizes absence of data — same policy as uniop_weight's fallback.
+    Missing data is not a contradiction.
     """
     if eggnog_row is None:
         return "neutral"
@@ -155,7 +160,12 @@ def run_eggnog(flagged_faa_path, out_dir, eggnog_path="emapper.py",
     out_dir.mkdir(parents=True, exist_ok=True)
     prefix = "efesto_flagged"
 
-    cmd = ["python3", str(eggnog_path),
+    try:
+        command = python_script_command(eggnog_path)
+    except OSError as error:
+        print(f"  [WARN] Could not run eggNOG-mapper: {error}", file=sys.stderr)
+        return None
+    cmd = command + [
            "-i", str(flagged_faa_path),
            "--itype", "proteins",
            "-o", prefix,

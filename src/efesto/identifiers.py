@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+# Copyright (c) 2026 Efesto contributors.
+
 """Genome-scoped protein identities for combined tool inputs and exports."""
 
 import csv

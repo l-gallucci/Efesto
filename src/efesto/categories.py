@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+# Copyright (c) 2026 Efesto contributors.
+
 """Canonical category names and aliases for existing libraries/configuration."""
 
 LEGACY_CATEGORY_NAMES = {'iron_acquisition-iron_transport': 'IronAcquisition-Transport',

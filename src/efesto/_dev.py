@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+# Copyright (c) 2026 Efesto contributors.
+
 """Private benchmark adapters. Never imported by the normal command line."""
 
 import argparse

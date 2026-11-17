@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: AGPL-3.0-only
+# Copyright (c) 2026 Efesto contributors.
+
 """Offline development workflow: grouped nested HMM calibration, never deployment.
 
 Inputs are curated FASTA and TSV (id,label,group,partition,evidence,reference).

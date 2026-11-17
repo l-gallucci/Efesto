@@ -96,7 +96,6 @@ For internal eggNOG-mapper execution, install it in a compatible environment and
 supply `--eggnog_db_dir`. Structural checks additionally require a curated
 Foldseek reference database and ProstT5 weights; topology checks require Phobius.
 See the [command reference](command-reference.md) for paths and options and
-[confidence scoring](cluster_confidence_scoring.md) for the scope of each check.
+[separate evidence](evidence.md) for the scope of each check.
 
-A missing optional result generally contributes a neutral score, not supporting
-evidence. Inspect the run log for warnings and tool failures.
+Missing optional results are reported explicitly and are not supporting evidence. Inspect the run log for warnings and tool failures.

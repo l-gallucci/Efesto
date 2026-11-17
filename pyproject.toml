@@ -7,8 +7,8 @@ name = "efesto"
 version = "1.0.0"
 description = "Efesto: HMM-based annotation of metal cycling and resistance genes in genomes and metagenomes"
 readme = "README.md"
-license = "MIT AND LicenseRef-ThirdParty-Models"
-license-files = ["LICENSE", "THIRD_PARTY_NOTICES.md"]
+license = "AGPL-3.0-only AND LicenseRef-ThirdParty-Models"
+license-files = ["LICENSE", "LICENSES/*.txt", "LICENSES/*.md", "THIRD_PARTY_NOTICES.md", "hmm_library/LICENSES.md"]
 requires-python = ">=3.9"
 
 # HMMER and other executables are installed separately. Gene calling is an

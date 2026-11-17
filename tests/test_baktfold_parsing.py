@@ -1,6 +1,9 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+# Copyright (c) 2026 Efesto contributors.
+
 """Tests for baktfold.py — Foldseek results parsing, confirm_struct_hit verdicts."""
 
-from efesto.baktfold import _parse_foldseek_results, confirm_struct_hit
+from efesto.baktfold import _parse_foldseek_results
 
 
 def _write_m8(tmp_path, data_lines):
@@ -56,28 +59,3 @@ class TestParseFoldseekResults:
         line = _row(bits="not_a_number")
         p.write_text(line + "\n")
         assert _parse_foldseek_results(str(p)) == {}
-
-
-class TestConfirmStructHit:
-    def test_matching_target_name_confirmed(self):
-        row = {"target": "MtrA_ref_1zzz", "bits": 450.0, "evalue": 1e-50}
-        assert confirm_struct_hit("MtrA", row) == "confirmed"
-
-    def test_case_insensitive_match(self):
-        row = {"target": "mtra_ref_1zzz", "bits": 450.0, "evalue": 1e-50}
-        assert confirm_struct_hit("MtrA", row) == "confirmed"
-
-    def test_different_target_name_contradicted(self):
-        row = {"target": "MtoA_ref_2yyy", "bits": 400.0, "evalue": 1e-40}
-        assert confirm_struct_hit("MtrA", row) == "contradicted"
-
-    def test_no_foldseek_row_is_neutral(self):
-        assert confirm_struct_hit("MtrA", None) == "neutral"
-
-    def test_empty_expected_gene_name_is_neutral(self):
-        row = {"target": "MtrA_ref_1zzz", "bits": 450.0, "evalue": 1e-50}
-        assert confirm_struct_hit("", row) == "neutral"
-
-    def test_empty_target_is_neutral(self):
-        row = {"target": "", "bits": 0.0, "evalue": 1.0}
-        assert confirm_struct_hit("MtrA", row) == "neutral"

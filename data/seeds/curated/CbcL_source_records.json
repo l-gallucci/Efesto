@@ -1,0 +1,6194 @@
+{
+  "retrieved_on": "2026-11-16",
+  "providers": [
+    "UniProt",
+    "NCBI/INSDC"
+  ],
+  "attribution": "UniProt Consortium and the original sequence submitters; NCBI/INSDC contributors",
+  "source_terms": [
+    "https://www.uniprot.org/help/license",
+    "https://www.ncbi.nlm.nih.gov/home/about/policies/"
+  ],
+  "records": [
+    {
+      "accession": "Q74GH2",
+      "ncbi_protein_accession": "AAR33608.1",
+      "uniprot_url": "https://www.uniprot.org/uniprotkb/Q74GH2/entry",
+      "ncbi_url": "https://www.ncbi.nlm.nih.gov/protein/AAR33608.1",
+      "sequence_sha256": "c9597031bfeee9efea3b8b9da1c7455df3748ca1953924eb5181430b508823d0",
+      "uniprot_and_ncbi_sequences_identical": true,
+      "uniprot_record": {
+        "entryType": "UniProtKB unreviewed (TrEMBL)",
+        "primaryAccession": "Q74GH2",
+        "uniProtkbId": "Q74GH2_GEOSL",
+        "entryAudit": {
+          "firstPublicDate": "2004-07-05",
+          "lastAnnotationUpdateDate": "2026-11-04",
+          "lastSequenceUpdateDate": "2004-07-05",
+          "entryVersion": 99,
+          "sequenceVersion": 1
+        },
+        "annotationScore": 1.0,
+        "organism": {
+          "scientificName": "Geobacter sulfurreducens (strain ATCC 51573 / DSM 12127 / PCA)",
+          "taxonId": 243231,
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000313",
+              "source": "EMBL",
+              "id": "AAR33608.1"
+            },
+            {
+              "evidenceCode": "ECO:0000313",
+              "source": "Proteomes",
+              "id": "UP000000577"
+            }
+          ],
+          "lineage": [
+            "Bacteria",
+            "Pseudomonadati",
+            "Thermodesulfobacteriota",
+            "Desulfuromonadia",
+            "Geobacterales",
+            "Geobacteraceae",
+            "Geobacter"
+          ]
+        },
+        "proteinExistence": "4: Predicted",
+        "proteinDescription": {
+          "submissionNames": [
+            {
+              "fullName": {
+                "evidences": [
+                  {
+                    "evidenceCode": "ECO:0000313",
+                    "source": "EMBL",
+                    "id": "AAR33608.1"
+                  }
+                ],
+                "value": "Cytochrome c, and cytochrome b"
+              }
+            }
+          ]
+        },
+        "genes": [
+          {
+            "orderedLocusNames": [
+              {
+                "evidences": [
+                  {
+                    "evidenceCode": "ECO:0000313",
+                    "source": "EMBL",
+                    "id": "AAR33608.1"
+                  }
+                ],
+                "value": "GSU0274"
+              }
+            ]
+          }
+        ],
+        "comments": [
+          {
+            "commentType": "COFACTOR",
+            "cofactors": [
+              {
+                "name": "heme c",
+                "evidences": [
+                  {
+                    "evidenceCode": "ECO:0000256",
+                    "source": "ARBA",
+                    "id": "ARBA00001926"
+                  }
+                ],
+                "cofactorCrossReference": {
+                  "database": "ChEBI",
+                  "id": "CHEBI:61717"
+                }
+              }
+            ]
+          },
+          {
+            "commentType": "SUBCELLULAR LOCATION",
+            "subcellularLocations": [
+              {
+                "location": {
+                  "evidences": [
+                    {
+                      "evidenceCode": "ECO:0000256",
+                      "source": "ARBA",
+                      "id": "ARBA00004196"
+                    }
+                  ],
+                  "value": "Cell envelope",
+                  "id": "SL-0036"
+                }
+              }
+            ]
+          }
+        ],
+        "features": [
+          {
+            "type": "Signal",
+            "location": {
+              "start": {
+                "value": 1,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 24,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "SignalP"
+              }
+            ]
+          },
+          {
+            "type": "Chain",
+            "location": {
+              "start": {
+                "value": 25,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 619,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "SignalP"
+              }
+            ],
+            "featureId": "PRO_5052592266"
+          },
+          {
+            "type": "Transmembrane",
+            "location": {
+              "start": {
+                "value": 286,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 314,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "Helical",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ]
+          },
+          {
+            "type": "Transmembrane",
+            "location": {
+              "start": {
+                "value": 351,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 373,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "Helical",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ]
+          },
+          {
+            "type": "Transmembrane",
+            "location": {
+              "start": {
+                "value": 399,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 421,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "Helical",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ]
+          },
+          {
+            "type": "Transmembrane",
+            "location": {
+              "start": {
+                "value": 476,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 495,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "Helical",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ]
+          },
+          {
+            "type": "Transmembrane",
+            "location": {
+              "start": {
+                "value": 507,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 532,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "Helical",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ]
+          },
+          {
+            "type": "Transmembrane",
+            "location": {
+              "start": {
+                "value": 589,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 614,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "Helical",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ]
+          },
+          {
+            "type": "Domain",
+            "location": {
+              "start": {
+                "value": 98,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 167,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "Tetraheme cytochrome",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000259",
+                "source": "Pfam",
+                "id": "PF14537"
+              }
+            ]
+          }
+        ],
+        "keywords": [
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "ARBA",
+                "id": "ARBA00022982"
+              }
+            ],
+            "id": "KW-0249",
+            "category": "Biological process",
+            "name": "Electron transport"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "ARBA",
+                "id": "ARBA00022617"
+              }
+            ],
+            "id": "KW-0349",
+            "category": "Ligand",
+            "name": "Heme"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "ARBA",
+                "id": "ARBA00023004"
+              }
+            ],
+            "id": "KW-0408",
+            "category": "Ligand",
+            "name": "Iron"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ],
+            "id": "KW-0472",
+            "category": "Cellular component",
+            "name": "Membrane"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "ARBA",
+                "id": "ARBA00022723"
+              }
+            ],
+            "id": "KW-0479",
+            "category": "Ligand",
+            "name": "Metal-binding"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000313",
+                "source": "Proteomes",
+                "id": "UP000000577"
+              }
+            ],
+            "id": "KW-1185",
+            "category": "Technical term",
+            "name": "Reference proteome"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "SignalP"
+              }
+            ],
+            "id": "KW-0732",
+            "category": "Domain",
+            "name": "Signal"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ],
+            "id": "KW-0812",
+            "category": "Domain",
+            "name": "Transmembrane"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ],
+            "id": "KW-1133",
+            "category": "Domain",
+            "name": "Transmembrane helix"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "ARBA",
+                "id": "ARBA00022448"
+              }
+            ],
+            "id": "KW-0813",
+            "category": "Biological process",
+            "name": "Transport"
+          }
+        ],
+        "references": [
+          {
+            "referenceNumber": 1,
+            "citation": {
+              "id": "14671304",
+              "citationType": "journal article",
+              "authors": [
+                "Methe B.A.",
+                "Nelson K.E.",
+                "Eisen J.A.",
+                "Paulsen I.T.",
+                "Nelson W.",
+                "Heidelberg J.F.",
+                "Wu D.",
+                "Wu M.",
+                "Ward N.",
+                "Beanan M.J.",
+                "Dodson R.J.",
+                "Madupu R.",
+                "Brinkac L.M.",
+                "Daugherty S.C.",
+                "DeBoy R.T.",
+                "Durkin A.S.",
+                "Gwinn M.",
+                "Kolonay J.F.",
+                "Sullivan S.A.",
+                "Haft D.H.",
+                "Selengut J.",
+                "Davidsen T.M.",
+                "Zafar N.",
+                "White O.",
+                "Tran B.",
+                "Romero C.",
+                "Forberger H.A.",
+                "Weidman J.",
+                "Khouri H.",
+                "Feldblyum T.V.",
+                "Utterback T.R.",
+                "Van Aken S.E.",
+                "Lovley D.R.",
+                "Fraser C.M."
+              ],
+              "citationCrossReferences": [
+                {
+                  "database": "PubMed",
+                  "id": "14671304"
+                },
+                {
+                  "database": "DOI",
+                  "id": "10.1126/science.1088727"
+                }
+              ],
+              "title": "Genome of Geobacter sulfurreducens: metal reduction in subsurface environments.",
+              "publicationDate": "2003",
+              "journal": "Science",
+              "firstPage": "1967",
+              "lastPage": "1969",
+              "volume": "302"
+            },
+            "referencePositions": [
+              "NUCLEOTIDE SEQUENCE [LARGE SCALE GENOMIC DNA]"
+            ],
+            "referenceComments": [
+              {
+                "evidences": [
+                  {
+                    "evidenceCode": "ECO:0000313",
+                    "source": "Proteomes",
+                    "id": "UP000000577"
+                  }
+                ],
+                "value": "ATCC 51573 / DSM 12127 / PCA",
+                "type": "STRAIN"
+              }
+            ],
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000313",
+                "source": "EMBL",
+                "id": "AAR33608.1"
+              },
+              {
+                "evidenceCode": "ECO:0000313",
+                "source": "Proteomes",
+                "id": "UP000000577"
+              }
+            ]
+          },
+          {
+            "referenceNumber": 2,
+            "citation": {
+              "id": "22967216",
+              "citationType": "journal article",
+              "authors": [
+                "Butler J.E.",
+                "Young N.D.",
+                "Aklujkar M.",
+                "Lovley D.R."
+              ],
+              "citationCrossReferences": [
+                {
+                  "database": "PubMed",
+                  "id": "22967216"
+                },
+                {
+                  "database": "DOI",
+                  "id": "10.1186/1471-2164-13-471"
+                }
+              ],
+              "title": "Comparative genomic analysis of Geobacter sulfurreducens KN400, a strain with enhanced capacity for extracellular electron transfer and electricity production.",
+              "publicationDate": "2012",
+              "journal": "BMC Genomics",
+              "firstPage": "471",
+              "lastPage": "471",
+              "volume": "13"
+            },
+            "referencePositions": [
+              "NUCLEOTIDE SEQUENCE [LARGE SCALE GENOMIC DNA]"
+            ],
+            "referenceComments": [
+              {
+                "evidences": [
+                  {
+                    "evidenceCode": "ECO:0000313",
+                    "source": "Proteomes",
+                    "id": "UP000000577"
+                  }
+                ],
+                "value": "ATCC 51573 / DSM 12127 / PCA",
+                "type": "STRAIN"
+              }
+            ],
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000313",
+                "source": "EMBL",
+                "id": "AAR33608.1"
+              },
+              {
+                "evidenceCode": "ECO:0000313",
+                "source": "Proteomes",
+                "id": "UP000000577"
+              }
+            ]
+          }
+        ],
+        "uniProtKBCrossReferences": [
+          {
+            "database": "EMBL",
+            "id": "AE017180",
+            "properties": [
+              {
+                "key": "ProteinId",
+                "value": "AAR33608.1"
+              },
+              {
+                "key": "Status",
+                "value": "-"
+              },
+              {
+                "key": "MoleculeType",
+                "value": "Genomic_DNA"
+              }
+            ]
+          },
+          {
+            "database": "RefSeq",
+            "id": "WP_010940947.1",
+            "properties": [
+              {
+                "key": "NucleotideSequenceId",
+                "value": "NC_002939.5"
+              }
+            ]
+          },
+          {
+            "database": "AlphaFoldDB",
+            "id": "Q74GH2",
+            "properties": [
+              {
+                "key": "Description",
+                "value": "-"
+              }
+            ]
+          },
+          {
+            "database": "STRING",
+            "id": "243231.GSU0274",
+            "properties": [
+              {
+                "key": "Description",
+                "value": "-"
+              }
+            ]
+          },
+          {
+            "database": "EnsemblBacteria",
+            "id": "AAR33608",
+            "properties": [
+              {
+                "key": "ProteinId",
+                "value": "AAR33608"
+              },
+              {
+                "key": "GeneId",
+                "value": "GSU0274"
+              }
+            ]
+          },
+          {
+            "database": "KEGG",
+            "id": "gsu:GSU0274",
+            "properties": [
+              {
+                "key": "Description",
+                "value": "-"
+              }
+            ]
+          },
+          {
+            "database": "PATRIC",
+            "id": "fig|243231.5.peg.273",
+            "properties": [
+              {
+                "key": "GeneDesignation",
+                "value": "-"
+              }
+            ]
+          },
+          {
+            "database": "eggNOG",
+            "id": "COG2864",
+            "properties": [
+              {
+                "key": "ToxonomicScope",
+                "value": "Bacteria"
+              }
+            ]
+          },
+          {
+            "database": "HOGENOM",
+            "id": "CLU_021306_0_0_7",
+            "properties": [
+              {
+                "key": "Description",
+                "value": "-"
+              }
+            ]
+          },
+          {
+            "database": "InParanoid",
+            "id": "Q74GH2",
+            "properties": [
+              {
+                "key": "Description",
+                "value": "-"
+              }
+            ]
+          },
+          {
+            "database": "OMA",
+            "id": "AANCVDC",
+            "properties": [
+              {
+                "key": "Fingerprint",
+                "value": "-"
+              }
+            ]
+          },
+          {
+            "database": "OrthoDB",
+            "id": "9814800at2",
+            "properties": [
+              {
+                "key": "Description",
+                "value": "-"
+              }
+            ]
+          },
+          {
+            "database": "Proteomes",
+            "id": "UP000000577",
+            "properties": [
+              {
+                "key": "Component",
+                "value": "Chromosome"
+              }
+            ]
+          },
+          {
+            "database": "GO",
+            "id": "GO:0030313",
+            "properties": [
+              {
+                "key": "GoTerm",
+                "value": "C:cell envelope"
+              },
+              {
+                "key": "GoEvidenceType",
+                "value": "IEA:UniProtKB-SubCell"
+              }
+            ]
+          },
+          {
+            "database": "GO",
+            "id": "GO:0016491",
+            "properties": [
+              {
+                "key": "GoTerm",
+                "value": "F:oxidoreductase activity"
+              },
+              {
+                "key": "GoEvidenceType",
+                "value": "IBA:GO_Central"
+              }
+            ]
+          },
+          {
+            "database": "Gene3D",
+            "id": "3.90.10.10",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "Cytochrome C3"
+              },
+              {
+                "key": "MatchStatus",
+                "value": "1"
+              }
+            ]
+          },
+          {
+            "database": "Gene3D",
+            "id": "1.10.1130.10",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "Flavocytochrome C3, Chain A"
+              },
+              {
+                "key": "MatchStatus",
+                "value": "1"
+              }
+            ]
+          },
+          {
+            "database": "Gene3D",
+            "id": "1.20.950.20",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "Transmembrane di-heme cytochromes, Chain C"
+              },
+              {
+                "key": "MatchStatus",
+                "value": "1"
+              }
+            ]
+          },
+          {
+            "database": "InterPro",
+            "id": "IPR036280",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "Multihaem_cyt_sf"
+              }
+            ]
+          },
+          {
+            "database": "InterPro",
+            "id": "IPR012286",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "Tetraheme_cytochrome"
+              }
+            ]
+          },
+          {
+            "database": "PANTHER",
+            "id": "PTHR35038",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "DISSIMILATORY SULFITE REDUCTASE SIRA"
+              },
+              {
+                "key": "MatchStatus",
+                "value": "1"
+              }
+            ]
+          },
+          {
+            "database": "PANTHER",
+            "id": "PTHR35038:SF6",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "SURFACE LOCALIZED DECAHEME CYTOCHROME C LIPOPROTEIN"
+              },
+              {
+                "key": "MatchStatus",
+                "value": "1"
+              }
+            ]
+          },
+          {
+            "database": "Pfam",
+            "id": "PF14537",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "Cytochrom_c3_2"
+              },
+              {
+                "key": "MatchStatus",
+                "value": "1"
+              }
+            ]
+          },
+          {
+            "database": "SUPFAM",
+            "id": "SSF48695",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "Multiheme cytochromes"
+              },
+              {
+                "key": "MatchStatus",
+                "value": "1"
+              }
+            ]
+          }
+        ],
+        "sequence": {
+          "value": "MLSTFLRLFPAFLLFVTLAGTAAAESGMAIDPATCLGCHSNKISAAAFSASVHGKNACTSCHVEITDLTKHMKGEVKVEKVRCERCHKKENAEHYSSVHAQKDVRCADCHTDIHTHSYWNKDKRKVVAKCIQCHDKEAGYRNSIHGKGVAAGNMDSAACNDCHNLHDIKPLGDPKSKENREFHTKVCLKCHADEKMMERNNVFTVAVKTYMDSYHGKNYRLGFPEKVAGCADCHTAHGVLPAKDPNSSVNPQNLVATCAKCHPKATPLFTKFYSHGELGDREKYPILYYTFIAMTGLLVSTFAVFWIHTLLWMFRGFVENREKQQALIHGHAEHHIPDGHKVYRRFKRRHIFLHLLVIISFLILSLSGLPLKFSSQHWAKFMMDHIFGHSANAALVHRIGAGITFVYFAGALLLSFHFLFVRKDIKGNWLQRMFGPDSLMPNFRDIKDVAGMVRWFLFRGPKPTFERWTYWEKFDFIAVFWGMFAIGGSGLMLWFPEFFGSFLPGWMFNVATIVHSDEALLATGFIFTVHFFNTHGRPEKFPMDFVIFNGQMPKHEFIEERGDQWKRYEELGITEEFAAKKTSGVVYDFIVKGFGFTAVVIGLTLVVLMLYAFLSGGAH",
+          "length": 619,
+          "molWeight": 70260,
+          "crc64": "12CE553CC08B6BA0",
+          "md5": "56C42360C938F4511FF154D1960D8B5C"
+        },
+        "extraAttributes": {
+          "countByCommentType": {
+            "COFACTOR": 1,
+            "SUBCELLULAR LOCATION": 1
+          },
+          "countByFeatureType": {
+            "Signal": 1,
+            "Chain": 1,
+            "Transmembrane": 6,
+            "Domain": 1
+          },
+          "uniParcId": "UPI000022E157"
+        }
+      }
+    },
+    {
+      "accession": "A0A0M4CZW0",
+      "ncbi_protein_accession": "ALC15014.1",
+      "uniprot_url": "https://www.uniprot.org/uniprotkb/A0A0M4CZW0/entry",
+      "ncbi_url": "https://www.ncbi.nlm.nih.gov/protein/ALC15014.1",
+      "sequence_sha256": "167caae2bcd045682e5e056ada71a56ff50f5c44b3f1778acb52496bed62814d",
+      "uniprot_and_ncbi_sequences_identical": true,
+      "uniprot_record": {
+        "entryType": "UniProtKB unreviewed (TrEMBL)",
+        "primaryAccession": "A0A0M4CZW0",
+        "uniProtkbId": "A0A0M4CZW0_9BACT",
+        "entryAudit": {
+          "firstPublicDate": "2015-12-09",
+          "lastAnnotationUpdateDate": "2026-11-04",
+          "lastSequenceUpdateDate": "2015-12-09",
+          "entryVersion": 38,
+          "sequenceVersion": 1
+        },
+        "annotationScore": 1.0,
+        "organism": {
+          "scientificName": "Desulfuromonas soudanensis",
+          "taxonId": 1603606,
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000313",
+              "source": "EMBL",
+              "id": "ALC15014.1"
+            },
+            {
+              "evidenceCode": "ECO:0000313",
+              "source": "Proteomes",
+              "id": "UP000057158"
+            }
+          ],
+          "lineage": [
+            "Bacteria",
+            "Pseudomonadati",
+            "Thermodesulfobacteriota",
+            "Desulfuromonadia",
+            "Desulfuromonadales",
+            "Desulfuromonadaceae",
+            "Desulfuromonas"
+          ]
+        },
+        "proteinExistence": "4: Predicted",
+        "proteinDescription": {
+          "submissionNames": [
+            {
+              "fullName": {
+                "evidences": [
+                  {
+                    "evidenceCode": "ECO:0000313",
+                    "source": "EMBL",
+                    "id": "ALC15014.1"
+                  }
+                ],
+                "value": "Putative c-and b-type cytochrome L"
+              }
+            }
+          ]
+        },
+        "genes": [
+          {
+            "geneName": {
+              "evidences": [
+                {
+                  "evidenceCode": "ECO:0000313",
+                  "source": "EMBL",
+                  "id": "ALC15014.1"
+                }
+              ],
+              "value": "cbcL"
+            },
+            "orfNames": [
+              {
+                "evidences": [
+                  {
+                    "evidenceCode": "ECO:0000313",
+                    "source": "EMBL",
+                    "id": "ALC15014.1"
+                  }
+                ],
+                "value": "DSOUD_0214"
+              }
+            ]
+          }
+        ],
+        "comments": [
+          {
+            "commentType": "COFACTOR",
+            "cofactors": [
+              {
+                "name": "heme c",
+                "evidences": [
+                  {
+                    "evidenceCode": "ECO:0000256",
+                    "source": "ARBA",
+                    "id": "ARBA00001926"
+                  }
+                ],
+                "cofactorCrossReference": {
+                  "database": "ChEBI",
+                  "id": "CHEBI:61717"
+                }
+              }
+            ]
+          },
+          {
+            "commentType": "SUBCELLULAR LOCATION",
+            "subcellularLocations": [
+              {
+                "location": {
+                  "evidences": [
+                    {
+                      "evidenceCode": "ECO:0000256",
+                      "source": "ARBA",
+                      "id": "ARBA00004196"
+                    }
+                  ],
+                  "value": "Cell envelope",
+                  "id": "SL-0036"
+                }
+              }
+            ]
+          }
+        ],
+        "features": [
+          {
+            "type": "Signal",
+            "location": {
+              "start": {
+                "value": 1,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 24,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "SignalP"
+              }
+            ]
+          },
+          {
+            "type": "Chain",
+            "location": {
+              "start": {
+                "value": 25,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 617,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "SignalP"
+              }
+            ],
+            "featureId": "PRO_5005791969"
+          },
+          {
+            "type": "Transmembrane",
+            "location": {
+              "start": {
+                "value": 286,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 314,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "Helical",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ]
+          },
+          {
+            "type": "Transmembrane",
+            "location": {
+              "start": {
+                "value": 351,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 374,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "Helical",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ]
+          },
+          {
+            "type": "Transmembrane",
+            "location": {
+              "start": {
+                "value": 394,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 420,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "Helical",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ]
+          },
+          {
+            "type": "Transmembrane",
+            "location": {
+              "start": {
+                "value": 475,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 494,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "Helical",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ]
+          },
+          {
+            "type": "Transmembrane",
+            "location": {
+              "start": {
+                "value": 506,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 531,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "Helical",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ]
+          },
+          {
+            "type": "Transmembrane",
+            "location": {
+              "start": {
+                "value": 588,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 613,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "Helical",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ]
+          },
+          {
+            "type": "Domain",
+            "location": {
+              "start": {
+                "value": 98,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 192,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "Tetraheme cytochrome",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000259",
+                "source": "Pfam",
+                "id": "PF14537"
+              }
+            ]
+          }
+        ],
+        "keywords": [
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "ARBA",
+                "id": "ARBA00022982"
+              }
+            ],
+            "id": "KW-0249",
+            "category": "Biological process",
+            "name": "Electron transport"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "ARBA",
+                "id": "ARBA00022617"
+              }
+            ],
+            "id": "KW-0349",
+            "category": "Ligand",
+            "name": "Heme"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "ARBA",
+                "id": "ARBA00023004"
+              }
+            ],
+            "id": "KW-0408",
+            "category": "Ligand",
+            "name": "Iron"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ],
+            "id": "KW-0472",
+            "category": "Cellular component",
+            "name": "Membrane"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "ARBA",
+                "id": "ARBA00022723"
+              }
+            ],
+            "id": "KW-0479",
+            "category": "Ligand",
+            "name": "Metal-binding"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000313",
+                "source": "Proteomes",
+                "id": "UP000057158"
+              }
+            ],
+            "id": "KW-1185",
+            "category": "Technical term",
+            "name": "Reference proteome"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "SignalP"
+              }
+            ],
+            "id": "KW-0732",
+            "category": "Domain",
+            "name": "Signal"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ],
+            "id": "KW-0812",
+            "category": "Domain",
+            "name": "Transmembrane"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ],
+            "id": "KW-1133",
+            "category": "Domain",
+            "name": "Transmembrane helix"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "ARBA",
+                "id": "ARBA00022448"
+              }
+            ],
+            "id": "KW-0813",
+            "category": "Biological process",
+            "name": "Transport"
+          }
+        ],
+        "references": [
+          {
+            "referenceNumber": 1,
+            "citation": {
+              "id": "CI-1071VB29DO8A8",
+              "citationType": "submission",
+              "authors": [
+                "Badalamenti J.P.",
+                "Summers Z.M.",
+                "Gralnick J.A.",
+                "Bond D.R."
+              ],
+              "title": "Isolation and Genomic Characterization of a Novel Halophilic Metal-Reducing Deltaproteobacterium from the Deep Subsurface.",
+              "publicationDate": "JUL-2015",
+              "submissionDatabase": "EMBL/GenBank/DDBJ databases"
+            },
+            "referencePositions": [
+              "NUCLEOTIDE SEQUENCE [LARGE SCALE GENOMIC DNA]"
+            ],
+            "referenceComments": [
+              {
+                "evidences": [
+                  {
+                    "evidenceCode": "ECO:0000313",
+                    "source": "EMBL",
+                    "id": "ALC15014.1"
+                  },
+                  {
+                    "evidenceCode": "ECO:0000313",
+                    "source": "Proteomes",
+                    "id": "UP000057158"
+                  }
+                ],
+                "value": "WTL",
+                "type": "STRAIN"
+              }
+            ],
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000313",
+                "source": "EMBL",
+                "id": "ALC15014.1"
+              },
+              {
+                "evidenceCode": "ECO:0000313",
+                "source": "Proteomes",
+                "id": "UP000057158"
+              }
+            ]
+          }
+        ],
+        "uniProtKBCrossReferences": [
+          {
+            "database": "EMBL",
+            "id": "CP010802",
+            "properties": [
+              {
+                "key": "ProteinId",
+                "value": "ALC15014.1"
+              },
+              {
+                "key": "Status",
+                "value": "-"
+              },
+              {
+                "key": "MoleculeType",
+                "value": "Genomic_DNA"
+              }
+            ]
+          },
+          {
+            "database": "RefSeq",
+            "id": "WP_053549256.1",
+            "properties": [
+              {
+                "key": "NucleotideSequenceId",
+                "value": "NZ_CP010802.1"
+              }
+            ]
+          },
+          {
+            "database": "AlphaFoldDB",
+            "id": "A0A0M4CZW0",
+            "properties": [
+              {
+                "key": "Description",
+                "value": "-"
+              }
+            ]
+          },
+          {
+            "database": "STRING",
+            "id": "1603606.DSOUD_0214",
+            "properties": [
+              {
+                "key": "Description",
+                "value": "-"
+              }
+            ]
+          },
+          {
+            "database": "KEGG",
+            "id": "des:DSOUD_0214",
+            "properties": [
+              {
+                "key": "Description",
+                "value": "-"
+              }
+            ]
+          },
+          {
+            "database": "PATRIC",
+            "id": "fig|1603606.3.peg.239",
+            "properties": [
+              {
+                "key": "GeneDesignation",
+                "value": "-"
+              }
+            ]
+          },
+          {
+            "database": "OrthoDB",
+            "id": "9814800at2",
+            "properties": [
+              {
+                "key": "Description",
+                "value": "-"
+              }
+            ]
+          },
+          {
+            "database": "Proteomes",
+            "id": "UP000057158",
+            "properties": [
+              {
+                "key": "Component",
+                "value": "Chromosome"
+              }
+            ]
+          },
+          {
+            "database": "GO",
+            "id": "GO:0030313",
+            "properties": [
+              {
+                "key": "GoTerm",
+                "value": "C:cell envelope"
+              },
+              {
+                "key": "GoEvidenceType",
+                "value": "IEA:UniProtKB-SubCell"
+              }
+            ]
+          },
+          {
+            "database": "GO",
+            "id": "GO:0016491",
+            "properties": [
+              {
+                "key": "GoTerm",
+                "value": "F:oxidoreductase activity"
+              },
+              {
+                "key": "GoEvidenceType",
+                "value": "IEA:TreeGrafter"
+              }
+            ]
+          },
+          {
+            "database": "CDD",
+            "id": "cd08168",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "Cytochrom_C3"
+              },
+              {
+                "key": "MatchStatus",
+                "value": "1"
+              }
+            ]
+          },
+          {
+            "database": "Gene3D",
+            "id": "3.90.10.10",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "Cytochrome C3"
+              },
+              {
+                "key": "MatchStatus",
+                "value": "1"
+              }
+            ]
+          },
+          {
+            "database": "Gene3D",
+            "id": "1.10.1130.10",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "Flavocytochrome C3, Chain A"
+              },
+              {
+                "key": "MatchStatus",
+                "value": "1"
+              }
+            ]
+          },
+          {
+            "database": "Gene3D",
+            "id": "1.20.950.20",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "Transmembrane di-heme cytochromes, Chain C"
+              },
+              {
+                "key": "MatchStatus",
+                "value": "1"
+              }
+            ]
+          },
+          {
+            "database": "InterPro",
+            "id": "IPR036280",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "Multihaem_cyt_sf"
+              }
+            ]
+          },
+          {
+            "database": "InterPro",
+            "id": "IPR012286",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "Tetraheme_cytochrome"
+              }
+            ]
+          },
+          {
+            "database": "PANTHER",
+            "id": "PTHR35038",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "DISSIMILATORY SULFITE REDUCTASE SIRA"
+              },
+              {
+                "key": "MatchStatus",
+                "value": "1"
+              }
+            ]
+          },
+          {
+            "database": "PANTHER",
+            "id": "PTHR35038:SF6",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "SURFACE LOCALIZED DECAHEME CYTOCHROME C LIPOPROTEIN"
+              },
+              {
+                "key": "MatchStatus",
+                "value": "1"
+              }
+            ]
+          },
+          {
+            "database": "Pfam",
+            "id": "PF14537",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "Cytochrom_c3_2"
+              },
+              {
+                "key": "MatchStatus",
+                "value": "1"
+              }
+            ]
+          },
+          {
+            "database": "SUPFAM",
+            "id": "SSF48695",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "Multiheme cytochromes"
+              },
+              {
+                "key": "MatchStatus",
+                "value": "1"
+              }
+            ]
+          }
+        ],
+        "sequence": {
+          "value": "MLKNLLRLLTLVCLVSFLTPAAQAAESMGIAPETCLECHDDVVSASDFSNSVHAANACTSCHVEITDLDKHSDGELIPGPVKCVRCHKKETAEHYSSVHMLNDITCAACHDDIHTLTPWKGDKRKVVDKCVQCHDAEEVYRNSSHGKALAEGNQDSAACNDCHNLHEINALGDPDSHANREFHTKVCMTCHSNEEMMARNGVFNVAVKTYMESYHGKNYSLGFPDKTAGCADCHTAHSVLPESDPQSSVNPANLVTTCAQCHPGSTPAFVQYYPHGEYTDRENYPLLYWTFIAMTGLLVGTFGVFWIHSLLWMFRGFVENREKLKAHHEGRLHPVVTEGHKQYRRFQRRHVLLHMTVIISFLGLSLTGLPLKFASQQWAHMLMDFWGGTYNAGLIHRACAVLTFFYFAGALLLSLDFLVLRKDIKGNFLQRLFGPDSLCPNFRDIRDITAMVRWFFFRGPKPTFERWTYWEKFDFLAVFWGMFAIGGSGLMLWFPEFFGALLPGWAFNIATIIHSDEALLATGFIFTVHFFNTHGRPEKFPMDFVIFNGQIAKEEFIEERGDQWKRYEKEGMPEEVIATKVSGVAYDFFFKGFGFLALFTGLGCLALMIFAFLTGSH",
+          "length": 617,
+          "molWeight": 69722,
+          "crc64": "C8B366E32945BFA6",
+          "md5": "15AC10E65840C30F4F40DCF4D016B571"
+        },
+        "extraAttributes": {
+          "countByCommentType": {
+            "COFACTOR": 1,
+            "SUBCELLULAR LOCATION": 1
+          },
+          "countByFeatureType": {
+            "Signal": 1,
+            "Chain": 1,
+            "Transmembrane": 6,
+            "Domain": 1
+          },
+          "uniParcId": "UPI0006AD5715"
+        }
+      }
+    },
+    {
+      "accession": "A0ABM8EG83",
+      "ncbi_protein_accession": "BDV41288.1",
+      "uniprot_url": "https://www.uniprot.org/uniprotkb/A0ABM8EG83/entry",
+      "ncbi_url": "https://www.ncbi.nlm.nih.gov/protein/BDV41288.1",
+      "sequence_sha256": "a9701a29de893ab8bf3c0861440e4aef1c96e2fcde6c50f1510ae640fa6eec3b",
+      "uniprot_and_ncbi_sequences_identical": true,
+      "uniprot_record": {
+        "entryType": "UniProtKB unreviewed (TrEMBL)",
+        "primaryAccession": "A0ABM8EG83",
+        "uniProtkbId": "A0ABM8EG83_9BACT",
+        "entryAudit": {
+          "firstPublicDate": "2025-10-08",
+          "lastAnnotationUpdateDate": "2026-11-04",
+          "lastSequenceUpdateDate": "2025-10-08",
+          "entryVersion": 5,
+          "sequenceVersion": 1
+        },
+        "annotationScore": 1.0,
+        "organism": {
+          "scientificName": "Geotalea uraniireducens",
+          "taxonId": 351604,
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000313",
+              "source": "EMBL",
+              "id": "BDV41288.1"
+            },
+            {
+              "evidenceCode": "ECO:0000313",
+              "source": "Proteomes",
+              "id": "UP001317705"
+            }
+          ],
+          "lineage": [
+            "Bacteria",
+            "Pseudomonadati",
+            "Thermodesulfobacteriota",
+            "Desulfuromonadia",
+            "Geobacterales",
+            "Geobacteraceae",
+            "Geotalea"
+          ]
+        },
+        "proteinExistence": "4: Predicted",
+        "proteinDescription": {
+          "submissionNames": [
+            {
+              "fullName": {
+                "evidences": [
+                  {
+                    "evidenceCode": "ECO:0000313",
+                    "source": "EMBL",
+                    "id": "BDV41288.1"
+                  }
+                ],
+                "value": "Cytochrome c"
+              }
+            }
+          ]
+        },
+        "genes": [
+          {
+            "geneName": {
+              "evidences": [
+                {
+                  "evidenceCode": "ECO:0000313",
+                  "source": "EMBL",
+                  "id": "BDV41288.1"
+                }
+              ],
+              "value": "cbcL"
+            },
+            "orfNames": [
+              {
+                "evidences": [
+                  {
+                    "evidenceCode": "ECO:0000313",
+                    "source": "EMBL",
+                    "id": "BDV41288.1"
+                  }
+                ],
+                "value": "GURASL_02110"
+              }
+            ]
+          }
+        ],
+        "comments": [
+          {
+            "commentType": "COFACTOR",
+            "cofactors": [
+              {
+                "name": "heme c",
+                "evidences": [
+                  {
+                    "evidenceCode": "ECO:0000256",
+                    "source": "ARBA",
+                    "id": "ARBA00001926"
+                  }
+                ],
+                "cofactorCrossReference": {
+                  "database": "ChEBI",
+                  "id": "CHEBI:61717"
+                }
+              }
+            ]
+          },
+          {
+            "commentType": "SUBCELLULAR LOCATION",
+            "subcellularLocations": [
+              {
+                "location": {
+                  "evidences": [
+                    {
+                      "evidenceCode": "ECO:0000256",
+                      "source": "ARBA",
+                      "id": "ARBA00004196"
+                    }
+                  ],
+                  "value": "Cell envelope",
+                  "id": "SL-0036"
+                }
+              }
+            ]
+          }
+        ],
+        "features": [
+          {
+            "type": "Signal",
+            "location": {
+              "start": {
+                "value": 1,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 24,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "SignalP"
+              }
+            ]
+          },
+          {
+            "type": "Chain",
+            "location": {
+              "start": {
+                "value": 25,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 619,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "SignalP"
+              }
+            ],
+            "featureId": "PRO_5046647627"
+          },
+          {
+            "type": "Transmembrane",
+            "location": {
+              "start": {
+                "value": 286,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 314,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "Helical",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ]
+          },
+          {
+            "type": "Transmembrane",
+            "location": {
+              "start": {
+                "value": 351,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 373,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "Helical",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ]
+          },
+          {
+            "type": "Transmembrane",
+            "location": {
+              "start": {
+                "value": 395,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 421,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "Helical",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ]
+          },
+          {
+            "type": "Transmembrane",
+            "location": {
+              "start": {
+                "value": 476,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 495,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "Helical",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ]
+          },
+          {
+            "type": "Transmembrane",
+            "location": {
+              "start": {
+                "value": 507,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 532,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "Helical",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ]
+          },
+          {
+            "type": "Transmembrane",
+            "location": {
+              "start": {
+                "value": 589,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 614,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "Helical",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ]
+          },
+          {
+            "type": "Domain",
+            "location": {
+              "start": {
+                "value": 98,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 167,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "Tetraheme cytochrome",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000259",
+                "source": "Pfam",
+                "id": "PF14537"
+              }
+            ]
+          }
+        ],
+        "keywords": [
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "ARBA",
+                "id": "ARBA00022982"
+              }
+            ],
+            "id": "KW-0249",
+            "category": "Biological process",
+            "name": "Electron transport"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "ARBA",
+                "id": "ARBA00022617"
+              }
+            ],
+            "id": "KW-0349",
+            "category": "Ligand",
+            "name": "Heme"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "ARBA",
+                "id": "ARBA00023004"
+              }
+            ],
+            "id": "KW-0408",
+            "category": "Ligand",
+            "name": "Iron"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ],
+            "id": "KW-0472",
+            "category": "Cellular component",
+            "name": "Membrane"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "ARBA",
+                "id": "ARBA00022723"
+              }
+            ],
+            "id": "KW-0479",
+            "category": "Ligand",
+            "name": "Metal-binding"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000313",
+                "source": "Proteomes",
+                "id": "UP001317705"
+              }
+            ],
+            "id": "KW-1185",
+            "category": "Technical term",
+            "name": "Reference proteome"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "SignalP"
+              }
+            ],
+            "id": "KW-0732",
+            "category": "Domain",
+            "name": "Signal"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ],
+            "id": "KW-0812",
+            "category": "Domain",
+            "name": "Transmembrane"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ],
+            "id": "KW-1133",
+            "category": "Domain",
+            "name": "Transmembrane helix"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "ARBA",
+                "id": "ARBA00022448"
+              }
+            ],
+            "id": "KW-0813",
+            "category": "Biological process",
+            "name": "Transport"
+          }
+        ],
+        "references": [
+          {
+            "referenceNumber": 1,
+            "citation": {
+              "id": "CI-CKJTLT938KNME",
+              "citationType": "submission",
+              "authors": [
+                "Xie L.",
+                "Yoshida N.",
+                "Meng L."
+              ],
+              "title": "Polyphasic characterization of Geotalea uranireducens NIT-SL11 newly isolated from a complex of sewage sludge and microbially reduced graphene oxide.",
+              "publicationDate": "DEC-2022",
+              "submissionDatabase": "EMBL/GenBank/DDBJ databases"
+            },
+            "referencePositions": [
+              "NUCLEOTIDE SEQUENCE [LARGE SCALE GENOMIC DNA]"
+            ],
+            "referenceComments": [
+              {
+                "evidences": [
+                  {
+                    "evidenceCode": "ECO:0000313",
+                    "source": "EMBL",
+                    "id": "BDV41288.1"
+                  },
+                  {
+                    "evidenceCode": "ECO:0000313",
+                    "source": "Proteomes",
+                    "id": "UP001317705"
+                  }
+                ],
+                "value": "NIT-SL11",
+                "type": "STRAIN"
+              }
+            ],
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000313",
+                "source": "EMBL",
+                "id": "BDV41288.1"
+              },
+              {
+                "evidenceCode": "ECO:0000313",
+                "source": "Proteomes",
+                "id": "UP001317705"
+              }
+            ]
+          }
+        ],
+        "uniProtKBCrossReferences": [
+          {
+            "database": "EMBL",
+            "id": "AP027151",
+            "properties": [
+              {
+                "key": "ProteinId",
+                "value": "BDV41288.1"
+              },
+              {
+                "key": "Status",
+                "value": "-"
+              },
+              {
+                "key": "MoleculeType",
+                "value": "Genomic_DNA"
+              }
+            ]
+          },
+          {
+            "database": "RefSeq",
+            "id": "WP_282001264.1",
+            "properties": [
+              {
+                "key": "NucleotideSequenceId",
+                "value": "NZ_AP027151.1"
+              }
+            ]
+          },
+          {
+            "database": "Proteomes",
+            "id": "UP001317705",
+            "properties": [
+              {
+                "key": "Component",
+                "value": "Chromosome"
+              }
+            ]
+          },
+          {
+            "database": "GO",
+            "id": "GO:0030313",
+            "properties": [
+              {
+                "key": "GoTerm",
+                "value": "C:cell envelope"
+              },
+              {
+                "key": "GoEvidenceType",
+                "value": "IEA:UniProtKB-SubCell"
+              }
+            ]
+          },
+          {
+            "database": "GO",
+            "id": "GO:0016491",
+            "properties": [
+              {
+                "key": "GoTerm",
+                "value": "F:oxidoreductase activity"
+              },
+              {
+                "key": "GoEvidenceType",
+                "value": "IEA:TreeGrafter"
+              }
+            ]
+          },
+          {
+            "database": "Gene3D",
+            "id": "3.90.10.10",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "Cytochrome C3"
+              },
+              {
+                "key": "MatchStatus",
+                "value": "1"
+              }
+            ]
+          },
+          {
+            "database": "Gene3D",
+            "id": "1.10.1130.10",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "Flavocytochrome C3, Chain A"
+              },
+              {
+                "key": "MatchStatus",
+                "value": "1"
+              }
+            ]
+          },
+          {
+            "database": "Gene3D",
+            "id": "1.20.950.20",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "Transmembrane di-heme cytochromes, Chain C"
+              },
+              {
+                "key": "MatchStatus",
+                "value": "1"
+              }
+            ]
+          },
+          {
+            "database": "InterPro",
+            "id": "IPR036280",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "Multihaem_cyt_sf"
+              }
+            ]
+          },
+          {
+            "database": "InterPro",
+            "id": "IPR012286",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "Tetraheme_cytochrome"
+              }
+            ]
+          },
+          {
+            "database": "PANTHER",
+            "id": "PTHR35038",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "DISSIMILATORY SULFITE REDUCTASE SIRA"
+              },
+              {
+                "key": "MatchStatus",
+                "value": "1"
+              }
+            ]
+          },
+          {
+            "database": "PANTHER",
+            "id": "PTHR35038:SF6",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "SURFACE LOCALIZED DECAHEME CYTOCHROME C LIPOPROTEIN"
+              },
+              {
+                "key": "MatchStatus",
+                "value": "1"
+              }
+            ]
+          },
+          {
+            "database": "Pfam",
+            "id": "PF14537",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "Cytochrom_c3_2"
+              },
+              {
+                "key": "MatchStatus",
+                "value": "1"
+              }
+            ]
+          },
+          {
+            "database": "SUPFAM",
+            "id": "SSF48695",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "Multiheme cytochromes"
+              },
+              {
+                "key": "MatchStatus",
+                "value": "1"
+              }
+            ]
+          }
+        ],
+        "sequence": {
+          "value": "MLSMLMRLFPALLLLVAFAGPAAAEGGLAIDPATCLGCHSNKISPAGFAASVHGKNACTSCHTEITDLAKHMKGEIKVGKVHCERCHKKEAAEHYGSVHAQKDVMCADCHTDIHTHTYWNKDKRKVVAKCIQCHDKESVYRNSIHGKAVAAGNMDSAACNDCHNLHAIKALGDPKSRENREFHTKVCLKCHANEQMMKRNNVMTVAVETYMQSYHGKNYRLGFPERVAGCADCHTAHSVLPAKDPNSSVNPQNLTATCAKCHPKATPLFTKFYAHGEHNDREKYPILFYTFIAMTGLLVGTFAVFWFHTLLWMFRGFVENREKQAALIAGHVEHHIPDGHKVYRRFKRRHIFLHLLVIISFLGLSLSGLPLKFSDQQWAKFMMENIFGGTANAGFVHRCCAGITFVYFSGALILSFHFLFVRKDLPGNWLQRMFGPDSLMPNLRDIKDVAGMVRWFIFKGPKPTFERWTYWEKFDFIAVFWGMFAIGGSGLMLWFPEFFGSFLPGWMFNVATIVHSDEALLATGFIFTVHFFNTHGRPEKFPMDFVIFNGQMPKHEFLEERGDQWKRYEELGITEQFAAKKTSGIAYDFIVKGFGFTAVIIGLTLVVLMLYAFLAGGSH",
+          "length": 619,
+          "molWeight": 69875,
+          "crc64": "CB71B29253020EE4",
+          "md5": "E08DA9223EF4B3314E992282CF10837C"
+        },
+        "extraAttributes": {
+          "countByCommentType": {
+            "COFACTOR": 1,
+            "SUBCELLULAR LOCATION": 1
+          },
+          "countByFeatureType": {
+            "Signal": 1,
+            "Chain": 1,
+            "Transmembrane": 6,
+            "Domain": 1
+          },
+          "uniParcId": "UPI002490A235"
+        }
+      }
+    },
+    {
+      "accession": "B5E8E3",
+      "ncbi_protein_accession": "ACH37126.1",
+      "uniprot_url": "https://www.uniprot.org/uniprotkb/B5E8E3/entry",
+      "ncbi_url": "https://www.ncbi.nlm.nih.gov/protein/ACH37126.1",
+      "sequence_sha256": "5a3a9e18a2a24e7639a5cdbbfedf1933920ea68c503450616c45b6b01a2b9bbe",
+      "uniprot_and_ncbi_sequences_identical": true,
+      "uniprot_record": {
+        "entryType": "UniProtKB unreviewed (TrEMBL)",
+        "primaryAccession": "B5E8E3",
+        "uniProtkbId": "B5E8E3_CITBB",
+        "entryAudit": {
+          "firstPublicDate": "2008-10-14",
+          "lastAnnotationUpdateDate": "2026-11-04",
+          "lastSequenceUpdateDate": "2008-10-14",
+          "entryVersion": 70,
+          "sequenceVersion": 1
+        },
+        "annotationScore": 1.0,
+        "organism": {
+          "scientificName": "Citrifermentans bemidjiense (strain ATCC BAA-1014 / DSM 16622 / JCM 12645 / Bem)",
+          "commonName": "Geobacter bemidjiensis",
+          "taxonId": 404380,
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000313",
+              "source": "EMBL",
+              "id": "ACH37126.1"
+            },
+            {
+              "evidenceCode": "ECO:0000313",
+              "source": "Proteomes",
+              "id": "UP000008825"
+            }
+          ],
+          "lineage": [
+            "Bacteria",
+            "Pseudomonadati",
+            "Thermodesulfobacteriota",
+            "Desulfuromonadia",
+            "Geobacterales",
+            "Geobacteraceae",
+            "Citrifermentans"
+          ]
+        },
+        "proteinExistence": "4: Predicted",
+        "proteinDescription": {
+          "submissionNames": [
+            {
+              "fullName": {
+                "evidences": [
+                  {
+                    "evidenceCode": "ECO:0000313",
+                    "source": "EMBL",
+                    "id": "ACH37126.1"
+                  }
+                ],
+                "value": "Cytochrome c, and cytochrome b"
+              }
+            }
+          ]
+        },
+        "genes": [
+          {
+            "geneName": {
+              "evidences": [
+                {
+                  "evidenceCode": "ECO:0000313",
+                  "source": "EMBL",
+                  "id": "ACH37126.1"
+                }
+              ],
+              "value": "cbcY"
+            },
+            "orderedLocusNames": [
+              {
+                "evidences": [
+                  {
+                    "evidenceCode": "ECO:0000313",
+                    "source": "EMBL",
+                    "id": "ACH37126.1"
+                  }
+                ],
+                "value": "Gbem_0095"
+              }
+            ]
+          }
+        ],
+        "comments": [
+          {
+            "commentType": "COFACTOR",
+            "cofactors": [
+              {
+                "name": "heme c",
+                "evidences": [
+                  {
+                    "evidenceCode": "ECO:0000256",
+                    "source": "ARBA",
+                    "id": "ARBA00001926"
+                  }
+                ],
+                "cofactorCrossReference": {
+                  "database": "ChEBI",
+                  "id": "CHEBI:61717"
+                }
+              }
+            ]
+          },
+          {
+            "commentType": "SUBCELLULAR LOCATION",
+            "subcellularLocations": [
+              {
+                "location": {
+                  "evidences": [
+                    {
+                      "evidenceCode": "ECO:0000256",
+                      "source": "ARBA",
+                      "id": "ARBA00004196"
+                    }
+                  ],
+                  "value": "Cell envelope",
+                  "id": "SL-0036"
+                }
+              }
+            ]
+          }
+        ],
+        "features": [
+          {
+            "type": "Signal",
+            "location": {
+              "start": {
+                "value": 1,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 23,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "SignalP"
+              }
+            ]
+          },
+          {
+            "type": "Chain",
+            "location": {
+              "start": {
+                "value": 24,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 616,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "SignalP"
+              }
+            ],
+            "featureId": "PRO_5002832276"
+          },
+          {
+            "type": "Transmembrane",
+            "location": {
+              "start": {
+                "value": 285,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 313,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "Helical",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ]
+          },
+          {
+            "type": "Transmembrane",
+            "location": {
+              "start": {
+                "value": 350,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 372,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "Helical",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ]
+          },
+          {
+            "type": "Transmembrane",
+            "location": {
+              "start": {
+                "value": 392,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 419,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "Helical",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ]
+          },
+          {
+            "type": "Transmembrane",
+            "location": {
+              "start": {
+                "value": 474,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 493,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "Helical",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ]
+          },
+          {
+            "type": "Transmembrane",
+            "location": {
+              "start": {
+                "value": 505,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 530,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "Helical",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ]
+          },
+          {
+            "type": "Transmembrane",
+            "location": {
+              "start": {
+                "value": 587,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 612,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "Helical",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ]
+          },
+          {
+            "type": "Domain",
+            "location": {
+              "start": {
+                "value": 97,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 167,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "Tetraheme cytochrome",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000259",
+                "source": "Pfam",
+                "id": "PF14537"
+              }
+            ]
+          }
+        ],
+        "keywords": [
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "ARBA",
+                "id": "ARBA00022982"
+              }
+            ],
+            "id": "KW-0249",
+            "category": "Biological process",
+            "name": "Electron transport"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "ARBA",
+                "id": "ARBA00022617"
+              }
+            ],
+            "id": "KW-0349",
+            "category": "Ligand",
+            "name": "Heme"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "ARBA",
+                "id": "ARBA00023004"
+              }
+            ],
+            "id": "KW-0408",
+            "category": "Ligand",
+            "name": "Iron"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ],
+            "id": "KW-0472",
+            "category": "Cellular component",
+            "name": "Membrane"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "ARBA",
+                "id": "ARBA00022723"
+              }
+            ],
+            "id": "KW-0479",
+            "category": "Ligand",
+            "name": "Metal-binding"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000313",
+                "source": "Proteomes",
+                "id": "UP000008825"
+              }
+            ],
+            "id": "KW-1185",
+            "category": "Technical term",
+            "name": "Reference proteome"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "SignalP"
+              }
+            ],
+            "id": "KW-0732",
+            "category": "Domain",
+            "name": "Signal"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ],
+            "id": "KW-0812",
+            "category": "Domain",
+            "name": "Transmembrane"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ],
+            "id": "KW-1133",
+            "category": "Domain",
+            "name": "Transmembrane helix"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "ARBA",
+                "id": "ARBA00022448"
+              }
+            ],
+            "id": "KW-0813",
+            "category": "Biological process",
+            "name": "Transport"
+          }
+        ],
+        "references": [
+          {
+            "referenceNumber": 1,
+            "citation": {
+              "id": "CI-DUT6BMQ9GRIDF",
+              "citationType": "submission",
+              "authoringGroup": [
+                "US DOE Joint Genome Institute"
+              ],
+              "authors": [
+                "Lucas S.",
+                "Copeland A.",
+                "Lapidus A.",
+                "Glavina del Rio T.",
+                "Dalin E.",
+                "Tice H.",
+                "Bruce D.",
+                "Goodwin L.",
+                "Pitluck S.",
+                "Kiss H.",
+                "Brettin T.",
+                "Detter J.C.",
+                "Han C.",
+                "Kuske C.R.",
+                "Schmutz J.",
+                "Larimer F.",
+                "Land M.",
+                "Hauser L.",
+                "Kyrpides N.",
+                "Lykidis A.",
+                "Lovley D.",
+                "Richardson P."
+              ],
+              "title": "Complete sequence of Geobacter bemidjiensis BEM.",
+              "publicationDate": "JUL-2008",
+              "submissionDatabase": "EMBL/GenBank/DDBJ databases"
+            },
+            "referencePositions": [
+              "NUCLEOTIDE SEQUENCE [LARGE SCALE GENOMIC DNA]"
+            ],
+            "referenceComments": [
+              {
+                "evidences": [
+                  {
+                    "evidenceCode": "ECO:0000313",
+                    "source": "Proteomes",
+                    "id": "UP000008825"
+                  }
+                ],
+                "value": "ATCC BAA-1014 / DSM 16622 / JCM 12645 / Bem",
+                "type": "STRAIN"
+              }
+            ],
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000313",
+                "source": "EMBL",
+                "id": "ACH37126.1"
+              },
+              {
+                "evidenceCode": "ECO:0000313",
+                "source": "Proteomes",
+                "id": "UP000008825"
+              }
+            ]
+          },
+          {
+            "referenceNumber": 2,
+            "citation": {
+              "id": "20828392",
+              "citationType": "journal article",
+              "authors": [
+                "Aklujkar M.",
+                "Young N.D.",
+                "Holmes D.",
+                "Chavan M.",
+                "Risso C.",
+                "Kiss H.E.",
+                "Han C.S.",
+                "Land M.L.",
+                "Lovley D.R."
+              ],
+              "citationCrossReferences": [
+                {
+                  "database": "PubMed",
+                  "id": "20828392"
+                },
+                {
+                  "database": "DOI",
+                  "id": "10.1186/1471-2164-11-490"
+                }
+              ],
+              "title": "The genome of Geobacter bemidjiensis, exemplar for the subsurface clade of Geobacter species that predominate in Fe(III)-reducing subsurface environments.",
+              "publicationDate": "2010",
+              "journal": "BMC Genomics",
+              "firstPage": "490",
+              "lastPage": "490",
+              "volume": "11"
+            },
+            "referencePositions": [
+              "NUCLEOTIDE SEQUENCE [LARGE SCALE GENOMIC DNA]"
+            ],
+            "referenceComments": [
+              {
+                "evidences": [
+                  {
+                    "evidenceCode": "ECO:0000313",
+                    "source": "Proteomes",
+                    "id": "UP000008825"
+                  }
+                ],
+                "value": "ATCC BAA-1014 / DSM 16622 / JCM 12645 / Bem",
+                "type": "STRAIN"
+              }
+            ],
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000313",
+                "source": "EMBL",
+                "id": "ACH37126.1"
+              },
+              {
+                "evidenceCode": "ECO:0000313",
+                "source": "Proteomes",
+                "id": "UP000008825"
+              }
+            ]
+          }
+        ],
+        "uniProtKBCrossReferences": [
+          {
+            "database": "EMBL",
+            "id": "CP001124",
+            "properties": [
+              {
+                "key": "ProteinId",
+                "value": "ACH37126.1"
+              },
+              {
+                "key": "Status",
+                "value": "-"
+              },
+              {
+                "key": "MoleculeType",
+                "value": "Genomic_DNA"
+              }
+            ]
+          },
+          {
+            "database": "RefSeq",
+            "id": "WP_012528534.1",
+            "properties": [
+              {
+                "key": "NucleotideSequenceId",
+                "value": "NC_011146.1"
+              }
+            ]
+          },
+          {
+            "database": "AlphaFoldDB",
+            "id": "B5E8E3",
+            "properties": [
+              {
+                "key": "Description",
+                "value": "-"
+              }
+            ]
+          },
+          {
+            "database": "STRING",
+            "id": "404380.Gbem_0095",
+            "properties": [
+              {
+                "key": "Description",
+                "value": "-"
+              }
+            ]
+          },
+          {
+            "database": "KEGG",
+            "id": "gbm:Gbem_0095",
+            "properties": [
+              {
+                "key": "Description",
+                "value": "-"
+              }
+            ]
+          },
+          {
+            "database": "eggNOG",
+            "id": "COG2864",
+            "properties": [
+              {
+                "key": "ToxonomicScope",
+                "value": "Bacteria"
+              }
+            ]
+          },
+          {
+            "database": "HOGENOM",
+            "id": "CLU_021306_0_0_7",
+            "properties": [
+              {
+                "key": "Description",
+                "value": "-"
+              }
+            ]
+          },
+          {
+            "database": "OMA",
+            "id": "AANCVDC",
+            "properties": [
+              {
+                "key": "Fingerprint",
+                "value": "-"
+              }
+            ]
+          },
+          {
+            "database": "OrthoDB",
+            "id": "9814800at2",
+            "properties": [
+              {
+                "key": "Description",
+                "value": "-"
+              }
+            ]
+          },
+          {
+            "database": "Proteomes",
+            "id": "UP000008825",
+            "properties": [
+              {
+                "key": "Component",
+                "value": "Chromosome"
+              }
+            ]
+          },
+          {
+            "database": "GO",
+            "id": "GO:0030313",
+            "properties": [
+              {
+                "key": "GoTerm",
+                "value": "C:cell envelope"
+              },
+              {
+                "key": "GoEvidenceType",
+                "value": "IEA:UniProtKB-SubCell"
+              }
+            ]
+          },
+          {
+            "database": "GO",
+            "id": "GO:0016491",
+            "properties": [
+              {
+                "key": "GoTerm",
+                "value": "F:oxidoreductase activity"
+              },
+              {
+                "key": "GoEvidenceType",
+                "value": "IEA:TreeGrafter"
+              }
+            ]
+          },
+          {
+            "database": "CDD",
+            "id": "cd08168",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "Cytochrom_C3"
+              },
+              {
+                "key": "MatchStatus",
+                "value": "1"
+              }
+            ]
+          },
+          {
+            "database": "Gene3D",
+            "id": "3.90.10.10",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "Cytochrome C3"
+              },
+              {
+                "key": "MatchStatus",
+                "value": "1"
+              }
+            ]
+          },
+          {
+            "database": "Gene3D",
+            "id": "1.10.780.10",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "Hydroxylamine Oxidoreductase, Chain A, domain 1"
+              },
+              {
+                "key": "MatchStatus",
+                "value": "1"
+              }
+            ]
+          },
+          {
+            "database": "Gene3D",
+            "id": "1.20.950.20",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "Transmembrane di-heme cytochromes, Chain C"
+              },
+              {
+                "key": "MatchStatus",
+                "value": "1"
+              }
+            ]
+          },
+          {
+            "database": "InterPro",
+            "id": "IPR036280",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "Multihaem_cyt_sf"
+              }
+            ]
+          },
+          {
+            "database": "InterPro",
+            "id": "IPR012286",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "Tetraheme_cytochrome"
+              }
+            ]
+          },
+          {
+            "database": "PANTHER",
+            "id": "PTHR35038",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "DISSIMILATORY SULFITE REDUCTASE SIRA"
+              },
+              {
+                "key": "MatchStatus",
+                "value": "1"
+              }
+            ]
+          },
+          {
+            "database": "PANTHER",
+            "id": "PTHR35038:SF6",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "SURFACE LOCALIZED DECAHEME CYTOCHROME C LIPOPROTEIN"
+              },
+              {
+                "key": "MatchStatus",
+                "value": "1"
+              }
+            ]
+          },
+          {
+            "database": "Pfam",
+            "id": "PF14537",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "Cytochrom_c3_2"
+              },
+              {
+                "key": "MatchStatus",
+                "value": "1"
+              }
+            ]
+          },
+          {
+            "database": "SUPFAM",
+            "id": "SSF48695",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "Multiheme cytochromes"
+              },
+              {
+                "key": "MatchStatus",
+                "value": "1"
+              }
+            ]
+          }
+        ],
+        "sequence": {
+          "value": "MVHVFTRLIPLLLLLLLSQPAFAAQGLAIDPATCLGCHGDKISAEKMAVSVHGKNGCTSCHVEIVELAKHMKGEIKVGKVKCVRCHKKEAAEHALSVHAEKGVQCAGCHTDMHSHTSWNKDKRRVLAKCVQCHSDEKGFLTSVHGKGVIAGNQDSAACNDCHNLHEIKALGNPNSHTNREFHTKVCLRCHADAKLVERNHISEVAVKSYMESYHGKNYRLGYPEKVAGCADCHTAHGILPSKDPNSSVNPNNLVKTCSKCHDKAKTPFTKFYAHGEHNDREKYPILFYTFIAMTGLLVGTFAVFWVHTLLWMIRGFVENREKAAALEEGVILHHVPEGHKQYRRFKRVHVFMHLLVIISFLGLSLTGLPLKFSDQVWAKFLMDLYGGAPNAAAFHRVCAGITFVYFSMALAMSIHFLFIRKDIKGNPLQRLFGPDSLCPNLRDISDVVGMVRWFFFKGPKPAFERWTYWEKFDFIAVFWGMFAIGGSGLMLWFPEFFGMFLPGWAFNVATIIHSDEALLATGFIFSVHFFNTHGRPEKFPMDFVIFNGQMSKHEFVEERGDQWARYEKEGITEKFAAKKSSGIFYDFCLKAFGFTALFIGITLLMLMVYAFMHPHH",
+          "length": 616,
+          "molWeight": 69537,
+          "crc64": "F9251829A81A87AB",
+          "md5": "1DB5D2918EEF843F9B472207AAC2AADA"
+        },
+        "extraAttributes": {
+          "countByCommentType": {
+            "COFACTOR": 1,
+            "SUBCELLULAR LOCATION": 1
+          },
+          "countByFeatureType": {
+            "Signal": 1,
+            "Chain": 1,
+            "Transmembrane": 6,
+            "Domain": 1
+          },
+          "uniParcId": "UPI00017BF9B1"
+        }
+      }
+    },
+    {
+      "accession": "A0A0C2DW34",
+      "ncbi_protein_accession": "KIH77629.1",
+      "uniprot_url": "https://www.uniprot.org/uniprotkb/A0A0C2DW34/entry",
+      "ncbi_url": "https://www.ncbi.nlm.nih.gov/protein/KIH77629.1",
+      "sequence_sha256": "c1d776eecf6fdb9c7ac63095b9d870c88c54afc89330c020c6fc5bc4a520191f",
+      "uniprot_and_ncbi_sequences_identical": true,
+      "uniprot_record": {
+        "entryType": "UniProtKB unreviewed (TrEMBL)",
+        "primaryAccession": "A0A0C2DW34",
+        "uniProtkbId": "A0A0C2DW34_9BACT",
+        "entryAudit": {
+          "firstPublicDate": "2015-04-01",
+          "lastAnnotationUpdateDate": "2026-11-04",
+          "lastSequenceUpdateDate": "2015-04-01",
+          "entryVersion": 38,
+          "sequenceVersion": 1
+        },
+        "annotationScore": 1.0,
+        "organism": {
+          "scientificName": "Geoalkalibacter ferrihydriticus DSM 17813",
+          "taxonId": 1121915,
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000313",
+              "source": "EMBL",
+              "id": "KIH77629.1"
+            },
+            {
+              "evidenceCode": "ECO:0000313",
+              "source": "Proteomes",
+              "id": "UP000035068"
+            }
+          ],
+          "lineage": [
+            "Bacteria",
+            "Pseudomonadati",
+            "Thermodesulfobacteriota",
+            "Desulfuromonadia",
+            "Desulfuromonadales",
+            "Geoalkalibacteraceae",
+            "Geoalkalibacter"
+          ]
+        },
+        "proteinExistence": "4: Predicted",
+        "proteinDescription": {
+          "submissionNames": [
+            {
+              "fullName": {
+                "evidences": [
+                  {
+                    "evidenceCode": "ECO:0000313",
+                    "source": "EMBL",
+                    "id": "KIH77629.1"
+                  }
+                ],
+                "value": "C-and b-type cytochrome L"
+              }
+            }
+          ]
+        },
+        "genes": [
+          {
+            "orfNames": [
+              {
+                "evidences": [
+                  {
+                    "evidenceCode": "ECO:0000313",
+                    "source": "EMBL",
+                    "id": "KIH77629.1"
+                  }
+                ],
+                "value": "GFER_02840"
+              }
+            ]
+          }
+        ],
+        "comments": [
+          {
+            "commentType": "COFACTOR",
+            "cofactors": [
+              {
+                "name": "heme c",
+                "evidences": [
+                  {
+                    "evidenceCode": "ECO:0000256",
+                    "source": "ARBA",
+                    "id": "ARBA00001926"
+                  }
+                ],
+                "cofactorCrossReference": {
+                  "database": "ChEBI",
+                  "id": "CHEBI:61717"
+                }
+              }
+            ]
+          },
+          {
+            "commentType": "SUBCELLULAR LOCATION",
+            "subcellularLocations": [
+              {
+                "location": {
+                  "evidences": [
+                    {
+                      "evidenceCode": "ECO:0000256",
+                      "source": "ARBA",
+                      "id": "ARBA00004196"
+                    }
+                  ],
+                  "value": "Cell envelope",
+                  "id": "SL-0036"
+                }
+              }
+            ]
+          },
+          {
+            "texts": [
+              {
+                "evidences": [
+                  {
+                    "evidenceCode": "ECO:0000313",
+                    "source": "EMBL",
+                    "id": "KIH77629.1"
+                  }
+                ],
+                "value": "The sequence shown here is derived from an EMBL/GenBank/DDBJ whole genome shotgun (WGS) entry which is preliminary data"
+              }
+            ],
+            "commentType": "CAUTION"
+          }
+        ],
+        "features": [
+          {
+            "type": "Signal",
+            "location": {
+              "start": {
+                "value": 1,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 24,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "SignalP"
+              }
+            ]
+          },
+          {
+            "type": "Chain",
+            "location": {
+              "start": {
+                "value": 25,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 620,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "SignalP"
+              }
+            ],
+            "featureId": "PRO_5002147610"
+          },
+          {
+            "type": "Transmembrane",
+            "location": {
+              "start": {
+                "value": 288,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 316,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "Helical",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ]
+          },
+          {
+            "type": "Transmembrane",
+            "location": {
+              "start": {
+                "value": 353,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 377,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "Helical",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ]
+          },
+          {
+            "type": "Transmembrane",
+            "location": {
+              "start": {
+                "value": 397,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 422,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "Helical",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ]
+          },
+          {
+            "type": "Transmembrane",
+            "location": {
+              "start": {
+                "value": 477,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 496,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "Helical",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ]
+          },
+          {
+            "type": "Transmembrane",
+            "location": {
+              "start": {
+                "value": 508,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 533,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "Helical",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ]
+          },
+          {
+            "type": "Transmembrane",
+            "location": {
+              "start": {
+                "value": 590,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 615,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "Helical",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ]
+          },
+          {
+            "type": "Domain",
+            "location": {
+              "start": {
+                "value": 99,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 193,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "Tetraheme cytochrome",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000259",
+                "source": "Pfam",
+                "id": "PF14537"
+              }
+            ]
+          }
+        ],
+        "keywords": [
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "ARBA",
+                "id": "ARBA00022982"
+              }
+            ],
+            "id": "KW-0249",
+            "category": "Biological process",
+            "name": "Electron transport"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "ARBA",
+                "id": "ARBA00022617"
+              }
+            ],
+            "id": "KW-0349",
+            "category": "Ligand",
+            "name": "Heme"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "ARBA",
+                "id": "ARBA00023004"
+              }
+            ],
+            "id": "KW-0408",
+            "category": "Ligand",
+            "name": "Iron"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ],
+            "id": "KW-0472",
+            "category": "Cellular component",
+            "name": "Membrane"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "ARBA",
+                "id": "ARBA00022723"
+              }
+            ],
+            "id": "KW-0479",
+            "category": "Ligand",
+            "name": "Metal-binding"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000313",
+                "source": "Proteomes",
+                "id": "UP000035068"
+              }
+            ],
+            "id": "KW-1185",
+            "category": "Technical term",
+            "name": "Reference proteome"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "SignalP"
+              }
+            ],
+            "id": "KW-0732",
+            "category": "Domain",
+            "name": "Signal"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ],
+            "id": "KW-0812",
+            "category": "Domain",
+            "name": "Transmembrane"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ],
+            "id": "KW-1133",
+            "category": "Domain",
+            "name": "Transmembrane helix"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "ARBA",
+                "id": "ARBA00022448"
+              }
+            ],
+            "id": "KW-0813",
+            "category": "Biological process",
+            "name": "Transport"
+          }
+        ],
+        "references": [
+          {
+            "referenceNumber": 1,
+            "citation": {
+              "id": "CI-FB8SGFORICSPU",
+              "citationType": "submission",
+              "authors": [
+                "Badalamenti J.P.",
+                "Torres C.I.",
+                "Krajmalnik-Brown R.",
+                "Bond D.R."
+              ],
+              "title": "Genomes of Geoalkalibacter ferrihydriticus and Geoalkalibacter subterraneus, two haloalkaliphilic metal-reducing members of the Geobacteraceae.",
+              "publicationDate": "DEC-2014",
+              "submissionDatabase": "EMBL/GenBank/DDBJ databases"
+            },
+            "referencePositions": [
+              "NUCLEOTIDE SEQUENCE [LARGE SCALE GENOMIC DNA]"
+            ],
+            "referenceComments": [
+              {
+                "evidences": [
+                  {
+                    "evidenceCode": "ECO:0000313",
+                    "source": "EMBL",
+                    "id": "KIH77629.1"
+                  },
+                  {
+                    "evidenceCode": "ECO:0000313",
+                    "source": "Proteomes",
+                    "id": "UP000035068"
+                  }
+                ],
+                "value": "DSM 17813",
+                "type": "STRAIN"
+              }
+            ],
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000313",
+                "source": "EMBL",
+                "id": "KIH77629.1"
+              },
+              {
+                "evidenceCode": "ECO:0000313",
+                "source": "Proteomes",
+                "id": "UP000035068"
+              }
+            ]
+          }
+        ],
+        "uniProtKBCrossReferences": [
+          {
+            "database": "EMBL",
+            "id": "JWJD01000001",
+            "properties": [
+              {
+                "key": "ProteinId",
+                "value": "KIH77629.1"
+              },
+              {
+                "key": "Status",
+                "value": "-"
+              },
+              {
+                "key": "MoleculeType",
+                "value": "Genomic_DNA"
+              }
+            ]
+          },
+          {
+            "database": "RefSeq",
+            "id": "WP_040095868.1",
+            "properties": [
+              {
+                "key": "NucleotideSequenceId",
+                "value": "NZ_JWJD01000001.1"
+              }
+            ]
+          },
+          {
+            "database": "AlphaFoldDB",
+            "id": "A0A0C2DW34",
+            "properties": [
+              {
+                "key": "Description",
+                "value": "-"
+              }
+            ]
+          },
+          {
+            "database": "Proteomes",
+            "id": "UP000035068",
+            "properties": [
+              {
+                "key": "Component",
+                "value": "Unassembled WGS sequence"
+              }
+            ]
+          },
+          {
+            "database": "GO",
+            "id": "GO:0030313",
+            "properties": [
+              {
+                "key": "GoTerm",
+                "value": "C:cell envelope"
+              },
+              {
+                "key": "GoEvidenceType",
+                "value": "IEA:UniProtKB-SubCell"
+              }
+            ]
+          },
+          {
+            "database": "GO",
+            "id": "GO:0016491",
+            "properties": [
+              {
+                "key": "GoTerm",
+                "value": "F:oxidoreductase activity"
+              },
+              {
+                "key": "GoEvidenceType",
+                "value": "IEA:TreeGrafter"
+              }
+            ]
+          },
+          {
+            "database": "CDD",
+            "id": "cd08168",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "Cytochrom_C3"
+              },
+              {
+                "key": "MatchStatus",
+                "value": "1"
+              }
+            ]
+          },
+          {
+            "database": "Gene3D",
+            "id": "1.10.287.3080",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "-"
+              },
+              {
+                "key": "MatchStatus",
+                "value": "1"
+              }
+            ]
+          },
+          {
+            "database": "Gene3D",
+            "id": "3.90.10.10",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "Cytochrome C3"
+              },
+              {
+                "key": "MatchStatus",
+                "value": "1"
+              }
+            ]
+          },
+          {
+            "database": "Gene3D",
+            "id": "1.20.950.20",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "Transmembrane di-heme cytochromes, Chain C"
+              },
+              {
+                "key": "MatchStatus",
+                "value": "1"
+              }
+            ]
+          },
+          {
+            "database": "InterPro",
+            "id": "IPR036280",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "Multihaem_cyt_sf"
+              }
+            ]
+          },
+          {
+            "database": "InterPro",
+            "id": "IPR012286",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "Tetraheme_cytochrome"
+              }
+            ]
+          },
+          {
+            "database": "PANTHER",
+            "id": "PTHR35038",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "DISSIMILATORY SULFITE REDUCTASE SIRA"
+              },
+              {
+                "key": "MatchStatus",
+                "value": "1"
+              }
+            ]
+          },
+          {
+            "database": "PANTHER",
+            "id": "PTHR35038:SF6",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "SURFACE LOCALIZED DECAHEME CYTOCHROME C LIPOPROTEIN"
+              },
+              {
+                "key": "MatchStatus",
+                "value": "1"
+              }
+            ]
+          },
+          {
+            "database": "Pfam",
+            "id": "PF14537",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "Cytochrom_c3_2"
+              },
+              {
+                "key": "MatchStatus",
+                "value": "1"
+              }
+            ]
+          },
+          {
+            "database": "SUPFAM",
+            "id": "SSF48695",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "Multiheme cytochromes"
+              },
+              {
+                "key": "MatchStatus",
+                "value": "1"
+              }
+            ]
+          }
+        ],
+        "sequence": {
+          "value": "MFKLFSRFAVAVLLLLPLSLPVQGAENGLAIDPMTCLECHDNVVSAEVFAASVHGRNACTSCHTDITDLDAHMMGEQMPGPAQCVRCHKQETAEHFASVHMLSGIGCADCHHDIHSHQYWQGDKNIANDKCTECHWDSWEVYNDSIHGQAVAEGKMDSAACFDCHNLHRIEEIGDPTSFHNREFHTTVCLDCHADQEMMARNNVTSVAVSTYMSSYHGKTYRLGYPELVAGCADCHTSHGVFNHNDPRASTHQDNLVATCGACHPGATPLFVQFYSHGDMTDRANYPILYWTFIAMTTLLVSVFAVFWIHTLLWMFRGFVENREKRAALIRGEVPHHIPEAHKIYRRFNRLHIFLHLLVIISFLGLSLTGLPLKFAGQPWAKLLMEFFGGAHNAALIHRWCAVITFVYFGASLVMSWNFLFVRKDLPGNPLQRLFGPDSLFPNLRDVRDITAMVRWFLFLGPKPVFERWTYWEKFDFLAVFWGMIAIGGSGLMLWFPEFFGGFLPGWAFNVATIVHSDEALLATGFIFTVHFFNTHGRPEKFPMDFVIFNGEMNKEEFIHERLDQWKRYEELGITEQFVKPKPSGVVYDFILKTFGFLAVFTGIGLVFLMIYAFMTSGFH",
+          "length": 620,
+          "molWeight": 70510,
+          "crc64": "6842E1A6EBF6D857",
+          "md5": "8585343B330CF29C522F7F6D2C0FF45F"
+        },
+        "extraAttributes": {
+          "countByCommentType": {
+            "COFACTOR": 1,
+            "SUBCELLULAR LOCATION": 1,
+            "CAUTION": 1
+          },
+          "countByFeatureType": {
+            "Signal": 1,
+            "Chain": 1,
+            "Transmembrane": 6,
+            "Domain": 1
+          },
+          "uniParcId": "UPI000589DDA1"
+        }
+      }
+    },
+    {
+      "accession": "A0A0B5FL41",
+      "ncbi_protein_accession": "AJF05379.1",
+      "uniprot_url": "https://www.uniprot.org/uniprotkb/A0A0B5FL41/entry",
+      "ncbi_url": "https://www.ncbi.nlm.nih.gov/protein/AJF05379.1",
+      "sequence_sha256": "f4863fe583df43a25a55df1ade84c2faa08f3f7933dd01e0876844dd85735341",
+      "uniprot_and_ncbi_sequences_identical": true,
+      "uniprot_record": {
+        "entryType": "UniProtKB unreviewed (TrEMBL)",
+        "primaryAccession": "A0A0B5FL41",
+        "uniProtkbId": "A0A0B5FL41_9BACT",
+        "entryAudit": {
+          "firstPublicDate": "2015-04-01",
+          "lastAnnotationUpdateDate": "2026-11-04",
+          "lastSequenceUpdateDate": "2015-04-01",
+          "entryVersion": 36,
+          "sequenceVersion": 1
+        },
+        "annotationScore": 1.0,
+        "organism": {
+          "scientificName": "Geoalkalibacter subterraneus",
+          "taxonId": 483547,
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000313",
+              "source": "EMBL",
+              "id": "AJF05379.1"
+            },
+            {
+              "evidenceCode": "ECO:0000313",
+              "source": "Proteomes",
+              "id": "UP000035036"
+            }
+          ],
+          "lineage": [
+            "Bacteria",
+            "Pseudomonadati",
+            "Thermodesulfobacteriota",
+            "Desulfuromonadia",
+            "Desulfuromonadales",
+            "Geoalkalibacteraceae",
+            "Geoalkalibacter"
+          ]
+        },
+        "proteinExistence": "4: Predicted",
+        "proteinDescription": {
+          "submissionNames": [
+            {
+              "fullName": {
+                "evidences": [
+                  {
+                    "evidenceCode": "ECO:0000313",
+                    "source": "EMBL",
+                    "id": "AJF05379.1"
+                  }
+                ],
+                "value": "C-and b-type cytochrome L"
+              }
+            }
+          ]
+        },
+        "genes": [
+          {
+            "orfNames": [
+              {
+                "evidences": [
+                  {
+                    "evidenceCode": "ECO:0000313",
+                    "source": "EMBL",
+                    "id": "AJF05379.1"
+                  }
+                ],
+                "value": "GSUB_00590"
+              }
+            ]
+          }
+        ],
+        "features": [
+          {
+            "type": "Signal",
+            "location": {
+              "start": {
+                "value": 1,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 24,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "SignalP"
+              }
+            ]
+          },
+          {
+            "type": "Chain",
+            "location": {
+              "start": {
+                "value": 25,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 619,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "SignalP"
+              }
+            ],
+            "featureId": "PRO_5002116967"
+          },
+          {
+            "type": "Transmembrane",
+            "location": {
+              "start": {
+                "value": 287,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 315,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "Helical",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ]
+          },
+          {
+            "type": "Transmembrane",
+            "location": {
+              "start": {
+                "value": 352,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 375,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "Helical",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ]
+          },
+          {
+            "type": "Transmembrane",
+            "location": {
+              "start": {
+                "value": 395,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 421,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "Helical",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ]
+          },
+          {
+            "type": "Transmembrane",
+            "location": {
+              "start": {
+                "value": 476,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 495,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "Helical",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ]
+          },
+          {
+            "type": "Transmembrane",
+            "location": {
+              "start": {
+                "value": 507,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 532,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "Helical",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ]
+          },
+          {
+            "type": "Transmembrane",
+            "location": {
+              "start": {
+                "value": 589,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 614,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "Helical",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ]
+          }
+        ],
+        "keywords": [
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "ARBA",
+                "id": "ARBA00022982"
+              }
+            ],
+            "id": "KW-0249",
+            "category": "Biological process",
+            "name": "Electron transport"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "ARBA",
+                "id": "ARBA00022617"
+              }
+            ],
+            "id": "KW-0349",
+            "category": "Ligand",
+            "name": "Heme"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "ARBA",
+                "id": "ARBA00023004"
+              }
+            ],
+            "id": "KW-0408",
+            "category": "Ligand",
+            "name": "Iron"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ],
+            "id": "KW-0472",
+            "category": "Cellular component",
+            "name": "Membrane"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "ARBA",
+                "id": "ARBA00022723"
+              }
+            ],
+            "id": "KW-0479",
+            "category": "Ligand",
+            "name": "Metal-binding"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000313",
+                "source": "Proteomes",
+                "id": "UP000035036"
+              }
+            ],
+            "id": "KW-1185",
+            "category": "Technical term",
+            "name": "Reference proteome"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "SignalP"
+              }
+            ],
+            "id": "KW-0732",
+            "category": "Domain",
+            "name": "Signal"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ],
+            "id": "KW-0812",
+            "category": "Domain",
+            "name": "Transmembrane"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ],
+            "id": "KW-1133",
+            "category": "Domain",
+            "name": "Transmembrane helix"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "ARBA",
+                "id": "ARBA00022448"
+              }
+            ],
+            "id": "KW-0813",
+            "category": "Biological process",
+            "name": "Transport"
+          }
+        ],
+        "references": [
+          {
+            "referenceNumber": 1,
+            "citation": {
+              "id": "25767222",
+              "citationType": "journal article",
+              "authors": [
+                "Badalamenti J.P.",
+                "Krajmalnik-Brown R.",
+                "Torres C.I.",
+                "Bond D.R."
+              ],
+              "citationCrossReferences": [
+                {
+                  "database": "PubMed",
+                  "id": "25767222"
+                }
+              ],
+              "title": "Genomes of Geoalkalibacter ferrihydriticus Z-0531T and Geoalkalibacter subterraneus Red1T, Two Haloalkaliphilic Metal-Reducing Deltaproteobacteria.",
+              "publicationDate": "2015",
+              "journal": "Genome Announc.",
+              "firstPage": "0",
+              "lastPage": "0",
+              "volume": "3"
+            },
+            "referencePositions": [
+              "NUCLEOTIDE SEQUENCE [LARGE SCALE GENOMIC DNA]"
+            ],
+            "referenceComments": [
+              {
+                "evidences": [
+                  {
+                    "evidenceCode": "ECO:0000313",
+                    "source": "EMBL",
+                    "id": "AJF05379.1"
+                  },
+                  {
+                    "evidenceCode": "ECO:0000313",
+                    "source": "Proteomes",
+                    "id": "UP000035036"
+                  }
+                ],
+                "value": "Red1",
+                "type": "STRAIN"
+              }
+            ],
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000313",
+                "source": "EMBL",
+                "id": "AJF05379.1"
+              },
+              {
+                "evidenceCode": "ECO:0000313",
+                "source": "Proteomes",
+                "id": "UP000035036"
+              }
+            ]
+          }
+        ],
+        "uniProtKBCrossReferences": [
+          {
+            "database": "EMBL",
+            "id": "CP010311",
+            "properties": [
+              {
+                "key": "ProteinId",
+                "value": "AJF05379.1"
+              },
+              {
+                "key": "Status",
+                "value": "-"
+              },
+              {
+                "key": "MoleculeType",
+                "value": "Genomic_DNA"
+              }
+            ]
+          },
+          {
+            "database": "RefSeq",
+            "id": "WP_040198653.1",
+            "properties": [
+              {
+                "key": "NucleotideSequenceId",
+                "value": "NZ_CP010311.1"
+              }
+            ]
+          },
+          {
+            "database": "AlphaFoldDB",
+            "id": "A0A0B5FL41",
+            "properties": [
+              {
+                "key": "Description",
+                "value": "-"
+              }
+            ]
+          },
+          {
+            "database": "STRING",
+            "id": "483547.GSUB_00590",
+            "properties": [
+              {
+                "key": "Description",
+                "value": "-"
+              }
+            ]
+          },
+          {
+            "database": "KEGG",
+            "id": "gsb:GSUB_00590",
+            "properties": [
+              {
+                "key": "Description",
+                "value": "-"
+              }
+            ]
+          },
+          {
+            "database": "HOGENOM",
+            "id": "CLU_021306_0_0_7",
+            "properties": [
+              {
+                "key": "Description",
+                "value": "-"
+              }
+            ]
+          },
+          {
+            "database": "OrthoDB",
+            "id": "9814800at2",
+            "properties": [
+              {
+                "key": "Description",
+                "value": "-"
+              }
+            ]
+          },
+          {
+            "database": "Proteomes",
+            "id": "UP000035036",
+            "properties": [
+              {
+                "key": "Component",
+                "value": "Chromosome"
+              }
+            ]
+          },
+          {
+            "database": "GO",
+            "id": "GO:0016491",
+            "properties": [
+              {
+                "key": "GoTerm",
+                "value": "F:oxidoreductase activity"
+              },
+              {
+                "key": "GoEvidenceType",
+                "value": "IEA:TreeGrafter"
+              }
+            ]
+          },
+          {
+            "database": "CDD",
+            "id": "cd08168",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "Cytochrom_C3"
+              },
+              {
+                "key": "MatchStatus",
+                "value": "1"
+              }
+            ]
+          },
+          {
+            "database": "Gene3D",
+            "id": "1.10.3820.10",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "Di-heme elbow motif domain"
+              },
+              {
+                "key": "MatchStatus",
+                "value": "1"
+              }
+            ]
+          },
+          {
+            "database": "Gene3D",
+            "id": "1.20.950.20",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "Transmembrane di-heme cytochromes, Chain C"
+              },
+              {
+                "key": "MatchStatus",
+                "value": "1"
+              }
+            ]
+          },
+          {
+            "database": "InterPro",
+            "id": "IPR036280",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "Multihaem_cyt_sf"
+              }
+            ]
+          },
+          {
+            "database": "InterPro",
+            "id": "IPR038266",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "NapC/NirT_cytc_sf"
+              }
+            ]
+          },
+          {
+            "database": "PANTHER",
+            "id": "PTHR35038",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "DISSIMILATORY SULFITE REDUCTASE SIRA"
+              },
+              {
+                "key": "MatchStatus",
+                "value": "1"
+              }
+            ]
+          },
+          {
+            "database": "PANTHER",
+            "id": "PTHR35038:SF6",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "SURFACE LOCALIZED DECAHEME CYTOCHROME C LIPOPROTEIN"
+              },
+              {
+                "key": "MatchStatus",
+                "value": "1"
+              }
+            ]
+          },
+          {
+            "database": "SUPFAM",
+            "id": "SSF48695",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "Multiheme cytochromes"
+              },
+              {
+                "key": "MatchStatus",
+                "value": "1"
+              }
+            ]
+          }
+        ],
+        "sequence": {
+          "value": "MLKVLPRILVALLLFGFLGSQALAANGLAIDPQTCIDCHEDVVSAETFANSVHGQNACTSCHVEITSVDAHMMGEIEVKPVNCVRCHKKETAEHYASVHMLNDIGCSACHYDIHEHNYWEGDKRIATSKCAECHFDVHETFEASIHGQALEAGNMDSAACFDCHGLHEIKPLGDPSSHDNREFHTRVCLDCHNDQEMMSRNGVNTVAVDTYMDSYHGKNYRLGYPELVAGCADCHTSHAVLPAENPDSSVHPDHLVETCANCHENATPLFTKFYSHGSYHDAENYPILYWTFMAMTGLLVTTFAVFWLHTLLWMFRGFVENREKKAALIRGDHVHHIPDAHKIYRRFTRRHIFLHLLVIISFLILSLTGLPLKFADQAWARIMMDWYGGAPVAAALHRLGAVITFVYFGAAMVMSVQFLFVRQDIPGNPIQRLFGPDSLFPNLRDVRDIAGMFRWFLFLGPKPTFERWTYWEKFDFLAVFWGMFAIGGSGLMLWFPEFFGTFLPGWMFNVATIVHSDEALLATGFIFTVHFFNTHGRPEKFPMDFVIFNGEINKEEFLEERADQWRRYEELGITEQFVKPKPSGVVYDFILKAFGFSAVFIGITLVILMVYAFMHGSGH",
+          "length": 619,
+          "molWeight": 70319,
+          "crc64": "A50C803C357768EA",
+          "md5": "FD169754BC0BD78311E794A92BD0CD98"
+        },
+        "extraAttributes": {
+          "countByFeatureType": {
+            "Signal": 1,
+            "Chain": 1,
+            "Transmembrane": 6
+          },
+          "uniParcId": "UPI00058A8FE8"
+        }
+      }
+    },
+    {
+      "accession": "Q39ZH5",
+      "ncbi_protein_accession": "ABB30349.1",
+      "uniprot_url": "https://www.uniprot.org/uniprotkb/Q39ZH5/entry",
+      "ncbi_url": "https://www.ncbi.nlm.nih.gov/protein/ABB30349.1",
+      "sequence_sha256": "d249e645342ac32f477cd246fb8b32ab0189b50611ea6b76f6d33491004a6962",
+      "uniprot_and_ncbi_sequences_identical": true,
+      "uniprot_record": {
+        "entryType": "UniProtKB unreviewed (TrEMBL)",
+        "primaryAccession": "Q39ZH5",
+        "uniProtkbId": "Q39ZH5_GEOMG",
+        "entryAudit": {
+          "firstPublicDate": "2005-11-22",
+          "lastAnnotationUpdateDate": "2026-11-04",
+          "lastSequenceUpdateDate": "2005-11-22",
+          "entryVersion": 90,
+          "sequenceVersion": 1
+        },
+        "annotationScore": 1.0,
+        "organism": {
+          "scientificName": "Geobacter metallireducens (strain ATCC 53774 / DSM 7210 / GS-15)",
+          "taxonId": 269799,
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000313",
+              "source": "EMBL",
+              "id": "ABB30349.1"
+            },
+            {
+              "evidenceCode": "ECO:0000313",
+              "source": "Proteomes",
+              "id": "UP000007073"
+            }
+          ],
+          "lineage": [
+            "Bacteria",
+            "Pseudomonadati",
+            "Thermodesulfobacteriota",
+            "Desulfuromonadia",
+            "Geobacterales",
+            "Geobacteraceae",
+            "Geobacter"
+          ]
+        },
+        "proteinExistence": "4: Predicted",
+        "proteinDescription": {
+          "submissionNames": [
+            {
+              "fullName": {
+                "evidences": [
+                  {
+                    "evidenceCode": "ECO:0000313",
+                    "source": "EMBL",
+                    "id": "ABB30349.1"
+                  }
+                ],
+                "value": "Cytochrome c/b"
+              }
+            }
+          ]
+        },
+        "genes": [
+          {
+            "geneName": {
+              "evidences": [
+                {
+                  "evidenceCode": "ECO:0000313",
+                  "source": "EMBL",
+                  "id": "ABB30349.1"
+                }
+              ],
+              "value": "cbcY"
+            },
+            "orderedLocusNames": [
+              {
+                "evidences": [
+                  {
+                    "evidenceCode": "ECO:0000313",
+                    "source": "EMBL",
+                    "id": "ABB30349.1"
+                  }
+                ],
+                "value": "Gmet_0100"
+              }
+            ]
+          }
+        ],
+        "comments": [
+          {
+            "commentType": "COFACTOR",
+            "cofactors": [
+              {
+                "name": "heme c",
+                "evidences": [
+                  {
+                    "evidenceCode": "ECO:0000256",
+                    "source": "ARBA",
+                    "id": "ARBA00001926"
+                  }
+                ],
+                "cofactorCrossReference": {
+                  "database": "ChEBI",
+                  "id": "CHEBI:61717"
+                }
+              }
+            ]
+          },
+          {
+            "commentType": "SUBCELLULAR LOCATION",
+            "subcellularLocations": [
+              {
+                "location": {
+                  "evidences": [
+                    {
+                      "evidenceCode": "ECO:0000256",
+                      "source": "ARBA",
+                      "id": "ARBA00004196"
+                    }
+                  ],
+                  "value": "Cell envelope",
+                  "id": "SL-0036"
+                }
+              }
+            ]
+          }
+        ],
+        "features": [
+          {
+            "type": "Signal",
+            "location": {
+              "start": {
+                "value": 1,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 24,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "SignalP"
+              }
+            ]
+          },
+          {
+            "type": "Chain",
+            "location": {
+              "start": {
+                "value": 25,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 618,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "SignalP"
+              }
+            ],
+            "featureId": "PRO_5004223534"
+          },
+          {
+            "type": "Transmembrane",
+            "location": {
+              "start": {
+                "value": 285,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 313,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "Helical",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ]
+          },
+          {
+            "type": "Transmembrane",
+            "location": {
+              "start": {
+                "value": 350,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 372,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "Helical",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ]
+          },
+          {
+            "type": "Transmembrane",
+            "location": {
+              "start": {
+                "value": 395,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 420,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "Helical",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ]
+          },
+          {
+            "type": "Transmembrane",
+            "location": {
+              "start": {
+                "value": 475,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 494,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "Helical",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ]
+          },
+          {
+            "type": "Transmembrane",
+            "location": {
+              "start": {
+                "value": 506,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 531,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "Helical",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ]
+          },
+          {
+            "type": "Transmembrane",
+            "location": {
+              "start": {
+                "value": 588,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 613,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "Helical",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ]
+          },
+          {
+            "type": "Domain",
+            "location": {
+              "start": {
+                "value": 98,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 191,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "Tetraheme cytochrome",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000259",
+                "source": "Pfam",
+                "id": "PF14537"
+              }
+            ]
+          }
+        ],
+        "keywords": [
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "ARBA",
+                "id": "ARBA00022982"
+              }
+            ],
+            "id": "KW-0249",
+            "category": "Biological process",
+            "name": "Electron transport"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "ARBA",
+                "id": "ARBA00022617"
+              }
+            ],
+            "id": "KW-0349",
+            "category": "Ligand",
+            "name": "Heme"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "ARBA",
+                "id": "ARBA00023004"
+              }
+            ],
+            "id": "KW-0408",
+            "category": "Ligand",
+            "name": "Iron"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ],
+            "id": "KW-0472",
+            "category": "Cellular component",
+            "name": "Membrane"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "ARBA",
+                "id": "ARBA00022723"
+              }
+            ],
+            "id": "KW-0479",
+            "category": "Ligand",
+            "name": "Metal-binding"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000313",
+                "source": "Proteomes",
+                "id": "UP000007073"
+              }
+            ],
+            "id": "KW-1185",
+            "category": "Technical term",
+            "name": "Reference proteome"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "SignalP"
+              }
+            ],
+            "id": "KW-0732",
+            "category": "Domain",
+            "name": "Signal"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ],
+            "id": "KW-0812",
+            "category": "Domain",
+            "name": "Transmembrane"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ],
+            "id": "KW-1133",
+            "category": "Domain",
+            "name": "Transmembrane helix"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "ARBA",
+                "id": "ARBA00022448"
+              }
+            ],
+            "id": "KW-0813",
+            "category": "Biological process",
+            "name": "Transport"
+          }
+        ],
+        "references": [
+          {
+            "referenceNumber": 1,
+            "citation": {
+              "id": "CI-A0A2KHIKI0SM8",
+              "citationType": "submission",
+              "authoringGroup": [
+                "US DOE Joint Genome Institute"
+              ],
+              "authors": [
+                "Copeland A.",
+                "Lucas S.",
+                "Lapidus A.",
+                "Barry K.",
+                "Detter J.C.",
+                "Glavina T.",
+                "Hammon N.",
+                "Israni S.",
+                "Pitluck S.",
+                "Di Bartolo G.",
+                "Chain P.",
+                "Schmutz J.",
+                "Larimer F.",
+                "Land M.",
+                "Kyrpides N.",
+                "Ivanova N.",
+                "Richardson P."
+              ],
+              "title": "Complete sequence of Geobacter metallireducens GS-15.",
+              "publicationDate": "OCT-2005",
+              "submissionDatabase": "EMBL/GenBank/DDBJ databases"
+            },
+            "referencePositions": [
+              "NUCLEOTIDE SEQUENCE [LARGE SCALE GENOMIC DNA]"
+            ],
+            "referenceComments": [
+              {
+                "evidences": [
+                  {
+                    "evidenceCode": "ECO:0000313",
+                    "source": "Proteomes",
+                    "id": "UP000007073"
+                  }
+                ],
+                "value": "ATCC 53774 / DSM 7210 / GS-15",
+                "type": "STRAIN"
+              }
+            ],
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000313",
+                "source": "EMBL",
+                "id": "ABB30349.1"
+              },
+              {
+                "evidenceCode": "ECO:0000313",
+                "source": "Proteomes",
+                "id": "UP000007073"
+              }
+            ]
+          },
+          {
+            "referenceNumber": 2,
+            "citation": {
+              "id": "19473543",
+              "citationType": "journal article",
+              "authors": [
+                "Aklujkar M.",
+                "Krushkal J.",
+                "DiBartolo G.",
+                "Lapidus A.",
+                "Land M.L.",
+                "Lovley D.R."
+              ],
+              "citationCrossReferences": [
+                {
+                  "database": "PubMed",
+                  "id": "19473543"
+                },
+                {
+                  "database": "DOI",
+                  "id": "10.1186/1471-2180-9-109"
+                }
+              ],
+              "title": "The genome sequence of Geobacter metallireducens: features of metabolism, physiology and regulation common and dissimilar to Geobacter sulfurreducens.",
+              "publicationDate": "2009",
+              "journal": "BMC Microbiol.",
+              "firstPage": "109",
+              "lastPage": "109",
+              "volume": "9"
+            },
+            "referencePositions": [
+              "NUCLEOTIDE SEQUENCE [LARGE SCALE GENOMIC DNA]"
+            ],
+            "referenceComments": [
+              {
+                "evidences": [
+                  {
+                    "evidenceCode": "ECO:0000313",
+                    "source": "Proteomes",
+                    "id": "UP000007073"
+                  }
+                ],
+                "value": "ATCC 53774 / DSM 7210 / GS-15",
+                "type": "STRAIN"
+              }
+            ],
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000313",
+                "source": "EMBL",
+                "id": "ABB30349.1"
+              },
+              {
+                "evidenceCode": "ECO:0000313",
+                "source": "Proteomes",
+                "id": "UP000007073"
+              }
+            ]
+          }
+        ],
+        "uniProtKBCrossReferences": [
+          {
+            "database": "EMBL",
+            "id": "CP000148",
+            "properties": [
+              {
+                "key": "ProteinId",
+                "value": "ABB30349.1"
+              },
+              {
+                "key": "Status",
+                "value": "-"
+              },
+              {
+                "key": "MoleculeType",
+                "value": "Genomic_DNA"
+              }
+            ]
+          },
+          {
+            "database": "RefSeq",
+            "id": "WP_004514105.1",
+            "properties": [
+              {
+                "key": "NucleotideSequenceId",
+                "value": "NC_007517.1"
+              }
+            ]
+          },
+          {
+            "database": "AlphaFoldDB",
+            "id": "Q39ZH5",
+            "properties": [
+              {
+                "key": "Description",
+                "value": "-"
+              }
+            ]
+          },
+          {
+            "database": "STRING",
+            "id": "269799.Gmet_0100",
+            "properties": [
+              {
+                "key": "Description",
+                "value": "-"
+              }
+            ]
+          },
+          {
+            "database": "KEGG",
+            "id": "gme:Gmet_0100",
+            "properties": [
+              {
+                "key": "Description",
+                "value": "-"
+              }
+            ]
+          },
+          {
+            "database": "eggNOG",
+            "id": "COG2864",
+            "properties": [
+              {
+                "key": "ToxonomicScope",
+                "value": "Bacteria"
+              }
+            ]
+          },
+          {
+            "database": "HOGENOM",
+            "id": "CLU_021306_0_0_7",
+            "properties": [
+              {
+                "key": "Description",
+                "value": "-"
+              }
+            ]
+          },
+          {
+            "database": "OMA",
+            "id": "AANCVDC",
+            "properties": [
+              {
+                "key": "Fingerprint",
+                "value": "-"
+              }
+            ]
+          },
+          {
+            "database": "Proteomes",
+            "id": "UP000007073",
+            "properties": [
+              {
+                "key": "Component",
+                "value": "Chromosome"
+              }
+            ]
+          },
+          {
+            "database": "GO",
+            "id": "GO:0030313",
+            "properties": [
+              {
+                "key": "GoTerm",
+                "value": "C:cell envelope"
+              },
+              {
+                "key": "GoEvidenceType",
+                "value": "IEA:UniProtKB-SubCell"
+              }
+            ]
+          },
+          {
+            "database": "GO",
+            "id": "GO:0016491",
+            "properties": [
+              {
+                "key": "GoTerm",
+                "value": "F:oxidoreductase activity"
+              },
+              {
+                "key": "GoEvidenceType",
+                "value": "IEA:TreeGrafter"
+              }
+            ]
+          },
+          {
+            "database": "Gene3D",
+            "id": "1.10.1130.10",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "Flavocytochrome C3, Chain A"
+              },
+              {
+                "key": "MatchStatus",
+                "value": "1"
+              }
+            ]
+          },
+          {
+            "database": "Gene3D",
+            "id": "1.20.950.20",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "Transmembrane di-heme cytochromes, Chain C"
+              },
+              {
+                "key": "MatchStatus",
+                "value": "1"
+              }
+            ]
+          },
+          {
+            "database": "InterPro",
+            "id": "IPR036280",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "Multihaem_cyt_sf"
+              }
+            ]
+          },
+          {
+            "database": "InterPro",
+            "id": "IPR012286",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "Tetraheme_cytochrome"
+              }
+            ]
+          },
+          {
+            "database": "PANTHER",
+            "id": "PTHR35038",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "DISSIMILATORY SULFITE REDUCTASE SIRA"
+              },
+              {
+                "key": "MatchStatus",
+                "value": "1"
+              }
+            ]
+          },
+          {
+            "database": "PANTHER",
+            "id": "PTHR35038:SF6",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "SURFACE LOCALIZED DECAHEME CYTOCHROME C LIPOPROTEIN"
+              },
+              {
+                "key": "MatchStatus",
+                "value": "1"
+              }
+            ]
+          },
+          {
+            "database": "Pfam",
+            "id": "PF14537",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "Cytochrom_c3_2"
+              },
+              {
+                "key": "MatchStatus",
+                "value": "1"
+              }
+            ]
+          },
+          {
+            "database": "SUPFAM",
+            "id": "SSF48695",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "Multiheme cytochromes"
+              },
+              {
+                "key": "MatchStatus",
+                "value": "1"
+              }
+            ]
+          }
+        ],
+        "sequence": {
+          "value": "MLSKVFRLVPALLLLMAVARPAAAESGMAIDPATCLGCHSNKVSASAFAASVHGKNACTSCHVEITDLAKHMKGETKVHKVRCERCHKKENSEHYASVHAQKDVMCADCHTDIHTHTYWNKDKRKVVAKCIQCHDKEAGYRNSIHGKSVAGGNMDSAACNDCHNLHAIKPLGDPKSKENREFHTKVCMKCHADEKMMERNNVVTVAVETYMESYHGKNYRLGFPEKVAGCADCHTAHGVLPAKDPNSSVNPQNLVATCAKCHPKATPLFTKFYAHGSHDRVKYPILFYTFVAMTGLLVSTFAVFWVHTLLWMFRGFVENREKQQALIQGHEEHHVPDGHKVYRRFKKRHIFLHLLVIISFLLLSLSGLPLKFSDQQWAKFMMDHIFGHSANAGRIHRLGACITFVYFFSAILLSLHFLFVRKDLKGNWLQRMFGPDSLMPNFRDIKDVAGMVRWFLFRGPKPTFERWTYWEKFDFIAVFWGMFAIGGSGLMLWFPEFFGSFLPGWMFNVATIVHSDEALLATGFIFTVHFFNTHGRPEKFPMDFVIFNGQIPKHEFLEERGDQWKRYEELGITEQFAAKKTSGVAYDFIVKAFGFCAVIIGISLTVLMLFAFLSGGSH",
+          "length": 618,
+          "molWeight": 70145,
+          "crc64": "9943C19C8A0F8A80",
+          "md5": "87E619493D5FFA424A6CC9CF735ED267"
+        },
+        "extraAttributes": {
+          "countByCommentType": {
+            "COFACTOR": 1,
+            "SUBCELLULAR LOCATION": 1
+          },
+          "countByFeatureType": {
+            "Signal": 1,
+            "Chain": 1,
+            "Transmembrane": 6,
+            "Domain": 1
+          },
+          "uniParcId": "UPI00003C6C6A"
+        }
+      }
+    },
+    {
+      "accession": "B9M704",
+      "ncbi_protein_accession": "ACM22025.1",
+      "uniprot_url": "https://www.uniprot.org/uniprotkb/B9M704/entry",
+      "ncbi_url": "https://www.ncbi.nlm.nih.gov/protein/ACM22025.1",
+      "sequence_sha256": "eb35dc95740bdd91c5020c35d0aad5a2a7ee53aa65b9a8c02f3d49a8b28865e7",
+      "uniprot_and_ncbi_sequences_identical": true,
+      "uniprot_record": {
+        "entryType": "UniProtKB unreviewed (TrEMBL)",
+        "primaryAccession": "B9M704",
+        "uniProtkbId": "B9M704_GEODF",
+        "entryAudit": {
+          "firstPublicDate": "2009-03-24",
+          "lastAnnotationUpdateDate": "2026-11-04",
+          "lastSequenceUpdateDate": "2009-03-24",
+          "entryVersion": 79,
+          "sequenceVersion": 1
+        },
+        "annotationScore": 1.0,
+        "organism": {
+          "scientificName": "Geotalea daltonii (strain DSM 22248 / JCM 15807 / FRC-32)",
+          "commonName": "Geobacter daltonii",
+          "taxonId": 316067,
+          "evidences": [
+            {
+              "evidenceCode": "ECO:0000313",
+              "source": "EMBL",
+              "id": "ACM22025.1"
+            },
+            {
+              "evidenceCode": "ECO:0000313",
+              "source": "Proteomes",
+              "id": "UP000007721"
+            }
+          ],
+          "lineage": [
+            "Bacteria",
+            "Pseudomonadati",
+            "Thermodesulfobacteriota",
+            "Desulfuromonadia",
+            "Geobacterales",
+            "Geobacteraceae",
+            "Geotalea"
+          ]
+        },
+        "proteinExistence": "4: Predicted",
+        "proteinDescription": {
+          "submissionNames": [
+            {
+              "fullName": {
+                "evidences": [
+                  {
+                    "evidenceCode": "ECO:0000313",
+                    "source": "EMBL",
+                    "id": "ACM22025.1"
+                  }
+                ],
+                "value": "Cytochrome c, 9 heme-binding sites, and cytochrome b"
+              }
+            }
+          ]
+        },
+        "genes": [
+          {
+            "geneName": {
+              "evidences": [
+                {
+                  "evidenceCode": "ECO:0000313",
+                  "source": "EMBL",
+                  "id": "ACM22025.1"
+                }
+              ],
+              "value": "cbcY"
+            },
+            "orderedLocusNames": [
+              {
+                "evidences": [
+                  {
+                    "evidenceCode": "ECO:0000313",
+                    "source": "EMBL",
+                    "id": "ACM22025.1"
+                  }
+                ],
+                "value": "Geob_3686"
+              }
+            ]
+          }
+        ],
+        "comments": [
+          {
+            "commentType": "COFACTOR",
+            "cofactors": [
+              {
+                "name": "heme c",
+                "evidences": [
+                  {
+                    "evidenceCode": "ECO:0000256",
+                    "source": "ARBA",
+                    "id": "ARBA00001926"
+                  }
+                ],
+                "cofactorCrossReference": {
+                  "database": "ChEBI",
+                  "id": "CHEBI:61717"
+                }
+              }
+            ]
+          },
+          {
+            "commentType": "SUBCELLULAR LOCATION",
+            "subcellularLocations": [
+              {
+                "location": {
+                  "evidences": [
+                    {
+                      "evidenceCode": "ECO:0000256",
+                      "source": "ARBA",
+                      "id": "ARBA00004196"
+                    }
+                  ],
+                  "value": "Cell envelope",
+                  "id": "SL-0036"
+                }
+              }
+            ]
+          }
+        ],
+        "features": [
+          {
+            "type": "Signal",
+            "location": {
+              "start": {
+                "value": 1,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 24,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "SignalP"
+              }
+            ]
+          },
+          {
+            "type": "Chain",
+            "location": {
+              "start": {
+                "value": 25,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 618,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "SignalP"
+              }
+            ],
+            "featureId": "PRO_5054523451"
+          },
+          {
+            "type": "Transmembrane",
+            "location": {
+              "start": {
+                "value": 286,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 307,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "Helical",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ]
+          },
+          {
+            "type": "Transmembrane",
+            "location": {
+              "start": {
+                "value": 351,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 374,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "Helical",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ]
+          },
+          {
+            "type": "Transmembrane",
+            "location": {
+              "start": {
+                "value": 394,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 420,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "Helical",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ]
+          },
+          {
+            "type": "Transmembrane",
+            "location": {
+              "start": {
+                "value": 475,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 494,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "Helical",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ]
+          },
+          {
+            "type": "Transmembrane",
+            "location": {
+              "start": {
+                "value": 506,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 531,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "Helical",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ]
+          },
+          {
+            "type": "Transmembrane",
+            "location": {
+              "start": {
+                "value": 588,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 614,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "Helical",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ]
+          },
+          {
+            "type": "Domain",
+            "location": {
+              "start": {
+                "value": 98,
+                "modifier": "EXACT"
+              },
+              "end": {
+                "value": 192,
+                "modifier": "EXACT"
+              }
+            },
+            "description": "Tetraheme cytochrome",
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000259",
+                "source": "Pfam",
+                "id": "PF14537"
+              }
+            ]
+          }
+        ],
+        "keywords": [
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "ARBA",
+                "id": "ARBA00022982"
+              }
+            ],
+            "id": "KW-0249",
+            "category": "Biological process",
+            "name": "Electron transport"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "ARBA",
+                "id": "ARBA00022617"
+              }
+            ],
+            "id": "KW-0349",
+            "category": "Ligand",
+            "name": "Heme"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "ARBA",
+                "id": "ARBA00023004"
+              }
+            ],
+            "id": "KW-0408",
+            "category": "Ligand",
+            "name": "Iron"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ],
+            "id": "KW-0472",
+            "category": "Cellular component",
+            "name": "Membrane"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "ARBA",
+                "id": "ARBA00022723"
+              }
+            ],
+            "id": "KW-0479",
+            "category": "Ligand",
+            "name": "Metal-binding"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000313",
+                "source": "Proteomes",
+                "id": "UP000007721"
+              }
+            ],
+            "id": "KW-1185",
+            "category": "Technical term",
+            "name": "Reference proteome"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "SignalP"
+              }
+            ],
+            "id": "KW-0732",
+            "category": "Domain",
+            "name": "Signal"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ],
+            "id": "KW-0812",
+            "category": "Domain",
+            "name": "Transmembrane"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "SAM",
+                "id": "Phobius"
+              }
+            ],
+            "id": "KW-1133",
+            "category": "Domain",
+            "name": "Transmembrane helix"
+          },
+          {
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000256",
+                "source": "ARBA",
+                "id": "ARBA00022448"
+              }
+            ],
+            "id": "KW-0813",
+            "category": "Biological process",
+            "name": "Transport"
+          }
+        ],
+        "references": [
+          {
+            "referenceNumber": 1,
+            "citation": {
+              "id": "CI-E6SURGASPI3FV",
+              "citationType": "submission",
+              "authoringGroup": [
+                "US DOE Joint Genome Institute"
+              ],
+              "authors": [
+                "Lucas S.",
+                "Copeland A.",
+                "Lapidus A.",
+                "Glavina del Rio T.",
+                "Dalin E.",
+                "Tice H.",
+                "Bruce D.",
+                "Goodwin L.",
+                "Pitluck S.",
+                "Saunders E.",
+                "Brettin T.",
+                "Detter J.C.",
+                "Han C.",
+                "Larimer F.",
+                "Land M.",
+                "Hauser L.",
+                "Kyrpides N.",
+                "Ovchinnikova G.",
+                "Kostka J.",
+                "Richardson P."
+              ],
+              "title": "Complete sequence of Geobacter sp. FRC-32.",
+              "publicationDate": "JAN-2009",
+              "submissionDatabase": "EMBL/GenBank/DDBJ databases"
+            },
+            "referencePositions": [
+              "NUCLEOTIDE SEQUENCE [LARGE SCALE GENOMIC DNA]"
+            ],
+            "referenceComments": [
+              {
+                "evidences": [
+                  {
+                    "evidenceCode": "ECO:0000313",
+                    "source": "Proteomes",
+                    "id": "UP000007721"
+                  }
+                ],
+                "value": "DSM 22248 / JCM 15807 / FRC-32",
+                "type": "STRAIN"
+              }
+            ],
+            "evidences": [
+              {
+                "evidenceCode": "ECO:0000313",
+                "source": "EMBL",
+                "id": "ACM22025.1"
+              },
+              {
+                "evidenceCode": "ECO:0000313",
+                "source": "Proteomes",
+                "id": "UP000007721"
+              }
+            ]
+          }
+        ],
+        "uniProtKBCrossReferences": [
+          {
+            "database": "EMBL",
+            "id": "CP001390",
+            "properties": [
+              {
+                "key": "ProteinId",
+                "value": "ACM22025.1"
+              },
+              {
+                "key": "Status",
+                "value": "-"
+              },
+              {
+                "key": "MoleculeType",
+                "value": "Genomic_DNA"
+              }
+            ]
+          },
+          {
+            "database": "RefSeq",
+            "id": "WP_012648751.1",
+            "properties": [
+              {
+                "key": "NucleotideSequenceId",
+                "value": "NC_011979.1"
+              }
+            ]
+          },
+          {
+            "database": "AlphaFoldDB",
+            "id": "B9M704",
+            "properties": [
+              {
+                "key": "Description",
+                "value": "-"
+              }
+            ]
+          },
+          {
+            "database": "STRING",
+            "id": "316067.Geob_3686",
+            "properties": [
+              {
+                "key": "Description",
+                "value": "-"
+              }
+            ]
+          },
+          {
+            "database": "KEGG",
+            "id": "geo:Geob_3686",
+            "properties": [
+              {
+                "key": "Description",
+                "value": "-"
+              }
+            ]
+          },
+          {
+            "database": "eggNOG",
+            "id": "COG2864",
+            "properties": [
+              {
+                "key": "ToxonomicScope",
+                "value": "Bacteria"
+              }
+            ]
+          },
+          {
+            "database": "HOGENOM",
+            "id": "CLU_021306_0_0_7",
+            "properties": [
+              {
+                "key": "Description",
+                "value": "-"
+              }
+            ]
+          },
+          {
+            "database": "OMA",
+            "id": "AANCVDC",
+            "properties": [
+              {
+                "key": "Fingerprint",
+                "value": "-"
+              }
+            ]
+          },
+          {
+            "database": "OrthoDB",
+            "id": "9814800at2",
+            "properties": [
+              {
+                "key": "Description",
+                "value": "-"
+              }
+            ]
+          },
+          {
+            "database": "Proteomes",
+            "id": "UP000007721",
+            "properties": [
+              {
+                "key": "Component",
+                "value": "Chromosome"
+              }
+            ]
+          },
+          {
+            "database": "GO",
+            "id": "GO:0030313",
+            "properties": [
+              {
+                "key": "GoTerm",
+                "value": "C:cell envelope"
+              },
+              {
+                "key": "GoEvidenceType",
+                "value": "IEA:UniProtKB-SubCell"
+              }
+            ]
+          },
+          {
+            "database": "GO",
+            "id": "GO:0016491",
+            "properties": [
+              {
+                "key": "GoTerm",
+                "value": "F:oxidoreductase activity"
+              },
+              {
+                "key": "GoEvidenceType",
+                "value": "IEA:TreeGrafter"
+              }
+            ]
+          },
+          {
+            "database": "Gene3D",
+            "id": "1.10.1130.10",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "Flavocytochrome C3, Chain A"
+              },
+              {
+                "key": "MatchStatus",
+                "value": "1"
+              }
+            ]
+          },
+          {
+            "database": "Gene3D",
+            "id": "1.20.950.20",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "Transmembrane di-heme cytochromes, Chain C"
+              },
+              {
+                "key": "MatchStatus",
+                "value": "1"
+              }
+            ]
+          },
+          {
+            "database": "InterPro",
+            "id": "IPR036280",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "Multihaem_cyt_sf"
+              }
+            ]
+          },
+          {
+            "database": "InterPro",
+            "id": "IPR012286",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "Tetraheme_cytochrome"
+              }
+            ]
+          },
+          {
+            "database": "PANTHER",
+            "id": "PTHR35038",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "DISSIMILATORY SULFITE REDUCTASE SIRA"
+              },
+              {
+                "key": "MatchStatus",
+                "value": "1"
+              }
+            ]
+          },
+          {
+            "database": "PANTHER",
+            "id": "PTHR35038:SF6",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "SURFACE LOCALIZED DECAHEME CYTOCHROME C LIPOPROTEIN"
+              },
+              {
+                "key": "MatchStatus",
+                "value": "1"
+              }
+            ]
+          },
+          {
+            "database": "Pfam",
+            "id": "PF14537",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "Cytochrom_c3_2"
+              },
+              {
+                "key": "MatchStatus",
+                "value": "1"
+              }
+            ]
+          },
+          {
+            "database": "SUPFAM",
+            "id": "SSF48695",
+            "properties": [
+              {
+                "key": "EntryName",
+                "value": "Multiheme cytochromes"
+              },
+              {
+                "key": "MatchStatus",
+                "value": "1"
+              }
+            ]
+          }
+        ],
+        "sequence": {
+          "value": "MFQIVTRLLPALLLLLAFVGPTAAEQGMAIDPATCLGCHSNKISAAAFAASVHGKNACTSCHVEITDLARHMRGETKIAKVHCERCHKKENAEHYNSVHVQNDVKCADCHTDIHTHTYWKKDKRIVVAKCIQCHEKQAVFQQSVHGKAVAAGNQDSAACNDCHNLHDIKPLGDPKSHTNREFHTKVCMKCHSDEKMMERNGVFNVAVKTYMESYHGKNYRLGFPEKVAGCADCHTAHMVLPAKDANSSVNPQNLVVTCAQCHKNATALFTKFYAHGEHTDREKYPILFYTFIAMTGLLVGTFAVFWLHSLLWMFRGFVENREKAQALMEGHVGHVVADGHAVYRRFQRRHIFLHLLVIISFLGLSLTGLPLKFSDQVWAKMFMELIGGSAKAGFIHRICAGITFVYFASAIALSIHFLFIRKDLKGNFLQRMFGPDSLMPNFRDIKDVTGMVRWFLFRGPKPTFERWTYWEKFDFIAVFWGMFAIGGSGLMLWFPEIFGYFLPGWAFNVATIVHSDEALLATGFIFTVHFFNTHGRPEKFPMDFVIFNGQLPKHEFLEERGDQWKRYEEQGITEKFRAKRTSGIAYDFIVKAFGFTAVITGLTLVVLMLFAFLAGGSH",
+          "length": 618,
+          "molWeight": 69954,
+          "crc64": "4ED30D343BCE5958",
+          "md5": "5D244FEDC3389DB7BEBD6EA2500B623E"
+        },
+        "extraAttributes": {
+          "countByCommentType": {
+            "COFACTOR": 1,
+            "SUBCELLULAR LOCATION": 1
+          },
+          "countByFeatureType": {
+            "Signal": 1,
+            "Chain": 1,
+            "Transmembrane": 6,
+            "Domain": 1
+          },
+          "uniParcId": "UPI0000DC91C1"
+        }
+      }
+    }
+  ]
+}

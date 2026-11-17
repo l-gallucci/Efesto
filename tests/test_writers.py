@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+# Copyright (c) 2026 Efesto contributors.
+
 """Tests for write_gff3, write_summary_stats, write_hit_faa, write_hit_fna."""
 
 import csv
@@ -12,7 +15,7 @@ from efesto.writers import (
 
 def _make_row(orf="orf1", genome="g1.faa", contig="c1", cat="Iron-Reduction",
               gene_name="mtrA", hmm_stem="MtrA", cluster_id=0,
-              cluster_confidence=0.85, confidence="calibrated",
+              threshold_type="model_specific",
               bitscore=200.0, evalue=1e-50, heme_motifs=0,
               cutoff=140.0, contig_len=50000):
     return {
@@ -23,8 +26,7 @@ def _make_row(orf="orf1", genome="g1.faa", contig="c1", cat="Iron-Reduction",
         "gene_name":          gene_name,
         "hmm_stem":           hmm_stem,
         "cluster_id":         cluster_id,
-        "cluster_confidence": cluster_confidence,
-        "confidence":         confidence,
+        "threshold_type":     threshold_type,
         "bitscore":           bitscore,
         "evalue":             evalue,
         "heme_motifs":        heme_motifs,
@@ -76,12 +78,13 @@ class TestWriteGff3:
         content = Path(out).read_text()
         assert "gene=mtrA" in content
 
-    def test_cluster_confidence_in_attributes(self, tmp_path):
-        rows   = [_make_row(cluster_confidence=0.750)]
+    def test_threshold_type_in_attributes(self, tmp_path):
+        rows   = [_make_row()]
         coords = {"g1.faa": {"orf1": _make_coords()}}
         out    = str(tmp_path / "out.gff3")
         write_gff3(out, rows, coords)
-        assert "cluster_confidence=0.750" in Path(out).read_text()
+        assert "threshold_type=model_specific" in Path(out).read_text()
+        assert "cluster_confidence" not in Path(out).read_text()
 
     def test_row_without_coords_skipped(self, tmp_path):
         rows   = [_make_row(orf="orf_no_coord")]
@@ -113,8 +116,7 @@ class TestWriteGff3:
 
 class TestWriteSummaryStats:
     def _rows(self, n=3):
-        return [_make_row(orf=f"orf{i}", cluster_id=i,
-                          cluster_confidence=0.9 - i * 0.2) for i in range(n)]
+        return [_make_row(orf=f"orf{i}", cluster_id=i) for i in range(n)]
 
     def test_creates_file(self, tmp_path):
         out = str(tmp_path / "stats.tsv")
@@ -134,12 +136,12 @@ class TestWriteSummaryStats:
         content = Path(out).read_text()
         assert "RUN\ttotal_orf_hits" in content
 
-    def test_confidence_section(self, tmp_path):
+    def test_threshold_counts_without_quality_tiers(self, tmp_path):
         out = str(tmp_path / "stats.tsv")
         write_summary_stats(out, self._rows(), ["g1.faa"])
         content = Path(out).read_text()
-        assert "CONFIDENCE" in content
-        assert "high_confidence_clusters" in content
+        assert "THRESHOLD\tmodel_specific\t3" in content
+        assert "CONFIDENCE" not in content
 
     def test_category_section(self, tmp_path):
         out = str(tmp_path / "stats.tsv")
@@ -164,8 +166,8 @@ class TestWriteSummaryStats:
 
 
 class TestWriteHitFaa:
-    def _row(self, orf="orf1", seq="MAST", cluster_confidence=0.9):
-        r = _make_row(orf=orf, cluster_confidence=cluster_confidence)
+    def _row(self, orf="orf1", seq="MAST"):
+        r = _make_row(orf=orf)
         r["sequence"] = seq
         r["bakta_id"] = orf
         return r
@@ -183,8 +185,8 @@ class TestWriteHitFaa:
         assert "gene=mtrA" in lines[0]
         assert "category=Iron-Reduction" in lines[0]
         assert "bitscore=200.0" in lines[0]
-        assert "cluster_confidence=0.900" in lines[0]
-        assert "confidence=calibrated" in lines[0]
+        assert "cluster_confidence" not in lines[0]
+        assert "threshold_type=model_specific" in lines[0]
 
     def test_sequence_written(self, tmp_path):
         out = str(tmp_path / "hits.faa")
@@ -258,7 +260,8 @@ class TestWriteHitFna:
         assert "gene=mtrA" in header
         assert "start=1" in header
         assert "strand=+" in header
-        assert "cluster_confidence=" in header
+        assert "cluster_confidence" not in header
+        assert "threshold_type=model_specific" in header
 
     def test_missing_fna_skipped(self, tmp_path):
         coords = {"g1.faa": {"orf1": _make_coords()}}
@@ -272,3 +275,19 @@ class TestWriteHitFna:
         out     = str(tmp_path / "hits.fna")
         n = write_hit_fna(out, [self._row_with_bakta()], coords, str(fna_dir))
         assert n == 0
+
+
+@pytest.mark.parametrize('genome',['MAG,1.faa','MAG"1.faa','MAG\n1.faa'])
+def test_heatmap_csv_roundtrips_genome_names(tmp_path,genome):
+    import csv
+    from efesto.writers import write_heatmap, write_coverage_heatmap
+    rows=[{'cat':'Iron-Reduction','genome':genome,'cluster_id':1,'contig':'ctg'}]
+    counts=tmp_path/'counts.csv'
+    write_heatmap(counts,rows,[genome])
+    with counts.open(newline='') as handle:
+        assert list(csv.reader(handle))==[['X',genome],['Iron-Reduction','1']]
+    coverage=tmp_path/'coverage.csv'
+    write_coverage_heatmap(coverage,rows,[genome],{genome:{'ctg':{'depth':2.5}}})
+    with coverage.open(newline='') as handle:
+        next(handle)
+        assert list(csv.reader(handle))==[['X',genome],['Iron-Reduction','2.5000']]

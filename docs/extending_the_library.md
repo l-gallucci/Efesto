@@ -40,7 +40,7 @@ biological calibration.
 
 Efesto's cutoff table uses full-sequence bitscores. A domain threshold cannot be
 copied into it as though it were a full-sequence threshold. Zero/nonpositive
-cutoffs invoke the generic bitscore floor and `low_confidence` interpretation.
+cutoffs invoke the generic bitscore floor and `threshold_type=generic` label.
 
 Acquisition, resistance and homeostasis should remain separate. Check canonical
 selectors in the source before adding categories. Context rules use model stems;

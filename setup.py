@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+# Copyright (c) 2026 Efesto contributors.
+
 """Package the maintained root HMM library without duplicating source files."""
 from pathlib import Path
 import csv
@@ -33,6 +36,7 @@ class BuildWithLibrary(build_py):
             shutil.copyfile(source, target)
         for name in ("LICENSE", "THIRD_PARTY_NOTICES.md", "CITATION.cff"):
             shutil.copyfile(ROOT / name, destination / name)
+        shutil.copytree(ROOT / "LICENSES", destination / "LICENSES")
         examples = destination / "examples"
         examples.mkdir()
         shutil.copyfile(ROOT / "operon_rules.json", examples / "operon_rules.json")

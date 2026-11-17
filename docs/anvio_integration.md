@@ -1,6 +1,6 @@
 # Anvi'o integration
 
-`--anvio` exports functional annotations and numeric gene scores:
+`--anvio` exports functional annotations and raw numeric hit observations:
 
 ```bash
 efesto --faa_dir proteins/ --gff_dir gff/ --out efesto_out --anvio
@@ -9,7 +9,12 @@ efesto --faa_dir proteins/ --gff_dir gff/ --out efesto_out --anvio
 | File | Columns |
 |---|---|
 | `Efesto-anvio-functions.tsv` | `gene_callers_id`, `source`, `accession`, `function`, `e_value` |
-| `Efesto-anvio-gene-scores.tsv` | `gene_callers_id`, `cluster_confidence`, `co_occ_score`, `hmm_weight`, `uniop_weight`, `bgc_boost` |
+| `Efesto-anvio-gene-evidence.tsv` | `gene_callers_id`, `bitscore`, `evalue`, `bitscore_cutoff`, `search_bitscore_cutoff`, `heme_c_motifs`, `contig_len` |
+
+These numeric columns preserve observations rather than a shared quality scale.
+Bitscores refer to their individual HMMs; keep model identity when interpreting
+them. Optional-tool statuses remain in the standard evidence tables, and UniOP
+probabilities remain in the pair table.
 
 ## Match gene identifiers first
 
@@ -36,7 +41,7 @@ correct integer ID for that database, a further conversion is unnecessary.
 
 ```bash
 anvi-import-functions -c CONTIGS.db -i mapped-functions.tsv
-anvi-import-misc-data mapped-gene-scores.tsv \
+anvi-import-misc-data mapped-gene-evidence.tsv \
   -c CONTIGS.db --target-data-table genes
 ```
 

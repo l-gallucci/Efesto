@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: AGPL-3.0-only
+# Copyright (c) 2026 Efesto contributors.
+
 # Efesto setup — verifies the installation
 # Not required if you used: conda env create -f environment.yml
 # (the environment.yml already runs pip install -e . automatically)

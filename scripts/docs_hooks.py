@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+# Copyright (c) 2026 Efesto contributors.
+
 """Build public documentation from maintained code and registry sources."""
 from collections import Counter
 import csv
@@ -67,11 +70,46 @@ def catalog_fragments():
         return table(['Model (filename stem)', 'Accession', 'NSEQ', 'Cutoff', 'Status'], [
             (f"`{r['stem']}`", r['acc'] or '—', r['nseq'], r['cutoff'], r['status']) for r in selected
         ])
+    def source_decision_table():
+        inclusion_notes = {
+            'curated': 'Documented redox-family builds; CymA remains experimental.',
+            'fegenie': 'Iron-related families; imported scoring parameters preserved.',
+            'interpro': 'Reviewed heme, siderophore and magnetosome assignments.',
+            'methmmdb': 'Broader metal acquisition, homeostasis and resistance.',
+            'mnoxgenetool': 'Published Mn-oxidation subclades, including sparse-seed exceptions.',
+            'ncbifam': 'Official metal-related/cofactor families; TupA remains experimental.',
+            'pfam': 'Relevant domain/family evidence, with specificity limits.',
+            'tabuteau': 'Acquisition and siderophore/metallophore biosynthetic families.',
+        }
+        exclusion_notes = {
+            'deprecated_nseq_insufficient': 'historical low-seed rule',
+            'deprecated_dedup_lower_coverage': 'overlapping variants',
+            'deprecated_dedup_sequence_cluster': 'sequence redundancy',
+            'deprecated_category_mismatch': 'category mismatch',
+            'deprecated_misassigned_duplicate': 'mislabeled duplicate',
+            'deprecated_out_of_scope': 'outside scope',
+            'deprecated_no_direct_iron_evidence': 'no direct native iron-oxidation evidence',
+        }
+        result = []
+        for source in sorted({r['source'] for r in rows}):
+            group = [r for r in rows if r['source'] == source]
+            excluded = Counter(r['status'] for r in group if not enabled(r))
+            reasons = '; '.join(
+                f"{count} {exclusion_notes.get(status, status)}"
+                for status, count in sorted(excluded.items())
+            ) or 'None among imported entries.'
+            result.append((source, sum(enabled(r) for r in group),
+                           inclusion_notes.get(source, 'See per-model provenance.'),
+                           sum(excluded.values()), reasons))
+        return table(['Source label', 'Enabled', 'Why included', 'Excluded', 'Why excluded'], result)
+
     by_stem = {r['stem']: r for r in rows}
     return {
         'catalog_summary': summary,
         'category_table': count_table('category', 'Category'),
         'source_table': count_table('source', 'Source label'),
+        'source_decision_table': source_decision_table(),
+        'curated_table': model_table(sorted((r for r in rows if r['source'] == 'curated'), key=lambda r: r['stem'])),
         'fes_table': model_table(sorted((r for r in rows if r['category'] == 'IronSulfur-Assembly'), key=lambda r: r['stem'])),
         'expansion_table': model_table([by_stem[stem] for stem in EXPANSION]),
     }

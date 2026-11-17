@@ -1,6 +1,9 @@
-"""Baktfold tier-3 structural confirmation: Foldseek+ProstT5 running and comparison.
+# SPDX-License-Identifier: AGPL-3.0-only
+# Copyright (c) 2026 Efesto contributors.
 
-Used only for HMM hits on models flagged needs_confirmation in the registry
+"""Structural reference searches with Foldseek+ProstT5.
+
+Used only for first-pass rejected HMM hits on models flagged needs_confirmation
 (narrow-margin models like sufA/sufD/sufE — see docs/hmm_library_curation.md),
 same narrow scope as eggnog.py's tier-2. Two things kept intentionally small:
 
@@ -102,34 +105,3 @@ def _parse_foldseek_results(path):
               file=sys.stderr)
         return {}
     return hits
-
-
-def confirm_struct_hit(expected_gene_name, foldseek_row):
-    """
-    Compare an HMM's guessed gene identity against Foldseek's independent
-    structural hit for the same ORF.
-
-    Args:
-        expected_gene_name: gene_name from the registry row that produced the
-            flagged HMM hit (e.g. "sufA")
-        foldseek_row: dict from _parse_foldseek_results for this ORF's query
-            ID, or None if Foldseek found no hit for this ORF at all
-
-    Returns one of "confirmed", "contradicted", "neutral".
-
-    Comparison is a loose substring match against the target structure's
-    name — reference DB entries should be named so the expected gene name
-    appears in the target ID (e.g. "MtrA_ref_1zzz"), the same naming
-    convention used for curating HMM seeds. "neutral" (no evidence either
-    way) when foldseek_row is None (no structural hit at all) or
-    expected_gene_name is empty. Never penalizes absence of data — same
-    policy as eggnog.confirm_hit / uniop_weight's fallback.
-    """
-    if foldseek_row is None or not expected_gene_name:
-        return "neutral"
-    target = (foldseek_row.get("target") or "").strip().lower()
-    if not target:
-        return "neutral"
-    if expected_gene_name.strip().lower() in target:
-        return "confirmed"
-    return "contradicted"

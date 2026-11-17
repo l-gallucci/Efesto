@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: AGPL-3.0-only
+# Copyright (c) 2026 Efesto contributors.
+
 # Efesto  –  quick smoke test using synthetic data
 # Requires: prodigal, hmmsearch (from HMMER) in PATH
 # Usage: bash test_data/test_run.sh

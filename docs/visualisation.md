@@ -7,7 +7,8 @@ Efesto includes `scripts/plot_heatmap.R` for static and interactive heatmaps.
 ## Features
 
 - Hierarchical clustering (Ward's method) on both axes
-- White → orange → red for gene counts; white → blue for coverage
+- White → orange → red for cluster counts; white → blue for coverage
+- Count matrices with a maximum above 10 use `log1p` for display
 - Static PDF/PNG via `pheatmap`
 - Interactive self-contained HTML via `plotly`
 - Compatible with FeGenie's R script input format
@@ -58,35 +59,47 @@ Rscript scripts/plot_heatmap.R --input results/Efesto-heatmap-data.csv
 ## Input files
 
 The script reads:
-- `Efesto-heatmap-data.csv` — gene-count matrix (categories × genomes)
+
+- `Efesto-heatmap-data.csv` — cluster-count matrix (categories × genomes)
 - `Efesto-coverage-heatmap.csv` — coverage matrix (same shape; optional)
 
-Both are in FeGenie's original CSV format and are compatible with FeGenie's
-own R visualisation script.
+The matrices use the FeGenie-compatible CSV layout. Their units differ:
+
+| Input | Unit |
+|---|---|
+| `Efesto-heatmap-data.csv` | Distinct retained clusters per category and genome |
+| The same file generated with `--norm` | Clusters per 1,000 input proteins |
+| `Efesto-coverage-heatmap.csv` | Sum of per-hit contig mean depths, or the configured coverage normalisation |
+
+Two retained genes of the same category in one cluster contribute **one** to the
+raw cluster matrix and **two** to a per-ORF count. Use `Efesto-results-long.tsv`
+when the question is how many retained genes matched. State the unit and any
+normalisation in figure captions. Coverage is not a confidence measure or
+transcript TPM; see [coverage units](output_formats.md#coverage-normalisation).
 
 ---
 
 ## Custom downstream analysis
 
 For custom plots, `Efesto-results-long.tsv` is the recommended starting
-point (one row per ORF, all columns including `cluster_confidence` and `model_nseq`):
+point (one row per ORF, all columns including `threshold_type`, evidence statuses and `model_nseq`):
 
 ```r
 library(tidyverse)
 
 hits <- read_tsv("results/Efesto-results-long.tsv")
 
-# Mean confidence by category
+# Retained family matches by category and search-gate type
 hits |>
-  group_by(category) |>
-  summarise(mean_conf = mean(cluster_confidence, na.rm=TRUE), n = n()) |>
-  arrange(desc(mean_conf))
+  count(category, threshold_type, name = "orf_hits")
 
-# Iron-reduction annotations in an illustrative score bin
+# Inspect iron-reduction family matches alongside available evidence
 hits |>
-  filter(str_detect(category, "Iron-Reduction"), cluster_confidence >= 0.8) |>
-  select(genome, contig, gene, bitscore, cluster_confidence)
+  filter(str_detect(category, "Iron-Reduction")) |>
+  select(genome, contig, gene, bitscore, evalue, threshold_type,
+         topology_verdict, heme_verdict, uniop_status)
 ```
 
-The 0.8 threshold above is an illustrative reporting bin, not a calibrated
-probability. See [interpretation](interpretation.md) before comparing samples.
+Counts describe retained annotations; neither an optional-tool status nor a
+model-specific cutoff alone establishes biological function. See
+[interpretation](interpretation.md) and [separate evidence](evidence.md).

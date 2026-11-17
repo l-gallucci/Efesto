@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+# Copyright (c) 2026 Efesto contributors.
+
 """Tests for src/efesto/io.py — build_confirmation_map, build_topology_expectation_map."""
 
 import csv
@@ -135,3 +138,15 @@ class TestBuildTopologyExpectationMap:
         assert "MtrA" in result
         assert result["MtrA"] == {"expected_heme_c": 10,
                                    "expected_topology": "signal_peptide"}
+
+
+def test_bundled_cutoff_table_has_one_exact_value_per_registered_model():
+    from pathlib import Path
+    from efesto.io import load_registry, read_cutoffs
+    library=Path(__file__).resolve().parents[1]/'hmm_library'
+    entries=[line.split() for line in (library/'HMM-bitcutoffs.txt').read_text().splitlines()
+             if line.strip() and not line.startswith('#')]
+    assert len({fields[0] for fields in entries})==len(entries)
+    cutoffs=read_cutoffs(library/'HMM-bitcutoffs.txt')
+    for row in load_registry(library):
+        assert float(row['cutoff'])==cutoffs.get(row['stem'],0.0),row['stem']

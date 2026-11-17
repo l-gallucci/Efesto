@@ -23,6 +23,8 @@ Efesto models. Exact source versions and cutoffs are retained in the registry.
 The SUF contextual rule requires multiple distinct components in a detected cluster;
 this supports a local assembly system without demonstrating physiological activity.
 Some profiles carry `needs_confirmation` metadata for optional annotation/structure
-checks. Missing confirmation is neutral, not evidence of correctness.
+checks. Their availability and comparison results are reported separately; a
+missing result does not confirm the assignment. Passing the minimum context
+requirement does not establish a complete SUF variant.
 
-See [curation](hmm_library_curation.md) and [confidence scoring](cluster_confidence_scoring.md).
+See [curation](hmm_library_curation.md) and [separate evidence](evidence.md).

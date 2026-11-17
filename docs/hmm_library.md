@@ -1,5 +1,12 @@
 # HMM library
 
+Efesto combines profiles from FeGenie, MetHMMDB, MnOxGeneTool, Tabuteau et al.,
+Pfam and NCBI protein family models, alongside profiles built for Efesto.
+Shared categories and runtime tables allow these sources to be searched in one
+workflow. Per-model records preserve their origins, references and search cutoffs;
+a shared category does not make the profiles functionally interchangeable.
+See [source citations](references.md) and [curation and provenance](hmm_library_curation.md).
+
 {{catalog_summary}}
 
 Counts below are generated from `hmm_registry.tsv` during the website build.
@@ -30,6 +37,12 @@ Source labels record the import channel as well as the original family database.
 Check each registry row and its reference; for example, an InterPro import may
 contain a Pfam or NCBIfam model. Source presence is not a per-profile validation.
 
+The [per-model license/source table](../hmm_library/model_licenses.tsv) records
+the original provider, identified terms and unresolved conditions for every
+registered profile. See [HMM license scope](../hmm_library/LICENSES.md) and
+[third-party notices](third-party-notices.md); runtime status does not
+change the redistribution terms of bundled files.
+
 ## Selectors
 
 Examples: `--annotate Fe Cu Zn`, `--annotate Ln W`, or an exact canonical category
@@ -56,3 +69,11 @@ NSEQ is a count of training records, not independent experimental positives.
 
 See [curation](hmm_library_curation.md), [functional scope](hmm_expansion_biological_rationale.md)
 and [custom libraries](extending_the_library.md).
+
+## Cutoff consistency
+
+The maintained `hmm_registry.tsv` records the authoritative curated model cutoffs.
+`HMM-bitcutoffs.txt` is the runtime table and must contain the same numeric values,
+without rounding or duplicate entries. The importer preserves full precision;
+package validation and regression checks enforce agreement. This synchronization
+does not constitute a new calibration or independent validation of a cutoff.

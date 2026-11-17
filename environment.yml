@@ -42,7 +42,7 @@ dependencies:
 
 # ── eggNOG-mapper tier-2 confirmation (optional, --run_eggnog) ──────────────
 # Only needed for narrow-margin models flagged needs_confirmation in the
-# registry — see docs/cluster_confidence_scoring.md.
+# registry — see docs/evidence.md.
 # Not required for --eggnog_annotations (reading a file you already have).
 #
 # Not installed by default — its reference database is tens of GB and must
@@ -58,7 +58,7 @@ dependencies:
 
 # ── Phobius topology/motif tier (optional, --topology_check) ────────────────
 # Runs on every hit whose model sets expected_heme_c/expected_topology in the
-# registry (see docs/cluster_confidence_scoring.md), not just
+# registry (see docs/evidence.md), not just
 # needs_confirmation-flagged ones, but cheap enough to leave unscoped.
 #
 # Phobius is NOT on conda or pip (academic license, manual download) — same
@@ -67,10 +67,10 @@ dependencies:
 #   Download: http://phobius.sbc.su.se/instructions.html
 #   efesto ... --topology_check --phobius_path /path/to/phobius.pl
 
-# ── Baktfold tier-3 structural confirmation (optional, --run_struct_confirmation) ──
+# ── Structural reference search (optional, --run_struct_confirmation) ──
 # Same narrow scope as eggNOG tier-2: only needs_confirmation-flagged hits
-# dropped by initial context filtering. This weights retained/rescued hits;
-# it does not independently rescue dropped hits. Foldseek translates amino-acid
+# dropped by initial context filtering. Raw reference matches are reported for
+# this candidate set; they do not independently rescue dropped hits. Foldseek translates amino-acid
 # sequences to the 3Di structural alphabet internally via ProstT5
 # (--prostt5-model) — no separate torch/transformers Python dependency.
 #

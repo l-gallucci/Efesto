@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: AGPL-3.0-only
+# Copyright (c) 2026 Efesto contributors.
+
 # make_insilico_mg.sh — build a synthetic metagenome from known genomes, so the
 # Efesto-vs-FeGenie metagenome benchmark has GROUND TRUTH (you know which genes
 # went in). Reads -> assembly -> contigs. Feed the contigs to benchmark_fegenie.py

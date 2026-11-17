@@ -4,9 +4,10 @@
 
 **Profile HMM annotation of metal cycling, acquisition, homeostasis and resistance genes.**
 
-Efesto combines an expanded HMM library with genomic-context filtering and optional
-UniOP, antiSMASH, eggNOG-mapper, structural and topology evidence. It builds on
-[FeGenie](https://github.com/Arkadiy-Garber/FeGenie).
+Efesto integrates profile HMMs from multiple databases and published collections
+to annotate metal-related genes in genomes, metagenomes and gene catalogs. It
+combines protein-family searches with genomic-context filtering and reports
+optional annotation, operon, BGC, structure and topology evidence separately.
 
 **[Documentation](https://l-gallucci.github.io/Efesto/)** ·
 [Installation](docs/installation.md) · [Workflows](docs/workflows.md) ·
@@ -47,42 +48,83 @@ Use a fresh output directory after changing inputs, models or search settings.
 
 ## Results
 
-Main outputs include `Efesto-results-long.tsv`, summary/count tables and matched
-protein sequences. GFF3 and nucleotide matches require appropriate coordinate/source
-data. See the [output reference](docs/output_formats.md).
+Start with `Efesto-results-long.tsv` for retained ORFs, HMM match statistics,
+threshold type and the individual annotation/context observations.
+`Efesto-filter-decisions.tsv` traces retained, excluded and rescued selected HMM candidates;
+`Efesto-context-evidence.tsv` describes distinct models, copies and rule outcomes;
+`Efesto-confirmation-candidates.tsv` records recovered and unretained candidates;
+`Efesto-UniOP-pair-evidence.tsv` contains available pair probabilities.
+See the [output reference](docs/output_formats.md).
+
+HMM thresholds, context filters and applicable eggNOG rescue decide retention.
+Optional UniOP, BGC, structure and topology observations are reported separately.
+Read [how the pipeline works](docs/pipeline.md) and the
+[worked evidence examples](docs/evidence.md#worked-examples).
 
 A hit indicates family-related genetic potential, not measured expression, metal
-specificity, pathway activity or resistance. Cluster confidence is a heuristic
-score, not a probability. See [interpretation](docs/interpretation.md).
+specificity, pathway activity or resistance. See [interpretation](docs/interpretation.md).
 
 ## HMM library
 
-The [catalog](docs/hmm_library.md) describes runtime categories, sources and profile
-status. The website generates current counts from the registry. Active and
-experimental profiles run by default, while deprecated profiles are skipped.
+The library brings together profiles from **FeGenie, MetHMMDB, MnOxGeneTool,
+Tabuteau et al., Pfam and NCBI protein family models**, alongside profiles built
+for Efesto. Coverage includes manganese, copper, zinc, nickel, cobalt, tungsten,
+lanthanides and other metal/metalloid functions, alongside iron-related processes.
+Import channels, including InterPro and models obtained through other
+collections, are distinguished from original providers in the source records.
+See the [catalog and sources](docs/hmm_library.md#sources) and
+[references](docs/references.md).
+
+The website generates current counts from the registry. Active and experimental
+profiles run by default, while deprecated profiles are skipped.
 See [curation and provenance](docs/hmm_library_curation.md) for interpretation limits.
 
-## Differences from FeGenie
+## Integration and provenance
 
-Efesto adds coordinate/strand-aware clustering, canonical categories, a versioned
-registry, context/scoring integrations and additional output formats. HMMER searches
-are coordinated by Python threads with at most two concurrent searches by default;
-gene prediction has separate workers. These changes do not by themselves establish
-higher annotation accuracy. See [pipeline](docs/pipeline.md) and
-[performance](docs/performance.md).
+Shared category names and runtime tables bring the collections into one workflow;
+per-model records preserve source, status and search cutoffs. Genomic grouping uses
+coordinates and optional strand information. Retention decisions and optional
+evidence are reported in separate tables.
+
+FeGenie contributes imported profiles and the basis of the default context engine,
+with Efesto-specific changes. Model and code provenance are documented in the
+[references](docs/references.md) and [third-party notices](THIRD_PARTY_NOTICES.md).
+Combining sources does not by itself establish higher annotation accuracy.
+See [pipeline](docs/pipeline.md) and [performance](docs/performance.md) for filtering
+and resource use.
+
+## Scope and model changes compared with FeGenie
+
+The [recap](docs/comparison.md) explains model changes relative to FeGenie,
+the combined metal/metalloid scope, source-specific curation, imported versus
+rebuilt profiles, category/threshold changes and separate evidence reporting,
+ahead of a dedicated methods publication.
+
+A historical local control used the same 37,633 proteins and 191 original FeGenie
+HMMs: Efesto took **38.0 s / 562.8 MiB** sampled peak RSS, versus
+**182.7 s / 886.4 MiB** for FeGenie. All 1,910 paired HMMER tables had identical
+hit rows. This was one run per program on archived snapshots; FeGenie's timing
+included its built-in BLAST searches and waits. It is not a current-release
+performance guarantee or an accuracy ranking. See [methods, full-library results
+and functional scope](docs/comparison.md).
 
 ## Cite and license
 
 Cite Efesto using [CITATION.cff](CITATION.cff), plus the applicable model and tool
 sources in [References](docs/references.md).
-The code is distributed under the [MIT license](LICENSE).
+All Efesto-owned code, including the Python application, standalone scripts,
+setup utilities and tests, is distributed under [AGPLv3](LICENSE).
+Project documentation uses the same license. Third-party software and model
+data retain their original terms; see [license scope](LICENSES/README.md).
 Logo: [Elena Panariello](https://www.instagram.com/elena_panariello/).
 Efesto is not affiliated with the original FeGenie authors.
 
 ## Source terms
 
-Efesto is intended for academic, non-commercial research. The MIT license covers
-Efesto's own code; imported profiles, reference data and external tools retain
-their original conditions. For non-academic or commercial use, always consult the
-original sources and obtain any required permissions. See
+Imported profiles, reference data and external tools retain their original
+conditions. Each HMM is linked to its source terms in
+[model_licenses.tsv](hmm_library/model_licenses.tsv); the six explicitly listed
+[Efesto rebuilt profiles](hmm_library/LICENSES.md) use CC BY-SA 4.0 on
+Efesto-owned contributions. Unspecified or unresolved redistribution terms
+remain flagged; citation does not replace permission. See
 [Third-party sources and conditions of use](THIRD_PARTY_NOTICES.md).

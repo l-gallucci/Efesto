@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+# Copyright (c) 2026 Efesto contributors.
+
 """UniOP operon prediction: running, parsing, and output writing."""
 
 import csv
@@ -5,8 +8,13 @@ import math
 import re
 import subprocess
 import sys
+import shutil
+import tempfile
 from collections import defaultdict
 from pathlib import Path
+
+from efesto._cache import cache_matches, file_digest, write_manifest
+from efesto._external import python_script_command
 
 
 def _parse_uniop_faa_index(faa_path):
@@ -141,7 +149,7 @@ def make_uniop_faa(bakta_faa_path, bakta_gff_path, out_faa_path):
 
     Reads coordinates from the Bakta GFF3 (locus_tag= attribute) and rewrites
     the FAA headers in Prodigal-compatible format. Sequences are unchanged.
-    Returns True if successful, False if no coordinates could be matched.
+    Returns True only when every FAA record has matching GFF coordinates.
     """
     coord_map = {}
     with open(bakta_gff_path) as fh:
@@ -172,10 +180,11 @@ def make_uniop_faa(bakta_faa_path, bakta_gff_path, out_faa_path):
     if not coord_map:
         return False
 
-    matched = 0
+    matched = total = 0
     with open(bakta_faa_path) as fh_in, open(out_faa_path, "w") as fh_out:
         for line in fh_in:
             if line.startswith(">"):
+                total += 1
                 current_id = line[1:].split()[0].strip()
                 coords = coord_map.get(current_id)
                 if coords:
@@ -191,126 +200,142 @@ def make_uniop_faa(bakta_faa_path, bakta_gff_path, out_faa_path):
             else:
                 fh_out.write(line)
 
-    return matched > 0
+    return total > 0 and matched == total
 
 
 def run_uniop(faa_files, fna_dir, out_dir, uniop_path, fna_ext="fna",
-              prodigal_faa_dir=None, bakta_gff_dir=None):
-    """
-    Run UniOP on each genome.
+              prodigal_faa_dir=None, bakta_gff_dir=None, return_status=False):
+    """Run UniOP and reuse only completed results bound to the exact inputs.
 
-    Input mode priority:
-      1. pyrodigal FAA (--fna_dir used): headers already Prodigal-compatible
-         → pass directly to UniOP with -a
-      2. Bakta FAA + GFF3 (--faa_dir + --bakta_gff_dir): reconstruct headers
-         from GFF3 coordinates → write temp FAA → pass to UniOP with -a
-      3. FNA fallback: UniOP runs Prodigal internally with -i
-
-    Returns (genome_operon_map, genome_pair_probs):
-        genome_operon_map:  {genome_faa_name → {orf_id → operon_id}}
-        genome_pair_probs:  {genome_faa_name → {(orf_a, orf_b) → float}}
-                            read from uniop.pred even when uniop.operon is present
+    Prefer Prodigal-compatible FAA, then reconstruct it from Bakta FAA/GFF,
+    then use UniOP's internal Prodigal on FNA. The preserved index is always
+    the exact FAA used by that prediction, never a current-file guess.
     """
-    uniop_dir = out_dir / "_uniop"
-    uniop_dir.mkdir(exist_ok=True)
-    genome_operon_map  = {}
-    genome_pair_probs  = {}
+    uniop_dir = Path(out_dir) / "_uniop"
+    uniop_dir.mkdir(parents=True, exist_ok=True)
+    genome_operon_map, genome_pair_probs, statuses = {}, {}, {}
 
     for faa in faa_files:
-        stem     = faa.stem
+        faa = Path(faa)
+        stem = faa.stem
         work_dir = uniop_dir / stem
         work_dir.mkdir(exist_ok=True)
+        manifest = work_dir / "efesto-cache.json"
+        statuses[faa.name] = "input_unavailable"
+        try:
+            command = python_script_command(uniop_path)
+            source, gff, mode = None, None, None
+            if prodigal_faa_dir:
+                candidate = Path(prodigal_faa_dir) / (stem + ".faa")
+                if candidate.is_file():
+                    source, mode = candidate, "prodigal_faa"
+            if source is None and bakta_gff_dir:
+                gff = next((p for ext in (".gff3", ".gff")
+                            if (p := Path(bakta_gff_dir) / (stem + ext)).is_file()), None)
+                if gff is not None and faa.is_file():
+                    source, mode = faa, "bakta_faa"
+            if source is None and fna_dir:
+                source = next((p for ext in dict.fromkeys((fna_ext, "fna", "fasta", "fa"))
+                               if (p := Path(fna_dir) / (stem + "." + ext)).is_file()), None)
+                if source is not None:
+                    mode = "fna"
+            if source is None:
+                print(f"  [WARN] UniOP: no compatible FAA/GFF or FNA for {stem}; skipping",
+                      file=sys.stderr)
+                continue
 
-        operon_file = work_dir / "uniop.operon"
-        pred_file   = work_dir / "uniop.pred"
+            def signature():
+                return {"schema": 1, "mode": mode, "source_sha256": file_digest(source),
+                        "gff_sha256": file_digest(gff) if gff is not None and mode == "bakta_faa" else None,
+                        "annotation_faa_sha256": file_digest(faa),
+                        "command": command, "script_sha256": file_digest(command[1]),
+                        "python_sha256": file_digest(command[0])}
 
-        faa_for_uniop = None
-        faa_for_index = None
+            def result_files(directory):
+                return {name: directory / name for name in
+                        ("uniop.operon", "uniop.pred", "efesto-index.faa")
+                        if (directory / name).is_file()}
 
-        if prodigal_faa_dir:
-            candidate = Path(prodigal_faa_dir) / f"{stem}.faa"
-            if candidate.exists():
-                faa_for_uniop = candidate
-                faa_for_index = candidate
-
-        if faa_for_uniop is None and bakta_gff_dir:
-            bakta_gff = None
-            for ext in (".gff3", ".gff"):
-                c = Path(bakta_gff_dir) / (stem + ext)
-                if c.exists():
-                    bakta_gff = c
-                    break
-            if bakta_gff and faa.exists():
-                temp_faa = work_dir / f"{stem}_uniop.faa"
-                if not temp_faa.exists():
-                    ok = make_uniop_faa(str(faa), str(bakta_gff), str(temp_faa))
-                    if not ok:
-                        print(f"  [WARN] UniOP: could not build temp FAA for {stem}",
-                              file=sys.stderr)
-                if temp_faa.exists():
-                    faa_for_uniop = temp_faa
-                    faa_for_index = temp_faa
-
-        if operon_file.exists():
-            print(f"  [INFO] UniOP cache hit for {stem}")
-        else:
-            if faa_for_uniop:
-                cmd = ["python3", str(uniop_path),
-                       "-a", str(faa_for_uniop.resolve()),
-                       "--faa_source", "prodigal_faa",
-                       "-t", str(work_dir.resolve())]
+            inputs = signature()
+            outputs = result_files(work_dir)
+            if ("efesto-index.faa" in outputs and len(outputs) >= 2
+                    and cache_matches(manifest, inputs, outputs)):
+                statuses[faa.name] = "cached"
+                print(f"  [INFO] UniOP cache hit for {stem}")
             else:
-                fna_path = None
-                if fna_dir:
-                    for ext in [fna_ext, "fna", "fasta", "fa"]:
-                        candidate = Path(fna_dir) / f"{stem}.{ext}"
-                        if candidate.exists():
-                            fna_path = candidate
-                            break
-                if fna_path is None:
-                    print(f"  [WARN] UniOP: no FAA or FNA found for {stem} — skipping.",
-                          file=sys.stderr)
-                    continue
-                cmd = ["python3", str(uniop_path),
-                       "-i", str(fna_path.resolve()),
-                       "-t", str(work_dir.resolve())]
+                # Old files may remain for inspection, but a failed run cannot
+                # mark them complete or decode them against a new FAA.
+                manifest.unlink(missing_ok=True)
+                with tempfile.TemporaryDirectory(dir=uniop_dir, prefix=stem + ".run-") as temp:
+                    staging = Path(temp)
+                    result_dir = staging / "results"
+                    result_dir.mkdir()
+                    prepared = staging / "input.faa"
+                    if mode == "bakta_faa":
+                        if not make_uniop_faa(str(source), str(gff), str(prepared)):
+                            statuses[faa.name] = "input_unavailable"
+                            print(f"  [WARN] UniOP: not all FAA headers have GFF coordinates for {stem}",
+                                  file=sys.stderr)
+                            continue
+                    elif mode == "prodigal_faa":
+                        shutil.copyfile(source, prepared)
+                    if mode == "fna":
+                        staged_fna = staging / "input.fna"
+                        shutil.copyfile(source, staged_fna)
+                        cmd = command + ["-i", str(staged_fna.resolve()),
+                                         "-t", str(result_dir.resolve())]
+                    else:
+                        cmd = command + ["-a", str(prepared.resolve()),
+                                         "--faa_source", "prodigal_faa",
+                                         "-t", str(result_dir.resolve())]
+                    process = subprocess.run(cmd, capture_output=True, text=True)
+                    if process.returncode != 0:
+                        (work_dir / "uniop_error.log").write_text(
+                            f"Command: {cmd!r}\n\nSTDOUT:\n{process.stdout}\n\nSTDERR:\n{process.stderr}")
+                        raise RuntimeError(f"exit {process.returncode}: {process.stderr[:400]}")
+                    if not any((result_dir / n).is_file() for n in ("uniop.operon", "uniop.pred")):
+                        raise RuntimeError("UniOP completed without prediction files")
+                    if mode == "fna":
+                        candidates = sorted(result_dir.glob("*.faa"))
+                        if len(candidates) != 1:
+                            raise RuntimeError("Cannot identify the exact FAA produced by UniOP")
+                        prepared = candidates[0]
+                    shutil.copyfile(prepared, result_dir / "efesto-index.faa")
+                    if signature() != inputs:
+                        raise RuntimeError("UniOP inputs or executable changed during prediction")
+                    write_manifest(result_dir / manifest.name, inputs, result_files(result_dir))
+                    # Replace the result set together, with its preserved index
+                    # and completion manifest, after successful execution only.
+                    old = staging / "previous"
+                    work_dir.replace(old)
+                    try:
+                        result_dir.replace(work_dir)
+                    except OSError:
+                        old.replace(work_dir)
+                        raise
+                statuses[faa.name] = "completed"
 
-            r = subprocess.run(cmd, capture_output=True, text=True)
-            if r.returncode != 0:
-                print(f"  [WARN] UniOP failed for {stem}:\n{r.stderr[:400]}",
-                      file=sys.stderr)
-                err_log = work_dir / "uniop_error.log"
-                err_log.write_text(
-                    f"Command: {' '.join(cmd)}\n\nSTDOUT:\n{r.stdout}\n\nSTDERR:\n{r.stderr}")
-                print(f"         Full error → {err_log}", file=sys.stderr)
-                continue
+            index = _parse_uniop_faa_index(work_dir / "efesto-index.faa")
+            operon_file, pred_file = work_dir / "uniop.operon", work_dir / "uniop.pred"
+            memberships = _parse_uniop_operon(operon_file, index) if operon_file.is_file() else {}
+            probabilities = {}
+            if pred_file.is_file():
+                fallback, probabilities = _parse_uniop_pred(pred_file, index)
+                if not memberships:
+                    memberships = fallback
+            if not memberships and not probabilities:
+                statuses[faa.name] = "no_informative_result"
+            genome_operon_map[faa.name] = memberships
+            if probabilities:
+                genome_pair_probs[faa.name] = probabilities
+            print(f"  [INFO] {stem}: {len(set(memberships.values()))} operons, "
+                  f"{len(memberships)} genes assigned")
+        except (OSError, ValueError, RuntimeError) as error:
+            statuses[faa.name] = "failed"
+            print(f"  [WARN] UniOP failed for {stem}: {error}", file=sys.stderr)
 
-        if faa_for_index is None:
-            faa_candidates = sorted(work_dir.glob("*.faa"))
-            if not faa_candidates:
-                print(f"  [WARN] UniOP: no FAA for index in {work_dir}",
-                      file=sys.stderr)
-                continue
-            faa_for_index = faa_candidates[0]
-
-        idx_to_orf = _parse_uniop_faa_index(str(faa_for_index))
-
-        orf_to_op  = {}
-        pair_probs = {}
-        if operon_file.exists():
-            orf_to_op = _parse_uniop_operon(str(operon_file), idx_to_orf)
-        if pred_file.exists():
-            predicted_ops, pair_probs = _parse_uniop_pred(str(pred_file), idx_to_orf)
-            if not orf_to_op:
-                orf_to_op = predicted_ops
-
-        n_operons = len(set(orf_to_op.values()))
-        print(f"  [INFO] {stem}: {n_operons} operons, {len(orf_to_op)} genes assigned")
-
-        genome_operon_map[faa.name]  = orf_to_op
-        if pair_probs:
-            genome_pair_probs[faa.name] = pair_probs
-
+    if return_status:
+        return genome_operon_map, genome_pair_probs, statuses
     return genome_operon_map, genome_pair_probs
 
 

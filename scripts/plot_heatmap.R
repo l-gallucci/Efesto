@@ -1,9 +1,12 @@
 #!/usr/bin/env Rscript
+# SPDX-License-Identifier: AGPL-3.0-only
+# Copyright (c) 2026 Efesto contributors.
+
 # =============================================================================
 # plot_heatmap.R  —  Visualisation script for Efesto output
 # =============================================================================
 # Generates hierarchically clustered, publication-ready heatmaps from Efesto
-# CSV output. Automatically detects the input type (gene counts vs coverage)
+# CSV output. Automatically detects the input type (cluster counts vs coverage)
 # and adapts colour scales accordingly.
 #
 # Usage
@@ -27,7 +30,7 @@
 #   --width       Plot width in inches  (overrides --size)
 #   --height      Plot height in inches (overrides --size)
 #   --font        Font family for all plot text (default: Helvetica)
-#   --min_count   Minimum gene count/coverage to include a category row (default: 0)
+#   --min_count   Minimum cluster count/coverage to include a category row (default: 0)
 #   --no_command  Suppress the inset caption showing the Efesto command that
 #                 produced the input CSV (auto-read from Efesto-run.log)
 #   --run_log     Explicit path to an Efesto-run.log to pull the command from
@@ -91,7 +94,7 @@ option_list <- list(
   make_option("--font",      type = "character", default = "Helvetica",
               help = "Font family for plot text [default: Helvetica]"),
   make_option("--min_count", type = "double",    default = 0,
-              help = "Min gene count/coverage per category to include [default: 0]"),
+              help = "Min cluster count/coverage per category to include [default: 0]"),
   make_option("--no_cluster_rows", action = "store_true", default = FALSE,
               help = "Disable hierarchical clustering of categories"),
   make_option("--no_cluster_cols", action = "store_true", default = FALSE,
@@ -239,7 +242,7 @@ palette_for_type <- function(type) {
     # Blue-purple gradient for coverage
     colorRampPalette(c("#F7FBFF", "#C6DBEF", "#6BAED6", "#2171B5", "#08306B"))(100)
   } else {
-    # White → warm orange → dark red for gene counts
+    # White → warm orange → dark red for cluster counts
     colorRampPalette(c("#FFFFFF", "#FFF3E0", "#FF8F00", "#BF360C"))(100)
   }
 }
@@ -266,7 +269,7 @@ make_static <- function(mat, title, type, out_base, caption,
   rownames(mat) <- pretty_category(rownames(mat))
 
   # Legend label
-  legend_title <- if (type == "coverage") "Coverage / depth" else "Gene count"
+  legend_title <- if (type == "coverage") "Coverage / depth" else "Cluster count"
 
   # Value breaks: log1p scaling for counts, linear for coverage
   if (type == "count" && max(mat) > 10) {
@@ -352,7 +355,7 @@ make_interactive <- function(mat, title, type, out_base, caption,
     cbar_title  <- "log(n + 1)"
   } else {
     display_mat <- mat
-    cbar_title  <- if (type == "coverage") "Coverage / depth" else "Gene count"
+    cbar_title  <- if (type == "coverage") "Coverage / depth" else "Cluster count"
   }
 
   colorscale <- if (type == "coverage") {

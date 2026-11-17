@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+# Copyright (c) 2026 Efesto contributors.
+
 """Tests for eggnog.py — annotations parsing, confirm_hit verdicts, FASTA export."""
 
 import pytest

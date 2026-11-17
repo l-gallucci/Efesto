@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+# Copyright (c) 2026 Efesto contributors.
+
 """Tests for src/efesto/clustering.py"""
 
 from efesto.clustering import build_clusters, cluster_by_index

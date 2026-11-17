@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+# Copyright (c) 2026 Efesto contributors.
+
 """Search scheduling must preserve hits while bounding concurrency and memory."""
 import subprocess
 import threading

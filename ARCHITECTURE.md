@@ -14,7 +14,8 @@ required only for their corresponding execution paths.
 | Profile search | `hmmer.py` | Bounded HMMER job queue, search tables, best accepted hit per ORF |
 | Neighborhoods | `clustering.py` | Coordinate/strand grouping, ordinal fallback, catalog singletons |
 | Context filtering | `operon.py` | Default and JSON rules, Mtr/Mto context and applicable checks |
-| Evidence weighting | `scoring.py` | Heuristic confidence factors |
+| Evidence reporting | `evidence.py` | Per-hit observations, availability and retained-neighborhood rule assessments |
+| Filter audit | `decisions.py`, `operon.py` | Actual decisions for selected candidates, disk spooling and final rescue status |
 | Optional context | `uniop.py`, `bgc.py` | Operon probabilities and qualifying BGC overlap |
 | Optional confirmation | `eggnog.py`, `baktfold.py`, `topology.py` | Applicable annotation, structure and topology evidence |
 | Coverage | `coverage.py` | Coverage inputs and optional normalization |
@@ -39,16 +40,22 @@ At most two searches overlap by default, subject to the supplied CPU budget.
 Gene prediction uses a separate process-pool allocation. Sequence loading is
 ordered to avoid overlap with the HMMER memory peak where possible.
 
-Raw searches and gene calls can be reused from existing output directories.
-The cache is not a complete content-hash provenance system: changing inputs or
-parameters requires a fresh output directory for a reproducible comparison.
+HMMER, gene-call and UniOP caches verify recorded input/configuration and completed
+output hashes before reuse. Use a fresh output directory for comparisons so stale
+final reports cannot be mistaken for new output. Record the source revision and
+external-tool versions alongside the run log.
 
-## Confidence and evidence
+## Separate evidence
 
-The composite score combines HMM threshold status, co-occurrence, available UniOP
-pairs, qualifying BGC overlap and applicable optional confirmation. Missing optional
-evidence is neutral. The score is capped at 1.2 and is not a correctness probability.
-There is no global confidence≥0.5 retention gate in ordinary runs.
+`evidence.py` records search gates, available annotation/structure/topology
+observations and retained-neighborhood rule assessments without a combined score.
+UniOP probabilities remain pair-level observations; qualifying BGC regions are
+reported per overlapping ORF. Missing data and bypassed rules are explicit.
+Rule satisfaction does not imply completeness or physiological activity.
 
-See [the user pipeline](docs/pipeline.md) and
-[confidence scoring](docs/cluster_confidence_scoring.md).
+`decisions.py` spools selected HMM candidates to disk with decisions emitted by
+the executing context and second-pass filters. The final TSV preserves excluded
+candidates and their initial rule failures even after eggNOG rescue. It does not
+alter retained annotations or duplicate the full candidate dataset in RAM.
+
+See [the user pipeline](docs/pipeline.md) and [separate evidence](docs/evidence.md).

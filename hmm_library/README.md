@@ -1,54 +1,15 @@
-# Note on HMM Library Population
+# Bundled HMM library
 
-The `hmm_library/` directory is intentionally empty in the repository.
-You need to populate it once before running Efesto.
+The maintained profiles are included in this source tree and in release packages.
+`hmm_registry.tsv` records model paths, import channels, accessions, status and
+scientific references. `HMM-bitcutoffs.txt` and `FeGenie-map.txt` provide runtime
+thresholds and display labels.
 
-## Option 1 – FeGenie HMMs only (iron genes)
+Read [model_licenses.tsv](model_licenses.tsv), [HMM license scope](LICENSES.md)
+and the [third-party notices](../THIRD_PARTY_NOTICES.md) for original terms,
+attribution and unresolved redistribution conditions. A bundled file or an
+academic citation is not an additional grant of rights. Excluded profiles retain
+their source conditions even though ordinary annotation runs do not search them.
 
-```bash
-python scripts/build_hmm_library.py \
-    --fegenie_dir /path/to/FeGenie/hmms/iron/ \
-    --out_dir     hmm_library/
-```
-
-## Option 2 – FeGenie + MetHMMDB (metal resistance genes)
-
-MetHMMDB provides individual HMM files in its `individual/` subfolder.
-Using that is preferred over the concatenated file.
-
-```bash
-# Clone MetHMMDB
-git clone https://github.com/Haelmorn/MetHMMDB
-# or: git clone https://github.com/kciuchcinski/MetHMMDB
-
-python scripts/build_hmm_library.py \
-    --fegenie_dir  /path/to/FeGenie/hmms/iron/ \
-    --methmmdb_dir MetHMMDB/individual/ \
-    --out_dir      hmm_library/
-```
-
-If you only have the concatenated file:
-
-```bash
-python scripts/build_hmm_library.py \
-    --fegenie_dir /path/to/FeGenie/hmms/iron/ \
-    --methmmdb    MetHMMDB/MetHMMDb.hmm \
-    --out_dir     hmm_library/
-```
-
-## Option 3 – Update to a new MetHMMDB release
-
-```bash
-python scripts/build_hmm_library.py \
-    --methmmdb_dir MetHMMDB_v2/individual/ \
-    --out_dir      hmm_library/ \
-    --update
-```
-
-The `--update` flag preserves existing models and only adds/replaces new ones.
-Removed models are flagged as `status=removed` in `hmm_registry.tsv`.
-
-## Adding custom operon rules
-
-Copy `hmm_library/operon_rules.json` and add rules for your new categories.
-See the main README for the rule schema.
+See the [library documentation](../docs/hmm_library.md) and
+[custom-library guide](../docs/extending_the_library.md) for use and extension.
