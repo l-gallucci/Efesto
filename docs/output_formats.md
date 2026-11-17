@@ -102,7 +102,7 @@ assembly headers to the corresponding scoped names when importing this merged
 GFF into a viewer. Anvi'o still requires mapping exported labels to that target
 database's integer gene IDs.
 
-## Search cache and failures
+## Caches and failures
 
 With `--keep_tblout`, Efesto retains completed HMMER tables and adjacent
 `.cache.json` files. Reuse requires matching protein/profile contents, score
@@ -111,6 +111,18 @@ Legacy caches without metadata are recomputed. An HMMER failure stops annotation
 with a nonzero exit status; a partial table is never installed as a valid cache.
 Fix the error and rerun to reuse any completed, valid searches. Use a fresh output
 directory when comparing runs so older result files cannot be mistaken for new ones.
+
+Gene-prediction FAA files have adjacent `.cache.json` completion records that bind
+assembly content, caller/version, mode and both FAA/GFF contents. Files are prepared
+before publication; prediction errors stop the run. Old generated genomes outside
+the current input list are not collected.
+
+Each successful UniOP work directory preserves `efesto-index.faa` and
+`efesto-cache.json`. These bind input contents, input mode, script/interpreter and
+prediction/index contents. The saved index, rather than a newly ordered FAA or an
+arbitrary cached FAA, decodes the numeric prediction indices. Incomplete legacy
+caches are recomputed. UniOP failures are optional-tool failures and are reported
+as unavailable evidence rather than valid cached predictions.
 
 ## Coverage normalisation
 

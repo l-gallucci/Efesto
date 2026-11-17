@@ -31,7 +31,14 @@ def check(wheel, sdist, smoke=False):
         registry_bytes = source("hmm_library/hmm_registry.tsv")
         assert whl.read("efesto/data/hmm_library/hmm_registry.tsv") == registry_bytes
         rows = list(csv.DictReader(io.StringIO(registry_bytes.decode()), delimiter="\t"))
+        cutoffs = {}
+        for line in source("hmm_library/HMM-bitcutoffs.txt").decode().splitlines():
+            fields = line.split()
+            if len(fields) == 2 and not line.startswith("#"):
+                assert fields[0] not in cutoffs, "Duplicate cutoff: " + fields[0]
+                cutoffs[fields[0]] = float(fields[1])
         for row in rows:
+            assert float(row["cutoff"]) == cutoffs.get(row["stem"], 0.0), row["stem"]
             rel = "hmm_library/" + row["hmm_file"]
             assert sha(whl.read("efesto/data/" + rel)) == sha(source(rel)), rel
         for name in ("HMM-bitcutoffs.txt", "FeGenie-map.txt", "category_aliases.tsv",

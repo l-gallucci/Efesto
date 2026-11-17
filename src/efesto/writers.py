@@ -121,8 +121,9 @@ def write_heatmap(path, rows, all_genomes, norm_dict=None):
     cm = defaultdict(lambda: defaultdict(set))
     for r in rows:
         cm[r["cat"]][r["genome"]].add(r["cluster_id"])
-    with open(path, "w") as fh:
-        fh.write("X," + ",".join(all_genomes) + "\n")
+    with open(path, "w", newline="") as fh:
+        writer = csv.writer(fh)
+        writer.writerow(["X", *all_genomes])
         for cat in all_cats:
             vals = []
             for g in all_genomes:
@@ -132,7 +133,7 @@ def write_heatmap(path, rows, all_genomes, norm_dict=None):
                     if norm_dict and norm_dict.get(g, 0) > 0
                     else str(raw)
                 )
-            fh.write(cat + "," + ",".join(vals) + "\n")
+            writer.writerow([cat, *vals])
 
 
 def write_coverage_heatmap(path, rows, all_genomes, genome_cov,
@@ -151,12 +152,12 @@ def write_coverage_heatmap(path, rows, all_genomes, genome_cov,
             val = info.get("depth", 0.0)
         cm[r["cat"]][r["genome"]] += val
     label = "coverage_per_million_sum" if norm_coverage else "mean_depth_sum"
-    with open(path, "w") as fh:
+    with open(path, "w", newline="") as fh:
         fh.write(f"# coverage metric: {label}\n")
-        fh.write("X," + ",".join(all_genomes) + "\n")
+        writer = csv.writer(fh)
+        writer.writerow(["X", *all_genomes])
         for cat in all_cats:
-            fh.write(cat + "," + ",".join(
-                f"{cm[cat].get(g, 0.0):.4f}" for g in all_genomes) + "\n")
+            writer.writerow([cat, *(f"{cm[cat].get(g, 0.0):.4f}" for g in all_genomes)])
 
 
 def write_gff3(path, final_rows, genome_coords):

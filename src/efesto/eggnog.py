@@ -17,6 +17,8 @@ import sys
 from pathlib import Path
 
 
+from efesto._external import python_script_command
+
 def _parse_eggnog_annotations(path):
     """
     Parse an eggNOG-mapper *.emapper.annotations TSV file.
@@ -158,7 +160,12 @@ def run_eggnog(flagged_faa_path, out_dir, eggnog_path="emapper.py",
     out_dir.mkdir(parents=True, exist_ok=True)
     prefix = "efesto_flagged"
 
-    cmd = ["python3", str(eggnog_path),
+    try:
+        command = python_script_command(eggnog_path)
+    except OSError as error:
+        print(f"  [WARN] Could not run eggNOG-mapper: {error}", file=sys.stderr)
+        return None
+    cmd = command + [
            "-i", str(flagged_faa_path),
            "--itype", "proteins",
            "-o", prefix,

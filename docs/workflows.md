@@ -70,7 +70,9 @@ the HMM results with Bakta calls. See [anvi'o identifiers](anvio_integration.md)
 ## Reproducible comparisons
 
 Use a **new output directory** after changing the input, library, thresholds or
-software version. Existing cached searches or gene calls can otherwise be reused.
+software version, so old final reports cannot be mistaken for new results.
+HMMER, gene-prediction and UniOP caches verify their recorded inputs and completed
+outputs before reuse; legacy caches without matching metadata are recomputed.
 Record the command, source revision, library and tool versions together with
 `Efesto-run.log`. `--keep_tblout` retains raw HMM search tables for inspection.
 

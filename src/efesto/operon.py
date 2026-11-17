@@ -223,142 +223,31 @@ def filter_cluster_fegenie(cluster_rows, report_all_pats, all_results=False,
             return _mtr(cluster_rows)
         return cluster_rows
 
-    def n_unique_total():
-        return len(stems)
-
-    def n_unique_in_cats(cat_set):
-        return len({r["hmm_stem"] for r in cluster_rows if r["cat"] in cat_set})
-
-    def n_in_gene_set(gene_set):
-        return len({r["hmm_stem"] for r in cluster_rows if r["hmm_stem"] in gene_set})
-
-    # A lone MbnB-like enzyme, a sigma-factor MbnA domain, or an incomplete
-    # cassette is family evidence only; catalog/all-results bypass this rule.
-    if stems & _MBN_SYNTH_GENES and not _MBN_SYNTH_GENES <= stems:
-        cluster_rows = [r for r in cluster_rows
-                        if r["hmm_stem"] not in _MBN_SYNTH_GENES]
-        if not cluster_rows:
-            return []
-        cats = {r["cat"] for r in cluster_rows}
-        stems = {r["hmm_stem"] for r in cluster_rows}
-
-    if stems & _CNT_SYNTH_GENES and not _CNT_CORE_GENES <= stems:
-        cluster_rows = [r for r in cluster_rows
-                        if r["hmm_stem"] not in _CNT_SYNTH_GENES]
-        if not cluster_rows:
-            return []
-        cats = {r["cat"] for r in cluster_rows}
-        stems = {r["hmm_stem"] for r in cluster_rows}
-
-    if stems & _FLEET_GENES:
-        n = n_in_gene_set(_FLEET_GENES)
-        non_fleet = [r for r in cluster_rows if r["hmm_stem"] not in _FLEET_GENES]
-        if n >= 5:
-            return cluster_rows
-        return non_fleet if non_fleet else []
-
-    if stems & _MAM_GENES:
-        n = n_in_gene_set(_MAM_GENES)
-        non_mam = [r for r in cluster_rows if r["hmm_stem"] not in _MAM_GENES]
-        if n >= 5:
-            return cluster_rows
-        return non_mam if non_mam else []
-
-    if stems & _FOXABC_GENES:
-        n = n_in_gene_set(_FOXABC_GENES)
-        non_fox = [r for r in cluster_rows if r["hmm_stem"] not in _FOXABC_GENES]
-        if n >= 2:
-            return cluster_rows
-        return non_fox if non_fox else []
-
-    if stems & _FOXEYZ_GENES:
-        non_fox = [r for r in cluster_rows if r["hmm_stem"] not in _FOXEYZ_GENES]
-        if "FoxE" in stems:
-            return cluster_rows
-        return non_fox if non_fox else []
-
-    if stems & _DFE1_GENES:
-        n = n_in_gene_set(_DFE1_GENES)
-        non_dfe = [r for r in cluster_rows if r["hmm_stem"] not in _DFE1_GENES]
-        if n >= 3:
-            return cluster_rows
-        return non_dfe if non_dfe else []
-
-    if stems & _DFE2_GENES:
-        n = n_in_gene_set(_DFE2_GENES)
-        non_dfe = [r for r in cluster_rows if r["hmm_stem"] not in _DFE2_GENES]
-        if n >= 3:
-            return cluster_rows
-        return non_dfe if non_dfe else []
-
-    if stems & _TAD_GENES:
-        n = n_in_gene_set(_TAD_GENES)
-        non_tad = [r for r in cluster_rows if r["hmm_stem"] not in _TAD_GENES]
-        if n >= 2:
-            return cluster_rows
-        return non_tad if non_tad else []
-
-    if stems & _SUF_GENES:
-        n = n_in_gene_set(_SUF_GENES)
-        non_suf = [r for r in cluster_rows if r["hmm_stem"] not in _SUF_GENES]
-        if n >= 3:
-            return cluster_rows
-        return non_suf if non_suf else []
-
-    # Cyc1 handled in second_pass, not here
-
-    if stems & _MTR_GENES:
-        return _mtr(cluster_rows)
-
-    if cats & _IRON_ACQ_ALL:
-        n_total = n_unique_total()
-        kept = []
-        skip_cluster = False
-
-        for r in cluster_rows:
-            cat = r["cat"]
-
-            if cat in _SIDERO_TRANS_CATS:
-                if n_total < 2:
-                    skip_cluster = True
-                    break
-                if n_unique_in_cats(_SIDERO_TRANS_CATS) < 2:
-                    pass
-                else:
-                    kept.append(r)
-
-            elif cat in _SIDERO_SYNTH_CATS:
-                if n_total < 3:
-                    skip_cluster = True
-                    break
-                if n_unique_in_cats(_SIDERO_SYNTH_CATS) < 3:
-                    pass
-                else:
-                    kept.append(r)
-
-            elif cat in _IRON_TRANS_CATS:
-                if n_total < 2:
-                    skip_cluster = True
-                    break
-                if n_unique_in_cats(_IRON_TRANS_CATS) < 2:
-                    pass
-                else:
-                    kept.append(r)
-
-            else:
-                kept.append(r)
-
-        if skip_cluster:
-            return []
-
-        if not kept:
-            if n_total > 1 or (stems & _TRUSTED_LONE):
-                return cluster_rows
-            return []
-
-        return kept
-
-    return cluster_rows
+    # Evaluate each system against its own members in this neighborhood.
+    # A decision about one system must not short-circuit unrelated rules.
+    rejected = set()
+    for genes, minimum in ((_FLEET_GENES, 5), (_MAM_GENES, 5),
+                           (_FOXABC_GENES, 2), (_DFE1_GENES, 3),
+                           (_DFE2_GENES, 3), (_TAD_GENES, 2), (_SUF_GENES, 3)):
+        if len(stems & genes) < minimum:
+            rejected.update(stems & genes)
+    for genes, anchors in ((_FOXEYZ_GENES, {"FoxE"}),
+                           (_CNT_SYNTH_GENES, _CNT_CORE_GENES),
+                           (_MBN_SYNTH_GENES, _MBN_SYNTH_GENES)):
+        if not anchors <= stems:
+            rejected.update(stems & genes)
+    rows = [r for r in cluster_rows if r["hmm_stem"] not in rejected]
+    # Count only distinct models in the relevant category group; another
+    # system's members cannot satisfy a transport/synthesis requirement.
+    for categories, minimum, trusted in ((_SIDERO_TRANS_CATS, 2, _TRUSTED_LONE),
+                                          (_SIDERO_SYNTH_CATS, 3, set()),
+                                          (_IRON_TRANS_CATS, 2, set())):
+        members = {r["hmm_stem"] for r in rows
+                   if canonical_category(r["cat"]) in categories}
+        if len(members) < minimum and not members & trusted:
+            rows = [r for r in rows if canonical_category(r["cat"]) not in categories]
+    # Category disambiguation does not exempt other systems from filtering.
+    return _mtr(rows) if any(r["hmm_stem"] in _MTR_GENES for r in rows) else rows
 
 
 def filter_cluster_json(cluster_rows, operon_rules, report_all_pats,

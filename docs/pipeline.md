@@ -23,6 +23,9 @@ Tables, cluster-count/coverage matrices, matched sequences and GFF3
 
 With `--fna_dir`, Efesto predicts genes using Pyrodigal-GV by default; Pyrodigal
 can be selected explicitly. With `--faa_dir`, it searches the supplied proteins.
+Gene-prediction caches are checked against assembly content, caller/version and
+meta/single mode. Only complete, unchanged FAA/GFF outputs are reused; a prediction
+failure stops annotation. Only assemblies selected for the current run are searched.
 Matching GFF coordinates allow grouping by contig, genomic separation and,
 optionally, strand. See [input workflows](workflows.md).
 
@@ -39,7 +42,9 @@ excluded. Enabling an experimental profile does not make it independently valida
 Each search uses a positive model-specific full-sequence cutoff where available.
 Otherwise the generic bitscore floor defaults to **30**. The E-value limit defaults
 to **1e-5** and applies to every accepted hit. `threshold_type` records which
-cutoff path was used.
+cutoff path was used. The maintained registry records the authoritative model
+cutoffs; the bundled runtime table preserves those values without rounding.
+Release-package checks reject disagreement between these two files.
 
 Efesto retains one accepted HMM per ORF using the highest raw bitscore across
 accepted matches. This can conceal competing-family matches: inspect tblout
@@ -54,7 +59,11 @@ global `--max_bp_gap`.
 
 The default context engine derives from FeGenie with Efesto additions. A
 library-local `operon_rules.json` selects the configurable engine. These rules
-can remove matches or alter Mtr/Mto category assignments. Existing per-protein
+can remove matches or alter Mtr/Mto category assignments. In the default engine,
+each system is evaluated independently: one supported system does not exempt a
+neighboring incomplete system, and unrelated models do not supply category minima.
+The declared trusted-lone exceptions remain available for siderophore transport.
+Existing per-protein
 checks, including Cyc2 length/motif requirements, still apply.
 
 The [context reference](operon_rules.md) describes modes and requirements.

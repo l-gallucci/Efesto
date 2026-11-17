@@ -62,3 +62,11 @@ NSEQ is a count of training records, not independent experimental positives.
 
 See [curation](hmm_library_curation.md), [functional scope](hmm_expansion_biological_rationale.md)
 and [custom libraries](extending_the_library.md).
+
+## Cutoff consistency
+
+The maintained `hmm_registry.tsv` records the authoritative curated model cutoffs.
+`HMM-bitcutoffs.txt` is the runtime table and must contain the same numeric values,
+without rounding or duplicate entries. The importer preserves full precision;
+package validation and regression checks enforce agreement. This synchronization
+does not constitute a new calibration or independent validation of a cutoff.

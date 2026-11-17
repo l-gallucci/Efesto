@@ -180,7 +180,7 @@ def _check_env(uniop_path: str = "uniop", eggnog_path: str = "emapper.py",
         print( "        Install: http://phobius.sbc.su.se/instructions.html")
         print( "        Then use: efesto --topology_check --phobius_path /path/to/phobius.pl")
 
-    # ── Foldseek (optional — tier-3 structural confirmation, conda install) ──
+    # ── Foldseek (optional — optional structural comparisons, conda install) ──
     print("\nFoldseek (optional — conda install -c bioconda -c conda-forge foldseek):")
     foldseek_found = shutil.which(foldseek_path) or (Path(foldseek_path).exists()
                                                       and not Path(foldseek_path).is_dir())
@@ -197,7 +197,7 @@ def _check_env(uniop_path: str = "uniop", eggnog_path: str = "emapper.py",
         print( "        foldseek databases ProstT5 /path/to/prostt5_weights tmp  "
                "  # one-time weights download")
         print( "        Also requires a small curated reference-structure DB "
-               "(--foldseek_db_dir) — see docs/hmm_library_curation.md, Tier 3.")
+               "(--foldseek_db_dir) — see docs/evidence.md, Scope of optional observations.")
         print( "        Then: efesto --run_struct_confirmation "
                "--foldseek_db_dir /path/to/db --prostt5_weights /path/to/prostt5_weights")
 
@@ -378,7 +378,7 @@ def main():
     p.add_argument("--phobius_path", default="phobius.pl",
                    help="Path to phobius.pl executable (default: 'phobius.pl', "
                         "assumed in PATH). Only used with --topology_check.")
-    # ── Baktfold tier-3 structural confirmation (needs_confirmation-flagged hits only) ──
+    # ── Optional structural comparisons (needs_confirmation-flagged hits only) ──
     p.add_argument("--run_struct_confirmation", action="store_true",
                    help="Search a curated Foldseek reference database for first-pass "
                         "rejected candidates flagged needs_confirmation. Requires "
@@ -462,11 +462,14 @@ def main():
         fna_files = sorted(fna_dir.glob(f"*.{args.fna_ext}"))
         if not fna_files:
             sys.exit(f"[ERROR] No .{args.fna_ext} in {fna_dir}")
-        faa_dir, gff_dir_path = run_prodigal(
-            fna_files, out_dir,
-            meta_mode=args.meta,
-            threads=args.threads,
-            gene_caller=args.gene_caller)
+        try:
+            faa_dir, gff_dir_path = run_prodigal(
+                fna_files, out_dir,
+                meta_mode=args.meta,
+                threads=args.threads,
+                gene_caller=args.gene_caller)
+        except RuntimeError as error:
+            sys.exit(f"[ERROR] {error}")
         faa_ext = "faa"
     else:
         faa_dir = Path(args.faa_dir)
@@ -481,7 +484,8 @@ def main():
                   "Add --gff_dir pointing to your Bakta GFF3 files.",
                   file=sys.stderr)
 
-    faa_files = sorted(faa_dir.glob(f"*.{faa_ext}"))
+    faa_files = ([faa_dir / (fna.stem + ".faa") for fna in fna_files]
+                 if args.fna_dir else sorted(faa_dir.glob(f"*.{faa_ext}")))
     if not faa_files:
         sys.exit(f"[ERROR] No .{faa_ext} in {faa_dir}")
     print(f"[INFO] {len(faa_files)} genome/bin FAA files")
@@ -771,7 +775,7 @@ def main():
                   "(pass --eggnog_annotations or --run_eggnog to enable) — "
                   "all pending hits stay dropped")
 
-        # ── Tier-3 pass: Foldseek/ProstT5 structural confirmation ────────────
+        # ── Foldseek/ProstT5 structural comparisons ────────────
         # Search only pending candidates; report raw reference hits, not a functional score.
         if args.run_struct_confirmation:
             if not args.foldseek_db_dir:
@@ -789,14 +793,14 @@ def main():
                 if results_path:
                     foldseek_hits = identifiers.group_hits(
                         _parse_foldseek_results(results_path), pending_confirmation)
-                    print(f"[INFO] Tier 3: Foldseek ran on "
+                    print(f"[INFO] Foldseek: ran on "
                           f"{len(pending_confirmation)} pending hit(s), "
                           f"{sum(map(len, foldseek_hits.values()))} structural hit(s) found")
                 else:
-                    print("[WARN] Tier 3: Foldseek did not run — no structural result", file=sys.stderr)
+                    print("[WARN] Foldseek: did not run — no structural result", file=sys.stderr)
 
     # ── Topology/motif tier: checks every hit with an expectation set ────────
-    # Not scoped to pending_confirmation like tier-2/tier-3 — cheap enough
+    # Not scoped to confirmation candidates — cheap enough
     # (one batched Phobius call, only over hits whose stem actually declares
     # expected_topology/expected_heme_c) to run unconditionally. Placed after
     # the tier-2 rescue pass so any eggNOG-rescued single-gene clusters are

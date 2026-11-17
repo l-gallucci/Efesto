@@ -92,11 +92,9 @@ def test_invalid_probabilities_not_used(tmp_path, probability):
 def test_pair_probabilities_read_with_or_without_membership(tmp_path,use_operon):
     from efesto.uniop import run_uniop
     faa=tmp_path/'sample.faa';faa.write_text('>a\nMAA\n>b\nMKK\n')
-    work=tmp_path/'_uniop/sample';work.mkdir(parents=True)
-    # Existing empty membership also exercises fallback assembly from pred.
-    (work/'uniop.operon').write_text('idx_genes,idx_op\n'+('"[1, 2]",7\n' if use_operon else ''))
-    (work/'uniop.pred').write_text('Gene A\tGene B\tPrediction\n1\t2\t0.8\n')
-    ops,probs=run_uniop([faa],None,tmp_path,'unused',prodigal_faa_dir=tmp_path)
+    from tests._tool_stubs import write_uniop_stub
+    tool=write_uniop_stub(tmp_path/'UniOP',membership=use_operon)
+    ops,probs=run_uniop([faa],None,tmp_path,str(tool),prodigal_faa_dir=tmp_path)
     assert probs=={'sample.faa':{('a','b'):.8}}
     assert ops['sample.faa']['a']==ops['sample.faa']['b']
     if use_operon:assert ops['sample.faa']['a']=='OP0007'

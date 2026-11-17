@@ -275,3 +275,19 @@ class TestWriteHitFna:
         out     = str(tmp_path / "hits.fna")
         n = write_hit_fna(out, [self._row_with_bakta()], coords, str(fna_dir))
         assert n == 0
+
+
+@pytest.mark.parametrize('genome',['MAG,1.faa','MAG"1.faa','MAG\n1.faa'])
+def test_heatmap_csv_roundtrips_genome_names(tmp_path,genome):
+    import csv
+    from efesto.writers import write_heatmap, write_coverage_heatmap
+    rows=[{'cat':'Iron-Reduction','genome':genome,'cluster_id':1,'contig':'ctg'}]
+    counts=tmp_path/'counts.csv'
+    write_heatmap(counts,rows,[genome])
+    with counts.open(newline='') as handle:
+        assert list(csv.reader(handle))==[['X',genome],['Iron-Reduction','1']]
+    coverage=tmp_path/'coverage.csv'
+    write_coverage_heatmap(coverage,rows,[genome],{genome:{'ctg':{'depth':2.5}}})
+    with coverage.open(newline='') as handle:
+        next(handle)
+        assert list(csv.reader(handle))==[['X',genome],['Iron-Reduction','2.5000']]

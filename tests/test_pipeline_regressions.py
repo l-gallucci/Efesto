@@ -96,19 +96,17 @@ def test_raw_uniop_pairs_and_hit_evidence_survive_normalisation(tmp_path,probabi
     seed=next(iter(read_fasta(ROOT/'data/seeds/curated/MtrA_seeds.faa').values()))
     (tmp_path/'faa/a.faa').write_text('>ctg_1\n'+seed+'\n>ctg_2\n'+seed+'\n')
     (tmp_path/'gff/a.gff').write_text('##sequence-region ctg 1 10000\nctg\tcaller\tCDS\t100\t300\t.\t+\t0\tID=ctg_1\nctg\tcaller\tCDS\t400\t600\t.\t+\t0\tID=ctg_2\n')
-    work=tmp_path/'out/_uniop/a';work.mkdir(parents=True)
-    (work/'cached.faa').write_text((tmp_path/'faa/a.faa').read_text())
-    (work/'uniop.operon').write_text('idx_genes,idx_op\n"[1, 2]",0\n')
-    (work/'uniop.pred').write_text(f'Gene A\tGene B\tPrediction\n1\t2\t{probability}\n')
+    from tests._tool_stubs import write_uniop_stub
+    tool=write_uniop_stub(tmp_path/'UniOP',probability=probability)
     depth=tmp_path/'depth.tsv';depth.write_text('ctg\t10\n')
-    options=('--all_results','--keep_tblout','--anvio','--operon_prediction','--depth',str(depth))
+    options=('--all_results','--keep_tblout','--anvio','--operon_prediction','--uniop_path',str(tool),'--bakta_gff_dir',str(tmp_path/'gff'),'--depth',str(depth))
     result=run_cli(tmp_path,lib,*options)
     assert result.returncode==0,result.stderr
     out=tmp_path/'out'
     rows=list(csv.DictReader((out/'Efesto-results-long.tsv').open(),delimiter='\t'))
     assert len(rows)==2
     assert all(r['threshold_type']=='model_specific' for r in rows)
-    assert all(r['uniop_status']=='cached' for r in rows)
+    assert all(r['uniop_status']=='completed' for r in rows)
     pairs=list(csv.DictReader((out/'Efesto-UniOP-pair-evidence.tsv').open(),delimiter='\t'))
     assert len(pairs)==1 and float(pairs[0]['operon_probability'])==probability
     for name in ('Efesto-results-long.tsv','Efesto-summary.csv','Efesto-geneSummary-clusters.csv',
@@ -119,7 +117,9 @@ def test_raw_uniop_pairs_and_hit_evidence_survive_normalisation(tmp_path,probabi
         assert 'co_occ_score' not in content
     normalised=run_cli(tmp_path,lib,*options,'--norm_coverage')
     assert normalised.returncode==0,normalised.stderr
-    assert list(csv.DictReader((out/'Efesto-results-long.tsv').open(),delimiter='\t'))==rows
+    repeated=list(csv.DictReader((out/'Efesto-results-long.tsv').open(),delimiter='\t'))
+    assert all(r['uniop_status']=='cached' for r in repeated)
+    assert [{**r,'uniop_status':'cached'} for r in rows]==repeated
     assert 'coverage_per_million_sum' in (out/'Efesto-coverage-heatmap.csv').read_text()
 
 
@@ -154,3 +154,40 @@ def test_confirmation_candidates_report_dropped_and_rescued_without_changing_hit
     else:
         stats=(out/'Efesto-summary-stats.tsv').read_text()
         assert 'RUN\ttotal_orf_hits\t0' in stats
+
+
+@pytest.mark.skipif(not shutil.which('hmmsearch'),reason='HMMER required')
+def test_fna_run_ignores_orphan_genomes_and_stops_on_prediction_failure(tmp_path):
+    lib=setup_library(tmp_path,'MtrA')
+    seed=next(iter(read_fasta(ROOT/'data/seeds/curated/MtrA_seeds.faa').values()))
+    fna=tmp_path/'fna';fna.mkdir();(fna/'sample.fna').write_text('>ctg\n'+'ATG'*400+'\n')
+    stub_dir=tmp_path/'python-stubs';stub_dir.mkdir()
+    (stub_dir/'pyrodigal.py').write_text('''__version__='test'
+class Gene:
+    begin=1;end=1200;strand=1;start_type='ATG';rbs_motif=None;partial_end=False
+    def translate(self):return SEED
+class GeneFinder:
+    def __init__(self,**kwargs):pass
+    def find_genes(self,seq):
+        if 'CCC' in seq:raise ValueError('controlled prediction failure')
+        return [Gene()]
+'''.replace('SEED',repr(seed)))
+    orphan=tmp_path/'out/_prodigal/faa/orphan.faa';orphan.parent.mkdir(parents=True)
+    orphan.write_text('>orphan_1\n'+seed+'\n')
+    env=os.environ.copy();env['PYTHONPATH']=str(stub_dir)+os.pathsep+str(ROOT/'src')
+    cmd=[sys.executable,'-m','efesto.cli','--fna_dir',str(fna),'--meta','--gene_caller','pyrodigal',
+         '--hmm_dir',str(lib),'--out',str(tmp_path/'out'),'--threads','1','--all_results']
+    first=subprocess.run(cmd,env=env,capture_output=True,text=True)
+    assert first.returncode==0,first.stderr
+    output=tmp_path/'out/Efesto-results-long.tsv'
+    rows=list(csv.DictReader(output.open(),delimiter='\t'))
+    assert len(rows)==1 and rows[0]['genome']=='sample.faa'
+    assert 'Genomes input : 1' in (tmp_path/'out/Efesto-run.log').read_text()
+    # A failed prediction must stop before any new annotation table is emitted.
+    output.unlink();(fna/'sample.fna').write_text('>ctg\n'+'CCC'*400+'\n')
+    failed=subprocess.run(cmd,env=env,capture_output=True,text=True)
+    assert failed.returncode!=0 and 'controlled prediction failure' in failed.stderr
+    assert not output.exists()
+    # The same failed input is retried rather than accepted as cached success.
+    retry=subprocess.run(cmd,env=env,capture_output=True,text=True)
+    assert retry.returncode!=0 and 'controlled prediction failure' in retry.stderr

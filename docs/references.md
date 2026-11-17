@@ -33,7 +33,7 @@ If you use Efesto, cite all of the following that apply:
 **Phobius** (topology/motif consistency check, if using `--topology_check`):
 > Käll L, Krogh A, Sonnhammer ELL (2004) *A Combined Transmembrane Topology and Signal Peptide Prediction Method.* J. Mol. Biol. 338(5):1027–1036. [doi:10.1016/j.jmb.2004.03.016](https://doi.org/10.1016/j.jmb.2004.03.016)
 
-**Foldseek + ProstT5** (tier-3 structural confirmation, if using `--run_struct_confirmation`):
+**Foldseek + ProstT5** (optional structural comparisons, if using `--run_struct_confirmation`):
 > van Kempen M et al. (2023) *Fast and accurate protein structure search with Foldseek.* Nat. Biotechnol. [doi:10.1038/s41587-023-01773-0](https://doi.org/10.1038/s41587-023-01773-0)
 > Heinzinger M et al. (2024) *Bilingual language model for protein sequence and structure.* NAR Genomics and Bioinformatics. [doi:10.1093/nargab/lqae150](https://doi.org/10.1093/nargab/lqae150)
 

@@ -12,7 +12,14 @@ First tagged-release preparation. Earlier development checkouts used internal
 - Distinguish repeated protein IDs across genomes in external-tool queries and
   combined exports; provide an identifier crosswalk.
 - Resolve Bakta ORFs to GFF contigs before short-contig filtering.
-- Stop on HMMER failures; reuse only complete, input-matched search caches.
+- Stop on HMMER and gene-prediction failures; reuse only complete, input-matched caches.
+- Bind gene-call caches to assembly/caller/mode and restrict collection to current inputs.
+- Bind UniOP caches to input content, script/interpreter and the exact saved FAA index;
+  reconstruct Bakta headers only when all proteins have matching coordinates.
+- Evaluate all default context rules in mixed neighborhoods without early-return bypasses;
+  apply category minima independently and honor declared trusted-lone exceptions.
+- Preserve registry cutoff precision in the runtime table and reject inconsistent packages.
+- Resolve UniOP/eggNOG script names through PATH and quote count/coverage heatmap CSVs.
 - Parse samtools depth position tables correctly and stream per-base coverage.
 - Read UniOP pair probabilities alongside operon membership, including zero.
 - Replace the composite confidence score and weights with separate hit, context,

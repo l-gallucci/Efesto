@@ -15,7 +15,10 @@ are co-transcribed.
 ## Context engines
 
 Without `operon_rules.json` in `--hmm_dir`, the FeGenie-derived engine is used,
-including Efesto's additional rules. A JSON file in that directory selects the
+including Efesto's additional rules. The default engine evaluates every applicable
+system independently and filters only that system's members when its requirement
+is not met. A complete FLEET neighborhood therefore does not rescue an isolated
+SufA or an unsupported siderophore-synthesis hit. A JSON file in that directory selects the
 configurable engine. The repository-root example must be copied into the chosen
 library directory to use it; its mere presence at the repository root is not enough.
 
@@ -31,8 +34,10 @@ Rule `genes` entries identify HMM stems.
 | `require_n_cat_or_lone_trusted` | Category count or an explicitly trusted lone model |
 | `mtr_disambiguation` | Contextual Mtr/Mto category assignment |
 
-`on_fail` can keep all rows, drop the affected set or pass nonmembers, depending
-on the rule. `max_bp_gap` provides a neighborhood threshold. Historical
+In the configurable JSON engine, `on_fail=keep_all` retains the current rows;
+`drop` drops the current cluster when the applicable rule fails. For named-gene
+count/anchor rules, `passthrough_non_members` removes the rule's members and lets
+the remaining rows continue through subsequent rules. `max_bp_gap` provides a neighborhood threshold. Historical
 `canonical_size` metadata is ignored; no completeness score is inferred. Inspect
 the supplied JSON and [evidence reference](evidence.md) when changing rules.
 
@@ -69,5 +74,10 @@ Efesto reads both when available, retaining membership from the operon file and
 reporting the prediction file as pairwise evidence. Zero probabilities remain zero. The
 prediction file is also used to assemble fallback membership when needed.
 
-When usable pairwise probabilities are unavailable, no probabilities are invented. Cached or failed runs can affect evidence availability; inspect the
-log and retained UniOP working directories. See [output files](output_formats.md).
+When usable pairwise probabilities are unavailable, no probabilities are invented.
+UniOP caches bind results to input contents (including FAA order and Bakta GFF),
+input mode and the resolved script/interpreter. Results retain the exact FAA index
+used for prediction, together with content hashes of the index and output files.
+Legacy or mismatched caches are recomputed; failed runs cannot publish a completed
+cache. FAA reconstruction requires matching coordinates for every protein.
+Inspect the log and retained UniOP working directories. See [output files](output_formats.md).

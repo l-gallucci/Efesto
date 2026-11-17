@@ -44,7 +44,7 @@ def test_suf_uses_model_ids_not_translated_gene_labels():
     assert len(suf['rule_models_not_observed'])==3
 
 
-def test_mixed_cluster_reports_unsatisfied_suf_even_if_retained_by_other_filter():
+def test_mixed_observations_assess_each_system_independently():
     rows=[row('EetA','a'),row('sufA_TIGR01997.1','b','IronSulfur-Assembly')]
     records=context(rows)
     assert {r['rule_id']:r['rule_status'] for r in records}=={'FLEET':'not_satisfied','SUF_OPERON':'not_satisfied'}
