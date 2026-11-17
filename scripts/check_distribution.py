@@ -41,6 +41,7 @@ def check(wheel, sdist, smoke=False):
             assert float(row["cutoff"]) == cutoffs.get(row["stem"], 0.0), row["stem"]
             rel = "hmm_library/" + row["hmm_file"]
             assert sha(whl.read("efesto/data/" + rel)) == sha(source(rel)), rel
+        assert "efesto/decisions.py" in names
         for name in ("HMM-bitcutoffs.txt", "FeGenie-map.txt", "category_aliases.tsv",
                      "category_catalog.tsv", "category_curation.tsv", "model_licenses.tsv",
                      "LICENSES.md"):
@@ -64,7 +65,7 @@ def check(wheel, sdist, smoke=False):
         assert sum(n.endswith(".hmm") for n in names) == len(rows)
         assert sum(n.endswith(".hmm") for n in source_names) == len(rows)
         for name in names + source_names:
-            assert not any(part in {"benchmark", "_calibration", "transport_workflow"}
+            assert not any(part in {"benchmark", "_calibration", "_staging", "transport_workflow"}
                            for part in Path(name).parts), name
         panel = json.loads(source("data/validation/metal_expansion/reference_expectations.json"))
         seed_id = panel["lanM_NF053806"]["positive"][0]
@@ -120,6 +121,11 @@ def check(wheel, sdist, smoke=False):
             assert hits[0]["threshold_type"] == "model_specific"
             assert "cluster_confidence" not in hits[0]
             assert (output / "Efesto-context-evidence.tsv").is_file()
+            with (output / "Efesto-filter-decisions.tsv").open() as handle:
+                decisions = list(csv.DictReader(handle, delimiter="\t"))
+            assert len(decisions) == 1 and decisions[0]["final_decision"] == "retained"
+            assert decisions[0]["hmm_stem"] == hits[0]["hmm_stem"]
+            assert decisions[0]["context_decision"] == "bypassed"
             assert (output / "Efesto-UniOP-pair-evidence.tsv").is_file()
             result["clean_wheel_install_and_real_hmmer_run"] = True
     return result

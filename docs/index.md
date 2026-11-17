@@ -4,10 +4,10 @@
 
 **Profile HMM annotation of metal cycling, acquisition, homeostasis and resistance genes.**
 
-Efesto searches proteins from genomes, MAGs and gene catalogs, then combines
-family matches with genomic context and optional annotation evidence. It extends
-[FeGenie](https://github.com/Arkadiy-Garber/FeGenie) with an expanded library,
-coordinate-based clustering and integrations with UniOP, antiSMASH and anvi'o.
+Efesto integrates profile HMMs from multiple databases and published collections
+to annotate metal-related genes in genomes, metagenomes and gene catalogs. It
+combines protein-family searches with genomic-context filtering and reports
+optional annotation, operon, BGC, structure and topology evidence separately.
 
 ## Start here
 
@@ -18,11 +18,33 @@ coordinate-based clustering and integrations with UniOP, antiSMASH and anvi'o.
 
 ## HMM library
 
+Sources include **FeGenie, MetHMMDB, MnOxGeneTool, Tabuteau et al., Pfam and NCBI
+protein family models**, together with profiles built for Efesto. Coverage spans
+iron, manganese, copper, zinc, nickel, cobalt, tungsten, lanthanides and other
+metal/metalloid functions. The
+[catalog and source records](hmm_library.md#sources) distinguish import channels
+from original providers and retain model-specific provenance and cutoffs.
+FeGenie also provides the basis of the default context engine, with
+Efesto-specific changes; see [pipeline](pipeline.md) and [references](references.md).
+
 {{catalog_summary}}
 
 Registered `active` and `experimental` profiles are enabled in ordinary runs;
 deprecated profiles are skipped. This runtime status is distinct from independent
 biological validation. See the [current catalog](hmm_library.md).
+
+## Scope and model changes compared with FeGenie
+
+The [recap](comparison.md) explains model changes relative to FeGenie,
+contributions from other sources, rebuilt profiles, category/threshold decisions
+and completed comparisons ahead of a dedicated methods publication.
+
+With the same proteins and 191 original FeGenie HMMs, a historical paired pilot
+measured **38.0 s / 562.8 MiB** sampled peak RSS for Efesto and
+**182.7 s / 886.4 MiB** for FeGenie. The paired HMMER tables contained identical
+hit rows. There was one run per program, and FeGenie's time included built-in
+BLAST searches and waits. See [methods, limits and broader model
+coverage](comparison.md); these are not measurements of the current release.
 
 ## Quick start
 
@@ -46,6 +68,7 @@ See [installation](installation.md) and [workflows](workflows.md).
 | Question | Start with |
 |---|---|
 | Which protein family matched? | `Efesto-results-long.tsv`: HMM, bitscore, E-value and threshold type |
+| Why was a candidate retained, excluded or rescued? | `Efesto-filter-decisions.tsv`: actual filter actions and final outcome |
 | What was observed nearby? | `Efesto-context-evidence.tsv`: distinct models, copies, distances and rule observations |
 | Was a rejected candidate recovered? | `Efesto-confirmation-candidates.tsv`: eggNOG comparisons and retention outcome |
 | What did UniOP predict? | Operon membership and `Efesto-UniOP-pair-evidence.tsv` |

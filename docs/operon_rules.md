@@ -14,6 +14,10 @@ are co-transcribed.
 
 ## Context engines
 
+Use `Efesto-filter-decisions.tsv` to inspect actual rule actions on selected HMM
+candidates, including exclusions and later rescue. Counts and final annotations
+still use retained hits only. See [output files](output_formats.md#filter-decision-table).
+
 Without `operon_rules.json` in `--hmm_dir`, the FeGenie-derived engine is used,
 including Efesto's additional rules. The default engine evaluates every applicable
 system independently and filters only that system's members when its requirement

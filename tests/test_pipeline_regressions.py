@@ -52,6 +52,12 @@ def test_bakta_short_contig_filtered_by_gff_contig(tmp_path):
     assert filtered.returncode==0,filtered.stderr
     assert list(csv.DictReader(path.open(),delimiter='\t'))==[]
     assert '1 ORFs removed (short contig)' in filtered.stdout
+    with (tmp_path/'out/Efesto-filter-decisions.tsv').open() as handle:
+        decision=next(csv.DictReader(handle,delimiter='\t'))
+    assert decision['final_decision']==decision['contig_length_decision']=='excluded'
+    assert decision['context_decision']==decision['sequence_decision']=='not_evaluated'
+    assert decision['raw_cluster_id']=='' and decision['clustering_basis']=='not_clustered'
+    assert json.loads(decision['reason_codes'])==['MIN_CONTIG_LENGTH:short_contig']
 
 
 @pytest.mark.skipif(not shutil.which('hmmsearch'),reason='HMMER required')
@@ -148,6 +154,13 @@ def test_confirmation_candidates_report_dropped_and_rescued_without_changing_hit
     assert len(candidates)==1 and len(retained)==int(supported)
     assert candidates[0]['eggnog_verdict']==('confirmed' if supported else 'contradicted')
     assert candidates[0]['retention_mode']==('eggnog_rescue' if supported else 'not_retained')
+    with (out/'Efesto-filter-decisions.tsv').open() as handle:
+        decisions=list(csv.DictReader(handle,delimiter='\t'))
+    assert len(decisions)==1 and decisions[0]['final_decision']==('rescued' if supported else 'excluded')
+    assert decisions[0]['context_decision']=='excluded'
+    assert decisions[0]['raw_cluster_id']=='0'
+    if supported:
+        assert decisions[0]['final_cluster_id']==retained[0]['cluster_id']
     if supported:
         assert retained[0]['cluster_id']==candidates[0]['cluster_id']
         assert retained[0]['original_orf']==candidates[0]['original_orf']=='ctg_1'

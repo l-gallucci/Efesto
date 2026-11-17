@@ -173,7 +173,7 @@ def _cm(cat, pats):
     return any(fnmatch.fnmatch(canonical_category(cat), canonical_category(p)) for p in pats)
 
 
-def _mtr(rows):
+def _mtr(rows, decisions=None):
     stems   = {r["hmm_stem"] for r in rows}
     updated = [dict(r) for r in rows]
     if "MtoA" in stems and "MtrB_TIGR03509" in stems and "MtrC_TIGR03507" not in stems:
@@ -188,11 +188,25 @@ def _mtr(rows):
         for r in updated:
             if r["hmm_stem"] in {"MtrA", "MtrB_TIGR03509"}:
                 r["cat"] = "Iron-Reduction"
+    _record_decision(decisions, [r for r in rows if r["hmm_stem"] in _MTR_GENES],
+                     rule_id="MtrMto", rule_type="mtr_disambiguation",
+                     status="evaluated", reason_code="category_disambiguation_only",
+                     observed_models=sorted(stems & _MTR_GENES))
     return updated
 
 
+def _record_decision(decisions, rows, *, stage="context", rule_id,
+                     rule_type, status, reason_code, excluded=(), **observations):
+    """Record an actual branch decision without affecting its result."""
+    if decisions is not None and rows:
+        decisions.append(dict(stage=stage, rule_id=rule_id, rule_type=rule_type,
+                              status=status, reason_code=reason_code,
+                              applies_to_orfs=[r["orf"] for r in rows],
+                              excluded_orfs=list(excluded), **observations))
+
+
 def filter_cluster_fegenie(cluster_rows, report_all_pats, all_results=False,
-                           catalog_mode=False):
+                           catalog_mode=False, decisions=None):
     """
     Reimplementation of FeGenie's context rules with Efesto extensions.
 
@@ -210,56 +224,91 @@ def filter_cluster_fegenie(cluster_rows, report_all_pats, all_results=False,
     is unavailable by definition.
     """
     if all_results:
+        _record_decision(decisions, cluster_rows, rule_id="ALL_RESULTS",
+                         rule_type="bypass", status="bypassed", reason_code="all_results")
         return cluster_rows
 
     cats  = {r["cat"]      for r in cluster_rows}
     stems = {r["hmm_stem"] for r in cluster_rows}
 
     if all(_cm(c, report_all_pats) for c in cats):
+        _record_decision(decisions, cluster_rows, rule_id="REPORT_ALL_CATEGORIES",
+                         rule_type="bypass", status="bypassed", reason_code="report_all_categories")
         return cluster_rows
 
     if catalog_mode:
+        _record_decision(decisions, cluster_rows, rule_id="CATALOG_MODE",
+                         rule_type="bypass", status="bypassed", reason_code="catalog_context_bypass")
         if stems & _MTR_GENES:
-            return _mtr(cluster_rows)
+            return _mtr(cluster_rows, decisions=decisions)
         return cluster_rows
 
     # Evaluate each system against its own members in this neighborhood.
     # A decision about one system must not short-circuit unrelated rules.
     rejected = set()
-    for genes, minimum in ((_FLEET_GENES, 5), (_MAM_GENES, 5),
-                           (_FOXABC_GENES, 2), (_DFE1_GENES, 3),
-                           (_DFE2_GENES, 3), (_TAD_GENES, 2), (_SUF_GENES, 3)):
-        if len(stems & genes) < minimum:
+    for name, genes, minimum in (("FLEET", _FLEET_GENES, 5), ("MAM", _MAM_GENES, 5),
+                                 ("FOXABC", _FOXABC_GENES, 2), ("DFE1", _DFE1_GENES, 3),
+                                 ("DFE2", _DFE2_GENES, 3), ("TAD_PILUS", _TAD_GENES, 2),
+                                 ("SUF_OPERON", _SUF_GENES, 3)):
+        failed = len(stems & genes) < minimum
+        if failed:
             rejected.update(stems & genes)
-    for genes, anchors in ((_FOXEYZ_GENES, {"FoxE"}),
-                           (_CNT_SYNTH_GENES, _CNT_CORE_GENES),
-                           (_MBN_SYNTH_GENES, _MBN_SYNTH_GENES)):
-        if not anchors <= stems:
+        _record_decision(decisions, [r for r in cluster_rows if r["hmm_stem"] in genes],
+                         rule_id=name, rule_type="require_n_of",
+                         status="failed" if failed else "passed",
+                         reason_code="minimum_models_not_met" if failed else "minimum_models_met",
+                         excluded=[r["orf"] for r in cluster_rows if failed and r["hmm_stem"] in genes],
+                         observed_models=sorted(stems & genes), minimum_models=minimum)
+    for name, genes, anchors in (("FOXEYZ", _FOXEYZ_GENES, {"FoxE"}),
+                                 ("CNT_CORE", _CNT_SYNTH_GENES, _CNT_CORE_GENES),
+                                 ("MBN_CORE", _MBN_SYNTH_GENES, _MBN_SYNTH_GENES)):
+        failed = not anchors <= stems
+        if failed:
             rejected.update(stems & genes)
+        _record_decision(decisions, [r for r in cluster_rows if r["hmm_stem"] in genes],
+                         rule_id=name, rule_type="require_all_anchors",
+                         status="failed" if failed else "passed",
+                         reason_code="required_anchors_not_met" if failed else "required_anchors_met",
+                         excluded=[r["orf"] for r in cluster_rows if failed and r["hmm_stem"] in genes],
+                         observed_models=sorted(stems & genes), required_anchors=sorted(anchors))
     rows = [r for r in cluster_rows if r["hmm_stem"] not in rejected]
     # Count only distinct models in the relevant category group; another
     # system's members cannot satisfy a transport/synthesis requirement.
-    for categories, minimum, trusted in ((_SIDERO_TRANS_CATS, 2, _TRUSTED_LONE),
-                                          (_SIDERO_SYNTH_CATS, 3, set()),
-                                          (_IRON_TRANS_CATS, 2, set())):
+    for name, categories, minimum, trusted in (("SIDERO_TRANSPORT", _SIDERO_TRANS_CATS, 2, _TRUSTED_LONE),
+                                               ("SIDERO_SYNTH", _SIDERO_SYNTH_CATS, 3, set()),
+                                               ("IRON_TRANSPORT", _IRON_TRANS_CATS, 2, set())):
         members = {r["hmm_stem"] for r in rows
                    if canonical_category(r["cat"]) in categories}
-        if len(members) < minimum and not members & trusted:
+        failed = len(members) < minimum and not members & trusted
+        affected = [r for r in rows if canonical_category(r["cat"]) in categories]
+        _record_decision(decisions, affected, rule_id=name, rule_type="require_n_cat",
+                         status="failed" if failed else "passed",
+                         reason_code=("minimum_models_not_met" if failed else
+                                      "trusted_lone_observed" if len(members) < minimum else "minimum_models_met"),
+                         excluded=[r["orf"] for r in affected] if failed else [],
+                         observed_models=sorted(members), minimum_models=minimum,
+                         trusted_models_observed=sorted(members & trusted))
+        if failed:
             rows = [r for r in rows if canonical_category(r["cat"]) not in categories]
     # Category disambiguation does not exempt other systems from filtering.
-    return _mtr(rows) if any(r["hmm_stem"] in _MTR_GENES for r in rows) else rows
+    return _mtr(rows, decisions=decisions) if any(r["hmm_stem"] in _MTR_GENES for r in rows) else rows
 
 
 def filter_cluster_json(cluster_rows, operon_rules, report_all_pats,
-                        all_results=False, contig_len=None, relaxed_threshold=10000):
+                        all_results=False, contig_len=None, relaxed_threshold=10000,
+                        decisions=None):
     """
     JSON-rule engine (for operon_rules.json users — model organisms).
     Used when operon_rules.json is present in --hmm_dir.
     """
     if all_results:
+        _record_decision(decisions, cluster_rows, rule_id="ALL_RESULTS",
+                         rule_type="bypass", status="bypassed", reason_code="all_results")
         return cluster_rows
     cats = {r["cat"] for r in cluster_rows}
     if all(_cm(c, report_all_pats) for c in cats):
+        _record_decision(decisions, cluster_rows, rule_id="REPORT_ALL_CATEGORIES",
+                         rule_type="bypass", status="bypassed", reason_code="report_all_categories")
         return cluster_rows
     relaxed = (contig_len is not None and contig_len > 0
                and contig_len < relaxed_threshold)
@@ -311,8 +360,42 @@ def filter_cluster_json(cluster_rows, operon_rules, report_all_pats,
         return rows
 
     rows = cluster_rows
-    for rd in operon_rules:
+    for index, rd in enumerate(operon_rules):
+        before = rows
         rows = _apply(rows, rd)
+        gs = set(rd.get("genes", []))
+        cs = {canonical_category(c) for c in rd.get("categories", [])}
+        named = [r for r in before if r["hmm_stem"] in gs]
+        categorized = [r for r in before if r["cat"] in cs]
+        if named or categorized:
+            kind = rd["rule"]
+            observed = {r["hmm_stem"] for r in (categorized if kind.startswith("require_n_cat") else named)}
+            minimum = max(1, rd.get("min_genes", 1) // 2) if relaxed else rd.get("min_genes", 1)
+            trusted = set(rd.get("trusted_lone", [])) & {r["hmm_stem"] for r in before}
+            if kind == "require_n_of" or kind == "require_n_cat":
+                passed = len(observed) >= minimum
+                reason = "minimum_models_met" if passed else "minimum_models_not_met"
+            elif kind == "require_anchor":
+                passed = rd.get("anchor", "") in {r["hmm_stem"] for r in named}
+                reason = "required_anchor_met" if passed else "required_anchor_not_met"
+            elif kind == "require_n_cat_or_lone_trusted":
+                passed = len(observed) > 1 or bool(trusted) or len(observed) >= minimum
+                reason = ("trusted_lone_observed" if trusted else "minimum_models_met" if len(observed) >= minimum
+                          else "two_model_exception" if len(observed) > 1 else "minimum_models_not_met")
+            else:
+                passed = True
+                reason = "category_disambiguation_only" if kind == "mtr_disambiguation" else "unrecognized_rule_passthrough"
+            kept = {r["orf"] for r in rows}
+            excluded = [r["orf"] for r in before if r["orf"] not in kept]
+            members = (categorized or named) if kind.startswith("require_n_cat") else (named or categorized)
+            affected_orfs = {r["orf"] for r in members} | set(excluded)
+            affected = [r for r in before if r["orf"] in affected_orfs]
+            _record_decision(decisions, affected, rule_id=rd.get("name", "rule_"+str(index)),
+                             rule_type=kind, status="passed" if passed else "failed", reason_code=reason,
+                             excluded=excluded, observed_models=sorted(observed),
+                             minimum_models=minimum if kind.startswith("require_n") else None,
+                             required_anchors=[rd.get("anchor", "")] if kind == "require_anchor" else [],
+                             on_fail=rd.get("on_fail", "keep_all"), relaxed=relaxed)
         if not rows:
             return []
     return rows
@@ -326,8 +409,11 @@ def count_heme(seq):
                 r"C(.{14})CH", r"C(.{15})CH"])
 
 
-def second_pass(cluster_rows, g2c, seq_dict, all_results=False, catalog_mode=False):
+def second_pass(cluster_rows, g2c, seq_dict, all_results=False, catalog_mode=False,
+                decisions=None):
     if all_results:
+        _record_decision(decisions, cluster_rows, stage="sequence", rule_id="ALL_RESULTS",
+                         rule_type="bypass", status="bypassed", reason_code="all_results")
         return cluster_rows
     stems = [r["hmm_stem"] for r in cluster_rows]
     kept  = []
@@ -335,6 +421,13 @@ def second_pass(cluster_rows, g2c, seq_dict, all_results=False, catalog_mode=Fal
         stem = r["hmm_stem"]
         cat  = r["cat"]
         if stem == "Cyc1":
+            observed = {h for h in set(stems) if g2c.get(h, "") in FE_REDOX}
+            passed = not catalog_mode and len(observed) >= 2
+            _record_decision(decisions, [r], stage="sequence", rule_id="CYC1_REDOX_CONTEXT",
+                             rule_type="require_n_redox_models", status="passed" if passed else "failed",
+                             reason_code="cyc1_catalog_exclusion" if catalog_mode else
+                                         "minimum_redox_models_met" if passed else "minimum_redox_models_not_met",
+                             excluded=[] if passed else [r["orf"]], observed_models=sorted(observed), minimum_models=2)
             if catalog_mode:
                 continue
             if len({h for h in set(stems) if g2c.get(h, "") in FE_REDOX}) >= 2:
@@ -342,10 +435,21 @@ def second_pass(cluster_rows, g2c, seq_dict, all_results=False, catalog_mode=Fal
             continue
         if re.match(r"Cyc2", stem):
             seq = seq_dict.get(r["genome"], {}).get(r["orf"], "")
+            passed = len(seq) >= 365 and count_heme(seq) > 0
+            _record_decision(decisions, [r], stage="sequence", rule_id="CYC2_LENGTH_HEME",
+                             rule_type="sequence_requirements", status="passed" if passed else "failed",
+                             reason_code="cyc2_requirements_met" if passed else "cyc2_requirements_not_met",
+                             excluded=[] if passed else [r["orf"]], protein_length=len(seq),
+                             minimum_length=365, heme_motifs=count_heme(seq), minimum_heme_motifs=1)
             if len(seq) >= 365 and count_heme(seq) > 0:
                 kept.append(r)
             continue
         if cat == "Iron-Regulation":
+            passed = catalog_mode or any("regulation" in g2c.get(h, "").lower() for h in stems)
+            _record_decision(decisions, [r], stage="sequence", rule_id="IRON_REGULATION_CONTEXT",
+                             rule_type="category_requirement", status="passed" if passed else "failed",
+                             reason_code="regulation_requirement_met" if passed else "regulation_requirement_not_met",
+                             excluded=[] if passed else [r["orf"]])
             if catalog_mode or any("regulation" in g2c.get(h, "").lower() for h in stems):
                 kept.append(r)
             continue

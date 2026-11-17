@@ -6,6 +6,7 @@ Main annotations describe retained hits after search and context filtering.
 ## Choose a table
 
 - **Family assignments:** use `Efesto-results-long.tsv` for one row per retained ORF.
+- **Filtering decisions:** use `Efesto-filter-decisions.tsv` for retained, excluded and recovered selected HMM candidates.
 - **Neighborhood requirements:** use `Efesto-context-evidence.tsv` for retained-cluster observations.
 - **Candidate recovery:** use `Efesto-confirmation-candidates.tsv`; some rows are not retained annotations.
 - **Operon probabilities:** use `Efesto-UniOP-pair-evidence.tsv`; a row describes a pair, not one gene's function.
@@ -21,6 +22,7 @@ to read unavailable or discordant results.
 | `Efesto-geneSummary-clusters.csv` | Compact per-ORF cluster summary |
 | `Efesto-heatmap-data.csv` | Category × genome counts of distinct retained clusters |
 | `Efesto-results-long.tsv` | Per-ORF match statistics, threshold type and separate evidence |
+| `Efesto-filter-decisions.tsv` | Every selected HMM candidate, actual filter decisions and final retention/rescue status |
 | `Efesto-context-evidence.tsv` | Observations and rule assessments for retained neighborhoods |
 | `Efesto-confirmation-candidates.tsv` | First-pass rejected confirmation candidates, including recovered and unretained hits |
 | `Efesto-UniOP-pair-evidence.tsv` | Available pair probabilities between retained hits; header-only when none |
@@ -64,6 +66,45 @@ edge. GFF3 supplies gene coordinates.
 `retention_mode` is `context_filter`, `all_results`, `catalog` or `eggnog_rescue`.
 In the separate candidate table, `not_retained` identifies candidates that were
 not recovered. Candidate rows never contribute to normal annotation summaries.
+
+## Filter-decision table
+
+`Efesto-filter-decisions.tsv` is always written with its own `filter-decisions-v1`
+schema. It has one row per highest-scoring accepted HMM candidate per ORF, including
+candidates excluded by the contig-length, context or second-pass filters. It does
+not enumerate subthreshold matches or the competing models discarded by best-hit
+selection. Excluded rows do not contribute to annotations, counts, heatmaps or FASTA exports.
+
+The table records genome/original/mapped ORF identity, model and threshold
+provenance, `category_before_filter`, `category_after_context`, `final_category`,
+`raw_cluster_id` and `final_cluster_id`. Raw clusters precede filtering; a rescued
+candidate can acquire a different final cluster. Candidates removed before
+clustering have an empty raw cluster ID. Genomic coordinates, index-based fallback
+and catalog-singleton grouping are distinguished. `contig_length_status` identifies
+known lengths versus CDS-derived lower bounds; this preserves the current length
+filter's behavior and does not turn a lower bound into an exact contig length.
+
+`contig_length_decision`, `context_decision` and `sequence_decision` describe the
+initial filtering stages; the last field covers the existing second-pass rules,
+including Cyc1 context and Cyc2 length/motif requirements. A stage can be excluded,
+retained, bypassed, not applied or not evaluated, as applicable. `final_decision`
+is `retained`, `excluded` or `rescued`; `retention_mode` identifies eggNOG recovery
+where it occurred. The original exclusion remains visible after rescue.
+
+`rule_decisions` contains a JSON array of decisions recorded by the executing
+filter: stage, rule ID/type, requirement status, action on this candidate, reason
+code, observed models and applicable minima/anchors or sequence measurements.
+An unsatisfied JSON rule with `on_fail=keep_all` can have `status=failed` and
+`action=retained`. A JSON cluster-wide drop also explains exclusions of nonmember
+hits. `reason_codes` lists initial excluding rules and any subsequent eggNOG rescue.
+An empty list for a retained candidate does not imply an experimentally validated
+function. Category assignments are recorded separately from exclusion decisions.
+
+The rule-version hash fingerprints the configuration, not the software source.
+Keep the source revision and run log for reproducibility. `--all_results` records
+context/second-pass bypasses; an explicitly requested short-contig filter still
+applies. The audit is spooled to disk to avoid retaining a second complete
+candidate dataset in memory.
 
 ## GFF3 and sequence headers
 

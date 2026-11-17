@@ -2,7 +2,10 @@
 
 Efesto reports protein-family and pathway-component potential. The annotations
 below are useful layers of genome interpretation, not direct measurements of
-metal turnover or resistance.
+metal turnover or resistance. Scope includes iron, manganese, copper, zinc,
+nickel, cobalt, tungsten, lanthanides and other metal/metalloid functions. See the
+[comparison and model examples](comparison.md#functional-scope-beyond-iron) for
+how the combined sources extend the functional scope beyond iron.
 
 | Layer | Useful annotation | Interpretation limit |
 |---|---|---|

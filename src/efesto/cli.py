@@ -33,6 +33,7 @@ from efesto.gene_calling import run_prodigal
 from efesto.hmmer import HMMSearchError, collect_best_hits, run_all_hmmsearches
 from efesto.identifiers import ProteinIdentifiers, scoped_id, write_id_map
 from efesto.categories import canonical_category
+from efesto.decisions import DECISION_SCHEMA, FilterDecisionLog
 from efesto.io import (build_confirmation_map, build_contig_length_dict,
                                 build_nseq_map, build_topology_expectation_map,
                                 filter_categories, load_gff_dir,
@@ -624,6 +625,9 @@ def main():
     # sufA hit with no sufB/sufC/sufS support nearby) — candidates for the
     # tier-2 (eggNOG) rescue pass run once after the main clustering loop.
     pending_confirmation = []
+    decision_log = FilterDecisionLog(directory=out_dir)
+    context_version = rule_version(_active_rules, report_all_pats)
+    context_engine = "json" if json_mode else "fegenie_derived"
 
     for faa in faa_files:
         genome    = faa.name
@@ -632,6 +636,20 @@ def main():
             continue
         orf_coords = genome_coords.get(genome, {})
         clen       = contig_lengths.get(genome, {})
+        def candidate_row(orf, hit, raw_cluster_id):
+            contig = (orf_coords[orf]["contig"] if orf in orf_coords else _orf_to_contig(orf))
+            return {
+                "cat": hit["cat"], "genome": genome, "contig": contig, "orf": orf,
+                "hmm_stem": hit["hmm_stem"], "bitscore": hit["bitscore"],
+                "cutoff": cutoffs.get(hit["hmm_stem"], 0), "evalue": hit["evalue"],
+                "threshold_type": hit["threshold_type"],
+                "search_bitscore_cutoff": max(cutoffs.get(hit["hmm_stem"], 0) if cutoffs.get(hit["hmm_stem"], 0) > 0 else args.zero_cutoff_min_bitscore, 0),
+                "threshold_source": "model_cutoff_table" if cutoffs.get(hit["hmm_stem"], 0) > 0 else "generic_search_option",
+                "model_source": registry_by_stem.get(hit["hmm_stem"], {}).get("source", "unknown"),
+                "retention_mode": "all_results" if args.all_results else "catalog" if args.catalog_mode else "context_filter",
+                "cluster_id": raw_cluster_id, "contig_len": clen.get(contig, 0),
+                "model_nseq": nseq_map.get(hit["hmm_stem"], ""),
+            }
         if args.min_contig_len > 0:
             before   = len(orf_hits)
             missing_lengths = set()
@@ -643,6 +661,15 @@ def main():
                     missing_lengths.add(contig)
                 if length is None or length >= args.min_contig_len:
                     kept_hits[orf] = hit
+                else:
+                    event = dict(stage="contig_length", rule_id="MIN_CONTIG_LENGTH",
+                                 rule_type="minimum_length", status="failed", reason_code="short_contig",
+                                 applies_to_orfs=[orf], excluded_orfs=[orf],
+                                 observed_length=length, minimum_length=args.min_contig_len)
+                    decision_log.record([candidate_row(orf, hit, "")], [event], [], [],
+                                        engine=context_engine, version=context_version,
+                                        coordinate_orfs=orf_coords, known_contigs=known_contig_lengths.get(genome, {}),
+                                        min_contig_len=args.min_contig_len)
             if missing_lengths:
                 print(f"[WARN] {genome}: contig length unavailable for "
                       f"{len(missing_lengths)} hit-bearing contig(s); these hits "
@@ -659,26 +686,7 @@ def main():
                 hit = orf_hits.get(orf)
                 if hit is None:
                     continue
-                contig = (orf_coords[orf]["contig"] if orf in orf_coords
-                          else _orf_to_contig(orf))
-                cluster_rows.append({
-                    "cat":        hit["cat"],
-                    "genome":     genome,
-                    "contig":     contig,
-                    "orf":        orf,
-                    "hmm_stem":   hit["hmm_stem"],
-                    "bitscore":   hit["bitscore"],
-                    "cutoff":     cutoffs.get(hit["hmm_stem"], 0),
-                    "evalue":     hit["evalue"],
-                    "threshold_type": hit["threshold_type"],
-                    "search_bitscore_cutoff": max(cutoffs.get(hit["hmm_stem"], 0) if cutoffs.get(hit["hmm_stem"], 0) > 0 else args.zero_cutoff_min_bitscore, 0),
-                    "threshold_source": "model_cutoff_table" if cutoffs.get(hit["hmm_stem"], 0) > 0 else "generic_search_option",
-                    "model_source": registry_by_stem.get(hit["hmm_stem"], {}).get("source", "unknown"),
-                    "retention_mode": "all_results" if args.all_results else "catalog" if args.catalog_mode else "context_filter",
-                    "cluster_id": cluster_id,
-                    "contig_len": clen.get(contig, 0),
-                    "model_nseq": nseq_map.get(hit["hmm_stem"], ""),
-                })
+                cluster_rows.append(candidate_row(orf, hit, cluster_id))
             if not cluster_rows:
                 cluster_id += 1
                 continue
@@ -686,17 +694,24 @@ def main():
                 min(r["contig_len"] for r in cluster_rows if r["contig_len"] > 0)
                 if any(r["contig_len"] > 0 for r in cluster_rows) else None)
             rel_thr = args.relaxed_threshold if args.relaxed_operons else 0
+            decisions = []
             if json_mode:
                 filtered = filter_cluster_json(
                     cluster_rows, operon_rules, report_all_pats,
                     args.all_results, contig_len=min_clen,
-                    relaxed_threshold=rel_thr)
+                    relaxed_threshold=rel_thr, decisions=decisions)
             else:
                 filtered = filter_cluster_fegenie(
                     cluster_rows, report_all_pats,
-                    args.all_results, catalog_mode=args.catalog_mode)
+                    args.all_results, catalog_mode=args.catalog_mode, decisions=decisions)
+            context_rows = filtered
             filtered = second_pass(filtered, h2c, seq_dict,
-                                   args.all_results, catalog_mode=args.catalog_mode)
+                                   args.all_results, catalog_mode=args.catalog_mode, decisions=decisions)
+            decision_log.record(cluster_rows, decisions, context_rows, filtered,
+                                engine=context_engine, version=context_version,
+                                coordinate_orfs=orf_coords, catalog_mode=args.catalog_mode,
+                                known_contigs=known_contig_lengths.get(genome, {}),
+                                min_contig_len=args.min_contig_len)
             if confirmation_map:
                 kept_orfs = {r["orf"] for r in filtered}
                 for r in cluster_rows:
@@ -887,6 +902,13 @@ def main():
 
     write_id_map(out_dir / "Efesto-protein-id-map.tsv", pending_confirmation, final_rows)
 
+    print("[INFO] Writing Efesto-filter-decisions.tsv…")
+    try:
+        decision_log.write(out_dir / "Efesto-filter-decisions.tsv", final_rows,
+                           gene_map, prodigal_to_bakta)
+    finally:
+        decision_log.close()
+
     print("[INFO] Writing Efesto-heatmap-data.csv…")
     write_heatmap(str(out_dir / "Efesto-heatmap-data.csv"),
                   final_rows, all_genomes, norm_dict)
@@ -992,7 +1014,6 @@ def main():
         bgc_map, bgc_statuses = parse_antismash_gff(args.bgc_dir, faa_files, return_status=True)
 
     pending_keys = {(r["genome"], r["orf"]) for r in pending_confirmation}
-    context_version = rule_version(_active_rules, report_all_pats)
     evidence_mode = "all_results" if args.all_results else "catalog" if args.catalog_mode else "normal"
     searched_models = {stem for models in cat_hmms.values() for stem, _ in models}
     def attach_hit_evidence(row):
@@ -1121,6 +1142,7 @@ def main():
         lf.write("Efesto run log\n")
         lf.write(f"Version       : {__version__}\n")
         lf.write(f"Output schema : {OUTPUT_SCHEMA}\n")
+        lf.write(f"Decision schema: {DECISION_SCHEMA}\n")
         lf.write(f"Date          : "
                  f"{datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
         lf.write(f"Command       : {' '.join(sys.argv)}\n")

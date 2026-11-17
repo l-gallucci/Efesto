@@ -95,9 +95,13 @@ or a demonstrated contradiction. Optional Phobius/motif reporting is separate
 from sequence checks already used in the filtering stage.
 
 See [evidence and decisions](evidence.md) for worked MtrA/LanM, SUF and singleton
-examples, and [output files](output_formats.md) for the exact tables. The context
-table assesses retained neighborhoods; it is not a full execution trace of the
-filtering engine.
+examples, and [output files](output_formats.md) for the exact tables.
+`Efesto-filter-decisions.tsv` records the actual filter actions on selected HMM
+candidates, including exclusions and the final outcome after any eggNOG rescue.
+It starts after HMM acceptance and best-hit selection, so subthreshold matches
+and competing models for the same ORF are not included.
+`Efesto-context-evidence.tsv` describes retained neighborhoods and their rule
+observations; it is not the execution trace.
 
 ## Resource use
 

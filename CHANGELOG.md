@@ -18,6 +18,10 @@ First tagged-release preparation. Earlier development checkouts used internal
   reconstruct Bakta headers only when all proteins have matching coordinates.
 - Evaluate all default context rules in mixed neighborhoods without early-return bypasses;
   apply category minima independently and honor declared trusted-lone exceptions.
+- Export every selected HMM candidate with its actual contig/context/second-pass
+  decisions and final retention/rescue status in `Efesto-filter-decisions.tsv`;
+  spool records to disk without changing thresholds or retained annotations.
+- Exclude local HMM staging experiments from source archives as well as wheels.
 - Preserve registry cutoff precision in the runtime table and reject inconsistent packages.
 - Resolve UniOP/eggNOG script names through PATH and quote count/coverage heatmap CSVs.
 - Parse samtools depth position tables correctly and stream per-base coverage.

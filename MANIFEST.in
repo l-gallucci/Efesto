@@ -4,8 +4,10 @@ include MAINTAINING.rst
 recursive-include LICENSES *.txt *.md
 recursive-include hmm_library *.hmm *.tsv *.txt *.md
 prune hmm_library/_calibration
+prune hmm_library/_staging
 recursive-include assets *.png
 recursive-include docs *.md *.css
+recursive-include docs/data *.json
 recursive-include scripts *.py *.R *.sh
 recursive-include tests *.py
 recursive-include data/seeds/curated *.faa *.aln *.md *.tsv *.json

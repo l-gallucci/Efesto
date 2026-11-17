@@ -20,6 +20,21 @@ The optional motif comparison is distinct from existing sequence filters. For
 example, the Cyc2 second-pass rule still uses sequence length and heme motifs.
 Those filters remain in place.
 
+## Why was a candidate excluded?
+
+`Efesto-filter-decisions.tsv` traces the actual filtering decisions for every
+selected HMM candidate, including unflagged candidates that never enter optional
+confirmation. It retains the original exclusion and the final outcome after any
+eggNOG rescue. For example, a DFE_0461-family candidate can exceed its HMM cutoff
+but fail a DFE2 minimum of three distinct models. Nearby Mtr-family models do not
+fulfil that requirement. This reports insufficient support for that source-style
+system; it does not prove that the protein has no metal-related function.
+
+The decision table adds transparency without changing the filtering rules or
+counting excluded candidates as retained annotations. It is distinct from
+`Efesto-context-evidence.tsv`, which assesses retained neighborhoods rather than
+replaying exclusions. See the [decision-table fields](output_formats.md#filter-decision-table).
+
 ## Match statistics and search thresholds
 
 `Efesto-results-long.tsv` has one row per retained ORF. The HMM identifier,

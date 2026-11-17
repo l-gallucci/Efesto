@@ -1,0 +1,297 @@
+{
+  "schema": "efesto-comparison-summary-v1",
+  "measurement_dates": {
+    "matched_library": "2026-11-04",
+    "original_workflows": "2026-11-03",
+    "memory_optimization": "2026-11-03"
+  },
+  "documentation_audit_date": "2026-11-17",
+  "status": "Historical local pilots; not a benchmark of the current release.",
+  "environment": {
+    "platform": "macOS-26.3.1-arm64-arm-64bit-Mach-O",
+    "python": "3.13.13",
+    "hmmsearch_version": "# HMMER 3.4 (Aug 2023); http://hmmer.org/",
+    "hardware_observed_preflight": {
+      "model": "Mac15,6",
+      "logical_cpus": 11,
+      "ram_bytes": 38654705664,
+      "ram_gib": 36
+    },
+    "blast_version": "2.16.0+",
+    "prodigal_version": "2.6.3"
+  },
+  "dataset": {
+    "genomes": 10,
+    "total_bp": 40197383,
+    "total_proteins": 37633,
+    "inputs": [
+      {
+        "genome": "Acidithiobacillus_ferrooxidans_ATCC23270",
+        "fna_sha256": "d8497c94293bf372b360289f2dcf97e5f20d8d6c6e0d6d3b49d4618ef4125580",
+        "faa_sha256": "19af46050d61a9e10fbb6398e0a05406005234892bae31055773253aad533ba4",
+        "gff_sha256": "6176e18b23e042459c5c4d2eae952b24bb657376e88565aed1f89abc057709cd",
+        "orfs": 3051,
+        "bp": 2982397
+      },
+      {
+        "genome": "Bacillus_subtilis_168",
+        "fna_sha256": "59c09816fb55fb1a0b42d0715f627bb42018a19c6bf933c9cb37f6058ee4737e",
+        "faa_sha256": "d1bce8ae2f1948b0a408dd4ed727e1937bdd06a611a93aadaeefcbbc42d159fe",
+        "gff_sha256": "768463242dfd43b73f9e4f76369b016de2e42f64abc26a4bb566355713fb7d36",
+        "orfs": 4226,
+        "bp": 4215606
+      },
+      {
+        "genome": "Cupriavidus_metallidurans_CH34",
+        "fna_sha256": "45e921523e1dee6d3bd7f8a4e901a608c1bfb1ba597223842fb367ae25414afa",
+        "faa_sha256": "e150d25ecedb36708b9b3561255df494e77c96da45204fd990af535afce210af",
+        "gff_sha256": "8ea3ff34b0408315f5c2e1c83a2e6d8046764698d239c34af3e907dbe5ae6f86",
+        "orfs": 6364,
+        "bp": 6913352
+      },
+      {
+        "genome": "Desulfovibrio_vulgaris_Hildenborough",
+        "fna_sha256": "6b9be89d1c9db808b7ff38f0bed412a9af50b2cf512be8b623133e992adc9842",
+        "faa_sha256": "6f99744364c16b1264679e48cae3fa314941e694ded4e8ece5f4d6758022eaab",
+        "gff_sha256": "3484f3436b72985fe7e42408676090b904f275aa83547a5afa0520a131c20173",
+        "orfs": 3309,
+        "bp": 3773159
+      },
+      {
+        "genome": "Escherichia_coli_K12",
+        "fna_sha256": "53bb6a51b6e92139ced1e38f74b7938781027c52200922ff03718c2237d23bb4",
+        "faa_sha256": "0be9800fbd28a6bdd6785bafda9c615b70246c84640f1075226d51c940d4db39",
+        "gff_sha256": "ffa413cfc36d515b1e353130077fc46f02b47f2e6248163b9a5969144aeeffcb",
+        "orfs": 4319,
+        "bp": 4641652
+      },
+      {
+        "genome": "Gallionella_capsiferriformans_ES2",
+        "fna_sha256": "8bfbbffd47fd80c874b982f474a9ece67e84d38da43ee13c3a7248097183d1ec",
+        "faa_sha256": "fe64031d624f651e3f3cb05f262a4102b9af8fce088a0481843169ad9476dfdd",
+        "gff_sha256": "69293e6a68f780e89d249ce20678142fb47992e460611acca28f3a7f6a84b199",
+        "orfs": 2927,
+        "bp": 3162471
+      },
+      {
+        "genome": "Geobacter_sulfurreducens_PCA",
+        "fna_sha256": "fe7227834938617d75fccc6ea07ae54e8af2fcc8117d1e345d8d30668c211f84",
+        "faa_sha256": "8bd23155b737ec08e3f64ba046c56deac4de4df3e307a22d0864f25f78ef4387",
+        "gff_sha256": "2f7d78971cad291890b61dcddf0f80dc79cedfb020351844ed6893e57eee5b04",
+        "orfs": 3417,
+        "bp": 3814128
+      },
+      {
+        "genome": "Leptospirillum_ferrooxidans",
+        "fna_sha256": "835d03c2a660e76eaa82e81b701fc6f0c567046210b0cb51ef5e60e7fc594e11",
+        "faa_sha256": "a483193c08d32d8fda3b90f195aafda540b47ee0767ec2f387db26ffe80a0720",
+        "gff_sha256": "88861c19e448690646376c2764daa95803955a367112ff5a7cb2db24fc1fe37f",
+        "orfs": 2451,
+        "bp": 2559538
+      },
+      {
+        "genome": "Shewanella_oneidensis_MR1",
+        "fna_sha256": "1538fa1d13bbbe31095d43e3958b8eac4e37669256b401d6247373d7a63d9832",
+        "faa_sha256": "80234d2202af091c86f93d1ea5414ea9299d9e7bf44f960ae6d007b210e20455",
+        "gff_sha256": "13e80c6ba638251b1b29a5fcf492bfaa2d8b0a04de0035cd8fa68f7ee8b01311",
+        "orfs": 4595,
+        "bp": 5131424
+      },
+      {
+        "genome": "Sideroxydans_lithotrophicus_ES1",
+        "fna_sha256": "80d399dbf85091d966b9ad18255c63ea236625ae394a329fbcab14a6f3903425",
+        "faa_sha256": "e5f01fb7a6894059eb5e962c60d6b7ae2af24e91d068928af1cb9c3de64fa8f1",
+        "gff_sha256": "e4f8e735b28c287d4d0dc80df3200777663649eb94d95c99c1078d877d996e89",
+        "orfs": 2974,
+        "bp": 3003656
+      }
+    ]
+  },
+  "matched_library": {
+    "fegenie_commit": "8efc74cabfd09680050e35b4deafc5db33e381fb",
+    "efesto_snapshot": "Archived source working tree, 2026-11-04; package version label 1.0.6, not a release identifier.",
+    "efesto_source_sha256": {
+      "src/efesto/__init__.py": "d62c97e6ff7e46f7507ca619cb02f4c451c36520996357048c021dde5032b126",
+      "src/efesto/_dev.py": "0a75656f5bf036de8d99e349c4cc2657b0eba9b95bb73be7c993fab7438a9607",
+      "src/efesto/baktfold.py": "a3ea1c16fba140f4e60c5dbec043496dedc23e75c12f36ff7064e3da4bfdf425",
+      "src/efesto/bgc.py": "e5cb7a88376cd3671621f6dfeb19aad1ce5b6f766d5cc8e8ccda85507094c8b5",
+      "src/efesto/cli.py": "81ea587205e97b95cf6986d0ce337a8c6941a296a7b57b11a21a26eca383fae6",
+      "src/efesto/clustering.py": "375068f989787af9f9cb5a2b52d2312cd6b75a3d927c162dce9af22eff4fd95e",
+      "src/efesto/coverage.py": "276b5c6951c2b992db2548bbc5bb77f6514f91e6fe6795a669f0e594761a1fc8",
+      "src/efesto/eggnog.py": "a6925abb938c78016ed4d2d84d1b1c89cedb5efcb35e8a3b713121e3fd2b1a38",
+      "src/efesto/gene_calling.py": "3c6d17ced156c9f3773be567b7baf93f15c98079030236b909bfb091ba0e0027",
+      "src/efesto/hmmer.py": "390d7ea5091c8636a46668753545570d334499956a49d2b95e3cecef9acf8a5f",
+      "src/efesto/io.py": "29b99a8aa4f921673e91cd5cc714593c6d5a076e2f89b0faa5244c8874f8885a",
+      "src/efesto/operon.py": "c0fbe278da2761cbf57fef09ca7b215e00b65db6518f51e64df66cc7353117cf",
+      "src/efesto/scoring.py": "6f370ae6056ac8a0f6f1bb4621dad1ce70dd23aa0f55202abdeee356be274523",
+      "src/efesto/topology.py": "18f6fe7e18439da9d79d4a504c44028405883d065af39e1bc1c52090329e3119",
+      "src/efesto/uniop.py": "ca2fd04d1c9146fe3878bcb54f30572119eb6843c3f60a7405b5afe38a33b6b1",
+      "src/efesto/writers.py": "cbd11d967ff9f450f0a527d726cf924ade6d18fa6565e377574661a8c6256a1d",
+      "pyproject.toml": "d6dd2fdcb1e15e0d7856191c8cb7885d726a2a04b9aec0a1c762298b9a74f3ba"
+    },
+    "source_hmm_paths": 216,
+    "unique_searched_models": 191,
+    "searches_per_tool": 1910,
+    "thresholds": "Original FeGenie full-sequence thresholds, with upstream integer truncation reproduced; E-value post-filter Efesto <=0.1 and FeGenie <0.1.",
+    "context_filtering": "Bypassed in both programs with all-results mode; other pipeline-specific checks remain.",
+    "cpu": {
+      "nominal_budget": 4,
+      "efesto_simultaneous_searches": 2,
+      "efesto_hmmer_cpu_argument": 1,
+      "fegenie_simultaneous_searches": 1,
+      "fegenie_hmmer_cpu_argument": 4,
+      "OMP_NUM_THREADS": 1,
+      "OPENBLAS_NUM_THREADS": 1,
+      "MKL_NUM_THREADS": 1
+    },
+    "replicates_per_tool": 1,
+    "runs": [
+      {
+        "tool": "Efesto",
+        "wall_seconds": 37.95060095889494,
+        "peak_sampled_family_rss_mib": 562.84375,
+        "rss_samples": 304,
+        "exit_code": 0
+      },
+      {
+        "tool": "FeGenie",
+        "wall_seconds": 182.74728562496603,
+        "peak_sampled_family_rss_mib": 886.359375,
+        "rss_samples": 1384,
+        "exit_code": 0
+      }
+    ],
+    "raw_search_agreement": {
+      "table_pairs": 1910,
+      "identical_table_pairs": 1910,
+      "raw_hit_rows": 3235,
+      "HMM_annotated_ORFs_per_tool": 1304,
+      "category_label_differences": 7,
+      "fegenie_additional_BLAST_ORFs": 12
+    },
+    "cutoff_file_sha256": "46950e8dcb9a33854558b2edbc5549254dec5d6ab204c273c595037b71db0c34",
+    "profile_files_and_effective_thresholds_sha256": "737a5892285b9d54699dc5b9bf3edc789791e5abf7cdffd8de21edbc2506f17e"
+  },
+  "memory_method": "Sum of RSS of the timed wrapper and live descendants, sampled with ps at approximately 0.1 s plus sampling-command overhead. Monitor excluded. Shared pages can be counted multiple times; not PSS or exclusive physical memory. MiB = 1048576 bytes.",
+  "timing_scope": "Complete invoked protein-input workflows, excluding common gene prediction. FeGenie built-in BLAST reference searches and deliberate waits included; optional external evidence and R plotting disabled.",
+  "execution_conditions": "Sequential paired runs; fresh output directories; no HMM result-cache reuse; filesystem caches not flushed; laptop system load and CPU affinity not controlled.",
+  "original_workflows": {
+    "efesto_base_commit": "7e0d39891c35b47b3709deeb203412f0de67df98",
+    "efesto_working_tree_changes_present": true,
+    "searched_models": {
+      "Efesto": 490,
+      "FeGenie": 191
+    },
+    "runs": [
+      {
+        "name": "shared_1_efesto",
+        "tool": "Efesto",
+        "mode": "shared_prodigal_orfs",
+        "repetition": 1,
+        "wall_seconds": 76.27937437500805,
+        "peak_sampled_family_rss_mib": 1909.953125,
+        "rss_samples": 596,
+        "exit_code": 0
+      },
+      {
+        "name": "shared_1_fegenie",
+        "tool": "FeGenie",
+        "mode": "shared_prodigal_orfs",
+        "repetition": 1,
+        "wall_seconds": 187.93854420818388,
+        "peak_sampled_family_rss_mib": 837.65625,
+        "rss_samples": 1430,
+        "exit_code": 0
+      },
+      {
+        "name": "shared_2_efesto",
+        "tool": "Efesto",
+        "mode": "shared_prodigal_orfs",
+        "repetition": 2,
+        "wall_seconds": 72.88965137512423,
+        "peak_sampled_family_rss_mib": 1707.9375,
+        "rss_samples": 578,
+        "exit_code": 0
+      },
+      {
+        "name": "shared_2_fegenie",
+        "tool": "FeGenie",
+        "mode": "shared_prodigal_orfs",
+        "repetition": 2,
+        "wall_seconds": 179.93663141620345,
+        "peak_sampled_family_rss_mib": 884.796875,
+        "rss_samples": 1345,
+        "exit_code": 0
+      },
+      {
+        "name": "shared_3_efesto",
+        "tool": "Efesto",
+        "mode": "shared_prodigal_orfs",
+        "repetition": 3,
+        "wall_seconds": 73.31947912508622,
+        "peak_sampled_family_rss_mib": 1622.625,
+        "rss_samples": 580,
+        "exit_code": 0
+      },
+      {
+        "name": "shared_3_fegenie",
+        "tool": "FeGenie",
+        "mode": "shared_prodigal_orfs",
+        "repetition": 3,
+        "wall_seconds": 240.4097456249874,
+        "peak_sampled_family_rss_mib": 950.015625,
+        "rss_samples": 1554,
+        "exit_code": 0
+      }
+    ],
+    "caution": "Pre-memory-optimization snapshot and unequal libraries. Efesto received GFF; FeGenie protein mode lacked a contig-name map. Do not use annotation differences as an accuracy ranking."
+  },
+  "memory_optimization": {
+    "baseline": {
+      "wall_seconds": 79.02838783408515,
+      "peak_sampled_family_rss_mib": 1753.671875
+    },
+    "optimized_default": {
+      "wall_seconds": 143.36860987497494,
+      "peak_sampled_family_rss_mib": 1235.71875
+    },
+    "reduction_percent": 29.5353499354034,
+    "runs_per_configuration": 1,
+    "annotation_rows": 1632,
+    "hmm_searches": 4900,
+    "hmm_errors": 0,
+    "equivalence": [
+      {
+        "file": "Efesto-results-long.tsv",
+        "byte_identical": true,
+        "sha256": "2a65d47bb26c8dd74d0e24285edc3d33facc0a73c3e5bd47398abc38c367d3c2"
+      },
+      {
+        "file": "Efesto-summary.csv",
+        "byte_identical": true,
+        "sha256": "38826f08db421ad15acbf033c3358f9194c56f2e4affe5d05e1ddede3c4a83c7"
+      },
+      {
+        "file": "Efesto-geneSummary-clusters.csv",
+        "byte_identical": true,
+        "sha256": "cf0a9cb187965fb28d8d2ec5f8814461f06cf7baa91391853dd703962146ce71"
+      },
+      {
+        "file": "Efesto-heatmap-data.csv",
+        "byte_identical": true,
+        "sha256": "76e4f965e729fb33e6b6f350ddd1aa228b2543e22513f2d9d930c67488ed8169"
+      },
+      {
+        "file": "Efesto-hits.gff3",
+        "byte_identical": true,
+        "sha256": "1aa01b1f356de8291fc214e1641a3407f470629364bbafe033c748e9ed6f9242"
+      },
+      {
+        "file": "Efesto-hits.faa",
+        "byte_identical": true,
+        "sha256": "99f453f9aee84aa38635423a80f3a53899fc8f1ee93081d3e9e552f69a3e835a"
+      }
+    ]
+  },
+  "availability": "Compact public summary. Full raw outputs, sampling traces and source snapshots are retained in the local benchmark archive."
+}

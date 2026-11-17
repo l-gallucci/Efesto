@@ -1,4 +1,12 @@
-# Memory use and HMM search concurrency
+# Performance and memory
+
+For measured wall time, sampled peak RSS and matching HMMER results, see
+[recorded comparisons with FeGenie](comparison.md). That page separates the
+same-HMM/same-protein control from full-library runs and the before/after memory
+optimization. The measurements concern archived snapshots; the behavior below
+describes the current code.
+
+## HMM search concurrency
 
 Efesto runs at most **two HMM searches simultaneously by default**. The existing
 CPU budget still applies: `--threads 1` or a larger `--hmm_threads` value can
@@ -22,6 +30,11 @@ submitted jobs per active search worker. Protein sequences load after HMM
 searches finish. These changes avoid extra coordinator interpreters, bound
 queue size and avoid overlapping the sequence dictionary with the HMMER peak.
 HMMER arguments, score/E-value cutoffs and annotation rules remain unchanged.
+
+The filter-decision audit spools selected candidates to a temporary file in the
+output directory and writes the final TSV after retention and rescue decisions.
+It avoids keeping a second full candidate table in RAM, at the cost of temporary
+disk space and additional I/O.
 
 The HMM search limit does not change Pyrodigal/Pyrodigal-GV worker allocation.
 `--threads` continues to control that stage. Lower it as well if gene prediction

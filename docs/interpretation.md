@@ -28,7 +28,9 @@ See [separate evidence](evidence.md) for availability, scope and output migratio
 ## Practical reading order
 
 1. Check the HMM identifier, model source, bitscore, E-value and effective threshold.
-2. Inspect `retention_mode` and any applicable context-rule observations.
+2. Inspect `retention_mode` and any applicable context-rule observations. Use
+   `Efesto-filter-decisions.tsv` to trace why a selected HMM candidate was retained,
+   excluded or rescued; see the [decision guide](evidence.md#why-was-a-candidate-excluded).
 3. Read optional-tool availability before interpreting a comparison or missing value.
 4. Keep discordant observations visible; another result does not cancel them out.
 5. Distinguish per-ORF counts from the cluster-count matrix before comparing samples.

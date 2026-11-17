@@ -2,6 +2,8 @@
 
 The current inventory and runtime status come from the [registry-backed catalog](hmm_library.md).
 This page describes the shipped library and its interpretation limits.
+For a consolidated overview of source contributions, rebuilt profiles and
+completed comparisons, read the [scope and model recap](comparison.md).
 
 ## Evidence records
 

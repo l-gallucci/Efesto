@@ -1,5 +1,12 @@
 # HMM library
 
+Efesto combines profiles from FeGenie, MetHMMDB, MnOxGeneTool, Tabuteau et al.,
+Pfam and NCBI protein family models, alongside profiles built for Efesto.
+Shared categories and runtime tables allow these sources to be searched in one
+workflow. Per-model records preserve their origins, references and search cutoffs;
+a shared category does not make the profiles functionally interchangeable.
+See [source citations](references.md) and [curation and provenance](hmm_library_curation.md).
+
 {{catalog_summary}}
 
 Counts below are generated from `hmm_registry.tsv` during the website build.
