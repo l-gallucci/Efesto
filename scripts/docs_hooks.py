@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+# Copyright (c) 2026 Efesto contributors.
+
 """Build public documentation from maintained code and registry sources."""
 from collections import Counter
 import csv

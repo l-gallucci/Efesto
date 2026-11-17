@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+# Copyright (c) 2026 Efesto contributors.
+
 """I/O helpers: FASTA, GFF, map/cutoff files, HMM catalog."""
 
 import csv
@@ -195,14 +198,17 @@ def read_map(path):
     return m
 
 
-def get_contig_lengths_from_gff(gff_path):
+def get_contig_lengths_from_gff(gff_path, return_exact=False):
     lengths = defaultdict(int)
+    exact = {}
     with open(gff_path) as fh:
         for line in fh:
             if line.startswith("#"):
-                m = re.search(r"##sequence-region\s+(\S+)\s+\d+\s+(\d+)", line)
+                m = re.search(r"##sequence-region\s+(\S+)\s+(\d+)\s+(\d+)", line)
                 if m:
-                    lengths[m.group(1)] = int(m.group(2))
+                    lengths[m.group(1)] = int(m.group(3))
+                    if int(m.group(2)) == 1:
+                        exact[m.group(1)] = int(m.group(3))
                 continue
             parts = line.rstrip().split("\t")
             if len(parts) >= 5 and parts[2] == "CDS":
@@ -212,11 +218,12 @@ def get_contig_lengths_from_gff(gff_path):
                         lengths[parts[0]] = end
                 except ValueError:
                     pass
-    return dict(lengths)
+    return (dict(lengths), exact) if return_exact else dict(lengths)
 
 
-def build_contig_length_dict(faa_files, gff_dir=None, fna_dir=None, fna_ext="fna"):
+def build_contig_length_dict(faa_files, gff_dir=None, fna_dir=None, fna_ext="fna", return_exact=False):
     contig_lengths = {}
+    exact_lengths = {}
     for faa in faa_files:
         stem = faa.stem
         genome = faa.name
@@ -235,11 +242,12 @@ def build_contig_length_dict(faa_files, gff_dir=None, fna_dir=None, fna_ext="fna
                     break
         if found:
             kind, path = found
-            contig_lengths[genome] = (
-                read_fasta_lengths(path) if kind == "fna"
-                else get_contig_lengths_from_gff(path)
-            )
-    return contig_lengths
+            if kind == "fna":
+                contig_lengths[genome] = read_fasta_lengths(path)
+                exact_lengths[genome] = contig_lengths[genome]
+            else:
+                contig_lengths[genome], exact_lengths[genome] = get_contig_lengths_from_gff(path, return_exact=True)
+    return (contig_lengths, exact_lengths) if return_exact else contig_lengths
 
 
 def load_prodigal_gff(gff_path):
@@ -373,7 +381,7 @@ def build_topology_expectation_map(registry):
     Both fields are independently optional per row — a stem can set only one
     and stay neutral for the other, same no-data-no-penalty policy as
     build_confirmation_map. A row with neither field set is excluded entirely;
-    topo_weight() never looks at it, so an unset stem is always neutral.
+    No consistency comparison is made for a stem without an expectation.
     """
     expectations = {}
     for r in registry:

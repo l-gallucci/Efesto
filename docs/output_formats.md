@@ -1,21 +1,34 @@
 # Output files
 
-Files are written below `--out`. Outputs describe retained annotations, after
-search and context filtering.
+Files below `--out` use the `separate-evidence-v1` schema recorded in the run log.
+Main annotations describe retained hits after search and context filtering.
+
+## Choose a table
+
+- **Family assignments:** use `Efesto-results-long.tsv` for one row per retained ORF.
+- **Neighborhood requirements:** use `Efesto-context-evidence.tsv` for retained-cluster observations.
+- **Candidate recovery:** use `Efesto-confirmation-candidates.tsv`; some rows are not retained annotations.
+- **Operon probabilities:** use `Efesto-UniOP-pair-evidence.tsv`; a row describes a pair, not one gene's function.
+
+The [evidence guide](evidence.md) explains which stages affect retention and how
+to read unavailable or discordant results.
 
 ## Main files
 
-| File | Contents / condition |
+| File | Contents |
 |---|---|
 | `Efesto-summary.csv` | Detailed per-ORF results with cluster separators |
-| `Efesto-geneSummary-clusters.csv` | Compact summary compatible with the FeGenie plotting format |
-| `Efesto-heatmap-data.csv` | Gene-count matrix |
-| `Efesto-results-long.tsv` | Tidy per-ORF table for analysis |
-| `Efesto-summary-stats.tsv` | Counts, score tiers and run statistics |
-| `Efesto-hits.faa` | Retained matched protein sequences |
-| `Efesto-hits.gff3` | Retained CDS features with available coordinates |
-| `Efesto-hits.fna` | Matched nucleotide sequences when source FNA and coordinates are available |
-| `Efesto-run.log` | Run metadata and recorded tool information |
+| `Efesto-geneSummary-clusters.csv` | Compact per-ORF cluster summary |
+| `Efesto-heatmap-data.csv` | Category × genome counts of distinct retained clusters |
+| `Efesto-results-long.tsv` | Per-ORF match statistics, threshold type and separate evidence |
+| `Efesto-context-evidence.tsv` | Observations and rule assessments for retained neighborhoods |
+| `Efesto-confirmation-candidates.tsv` | First-pass rejected confirmation candidates, including recovered and unretained hits |
+| `Efesto-UniOP-pair-evidence.tsv` | Available pair probabilities between retained hits; header-only when none |
+| `Efesto-summary-stats.tsv` | Counts, threshold types, evidence availability and runtime |
+| `Efesto-hits.faa` | Retained matched proteins |
+| `Efesto-hits.gff3` | Retained CDS features with coordinates |
+| `Efesto-hits.fna` | Nucleotide matches when source FNA and coordinates are available |
+| `Efesto-run.log` | Run metadata and output schema |
 
 ## Optional files
 
@@ -24,50 +37,47 @@ search and context filtering.
 | `Efesto-coverage-heatmap.csv` | Coverage inputs supplied |
 | `Efesto-OperonStructure.tsv` | Operon-prediction results available |
 | `Efesto-anvio-functions.tsv` | `--anvio` |
-| `Efesto-anvio-gene-scores.tsv` | `--anvio` |
-| `_tblout_cache/` | Raw search tables; retain with `--keep_tblout` |
+| `Efesto-anvio-gene-evidence.tsv` | `--anvio`; raw numeric observations |
+| `_tblout_cache/` | Search tables retained with `--keep_tblout` |
 
 ## Long-format table
 
-The standard columns, in order, are:
+The initial columns are:
 
 ```text
-category  genome  contig  orf  gene  bitscore  bitscore_cutoff  confidence
-cluster_id  heme_c_motifs  contig_len  cluster_confidence  model_nseq  topology_weight
+category genome contig orf original_orf gene hmm_stem bitscore evalue bitscore_cutoff
+threshold_type cluster_id heme_c_motifs contig_len model_nseq
 ```
 
-`uniop_context` is appended when available. Inspect the actual header when reading
-a result from a different revision.
+They are followed by search-gate provenance, retention mode, coordinate/contig-edge
+observations and the individual tool statuses and results. See the complete
+[evidence reference](evidence.md). Always read columns by header name.
 
-| Field | Meaning |
-|---|---|
-| `category`, `gene` | Assigned category and readable family/gene label |
-| `genome`, `contig`, `orf` | Input and gene identifiers; `orf` can carry a mapped Bakta label |
-| `bitscore`, `bitscore_cutoff` | Full-sequence match score and configured model cutoff |
-| `confidence` | `calibrated` when a positive model-specific cutoff exists; otherwise `low_confidence` |
-| `cluster_id` | Genomic cluster assignment |
-| `heme_c_motifs` | Count of configured heme-binding motif patterns |
-| `contig_len` | Available contig length; zero can mean unavailable |
-| `cluster_confidence` | Multiplicative heuristic score, capped at 1.2 |
-| `model_nseq` | Source/model training-record count, not number of independently validated examples |
-| `topology_weight` | Contribution of the applicable topology check |
+`threshold_type` is `model_specific` or `generic`; `bitscore_cutoff` is the model
+cutoff (zero when absent), and `search_bitscore_cutoff` records the actual search
+threshold, including the generic fallback. `model_nseq` counts training records,
+not independent validation examples. Unknown contig lengths are zero and unknown
+edge distances are blank. `contig_length_status=lower_bound` marks a length
+inferred from annotated CDS coordinates, which is not used as a known contig
+edge. GFF3 supplies gene coordinates.
 
-Coordinates and the HMM stem are **not standard columns of this TSV**. Use the
-GFF3 and retained search tables for those details.
+`retention_mode` is `context_filter`, `all_results`, `catalog` or `eggnog_rescue`.
+In the separate candidate table, `not_retained` identifies candidates that were
+not recovered. Candidate rows never contribute to normal annotation summaries.
 
-## GFF3
+## GFF3 and sequence headers
 
-The emitted feature type is `CDS`, with 1-based inclusive coordinates. The score
-and phase columns are `.`. Attributes include `ID`, `gene`, `category`,
-`hmm_stem`, `cluster_id`, `cluster_confidence` and `confidence`. Records without
-coordinates are omitted from GFF3, even if present in the tabular results.
+GFF3 uses CDS features and 1-based inclusive coordinates; score and phase are `.`.
+Attributes include gene, category, model, cluster and `threshold_type`, without an
+aggregate score. Records lacking coordinates are omitted from GFF3. Protein and
+nucleotide FASTA headers also use `threshold_type` rather than a confidence field.
 
 ## Statistics and interpretation
 
-The statistics table uses `section`, `metric`, `value` and `notes` columns. Confidence
-tiers are ≥0.8, 0.5–<0.8 and <0.5. These are reporting bins; the normal run does
-not apply a global 0.5 confidence filter. Apply any analysis threshold explicitly
-and report it. See [interpretation](interpretation.md).
+Statistics use `section`, `metric`, `value`, `notes` and include RUN, THRESHOLD,
+EVIDENCE, CATEGORY and GENOME sections. There are no confidence bins or score
+averages. A rule's minimum being satisfied does not establish pathway completeness
+or activity. See [interpretation](interpretation.md).
 
 ## Protein identities across genomes
 

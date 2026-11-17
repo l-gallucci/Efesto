@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+# Copyright (c) 2026 Efesto contributors.
+
 """Repeated ORF and Bakta labels must remain distinct across genomes."""
 import csv
 import pytest
@@ -9,7 +12,7 @@ from efesto._dev_figures import attach_coordinates
 def rows():
     return [dict(genome=g,orf='contig_1',contig='contig',bakta_id='BAKTA_1',
                  sequence=s,gene_name='MtrA',hmm_stem='MtrA',cat='Iron-Reduction',
-                 cluster_id=i,bitscore=200,evalue=1e-40)
+                 cluster_id=i,bitscore=200,evalue=1e-40,cutoff=140,heme_motifs=0)
             for i,(g,s) in enumerate([('a.faa','MAST'),('b.faa','MKKL')])]
 
 

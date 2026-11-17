@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: AGPL-3.0-only
+# Copyright (c) 2026 Efesto contributors.
+
 """
 benchmark_fegenie.py — head-to-head benchmark of Efesto vs FeGenie.
 

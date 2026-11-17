@@ -16,9 +16,11 @@ attribute, or `type` when no product is available, must contain a case-insensiti
 `siderophore` or `metallophore` keyword. Generic NRPS/PKS annotations do not
 qualify by themselves.
 
-An overlapping retained ORF gives the cluster `bgc_boost = 1.2`; otherwise the
-factor is 1.0. This is one component of the full [confidence formula](cluster_confidence_scoring.md),
-which is capped at 1.2. Other optional components can also boost the score.
+Matching region coordinates and product labels are reported for each overlapping
+retained ORF in the [evidence table](evidence.md). A neighboring gene outside
+the region does not inherit that overlap. Missing GFF input, unavailable
+coordinates and no qualifying overlap are reported separately. Overlap does
+not change which HMM hits are retained.
 
 BGC overlap adds related annotation context. It does not independently establish
 product chemistry, expression, Fe specificity or metal uptake. Efesto does not

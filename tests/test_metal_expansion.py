@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+# Copyright (c) 2026 Efesto contributors.
+
 """Prevent unsupported metal assignments and preserve official-profile provenance."""
 import csv
 import hashlib

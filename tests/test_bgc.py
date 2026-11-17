@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+# Copyright (c) 2026 Efesto contributors.
+
 """Tests for src/efesto/bgc.py"""
 
 from pathlib import Path
@@ -7,7 +10,6 @@ import pytest
 from efesto.bgc import (
     _extract_bgc_type,
     _is_siderophore_type,
-    bgc_boost_for_cluster,
     parse_antismash_gff,
 )
 
@@ -106,35 +108,8 @@ class TestParseAntismashGff:
         assert "genome2.faa" in result
 
 
-class TestBgcBoostForCluster:
-    def _coords(self):
-        return {
-            "orf1": {"start": 5000, "end": 5300, "contig": "c1"},
-            "orf2": {"start": 5400, "end": 5700, "contig": "c1"},
-        }
-
-    def test_no_regions_returns_one(self):
-        assert bgc_boost_for_cluster(["orf1"], self._coords(), []) == 1.0
-
-    def test_none_regions_returns_one(self):
-        assert bgc_boost_for_cluster(["orf1"], self._coords(), None) == 1.0
-
-    def test_overlap_returns_boost(self):
-        regions = [("c1", 1000, 10000, "siderophore")]
-        assert bgc_boost_for_cluster(["orf1", "orf2"], self._coords(), regions) == pytest.approx(1.2)
-
-    def test_no_overlap_returns_one(self):
-        regions = [("c1", 100000, 200000, "siderophore")]
-        assert bgc_boost_for_cluster(["orf1", "orf2"], self._coords(), regions) == 1.0
-
-    def test_different_contig_no_overlap(self):
-        regions = [("c2", 1000, 10000, "siderophore")]
-        assert bgc_boost_for_cluster(["orf1"], self._coords(), regions) == 1.0
-
-    def test_custom_boost_value(self):
-        regions = [("c1", 1000, 10000, "siderophore")]
-        assert bgc_boost_for_cluster(["orf1"], self._coords(), regions, boost=1.5) == pytest.approx(1.5)
-
-    def test_no_orf_coords_returns_one(self):
-        regions = [("c1", 1000, 10000, "siderophore")]
-        assert bgc_boost_for_cluster(["orf1"], {}, regions) == 1.0
+def test_status_distinguishes_missing_input_from_no_qualifying_regions(tmp_path):
+    _make_gff(tmp_path, "present", [("ctg", 1, 1000, "NRPS")])
+    regions, statuses = parse_antismash_gff(tmp_path, [FakeFaa("present"), FakeFaa("missing")], return_status=True)
+    assert regions == {}
+    assert statuses == {"present.faa": "parsed", "missing.faa": "input_unavailable"}

@@ -47,13 +47,20 @@ Use a fresh output directory after changing inputs, models or search settings.
 
 ## Results
 
-Main outputs include `Efesto-results-long.tsv`, summary/count tables and matched
-protein sequences. GFF3 and nucleotide matches require appropriate coordinate/source
-data. See the [output reference](docs/output_formats.md).
+Start with `Efesto-results-long.tsv` for retained ORFs, HMM match statistics,
+threshold type and the individual annotation/context observations.
+`Efesto-context-evidence.tsv` describes distinct models, copies and rule outcomes;
+`Efesto-confirmation-candidates.tsv` records recovered and unretained candidates;
+`Efesto-UniOP-pair-evidence.tsv` contains available pair probabilities.
+See the [output reference](docs/output_formats.md).
+
+HMM thresholds, context filters and applicable eggNOG rescue decide retention.
+Optional UniOP, BGC, structure and topology observations are reported separately.
+Read [how the pipeline works](docs/pipeline.md) and the
+[worked evidence examples](docs/evidence.md#worked-examples).
 
 A hit indicates family-related genetic potential, not measured expression, metal
-specificity, pathway activity or resistance. Cluster confidence is a heuristic
-score, not a probability. See [interpretation](docs/interpretation.md).
+specificity, pathway activity or resistance. See [interpretation](docs/interpretation.md).
 
 ## HMM library
 
@@ -65,7 +72,7 @@ See [curation and provenance](docs/hmm_library_curation.md) for interpretation l
 ## Differences from FeGenie
 
 Efesto adds coordinate/strand-aware clustering, canonical categories, a versioned
-registry, context/scoring integrations and additional output formats. HMMER searches
+registry, context/evidence integrations and additional output formats. HMMER searches
 are coordinated by Python threads with at most two concurrent searches by default;
 gene prediction has separate workers. These changes do not by themselves establish
 higher annotation accuracy. See [pipeline](docs/pipeline.md) and
@@ -75,14 +82,19 @@ higher annotation accuracy. See [pipeline](docs/pipeline.md) and
 
 Cite Efesto using [CITATION.cff](CITATION.cff), plus the applicable model and tool
 sources in [References](docs/references.md).
-The code is distributed under the [MIT license](LICENSE).
+All Efesto-owned code, including the Python application, standalone scripts,
+setup utilities and tests, is distributed under [AGPLv3](LICENSE).
+Project documentation uses the same license. Third-party software and model
+data retain their original terms; see [license scope](LICENSES/README.md).
 Logo: [Elena Panariello](https://www.instagram.com/elena_panariello/).
 Efesto is not affiliated with the original FeGenie authors.
 
 ## Source terms
 
-Efesto is intended for academic, non-commercial research. The MIT license covers
-Efesto's own code; imported profiles, reference data and external tools retain
-their original conditions. For non-academic or commercial use, always consult the
-original sources and obtain any required permissions. See
+Imported profiles, reference data and external tools retain their original
+conditions. Each HMM is linked to its source terms in
+[model_licenses.tsv](hmm_library/model_licenses.tsv); the six explicitly listed
+[Efesto rebuilt profiles](hmm_library/LICENSES.md) use CC BY-SA 4.0 on
+Efesto-owned contributions. Unspecified or unresolved redistribution terms
+remain flagged; citation does not replace permission. See
 [Third-party sources and conditions of use](THIRD_PARTY_NOTICES.md).

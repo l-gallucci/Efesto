@@ -1,15 +1,16 @@
-"""antiSMASH BGC region parsing for siderophore cluster boost.
+# SPDX-License-Identifier: AGPL-3.0-only
+# Copyright (c) 2026 Efesto contributors.
+
+"""antiSMASH BGC region parsing for siderophore/metallophore overlap evidence.
 
 Parses antiSMASH GFF3 output (produced with --output-format gff3) to identify
-siderophore-type BGC regions. Clusters whose ORFs overlap a siderophore region
-receive a bgc_boost=1.2 multiplier in cluster_confidence.
+siderophore-type BGC regions. Overlapping retained ORFs are reported as observations, without numerical weights.
 
-Only siderophore-type regions trigger the boost. Other antiSMASH region types
-(NRPS, PKS, terpene, ...) are ignored to avoid inflating non-siderophore clusters.
+Only siderophore/metallophore-type regions are retained. Other antiSMASH region types
+(NRPS, PKS, terpene, ...) are ignored.
 
 Usage:
     bgc_map = parse_antismash_gff(bgc_dir, faa_files)
-    boost   = bgc_boost_for_cluster(cluster_orfs, orf_coords, bgc_map.get(genome))
 """
 
 from pathlib import Path
@@ -23,7 +24,7 @@ def _is_siderophore_type(bgc_type):
     return any(k in t for k in _SIDEROPHORE_KEYWORDS)
 
 
-def parse_antismash_gff(bgc_dir, faa_files):
+def parse_antismash_gff(bgc_dir, faa_files, return_status=False):
     """
     Find siderophore BGC regions from antiSMASH GFF3 files.
 
@@ -40,9 +41,10 @@ def parse_antismash_gff(bgc_dir, faa_files):
         Empty dict if bgc_dir is None or no matching files found.
     """
     if bgc_dir is None:
-        return {}
+        return ({}, {}) if return_status else {}
     bgc_dir = Path(bgc_dir)
     result  = {}
+    statuses = {}
 
     for faa in faa_files:
         stem     = faa.stem
@@ -57,8 +59,10 @@ def parse_antismash_gff(bgc_dir, faa_files):
                 break
 
         if gff_path is None:
+            statuses[faa.name] = "input_unavailable"
             continue
 
+        statuses[faa.name] = "parsed"
         regions = []
         try:
             with open(gff_path) as fh:
@@ -80,6 +84,7 @@ def parse_antismash_gff(bgc_dir, faa_files):
                     if _is_siderophore_type(bgc_type):
                         regions.append((contig, start, end, bgc_type))
         except OSError as e:
+            statuses[faa.name] = "failed"
             import sys
             print(f"  [WARN] BGC: could not read {gff_path}: {e}", file=sys.stderr)
             continue
@@ -92,7 +97,7 @@ def parse_antismash_gff(bgc_dir, faa_files):
     if n_genomes:
         import sys
         print(f"[INFO] BGC: {n_regions} siderophore region(s) in {n_genomes} genome(s)")
-    return result
+    return (result, statuses) if return_status else result
 
 
 def _extract_bgc_type(attr_str):
@@ -106,33 +111,3 @@ def _extract_bgc_type(attr_str):
         if attr.startswith("type="):
             return attr[5:].strip()
     return ""
-
-
-def bgc_boost_for_cluster(cluster_orfs, orf_coords, bgc_regions, boost=1.2):
-    """
-    Return bgc_boost value for a cluster.
-
-    Returns boost (default 1.2) if any ORF in the cluster overlaps a siderophore
-    BGC region. Returns 1.0 otherwise.
-
-    Args:
-        cluster_orfs: iterable of ORF names
-        orf_coords:   {orf: {"start": int, "end": int, "contig": str}}
-        bgc_regions:  [(contig, start, end, bgc_type)] for this genome, or None/[]
-        boost:        multiplier applied when overlap found
-    """
-    if not bgc_regions or not orf_coords:
-        return 1.0
-
-    by_contig = {}
-    for contig, rs, re, _ in bgc_regions:
-        by_contig.setdefault(contig, []).append((rs, re))
-
-    for orf in cluster_orfs:
-        c = orf_coords.get(orf)
-        if c is None:
-            continue
-        for rs, re in by_contig.get(c["contig"], []):
-            if c["start"] <= re and c["end"] >= rs:
-                return boost
-    return 1.0

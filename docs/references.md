@@ -40,5 +40,6 @@ If you use Efesto, cite all of the following that apply:
 ## Conditions of use
 
 Citation does not replace permission or source-specific conditions. Consult
-[Third-party sources and conditions of use](../THIRD_PARTY_NOTICES.md), especially
-before non-academic or commercial use.
+[Third-party sources and conditions of use](../THIRD_PARTY_NOTICES.md) and the
+[per-model source notices](../hmm_library/model_licenses.tsv). These identify
+original licenses, use restrictions and unresolved redistribution terms.

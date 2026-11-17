@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+# Copyright (c) 2026 Efesto contributors.
+
 """Tests for topology.py — Phobius output parsing and verdict logic."""
 
 from efesto.topology import (_parse_phobius_output, heme_verdict,

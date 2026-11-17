@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+# Copyright (c) 2026 Efesto contributors.
+
 """
 Efesto  —  HMM-based annotation of iron cycling and metal resistance genes
 ===================================================================================
@@ -35,25 +38,24 @@ from efesto.io import (build_confirmation_map, build_contig_length_dict,
                                 filter_categories, load_gff_dir,
                                 load_registry, print_provenance, read_fasta,
                                 read_cutoffs, read_map, VALID_ANNOTATE_TOKENS)
-from efesto.operon import (_DEFAULT_OPERON_RULES, build_canonical_size_map,
+from efesto.operon import (_DEFAULT_OPERON_RULES,
                                     build_stem_gap_map, count_heme,
                                     filter_cluster_fegenie, filter_cluster_json,
                                     load_operon_rules, second_pass)
-from efesto.bgc import bgc_boost_for_cluster, parse_antismash_gff
-from efesto.baktfold import (_parse_foldseek_results, confirm_struct_hit,
+from efesto.bgc import parse_antismash_gff
+from efesto.baktfold import (_parse_foldseek_results,
                                      run_foldseek)
 from efesto.eggnog import (_parse_eggnog_annotations, confirm_hit, run_eggnog,
                                     write_flagged_faa)
-from efesto.scoring import (
-    annot_weight, cluster_confidence, co_occurrence_score, hmm_weight,
-    struct_weight, topo_weight, uniop_pair_score)
+from efesto.evidence import OUTPUT_SCHEMA, context_evidence, hit_evidence, rule_version
 from efesto.topology import _parse_phobius_output, run_phobius
 from efesto.uniop import (
     _uniop_context, build_prodigal_bakta_map, run_uniop, write_operon_structure)
 from efesto.writers import (
     write_anvio_functions, write_anvio_misc_data, write_coverage_heatmap,
     write_gene_summary, write_gff3, write_heatmap, write_hit_faa, write_hit_fna,
-    write_long_format, write_summary, write_summary_stats)
+    write_long_format, write_summary, write_summary_stats, write_context_evidence,
+    write_uniop_pair_evidence)
 
 
 def _groupby_genome(rows):
@@ -301,15 +303,15 @@ def main():
     p.add_argument("--threads", type=int, default=4)
     p.add_argument("--hmm_threads", type=int, default=1)
     p.add_argument("--zero_cutoff_min_bitscore", type=float, default=30.0,
-                   help="Minimum bitscore applied to HMMs that have no calibrated "
-                        "cutoff in the registry (cutoff=0.0). These hits are "
-                        "reported as 'low_confidence' in the long-format output. "
+                   help="Minimum bitscore applied to HMMs that have no model-specific "
+                        "cutoff in the cutoff table (cutoff<=0.0). These hits are "
+                        "reported with threshold_type=generic in the long-format output. "
                         "Set to 0 to disable (not recommended). Default: 30")
     p.add_argument("--max_evalue", type=float, default=1e-5,
                    help="Maximum E-value for every accepted hmmsearch hit, "
                         "in addition to the applicable full-sequence bitscore gate.")
     p.add_argument("--norm", action="store_true",
-                   help="Normalise gene-count heatmap")
+                   help="Normalise cluster-count heatmap per 1,000 input proteins")
     p.add_argument("--bam", help="Single BAM file (requires samtools >=1.10)")
     p.add_argument("--bams", help="TSV: genome<TAB>bam_path")
     p.add_argument("--depth",
@@ -366,27 +368,24 @@ def main():
                         "flagged.")
     # ── Topology/motif consistency (runs on every hit, not just flagged ones) ──
     p.add_argument("--topology_check", action="store_true",
-                   help="Run Phobius (transmembrane topology + signal-peptide "
-                        "prediction) on filtered HMM hits and compare against "
-                        "expected_topology/expected_heme_c set in the registry "
-                        "(currently MtrA/MtoA — see docs/hmm_library_curation.md). "
-                        "Unlike --run_eggnog/tier-3 struct confirmation, this is "
-                        "not limited to needs_confirmation-flagged hits — it "
-                        "checks every hit whose model declares an expectation, "
-                        "which is cheap enough to leave unscoped. Off by default. "
-                        "Requires Phobius installed (see 'efesto checkenv').")
+                   help="Report Phobius topology/signal-peptide predictions and "
+                        "heme-motif consistency for retained hits with expectations "
+                        "in the registry. Unlike eggNOG/Foldseek candidate searches, "
+                        "this is not restricted to needs_confirmation models. "
+                        "These observations do not change hit retention. Off by "
+                        "default; requires Phobius for topology predictions. "
+                        "See docs/evidence.md.")
     p.add_argument("--phobius_path", default="phobius.pl",
                    help="Path to phobius.pl executable (default: 'phobius.pl', "
                         "assumed in PATH). Only used with --topology_check.")
     # ── Baktfold tier-3 structural confirmation (needs_confirmation-flagged hits only) ──
     p.add_argument("--run_struct_confirmation", action="store_true",
-                   help="Run Foldseek (using ProstT5 to translate sequence directly to "
-                        "the 3Di structural alphabet, no separate structure prediction "
-                        "step) on the same small needs_confirmation-flagged subset "
-                        "--run_eggnog uses. Requires --foldseek_db_dir (a small curated "
-                        "reference-structure DB — see docs/hmm_library_curation.md, "
-                        "Tier 3) and Foldseek installed. Scoped identically to "
-                        "--run_eggnog: never the whole proteome.")
+                   help="Search a curated Foldseek reference database for first-pass "
+                        "rejected candidates flagged needs_confirmation. Requires "
+                        "--foldseek_db_dir and Foldseek; ProstT5 can translate "
+                        "sequences to the 3Di alphabet. Reports raw reference hits "
+                        "and label comparisons, without independently recovering "
+                        "dropped candidates. See docs/evidence.md.")
     p.add_argument("--foldseek_db_dir",
                    help="Path to a curated Foldseek reference-structure DB (built with "
                         "'foldseek createdb'). Only used with --run_struct_confirmation.")
@@ -417,8 +416,7 @@ def main():
     p.add_argument("--bgc_dir",
                    help="Directory of antiSMASH GFF3 output files (one per genome, "
                         "named <genome_stem>.gff3 or <genome_stem>.gff). Enables "
-                        "bgc_boost=1.2 in cluster_confidence for clusters overlapping "
-                        "siderophore/metallophore BGC regions. Supply GFF3 "
+                        "reporting of overlaps with siderophore/metallophore BGC regions. Supply GFF3 "
                         "containing region/cluster features with product/type labels.")
     # Private benchmark interface: ordinary users cannot pass this argument.
     if os.environ.get("EFESTO_DEV_MODE") == "1":
@@ -511,6 +509,7 @@ def main():
     nseq_map = build_nseq_map(registry)
     confirmation_map = build_confirmation_map(registry)
     topology_map = build_topology_expectation_map(registry)
+    registry_by_stem = {r["stem"]: r for r in registry}
     _skip_statuses = {"deprecated", "inactive"}
     _active_stems = {
         r["stem"] for r in registry
@@ -558,24 +557,24 @@ def main():
                                        for _, hf in hmms}
     if active_exp:
         print(f"[WARN] {len(active_exp)} experimental models active "
-              f"(nseq < 10, no calibrated cutoff — treat hits with high caution): "
+              f"(experimental status in the registry — inspect source evidence): "
               f"{', '.join(sorted(active_exp))}", file=sys.stderr)
     operon_rules, report_all_pats, json_mode = load_operon_rules(args.hmm_dir)
     _active_rules     = operon_rules if operon_rules else _DEFAULT_OPERON_RULES
-    gene_canonical_map = build_canonical_size_map(_active_rules)
     stem_gap_map       = build_stem_gap_map(_active_rules, gene_map)
 
     # BGC map: populated only when --bgc_dir is given
     bgc_map = {}
 
     contig_lengths = {}
-    if args.min_contig_len > 0 or args.relaxed_operons:
+    known_contig_lengths = {}
+    if gff_dir_path or args.fna_dir:
         print("[INFO] Loading contig lengths…")
-        contig_lengths = build_contig_length_dict(
+        contig_lengths, known_contig_lengths = build_contig_length_dict(
             faa_files,
             gff_dir=gff_dir_path,
             fna_dir=Path(args.fna_dir) if args.fna_dir else None,
-            fna_ext=args.fna_ext if args.fna_dir else "fna")
+            fna_ext=args.fna_ext if args.fna_dir else "fna", return_exact=True)
         n_cl = sum(1 for f in faa_files if f.name in contig_lengths)
         print(f"       {n_cl}/{len(faa_files)} genomes have contig length data")
 
@@ -667,7 +666,11 @@ def main():
                     "bitscore":   hit["bitscore"],
                     "cutoff":     cutoffs.get(hit["hmm_stem"], 0),
                     "evalue":     hit["evalue"],
-                    "confidence": hit.get("confidence", "low_confidence"),
+                    "threshold_type": hit["threshold_type"],
+                    "search_bitscore_cutoff": max(cutoffs.get(hit["hmm_stem"], 0) if cutoffs.get(hit["hmm_stem"], 0) > 0 else args.zero_cutoff_min_bitscore, 0),
+                    "threshold_source": "model_cutoff_table" if cutoffs.get(hit["hmm_stem"], 0) > 0 else "generic_search_option",
+                    "model_source": registry_by_stem.get(hit["hmm_stem"], {}).get("source", "unknown"),
+                    "retention_mode": "all_results" if args.all_results else "catalog" if args.catalog_mode else "context_filter",
                     "cluster_id": cluster_id,
                     "contig_len": clen.get(contig, 0),
                     "model_nseq": nseq_map.get(hit["hmm_stem"], ""),
@@ -695,20 +698,10 @@ def main():
                 for r in cluster_rows:
                     if r["orf"] not in kept_orfs and r["hmm_stem"] in confirmation_map:
                         pending_confirmation.append(dict(r))
-            gene_names = {gene_map.get(r["hmm_stem"], r["hmm_stem"]) for r in filtered}
-            matched_cs = [gene_canonical_map[g] for g in gene_names
-                          if g in gene_canonical_map]
-            canonical_size = max(set(matched_cs), key=matched_cs.count) if matched_cs else None
-            co_occ = co_occurrence_score(
-                [r["orf"] for r in filtered], orf_coords, clen,
-                canonical_size=canonical_size)
-            hmm_w  = hmm_weight(filtered)
             for r in filtered:
                 r["gene_name"]   = gene_map.get(r["hmm_stem"], r["hmm_stem"])
                 r["sequence"]    = seq_dict.get(genome, {}).get(r["orf"], "")
                 r["heme_motifs"] = count_heme(r["sequence"])
-                r["co_occ_score"] = co_occ
-                r["hmm_w"]        = hmm_w
                 final_rows.append(r)
             cluster_id += 1
 
@@ -721,6 +714,8 @@ def main():
     # never the whole proteome. See docs/hmm_library_curation.md.
     eggnog_hits = {}
     foldseek_hits = {}
+    eggnog_status = "not_requested"
+    foldseek_status = "not_requested"
     if pending_confirmation:
         write_id_map(out_dir / "Efesto-protein-id-map.tsv", pending_confirmation, final_rows)
         print(f"[INFO] {len(pending_confirmation)} needs_confirmation hit(s) "
@@ -733,12 +728,14 @@ def main():
         annotations_path = None
         if args.eggnog_annotations:
             annotations_path = args.eggnog_annotations
+            eggnog_status = "provided" if Path(annotations_path).is_file() else "failed"
         elif args.run_eggnog:
             flagged_faa_tmp = out_dir / "efesto_flagged_candidates.faa"
             identifiers.write_fasta(flagged_faa_tmp, pending_confirmation)
             annotations_path = run_eggnog(
                 flagged_faa_tmp, out_dir, eggnog_path=args.eggnog_path,
                 db_dir=args.eggnog_db_dir)
+            eggnog_status = "completed" if annotations_path else "failed"
 
         if annotations_path:
             try:
@@ -759,8 +756,7 @@ def main():
             r["gene_name"]      = gene_map.get(r["hmm_stem"], r["hmm_stem"])
             r["sequence"]       = seq_dict.get(genome, {}).get(r["orf"], "")
             r["heme_motifs"]    = count_heme(r["sequence"])
-            r["co_occ_score"]   = 1.0  # single-gene cluster, rescued via eggNOG not operon context
-            r["hmm_w"]          = hmm_weight([r])
+            r["retention_mode"] = "eggnog_rescue"
             r["cluster_id"]     = cluster_id
             r["tier2_rescued"]  = True
             final_rows.append(r)
@@ -776,16 +772,12 @@ def main():
                   "all pending hits stay dropped")
 
         # ── Tier-3 pass: Foldseek/ProstT5 structural confirmation ────────────
-        # Same pending_confirmation population as tier 2, run in parallel —
-        # an independent structural signal (not another rescue mechanism of
-        # its own; struct_weight only ever corroborates hits already in
-        # final_rows via tier-1 or the tier-2 rescue above, same role
-        # annot_weight already plays). See docs/hmm_library_curation.md.
+        # Search only pending candidates; report raw reference hits, not a functional score.
         if args.run_struct_confirmation:
             if not args.foldseek_db_dir:
+                foldseek_status = "input_unavailable"
                 print("[WARN] --run_struct_confirmation given without "
-                      "--foldseek_db_dir — tier 3 skipped, struct_w stays "
-                      "neutral", file=sys.stderr)
+                      "--foldseek_db_dir — structural search unavailable", file=sys.stderr)
             else:
                 struct_faa_tmp = out_dir / "efesto_struct_candidates.faa"
                 identifiers.write_fasta(struct_faa_tmp, pending_confirmation)
@@ -793,6 +785,7 @@ def main():
                     struct_faa_tmp, args.foldseek_db_dir, out_dir,
                     foldseek_path=args.foldseek_path,
                     prostt5_weights=args.prostt5_weights, gpu=args.foldseek_gpu)
+                foldseek_status = "completed" if results_path else "failed"
                 if results_path:
                     foldseek_hits = identifiers.group_hits(
                         _parse_foldseek_results(results_path), pending_confirmation)
@@ -800,8 +793,7 @@ def main():
                           f"{len(pending_confirmation)} pending hit(s), "
                           f"{sum(map(len, foldseek_hits.values()))} structural hit(s) found")
                 else:
-                    print("[WARN] Tier 3: Foldseek did not run — struct_w "
-                          "stays neutral this run", file=sys.stderr)
+                    print("[WARN] Tier 3: Foldseek did not run — no structural result", file=sys.stderr)
 
     # ── Topology/motif tier: checks every hit with an expectation set ────────
     # Not scoped to pending_confirmation like tier-2/tier-3 — cheap enough
@@ -810,10 +802,13 @@ def main():
     # the tier-2 rescue pass so any eggNOG-rescued single-gene clusters are
     # included too.
     phobius_hits = {}
+    phobius_queries = set()
+    phobius_status = "not_run" if args.topology_check else "not_requested"
     if args.topology_check and topology_map and final_rows:
         applicable = {scoped_id(r["genome"], r["orf"]): r["sequence"] for r in final_rows
                      if r["hmm_stem"] in topology_map and r.get("sequence")}
         if applicable:
+            phobius_queries = set(applicable)
             topo_faa_tmp = out_dir / "efesto_topology_candidates.faa"
             with open(topo_faa_tmp, "w") as fh_out:
                 for orf_id, seq in applicable.items():
@@ -821,6 +816,7 @@ def main():
             topo_out = out_dir / "efesto_topology.phobius"
             phobius_result = run_phobius(topo_faa_tmp, topo_out,
                                          phobius_path=args.phobius_path)
+            phobius_status = "completed" if phobius_result else "failed"
             if phobius_result:
                 phobius_hits = identifiers.group_hits(
                     _parse_phobius_output(phobius_result), final_rows)
@@ -828,7 +824,7 @@ def main():
                       f"hit(s) with an expected_topology/expected_heme_c set")
             else:
                 print("[WARN] --topology_check given but Phobius did not run "
-                      "— topo_weight stays neutral this run", file=sys.stderr)
+                      "— Phobius evidence unavailable; motif observations remain available", file=sys.stderr)
     elif args.topology_check and not topology_map:
         print("[INFO] --topology_check given but no registry stem sets "
               "expected_topology/expected_heme_c — nothing to check")
@@ -929,6 +925,7 @@ def main():
     # ── UniOP operon prediction (optional) ────────────────────────────────────
     genome_operon_map = {}
     genome_pair_probs = {}
+    genome_uniop_status = {}
     if args.operon_prediction:
         uniop_script = Path(args.uniop_path)
         if uniop_script.is_dir():
@@ -948,7 +945,7 @@ def main():
             fna_dir_for_uniop = Path(args.fna_dir) if args.fna_dir else None
             print(f"[INFO] Running UniOP on {len(faa_files)} genomes…")
             print(f"       UniOP script: {uniop_script}")
-            genome_operon_map, genome_pair_probs = run_uniop(
+            genome_operon_map, genome_pair_probs, genome_uniop_status = run_uniop(
                 faa_files,
                 fna_dir          = fna_dir_for_uniop,
                 out_dir          = out_dir,
@@ -956,6 +953,7 @@ def main():
                 fna_ext          = args.fna_ext if args.fna_dir else "fna",
                 prodigal_faa_dir = str(faa_dir) if args.fna_dir else None,
                 bakta_gff_dir    = args.bakta_gff_dir,
+                return_status    = True,
             )
             if genome_operon_map:
                 # Key by (genome, op_id) to prevent cross-genome operon ID collision.
@@ -985,49 +983,64 @@ def main():
                 print("[WARN] UniOP produced no predictions — "
                       "see Efesto-run.log for details.", file=sys.stderr)
 
-    # Parse BGC regions if --bgc_dir provided.
+    bgc_statuses = {}
     if args.bgc_dir:
-        bgc_map = parse_antismash_gff(args.bgc_dir, faa_files)
+        bgc_map, bgc_statuses = parse_antismash_gff(args.bgc_dir, faa_files, return_status=True)
 
-    # Compute cluster_confidence for all clusters (uniop_w=1.0 when UniOP not run,
-    # bgc_boost=1.0 when --bgc_dir not provided).
-    for _, grp in groupby(
-            sorted(final_rows, key=lambda r: r["cluster_id"]),
-            key=lambda r: r["cluster_id"]):
-        grp     = list(grp)
-        genome  = grp[0]["genome"]
-        pp      = genome_pair_probs.get(genome, {})
-        uniop_w = uniop_pair_score([r["orf"] for r in grp], pp)
-        orf_coords_g = genome_coords.get(genome, {})
-        boost    = bgc_boost_for_cluster(
-            [r["orf"] for r in grp], orf_coords_g,
-            bgc_map.get(genome))
-        annot_w  = annot_weight(grp, eggnog_hits.get(genome, {}), confirmation_map)
-        # Gated on args.topology_check even though topology_map/heme_motifs are
-        # always populated — without this gate, heme_verdict would silently
-        # apply to MtrA/MtoA clusters on every run, changing default behavior
-        # for users who never opted in. See verification step in the plan.
-        topo_w   = (topo_weight(grp, phobius_hits.get(genome, {}), topology_map)
-                   if args.topology_check else 1.0)
-        # struct_weight only ever reads foldseek_hits, which stays {} unless
-        # --run_struct_confirmation ran, so this gate is defense-in-depth
-        # rather than strictly required — kept explicit for the same reason
-        # as the topo_w gate above: the off-by-default contract should be
-        # visible at the call site, not implied by data flow elsewhere.
-        struct_w = (struct_weight(grp, foldseek_hits.get(genome, {}), confirmation_map)
-                   if args.run_struct_confirmation else 1.0)
-        conf    = cluster_confidence(
-            grp[0]["hmm_w"], grp[0]["co_occ_score"], uniop_w,
-            bgc_boost=boost, annot_w=annot_w, struct_w=struct_w, topo_w=topo_w)
-        for r in grp:
-            r["uniop_w"]            = uniop_w
-            r["bgc_boost"]          = boost
-            r["annot_w"]            = annot_w
-            r["struct_w"]           = struct_w
-            r["topo_w"]             = topo_w
-            r["cluster_confidence"] = conf
+    pending_keys = {(r["genome"], r["orf"]) for r in pending_confirmation}
+    context_version = rule_version(_active_rules, report_all_pats)
+    evidence_mode = "all_results" if args.all_results else "catalog" if args.catalog_mode else "normal"
+    searched_models = {stem for models in cat_hmms.values() for stem, _ in models}
+    def attach_hit_evidence(row):
+        genome = row["genome"]
+        row["contig_length_status"] = ("known" if row["contig"] in known_contig_lengths.get(genome, {})
+                                       else "lower_bound" if row.get("contig_len", 0) > 0 else "unavailable")
+        row.update(hit_evidence(
+            row, coords=genome_coords.get(genome, {}),
+            contig_lengths=known_contig_lengths.get(genome, {}),
+            confirmation_map=confirmation_map, topology_map=topology_map,
+            pending_keys=pending_keys, eggnog_hits=eggnog_hits.get(genome, {}),
+            eggnog_status=eggnog_status, foldseek_hits=foldseek_hits.get(genome, {}),
+            foldseek_status=foldseek_status, topology_requested=args.topology_check,
+            phobius_hits=phobius_hits.get(genome, {}),
+            phobius_status=phobius_status if scoped_id(genome, row["orf"]) in phobius_queries else ("not_queried" if args.topology_check else "not_requested"),
+            bgc_regions=bgc_map.get(genome, []),
+            bgc_status=bgc_statuses.get(genome, "input_unavailable") if args.bgc_dir else "not_requested",
+            uniop_status=genome_uniop_status.get(genome, "unavailable") if args.operon_prediction else "not_requested",
+            operon_map=genome_operon_map.get(genome, {})))
 
-    # All tabular confidence fields use the same final evidence calculation.
+    def context_records():
+        for _, group in groupby(final_rows, key=lambda r: r["cluster_id"]):
+            group = list(group)
+            genome = group[0]["genome"]
+            coords = genome_coords.get(genome, {})
+            lengths = contig_lengths.get(genome, {})
+            for row in group:
+                attach_hit_evidence(row)
+            min_length = min((lengths.get(r["contig"], 0) for r in group
+                              if lengths.get(r["contig"], 0) > 0), default=0)
+            yield from context_evidence(
+                group, _active_rules, report_all_pats, mode=evidence_mode, coords=coords,
+                relaxed=args.relaxed_operons and 0 < min_length < args.relaxed_threshold,
+                json_mode=json_mode, available_models=searched_models,
+                configuration_version=context_version)
+
+    write_context_evidence(out_dir / "Efesto-context-evidence.tsv", context_records())
+    retained_by_key = {(r["genome"], r["orf"]): r for r in final_rows}
+    def candidate_records():
+        for candidate in pending_confirmation:
+            key = (candidate["genome"], candidate["orf"])
+            row = dict(retained_by_key.get(key, candidate))
+            row["gene_name"] = gene_map.get(row["hmm_stem"], row["hmm_stem"])
+            row["sequence"] = seq_dict.get(row["genome"], {}).get(row["orf"], "")
+            row["heme_motifs"] = count_heme(row["sequence"])
+            row["retention_mode"] = "eggnog_rescue" if key in retained_by_key else "not_retained"
+            attach_hit_evidence(row)
+            yield row
+    write_long_format(out_dir / "Efesto-confirmation-candidates.tsv", candidate_records())
+    write_uniop_pair_evidence(out_dir / "Efesto-UniOP-pair-evidence.tsv",
+                             final_rows, genome_pair_probs)
+
     for path, fn in [(out_dir / "Efesto-summary.csv", write_summary),
                      (out_dir / "Efesto-geneSummary-clusters.csv", write_gene_summary)]:
         print(f"[INFO] Writing {path.name}…")
@@ -1088,7 +1101,7 @@ def main():
         print(f"       Import with: anvi-import-functions -c CONTIGS.db "
               f"-i {anvio_path.name} -p Efesto")
 
-        misc_path = out_dir / "Efesto-anvio-gene-scores.tsv"
+        misc_path = out_dir / "Efesto-anvio-gene-evidence.tsv"
         print(f"[INFO] Writing {misc_path.name}…")
         write_anvio_misc_data(str(misc_path), final_rows,
                               prodigal_to_bakta=prodigal_to_bakta)
@@ -1103,6 +1116,7 @@ def main():
     with open(log_path, "w") as lf:
         lf.write("Efesto run log\n")
         lf.write(f"Version       : {__version__}\n")
+        lf.write(f"Output schema : {OUTPUT_SCHEMA}\n")
         lf.write(f"Date          : "
                  f"{datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
         lf.write(f"Command       : {' '.join(sys.argv)}\n")

@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+# Copyright (c) 2026 Efesto contributors.
+
 """eggNOG-mapper tier-2 confirmation: parsing, running, and comparison logic.
 
 Used only for HMM hits on models flagged needs_confirmation in the registry
@@ -88,7 +91,7 @@ def confirm_hit(expected_gene_name, expected_kos, eggnog_row):
       - eggnog_row is None (no eggNOG hit for this ORF)
       - eggNOG assigned no KEGG_ko and no Preferred_name (uninformative hit)
       - expected_kos is empty (registry has no KO for this model — can't compare)
-    Never penalizes absence of data — same policy as uniop_weight's fallback.
+    Missing data is not a contradiction.
     """
     if eggnog_row is None:
         return "neutral"

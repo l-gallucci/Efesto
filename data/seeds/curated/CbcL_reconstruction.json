@@ -1,0 +1,50 @@
+{
+  "verified_on": "2026-11-16",
+  "input_basis": "reconstructed_from_official_records_exact_existing_build",
+  "historical_input_files_recovered": false,
+  "method": "Use historical genus/length descriptions to retrieve public candidates; compare 792 eight-sequence sets from 13 unique candidate sequences to the existing model; reconstruct sequence order against the Easel alignment checksum; independently verify all eight protein sequences against NCBI; reproduce with a fresh MAFFT alignment and hmmbuild.",
+  "purpose": "Provenance reconstruction of the existing model, not independent classifier validation or cutoff calibration.",
+  "seed_accessions_in_order": [
+    "Q74GH2",
+    "A0A0M4CZW0",
+    "A0ABM8EG83",
+    "B5E8E3",
+    "A0A0C2DW34",
+    "A0A0B5FL41",
+    "Q39ZH5",
+    "B9M704"
+  ],
+  "unique_sequences": 8,
+  "seed_fasta_sha256": "f975f032bb44655c865754635eeac442ee101f013d873019d2890bf57a592165",
+  "alignment_sha256": "56b9b9ae2a0861c62c077f86bfee37b20c074afd75a06015b97cc6d83b8c381c",
+  "deployed_hmm_sha256": "b7fd35d5100694663fb3805ec992dc3dc425fff3bb2c63b06ce008eb940f757b",
+  "alignment_length": 621,
+  "model_length": 618,
+  "model_nseq": 8,
+  "model_checksum": 3842520616,
+  "same_matrix": true,
+  "same_checksum": true,
+  "same_statistical_parameters": true,
+  "same_entire_hmm_except_date": true,
+  "mafft_version": "7.526",
+  "hmmer_version": "3.4",
+  "commands": [
+    "mafft --thread 1 --auto --quiet CbcL_seeds.faa > CbcL_seeds.aln",
+    "hmmbuild --cpu 1 -n CbcL CbcL.reproduced.hmm CbcL_seeds.aln"
+  ],
+  "excluded_comparison_fields": [
+    "DATE"
+  ],
+  "production_model_replaced": false,
+  "runtime_full_sequence_cutoff": 200.0,
+  "limitations": [
+    "One experimentally characterized canonical anchor; seven additional homologs are not individually functionally validated by this reconstruction.",
+    "Training scores and exact build reproduction do not establish independent sensitivity, specificity or universal Fe(III)-reduction activity.",
+    "Some source records use the gene name cbcY; names are preserved as provider annotations rather than treated as experimental functional evidence."
+  ],
+  "reference_papers": [
+    "https://doi.org/10.1016/j.bioelechem.2015.08.003",
+    "https://doi.org/10.3389/fmicb.2022.898015"
+  ],
+  "source_record_file": "CbcL_source_records.json"
+}

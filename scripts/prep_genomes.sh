@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: AGPL-3.0-only
+# Copyright (c) 2026 Efesto contributors.
+
 # prep_genomes.sh — download benchmark reference genomes from NCBI and rename
 # them to the labels used in benchmark/truth.tsv (so the harness can match them).
 #

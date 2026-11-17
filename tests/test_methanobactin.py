@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+# Copyright (c) 2026 Efesto contributors.
+
 """Specific Mbn subfamilies must not turn isolated MNIO hits into a pathway."""
 import csv
 import hashlib

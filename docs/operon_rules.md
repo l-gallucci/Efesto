@@ -32,14 +32,25 @@ Rule `genes` entries identify HMM stems.
 | `mtr_disambiguation` | Contextual Mtr/Mto category assignment |
 
 `on_fail` can keep all rows, drop the affected set or pass nonmembers, depending
-on the rule. `canonical_size` supplies a completeness reference for scoring;
-`max_bp_gap` provides a neighborhood threshold. Inspect the supplied JSON and
-[scoring reference](cluster_confidence_scoring.md) when changing them.
+on the rule. `max_bp_gap` provides a neighborhood threshold. Historical
+`canonical_size` metadata is ignored; no completeness score is inferred. Inspect
+the supplied JSON and [evidence reference](evidence.md) when changing rules.
 
 CntL+CntM and the MbnA/B/C set have explicit distinct-family requirements.
 `--all_results` bypasses context filtering but still reports only the best accepted
 HMM per ORF. `--relaxed_operons` relaxes supported minimum-count rules on short
 contigs in the JSON engine; anchor requirements are not automatically relaxed.
+
+## Read rule outcomes
+
+The [context-evidence table](evidence.md#neighborhood-observations) reports rule
+requirements against the retained neighborhood. It distinguishes satisfaction,
+bypass and missing information, and counts model families separately from copies.
+It does not replay every branch taken by the filtering engine.
+
+For example, observing SufB/SufC/SufS can satisfy the default three-model minimum.
+This is not a six-component completeness claim. The Mtr/Mto rule assigns a
+context-dependent category; it is not a general completeness definition.
 
 ## UniOP
 
@@ -55,9 +66,8 @@ an input-format declaration, not a request to switch Efesto's gene caller.
 
 `uniop.operon` provides membership; `uniop.pred` provides pairwise probabilities.
 Efesto reads both when available, retaining membership from the operon file and
-using the prediction file for confidence. Zero probabilities remain zero. The
+reporting the prediction file as pairwise evidence. Zero probabilities remain zero. The
 prediction file is also used to assemble fallback membership when needed.
 
-When usable pairwise scores are unavailable, the UniOP confidence contribution
-is neutral. Cached or failed runs can affect evidence availability; inspect the
+When usable pairwise probabilities are unavailable, no probabilities are invented. Cached or failed runs can affect evidence availability; inspect the
 log and retained UniOP working directories. See [output files](output_formats.md).

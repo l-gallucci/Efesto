@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+# Copyright (c) 2026 Efesto contributors.
+
 """Gene prediction via pyrodigal / pyrodigal-gv."""
 
 # pyrodigal-gv (Camargo et al. 2023) extends pyrodigal with viral/giant-virus

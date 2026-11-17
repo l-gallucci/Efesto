@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+# Copyright (c) 2026 Efesto contributors.
+
 """UniOP operon prediction: running, parsing, and output writing."""
 
 import csv
@@ -195,7 +198,7 @@ def make_uniop_faa(bakta_faa_path, bakta_gff_path, out_faa_path):
 
 
 def run_uniop(faa_files, fna_dir, out_dir, uniop_path, fna_ext="fna",
-              prodigal_faa_dir=None, bakta_gff_dir=None):
+              prodigal_faa_dir=None, bakta_gff_dir=None, return_status=False):
     """
     Run UniOP on each genome.
 
@@ -215,8 +218,10 @@ def run_uniop(faa_files, fna_dir, out_dir, uniop_path, fna_ext="fna",
     uniop_dir.mkdir(exist_ok=True)
     genome_operon_map  = {}
     genome_pair_probs  = {}
+    statuses = {}
 
     for faa in faa_files:
+        statuses[faa.name] = "no_informative_result"
         stem     = faa.stem
         work_dir = uniop_dir / stem
         work_dir.mkdir(exist_ok=True)
@@ -252,6 +257,7 @@ def run_uniop(faa_files, fna_dir, out_dir, uniop_path, fna_ext="fna",
                     faa_for_index = temp_faa
 
         if operon_file.exists():
+            statuses[faa.name] = "cached"
             print(f"  [INFO] UniOP cache hit for {stem}")
         else:
             if faa_for_uniop:
@@ -268,6 +274,7 @@ def run_uniop(faa_files, fna_dir, out_dir, uniop_path, fna_ext="fna",
                             fna_path = candidate
                             break
                 if fna_path is None:
+                    statuses[faa.name] = "input_unavailable"
                     print(f"  [WARN] UniOP: no FAA or FNA found for {stem} — skipping.",
                           file=sys.stderr)
                     continue
@@ -277,6 +284,7 @@ def run_uniop(faa_files, fna_dir, out_dir, uniop_path, fna_ext="fna",
 
             r = subprocess.run(cmd, capture_output=True, text=True)
             if r.returncode != 0:
+                statuses[faa.name] = "failed"
                 print(f"  [WARN] UniOP failed for {stem}:\n{r.stderr[:400]}",
                       file=sys.stderr)
                 err_log = work_dir / "uniop_error.log"
@@ -285,9 +293,12 @@ def run_uniop(faa_files, fna_dir, out_dir, uniop_path, fna_ext="fna",
                 print(f"         Full error → {err_log}", file=sys.stderr)
                 continue
 
+        if statuses[faa.name] != "cached":
+            statuses[faa.name] = "completed"
         if faa_for_index is None:
             faa_candidates = sorted(work_dir.glob("*.faa"))
             if not faa_candidates:
+                statuses[faa.name] = "index_unavailable"
                 print(f"  [WARN] UniOP: no FAA for index in {work_dir}",
                       file=sys.stderr)
                 continue
@@ -304,6 +315,8 @@ def run_uniop(faa_files, fna_dir, out_dir, uniop_path, fna_ext="fna",
             if not orf_to_op:
                 orf_to_op = predicted_ops
 
+        if not orf_to_op and not pair_probs:
+            statuses[faa.name] = "no_informative_result"
         n_operons = len(set(orf_to_op.values()))
         print(f"  [INFO] {stem}: {n_operons} operons, {len(orf_to_op)} genes assigned")
 
@@ -311,6 +324,8 @@ def run_uniop(faa_files, fna_dir, out_dir, uniop_path, fna_ext="fna",
         if pair_probs:
             genome_pair_probs[faa.name] = pair_probs
 
+    if return_status:
+        return genome_operon_map, genome_pair_probs, statuses
     return genome_operon_map, genome_pair_probs
 
 

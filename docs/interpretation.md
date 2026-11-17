@@ -13,16 +13,30 @@ behind its members. A source-supported label is not an independent accuracy test
 - A missing hit can reflect incomplete assemblies, uncalled small genes or limited
   model coverage; it does not establish biological absence.
 
-## Confidence and completeness
+## Evidence and completeness
 
-`cluster_confidence` combines selected evidence using heuristic weights. It is
-not a probability or a directly comparable measure of biological activity across
-gene systems. Optional evidence can be missing and neutral. A high score is not
-a guarantee that every component is present or correctly assigned.
+Match statistics, threshold type, neighborhood rules and optional checks are
+reported separately. A positive model-specific cutoff is not an independent
+accuracy certificate. Missing evidence is distinct from supporting evidence.
+There is no combined score or global confidence threshold.
 
-The normal output does not globally discard scores below 0.5. Use the
-[scoring reference](cluster_confidence_scoring.md) to decide and document your own
-analysis thresholds.
+A neighborhood rule can require a minimum number of distinct model families;
+passing it does not show that a complete or active pathway exists. Repeated
+copies and genes from other systems do not become missing functional components.
+See [separate evidence](evidence.md) for availability, scope and output migration.
+
+## Practical reading order
+
+1. Check the HMM identifier, model source, bitscore, E-value and effective threshold.
+2. Inspect `retention_mode` and any applicable context-rule observations.
+3. Read optional-tool availability before interpreting a comparison or missing value.
+4. Keep discordant observations visible; another result does not cancel them out.
+5. Distinguish per-ORF counts from the cluster-count matrix before comparing samples.
+
+For a minimum SUF rule, `satisfied_minimum` means that the configured minimum of
+distinct model families was observed. It does not mean every SUF component exists.
+For MtrA plus LanM hits, LanM does not supply a missing Mtr component. See
+[worked examples](evidence.md#worked-examples).
 
 ## Specific limitations
 

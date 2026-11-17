@@ -1,13 +1,14 @@
 include README.md ARCHITECTURE.md CHANGELOG.md CITATION.cff LICENSE THIRD_PARTY_NOTICES.md
 include pyproject.toml setup.py environment.yml setup.sh operon_rules.json mkdocs.yml requirements-docs.txt
 include MAINTAINING.rst
+recursive-include LICENSES *.txt *.md
 recursive-include hmm_library *.hmm *.tsv *.txt *.md
 prune hmm_library/_calibration
 recursive-include assets *.png
 recursive-include docs *.md *.css
 recursive-include scripts *.py *.R *.sh
 recursive-include tests *.py
-recursive-include data/seeds/curated *.faa *.md *.tsv *.json
+recursive-include data/seeds/curated *.faa *.aln *.md *.tsv *.json
 recursive-include data/validation/metal_expansion *.faa *.md *.tsv *.json
 recursive-include data/validation/methanobactin *.faa *.tsv *.json
 prune benchmark

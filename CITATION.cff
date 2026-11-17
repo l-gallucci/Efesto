@@ -5,6 +5,7 @@ message: >-
 type: software
 title: "Efesto: annotation of metal cycling, acquisition and resistance genes"
 version: 1.0.0
+license: AGPL-3.0-only
 authors:
   - given-names: Luigi
     family-names: Gallucci
@@ -30,8 +31,9 @@ abstract: >-
   Efesto annotates metal cycling, acquisition and resistance genes in genomes
   and metagenomes using profile HMMs, gene neighbourhoods and optional evidence
   from operon prediction, orthology, topology and structural comparisons.
-  Efesto code is MIT-licensed. Imported HMM profiles and third-party resources
-  retain their original conditions; see THIRD_PARTY_NOTICES.md.
+  All Efesto-owned code, standalone tooling, tests and project documentation
+  are AGPLv3-licensed. HMMs and other third-party resources retain their source-specific terms;
+  see THIRD_PARTY_NOTICES.md and the per-model license/source table.
 keywords:
   - bioinformatics
   - metagenomics

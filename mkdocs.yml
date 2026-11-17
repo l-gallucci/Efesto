@@ -24,7 +24,7 @@ nav:
   - Results:
       - Output files: output_formats.md
       - Interpretation: interpretation.md
-      - Confidence scoring: cluster_confidence_scoring.md
+      - Evidence and decisions: evidence.md
       - Visualisation: visualisation.md
   - HMM library:
       - Catalog and categories: hmm_library.md

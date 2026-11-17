@@ -1,4 +1,7 @@
-"""Operon context filtering: FeGenie port, JSON rule engine, second-pass checks."""
+# SPDX-License-Identifier: AGPL-3.0-only
+# Copyright (c) 2026 Efesto contributors.
+
+"""Operon context filtering: FeGenie-derived rules, JSON rule engine, second-pass checks."""
 
 import fnmatch
 import json
@@ -10,40 +13,39 @@ from efesto.categories import canonical_category
 
 # ── Default operon rules (used when no operon_rules.json is present) ──────────
 _DEFAULT_OPERON_RULES = [
-    # canonical_size: expected number of genes in a complete system (for completeness scoring).
     # max_bp_gap:     recommended max intergenic gap for this gene system (bp).
     #                 Used as metadata; the global --max_bp_gap is the detection window.
     {"name": "FLEET", "categories": ["Iron-Oxidation"],
      "genes": ["EetA", "EetB", "Ndh2", "FmnB", "FmnA", "DmkA", "DmkB", "PplA"],
      "rule": "require_n_of", "min_genes": 5, "on_fail": "passthrough_non_members",
-     "canonical_size": 8, "max_bp_gap": 2000},
+     "max_bp_gap": 2000},
     {"name": "MAM", "categories": ["Magnetosome-Formation"],
      "genes": ["MamA", "MamB", "MamE", "MamK", "MamP", "MamM", "MamQ", "MamI", "MamL", "MamO"],
      "rule": "require_n_of", "min_genes": 5, "on_fail": "passthrough_non_members",
-     "canonical_size": 10, "max_bp_gap": 3000},
+     "max_bp_gap": 3000},
     {"name": "FOXABC", "categories": ["Iron-Oxidation"],
      "genes": ["FoxA", "FoxB", "FoxC"],
      "rule": "require_n_of", "min_genes": 2, "on_fail": "passthrough_non_members",
-     "canonical_size": 3, "max_bp_gap": 1000},
+     "max_bp_gap": 1000},
     {"name": "FOXEYZ", "categories": ["Iron-Oxidation"],
      "genes": ["FoxE", "FoxY", "FoxZ"],
      "rule": "require_anchor", "anchor": "FoxE", "on_fail": "passthrough_non_members",
-     "canonical_size": 3, "max_bp_gap": 1000},
+     "max_bp_gap": 1000},
     {"name": "DFE1", "categories": ["Iron-Reduction", "Iron-ReductionPotential"],
      "genes": ["DFE_0448", "DFE_0449", "DFE_0450", "DFE_0451"],
      "rule": "require_n_of", "min_genes": 3, "on_fail": "passthrough_non_members",
-     "canonical_size": 4, "max_bp_gap": 1000},
+     "max_bp_gap": 1000},
     {"name": "DFE2", "categories": ["Iron-Reduction", "Iron-ReductionPotential"],
      "genes": ["DFE_0461", "DFE_0462", "DFE_0463", "DFE_0464", "DFE_0465"],
      "rule": "require_n_of", "min_genes": 3, "on_fail": "passthrough_non_members",
-     "canonical_size": 5, "max_bp_gap": 1000},
+     "max_bp_gap": 1000},
     {"name": "MtrMto",
      "categories": ["Iron-Oxidation", "Iron-Reduction",
                     "Iron-RedoxPotential"],
      # ImoA is excluded; native Fe(II) oxidation has not been demonstrated.
      "genes": ["MtrA", "MtrB_TIGR03509", "MtrC_TIGR03507", "MtoA"],
      "rule": "mtr_disambiguation", "on_fail": "keep_all",
-     "canonical_size": 3, "max_bp_gap": 2000},
+     "max_bp_gap": 2000},
     {"name": "SIDERO_TRANSPORT",
      "categories": ["Siderophore-TransportPotential",
                     "Heme-Transport",
@@ -65,12 +67,12 @@ _DEFAULT_OPERON_RULES = [
     {"name": "TAD_PILUS", "categories": ["Iron-Reduction"],
      "genes": ["PF04964-Flp_Fap_pilin", "cpaB_TIGR03177.1"],
      "rule": "require_n_of", "min_genes": 2, "on_fail": "passthrough_non_members",
-     "canonical_size": 2, "max_bp_gap": 2000},
+     "max_bp_gap": 2000},
     {"name": "SUF_OPERON", "categories": ["IronSulfur-Assembly"],
      "genes": ["sufA_TIGR01997.1", "sufB_TIGR01980.1", "sufC_TIGR01978.1",
                "sufD_TIGR01981.1", "sufS_TIGR01979.1", "sufE_PF02657.22"],
      "rule": "require_n_of", "min_genes": 3, "on_fail": "passthrough_non_members",
-     "canonical_size": 6, "max_bp_gap": 2000},
+     "max_bp_gap": 2000},
 ]
 
 _DEFAULT_OPERON_RULES.extend(
@@ -148,26 +150,10 @@ def build_stem_gap_map(rules, gene_map):
     return result
 
 
-def build_canonical_size_map(rules):
-    """
-    Return {gene_name → canonical_size} from rules that define both a genes list
-    and a canonical_size. Used to look up completeness expectations per cluster.
-    """
-    if not rules:
-        return {}
-    result = {}
-    for rule in rules:
-        cs = rule.get("canonical_size")
-        if cs and rule.get("genes"):
-            for g in rule["genes"]:
-                result[g] = cs
-    return result
-
-
 def load_operon_rules(hmm_dir):
     """Return (rules, report_all_pats, json_present).
     json_present=True → use JSON rule engine (model organisms).
-    json_present=False → use FeGenie exact port (default).
+    json_present=False → use the FeGenie-derived engine (default).
     """
     p = Path(hmm_dir) / "operon_rules.json"
     if p.exists():
@@ -179,7 +165,7 @@ def load_operon_rules(hmm_dir):
         print(f"[INFO] Loaded {len(rules)} operon rules from {p}")
         print(f"       Using JSON rule engine (model-organism mode)")
         return rules, pats, True
-    print("[INFO] Using FeGenie exact operon logic (no operon_rules.json found)")
+    print("[INFO] Using FeGenie-derived operon rules (no operon_rules.json found)")
     return [], _REPORT_ALL_PATTERNS, False
 
 
@@ -208,7 +194,12 @@ def _mtr(rows):
 def filter_cluster_fegenie(cluster_rows, report_all_pats, all_results=False,
                            catalog_mode=False):
     """
-    Exact port of FeGenie's operon context filtering logic.
+    Reimplementation of FeGenie's context rules with Efesto extensions.
+
+    Based on Garber et al. (2020), doi:10.3389/fmicb.2020.00037.
+    Efesto changes include catalog handling and additional gene systems;
+    this is not a claim of exact behavior equivalence to every FeGenie mode.
+    See Git history and CHANGELOG.md for modifications.
 
     catalog_mode=True: bypass co-occurrence count rules (FLEET ≥5, MAM ≥5,
     siderophore ≥2/3, iron_transport ≥2) but keep:

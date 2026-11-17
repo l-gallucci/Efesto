@@ -44,9 +44,14 @@ real reference scores and context before deprecating a profile.
 
 ## Remaining limitations
 
-Five local curated builds were reproduced from recovered inputs. That establishes
-build provenance, not generalization. Seven original CbcL seed accessions and the
-original alignment remain unavailable; one canonical reference is verified.
+Six local curated builds are now reproducible from documented inputs. CbcL's
+eight public sequences were cross-verified against UniProt/NCBI, and a fresh
+MAFFT/HMMER build reproduces its existing matrix, statistics and checksum exactly
+(build date excluded). This is reconstruction of the inputs, not recovery of the
+historical files or independent classifier validation. The HMM and cutoff are
+unchanged. CbcL is an inner-membrane EET component linked to low-potential Fe(III)
+respiration in the canonical organism; a homolog hit alone does not establish
+iron reduction. See the source records in `data/seeds/curated/`.
 Some MtrA seeds have only broad DmsE-family annotations; DA_402 remains a candidate
 family with limited independent functional evidence.
 

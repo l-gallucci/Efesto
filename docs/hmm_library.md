@@ -30,6 +30,12 @@ Source labels record the import channel as well as the original family database.
 Check each registry row and its reference; for example, an InterPro import may
 contain a Pfam or NCBIfam model. Source presence is not a per-profile validation.
 
+The [per-model license/source table](../hmm_library/model_licenses.tsv) records
+the original provider, identified terms and unresolved conditions for every
+registered profile. See [HMM license scope](../hmm_library/LICENSES.md) and
+[third-party notices](third-party-notices.md); runtime status does not
+change the redistribution terms of bundled files.
+
 ## Selectors
 
 Examples: `--annotate Fe Cu Zn`, `--annotate Ln W`, or an exact canonical category

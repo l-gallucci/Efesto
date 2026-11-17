@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: AGPL-3.0-only
+# Copyright (c) 2026 Efesto contributors.
+
 """Verify release archives and run the installed wheel outside its source tree."""
 import argparse
 import csv
@@ -32,11 +35,24 @@ def check(wheel, sdist, smoke=False):
             rel = "hmm_library/" + row["hmm_file"]
             assert sha(whl.read("efesto/data/" + rel)) == sha(source(rel)), rel
         for name in ("HMM-bitcutoffs.txt", "FeGenie-map.txt", "category_aliases.tsv",
-                     "category_catalog.tsv", "category_curation.tsv"):
+                     "category_catalog.tsv", "category_curation.tsv", "model_licenses.tsv",
+                     "LICENSES.md"):
             rel = "hmm_library/" + name
             assert whl.read("efesto/data/" + rel) == source(rel), rel
         for name in ("LICENSE", "THIRD_PARTY_NOTICES.md", "CITATION.cff"):
             assert whl.read("efesto/data/" + name) == source(name)
+        model_licenses = list(csv.DictReader(io.StringIO(
+            source("hmm_library/model_licenses.tsv").decode()), delimiter="\t"))
+        assert len(model_licenses) == len(rows)
+        assert {r["stem"] for r in model_licenses} == {r["stem"] for r in rows}
+        for rel in ("LICENSES/MIT.txt", "LICENSES/GPL-3.0.txt", "LICENSES/README.md"):
+            assert whl.read("efesto/data/" + rel) == source(rel), rel
+            assert any(n.endswith(".dist-info/licenses/" + rel) for n in names), rel
+        for seed_alignment in ("MtrA", "MtoA", "CymA", "ImoA", "DA_402", "CbcL"):
+            assert source("data/seeds/curated/" + seed_alignment + "_seeds.aln")
+        cbcl_sources = json.loads(source("data/seeds/curated/CbcL_source_records.json"))
+        assert len(cbcl_sources["records"]) == 8
+        assert json.loads(source("data/seeds/curated/CbcL_reconstruction.json"))["same_entire_hmm_except_date"]
         assert whl.read("efesto/data/examples/operon_rules.json") == source("operon_rules.json")
         assert sum(n.endswith(".hmm") for n in names) == len(rows)
         assert sum(n.endswith(".hmm") for n in source_names) == len(rows)
@@ -94,7 +110,10 @@ def check(wheel, sdist, smoke=False):
             with (output / "Efesto-results-long.tsv").open() as handle:
                 hits = list(csv.DictReader(handle, delimiter="\t"))
             assert len(hits) == 1 and hits[0]["gene"].lower() == "lanm", hits
-            assert hits[0]["cluster_confidence"]
+            assert hits[0]["threshold_type"] == "model_specific"
+            assert "cluster_confidence" not in hits[0]
+            assert (output / "Efesto-context-evidence.tsv").is_file()
+            assert (output / "Efesto-UniOP-pair-evidence.tsv").is_file()
             result["clean_wheel_install_and_real_hmmer_run"] = True
     return result
 

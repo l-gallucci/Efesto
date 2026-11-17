@@ -14,7 +14,7 @@ required only for their corresponding execution paths.
 | Profile search | `hmmer.py` | Bounded HMMER job queue, search tables, best accepted hit per ORF |
 | Neighborhoods | `clustering.py` | Coordinate/strand grouping, ordinal fallback, catalog singletons |
 | Context filtering | `operon.py` | Default and JSON rules, Mtr/Mto context and applicable checks |
-| Evidence weighting | `scoring.py` | Heuristic confidence factors |
+| Evidence reporting | `evidence.py` | Per-hit observations, availability and retained-neighborhood rule assessments |
 | Optional context | `uniop.py`, `bgc.py` | Operon probabilities and qualifying BGC overlap |
 | Optional confirmation | `eggnog.py`, `baktfold.py`, `topology.py` | Applicable annotation, structure and topology evidence |
 | Coverage | `coverage.py` | Coverage inputs and optional normalization |
@@ -43,12 +43,12 @@ Raw searches and gene calls can be reused from existing output directories.
 The cache is not a complete content-hash provenance system: changing inputs or
 parameters requires a fresh output directory for a reproducible comparison.
 
-## Confidence and evidence
+## Separate evidence
 
-The composite score combines HMM threshold status, co-occurrence, available UniOP
-pairs, qualifying BGC overlap and applicable optional confirmation. Missing optional
-evidence is neutral. The score is capped at 1.2 and is not a correctness probability.
-There is no global confidence≥0.5 retention gate in ordinary runs.
+`evidence.py` records search gates, available annotation/structure/topology
+observations and retained-neighborhood rule assessments without a combined score.
+UniOP probabilities remain pair-level observations; qualifying BGC regions are
+reported per overlapping ORF. Missing data and bypassed rules are explicit.
+Rule satisfaction does not imply completeness or physiological activity.
 
-See [the user pipeline](docs/pipeline.md) and
-[confidence scoring](docs/cluster_confidence_scoring.md).
+See [the user pipeline](docs/pipeline.md) and [separate evidence](docs/evidence.md).

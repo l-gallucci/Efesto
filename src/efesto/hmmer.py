@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+# Copyright (c) 2026 Efesto contributors.
+
 """HMMER search execution, tblout parsing, and library normalization."""
 
 import os
@@ -232,6 +235,6 @@ def collect_best_hits(faa_files, cat_hmms, out_tmp, cutoffs=None, max_evalue=1e-
                         bh[genome][orf] = {
                             "hmm_stem": stem, "cat": cat,
                             "evalue": ev, "bitscore": bs,
-                            "confidence": "calibrated" if calibrated else "low_confidence",
+                            "threshold_type": "model_specific" if calibrated else "generic",
                         }
     return bh

@@ -1,51 +1,97 @@
-# Pipeline
+# How Efesto processes a dataset
+
+Efesto first decides which protein-family matches to retain, then reports the
+available evidence for those matches. HMMER bitscores remain part of the search;
+there is no combined confidence score or final confidence cutoff.
 
 ```text
-FNA ── Pyrodigal/Pyrodigal-GV ── FAA + coordinates
-                                │
-FAA + optional matching GFF ─────┘
+Assemblies (FNA) → Pyrodigal/Pyrodigal-GV → proteins + coordinates
+Existing proteins (FAA) + optional matching GFF ────────────┘
        ↓
-enabled profile HMMs → score and E-value gates → best hit per ORF
+Enabled HMM profiles → bitscore and E-value gates → best accepted hit per ORF
        ↓
-genomic clustering → context rules → applicable confirmation checks
+Genomic grouping → context/per-protein filters
        ↓
-confidence annotation → summaries, TSV, matched sequences and GFF3
+Optional eggNOG rescue of flagged, first-pass rejected candidates
+       ↓
+Retained annotations + separate context, tool and UniOP-pair evidence
+       ↓
+Tables, cluster-count/coverage matrices, matched sequences and GFF3
 ```
 
-## Search and assignment
+## 1. Prepare proteins and coordinates
 
-Profiles whose registry status starts with `deprecated` or `inactive` are excluded.
-Active and experimental profiles are searched unless category selection removes
-them. A positive model-specific full-sequence cutoff is used where available;
-otherwise the generic bitscore floor defaults to 30. The E-value limit defaults
-to `1e-5` and applies to all accepted hits.
+With `--fna_dir`, Efesto predicts genes using Pyrodigal-GV by default; Pyrodigal
+can be selected explicitly. With `--faa_dir`, it searches the supplied proteins.
+Matching GFF coordinates allow grouping by contig, genomic separation and,
+optionally, strand. See [input workflows](workflows.md).
 
-One best HMM hit is retained per ORF using the highest raw bitscore across accepted
-matches. This rule can conceal competing-family matches; inspect retained tblout
-files when investigating paralog assignments.
+Without coordinates, the fallback assumes Prodigal-style ordinal identifiers.
+A gene catalog instead uses singleton clusters; catalog numbering does not
+establish genomic proximity.
 
-## Clusters and context
+## 2. Search the enabled profiles
 
-With coordinates, hits are grouped on a contig by base-pair separation and,
-optionally, strand. Named systems may use tighter rule-specific gaps than the
-global `--max_bp_gap`. Without coordinates, the fallback uses Prodigal-style
-ordinal identifiers. A gene catalog instead uses singleton clusters.
+Active and experimental profiles are enabled unless category selection removes
+them. Profiles whose registry status starts with `deprecated` or `inactive` are
+excluded. Enabling an experimental profile does not make it independently validated.
 
-The default context engine derives from FeGenie, with Efesto-specific additions.
-A library-local `operon_rules.json` selects the JSON engine. Context can change
-retention and redox-category assignment; it does not demonstrate physiological
-activity. See [operon rules](operon_rules.md).
+Each search uses a positive model-specific full-sequence cutoff where available.
+Otherwise the generic bitscore floor defaults to **30**. The E-value limit defaults
+to **1e-5** and applies to every accepted hit. `threshold_type` records which
+cutoff path was used.
 
-## Additional evidence
+Efesto retains one accepted HMM per ORF using the highest raw bitscore across
+accepted matches. This can conceal competing-family matches: inspect tblout
+files retained with `--keep_tblout` when investigating paralogs. Bitscores across
+models are not a common probability scale.
 
-UniOP, antiSMASH, eggNOG-mapper, Foldseek and Phobius are optional. Their
-applicability differs: annotation and structural confirmation target models
-flagged `needs_confirmation`; topology checks target models with explicit
-expectations. These checks are not applied uniformly to every protein.
-See [confidence scoring](cluster_confidence_scoring.md).
+## 3. Group and filter family matches
+
+With coordinates, neighboring hits are grouped by base-pair separation and,
+optionally, strand. Named systems can use tighter rule-specific gaps than the
+global `--max_bp_gap`.
+
+The default context engine derives from FeGenie with Efesto additions. A
+library-local `operon_rules.json` selects the configurable engine. These rules
+can remove matches or alter Mtr/Mto category assignments. Existing per-protein
+checks, including Cyc2 length/motif requirements, still apply.
+
+The [context reference](operon_rules.md) describes modes and requirements.
+A minimum count refers to distinct models and does not establish a complete or
+active biological system.
+
+## 4. Optionally recover flagged candidates
+
+Only hits on `needs_confirmation` models that failed the first-pass filters enter
+the eggNOG rescue set. Informative matching name/KO evidence can recover a
+candidate as a singleton. Candidates without matching informative evidence remain
+excluded. Supplying a whole-proteome annotation file does not check every retained
+hit automatically.
+
+`Efesto-confirmation-candidates.tsv` reports both recovered and unretained
+candidates. It is not an additional annotation count table.
+
+## 5. Report optional evidence separately
+
+| Analysis | Added observations | Changes retention? |
+|---|---|---|
+| UniOP | Operon membership and available pair probabilities | No |
+| antiSMASH inputs | Qualifying siderophore/metallophore region overlaps | No |
+| Foldseek | Candidate reference target, match statistics and label comparison | No |
+| Phobius and optional motif comparison | Predictions and consistency with model expectations | No |
+
+Tool applicability and availability are explicit. A missing result is not support
+or a demonstrated contradiction. Optional Phobius/motif reporting is separate
+from sequence checks already used in the filtering stage.
+
+See [evidence and decisions](evidence.md) for worked MtrA/LanM, SUF and singleton
+examples, and [output files](output_formats.md) for the exact tables. The context
+table assesses retained neighborhoods; it is not a full execution trace of the
+filtering engine.
 
 ## Resource use
 
-At most two HMM searches overlap by default. `--threads` and `--hmm_threads`
-can reduce that concurrency; they do not define a hard RAM limit. Gene prediction
-has its own worker allocation. See [performance](performance.md).
+At most two HMM searches overlap by default. `--threads` and `--hmm_threads` can
+reduce concurrency; they do not define a hard RAM limit. Gene prediction has its
+own worker allocation. See [performance](performance.md).

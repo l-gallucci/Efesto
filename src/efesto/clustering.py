@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+# Copyright (c) 2026 Efesto contributors.
+
 """ORF clustering by genomic index or base-pair coordinates."""
 
 from collections import defaultdict
