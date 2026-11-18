@@ -30,8 +30,8 @@ but fail a DFE2 minimum of three distinct models. Nearby Mtr-family models do no
 fulfil that requirement. This reports insufficient support for that source-style
 system; it does not prove that the protein has no metal-related function.
 
-The decision table adds transparency without changing the filtering rules or
-counting excluded candidates as retained annotations. It is distinct from
+Excluded candidates appear only in the decision table, not in retained-hit
+counts or sequence exports. This table is distinct from
 `Efesto-context-evidence.tsv`, which assesses retained neighborhoods rather than
 replaying exclusions. See the [decision-table fields](output_formats.md#filter-decision-table).
 
@@ -51,9 +51,9 @@ bitscore, E-value and model cutoff describe the accepted match.
 | `retention_mode` | Ordinary context filtering, all-results/catalog mode, or eggNOG rescue |
 
 By default, the generic bitscore floor is **30** and the E-value limit is
-**1e-5**. A model-specific cutoff describes a search decision; it is not a
-certificate of independent validation or substrate specificity. Bitscores from
-different models are not a common probability scale.
+**1e-5**. Model-specific thresholds control search acceptance. Interpret
+substrate specificity using the profile's functional scope and references.
+Bitscores from different models are not a common probability scale.
 
 The [output reference](output_formats.md) describes identifiers, tables and
 export formats. Read columns by header name.
@@ -148,7 +148,7 @@ fixed edge penalty or inferred biological absence is assigned.
 
 ## Worked examples
 
-These are schematic reading examples, not biological validation datasets.
+The following schematic examples illustrate how to read the output fields.
 
 | Observed neighborhood | What the result says | What it does not establish |
 |---|---|---|
@@ -180,15 +180,13 @@ IDs and each member's cluster. Zero is retained as zero; missing pairs are not
 assigned 1. These probabilities concern operon prediction, not metal function.
 An empty table has a header and no inferred scores.
 
-## Updating analysis scripts
+## Using results in analysis scripts
 
 The output schema is `separate-evidence-v1`, recorded in `Efesto-run.log`.
-Composite scores, numeric evidence weights and confidence bins have been removed.
-The former per-hit `confidence` field is replaced by the descriptive
-`threshold_type` field. The numeric anvi'o export is now
-`Efesto-anvio-gene-evidence.tsv`, containing raw observations.
+`threshold_type` describes the search threshold used for each hit. The numeric
+anvi'o export, `Efesto-anvio-gene-evidence.tsv`, contains individual observations.
 
-Read the new headers and [file definitions](output_formats.md). Do not replace an
-old score cutoff with a universal bitscore cutoff or treat every unavailable check
-as a negative. Use a fresh output directory when changing software revision or
-analysis settings.
+Read columns by header name using the [file definitions](output_formats.md).
+Apply model-specific interpretations rather than a universal bitscore cutoff,
+and keep unavailable observations separate from negative results. Use a fresh
+output directory when changing software revision or analysis settings.

@@ -37,14 +37,14 @@ establish genomic proximity.
 
 Active and experimental profiles are enabled unless category selection removes
 them. Profiles whose registry status starts with `deprecated` or `inactive` are
-excluded. Enabling an experimental profile does not make it independently validated.
+excluded. Experimental profiles have model-specific interpretation notes in the
+[catalog and scope guide](hmm_library_curation.md).
 
 Each search uses a positive model-specific full-sequence cutoff where available.
 Otherwise the generic bitscore floor defaults to **30**. The E-value limit defaults
 to **1e-5** and applies to every accepted hit. `threshold_type` records which
 cutoff path was used. The maintained registry records the authoritative model
 cutoffs; the bundled runtime table preserves those values without rounding.
-Release-package checks reject disagreement between these two files.
 
 Efesto retains one accepted HMM per ORF using the highest raw bitscore across
 accepted matches. This can conceal competing-family matches: inspect tblout

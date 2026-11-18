@@ -35,7 +35,8 @@ A category name does not establish a measured phenotype.
 
 Source labels record the import channel as well as the original family database.
 Check each registry row and its reference; for example, an InterPro import may
-contain a Pfam or NCBIfam model. Source presence is not a per-profile validation.
+contain a Pfam or NCBIfam model. Functional scope and references are recorded
+for each profile.
 
 The [per-model license/source table](../hmm_library/model_licenses.tsv) records
 the original provider, identified terms and unresolved conditions for every
@@ -57,10 +58,10 @@ list in the [command reference](command-reference.md).
 ## Registry and search thresholds
 
 The registry records filename stem, model name/accession, category, source,
-status, cutoff, NSEQ, references and review metadata. Filename stems key the
+status, cutoff, NSEQ, references and interpretation notes. Filename stems key the
 runtime maps; the HMM `NAME` can legitimately differ from that stem.
-`category_review_status` records source support or unresolved review, not a
-classifier accuracy estimate.
+`category_review_status` describes the supporting source or an unresolved
+category assignment.
 
 The runtime reads full-sequence cutoffs from `HMM-bitcutoffs.txt`. A missing or
 nonpositive cutoff uses the generic bitscore floor, default 30; an E-value gate
@@ -70,10 +71,22 @@ NSEQ is a count of training records, not independent experimental positives.
 See [curation](hmm_library_curation.md), [functional scope](hmm_expansion_biological_rationale.md)
 and [custom libraries](extending_the_library.md).
 
+## Cutoff provenance
+
+Official Pfam and NCBIfam/TIGRFAM profiles, including enabled member-database
+profiles imported through InterPro, use the full-sequence GA value from the
+source HMM. These thresholds are inherited from the provider, not estimated
+de novo in Efesto.
+
+Other published collections can supply cutoffs in external metadata.
+Efesto-built profiles use Efesto-selected operating thresholds.
+Profiles without a positive model-specific cutoff use the generic bitscore
+floor. See [curation and construction methods](hmm_library_curation.md#cutoff-provenance)
+for the distinction between these threshold sources.
+
 ## Cutoff consistency
 
 The maintained `hmm_registry.tsv` records the authoritative curated model cutoffs.
 `HMM-bitcutoffs.txt` is the runtime table and must contain the same numeric values,
-without rounding or duplicate entries. The importer preserves full precision;
-package validation and regression checks enforce agreement. This synchronization
-does not constitute a new calibration or independent validation of a cutoff.
+without rounding or duplicate entries. Both files preserve the full numeric precision of model cutoffs. The
+cutoff source and model-specific interpretation notes are recorded in the registry.

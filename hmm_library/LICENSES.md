@@ -26,13 +26,10 @@ literature references. Indicate modifications and preserve the applicable
 ShareAlike conditions. This grant does not replace third-party rights in the
 training inputs or extend to other imported HMMs.
 
-These models were rebuilt from the documented inputs; their build/provenance
-records are in `data/seeds/curated/` in the source repository. The stored NCBI
-and UniProt input records retain their original conditions. CbcL's eight public
-input sequences are now documented and cross-verified against NCBI; its freshly
-reconstructed alignment reproduces the deployed model exactly, apart from its
-build date. The historical input files were not recovered; this is a documented
-reconstruction, not a claim of independent functional validation.
+Sequence sets, alignments and build/provenance records are available in
+`data/seeds/curated/` in the source repository. The NCBI and UniProt input
+records retain their original conditions. CbcL's supplied inputs are reconstructed
+from public records; `CbcL_reconstruction.json` documents their derivation.
 
 ## Changes to imported material
 

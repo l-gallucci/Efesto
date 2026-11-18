@@ -2,13 +2,14 @@
 
 ## Imported profiles
 
-The eleven profiles below are unchanged official imports. They were not trained
-from new Efesto seed collections. Full-sequence GA values are inherited, not
-recalibrated from the small Efesto reference panels.
+The eleven profiles below come from NCBI protein family models and Pfam.
+They retain the providers' HMM parameters. The cutoffs below are copied from
+the **full-sequence GA field of each source HMM**, rather than estimated de novo
+by Efesto. NSEQ describes the source model's training records.
 
 {{expansion_table}}
 
-Source URLs, versions, hashes and reference expectations are recorded under
+Source URLs, versions and reference sequences are available under
 `data/validation/metal_expansion/` and `data/validation/methanobactin/` in the
 [source repository](https://github.com/l-gallucci/Efesto/tree/main/data/validation).
 
@@ -22,7 +23,6 @@ Wtp components are assigned to shared Mo/W acquisition. Tup profiles retain thei
 W-associated source scope, but TupA NF041772 has known coverage gaps: characterized
 D. alaskensis Q316W1 and P. acidaminophilum Q93KD6 fall below GA400. The model is
 experimental and its negative result must not be read as absence of W acquisition.
-The cutoff was not lowered to recover these few references.
 
 ## Opine-type metallophores
 

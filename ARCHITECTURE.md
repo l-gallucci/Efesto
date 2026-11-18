@@ -15,7 +15,7 @@ required only for their corresponding execution paths.
 | Neighborhoods | `clustering.py` | Coordinate/strand grouping, ordinal fallback, catalog singletons |
 | Context filtering | `operon.py` | Default and JSON rules, Mtr/Mto context and applicable checks |
 | Evidence reporting | `evidence.py` | Per-hit observations, availability and retained-neighborhood rule assessments |
-| Filter audit | `decisions.py`, `operon.py` | Actual decisions for selected candidates, disk spooling and final rescue status |
+| Filter decisions | `decisions.py`, `operon.py` | Actual decisions for selected candidates, disk spooling and final rescue status |
 | Optional context | `uniop.py`, `bgc.py` | Operon probabilities and qualifying BGC overlap |
 | Optional confirmation | `eggnog.py`, `baktfold.py`, `topology.py` | Applicable annotation, structure and topology evidence |
 | Coverage | `coverage.py` | Coverage inputs and optional normalization |

@@ -66,15 +66,15 @@ def catalog_fragments():
              sum(r[field] == group and r['status'] == 'experimental' for r in rows),
              sum(r[field] == group and not enabled(r) for r in rows)) for group in groups
         ])
-    def model_table(selected):
-        return table(['Model (filename stem)', 'Accession', 'NSEQ', 'Cutoff', 'Status'], [
-            (f"`{r['stem']}`", r['acc'] or '—', r['nseq'], r['cutoff'], r['status']) for r in selected
+    def model_table(selected, cutoff_source):
+        return table(['Model (filename stem)', 'Accession', 'NSEQ', 'Cutoff (bits)', 'Cutoff source', 'Status'], [
+            (f"`{r['stem']}`", r['acc'] or '—', r['nseq'], r['cutoff'], cutoff_source, r['status']) for r in selected
         ])
     def source_decision_table():
         inclusion_notes = {
-            'curated': 'Documented redox-family builds; CymA remains experimental.',
+            'curated': 'Efesto-built redox-family profiles; CymA is experimental.',
             'fegenie': 'Iron-related families; imported scoring parameters preserved.',
-            'interpro': 'Reviewed heme, siderophore and magnetosome assignments.',
+            'interpro': 'Heme, siderophore and magnetosome families.',
             'methmmdb': 'Broader metal acquisition, homeostasis and resistance.',
             'mnoxgenetool': 'Published Mn-oxidation subclades, including sparse-seed exceptions.',
             'ncbifam': 'Official metal-related/cofactor families; TupA remains experimental.',
@@ -82,7 +82,7 @@ def catalog_fragments():
             'tabuteau': 'Acquisition and siderophore/metallophore biosynthetic families.',
         }
         exclusion_notes = {
-            'deprecated_nseq_insufficient': 'historical low-seed rule',
+            'deprecated_nseq_insufficient': 'low-seed criterion',
             'deprecated_dedup_lower_coverage': 'overlapping variants',
             'deprecated_dedup_sequence_cluster': 'sequence redundancy',
             'deprecated_category_mismatch': 'category mismatch',
@@ -109,9 +109,9 @@ def catalog_fragments():
         'category_table': count_table('category', 'Category'),
         'source_table': count_table('source', 'Source label'),
         'source_decision_table': source_decision_table(),
-        'curated_table': model_table(sorted((r for r in rows if r['source'] == 'curated'), key=lambda r: r['stem'])),
-        'fes_table': model_table(sorted((r for r in rows if r['category'] == 'IronSulfur-Assembly'), key=lambda r: r['stem'])),
-        'expansion_table': model_table([by_stem[stem] for stem in EXPANSION]),
+        'curated_table': model_table(sorted((r for r in rows if r['source'] == 'curated'), key=lambda r: r['stem']), 'Efesto-selected'),
+        'fes_table': model_table(sorted((r for r in rows if r['category'] == 'IronSulfur-Assembly'), key=lambda r: r['stem']), 'Source HMM GA (sequence)'),
+        'expansion_table': model_table([by_stem[stem] for stem in EXPANSION], 'Source HMM GA (sequence)'),
     }
 
 

@@ -19,7 +19,7 @@ original database. [model_licenses.tsv](hmm_library/model_licenses.tsv) maps
 **each registered HMM** to its source, applicable notice and any unresolved
 conditions. It also covers excluded profiles: runtime status does not change
 the terms for files included in a package. The table is a record of the source
-notices checked on **2026-11-16**, not a new license or a permission grant.
+notices as of **2026-11-16**; it does not grant additional rights.
 
 | Source / original provider | Terms identified | Attribution and original source |
 |---|---|---|
@@ -29,14 +29,14 @@ notices checked on **2026-11-16**, not a new license or a permission grant.
 | NCBIfam NF / NCBI-created family models | NCBI's public-domain/no-additional-restrictions policy for its own material, with the stated reservation for third-party rights. This is not a blanket public-domain claim for everything hosted by NCBI. | NCBI/NLM and original contributors; [data policy and disclaimer](https://www.ncbi.nlm.nih.gov/home/about/policies/) |
 | Tabuteau original/other profiles | GPLv3 project notice. Imported KOfam/NCBI models retain their original source conditions. | Tabuteau, Herve, Irlinger and Monnet; [publication](https://doi.org/10.1111/1462-2920.70218), [repository and license](https://github.com/STabuteau/iron_cheese_metagenomes) |
 | KOfam / KEGG profiles imported through Tabuteau | **Profile redistribution terms not established.** The KOfam README explicitly identifies KEGG rights/usage terms for KO definitions; it does not provide a clear general redistribution grant for the profiles. Do not infer one from KofamScan software licensing or Tabuteau's collection license. | Aramaki et al.; [KOfam README](https://www.genome.jp/ftp/db/kofam/README), [KEGG terms](https://www.kegg.jp/kegg/legal.html), [publication](https://doi.org/10.1093/bioinformatics/btz859) |
-| MetHMMDB | **No project/data license specified in the checked sources; refer to the original repository/authors for applicable terms.** Efesto makes no new license grant for these HMMs and does not treat the absence of a notice as redistribution permission. | Ciuchcinski and Dziurzynski; [repository](https://github.com/kciuchcinski/MetHMMDB), [publication](https://doi.org/10.1101/2024.12.26.629440) |
+| MetHMMDB | **No project/data license specified in the source records; refer to the original repository/authors for applicable terms.** Efesto makes no new license grant for these HMMs and does not treat the absence of a notice as redistribution permission. | Ciuchcinski and Dziurzynski; [repository](https://github.com/kciuchcinski/MetHMMDB), [publication](https://doi.org/10.1101/2024.12.26.629440) |
 | MnOxGeneTool | **Non-commercial academic use only**, with author consent required for commercial use. Redistribution/modification permission for this repackaging is not established by that use notice. | Wang et al.; [original notice](https://github.com/wyh19990121/MnOxGeneTool/blob/main/Readme.md), [publication](https://doi.org/10.1021/acs.est.5c01235) |
-| Efesto rebuilt profiles | CC BY-SA 4.0 only for the six models explicitly listed in [HMM license scope](hmm_library/LICENSES.md), on copyrightable contributions held by Efesto contributors. Seed/source-sequence rights remain applicable. CbcL now has eight traceable input records and an exact reconstruction of its existing build; input rights remain applicable. | Efesto contributors; individual literature references in the model registry and source records in `data/seeds/curated/` |
+| Efesto rebuilt profiles | CC BY-SA 4.0 only for the six models explicitly listed in [HMM license scope](hmm_library/LICENSES.md), on copyrightable contributions held by Efesto contributors. Seed/source-sequence rights remain applicable; sequence provenance and build information are provided in `data/seeds/curated/`. | Efesto contributors; individual literature references in the model registry and source records in `data/seeds/curated/` |
 
 Unspecified or unresolved terms are **not permission to redistribute**. This
-notice records those gaps; it does not resolve them. Before publishing a release
-that contains such assets, establish the required rights with the original
-provider or obtain a separately documented authorization. Neither academic
+notice identifies those conditions. Redistribution of such assets requires
+establishing the applicable rights with the original provider or obtaining
+separately documented authorization. Neither academic
 intent nor adding this notice establishes that every bundled asset is cleared.
 No blanket non-commercial restriction is added to Efesto's AGPLv3 code.
 
@@ -59,7 +59,7 @@ their own licenses and notices remain applicable.
 executable under its upstream BSD three-clause terms. UniOP, eggNOG-mapper, Foldseek,
 Phobius, their models/databases, and upstream annotation tools are not relicensed
 by Efesto. Install and use them under their original conditions. In particular,
-the checked UniOP repository does not specify a project license, and Phobius has
+the UniOP source records do not specify a project license, and Phobius has
 separate restrictive academic terms.
 
 The wheel and source archive do not bundle the implementations of these

@@ -20,7 +20,7 @@ The internal HMM `NAME` may differ; official imports already use that convention
 Keep these external keys synchronized.
 
 For each model, record the source/version, sequence provenance, NSEQ, category,
-cutoff score type, runtime status, references and review limitations. `active`
+cutoff score type, runtime status, references and interpretation limits. `active`
 and `experimental` are enabled states. Keep the selected library consistent with
 its registry, cutoff table and gene map.
 

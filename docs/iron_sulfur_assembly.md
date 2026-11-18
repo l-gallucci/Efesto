@@ -8,8 +8,14 @@ all Fe-S-containing proteins or specifically identify iron-respiring organisms.
 
 {{fes_table}}
 
-These are official NCBIfam/Pfam imports selected for Efesto, not newly trained
-Efesto models. Exact source versions and cutoffs are retained in the registry.
+These are imported NCBIfam/TIGRFAM and Pfam profiles. The cutoffs in the table
+are taken directly from the **full-sequence GA (gathering threshold)** in each
+source HMM; they were not estimated de novo by Efesto. Where an HMM provides
+separate sequence and domain GA values, Efesto uses the sequence value. NSEQ
+is the number of training records reported by the source model.
+
+Source versions and the corresponding runtime thresholds are preserved in
+the registry and cutoff table. See [cutoff provenance](hmm_library_curation.md#cutoff-provenance).
 
 ## Interpretation
 

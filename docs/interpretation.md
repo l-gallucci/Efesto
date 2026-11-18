@@ -4,7 +4,7 @@
 
 An accepted match identifies a protein-family relationship under the configured
 search gates. Functional specificity depends on the profile and the evidence
-behind its members. A source-supported label is not an independent accuracy test.
+behind its members. Consult the model's scope and functional references.
 
 - Acquisition, resistance, homeostasis and regulation describe different roles.
 - Generic transporter components do not determine substrate specificity.
@@ -16,14 +16,15 @@ behind its members. A source-supported label is not an independent accuracy test
 ## Evidence and completeness
 
 Match statistics, threshold type, neighborhood rules and optional checks are
-reported separately. A positive model-specific cutoff is not an independent
-accuracy certificate. Missing evidence is distinct from supporting evidence.
+reported separately. A model-specific cutoff controls search acceptance;
+functional interpretation also depends on the profile and genomic context.
 There is no combined score or global confidence threshold.
 
 A neighborhood rule can require a minimum number of distinct model families;
 passing it does not show that a complete or active pathway exists. Repeated
 copies and genes from other systems do not become missing functional components.
-See [separate evidence](evidence.md) for availability, scope and output migration.
+See [separate evidence](evidence.md) for the availability, scope and meaning of
+each observation.
 
 ## Practical reading order
 
@@ -46,7 +47,10 @@ For MtrA plus LanM hits, LanM does not supply a missing Mtr component. See
 |---|---|
 | Fe-S assembly profiles | Cofactor-biogenesis potential, not proof of iron respiration or stress |
 | SufE-related domain | May match CsdE; inspect orthology and genomic context |
+| CbcL | Inner-membrane electron transfer associated with low-potential Fe(III) respiration in the reference organism; not a terminal reductase |
+| MtrA / MtoA | Related multiheme families; use partner proteins and context to interpret pathway role and direction |
 | CymA | Multifunctional respiratory component; not an Fe-specific terminal reductase |
+| DA_402 | Candidate electron-transfer family; functional scope remains provisional |
 | ImoA | Deprecated in this library; native Fe(II) oxidation not established by the cited evidence |
 | TupA NF041772 | Known characterized references fall below GA; negative detection is not absence of W uptake |
 | LanM / LanD | Lanthanide binding and handling, not a complete uptake system |
@@ -59,6 +63,6 @@ Compare the same proteins, library versions and filtering conditions. Distinguis
 raw family assignment from the effects of genomic-context rules. Changes in
 category naming or retention can change summaries without changing HMM scores.
 
-A metagenomic case study demonstrates applicability; it is not automatically a
-labelled accuracy benchmark. Software checks and targeted reference panels do not
-establish independent biological accuracy.
+Use independently labelled reference data to estimate annotation accuracy.
+Metagenomic examples and runtime comparisons illustrate use and resource
+requirements; they do not provide sensitivity or specificity estimates.

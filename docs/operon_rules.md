@@ -41,8 +41,9 @@ Rule `genes` entries identify HMM stems.
 In the configurable JSON engine, `on_fail=keep_all` retains the current rows;
 `drop` drops the current cluster when the applicable rule fails. For named-gene
 count/anchor rules, `passthrough_non_members` removes the rule's members and lets
-the remaining rows continue through subsequent rules. `max_bp_gap` provides a neighborhood threshold. Historical
-`canonical_size` metadata is ignored; no completeness score is inferred. Inspect
+the remaining rows continue through subsequent rules. `max_bp_gap` provides a
+neighborhood threshold. The engine ignores `canonical_size` metadata and does
+not calculate a completeness score. Inspect
 the supplied JSON and [evidence reference](evidence.md) when changing rules.
 
 CntL+CntM and the MbnA/B/C set have explicit distinct-family requirements.

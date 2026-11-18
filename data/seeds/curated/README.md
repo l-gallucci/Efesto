@@ -1,65 +1,88 @@
-# Curated HMM inputs: provenance audit, updated 2026-11-16
+# Sequence inputs for Efesto-built profiles
 
-HMM licensing is described in [HMM license scope](../../../hmm_library/LICENSES.md).
-The six explicitly listed Efesto model contributions use CC BY-SA 4.0;
-this does not replace NCBI/UniProt conditions on the FASTA/MSA input records.
-Preserve the source accessions, links and attributions in the manifest.
+This directory contains FASTA sequences, alignments and source records for
+MtrA, MtoA, CymA, ImoA, DA_402 and CbcL. Model status and search cutoffs are
+listed in the [registry](../../../hmm_library/hmm_registry.tsv).
 
-These inputs reproduce the current MtrA, MtoA, CymA, ImoA, DA_402 and CbcL HMM scoring parameters exactly with MAFFT 7.526 and HMMER 3.4. Dates and textual HMM metadata are excluded from the equality check. See `build_reproduction.tsv` and the accession/sequence SHA256 manifest. This establishes reproducibility, not independent classifier accuracy.
+## Files
 
-MtrA/MtoA FASTA and MSA files are original Git objects recovered at the commit recorded in `recovered_history_manifest.json`. All 21 sequences match official NCBI records. The other three MSAs were reconstructed with `mafft --auto --quiet` from the documented official sequences; their builds match the deployed matrices, checksums, lengths, effective counts and statistical parameters.
+| File | Contents |
+|---|---|
+| `<model>_seeds.faa` | Ordered training sequences |
+| `<model>_seeds.aln` | Multiple sequence alignment used for HMM construction |
+| `curated_sequence_manifest.tsv` | Accessions, sequence hashes and provenance |
+| `build_reproduction.tsv` | MAFFT/HMMER versions and scoring-parameter comparison |
+| `recovered_history_manifest.json` | Source Git objects for available original input files |
+| `CbcL_source_records.json` | UniProt records and NCBI cross-references for the CbcL inputs |
+| `CbcL_reconstruction.json` | CbcL input provenance, build settings and hashes |
 
-Reproduce a model into a separate output directory:
+For CbcL, `CbcL_reconstruction.json` documents the derivation of the supplied
+sequence set and alignment from public records.
+`CbcL_verified_reference_only.faa` contains the single characterized reference
+Q74GH2/GSU0274; the full training set is `CbcL_seeds.faa`.
+
+## Building a profile
+
+The documented environment uses MAFFT 7.526 and HMMER 3.4. Preserve sequence
+order when regenerating an alignment:
 
 ```sh
-hmmbuild --cpu 1 -n MtrA /tmp/MtrA.reproduced.hmm MtrA_seeds.aln
+mafft --thread 1 --auto --quiet MtrA_seeds.faa > /tmp/MtrA.aln
+hmmbuild --cpu 1 -n MtrA /tmp/MtrA.hmm /tmp/MtrA.aln
 ```
 
-Use the corresponding name and alignment for MtoA, CymA, ImoA, DA_402 or CbcL. Preserve FASTA order for reconstructing an alignment. Do not replace deployed models or choose cutoffs from this check alone.
+To build directly from the supplied alignment:
 
-| Model | Training records | Unique sequences | Provenance/function limit |
+```sh
+hmmbuild --cpu 1 -n MtrA /tmp/MtrA.hmm MtrA_seeds.aln
+```
+
+Use the corresponding model name and files for other profiles.
+`build_reproduction.tsv` compares scoring parameters, excluding build dates and
+textual metadata. A new model or alignment requires its own threshold evaluation.
+
+## Operating thresholds
+
+The cutoffs for these six profiles are Efesto-selected full-sequence
+operating thresholds. They are stored in `hmm_registry.tsv` and
+`HMM-bitcutoffs.txt`, rather than inherited GA values from an external model.
+`hmmbuild` constructs the profile; it does not select these biological acceptance
+thresholds. Regenerating an existing HMM does not recalibrate its cutoff.
+
+## Training-set composition and scope
+
+| Model | Training records | Unique sequences | Scope |
 |---|---:|---:|---|
-| MtrA | 15 | 14 | Six records have only a DmsE-family annotation; specific orthology needs genomic context/phylogeny |
-| MtoA | 6 | 4 | Additional homologs have inferred, not individually assayed, functions |
-| CymA | 5 | 5 | Respiratory hub supporting several acceptors, not exclusively iron |
-| ImoA | 2 | 2 | Quinol oxidation demonstrated; pathway context does not prove direct Fe(II) oxidation |
-| DA_402 | 5 | 5 | Four paralogs from one genome plus one unreviewed external homolog; candidate EET family |
-| CbcL | 8 | 8 | Reconstructed from traceable public records; exact deployed-build reproduction, not independent classifier validation |
+| MtrA | 15 | 14 | MtrA/DmsE-related cytochromes; partner proteins and context guide orthology assignment |
+| MtoA | 6 | 4 | MtoA-related cytochromes; individual homologs need not share a demonstrated electron-flow direction |
+| CymA | 5 | 5 | Multifunctional respiratory electron transfer, including Fe(III) respiration |
+| ImoA | 2 | 2 | Quinol oxidation; excluded from ordinary metal annotation |
+| DA_402 | 5 | 5 | Candidate electron-transfer family; four records are same-genome paralogs |
+| CbcL | 8 | 8 | Inner-membrane electron transfer associated with low-potential extracellular respiration |
 
-## CbcL reconstruction
+Training records include experimentally characterized anchors and inferred
+homologs. Their number does not represent independent functional experiments.
+CbcL's characterized reference is associated with low-potential Fe(III)
+respiration in *G. sulfurreducens*, rather than terminal Fe(III) reduction.
+The manifest retains provider names such as `cbcY` for related sequences.
 
-`CbcL_seeds.faa` and `CbcL_seeds.aln` now contain all eight input sequences in
-the order that reproduces the deployed model. `CbcL_source_records.json` stores
-the official UniProt records and NCBI cross-references; every sequence was
-independently verified byte-identical between those providers on 2026-11-16.
-`CbcL_reconstruction.json` records commands, versions, file hashes and the result.
+Repeated records are retained where they form part of the distributed model:
+MtrA WP_011071900.1/AAN54830.1; MtoA ADE12722.1/WP_013030620.1 and
+ADL56010.1/WP_013293942.1. Deduplication changes the training input and requires
+rebuilding and threshold assessment.
 
-The historical input files were not found. The reconstruction used the old
-genus/length description to retrieve public records, compared 792 eight-sequence
-sets from 13 unique candidates against the existing build, and recovered input
-order using the Easel alignment checksum. A fresh `mafft --thread 1 --auto --quiet`
-alignment followed by HMMER 3.4 `hmmbuild --cpu 1 -n CbcL` reproduces the entire
-current HMM apart from `DATE`: matrix, transitions, map, statistics, effective
-sequence count and checksum **3842520616** all match. The deployed HMM and cutoff
-**200 bits** have not been replaced or recalibrated.
+## Functional references
 
-The ordered UniProt accessions are Q74GH2, A0A0M4CZW0, A0ABM8EG83, B5E8E3,
-A0A0C2DW34, A0A0B5FL41, Q39ZH5 and B9M704. All eight have nine CXXCH motifs.
-Some provider records use the name `cbcY`; these annotations are preserved as
-source metadata and are not treated as experimental evidence for every homolog.
+- [MtrA](https://doi.org/10.1074/jbc.M302582200)
+- [MtoA](https://doi.org/10.3389/fmicb.2012.00037)
+- [CymA](https://doi.org/10.1128/jb.179.4.1143-1152.1997)
+- [ImoA](https://doi.org/10.1128/mbio.02150-22)
+- [DA_402](https://doi.org/10.1038/s41586-025-09467-0)
+- [CbcL](https://doi.org/10.3389/fmicb.2022.898015)
 
-`CbcL_verified_reference_only.faa` remains the original single-anchor convenience
-file. It is not the training set. Q74GH2 is identical to AAR33608.1/GSU0274, linked
-explicitly to CbcL in [Antunes et al. (2022)](https://doi.org/10.3389/fmicb.2022.898015).
-It scores 1331.3 bits against the unchanged HMM. This anchor has experimental
-support; the other seven are inferred homologs, not individually assayed in this
-audit. Input reconstruction is not an independent sensitivity/specificity test.
+## Source terms
 
-CbcL is an inner-membrane electron-transfer component associated with respiration
-of low-potential extracellular acceptors, including Fe(III) oxides, in
-*G. sulfurreducens*. It is not a terminal Fe(III) reductase. A homolog hit alone
-does not establish iron reduction, and absence does not exclude other EET routes.
-
-Duplicate groups: MtrA WP_011071900.1/AAN54830.1; MtoA ADE12722.1/WP_013030620.1 and ADL56010.1/WP_013293942.1. They are retained to reproduce the deployed models; deduplication requires retraining and threshold reassessment. The manifest distinguishes experimentally linked anchors from inferred homologs. Source papers are family/context evidence, not per-accession experimental validation for every row.
-
-Canonical references: [MtrA](https://doi.org/10.1074/jbc.M302582200), [MtoA](https://doi.org/10.3389/fmicb.2012.00037), [CymA](https://doi.org/10.1128/jb.179.4.1143-1152.1997), [ImoA](https://doi.org/10.1128/mbio.02150-22), [DA_402](https://doi.org/10.1038/s41586-025-09467-0). DA_402 is linked to WP_013162640.1 by the Nature Source Data coordinate table (Extended Figure 3, B16:H16), independently matching NC_014216.1:468410–469705, minus strand. Expression and structural evidence do not demonstrate the function of every homolog.
+The six explicitly listed Efesto model contributions use CC BY-SA 4.0; see
+[HMM license scope](../../../hmm_library/LICENSES.md). Input sequence records
+retain their NCBI/UniProt conditions and attributions. Preserve source accessions,
+links and attribution metadata when reusing them.

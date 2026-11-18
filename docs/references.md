@@ -27,7 +27,7 @@ If you use Efesto, cite all of the following that apply:
 **UniOP** (operon prediction, if using `--operon_prediction`):
 > Su H, Zhang R, Söding J (2024) *UniOP: a universal operon prediction for high-throughput prokaryotic (meta-)genomic data using intergenic distance.* bioRxiv. [doi:10.1101/2024.11.11.623000](https://doi.org/10.1101/2024.11.11.623000)
 
-**eggNOG-mapper** (tier-2 confirmation for `needs_confirmation`-flagged HMM hits, if using `--eggnog_annotations` or `--run_eggnog`):
+**eggNOG-mapper** (annotation comparison and rescue of flagged candidates rejected by the first-pass filters, if using `--eggnog_annotations` or `--run_eggnog`):
 > Cantalapiedra CP et al. (2021) *eggNOG-mapper v2: Functional Annotation, Orthology Assignments, and Domain Prediction at the Metagenomic Scale.* Mol. Biol. Evol. 38(12):5825–5829. [doi:10.1093/molbev/msab293](https://doi.org/10.1093/molbev/msab293)
 
 **Phobius** (topology/motif consistency check, if using `--topology_check`):

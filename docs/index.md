@@ -30,21 +30,21 @@ Efesto-specific changes; see [pipeline](pipeline.md) and [references](references
 {{catalog_summary}}
 
 Registered `active` and `experimental` profiles are enabled in ordinary runs;
-deprecated profiles are skipped. This runtime status is distinct from independent
-biological validation. See the [current catalog](hmm_library.md).
+deprecated profiles are skipped. See the [current catalog](hmm_library.md) for
+model-specific scope and limitations.
 
 ## Scope and model changes compared with FeGenie
 
-The [recap](comparison.md) explains model changes relative to FeGenie,
-contributions from other sources, rebuilt profiles, category/threshold decisions
-and completed comparisons ahead of a dedicated methods publication.
+The [source and workflow comparison](comparison.md) describes model changes relative to FeGenie,
+contributions from other sources, Efesto-built profiles, categories, thresholds
+and performance comparisons.
 
-With the same proteins and 191 original FeGenie HMMs, a historical paired pilot
-measured **38.0 s / 562.8 MiB** sampled peak RSS for Efesto and
-**182.7 s / 886.4 MiB** for FeGenie. The paired HMMER tables contained identical
-hit rows. There was one run per program, and FeGenie's time included built-in
-BLAST searches and waits. See [methods, limits and broader model
-coverage](comparison.md); these are not measurements of the current release.
+A matched-library benchmark (**3–4 November 2026, before v1.0.0**) measured
+**38.0 s / 562.8 MiB** sampled peak RSS for Efesto and **182.7 s / 886.4 MiB**
+for FeGenie using the same proteins and 191 original FeGenie HMMs. The paired
+HMMER tables contained identical hit rows. Each program was measured once,
+including FeGenie's built-in BLAST searches and waits. See [benchmark methods
+and results](comparison.md#performance-comparisons).
 
 ## Quick start
 

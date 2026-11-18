@@ -77,7 +77,7 @@ See the [catalog and sources](docs/hmm_library.md#sources) and
 
 The website generates current counts from the registry. Active and experimental
 profiles run by default, while deprecated profiles are skipped.
-See [curation and provenance](docs/hmm_library_curation.md) for interpretation limits.
+See [model scope and provenance](docs/hmm_library_curation.md).
 
 ## Integration and provenance
 
@@ -95,18 +95,17 @@ and resource use.
 
 ## Scope and model changes compared with FeGenie
 
-The [recap](docs/comparison.md) explains model changes relative to FeGenie,
-the combined metal/metalloid scope, source-specific curation, imported versus
-rebuilt profiles, category/threshold changes and separate evidence reporting,
-ahead of a dedicated methods publication.
+The [source and workflow comparison](docs/comparison.md) describes model changes relative to FeGenie,
+the combined metal/metalloid scope, source contributions, imported and
+Efesto-built profiles, categories, thresholds and evidence reporting.
 
-A historical local control used the same 37,633 proteins and 191 original FeGenie
-HMMs: Efesto took **38.0 s / 562.8 MiB** sampled peak RSS, versus
-**182.7 s / 886.4 MiB** for FeGenie. All 1,910 paired HMMER tables had identical
-hit rows. This was one run per program on archived snapshots; FeGenie's timing
-included its built-in BLAST searches and waits. It is not a current-release
-performance guarantee or an accuracy ranking. See [methods, full-library results
-and functional scope](docs/comparison.md).
+A matched-library benchmark (**3–4 November 2026, before v1.0.0**) used
+37,633 proteins and 191 original FeGenie HMMs. Efesto took **38.0 s / 562.8 MiB**
+sampled peak RSS, versus **182.7 s / 886.4 MiB** for FeGenie; all 1,910 paired
+HMMER tables contained identical hit rows. Each program was measured once,
+including FeGenie's built-in BLAST searches and waits. These results characterize
+runtime and memory for the tested configurations. See [benchmark methods and
+results](docs/comparison.md#performance-comparisons).
 
 ## Cite and license
 

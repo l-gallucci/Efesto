@@ -58,7 +58,7 @@ observations and the individual tool statuses and results. See the complete
 `threshold_type` is `model_specific` or `generic`; `bitscore_cutoff` is the model
 cutoff (zero when absent), and `search_bitscore_cutoff` records the actual search
 threshold, including the generic fallback. `model_nseq` counts training records,
-not independent validation examples. Unknown contig lengths are zero and unknown
+including duplicate or closely related sequences. Unknown contig lengths are zero and unknown
 edge distances are blank. `contig_length_status=lower_bound` marks a length
 inferred from annotated CDS coordinates, which is not used as a known contig
 edge. GFF3 supplies gene coordinates.
@@ -81,8 +81,8 @@ provenance, `category_before_filter`, `category_after_context`, `final_category`
 candidate can acquire a different final cluster. Candidates removed before
 clustering have an empty raw cluster ID. Genomic coordinates, index-based fallback
 and catalog-singleton grouping are distinguished. `contig_length_status` identifies
-known lengths versus CDS-derived lower bounds; this preserves the current length
-filter's behavior and does not turn a lower bound into an exact contig length.
+known lengths versus CDS-derived lower bounds. Only known lengths define
+contig-edge distances.
 
 `contig_length_decision`, `context_decision` and `sequence_decision` describe the
 initial filtering stages; the last field covers the existing second-pass rules,
@@ -97,28 +97,27 @@ code, observed models and applicable minima/anchors or sequence measurements.
 An unsatisfied JSON rule with `on_fail=keep_all` can have `status=failed` and
 `action=retained`. A JSON cluster-wide drop also explains exclusions of nonmember
 hits. `reason_codes` lists initial excluding rules and any subsequent eggNOG rescue.
-An empty list for a retained candidate does not imply an experimentally validated
-function. Category assignments are recorded separately from exclusion decisions.
+Category assignments are recorded separately from exclusion decisions.
+Interpret retained candidates using their model scope and available evidence.
 
 The rule-version hash fingerprints the configuration, not the software source.
 Keep the source revision and run log for reproducibility. `--all_results` records
 context/second-pass bypasses; an explicitly requested short-contig filter still
-applies. The audit is spooled to disk to avoid retaining a second complete
-candidate dataset in memory.
+applies. Decision records are spooled to disk to limit memory use.
 
 ## GFF3 and sequence headers
 
 GFF3 uses CDS features and 1-based inclusive coordinates; score and phase are `.`.
-Attributes include gene, category, model, cluster and `threshold_type`, without an
-aggregate score. Records lacking coordinates are omitted from GFF3. Protein and
-nucleotide FASTA headers also use `threshold_type` rather than a confidence field.
+Attributes include gene, category, model, cluster and `threshold_type`. Records
+lacking coordinates are omitted from GFF3. Protein and nucleotide FASTA headers
+also include `threshold_type`.
 
 ## Statistics and interpretation
 
 Statistics use `section`, `metric`, `value`, `notes` and include RUN, THRESHOLD,
-EVIDENCE, CATEGORY and GENOME sections. There are no confidence bins or score
-averages. A rule's minimum being satisfied does not establish pathway completeness
-or activity. See [interpretation](interpretation.md).
+EVIDENCE, CATEGORY and GENOME sections. See
+[interpretation](interpretation.md) for the relationship between retained hits,
+context requirements and biological function.
 
 ## Protein identities across genomes
 

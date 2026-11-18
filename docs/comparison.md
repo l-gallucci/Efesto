@@ -6,43 +6,39 @@ the basis of the default context engine. MetHMMDB, MnOxGeneTool, Tabuteau et al.
 public protein-family databases and Efesto-built profiles contribute other
 families and functional layers.
 
-This page recaps how Efesto differs from the pinned FeGenie workflow: shared
-profiles retained unchanged, rebuilt redox models, additional source collections,
-annotation changes and completed local comparisons. It describes the distributed
-library ahead of a dedicated methods publication. Cite the
-software version using [CITATION.cff](../CITATION.cff), together with the
-[original model and tool sources](references.md) applicable to the analysis.
+This page describes the functional coverage, model sources and workflow
+differences between Efesto and FeGenie, followed by performance measurements.
+Cite the software version using [CITATION.cff](../CITATION.cff), together with the
+[original model and tool sources](references.md) used in the analysis.
 
 ## Current library at a glance
 
 {{catalog_summary}}
 
-Runtime status describes which profiles are searched; it does not certify
-independent biological validation. Source labels below distinguish import
-channels, which may differ from the original database behind a model.
+Runtime status determines which profiles are searched. Source labels distinguish
+import channels from the original family databases; model-specific scope is
+listed in the [catalog](hmm_library.md).
 
 ## Functional scope beyond iron
 
 The combined library includes manganese, copper, zinc, nickel, cobalt, cadmium,
 chromium, mercury, silver, tungsten, lanthanide and metal/metalloid-associated
 families. Acquisition, homeostasis, regulation, redox and resistance remain
-separate functional categories. The following are examples of enabled profiles,
-not counts of experimentally established functions in a sample.
+separate functional categories. The following table gives examples of enabled profile families.
 
 | Scope | Example profile families | Source contribution |
 |---|---|---|
 | Iron redox, acquisition, heme, storage and magnetosomes | Cyc2, Mtr/Mto, heme-handling and siderophore families | FeGenie, Tabuteau et al., public family databases and Efesto-built profiles |
 | Manganese oxidation and acquisition | BoxA, MnxG, MopA; MntA and MntH | MnOxGeneTool, MetHMMDB and NCBI protein family models |
 | Copper homeostasis and resistance | CopZ, copper-transporting ATPases, CueO | MetHMMDB |
-| Other metal and metalloid functions | ZitB, cadmium-associated ATPases, mercuric reductase, ArsB/Acr3; Ni/Cr/Ag/Te-associated families | MetHMMDB, with source-specific category review |
+| Other metal and metalloid functions | ZitB, cadmium-associated ATPases, mercuric reductase, ArsB/Acr3; Ni/Cr/Ag/Te-associated families | MetHMMDB, with role-specific categories |
 | Lanthanide binding and handling | LanM, LanD | NCBI protein family models and Pfam |
 | Tungsten and shared Mo/W acquisition | TupA/B/C, WtpA/B/C | NCBI protein family models, including TIGRFAM-derived profiles |
 | Metallophore biosynthesis | CntK/L/M and MbnA/B/C | KOfam through Tabuteau et al.; NCBI protein family models |
 | Fe–S cofactor biogenesis | SufA/B/C/D/E/S and IscS | NCBI protein family models and Pfam |
 
-**Additional profiles are not all newly trained models.** The eleven LanM/LanD,
-Wtp/Tup and MbnA/B/C profiles are unchanged official imports with inherited GA
-cutoffs. Current counts, exclusions and experimental status are documented in the
+The eleven LanM/LanD, Wtp/Tup and MbnA/B/C profiles retain the official providers'
+HMM parameters and GA cutoffs. Counts and runtime status are listed in the
 [catalog](hmm_library.md),
 [curation records](hmm_library_curation.md) and
 [lanthanide, tungsten and metallophore guide](metal_expansion.md).
@@ -70,10 +66,9 @@ available in the upstream collections.
 
 Excluded registry entries remain bundled for provenance and are not searched.
 The three glyceraldehyde-dehydrogenase imports were removed entirely and are
-absent from these counts. Low seed count and redundancy labels record curation
-choices, not measured error rates. In particular, MamG remains excluded by a
-historical seed-count rule despite its relevant magnetosome scope; BimA also lies
-outside metal scope although its recorded exclusion status is low seed count.
+absent from these counts. Exclusions include sparse training sets, overlapping
+variants and functions outside the library scope. Per-profile status and category
+records provide the detailed selection criteria.
 
 These are not counts of models searched by the original FeGenie workflow.
 Compare model stems/accessions and runtime status rather than treating a
@@ -83,38 +78,37 @@ difference in totals as newly trained models.
 
 | Source label | Contribution and changes in Efesto |
 |---|---|
-| `fegenie` | Iron-related source profiles were selected and reviewed for sparse training sets, redundancy and misassignment. The archived audit found unchanged scoring parameters for all 211 imported profiles after format conversion; current files match those audited copies. The mislabeled FpvI/FpvH duplicate is excluded. Rebuilt MtrA/MtoA/CymA belong to the separate `curated` group. |
-| `methmmdb` | Adds metal acquisition, homeostasis and resistance families beyond iron. Overlapping variants, low-seed entries and category mismatches were excluded; reviewed uptake and homeostasis proteins were reassigned from resistance where justified. Enabled profiles lack positive model-specific cutoffs and use the generic bitscore/E-value gates. |
+| `fegenie` | Iron-related profiles retain their imported scoring parameters. Selected sparse, overlapping and out-of-scope entries are excluded, including the mislabeled FpvI/FpvH duplicate. Efesto-built MtrA/MtoA/CymA profiles use the separate `curated` label. |
+| `methmmdb` | Adds metal acquisition, homeostasis and resistance families beyond iron. Overlapping variants, low-seed entries and category mismatches were excluded; uptake and homeostasis families use categories distinct from resistance. Enabled profiles lack positive model-specific cutoffs and use the generic bitscore/E-value gates. |
 | `tabuteau` | Adds acquisition and siderophore/metallophore biosynthetic profiles, including KOfam-derived models. Source cutoffs are retained; selected sparse or redundant entries are excluded. CntK/L/M are classified as metallophore synthesis. |
 | `mnoxgenetool` | Adds 12 Mn-oxidation profile imports with published external cutoffs. Sparse source subclades include documented exceptions to seed-count exclusions. These were imported, not retrained by Efesto. |
 | `ncbifam` | Adds official prokaryotic family profiles, including Fe–S machinery, regulation, stress, lanthanide handling, Mo/W uptake and methanobactin-related families. Source models and thresholds are retained, with model-specific cautions such as TupA coverage. |
 | `pfam` | Adds direct domain/family imports, including SufE, LanD and a pilin-related profile. Context and interpretation guidance distinguish broad family detection from metal-specific function. |
-| `interpro` | Records an import channel for member-database profiles. Functional assignments were reviewed: the MHB domain belongs to heme handling, and MamH/MamJ to magnetosome formation. Three glyceraldehyde-dehydrogenase profiles were removed from the metal inventory; unrelated competence/virulence entries remain excluded. |
-| `curated` | Six redox profiles were built or rebuilt from documented sequence inputs. Five remain enabled; ImoA is excluded. See their individual status and rationale below. |
+| `interpro` | Records an import channel for member-database profiles. The MHB domain is assigned to heme handling, and MamH/MamJ to magnetosome formation. Three glyceraldehyde-dehydrogenase profiles were removed from the metal inventory; unrelated competence/virulence entries remain excluded. |
+| `curated` | Six redox profiles have documented sequence inputs. Five are enabled; ImoA is excluded. Their functional scope is summarized below. |
 
-Exclusion reasons and source support are recorded per model. Low seed count and
-sequence similarity are curation heuristics, not measured error rates. The
+Exclusion reasons and references are recorded per model in the
 [source table](../hmm_library/model_licenses.tsv),
 [category decisions](../hmm_library/category_curation.tsv) and
-[curation guide](hmm_library_curation.md) retain the detailed provenance.
+[curation guide](hmm_library_curation.md).
 
-### An updated imported model is not a rebuild
+### Imported model versions
 
 The original FeGenie `PF16525-MHB` file contains **Pfam PF16525.5**. Efesto uses
 **PF16525.11**, imported through InterPro, under `Heme-Transport`. It has the
 newer source model's parameters and GA of 27.4 bits, versus 27.3 in the old file.
-This is a source-version replacement and annotation review, not an Efesto-trained
-HMM or evidence of improved accuracy by itself.
+Both accessions identify the same Pfam family; `.5` and `.11` denote model
+revisions. Efesto imports revision 11 without retraining the HMM.
 
 ### Profiles built or rebuilt for Efesto
 
 MtrA, MtoA and CymA replace the corresponding original FeGenie HMMs in Efesto's
-ordinary library. CbcL and DA_402 add profile-based targets; ImoA was built but
-subsequently excluded. FeGenie also detects Geobacter/Thermincola reference
+ordinary library. CbcL and DA_402 add profile-based targets; ImoA is excluded
+from ordinary searches. FeGenie also detects Geobacter/Thermincola reference
 proteins through built-in BLAST searches, so these profile additions do not mean
 that FeGenie lacked all detection for those organisms or electron-transfer systems.
 
-In the pinned FeGenie metadata, MtrA and MtoA each used a 140-bit full-sequence
+In the FeGenie revision used for comparison, MtrA and MtoA each used a 140-bit full-sequence
 cutoff, and CymA used 237 bits. The rebuilt Efesto profiles use the registry
 cutoffs below. Their HMM parameters also changed, so the different score scales
 must not be interpreted as a direct probability or accuracy gain. The matched
@@ -124,39 +118,44 @@ not these rebuilt ones.
 The following table is generated from registry rows labelled `curated`. NSEQ
 counts training records, including any duplicate or closely related sequences;
 it is not a count of independent functional experiments. Cutoffs are
-full-sequence bitscores.
+full-sequence bitscores selected for Efesto, rather than inherited source GA
+values.
 
 {{curated_table}}
 
+These profiles use separate, documented NCBI/UniProt sequence sets, aligned with
+MAFFT (`--auto`) and converted into HMMs with HMMER `hmmbuild`. Threshold
+selection is separate from profile construction; `hmmbuild` does not generate
+these operating cutoffs. See [construction methods and cutoff provenance](hmm_library_curation.md#construction-of-efesto-built-profiles)
+for the build recipe and training-set information.
+
 | Profile | What changed and how to interpret it |
 |---|---|
-| MtrA | Rebuilt to separate the MtrA-side family from MtoA-related matches, with a manually selected cutoff. Some seeds have broad DmsE-family annotations and still require orthology/context interpretation. |
+| MtrA | Rebuilt to separate the MtrA-side family from MtoA-related matches, with a manually selected cutoff. The family includes DmsE-related cytochromes; partner proteins and genomic context guide interpretation. |
 | MtoA | Rebuilt with a distinct seed set and cutoff for the MtoA-side family. Six training records represent four unique sequences; electron-flow direction is not established by a homolog hit alone. |
 | CymA | Rebuilt separately from ImoA. Retained as experimental because its characterized Fe(III)-respiration role coexists with other respiratory functions; it is not an Fe-specific terminal reductase. |
-| ImoA | A separate profile was built, then excluded from ordinary runs because the cited experiments establish quinol oxidation/complementation, not direct native Fe(II) oxidation. It is retained for provenance. |
-| CbcL | Adds a restricted inner-membrane electron-transfer family linked to low-potential Fe(III) respiration in the reference organism. Eight public inputs and a reconstructed alignment reproduce the existing HMM exactly, excluding the build date; this does not independently calibrate the classifier. |
-| DA_402 | Adds a candidate electron-transfer family using corrected sequence provenance. Four same-genome paralogs and one external homolog form the five-record training set; broader functional generalization remains limited. |
+| ImoA | Excluded from ordinary runs. Its characterized quinol-oxidation role does not establish native Fe(II) oxidation. |
+| CbcL | Adds an inner-membrane electron-transfer family associated with low-potential Fe(III) respiration in *G. sulfurreducens*. A homolog match alone does not establish iron reduction. |
+| DA_402 | Adds a candidate electron-transfer family. The training set contains five records, including four same-genome paralogs; its functional scope remains provisional. |
 
-Recovered inputs, alignments and reproduction records are distributed under
-[`data/seeds/curated/`](https://github.com/l-gallucci/Efesto/tree/main/data/seeds/curated).
-Seed recovery and build reproducibility document how a model was generated;
-they do not substitute for held-out positive and near-paralog negative testing.
+Sequences, alignments, functional references and build instructions are available
+in [`data/seeds/curated/`](https://github.com/l-gallucci/Efesto/tree/main/data/seeds/curated).
 
 ### Categories and thresholds
 
 - Category names were standardized across sources, for example
   `iron_acquisition-iron_transport` → `IronAcquisition-Transport`.
-  [Aliases](../hmm_library/category_aliases.tsv) preserve historical spellings.
+  [Aliases](../hmm_library/category_aliases.tsv) support previous spellings.
 - Functional reassignment is recorded separately from spelling changes.
   CntK/L/M describe `Metallophore-Synthesis`; the glyceraldehyde-dehydrogenase
   imports were removed rather than given another metal-function label.
-- Official imported cutoffs and the locally selected redox cutoffs retain their
-  distinct provenance. The registry and runtime cutoff table now preserve the
+- Official imported cutoffs and the Efesto-selected redox cutoffs retain their
+  distinct provenance. The registry and runtime cutoff table preserve the
   same numeric precision.
 - A missing or nonpositive model-specific cutoff uses the ordinary generic floor
   of 30 bits; the default E-value gate is 1e-5. These generic settings are not
-  individually calibrated GA thresholds. The archived same-HMM control below
-  deliberately used different settings to match the pinned FeGenie workflow.
+  individually calibrated GA thresholds. The matched-library benchmark below
+  uses FeGenie-compatible thresholds to compare the two workflows.
 
 ## Annotation and reporting changes
 
@@ -164,28 +163,27 @@ they do not substitute for held-out positive and near-paralog negative testing.
 |---|---|
 | Genomic context | Coordinate-based grouping, optional strand awareness and system-specific rules; distinct systems in a mixed neighborhood are evaluated independently. |
 | Retention | HMM gates, applicable sequence/context filters and restricted eggNOG rescue determine which candidates are retained. |
-| Evidence | HMM statistics, context, UniOP pair probabilities, BGC overlap and optional structure/topology observations remain separate; the composite confidence score has been removed. |
+| Evidence | HMM statistics, context, UniOP pair probabilities, BGC overlap and optional structure/topology observations are reported as separate observations. |
 | Traceability | `Efesto-filter-decisions.tsv` records actual decisions and final retention/rescue outcomes for selected HMM candidates, including exclusions. |
-| Resource use | At most two HMM searches overlap by default; a bounded queue and disk-spooled decision audit reduce avoidable memory use without setting a hard RAM ceiling. |
-| Input handling | Genome-scoped identifiers, Bakta-aware contig resolution, checked external-tool failures and input-bound caches protect multi-genome runs. |
+| Resource use | At most two HMM searches overlap by default; a bounded queue and disk-spooled decision records reduce avoidable memory use without setting a hard RAM ceiling. |
+| Input handling | Genome-scoped identifiers, Bakta-aware contig resolution, external-tool error handling and input-bound caches protect multi-genome runs. |
 
 See [pipeline](pipeline.md), [outputs](output_formats.md),
 [evidence examples](evidence.md) and [performance](performance.md) for practical use.
 
-## What the completed comparisons establish
+## Performance comparisons
 
-The local experiments below answer different questions. The **matched-library
-control** compares the invoked workflows with the same proteins and original
-FeGenie HMMs. The **full-library comparison** measures workflows with different
-functional scope. Neither is an independent biological accuracy benchmark.
+The **matched-library control** uses identical proteins and original FeGenie
+HMMs. The **full-library comparison** uses each program's enabled library, with
+different functional scope. Both comparisons measure runtime and memory, not
+annotation accuracy.
 
-These are archived measurements from **3–4 November 2026**, before subsequent
-library and release corrections. They have not been rerun on the current release.
-A [downloadable summary](data/comparison_20261104.json) records exact measurements,
-input checksums, software provenance and source-snapshot hashes. Full raw outputs
-and sampling traces are retained locally and are not included in this documentation.
+**Benchmark configuration: 3–4 November 2026, before v1.0.0.** Results apply
+to the software revisions and library configurations described below.
+The [benchmark data](data/comparison_20261104.json) provide measurements, input
+checksums and software identifiers.
 
-## Same proteins and HMMs
+## Matched-library benchmark
 
 The control used the same **37,633 Prodigal-called proteins from 10 reference
 genomes**, the same HMMER 3.4 executable and **191 distinct searched HMMs** from
@@ -197,24 +195,24 @@ Gene prediction was performed once and excluded from these timings.
 | Efesto | 1 | 38.0 | 562.8 | 1,304 |
 | FeGenie | 1 | 182.7 | 886.4 | 1,304 |
 
-For this paired pilot, the wall-time ratio was **4.82**, and Efesto's sampled
-peak RSS was **36.5% lower**. These are observations from one run per program,
-not replicated estimates or a general speed/memory guarantee.
+In this configuration, Efesto completed the workflow **4.82 times faster**,
+with **36.5% lower** sampled peak RSS. Each program was measured once; repeated
+runs would be needed to estimate variability.
 
 ### Agreement of the search results
 
-All **1,910 paired HMMER tables** (191 profiles × 10 genomes) had identical
-non-comment hit rows after sorting: **3,235 raw hit rows**. Both workflows
-annotated the same **1,304 ORFs through HMMs**. Raw-search agreement does not mean
-that all downstream labels or annotation methods were identical:
+All **1,910 paired HMMER tables** (191 profiles × 10 genomes) contained identical
+non-comment hit rows after sorting: **3,235 raw hit rows**, corresponding to
+**1,304 ORFs annotated through HMMs** in each workflow. Downstream differences
+concerned category assignment and the additional BLAST stage:
 
 - Seven ORFs had different category labels: six involved the MtrB
   oxidation/reduction category alias, and one involved an equal-bitscore
   PchH/FpvD assignment.
 - FeGenie's built-in reference BLAST searches added **12 ORFs**. These are
-  additional BLAST results, not HMM matches missing from the paired search tables.
+  results from the BLAST stage, separate from the shared HMM matches.
 
-### What was controlled
+### Benchmark setup
 
 - Both programs received the same FAA files; Efesto also received matching
   Prodigal GFF coordinates. Both used all-results mode to bypass context filters;
@@ -225,11 +223,11 @@ that all downstream labels or annotation methods were identical:
   not Efesto's ordinary default thresholds.
 - Both had a nominal four-CPU budget. Efesto ran at most two concurrent searches,
   with HMMER `--cpu 1`; FeGenie ran searches serially with `--cpu 4`.
-  This controls the nominal budget, not the scheduling strategy or actual CPU use.
+  Search scheduling and CPU allocation differed between workflows.
 - The original library contained 216 category paths. The upstream metadata lookup
   enabled 192 paths representing 191 distinct searched names. A duplicate MtrB
-  profile occurred in two categories; 24 paths lacked cutoff metadata. Thus the
-  control concerns the 191 searched models, not every file in the source library.
+  profile occurred in two categories; 24 paths lacked cutoff metadata. The
+  comparison therefore covers the 191 models searched by the FeGenie workflow.
 
 The measured wall time covers each complete invoked protein-input workflow.
 It includes **FeGenie's built-in BLAST searches and deliberate waits** in the
@@ -238,9 +236,9 @@ The ratio therefore describes these workflows; it does not isolate HMMER speed.
 
 ## Full libraries: different scope
 
-An earlier protein-input experiment used the same proteins but each program's
-then-enabled library, before Efesto's memory optimization. The three repetitions
-per program gave the following medians:
+The full-library benchmark used the same proteins with **490 Efesto profiles**
+and **191 FeGenie profiles**, with three runs per program. The Efesto configuration
+preceded the two-search concurrency limit. Median measurements were:
 
 | Program | HMMs searched per genome | Runs | Median wall time (s) | Median sampled peak RSS (MiB) |
 |---|---:|---:|---:|---:|
@@ -248,38 +246,38 @@ per program gave the following medians:
 | FeGenie | 191 | 3 | 187.9 | 884.8 |
 
 These libraries were unequal: Efesto searched 490 profiles, versus 191 in the
-pinned FeGenie workflow. Efesto also received GFF coordinates; FeGenie's protein
+FeGenie workflow. Efesto also received GFF coordinates; FeGenie's protein
 workflow lacked a contig-name map and used singleton neighborhoods. Consequently,
 annotation-count differences combine library scope and context behavior. They
 cannot be interpreted as sensitivity or specificity differences.
 
-The historical 490-profile count is not the current library inventory. Use the
-[registry-backed catalog](hmm_library.md) for the installed source revision's scope.
+The [library catalog](hmm_library.md) lists the profiles enabled in the current
+version of Efesto.
 
 ## Memory optimization within Efesto
 
-A separate before/after pilot used the same full-library snapshot, the same
-FAA/GFF inputs and unchanged command arguments. It tested the change to at most
-two overlapping HMM searches, bounded job submission and later sequence loading.
+The memory benchmark compared two search-scheduling configurations using the
+same 490-profile library, FAA/GFF inputs and command arguments. The revised
+configuration allowed at most two simultaneous HMM searches, bounded job
+submission and loaded protein sequences after the searches.
 
 | Efesto configuration | Runs | Wall time (s) | Sampled peak RSS (MiB) | Retained annotations |
 |---|---:|---:|---:|---:|
 | Before optimization | 1 | 79.0 | 1753.7 | 1,632 |
 | Two-search default | 1 | 143.4 | 1235.7 | 1,632 |
 
-Sampled peak RSS decreased by **29.5%**, with a longer wall
-time. All 4,900 HMM searches completed without errors. Six checked scientific
-outputs were byte-identical between these two configurations: the long TSV,
-summary, cluster summary, heatmap matrix, GFF3 and protein FASTA.
-This checks equivalence for that optimization and snapshot, not every later
-pipeline change. See [current resource behavior](performance.md).
+Sampled peak RSS decreased by **29.5%**, while wall time increased from
+79.0 to 143.4 seconds. All 4,900 HMM searches completed successfully. The long TSV,
+summary, cluster summary, heatmap matrix, GFF3 and protein FASTA were byte-identical
+between configurations. See [performance and memory](performance.md) for the
+current scheduling behavior and configuration guidance.
 
 ## Measurement environment and limits
 
 The runs used macOS 26.3.1 on an ARM64 Mac15,6 with 11 logical CPUs and 36 GiB
 RAM, Python 3.13.13, HMMER 3.4, Prodigal 2.6.3 and BLAST+ 2.16.0.
-The Efesto measurements refer to archived working-tree snapshots, not a clean
-release identified by the current version number; the summary records hashes.
+The benchmark data identify the Efesto source revisions by content hashes
+and FeGenie by its commit identifier.
 
 RSS is the sum for the timed wrapper and its live descendants, sampled using
 `ps` approximately every 0.1 seconds plus sampling overhead. Shared pages can be
@@ -288,10 +286,10 @@ can be missed. One MiB is 1,048,576 bytes. The monitor was outside the timed tre
 
 Runs were sequential with fresh output directories and no HMM result-cache reuse.
 Filesystem caches were not flushed, CPU affinity and laptop load were not
-controlled, and the matched-library and memory-optimization pilots had one run
+controlled, and the matched-library and memory benchmarks had one run
 per configuration. The ten reference genomes cover 40,197,383 bp; input identities,
 ORF counts and SHA-256 checksums are in the downloadable summary.
 
-No precision, recall or F1 estimate is supported by these timing experiments.
-Training overlap and a limited reference panel also prevent treating additional
-calls as independently validated discoveries. See [interpretation](interpretation.md).
+These timing experiments do not estimate precision, recall or F1. Additional
+annotations from a larger library require their own functional interpretation;
+see [interpreting results](interpretation.md).
