@@ -53,7 +53,7 @@ def write_gene_summary(path, rows):
 
 
 HIT_EVIDENCE_FIELDS = [
-    "threshold_source", "search_bitscore_cutoff", "model_source", "retention_mode",
+    "threshold_source", "search_bitscore_cutoff", "model_source", "model_status", "retention_mode",
     "coordinate_status", "contig_length_status", "distance_to_contig_edge_bp", "expected_heme_c", "expected_topology",
     "eggnog_status", "eggnog_verdict", "eggnog_preferred_name", "eggnog_kos",
     "structure_status", "structure_target", "structure_bitscore", "structure_evalue",
@@ -72,6 +72,7 @@ def write_long_format(path, rows):
         writer.writeheader()
         for row in rows:
             record = {field: row.get(field, "") for field in HIT_EVIDENCE_FIELDS}
+            record["model_status"] = row.get("model_status") or "unknown"
             record.update(category=row["cat"], genome=row["genome"], contig=row["contig"],
                           orf=row.get("bakta_id", row["orf"]), original_orf=row["orf"], gene=row["gene_name"],
                           hmm_stem=row["hmm_stem"], bitscore=f"{row['bitscore']:.1f}",

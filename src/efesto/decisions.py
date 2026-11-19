@@ -46,7 +46,8 @@ class FilterDecisionLog:
                           bitscore=row["bitscore"], evalue=row["evalue"], bitscore_cutoff=row["cutoff"],
                           search_bitscore_cutoff=row["search_bitscore_cutoff"],
                           threshold_type=row["threshold_type"], threshold_source=row["threshold_source"],
-                          model_source=row["model_source"], raw_cluster_id=row["cluster_id"],
+                          model_source=row["model_source"], model_status=row.get("model_status") or "unknown",
+                          raw_cluster_id=row["cluster_id"],
                           coordinate_status="available" if orf in coordinate_orfs else "unavailable",
                           clustering_basis="not_clustered" if length_excluded else "catalog_singleton" if catalog_mode
                                            else "coordinates" if orf in coordinate_orfs else "orf_index_or_coordinate_fallback",
@@ -69,7 +70,7 @@ class FilterDecisionLog:
         retained = {(r["genome"], r["orf"]): r for r in retained_rows}
         fields = ["schema_version", "genome", "contig", "orf", "original_orf", "gene", "hmm_stem",
                   "category_before_filter", "category_after_context", "final_category", "bitscore", "evalue",
-                  "bitscore_cutoff", "search_bitscore_cutoff", "threshold_type", "threshold_source", "model_source",
+                  "bitscore_cutoff", "search_bitscore_cutoff", "threshold_type", "threshold_source", "model_source", "model_status",
                   "raw_cluster_id", "final_cluster_id", "coordinate_status", "clustering_basis", "contig_length_status",
                   "contig_len", "minimum_contig_length", "context_engine", "rule_version", "contig_length_decision", "context_decision",
                   "sequence_decision", "final_decision", "retention_mode", "reason_codes", "rule_decisions"]

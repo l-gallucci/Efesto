@@ -646,6 +646,7 @@ def main():
                 "search_bitscore_cutoff": max(cutoffs.get(hit["hmm_stem"], 0) if cutoffs.get(hit["hmm_stem"], 0) > 0 else args.zero_cutoff_min_bitscore, 0),
                 "threshold_source": "model_cutoff_table" if cutoffs.get(hit["hmm_stem"], 0) > 0 else "generic_search_option",
                 "model_source": registry_by_stem.get(hit["hmm_stem"], {}).get("source", "unknown"),
+                "model_status": registry_by_stem.get(hit["hmm_stem"], {}).get("status") or "unknown",
                 "retention_mode": "all_results" if args.all_results else "catalog" if args.catalog_mode else "context_filter",
                 "cluster_id": raw_cluster_id, "contig_len": clen.get(contig, 0),
                 "model_nseq": nseq_map.get(hit["hmm_stem"], ""),

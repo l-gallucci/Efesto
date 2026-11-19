@@ -48,6 +48,7 @@ bitscore, E-value and model cutoff describe the accepted match.
 | `search_bitscore_cutoff` | The effective search threshold, including the generic fallback |
 | `threshold_source` | Cutoff table or generic search option used by this run |
 | `model_source` | Registry source for the model, when available |
+| `model_status` | Registry label such as `active` or `experimental`; `unknown` when unavailable. Describes the model, not hit confidence |
 | `retention_mode` | Ordinary context filtering, all-results/catalog mode, or eggNOG rescue |
 
 By default, the generic bitscore floor is **30** and the E-value limit is

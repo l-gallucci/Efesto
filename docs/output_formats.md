@@ -58,7 +58,10 @@ observations and the individual tool statuses and results. See the complete
 `threshold_type` is `model_specific` or `generic`; `bitscore_cutoff` is the model
 cutoff (zero when absent), and `search_bitscore_cutoff` records the actual search
 threshold, including the generic fallback. `model_nseq` counts training records,
-including duplicate or closely related sequences. Unknown contig lengths are zero and unknown
+including duplicate or closely related sequences. `model_status` records the searched
+profile’s registry status, including `experimental`; `unknown` means no status
+is available from the supplied library. This is a model-level label, separate
+from the per-hit evidence and filter decisions. Unknown contig lengths are zero and unknown
 edge distances are blank. `contig_length_status=lower_bound` marks a length
 inferred from annotated CDS coordinates, which is not used as a known contig
 edge. GFF3 supplies gene coordinates.
@@ -76,7 +79,7 @@ not enumerate subthreshold matches or the competing models discarded by best-hit
 selection. Excluded rows do not contribute to annotations, counts, heatmaps or FASTA exports.
 
 The table records genome/original/mapped ORF identity, model and threshold
-provenance, `category_before_filter`, `category_after_context`, `final_category`,
+provenance, `model_status`, `category_before_filter`, `category_after_context`, `final_category`,
 `raw_cluster_id` and `final_cluster_id`. Raw clusters precede filtering; a rescued
 candidate can acquire a different final cluster. Candidates removed before
 clustering have an empty raw cluster ID. Genomic coordinates, index-based fallback

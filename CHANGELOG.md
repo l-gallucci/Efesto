@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Export registry model status per hit and selected candidate, including experimental
+  profiles and an explicit unknown status for libraries without that metadata.
+- Preserve provenance, exclusions, confirmation expectations and source notes when
+  reconstructing libraries from existing models or reviewed reports.
+
 - Separate siderophore synthesis, export and utilization labels from the stable
   neighborhood groups used for candidate retention; include the roles in Fe selectors.
 - Distinguish nutritional ferric-chelate reduction from respiratory iron reduction.

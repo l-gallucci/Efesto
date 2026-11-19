@@ -40,7 +40,8 @@ not a membrane transporter or dissimilatory Fe(III) respiration
 PF06276 has a broader domain scope: it occurs in FhuF reductases and in
 IucA/IucC-like NIS biosynthetic enzymes. The domain cannot by itself establish
 either activity. PF06276 and the unresolved PHYLLO assignment are marked
-`experimental`; both remain enabled in ordinary runs. Full protein architecture and specific family evidence are
+`experimental`; both remain enabled in ordinary runs. Their status is exported
+in the `model_status` column of the hit and filter-decision tables. Full protein architecture and specific family evidence are
 needed ([Trindade et al.](https://doi.org/10.1007/s00775-021-01854-y),
 [Bailey et al.](https://doi.org/10.1021/acs.biochem.6b00409),
 [provider entry](https://www.ebi.ac.uk/interpro/entry/pfam/PF06276/)).

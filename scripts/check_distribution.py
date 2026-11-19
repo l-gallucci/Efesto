@@ -119,12 +119,14 @@ def check(wheel, sdist, smoke=False):
                 hits = list(csv.DictReader(handle, delimiter="\t"))
             assert len(hits) == 1 and hits[0]["gene"].lower() == "lanm", hits
             assert hits[0]["threshold_type"] == "model_specific"
+            assert hits[0]["model_status"] == "active"
             assert "cluster_confidence" not in hits[0]
             assert (output / "Efesto-context-evidence.tsv").is_file()
             with (output / "Efesto-filter-decisions.tsv").open() as handle:
                 decisions = list(csv.DictReader(handle, delimiter="\t"))
             assert len(decisions) == 1 and decisions[0]["final_decision"] == "retained"
             assert decisions[0]["hmm_stem"] == hits[0]["hmm_stem"]
+            assert decisions[0]["model_status"] == hits[0]["model_status"]
             assert decisions[0]["context_decision"] == "bypassed"
             assert (output / "Efesto-UniOP-pair-evidence.tsv").is_file()
             result["clean_wheel_install_and_real_hmmer_run"] = True

@@ -19,6 +19,13 @@ lists the profiles available in each source revision; the
 | `data/seeds/curated/` | Sequences, alignments and build information for Efesto-built profiles |
 | `data/validation/` | Reference sequences and expected search behavior |
 
+Library reconstruction preserves existing registry references, original categories,
+status, dates, confirmation/topology expectations and additional metadata columns.
+Known per-model scope, reclassification and source-condition tables are restricted
+to the written profiles and synchronized with their current labels and status.
+New models without a source record do not acquire inferred validation or license
+terms. The reviewed-report route retains these metadata fields as well.
+
 These files are available in the [source repository](https://github.com/l-gallucci/Efesto).
 
 ## Cutoff provenance

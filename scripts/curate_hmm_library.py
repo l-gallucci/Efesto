@@ -29,7 +29,7 @@ SOURCES
   3. others                    flat dir — NCBI NF* and Pfam PF* downloads
   4. MetHMMDB individual/      flat dir — metal mobility resistance genes
 
-OUTPUT STRUCTURE (mirrors FeGenie iron/ exactly)
+OUTPUT STRUCTURE (canonical biological categories)
 -------------------------------------------------
   hmm_library/
     Iron-Reduction/
@@ -92,6 +92,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 from efesto.categories import CANONICAL_CATEGORIES, canonical_category
+from efesto.io import SOURCE_REFS
 
 
 def _load_category_curations():
@@ -111,6 +112,7 @@ def _apply_category_curations(models):
         decision = _CATEGORY_CURATIONS.get(model["stem"])
         if decision and decision["status_override"] == "removed_out_of_scope":
             continue
+        model["category_original"] = model.get("category_original") or model["category"]
         model["category"] = canonical_category(model["category"])
         if decision:
             model["category"] = decision["category"]
@@ -620,14 +622,18 @@ def load_fegenie(fegenie_dir):
             if len(ls) >= 2:
                 gene_map[ls[0]] = ls[1]
 
+    source_registry = {}
+    if (base / "hmm_registry.tsv").is_file():
+        with (base / "hmm_registry.tsv").open(newline="") as handle:
+            source_registry = {r["stem"]: r for r in csv.DictReader(handle, delimiter="\t")}
     models = []
     for cat_dir in sorted(base.iterdir()):
-        if not cat_dir.is_dir() or cat_dir.name.startswith("."):
+        if not cat_dir.is_dir() or cat_dir.name.startswith((".", "_")):
             continue
         for hmm_file in sorted(cat_dir.glob("*.hmm")):
             meta = parse_hmm_meta(str(hmm_file))
             stem = hmm_file.stem
-            models.append({
+            model = {
                 "stem":       stem,
                 "hmm_file":   str(hmm_file),
                 "name":       meta["name"] or stem,
@@ -642,7 +648,11 @@ def load_fegenie(fegenie_dir):
                 "gene_name":  gene_map.get(stem, stem),
                 "cutoff":     cutoffs.get(stem, 0.0),
                 "source":     "fegenie",
-            })
+            }
+            model.update(source_registry.get(stem, {}))
+            model.update(hmm_file=str(hmm_file), category=cat_dir.name,
+                         cutoff=cutoffs.get(stem, model.get("cutoff", 0.0)))
+            models.append(model)
     return _apply_category_curations(models)
 
 
@@ -972,12 +982,88 @@ def deduplicate(all_models, jaccard_thr):
 # REGISTRY + WRITER
 # ═══════════════════════════════════════════════════════════════════════════════
 
-REPORT_FIELDS = ["stem", "hmm_file", "name", "acc", "desc", "nseq",
-                 "category", "confidence", "gene_name", "cutoff", "source"]
-
 REG_FIELDS = ["stem", "name", "acc", "category", "gene_name", "source",
-              "hmm_file", "nseq", "cutoff", "added_date", "status",
-              "category_review_status", "category_note"]
+              "hmm_file", "nseq", "cutoff", "added_date", "status", "reference",
+              "validated_in", "needs_confirmation", "kegg_ko", "expected_heme_c",
+              "expected_topology", "category_original", "category_review_status", "category_note"]
+REPORT_FIELDS = ["stem", "hmm_file", "name", "acc", "desc", "nseq",
+                 "category", "confidence", "gene_name", "cutoff", "source",
+                 *[key for key in REG_FIELDS if key not in {
+                     "stem", "hmm_file", "name", "acc", "nseq", "category",
+                     "gene_name", "cutoff", "source"}]]
+# Alignment/search heuristics belong in the build report, not the registry.
+_BUILD_ONLY_FIELDS = {"desc", "confidence", "ga_seq", "tc_seq", "date"}
+
+
+def _write_table(path, fields, rows):
+    with path.open("w", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fields, delimiter="\t",
+                                lineterminator="\n", extrasaction="ignore")
+        writer.writeheader()
+        writer.writerows(rows)
+
+
+def _synchronize_library_tables(out_dir, accepted, written):
+    """Retain known source notes and synchronize per-model output metadata.
+
+    Unknown models do not inherit a fabricated interpretation or license.
+    Current-library metadata is a fallback for the stable curated identifiers.
+    """
+    roots = [out_dir]
+    for model in accepted:
+        path = Path(model.get("hmm_file") or ".").resolve()
+        roots.extend((path.parent, path.parent.parent))
+    roots.append(Path(__file__).resolve().parents[1] / "hmm_library")
+    roots = list(dict.fromkeys(root.resolve() for root in roots))
+    by_stem = {row["stem"]: row for row in written}
+    # Global assignment rules include exclusions for profiles not written here.
+    for filename in ("category_curation.tsv", "category_aliases.tsv"):
+        source = next((root / filename for root in roots if (root / filename).is_file()), None)
+        target = out_dir / filename
+        if source is not None and source.resolve() != target.resolve():
+            shutil.copy2(source, target)
+    for filename in ("siderophore_metadata.tsv", "siderophore_reclassification.tsv",
+                     "model_licenses.tsv"):
+        fields, selected = [], {}
+        for root in roots:
+            source = root / filename
+            if not source.is_file():
+                continue
+            with source.open(newline="") as handle:
+                reader = csv.DictReader(handle, delimiter="\t")
+                for field in reader.fieldnames or []:
+                    if field not in fields:
+                        fields.append(field)
+                for row in reader:
+                    stem = row.get("stem")
+                    if stem not in by_stem or stem in selected:
+                        continue
+                    # Source-specific interpretation/terms cannot be transferred
+                    # merely because an unrelated input has reused an identifier.
+                    current = by_stem[stem]
+                    if row.get("source") and row["source"] != current["source"]:
+                        continue
+                    for key in ("source", "category", "gene_name", "status"):
+                        if key in row:
+                            row[key] = current[key]
+                    for old_key, new_key in (("category_current", "category"),
+                                             ("gene_current", "gene_name"),
+                                             ("status_current", "status")):
+                        if old_key in row:
+                            row[old_key] = current[new_key]
+                    selected[stem] = row
+        if fields:
+            _write_table(out_dir / filename, fields,
+                         [selected[stem] for stem in sorted(selected)])
+    counts = defaultdict(lambda: defaultdict(int))
+    for row in written:
+        counts[row["category"]]["total"] += 1
+        status = row["status"]
+        counts[row["category"]][status if status in {"active", "experimental"} else "deprecated"] += 1
+    fields = ["category", "total", "active", "experimental", "deprecated"]
+    _write_table(out_dir / "category_catalog.tsv", fields,
+                 [dict(category=cat, **{key: counts[cat][key] for key in fields[1:]})
+                  for cat in sorted(counts)])
 
 
 def write_library(out_dir, accepted, dup_log, log_path=None):
@@ -986,6 +1072,9 @@ def write_library(out_dir, accepted, dup_log, log_path=None):
     out_dir.mkdir(parents=True, exist_ok=True)
 
     today = datetime.today().strftime("%Y-%m-%d")
+    registry_fields = REG_FIELDS + sorted({
+        key for model in accepted for key in model
+        if key not in REG_FIELDS and key not in _BUILD_ONLY_FIELDS})
     cutoff_lines, map_lines, registry_rows = [], [], []
 
     for m in accepted:
@@ -1014,7 +1103,8 @@ def write_library(out_dir, accepted, dup_log, log_path=None):
             cutoff_lines.append(f"{m['stem']}\t{float(m['cutoff'])}")
         map_lines.append(f"{m['stem']}\t{m.get('gene_name', m['stem'])}")
 
-        registry_rows.append({
+        record = {key: m.get(key, "") for key in registry_fields}
+        record.update({
             "stem":       m["stem"],
             "name":       m["name"],
             "acc":        m["acc"],
@@ -1024,21 +1114,20 @@ def write_library(out_dir, accepted, dup_log, log_path=None):
             "hmm_file":   str(dest.relative_to(out_dir)),
             "nseq":       str(m.get("nseq", 0)),
             "cutoff":     str(m.get("cutoff", 0)),
-            "added_date": today,
-            "status":     m.get("status", "active"),
+            "added_date": m.get("added_date") or today,
+            "status":     m.get("status") or "active",
+            "reference":  m.get("reference") or (SOURCE_REFS.get(m["source"], "") if m["source"] != "curated" else ""),
             "category_review_status": m.get("category_review_status", "not_individually_reviewed"),
             "category_note": m.get("category_note", ""),
         })
+        registry_rows.append(record)
 
     (out_dir / "HMM-bitcutoffs.txt").write_text("\n".join(cutoff_lines) + "\n")
     (out_dir / "FeGenie-map.txt").write_text("\n".join(map_lines) + "\n")
 
-    with open(out_dir / "hmm_registry.tsv", "w", newline="") as fh:
-        w = csv.DictWriter(fh, fieldnames=REG_FIELDS, delimiter="\t",
-                           extrasaction="ignore")
-        w.writeheader()
-        for r in sorted(registry_rows, key=lambda x: (x["category"], x["stem"])):
-            w.writerow(r)
+    _write_table(out_dir / "hmm_registry.tsv", registry_fields,
+                 sorted(registry_rows, key=lambda x: (x["category"], x["stem"])))
+    _synchronize_library_tables(out_dir, accepted, registry_rows)
 
     # Write deduplication log
     if dup_log:
@@ -1239,9 +1328,14 @@ python scripts/curate_hmm_library.py --verify hmm_library/
                     cutoff = float(row.get("cutoff", 0) or 0)
                 except ValueError:
                     cutoff = 0.0
+                source_path = Path(row["hmm_file"])
+                relative_to_report = Path(args.from_report).resolve().parent / source_path
+                if not source_path.is_absolute() and relative_to_report.is_file():
+                    source_path = relative_to_report
                 all_models.append({
+                    **row,
                     "stem":       row["stem"],
-                    "hmm_file":   row["hmm_file"],
+                    "hmm_file":   str(source_path),
                     "name":       row["name"],
                     "acc":        row.get("acc", ""),
                     "desc":       row.get("desc", ""),
@@ -1333,7 +1427,8 @@ python scripts/curate_hmm_library.py --verify hmm_library/
     # ── Write report TSV ──────────────────────────────────────────────────────
     if args.log:
         with open(args.log, "w", newline="") as fh:
-            w = csv.DictWriter(fh, fieldnames=REPORT_FIELDS, delimiter="\t",
+            w = csv.DictWriter(fh, fieldnames=REPORT_FIELDS + sorted({
+                key for model in all_models for key in model if key not in REPORT_FIELDS}), delimiter="\t",
                                extrasaction="ignore")
             w.writeheader()
             for m in sorted(accepted, key=lambda x: (x["category"], x["stem"])):
