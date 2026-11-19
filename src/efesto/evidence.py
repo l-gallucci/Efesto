@@ -12,7 +12,7 @@ import fnmatch
 import hashlib
 import json
 
-from efesto.categories import canonical_category
+from efesto.categories import canonical_category, rule_category
 from efesto.eggnog import confirm_hit
 from efesto.topology import heme_verdict, topology_verdict
 
@@ -143,7 +143,7 @@ def context_evidence(rows, rules, patterns, *, mode, coords, relaxed=False,
         named = set(rule.get("genes", []))
         cats = {canonical_category(c) for c in rule.get("categories", [])}
         members = stems & named if named else {r["hmm_stem"] for r in rows
-                                               if canonical_category(r["cat"]) in cats}
+                                               if rule_category(r, rule) in cats}
         if not members:
             continue
         kind = rule.get("rule", "")
@@ -177,7 +177,8 @@ def context_evidence(rows, rules, patterns, *, mode, coords, relaxed=False,
             if status == "not_satisfied" and not_searched:
                 status = "not_evaluable_models_not_searched"
         records.append(dict(base, rule_id=rule.get("name", "unnamed"), rule_type=kind,
-                            rule_status=status, rule_models=sorted(named),
+                            rule_status=status, category_basis=rule.get("category_basis", "annotation"),
+                            rule_models=sorted(named),
                             observed_rule_models=sorted(members),
                             distinct_rule_models=len(members), minimum_models=minimum,
                             anchor=anchor, rule_models_not_observed=not_observed,

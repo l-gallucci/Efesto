@@ -13,6 +13,8 @@ lists the profiles available in each source revision; the
 | `category_curation.tsv` | Category assignments and supporting references |
 | `category_aliases.tsv` | Alternative and previous category spellings |
 | `HMM-bitcutoffs.txt` | Runtime full-sequence thresholds |
+| `siderophore_reclassification.tsv` | Previous/current categories, labels and status keyed by model stem, for reinterpretation of existing outputs |
+| `siderophore_metadata.tsv` | Complete siderophore/metallophore scope, interpretation limits and references |
 | `FeGenie-map.txt` | Readable labels indexed by model filename stem |
 | `data/seeds/curated/` | Sequences, alignments and build information for Efesto-built profiles |
 | `data/validation/` | Reference sequences and expected search behavior |
@@ -26,8 +28,8 @@ the model source:
 
 | Profile source | Threshold used by Efesto |
 |---|---|
-| Official Pfam and NCBIfam/TIGRFAM profiles, including enabled member-database imports through InterPro | Full-sequence GA from the source HMM, retained without de novo estimation |
-| Other published model collections | Model-specific cutoff from the source metadata, where available |
+| Direct Pfam and NCBIfam/TIGRFAM imports, including enabled member-database imports through InterPro | Full-sequence GA from the source HMM, retained without de novo estimation |
+| Other published model collections, including member-database profiles imported through FeGenie | Model-specific cutoff from collection metadata, where available; it can differ from source HMM GA |
 | Efesto-built profiles | Efesto-selected operating threshold recorded in the registry and runtime cutoff table |
 | No positive model-specific cutoff | Generic bitscore floor, 30 bits by default |
 

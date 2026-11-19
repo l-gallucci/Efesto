@@ -28,7 +28,12 @@ library directory to use it; its mere presence at the repository root is not eno
 
 The JSON schema has `report_all_categories` and `rules`. Category bypasses preserve
 specific reporting behavior and do not certify that individual hits are validated.
-Rule `genes` entries identify HMM stems.
+Rule `genes` entries identify HMM stems. Category rules use output categories
+by default. `category_basis: context` instead uses the stable neighborhood group
+for the bundled reclassified siderophore models. The supplied siderophore count
+rules declare this explicitly; changing a biological label therefore does not
+silently change their retention policy. The context-evidence output records the
+basis used. See [siderophore roles](siderophores.md#functional-labels-and-neighborhood-rules).
 
 | Rule | Condition |
 |---|---|

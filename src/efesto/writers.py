@@ -85,7 +85,7 @@ def write_long_format(path, rows):
 
 def write_context_evidence(path, records):
     fields = ["genome", "cluster_id", "assessment_scope", "mode", "rule_id", "rule_version",
-              "rule_type", "rule_status", "coordinate_status", "observed_models",
+              "rule_type", "rule_status", "category_basis", "coordinate_status", "observed_models",
               "model_copy_counts", "inter_hit_gaps_bp", "rule_models", "observed_rule_models",
               "distinct_rule_models", "minimum_models", "anchor", "rule_models_not_observed",
               "rule_models_not_searched"]

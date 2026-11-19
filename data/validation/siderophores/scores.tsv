@@ -1,0 +1,5 @@
+model	target	evalue	bitscore	cutoff	passes_bitscore
+PF06276-RhbCF-AcsD-IucA-IucC-PvsB-Ferric_iron_reductase_FhuF_like_transporter	tr|Q93AT8|Q93AT8_DICCH	2.2e-40	126.6	25.2	True
+PF06276-RhbCF-AcsD-IucA-IucC-PvsB-Ferric_iron_reductase_FhuF_like_transporter	tr|A0A1A9TA96|A0A1A9TA96_KLEPN	6.2e-34	105.7	25.2	True
+PF06276-RhbCF-AcsD-IucA-IucC-PvsB-Ferric_iron_reductase_FhuF_like_transporter	sp|P39405|FHUF_ECOLI	2.9e-33	103.5	25.2	True
+Sid_YqjH_NADPH-dep_ferric_chelate_reductase_enterobactin_Q46871_Escherichia_coli_180606	sp|Q46871|YQJH_ECOLI	2.6e-188	611.2	27.0	True

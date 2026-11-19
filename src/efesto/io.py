@@ -134,6 +134,9 @@ _ANNOTATE_MAP.update({
 })
 _ANNOTATE_MAP["Mo"] += ["MetalAcquisition-MolybdenumTungsten"]
 _ANNOTATE_MAP["Mo-acquisition"] += ["MetalAcquisition-MolybdenumTungsten"]
+for _selector in ("Fe", "Fe-acquisition", "Fe-metabolism"):
+    _ANNOTATE_MAP[_selector] += ["Siderophore-Export", "Siderophore-Utilization",
+                                 "Siderophore-FunctionUnresolved", "IronAcquisition-IronRelease"]
 _ANNOTATE_MAP.update({cat: [cat] for cat in CANONICAL_CATEGORIES})
 VALID_ANNOTATE_TOKENS = sorted(_ANNOTATE_MAP) + ["all"]
 

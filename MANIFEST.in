@@ -13,6 +13,7 @@ recursive-include tests *.py
 recursive-include data/seeds/curated *.faa *.aln *.md *.tsv *.json
 recursive-include data/validation/metal_expansion *.faa *.md *.tsv *.json
 recursive-include data/validation/methanobactin *.faa *.tsv *.json
+recursive-include data/validation/siderophores *.faa *.md *.tsv *.json
 prune benchmark
 prune site
 prune build

@@ -55,6 +55,10 @@ list in the [command reference](command-reference.md).
 - `metallophores` includes metallophore and siderophore synthesis categories.
 - Resistance-specific selectors preserve their resistance meaning.
 
+See [siderophores and metallophores](siderophores.md) for the complete profile
+table, shared-family limits and the distinction between synthesis, uptake, export
+and utilization.
+
 ## Registry and search thresholds
 
 The registry records filename stem, model name/accession, category, source,
@@ -73,10 +77,12 @@ and [custom libraries](extending_the_library.md).
 
 ## Cutoff provenance
 
-Official Pfam and NCBIfam/TIGRFAM profiles, including enabled member-database
-profiles imported through InterPro, use the full-sequence GA value from the
-source HMM. These thresholds are inherited from the provider, not estimated
-de novo in Efesto.
+Direct imports of official Pfam and NCBIfam/TIGRFAM profiles, including enabled
+member-database profiles imported through InterPro, use the full-sequence GA
+value from the source HMM. These thresholds are inherited from the provider,
+not estimated de novo in Efesto. Profiles imported through another collection
+retain that collection’s operating cutoff, which can differ from the HMM GA;
+for example, FeGenie supplies 25.2 bits for the bundled PF06276.7 profile.
 
 Other published collections can supply cutoffs in external metadata.
 Efesto-built profiles use Efesto-selected operating thresholds.

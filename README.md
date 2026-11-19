@@ -127,3 +127,7 @@ conditions. Each HMM is linked to its source terms in
 Efesto-owned contributions. Unspecified or unresolved redistribution terms
 remain flagged; citation does not replace permission. See
 [Third-party sources and conditions of use](THIRD_PARTY_NOTICES.md).
+
+Siderophore synthesis, uptake, export and utilization profiles are described in
+the [siderophore and metallophore guide](docs/siderophores.md), including
+shared-family limits and a complete source-annotated model table.

@@ -10,6 +10,7 @@ Iron-Resistance	3	0	0	3
 Iron-Storage	3	3	0	0
 Iron-StressResponse	2	2	0	0
 IronAcquisition-ComplexTransport	3	3	0	0
+IronAcquisition-IronRelease	1	1	0	0
 IronAcquisition-Transport	38	37	0	1
 IronSulfur-Assembly	7	7	0	0
 IronSulfur-Regulation	1	1	0	0
@@ -44,9 +45,12 @@ MetalResistance-NonSpecific	15	2	0	13
 MetalResistance-Silver	4	2	0	2
 MetalResistance-Tellurite	12	6	0	6
 Metallophore-Synthesis	6	6	0	0
-Siderophore-Synthesis	159	145	0	14
-Siderophore-Transport	65	61	0	4
+Siderophore-Export	4	4	0	0
+Siderophore-FunctionUnresolved	1	0	1	0
+Siderophore-Synthesis	155	140	1	14
+Siderophore-Transport	57	53	0	4
 Siderophore-TransportPotential	6	6	0	0
+Siderophore-Utilization	6	6	0	0
 StressResponse-Nitrosative	1	1	0	0
 StressResponse-Oxidative	1	1	0	0
 StressResponse-Redox	1	1	0	0

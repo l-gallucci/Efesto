@@ -30,6 +30,7 @@ nav:
       - Catalog and categories: hmm_library.md
       - Curation and provenance: hmm_library_curation.md
       - Biological scope: hmm_expansion_biological_rationale.md
+      - Siderophores and metallophores: siderophores.md
       - Fe-S assembly: iron_sulfur_assembly.md
       - Lanthanides, tungsten and metallophores: metal_expansion.md
       - Custom libraries: extending_the_library.md

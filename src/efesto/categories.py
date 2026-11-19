@@ -105,6 +105,10 @@ CANONICAL_CATEGORIES = frozenset(['Metallophore-Synthesis',
  'MetalResistance-Tellurite',
  'MetalResistance-Tellurium',
  'MetalResistance-Unknown',
+ 'Siderophore-Export',
+ 'Siderophore-Utilization',
+ 'Siderophore-FunctionUnresolved',
+ 'IronAcquisition-IronRelease',
  'Siderophore-Synthesis',
  'Siderophore-Transport',
  'Siderophore-TransportPotential',
@@ -113,3 +117,38 @@ CANONICAL_CATEGORIES = frozenset(['Metallophore-Synthesis',
  'StressResponse-Redox',
  'Unclassified-MetalFunction',
  'Virulence-ActinNucleation'])
+
+
+# Preserve the established neighborhood membership when functional labels change.
+# Keys are stable bundled model identifiers; custom categories are not remapped.
+_CONTEXT_CATEGORY_OVERRIDES = {
+    'Sid_IroB_Shigella_dysenteriae_AAR13266.1_180606': ('Siderophore-Synthesis', 'Siderophore-Transport'),
+    'Sid_BesA_Bacillibactin_hydrolyze_Bsubtilis_YP_003867459.1_180603': ('Siderophore-Utilization', 'Siderophore-Synthesis'),
+    'IroD-VabH-enterochelin_esterase-rep': ('Siderophore-Utilization', 'Siderophore-Synthesis'),
+    'PvsC_vibrioferrin_biosynthesis-rep': ('Siderophore-Export', 'Siderophore-Synthesis'),
+    'Sid_PchH_pyochelin_biosynthesis_Pseudomonas_aeruginosa_PA4223_180623': ('Siderophore-Transport', 'Siderophore-Synthesis'),
+    'Sid_PchI_pyochelin_biosynthesis_Pseudomonas_aeruginosa_PA4222_180623': ('Siderophore-Transport', 'Siderophore-Synthesis'),
+    'Sid_IroE_Shigella_dysenteriae_AAR13269.1_180606': ('Siderophore-Utilization', 'Siderophore-Transport'),
+    'Sid_ViuB_Vibriobactin_siderophore_transport_utilization_protein_Vibrio_cholerae_A5F660.txt-nr': ('Siderophore-Utilization', 'Siderophore-Transport'),
+    'Sid_FpvG_iron_reductase_PA2403_Paeruginosa_PAO1_180602': ('Siderophore-Utilization', 'Siderophore-Transport'),
+    'Sid_FpvH_iron_release_PA2404_Paeruginosa_PAO1_180602': ('Siderophore-Utilization', 'Siderophore-Transport'),
+    'Sid_YqjH_NADPH-dep_ferric_chelate_reductase_enterobactin_Q46871_Escherichia_coli_180606': ('IronAcquisition-IronRelease', 'Siderophore-Transport'),
+    'PF06276-RhbCF-AcsD-IucA-IucC-PvsB-Ferric_iron_reductase_FhuF_like_transporter': ('Siderophore-FunctionUnresolved', 'Siderophore-Transport'),
+    'Sid_EntS_enterobactin_exporter_Ecoli_P24077_180603': ('Siderophore-Export', 'Siderophore-Transport'),
+    'Sid_PvdR_Pyoverdine_export_Paeruginosa_PA2389_180623': ('Siderophore-Export', 'Siderophore-Transport'),
+    'Sid_PvdT_Pyoverdine_export_Paeruginosa_PA2390_180623': ('Siderophore-Export', 'Siderophore-Transport'),
+}
+
+
+def context_category(row):
+    """Return the neighborhood group independently of the output role label."""
+    category = canonical_category(row["cat"])
+    override = _CONTEXT_CATEGORY_OVERRIDES.get(row["hmm_stem"])
+    return override[1] if override and category == override[0] else category
+
+
+def rule_category(row, rule):
+    """Custom JSON rules use output categories unless context basis is explicit."""
+    if rule.get("category_basis", "annotation") == "context":
+        return context_category(row)
+    return canonical_category(row["cat"])

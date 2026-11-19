@@ -1,0 +1,1890 @@
+{
+  "All_seq_Fusarinine": {
+    "sha256": "26e3dc168ee5265196e3754782f7602fb7f9b43e8084dcce26a7f34bd82aeec4",
+    "cutoff": "2800.7",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "All_seq_Fusarinine",
+    "hmm_file": "Siderophore-Synthesis/All_seq_Fusarinine.hmm"
+  },
+  "All_seq_putSID2": {
+    "sha256": "30e985c616c867755fc088ec467ca45dbd38f443d915881997c18e9febda277f",
+    "cutoff": "6429.4",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "All_seq_putSID2",
+    "hmm_file": "Siderophore-Synthesis/All_seq_putSID2.hmm"
+  },
+  "AsbE_petrobactin_synthesis-rep": {
+    "sha256": "a5abed044e51af2251a8098ed6e553bf481052c509dab2baaff2b79b5dd5a6a2",
+    "cutoff": "147.6",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "AsbE-family-siderophore-synthesis",
+    "hmm_file": "Siderophore-Synthesis/AsbE_petrobactin_synthesis-rep.hmm"
+  },
+  "DhbA-VibA-VabA-EntA": {
+    "sha256": "3d9859267f8bf30d9f8b1f5e4dcf6950f1d9cece7f23362011060f46e56279df",
+    "cutoff": "240.5",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "VabA-family-siderophore-synthesis",
+    "hmm_file": "Siderophore-Synthesis/DhbA-VibA-VabA-EntA.hmm"
+  },
+  "DhbB-EntB-VenB-VibB-VabB": {
+    "sha256": "c15e98f8b02c0c422f7e473718d95eb394f203e7577583c35e400b7e4e1d909b",
+    "cutoff": "196.1",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "VabB-family-siderophore-synthesis",
+    "hmm_file": "Siderophore-Synthesis/DhbB-EntB-VenB-VibB-VabB.hmm"
+  },
+  "DhbC-VibC-VabC": {
+    "sha256": "c8065553dedecdfd7bd8400b735e2c7f097e612cf5ebbda4b7d661f58a748065",
+    "cutoff": "376.9",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "VabC-family-siderophore-synthesis",
+    "hmm_file": "Siderophore-Synthesis/DhbC-VibC-VabC.hmm"
+  },
+  "DhbE-PchD-VibE-VabE-EntE-IroD-PvdQ-MbtA": {
+    "sha256": "c5870c3f2590e35f5d9a1d6b0cb5e9c43f9865483ec2046be829df1423c1a5ce",
+    "cutoff": "467.8",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "VabE-family-siderophore-synthesis",
+    "hmm_file": "Siderophore-Synthesis/DhbE-PchD-VibE-VabE-EntE-IroD-PvdQ-MbtA.hmm"
+  },
+  "DhbF-PvdDIJL-VabF": {
+    "sha256": "892700fa183de0aec91a272033a9865f5d5decbfd6fb862a440f3299ed9034c4",
+    "cutoff": "1091.9",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "VabF-family-siderophore-synthesis",
+    "hmm_file": "Siderophore-Synthesis/DhbF-PvdDIJL-VabF.hmm"
+  },
+  "F9X9V1_NRPS2_V2": {
+    "sha256": "652adebce47c460750c09cd6679878a66b6b583d6896336e8100dee8dfa93fc8",
+    "cutoff": "10414.1",
+    "status": "deprecated_nseq_insufficient",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "F9X9V1_NRPS2_V2",
+    "hmm_file": "Siderophore-Synthesis/F9X9V1_NRPS2_V2.hmm"
+  },
+  "Fer3_USTMA_V2": {
+    "sha256": "b23d41849e207049d20e6fa8247394ab6435d6fe5e4ce541a59e60e5b94157eb",
+    "cutoff": "9077.3",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "Fer3_USTMA_V2",
+    "hmm_file": "Siderophore-Synthesis/Fer3_USTMA_V2.hmm"
+  },
+  "FslA": {
+    "sha256": "05692bd94b3b9d86ca33aedbe4ba8623791da012373d78b4f9eb315351a297d9",
+    "cutoff": "1000.0",
+    "status": "deprecated_nseq_insufficient",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "FslA",
+    "hmm_file": "Siderophore-Synthesis/FslA.hmm"
+  },
+  "FslC": {
+    "sha256": "3654f02ad5d530435d75c6b2f78431027531325e364216b67aced870c81ec251",
+    "cutoff": "500.0",
+    "status": "deprecated_nseq_insufficient",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "FslC",
+    "hmm_file": "Siderophore-Synthesis/FslC.hmm"
+  },
+  "IroD-VabH-enterochelin_esterase-rep": {
+    "sha256": "18b96fb4d0d54ed770df4b93f4396df312d43eaa6f4e0b0be511237412116914",
+    "cutoff": "99.7",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "VabH-family-siderophore-synthesis",
+    "hmm_file": "Siderophore-Synthesis/IroD-VabH-enterochelin_esterase-rep.hmm"
+  },
+  "K00216": {
+    "sha256": "ce50fbc1820065099a6894cbbe67e84fd381179dfd632e4776690e5de5e0dc94",
+    "cutoff": "260.47",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K00216",
+    "hmm_file": "Siderophore-Synthesis/K00216.hmm"
+  },
+  "K00257": {
+    "sha256": "d5efeaef8003cdec50bc8c57dda009473ce776a881858b4950a18851c684caf0",
+    "cutoff": "436.2",
+    "status": "deprecated_dedup_sequence_cluster",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K00257",
+    "hmm_file": "Siderophore-Synthesis/K00257.hmm"
+  },
+  "K00824": {
+    "sha256": "f0056f61d95adb980b6269acf405e90c785108a15da855277656de43b5ca2dfc",
+    "cutoff": "285.53",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K00824",
+    "hmm_file": "Siderophore-Synthesis/K00824.hmm"
+  },
+  "K01252": {
+    "sha256": "ee32bdd294ee488ad6138d5011667a51d9f56751795c979591cd441d5b3c194c",
+    "cutoff": "321.2",
+    "status": "deprecated_dedup_sequence_cluster",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K01252",
+    "hmm_file": "Siderophore-Synthesis/K01252.hmm"
+  },
+  "K01582": {
+    "sha256": "0ce5fa7d74986315d41f219754e139e006bc6b4683c5c6779ae5a2e169b1c98a",
+    "cutoff": "556.23",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K01582",
+    "hmm_file": "Siderophore-Synthesis/K01582.hmm"
+  },
+  "K01780": {
+    "sha256": "8c4c3a1b83fb59bcc296c09b80f44187c25a4c5a9da99859e3063ffca7a0b9a5",
+    "cutoff": "163.27",
+    "status": "active",
+    "category": "Metallophore-Synthesis",
+    "gene_name": "cntK",
+    "hmm_file": "Metallophore-Synthesis/K01780.hmm"
+  },
+  "K01851": {
+    "sha256": "369b7a3524eb3293e3fc4b16d3bd94229511004df3cc733f35316857e81fdd91",
+    "cutoff": "519.1",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K01851",
+    "hmm_file": "Siderophore-Synthesis/K01851.hmm"
+  },
+  "K01909": {
+    "sha256": "a89d427d5526a6277201bc79fb1f5e07bc4da979f616bde60fbf29c092d76012",
+    "cutoff": "429.87",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K01909",
+    "hmm_file": "Siderophore-Synthesis/K01909.hmm"
+  },
+  "K04788": {
+    "sha256": "60e9a3ee0529cc81ca7c7b52da5116c62fb3e4af002a6fd6e897fe7b25710fe7",
+    "cutoff": "1500.8",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K04788",
+    "hmm_file": "Siderophore-Synthesis/K04788.hmm"
+  },
+  "K04789": {
+    "sha256": "cac86239569cf6b2bf72872f3af4961caa42a93f0b24ae06efd7939779ce1375",
+    "cutoff": "1334.37",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K04789",
+    "hmm_file": "Siderophore-Synthesis/K04789.hmm"
+  },
+  "K04790": {
+    "sha256": "b043a28a452388d3017362a72cad3c91572314efa4a6d3fd13ce05321f12bfb6",
+    "cutoff": "626.5",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K04790",
+    "hmm_file": "Siderophore-Synthesis/K04790.hmm"
+  },
+  "K04791": {
+    "sha256": "bad9720ca7f87da8ce35d117e56059fa6a699de6a97cc15aa6229deecb34d04c",
+    "cutoff": "876.87",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K04791",
+    "hmm_file": "Siderophore-Synthesis/K04791.hmm"
+  },
+  "K04792": {
+    "sha256": "13750156bc598f9897208322327e043a154b67254500b9980ae707a0e132cdd1",
+    "cutoff": "1459.93",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K04792",
+    "hmm_file": "Siderophore-Synthesis/K04792.hmm"
+  },
+  "K04793": {
+    "sha256": "1a1bf343292ada8a1932952cfb6a8d60fe3c191ad4452758e649a67f770b595e",
+    "cutoff": "269.0",
+    "status": "deprecated_dedup_sequence_cluster",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K04793",
+    "hmm_file": "Siderophore-Synthesis/K04793.hmm"
+  },
+  "K05375": {
+    "sha256": "1eb48956c31e614f4cc10aba56cdb5a425c1a810204f587b0d90c2bfd4ce2851",
+    "cutoff": "23.57",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K05375",
+    "hmm_file": "Siderophore-Synthesis/K05375.hmm"
+  },
+  "K07116": {
+    "sha256": "1982205615d554f6d020503f48e2c9c5c05fb394a162b1adb599dd108d46c42a",
+    "cutoff": "449.97",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K07116",
+    "hmm_file": "Siderophore-Synthesis/K07116.hmm"
+  },
+  "K10531": {
+    "sha256": "3e09b8df3759501774d09860294a7760ed010bcfb0db1b46fcd3c065ebb68aa7",
+    "cutoff": "374.5",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K10531",
+    "hmm_file": "Siderophore-Synthesis/K10531.hmm"
+  },
+  "K12237": {
+    "sha256": "6157baaacee3c7f3cdf4979f4b04aa12fe71c5b7d35fc1b95fd64ec4c071ec84",
+    "cutoff": "1974.2",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K12237",
+    "hmm_file": "Siderophore-Synthesis/K12237.hmm"
+  },
+  "K12238": {
+    "sha256": "d729856ea590bd75e414b42dca806e49281fda7d3cef76de253eea3c55fb2683",
+    "cutoff": "917.1",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K12238",
+    "hmm_file": "Siderophore-Synthesis/K12238.hmm"
+  },
+  "K12239": {
+    "sha256": "eaafe01a05b135afeea21272a35818f3396c1f5fa96f6ba743ac196176ccdbd0",
+    "cutoff": "1578.87",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K12239",
+    "hmm_file": "Siderophore-Synthesis/K12239.hmm"
+  },
+  "K12240": {
+    "sha256": "37dbaf00f578e20cb9abdc868034fb805ae4eef36624421130062e8062966c95",
+    "cutoff": "1662.5",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K12240",
+    "hmm_file": "Siderophore-Synthesis/K12240.hmm"
+  },
+  "K12241": {
+    "sha256": "e2aadf03606f13abaedf62eb61b21cfcc88c53fafad1af90a86978806b622f19",
+    "cutoff": "335.77",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K12241",
+    "hmm_file": "Siderophore-Synthesis/K12241.hmm"
+  },
+  "K13745": {
+    "sha256": "3375b53594e478485761c0a9b9af3eccfb35c6667456bd54a967987d042db47f",
+    "cutoff": "407.53",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K13745",
+    "hmm_file": "Siderophore-Synthesis/K13745.hmm"
+  },
+  "K14759": {
+    "sha256": "92b2b3ea86e44a9d74f365c7d2655e2434a944d4f2985ef0d9243b44f6681e83",
+    "cutoff": "1251.0",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K14759",
+    "hmm_file": "Siderophore-Synthesis/K14759.hmm"
+  },
+  "K15652": {
+    "sha256": "c48bd24c367fec67052e5d8ca288a7abfd2945c95e3f5ca4d0361181986416c6",
+    "cutoff": "239.9",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K15652",
+    "hmm_file": "Siderophore-Synthesis/K15652.hmm"
+  },
+  "K15653": {
+    "sha256": "18962e253e6829057e6d71edd4938607c4e3848ce394d5fc131d3acfb5f1a7fb",
+    "cutoff": "1373.87",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K15653",
+    "hmm_file": "Siderophore-Synthesis/K15653.hmm"
+  },
+  "K15681": {
+    "sha256": "e20c2bf14841723d6a461c7d5b5e9dd268b1195baadda2bf8ba7b2d1c5c7ec37",
+    "cutoff": "612.43",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K15681",
+    "hmm_file": "Siderophore-Synthesis/K15681.hmm"
+  },
+  "K15721": {
+    "sha256": "936ec53fa08150d64d1d70c94364caac8cc1cbe653a8225c39eac9a58b8e86da",
+    "cutoff": "582.4",
+    "status": "active",
+    "category": "Siderophore-Transport",
+    "gene_name": "K15721",
+    "hmm_file": "Siderophore-Transport/K15721.hmm"
+  },
+  "K16088": {
+    "sha256": "a9a069ce1880cf5f9c85520ef9eec683581b0f9994de8c2c722191a1a8629122",
+    "cutoff": "503.0",
+    "status": "active",
+    "category": "Siderophore-Transport",
+    "gene_name": "K16088",
+    "hmm_file": "Siderophore-Transport/K16088.hmm"
+  },
+  "K16090": {
+    "sha256": "28da719151d5427248861c740d1a74249a6d9cf5cb76a003ce1ae0e300fc488f",
+    "cutoff": "589.77",
+    "status": "active",
+    "category": "Siderophore-Transport",
+    "gene_name": "K16090",
+    "hmm_file": "Siderophore-Transport/K16090.hmm"
+  },
+  "K19611": {
+    "sha256": "8fe0891613af130799ed7fb2a10fc869587f61f13943a75fd9a537c09e5dc5b0",
+    "cutoff": "426.07",
+    "status": "active",
+    "category": "Siderophore-Transport",
+    "gene_name": "K19611",
+    "hmm_file": "Siderophore-Transport/K19611.hmm"
+  },
+  "K21476": {
+    "sha256": "158e805879ba13bfc2894bc113d7dd8cbb3ffc4999f7da6ccf89b447905f2bff",
+    "cutoff": "1.0",
+    "status": "deprecated_nseq_insufficient",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K21476",
+    "hmm_file": "Siderophore-Synthesis/K21476.hmm"
+  },
+  "K21721": {
+    "sha256": "c5074856d0a3f060c1e20fa9fef46dd40999c433e2733cb4186710eadb7e7b51",
+    "cutoff": "398.87",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K21721",
+    "hmm_file": "Siderophore-Synthesis/K21721.hmm"
+  },
+  "K21949": {
+    "sha256": "761aaf4cb50d94b627ffe5a03bcab9e62530a000449ebe14fe8eb042108dc310",
+    "cutoff": "336.97",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K21949",
+    "hmm_file": "Siderophore-Synthesis/K21949.hmm"
+  },
+  "K21992": {
+    "sha256": "1f6caba1d81a38cbbd8708226081f3f9d7da06ad6a4f67f5a714215c66c06414",
+    "cutoff": "223.53",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K21992",
+    "hmm_file": "Siderophore-Synthesis/K21992.hmm"
+  },
+  "K22148": {
+    "sha256": "96f42ff1dc4d540d2995383ce9bbe23272dfdd31e1a5544d7f3d98073eeb304b",
+    "cutoff": "1278.17",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K22148",
+    "hmm_file": "Siderophore-Synthesis/K22148.hmm"
+  },
+  "K22149": {
+    "sha256": "300b86439910d0b9e97b82aa4aa06c561f7533484c081dfb24e17e1a7e0b81e3",
+    "cutoff": "640.97",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K22149",
+    "hmm_file": "Siderophore-Synthesis/K22149.hmm"
+  },
+  "K22150": {
+    "sha256": "ab1121d0497ec65f72d8d9a08be6dc8ab179a1044882dcf98730f5e0a006c7db",
+    "cutoff": "433.77",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K22150",
+    "hmm_file": "Siderophore-Synthesis/K22150.hmm"
+  },
+  "K22151": {
+    "sha256": "69df4f4b541333aeaa7742ff8c9f4aa4add095608814685070f48b90f0d16a23",
+    "cutoff": "339.0",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K22151",
+    "hmm_file": "Siderophore-Synthesis/K22151.hmm"
+  },
+  "K22152": {
+    "sha256": "e9ae4ac894c7672058589a9efe6707f5897c0a42510417184d7e1693759ff912",
+    "cutoff": "1129.1",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K22152",
+    "hmm_file": "Siderophore-Synthesis/K22152.hmm"
+  },
+  "K22153": {
+    "sha256": "c7334f0e9b73f892ff42187b953cf8c41ebed5165b2ae592daca4502684f3997",
+    "cutoff": "303.5",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K22153",
+    "hmm_file": "Siderophore-Synthesis/K22153.hmm"
+  },
+  "K23120": {
+    "sha256": "37dd3c1a9d2dcac7731b9b923f971960ac39ee0ae6093155d0327859acb6449d",
+    "cutoff": "216.33",
+    "status": "active",
+    "category": "Metallophore-Synthesis",
+    "gene_name": "cntL",
+    "hmm_file": "Metallophore-Synthesis/K23120.hmm"
+  },
+  "K23122": {
+    "sha256": "febe127b8be20fba52cdcc091dad531684d5762145633189122bbb0ab5588dd5",
+    "cutoff": "316.27",
+    "status": "active",
+    "category": "Metallophore-Synthesis",
+    "gene_name": "cntM",
+    "hmm_file": "Metallophore-Synthesis/K23122.hmm"
+  },
+  "K23185": {
+    "sha256": "3f6b2e2965963608036962c088997aa18d5fe81b28ce1aac2bf397310dd7d7da",
+    "cutoff": "209.2",
+    "status": "active",
+    "category": "Siderophore-Transport",
+    "gene_name": "K23185",
+    "hmm_file": "Siderophore-Transport/K23185.hmm"
+  },
+  "K23227": {
+    "sha256": "5c4fa546486ea40caf9fa16644c3e30e9c80edfe85dde906cf1c7988fff8ce57",
+    "cutoff": "198.13",
+    "status": "active",
+    "category": "Siderophore-Transport",
+    "gene_name": "K23227",
+    "hmm_file": "Siderophore-Transport/K23227.hmm"
+  },
+  "K23371": {
+    "sha256": "4ba4ca693a1d56c7569233d8abea1d92bc198d2a49fd415a9e516ac7231d3f22",
+    "cutoff": "158.7",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K23371",
+    "hmm_file": "Siderophore-Synthesis/K23371.hmm"
+  },
+  "K23372": {
+    "sha256": "615c9a7c69e3b0c04c7e9848524c05590f76b4015c5a25b90acbcdce9251140d",
+    "cutoff": "502.17",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K23372",
+    "hmm_file": "Siderophore-Synthesis/K23372.hmm"
+  },
+  "K23373": {
+    "sha256": "0e6e2490739f17ac285f9debea0435372ab4da243495eaeb74995d2f3edf5829",
+    "cutoff": "544.73",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K23373",
+    "hmm_file": "Siderophore-Synthesis/K23373.hmm"
+  },
+  "K23374": {
+    "sha256": "45077e0cd7d23d39d97c2e1a03f9ea5d11c0b606cc9d6471311ed24dd16bb4c8",
+    "cutoff": "711.17",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K23374",
+    "hmm_file": "Siderophore-Synthesis/K23374.hmm"
+  },
+  "K23375": {
+    "sha256": "efb8df51351045fdd771398799da2f1fb33432e7575762f19c36ce8a75b8b0fb",
+    "cutoff": "423.6",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K23375",
+    "hmm_file": "Siderophore-Synthesis/K23375.hmm"
+  },
+  "K23376": {
+    "sha256": "37991cbf5d1e428f7409a080f395b46aad69b3633e2fb8221c2dd909d93abbf6",
+    "cutoff": "299.07",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K23376",
+    "hmm_file": "Siderophore-Synthesis/K23376.hmm"
+  },
+  "K23446": {
+    "sha256": "23035a09b401064e846637a8873e6f03b4315c741abcf01c2e553ab4cf78fa21",
+    "cutoff": "554.6",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K23446",
+    "hmm_file": "Siderophore-Synthesis/K23446.hmm"
+  },
+  "K23447": {
+    "sha256": "f71cbf88f0f7f45ba1770361c3c80b3da9a13563303324c25045aaaf66186b7b",
+    "cutoff": "499.9",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K23447",
+    "hmm_file": "Siderophore-Synthesis/K23447.hmm"
+  },
+  "K23725": {
+    "sha256": "38c4b23ffcdc0c9cb0c2132146f7c8092a2bbac3b5e3ba0220fdf3a89419632e",
+    "cutoff": "516.8",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K23725",
+    "hmm_file": "Siderophore-Synthesis/K23725.hmm"
+  },
+  "K24101": {
+    "sha256": "619fda09c68e90f324fc13697eb20560698449a9d20df4a1bf0dd423c692be77",
+    "cutoff": "1909.67",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K24101",
+    "hmm_file": "Siderophore-Synthesis/K24101.hmm"
+  },
+  "K24108": {
+    "sha256": "015f72ffd71f7d4afddc4aad041ee0858770b8cb77b87f74e3434bd5777d383f",
+    "cutoff": "573.73",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K24108",
+    "hmm_file": "Siderophore-Synthesis/K24108.hmm"
+  },
+  "K24109": {
+    "sha256": "2a34c3474448fa53037afb3cb833c1ece649ce811fbd8c4c8da4480fc1ae8d7f",
+    "cutoff": "680.87",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K24109",
+    "hmm_file": "Siderophore-Synthesis/K24109.hmm"
+  },
+  "K24110": {
+    "sha256": "f30a6c2d5845c23748d74d47e4478d6681dd5e83fd748cdae64576b3a97f8106",
+    "cutoff": "538.93",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K24110",
+    "hmm_file": "Siderophore-Synthesis/K24110.hmm"
+  },
+  "K24111": {
+    "sha256": "0e5dcfb21c757b4f2c20b5c414f494a02311528b762b12ca3e4b8ee113f9885b",
+    "cutoff": "97.4",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K24111",
+    "hmm_file": "Siderophore-Synthesis/K24111.hmm"
+  },
+  "K24112": {
+    "sha256": "d4424e3a85b2b90638df9d5bf5b4efa7028c83d1e23893495647843921716cd9",
+    "cutoff": "243.6",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K24112",
+    "hmm_file": "Siderophore-Synthesis/K24112.hmm"
+  },
+  "K25109": {
+    "sha256": "f03c24d5028b80c8aad0a3c2d43a5d05d7b3dfe3c571e4dd25409d9b48c4e790",
+    "cutoff": "360.9",
+    "status": "active",
+    "category": "Siderophore-Transport",
+    "gene_name": "K25109",
+    "hmm_file": "Siderophore-Transport/K25109.hmm"
+  },
+  "K25282": {
+    "sha256": "57eafc50d4b7c4fd4dfc98be4b40b30515763ea9c7ab439219ea76f291b2a373",
+    "cutoff": "212.3",
+    "status": "active",
+    "category": "Siderophore-Transport",
+    "gene_name": "K25282",
+    "hmm_file": "Siderophore-Transport/K25282.hmm"
+  },
+  "K25286": {
+    "sha256": "616324ac2384abb0a3abc34b5854aa2487fa536d39468b805a113724b28b081e",
+    "cutoff": "274.67",
+    "status": "active",
+    "category": "Siderophore-Transport",
+    "gene_name": "K25286",
+    "hmm_file": "Siderophore-Transport/K25286.hmm"
+  },
+  "K25287": {
+    "sha256": "c712ceb2a4f64ffc51e489de18addffe8ffa9d4fc1c2a54735f66cd34c7f97e9",
+    "cutoff": "222.47",
+    "status": "active",
+    "category": "Siderophore-Transport",
+    "gene_name": "K25287",
+    "hmm_file": "Siderophore-Transport/K25287.hmm"
+  },
+  "NF037942": {
+    "sha256": "2bb8ea37409d8c32085fb486e2267043ec52a4be8b3887469af604231fe6538b",
+    "cutoff": "700.0",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "NF037942",
+    "hmm_file": "Siderophore-Synthesis/NF037942.hmm"
+  },
+  "PF04183-IucA_IucC-rhbCF-AcsD-PvsD": {
+    "sha256": "30fed6730651c977ae02fcc6b4f1cc9da7216d0c4931793d42dff4de5aeb1d15",
+    "cutoff": "26.3",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "PvsD-family-siderophore-synthesis",
+    "hmm_file": "Siderophore-Synthesis/PF04183-IucA_IucC-rhbCF-AcsD-PvsD.hmm"
+  },
+  "PRK10003.1": {
+    "sha256": "160033f22f3ca5242e332940f99a938515a29f3b62772799ef6152a0ec219021",
+    "cutoff": "666.0",
+    "status": "active",
+    "category": "Siderophore-Transport",
+    "gene_name": "PRK10003.1",
+    "hmm_file": "Siderophore-Transport/PRK10003.1.hmm"
+  },
+  "PRK10044.1": {
+    "sha256": "3f0a8171198242a0c939bbfd9ad89e9da857851290f9dfbc59f4c2ee385e943b",
+    "cutoff": "803.0",
+    "status": "active",
+    "category": "Siderophore-Transport",
+    "gene_name": "PRK10044.1",
+    "hmm_file": "Siderophore-Transport/PRK10044.1.hmm"
+  },
+  "Put_copfam2_VF_corr": {
+    "sha256": "5616b24aea2aaf40c078a9b6f2d2f86e03d72ab8167e53a7f1fda3a8eb466764",
+    "cutoff": "2930.6",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "Put_copfam2_VF_corr",
+    "hmm_file": "Siderophore-Synthesis/Put_copfam2_VF_corr.hmm"
+  },
+  "Put_copfam3_VF_corr": {
+    "sha256": "799e3709ee9622d1253ea57569aa46a574ca59968852d0e0eafa9be6a8a9759a",
+    "cutoff": "3265.4",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "Put_copfam3_VF_corr",
+    "hmm_file": "Siderophore-Synthesis/Put_copfam3_VF_corr.hmm"
+  },
+  "Put_copfam4_VF_corr": {
+    "sha256": "4926fb8c1121558813f4e540bd85d1218d2579354c1ca0d983d1d31fe813d88b",
+    "cutoff": "3046.6",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "Put_copfam4_VF_corr",
+    "hmm_file": "Siderophore-Synthesis/Put_copfam4_VF_corr.hmm"
+  },
+  "Put_rhizoferrin_VF_corr": {
+    "sha256": "80136c822497d613a5caa9e3c84b154cb33ec26d95f08b7d9ac1cfdaf5b93c1a",
+    "cutoff": "775.7",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "Put_rhizoferrin_VF_corr",
+    "hmm_file": "Siderophore-Synthesis/Put_rhizoferrin_VF_corr.hmm"
+  },
+  "PvdDIJL-VabF-VibF-EntF-DhbF-MbtB-PchE": {
+    "sha256": "1fd0fa18414900b8673fa776426179d0673f296a806b487f53612bf39c21ce08",
+    "cutoff": "430.0",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "VabF-family-siderophore-synthesis",
+    "hmm_file": "Siderophore-Synthesis/PvdDIJL-VabF-VibF-EntF-DhbF-MbtB-PchE.hmm"
+  },
+  "PvdDIJL-VabF-VibF-EntF-DhbF-MbtB-PchE-AngR_2": {
+    "sha256": "076e240c8aaec8105ff303ee85077ee80aea81acc62e3b8a29ec95a3b6b01cd1",
+    "cutoff": "270.0",
+    "status": "deprecated_nseq_insufficient",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "VabF-family-siderophore-synthesis",
+    "hmm_file": "Siderophore-Synthesis/PvdDIJL-VabF-VibF-EntF-DhbF-MbtB-PchE-AngR_2.hmm"
+  },
+  "PvdDIJL-VabF-VibF-EntF-DhbF-MbtBEF-PchE-AngR-PchF": {
+    "sha256": "1358fb8e25f4751914e72b582db6845e06bdc7b47b7c7f825709fd033aa33d36",
+    "cutoff": "272.0",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "VabF-family-siderophore-synthesis",
+    "hmm_file": "Siderophore-Synthesis/PvdDIJL-VabF-VibF-EntF-DhbF-MbtBEF-PchE-AngR-PchF.hmm"
+  },
+  "PvdQ_pyoverdine_biosynthesis-rep": {
+    "sha256": "51e786ed6f4be75400389998788df1863d7e8951cabb609ce5ad30507f506903",
+    "cutoff": "480.0",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "PvdQ-family-siderophore-synthesis",
+    "hmm_file": "Siderophore-Synthesis/PvdQ_pyoverdine_biosynthesis-rep.hmm"
+  },
+  "PvsA_vibrioferrin_biosynthesis-rep": {
+    "sha256": "779bcde283b18593c3a427ec32142729ba114c9f98ff6f8b0b54f9e64548f9b3",
+    "cutoff": "62.0",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "PvsA-family-siderophore-synthesis",
+    "hmm_file": "Siderophore-Synthesis/PvsA_vibrioferrin_biosynthesis-rep.hmm"
+  },
+  "PvsB-AcsD-IucA-IucC-RhbCF-PvsD": {
+    "sha256": "e7750f3434ee7d07f2d4899cb98a00db62f9902f179c9ef6e2fb958f494d671e",
+    "cutoff": "17.5",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "PvsD-family-siderophore-synthesis",
+    "hmm_file": "Siderophore-Synthesis/PvsB-AcsD-IucA-IucC-RhbCF-PvsD.hmm"
+  },
+  "PvsC_vibrioferrin_biosynthesis-rep": {
+    "sha256": "134610edfd6cfcf50b171b3d823441dcd545225d7868cbbc083a0e4fc10b084a",
+    "cutoff": "35.0",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "PvsC-family-siderophore-synthesis",
+    "hmm_file": "Siderophore-Synthesis/PvsC_vibrioferrin_biosynthesis-rep.hmm"
+  },
+  "PvsD-AcsD-IucA-IucC-RhbCF-PvsB": {
+    "sha256": "0dca47516f7456b86c5c2916cd6b00e7a253b1da191a4b6d925207b934d9fdb4",
+    "cutoff": "17.5",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "PvsD-family-siderophore-synthesis",
+    "hmm_file": "Siderophore-Synthesis/PvsD-AcsD-IucA-IucC-RhbCF-PvsB.hmm"
+  },
+  "PvsE-AcsE_vibrioferrin_biosynthesis-rep": {
+    "sha256": "97e3bf78ecc0294362310fc55c27126a8d99c9794aeab5640362e620f616f6b5",
+    "cutoff": "85.0",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "PvsE-family-siderophore-synthesis",
+    "hmm_file": "Siderophore-Synthesis/PvsE-AcsE_vibrioferrin_biosynthesis-rep.hmm"
+  },
+  "Q52US9_FSO1_V2": {
+    "sha256": "2c7a8b92de8395c2090874b1fde544fc7284fba4cb1fcd8f3c0058165a91813a",
+    "cutoff": "8260.9",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "Q52US9_FSO1_V2",
+    "hmm_file": "Siderophore-Synthesis/Q52US9_FSO1_V2.hmm"
+  },
+  "Sid_AcsB_Achromobactin_siderophore_synthesis_Dickeya_chrysanthemi_AAL14564.1.txt-nr": {
+    "sha256": "aede529d75ba36e10636e63a7c34227b230de3b44329f8fc076b8b17a284ec00",
+    "cutoff": "0.0",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "AcsB-family-siderophore-synthesis",
+    "hmm_file": "Siderophore-Synthesis/Sid_AcsB_Achromobactin_siderophore_synthesis_Dickeya_chrysanthemi_AAL14564.1.txt-nr.hmm"
+  },
+  "Sid_AcsF_Achromobactin_siderophore_synthesis_Pseudomonas_syringae_EPF66771.1.txt-nr": {
+    "sha256": "f9420b17b31e8022955cd9a400899fe848d4506ea4b6a247096ab015de7d6666",
+    "cutoff": "0.0",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "AcsF-family-siderophore-synthesis",
+    "hmm_file": "Siderophore-Synthesis/Sid_AcsF_Achromobactin_siderophore_synthesis_Pseudomonas_syringae_EPF66771.1.txt-nr.hmm"
+  },
+  "Sid_AsbC_Petrobactin_biosynthesis_Bacillus_anthracis_Q81RQ7_180623": {
+    "sha256": "d70c2ad488eb1df50e68e3316dc4a9fd4ac81c9ed6b896a18a0dbd92bdad97b0",
+    "cutoff": "277.1",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "AsbC-family-siderophore-synthesis",
+    "hmm_file": "Siderophore-Synthesis/Sid_AsbC_Petrobactin_biosynthesis_Bacillus_anthracis_Q81RQ7_180623.hmm"
+  },
+  "Sid_AsbD_Petrobactin_biosynthesis_Bacillus_anthracis_Q81RQ6_180623": {
+    "sha256": "91bad1469935abacbd089e01d890c7322c7722e3eb355184e109a9fe65680600",
+    "cutoff": "30.1",
+    "status": "deprecated_dedup_sequence_cluster",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "AsbD-family-siderophore-synthesis",
+    "hmm_file": "Siderophore-Synthesis/Sid_AsbD_Petrobactin_biosynthesis_Bacillus_anthracis_Q81RQ6_180623.hmm"
+  },
+  "Sid_AsbF_Petrobactin_biosynthesis_Bacillus_anthracis_Q81RQ4_180606": {
+    "sha256": "58c2e9d4fc12cb913a1047959ab2377b697ec626731cc0f99874e95b41549faf",
+    "cutoff": "655.0",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "AsbF-family-siderophore-synthesis",
+    "hmm_file": "Siderophore-Synthesis/Sid_AsbF_Petrobactin_biosynthesis_Bacillus_anthracis_Q81RQ4_180606.hmm"
+  },
+  "Sid_BesA_Bacillibactin_hydrolyze_Bsubtilis_YP_003867459.1_180603": {
+    "sha256": "aae6dd84235a51fff74c5d1f8f385945d2f1e243e96282f09cb778809186bed2",
+    "cutoff": "32.0",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "BesA-family-siderophore-synthesis",
+    "hmm_file": "Siderophore-Synthesis/Sid_BesA_Bacillibactin_hydrolyze_Bsubtilis_YP_003867459.1_180603.hmm"
+  },
+  "Sid_EntD_enterobactin_synthesis_Ecoli": {
+    "sha256": "df4690fef049a08a9adc5113fac180d3b0d899293baf371e0582a91b6a78a1da",
+    "cutoff": "0.0",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "EntD-family-siderophore-synthesis",
+    "hmm_file": "Siderophore-Synthesis/Sid_EntD_enterobactin_synthesis_Ecoli.hmm"
+  },
+  "Sid_IucB_Escherichia_coli_Q47317": {
+    "sha256": "15e891d4a789659c0872270b160dd4015ac6b833dc0fdebd27a6f59db15b8b10",
+    "cutoff": "24.0",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "IucB-family-siderophore-synthesis",
+    "hmm_file": "Siderophore-Synthesis/Sid_IucB_Escherichia_coli_Q47317.hmm"
+  },
+  "Sid_IucD_Escherichia_coli_P11295": {
+    "sha256": "f886dc39dcfd96936037746d2405b7dcd61c7e9c9a4310df073f0b3b74c154f5",
+    "cutoff": "50.0",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "IucD-family-siderophore-synthesis",
+    "hmm_file": "Siderophore-Synthesis/Sid_IucD_Escherichia_coli_P11295.hmm"
+  },
+  "Sid_MbtC_Mycobactin_biosynthesis_Mycobacterium_tuberculosis_NP_216898.1.txt-nr": {
+    "sha256": "fe2cd2adbaea49e59d2cbbc1718ea0fe3e613bb216738782e3524ce78c2c690d",
+    "cutoff": "0.0",
+    "status": "deprecated_dedup_sequence_cluster",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "MbtC-family-siderophore-synthesis",
+    "hmm_file": "Siderophore-Synthesis/Sid_MbtC_Mycobactin_biosynthesis_Mycobacterium_tuberculosis_NP_216898.1.txt-nr.hmm"
+  },
+  "Sid_MbtD_Mycobactin_biosynthesis_Mycobacterium_tuberculosis_NP_216897.1.txt-nr": {
+    "sha256": "4db18d3c89d0f444e04bc5dc154890aa79ce61d3cea02fd9c4cb341ef85ee6bf",
+    "cutoff": "0.0",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "MbtD-family-siderophore-synthesis",
+    "hmm_file": "Siderophore-Synthesis/Sid_MbtD_Mycobactin_biosynthesis_Mycobacterium_tuberculosis_NP_216897.1.txt-nr.hmm"
+  },
+  "Sid_MbtG_Mycobactin_biosynthesis_Mycobacterium_tuberculosis_NP_216894.1.txt-nr": {
+    "sha256": "efcaccdb6bb3f5f7aeb95074a6206fbc6bf9a60e7cda768032d2b99a8e767e9b",
+    "cutoff": "0.0",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "MbtG-family-siderophore-synthesis",
+    "hmm_file": "Siderophore-Synthesis/Sid_MbtG_Mycobactin_biosynthesis_Mycobacterium_tuberculosis_NP_216894.1.txt-nr.hmm"
+  },
+  "Sid_MbtH_Mycobactin_biosynthesis_Mycobacterium_tuberculosis_NP_216893.1.txt-nr": {
+    "sha256": "64fae035532407933d73252b41353e12062f9139256fc40d31b21d711a21f13a",
+    "cutoff": "0.0",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "MbtH-family-siderophore-synthesis",
+    "hmm_file": "Siderophore-Synthesis/Sid_MbtH_Mycobactin_biosynthesis_Mycobacterium_tuberculosis_NP_216893.1.txt-nr.hmm"
+  },
+  "Sid_MbtI_Mycobactin_biosynthesis_Mycobacterium_tuberculosis_NC_000962.3.txt-nr": {
+    "sha256": "b67ed7b7f9649021aebed475b63f0304aedf0f8e69438bbc37d6892a2308e4d5",
+    "cutoff": "0.0",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "MbtI-family-siderophore-synthesis",
+    "hmm_file": "Siderophore-Synthesis/Sid_MbtI_Mycobactin_biosynthesis_Mycobacterium_tuberculosis_NC_000962.3.txt-nr.hmm"
+  },
+  "Sid_MbtJ_Mycobactin_biosynthesis_Mycobacterium_tuberculosis_YP_177876.1.txt-nr": {
+    "sha256": "df1ebe8a86fb12b7af21e88c5aae3763f1c76da19ebf58b8c3d7fb4936a30d24",
+    "cutoff": "0.0",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "MbtJ-family-siderophore-synthesis",
+    "hmm_file": "Siderophore-Synthesis/Sid_MbtJ_Mycobactin_biosynthesis_Mycobacterium_tuberculosis_YP_177876.1.txt-nr.hmm"
+  },
+  "Sid_PchB_pyochelin_biosynthesis_Pseudomonas_aeruginosa_Q51507": {
+    "sha256": "b87396fab69e966cae3febf089f30153244bf4ef093766814f07600f11e0deef",
+    "cutoff": "80.0",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "PchB-family-siderophore-synthesis",
+    "hmm_file": "Siderophore-Synthesis/Sid_PchB_pyochelin_biosynthesis_Pseudomonas_aeruginosa_Q51507.hmm"
+  },
+  "Sid_PchC_pyochelin_biosynthesis_Pseudomonas_aeruginosa_PA4229": {
+    "sha256": "93d17cd9e4b8a779f6b11256a2eadc421ad745e3bd38655c041fe2f4326e4ca0",
+    "cutoff": "64.0",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "PchC-family-siderophore-synthesis",
+    "hmm_file": "Siderophore-Synthesis/Sid_PchC_pyochelin_biosynthesis_Pseudomonas_aeruginosa_PA4229.hmm"
+  },
+  "Sid_PchG_pyochelin_biosynthesis_Pseudomonas_aeruginosa_PA4224_180623": {
+    "sha256": "f7056201561f2c245604207fd9e6fd71d35a994706cb095cf2dcfe239d1b0de4",
+    "cutoff": "80.0",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "PchG-family-siderophore-synthesis",
+    "hmm_file": "Siderophore-Synthesis/Sid_PchG_pyochelin_biosynthesis_Pseudomonas_aeruginosa_PA4224_180623.hmm"
+  },
+  "Sid_PchH_pyochelin_biosynthesis_Pseudomonas_aeruginosa_PA4223_180623": {
+    "sha256": "45e754e59ae3446d4b0015e12aff8f090f46bac5e177aefaf587a4dece981c65",
+    "cutoff": "24.0",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "PchH-family-siderophore-synthesis",
+    "hmm_file": "Siderophore-Synthesis/Sid_PchH_pyochelin_biosynthesis_Pseudomonas_aeruginosa_PA4223_180623.hmm"
+  },
+  "Sid_PchI_pyochelin_biosynthesis_Pseudomonas_aeruginosa_PA4222_180623": {
+    "sha256": "618d745dfd30dfd35ce9db71a6212c666b99faea19096c78e76951aeeb1f58d5",
+    "cutoff": "24.0",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "PchI-family-siderophore-synthesis",
+    "hmm_file": "Siderophore-Synthesis/Sid_PchI_pyochelin_biosynthesis_Pseudomonas_aeruginosa_PA4222_180623.hmm"
+  },
+  "Sid_PvdA_Pyoverdine_biosynthesis": {
+    "sha256": "6a1d9245552d207deb37510f509ab9698003c3d12dc92c899c7b959f35ac75ef",
+    "cutoff": "150.0",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "PvdA-family-siderophore-synthesis",
+    "hmm_file": "Siderophore-Synthesis/Sid_PvdA_Pyoverdine_biosynthesis.hmm"
+  },
+  "Sid_PvdE_Pyoverdine_biosynthesis_Paeruginosa_PA2397_180623": {
+    "sha256": "c8fc2b463ffe0b9c6e0d28d961fd396bf15ab2464249e68be144b778c8bfeec7",
+    "cutoff": "120.0",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "PvdE-family-siderophore-synthesis",
+    "hmm_file": "Siderophore-Synthesis/Sid_PvdE_Pyoverdine_biosynthesis_Paeruginosa_PA2397_180623.hmm"
+  },
+  "Sid_PvdF_Pyoverdine_biosynthesis_Paeruginosa_PA2396_180623": {
+    "sha256": "66d4f9fd3b114f6fad3690ecdf934795f3d955112d4e5e721de4a07db458a9cb",
+    "cutoff": "86.9",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "PvdF-family-siderophore-synthesis",
+    "hmm_file": "Siderophore-Synthesis/Sid_PvdF_Pyoverdine_biosynthesis_Paeruginosa_PA2396_180623.hmm"
+  },
+  "Sid_PvdH_Pyoverdine_biosynthesis_Pseudomonas_aeruginosa_PA2413_180623": {
+    "sha256": "2271cc006d71683021c93e2c90a4875206b74b7b3473a3f29381eedacd2c07d8",
+    "cutoff": "98.0",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "PvdH-family-siderophore-synthesis",
+    "hmm_file": "Siderophore-Synthesis/Sid_PvdH_Pyoverdine_biosynthesis_Pseudomonas_aeruginosa_PA2413_180623.hmm"
+  },
+  "Sid_PvdM_Pyoverdine_biosynthesis_Pseudomonas_fluorescens_PSF113_1846_180623": {
+    "sha256": "f8bf922c1d5f7fd42d9c167249d3ec9ad1c919ed3b749e28645e2955cfa5e967",
+    "cutoff": "17.9",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "PvdM-family-siderophore-synthesis",
+    "hmm_file": "Siderophore-Synthesis/Sid_PvdM_Pyoverdine_biosynthesis_Pseudomonas_fluorescens_PSF113_1846_180623.hmm"
+  },
+  "Sid_PvdN_Pyoverdine_biosynthesis_Paeruginosa_PA2394_180623": {
+    "sha256": "21e6b3baa010bf648bcf7148d67a18b4aacfb9a7ec60aa9b1e1905b3341b624a",
+    "cutoff": "63.0",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "PvdN-family-siderophore-synthesis",
+    "hmm_file": "Siderophore-Synthesis/Sid_PvdN_Pyoverdine_biosynthesis_Paeruginosa_PA2394_180623.hmm"
+  },
+  "Sid_PvdO_Pyoverdine_biosynthesis_Paeruginosa_PA2395_180623": {
+    "sha256": "2374440bdcc545aaffe8606851a2bbdde56497c48ccf1bd548e6a793dc8fd052",
+    "cutoff": "154.0",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "PvdO-family-siderophore-synthesis",
+    "hmm_file": "Siderophore-Synthesis/Sid_PvdO_Pyoverdine_biosynthesis_Paeruginosa_PA2395_180623.hmm"
+  },
+  "Sid_PvdP_Pyoverdine_biosynthesis_Paeruginosa_PA2392_180623": {
+    "sha256": "207a4ec80ff6ca60a23eb81615b663b1878362f2847b9453035c07f5fe499dc4",
+    "cutoff": "92.3",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "PvdP-family-siderophore-synthesis",
+    "hmm_file": "Siderophore-Synthesis/Sid_PvdP_Pyoverdine_biosynthesis_Paeruginosa_PA2392_180623.hmm"
+  },
+  "Sid_RhbA_Rhizobactin_biosynthesis_Rhizobium_meliloti_Q9Z3R2": {
+    "sha256": "969151f4caf21f6db5462de53a3e5c5b417fad23eda4fb85377fbd9ebdbebb54",
+    "cutoff": "35.0",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "RhbA-family-siderophore-synthesis",
+    "hmm_file": "Siderophore-Synthesis/Sid_RhbA_Rhizobactin_biosynthesis_Rhizobium_meliloti_Q9Z3R2.hmm"
+  },
+  "Sid_RhbB_Rhizobactin_biosynthesis_Rhizobium_meliloti_Q9Z3R1": {
+    "sha256": "57e840710bc6ab046e73a873d27f87b5e8e2ac274ed7b0954d3bd845f86a0dd7",
+    "cutoff": "61.9",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "RhbB-family-siderophore-synthesis",
+    "hmm_file": "Siderophore-Synthesis/Sid_RhbB_Rhizobactin_biosynthesis_Rhizobium_meliloti_Q9Z3R1.hmm"
+  },
+  "Sid_RhbD_Rhizobactin_biosynthesis_Rhizobium_meliloti_Q9Z3Q9": {
+    "sha256": "9201b15b829b94a7bdce980a8680f46c21fc9c2e0f907ab83542fc61e7dd03bc",
+    "cutoff": "24.0",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "RhbD-family-siderophore-synthesis",
+    "hmm_file": "Siderophore-Synthesis/Sid_RhbD_Rhizobactin_biosynthesis_Rhizobium_meliloti_Q9Z3Q9.hmm"
+  },
+  "Sid_RhbE_Rhizobactin_siderophore_biosynthesis_Rhizobium_meliloti_Q9Z3Q8.txt-nr": {
+    "sha256": "f32bad86defaff2f2f5aa3448f9098981725cea770c986035b08477f06de4fa3",
+    "cutoff": "0.0",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "RhbE-family-siderophore-synthesis",
+    "hmm_file": "Siderophore-Synthesis/Sid_RhbE_Rhizobactin_siderophore_biosynthesis_Rhizobium_meliloti_Q9Z3Q8.txt-nr.hmm"
+  },
+  "Sid_VabD_Vanchrobactin_Biosynthesis_Vibrio_anguillarum_AAW66006.2_180623": {
+    "sha256": "1e36c3639ee334a3edc4eed3e7708180e91fed9d7a6f74b2e9f6236dadda977b",
+    "cutoff": "36.0",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "VabD-family-siderophore-synthesis",
+    "hmm_file": "Siderophore-Synthesis/Sid_VabD_Vanchrobactin_Biosynthesis_Vibrio_anguillarum_AAW66006.2_180623.hmm"
+  },
+  "Sid_VibD_Vibriobactin_siderophore_biosynthesis_Vibrio_cholerae_AAD48884.1.txt-nr": {
+    "sha256": "9d10b54d0d8233dc23249796fd7720432781952e7469a042f5cc6260fd3b15a7",
+    "cutoff": "0.0",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "VibD-family-siderophore-synthesis",
+    "hmm_file": "Siderophore-Synthesis/Sid_VibD_Vibriobactin_siderophore_biosynthesis_Vibrio_cholerae_AAD48884.1.txt-nr.hmm"
+  },
+  "Sid_VibH_Vanchrobactin_Biosynthesis_Vibrio_cholerae_AAG00565.1_180623": {
+    "sha256": "e97850f0292e2659ceb24e599e08c833af907a03d6a678751da698046c413311",
+    "cutoff": "230.6",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "VibH-family-siderophore-synthesis",
+    "hmm_file": "Siderophore-Synthesis/Sid_VibH_Vanchrobactin_Biosynthesis_Vibrio_cholerae_AAG00565.1_180623.hmm"
+  },
+  "VabA-DhbA-EntA-VibA": {
+    "sha256": "d70c3f33f93c7ce4f3fb921d6b21c97e375b30da2e5f0c0f6df2fc37796dc34f",
+    "cutoff": "235.0",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "VabA-family-siderophore-synthesis",
+    "hmm_file": "Siderophore-Synthesis/VabA-DhbA-EntA-VibA.hmm"
+  },
+  "VabB-EntB-DhbB-VenB-VibB": {
+    "sha256": "c8b03ba1c94d58472df7d8cb5781bf130c1973a01724bcbf4c448ff16b03c75a",
+    "cutoff": "75.0",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "VabB-family-siderophore-synthesis",
+    "hmm_file": "Siderophore-Synthesis/VabB-EntB-DhbB-VenB-VibB.hmm"
+  },
+  "VabC-DhbC-VibC-EntC-AmoA-PchA": {
+    "sha256": "72d0c1e13e9272d4402999d354704fda36284ea3e119eb6060733bd4acef2af3",
+    "cutoff": "161.0",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "VabC-family-siderophore-synthesis",
+    "hmm_file": "Siderophore-Synthesis/VabC-DhbC-VibC-EntC-AmoA-PchA.hmm"
+  },
+  "VabE_Vanchrobactin_biosynthesis-rep": {
+    "sha256": "739511145c71ce5fa8004c372fbab4727daa44f391684651c0bcafaed59fc6d6",
+    "cutoff": "10000.0",
+    "status": "deprecated_nseq_insufficient",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "VabE-family-siderophore-synthesis",
+    "hmm_file": "Siderophore-Synthesis/VabE_Vanchrobactin_biosynthesis-rep.hmm"
+  },
+  "VabF_Vanchrobactin_biosynthesis-rep": {
+    "sha256": "19cc1b32eb1acb97b85f65cc81bc8df9369b4f6e4468c1e90dd2a8e569a8492d",
+    "cutoff": "10000.0",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "VabF-family-siderophore-synthesis",
+    "hmm_file": "Siderophore-Synthesis/VabF_Vanchrobactin_biosynthesis-rep.hmm"
+  },
+  "VabG_Vanchrobactin_biosynthesis-rep": {
+    "sha256": "4c147f80b73ed024a39735d4cd3036799ad6c2471e74c5c653e889ab3881a740",
+    "cutoff": "245.0",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "VabG-family-siderophore-synthesis",
+    "hmm_file": "Siderophore-Synthesis/VabG_Vanchrobactin_biosynthesis-rep.hmm"
+  },
+  "put_4WR82_SIDC_VF": {
+    "sha256": "402a7fceae17962695616f9c374e6677196f2331ea5031b2d66e21c9607c6657",
+    "cutoff": "7692.7",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "put_4WR82_SIDC_VF",
+    "hmm_file": "Siderophore-Synthesis/put_4WR82_SIDC_VF.hmm"
+  },
+  "put_B4EUG7_VF": {
+    "sha256": "4ca5a01168d4ba4e756d5596403a75f9c3b7a29bc5d1662c9b96984d86ab116a",
+    "cutoff": "518.7",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "put_B4EUG7_VF",
+    "hmm_file": "Siderophore-Synthesis/put_B4EUG7_VF.hmm"
+  },
+  "put_B4EUH0_VF": {
+    "sha256": "b550e2e7c8f60e9b278e52b4c0a6efe9970fa12171b2bee0529606164a055f7b",
+    "cutoff": "752.7",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "put_B4EUH0_VF",
+    "hmm_file": "Siderophore-Synthesis/put_B4EUH0_VF.hmm"
+  },
+  "put_B4EUH1_V2": {
+    "sha256": "ff7148d38c688cc293b2f8941d88520e281b5c1e230070ba0b97ccb0748587e1",
+    "cutoff": "655.6",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "put_B4EUH1_V2",
+    "hmm_file": "Siderophore-Synthesis/put_B4EUH1_V2.hmm"
+  },
+  "put_B4EUH2_VF": {
+    "sha256": "b354aab056a43ba07244f6e7c8c9e31112cd69abf13191aec4bc4d92cd400897",
+    "cutoff": "627.7",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "put_B4EUH2_VF",
+    "hmm_file": "Siderophore-Synthesis/put_B4EUH2_VF.hmm"
+  },
+  "put_B4EUH5_V4": {
+    "sha256": "e41cc8a04be1c2d8d7dfa333265f44f6ffe483a9ecef0c3e9911bd2b93bc04d6",
+    "cutoff": "202.7",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "put_B4EUH5_V4",
+    "hmm_file": "Siderophore-Synthesis/put_B4EUH5_V4.hmm"
+  },
+  "put_CRL25140_VF": {
+    "sha256": "bab5b8cfefcb20a46f993b938895ce66e0b38241bc286a43cc421b2001e01545",
+    "cutoff": "7936.4",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "put_CRL25140_VF",
+    "hmm_file": "Siderophore-Synthesis/put_CRL25140_VF.hmm"
+  },
+  "put_D4AU56_V3_corr": {
+    "sha256": "ad4ded69f53c180028a42564afc48b4cf16f40a6095d6305c4df76bf63fc27bc",
+    "cutoff": "7453.5",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "put_D4AU56_V3_corr",
+    "hmm_file": "Siderophore-Synthesis/put_D4AU56_V3_corr.hmm"
+  },
+  "put_Ferrirhodin_VF": {
+    "sha256": "bdb58b7d3bb4fbd261d2b9fc7b0cdcb1690fd2415c791950eddf6c78c856106d",
+    "cutoff": "8038.7",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "put_Ferrirhodin_VF",
+    "hmm_file": "Siderophore-Synthesis/put_Ferrirhodin_VF.hmm"
+  },
+  "put_FitA_VF": {
+    "sha256": "2ccafb08fe1be80f7f8110c49039b5ddb43ec6a92e14ee77f5272fe738e3d33e",
+    "cutoff": "868.4",
+    "status": "active",
+    "category": "Siderophore-Transport",
+    "gene_name": "put_FitA_VF",
+    "hmm_file": "Siderophore-Transport/put_FitA_VF.hmm"
+  },
+  "put_I1RN14_NRPS2_VF": {
+    "sha256": "ad62ac7b13d06c46d414ef70aaac1eefc43beff11c3a26ac1a2fc9c4f4b1ed59",
+    "cutoff": "8568.1",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "put_I1RN14_NRPS2_VF",
+    "hmm_file": "Siderophore-Synthesis/put_I1RN14_NRPS2_VF.hmm"
+  },
+  "put_NRPS1_VF_corr": {
+    "sha256": "18f106b678d409ba615e0d0d116208a6071de1223972405124eacc1c8c35b3f8",
+    "cutoff": "2702.6",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "put_NRPS1_VF_corr",
+    "hmm_file": "Siderophore-Synthesis/put_NRPS1_VF_corr.hmm"
+  },
+  "put_Q5D6D7_NRPS2_VF": {
+    "sha256": "fc5b0ee2b96139f1df788b90bbf77a70deb0cf519bbfc8b167e99b45713a0a54",
+    "cutoff": "8969.5",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "put_Q5D6D7_NRPS2_VF",
+    "hmm_file": "Siderophore-Synthesis/put_Q5D6D7_NRPS2_VF.hmm"
+  },
+  "put_Q6CSN0_VF": {
+    "sha256": "1c5ff6d8404cfcdc80a8ac00b55d278d3d4e4e574d0026c25c319b3911ae12fd",
+    "cutoff": "650.0",
+    "status": "active",
+    "category": "Siderophore-Transport",
+    "gene_name": "put_Q6CSN0_VF",
+    "hmm_file": "Siderophore-Transport/put_Q6CSN0_VF.hmm"
+  },
+  "put_Q6CSN3_VF": {
+    "sha256": "1b7a63a9dc40f406ce9ca7b6af561e3b276f5a4b22a8d6939ba715ec13fca573",
+    "cutoff": "1033.5",
+    "status": "deprecated_nseq_insufficient",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "put_Q6CSN3_VF",
+    "hmm_file": "Siderophore-Synthesis/put_Q6CSN3_VF.hmm"
+  },
+  "put_RhbF_DesD_VF": {
+    "sha256": "e12c48d15b2fb8c98ded9d56dc692a5a7e12d6576d47a6df7541b65e8b2f50b0",
+    "cutoff": "19.2",
+    "status": "deprecated_nseq_insufficient",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "put_RhbF_DesD_VF",
+    "hmm_file": "Siderophore-Synthesis/put_RhbF_DesD_VF.hmm"
+  },
+  "put_SidA1_V1": {
+    "sha256": "5ce8f9c2f33c3ebf75b73a893affd6066acbe73eb5ce01e17bb849f6d0085525",
+    "cutoff": "277.8",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "put_SidA1_V1",
+    "hmm_file": "Siderophore-Synthesis/put_SidA1_V1.hmm"
+  },
+  "put_TAFC_VF": {
+    "sha256": "89e03c0cd55da576e8a57840582b5ef0e487bf71b80afee4f9a7555314ce5206",
+    "cutoff": "286.7",
+    "status": "deprecated_dedup_sequence_cluster",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "put_TAFC_VF",
+    "hmm_file": "Siderophore-Synthesis/put_TAFC_VF.hmm"
+  },
+  "put_WP_010220689_VF": {
+    "sha256": "82ba5c0440ac650dccbd29e8cd928d6db0164ca47e3bf3fd4edf798fa795fce0",
+    "cutoff": "971.4",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "put_WP_010220689_VF",
+    "hmm_file": "Siderophore-Synthesis/put_WP_010220689_VF.hmm"
+  },
+  "put_WP_010220690_VF": {
+    "sha256": "d8fc9ec6a9174a55a4dd3bcb6a3ed2fbab19c277d35dcd2438d46f1dd62b46be",
+    "cutoff": "850.9",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "put_WP_010220690_VF",
+    "hmm_file": "Siderophore-Synthesis/put_WP_010220690_VF.hmm"
+  },
+  "put_WP_010220691_VF": {
+    "sha256": "3fd83fa5c0ba11bb3ee0ab2efe1db7642e838e95f677f7b75e229dd027191af8",
+    "cutoff": "689.3",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "put_WP_010220691_VF",
+    "hmm_file": "Siderophore-Synthesis/put_WP_010220691_VF.hmm"
+  },
+  "put_rumB_VF": {
+    "sha256": "7c822b0f93c6101ae7d6ee090e94cd29fcb483f2211d399e6280e3e6e069c7a0",
+    "cutoff": "413.8",
+    "status": "active",
+    "category": "Siderophore-Transport",
+    "gene_name": "put_rumB_VF",
+    "hmm_file": "Siderophore-Transport/put_rumB_VF.hmm"
+  },
+  "FecB-PvuB-vibrioferrin_transport": {
+    "sha256": "f2bcc3c357fc333d65aeac6dc4b6d25ef10ba818cb31195b1bb7de6480e7ab82",
+    "cutoff": "174.6",
+    "status": "active",
+    "category": "Siderophore-Transport",
+    "gene_name": "PvuB-family-substrate-binding-protein",
+    "hmm_file": "Siderophore-Transport/FecB-PvuB-vibrioferrin_transport.hmm"
+  },
+  "FecE-PvuE-FhuC-CbrD-FepC-YusV-FpuD-FpuC-PiuA-PirA-FepA-RhtA": {
+    "sha256": "89ee38d3b89f1bebcebf6ffa00db0095e7052857bd88427417cbe991a279a9a5",
+    "cutoff": "200.1",
+    "status": "deprecated_dedup_sequence_cluster",
+    "category": "Siderophore-Transport",
+    "gene_name": "PvuE-family-ATP-binding-protein",
+    "hmm_file": "Siderophore-Transport/FecE-PvuE-FhuC-CbrD-FepC-YusV-FpuD-FpuC-PiuA-PirA-FepA-RhtA.hmm"
+  },
+  "FeuB-FhuB-PvuC-CbrB-PvuD-FeuC-CbrC": {
+    "sha256": "b9158d1199b595fbdb687d64c9c0fd4c28bc66b2c403489ee7c903672d5d6c32",
+    "cutoff": "151.8",
+    "status": "active",
+    "category": "Siderophore-Transport",
+    "gene_name": "PvuC-family-permease",
+    "hmm_file": "Siderophore-Transport/FeuB-FhuB-PvuC-CbrB-PvuD-FeuC-CbrC.hmm"
+  },
+  "FhuB-FeuB-CbrB-PvuC-iron_ABC_transporter_periplasmic": {
+    "sha256": "967e237b2dd219ba47e05ba7e8845dbb94871742eab3b813dec7d85c75fead0b",
+    "cutoff": "228.1",
+    "status": "active",
+    "category": "Siderophore-Transport",
+    "gene_name": "PvuC-family-permease",
+    "hmm_file": "Siderophore-Transport/FhuB-FeuB-CbrB-PvuC-iron_ABC_transporter_periplasmic.hmm"
+  },
+  "FpuC-FhuC-FpuD-YusV-CbrD-FepC-PvuE-FecE-HatC-ATPase": {
+    "sha256": "d74542675de31c538266f1ec3a69158a11f31bd12123887286f14ddecce805d7",
+    "cutoff": "269.5",
+    "status": "deprecated_dedup_sequence_cluster",
+    "category": "Siderophore-Transport",
+    "gene_name": "PvuE-family-permease",
+    "hmm_file": "Siderophore-Transport/FpuC-FhuC-FpuD-YusV-CbrD-FepC-PvuE-FecE-HatC-ATPase.hmm"
+  },
+  "FpuCD-YusV-CbrD-FepC-FepE-PvuE-ABC_transporters_ATPase": {
+    "sha256": "b948296402a85110f5cdcbcbc48ccba0d3c489262ffbd22a2eb16a2b56295af8",
+    "cutoff": "269.5",
+    "status": "active",
+    "category": "Siderophore-Transport",
+    "gene_name": "PvuE-family-ATP-binding-protein",
+    "hmm_file": "Siderophore-Transport/FpuCD-YusV-CbrD-FepC-FepE-PvuE-ABC_transporters_ATPase.hmm"
+  },
+  "FpuD-CbrD-FepC-FhuC-PvuDE-FecE-SstC-ViuC-Siderophore_ABC_transport": {
+    "sha256": "519a664cf8c56026811bb9e57bef9a2300f3860222757ff6e491a1c8c286e055",
+    "cutoff": "172.0",
+    "status": "active",
+    "category": "Siderophore-Transport",
+    "gene_name": "PvuD-family-ATP-binding-protein",
+    "hmm_file": "Siderophore-Transport/FpuD-CbrD-FepC-FhuC-PvuDE-FecE-SstC-ViuC-Siderophore_ABC_transport.hmm"
+  },
+  "FpvK-sid_Pyoverdine_uptake-rep": {
+    "sha256": "d45948f283fc0cb65c230e82ceaf7852cfd6cc802e3e6934bdac72d9cfd72d57",
+    "cutoff": "25.6",
+    "status": "active",
+    "category": "Siderophore-Transport",
+    "gene_name": "FpvK-family-hypothetical",
+    "hmm_file": "Siderophore-Transport/FpvK-sid_Pyoverdine_uptake-rep.hmm"
+  },
+  "IroC-salmochelin_transport-rep": {
+    "sha256": "4194558a665d9e5b889e58675934a795c871cf4f85ee76b642b5e1b2cce2f3dc",
+    "cutoff": "454.0",
+    "status": "deprecated_nseq_insufficient",
+    "category": "Siderophore-Transport",
+    "gene_name": "IroC-family-ATP-binding-protein",
+    "hmm_file": "Siderophore-Transport/IroC-salmochelin_transport-rep.hmm"
+  },
+  "K02014": {
+    "sha256": "b0c548b4d818cdfe4af8d87422194092406009166ed2aeec06c43a9117441523",
+    "cutoff": "161.3",
+    "status": "active",
+    "category": "Siderophore-Transport",
+    "gene_name": "K02014",
+    "hmm_file": "Siderophore-Transport/K02014.hmm"
+  },
+  "K02016": {
+    "sha256": "c425a67f9135ab93c539cfdf5bb0dfa5c3aab9f3ffef9ba54a57a369095b7291",
+    "cutoff": "154.17",
+    "status": "active",
+    "category": "Siderophore-Transport",
+    "gene_name": "K02016",
+    "hmm_file": "Siderophore-Transport/K02016.hmm"
+  },
+  "K02361": {
+    "sha256": "eef4e7fc14b76d70739b195b62dc224e0c6038e4a416c9bcb4387c7d13394e9c",
+    "cutoff": "104.9",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K02361",
+    "hmm_file": "Siderophore-Synthesis/K02361.hmm"
+  },
+  "K02362": {
+    "sha256": "fae1345167fc9d190a15d4d14714cdd69d31e826e71737a1f1b3bb37156267fe",
+    "cutoff": "776.83",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K02362",
+    "hmm_file": "Siderophore-Synthesis/K02362.hmm"
+  },
+  "K02363": {
+    "sha256": "32f2c9636d55226e2fb777284d6697f1ceb5162b1b0f6b964b264f488df3d950",
+    "cutoff": "1380.97",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K02363",
+    "hmm_file": "Siderophore-Synthesis/K02363.hmm"
+  },
+  "K02364": {
+    "sha256": "bb79838dafa0150968a6ed54c688438f516962c6d664e6fd57a45671e7145e12",
+    "cutoff": "1550.0",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K02364",
+    "hmm_file": "Siderophore-Synthesis/K02364.hmm"
+  },
+  "K03894": {
+    "sha256": "1a639f15bcc51b384755ac9d4b6fc1e85a3975f9d8b523938cf8e2374baa3949",
+    "cutoff": "528.23",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K03894",
+    "hmm_file": "Siderophore-Synthesis/K03894.hmm"
+  },
+  "K03895": {
+    "sha256": "d4018cd5094ab1738e5a36b498e40e33378a598dd18a50505229fee79fd73c76",
+    "cutoff": "626.6",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K03895",
+    "hmm_file": "Siderophore-Synthesis/K03895.hmm"
+  },
+  "K03896": {
+    "sha256": "e3e3ed9fd8cb6af311cdd6278571ed0c8936c16463da393caaab5baf1a3649a4",
+    "cutoff": "282.37",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K03896",
+    "hmm_file": "Siderophore-Synthesis/K03896.hmm"
+  },
+  "K03897": {
+    "sha256": "2e94bc026e20cfe19f6bacd354a5c0f01f35e5f594ce5ff6bdb74fa7768f9c8d",
+    "cutoff": "376.3",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K03897",
+    "hmm_file": "Siderophore-Synthesis/K03897.hmm"
+  },
+  "K04778": {
+    "sha256": "4c34f3bd49ce8749ddf1d225a71456815f9580b617c9aff6d67bd454e476793d",
+    "cutoff": "697.63",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K04778",
+    "hmm_file": "Siderophore-Synthesis/K04778.hmm"
+  },
+  "K04780": {
+    "sha256": "ff590f0fa2459081a75b2e55b25eb95a16329ff67437904a228ca16824168bf4",
+    "cutoff": "2241.0",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K04780",
+    "hmm_file": "Siderophore-Synthesis/K04780.hmm"
+  },
+  "K04781": {
+    "sha256": "7a77607f6910a884e5b8bd122e3ad2742f8342f6a92570909982eba102b61a42",
+    "cutoff": "494.33",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K04781",
+    "hmm_file": "Siderophore-Synthesis/K04781.hmm"
+  },
+  "K04782": {
+    "sha256": "92b33e1b298909d045dd5abe12c61416acf381b2860c41cddf2f849e133d4a34",
+    "cutoff": "87.3",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K04782",
+    "hmm_file": "Siderophore-Synthesis/K04782.hmm"
+  },
+  "K04783": {
+    "sha256": "c9f596b7652efb50f6613925cebc24ede8adf4bacd421166c6da165ee2da5bb9",
+    "cutoff": "798.27",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K04783",
+    "hmm_file": "Siderophore-Synthesis/K04783.hmm"
+  },
+  "K04784": {
+    "sha256": "397ff5b6e82ac454e2ba35a5869e9e7fb0485c808aa4053baea766522f4e8a37",
+    "cutoff": "1871.0",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K04784",
+    "hmm_file": "Siderophore-Synthesis/K04784.hmm"
+  },
+  "K04785": {
+    "sha256": "42c949011b312d26c73483b76d61f692f201bd596c9440993b55f3797ce4d19b",
+    "cutoff": "479.37",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K04785",
+    "hmm_file": "Siderophore-Synthesis/K04785.hmm"
+  },
+  "K04786": {
+    "sha256": "42cde27246378d6754a4e343ec9db294c88630736abe8282cf235ea48096cb75",
+    "cutoff": "1555.1",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K04786",
+    "hmm_file": "Siderophore-Synthesis/K04786.hmm"
+  },
+  "K04787": {
+    "sha256": "5d8f12af65ad52d9f056a46312838eb78abe2a204bc978817f021fb54c20e6ce",
+    "cutoff": "766.97",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "K04787",
+    "hmm_file": "Siderophore-Synthesis/K04787.hmm"
+  },
+  "K08197": {
+    "sha256": "132c508b777c3c019426f2db53a6d6b69507618207fa5a6db1e44eb1bc31f8ea",
+    "cutoff": "399.67",
+    "status": "active",
+    "category": "Siderophore-Transport",
+    "gene_name": "K08197",
+    "hmm_file": "Siderophore-Transport/K08197.hmm"
+  },
+  "LbtU-LbtB-legiobactin_receptor": {
+    "sha256": "7f04feb40f3c6546dec1ef30ffef483e422a175bc41fb38678fe60da4200bcb0",
+    "cutoff": "21.0",
+    "status": "deprecated_nseq_insufficient",
+    "category": "Siderophore-Transport",
+    "gene_name": "LbtU-family-siderophore-receptor",
+    "hmm_file": "Siderophore-Transport/LbtU-LbtB-legiobactin_receptor.hmm"
+  },
+  "LbtU-LvtA-PiuA-PirA-RhtA-ViuA": {
+    "sha256": "04edfe87c4619ae9617c6982823811937cfe495a7516593edb9b23e0142fdcc1",
+    "cutoff": "25.0",
+    "status": "active",
+    "category": "Siderophore-Transport",
+    "gene_name": "LbtU-family-siderophore receptor",
+    "hmm_file": "Siderophore-Transport/LbtU-LvtA-PiuA-PirA-RhtA-ViuA.hmm"
+  },
+  "LbtU_LbtB-legiobactin_receptor_2": {
+    "sha256": "932a42769591de0d0c5cba18e3a349d0623b336b5c0acbe029c699979cd4c2fd",
+    "cutoff": "21.3",
+    "status": "active",
+    "category": "Siderophore-Transport",
+    "gene_name": "LbtU-family-siderophore-receptor",
+    "hmm_file": "Siderophore-Transport/LbtU_LbtB-legiobactin_receptor_2.hmm"
+  },
+  "PF00593-TonB_dependent_receptor-PiuA-PirA-FepA-RhtA": {
+    "sha256": "0965bc857e6198fb892cc93e06c4d69ec5132d119e2a33fbd7129ecc519519a1",
+    "cutoff": "75.3",
+    "status": "active",
+    "category": "Siderophore-Transport",
+    "gene_name": "PirA-family-siderophore-receptor",
+    "hmm_file": "Siderophore-Transport/PF00593-TonB_dependent_receptor-PiuA-PirA-FepA-RhtA.hmm"
+  },
+  "PF01032-FecCD-YfhA-FpvE-YfeCD_transport_family": {
+    "sha256": "b377e08daff10d5758091450a7cd0484414cf18f8681f9f2448ea2c7524baff4",
+    "cutoff": "25.8",
+    "status": "active",
+    "category": "Siderophore-Transport",
+    "gene_name": "FpvE-family-permease",
+    "hmm_file": "Siderophore-Transport/PF01032-FecCD-YfhA-FpvE-YfeCD_transport_family.hmm"
+  },
+  "PF01497_Peripla_BP_2-HatD-SsstD-PhuT-FhuD-HmuT-YfiY-FpuA-FatB-ViuP-CbrA": {
+    "sha256": "195bf4d1234bb90a1f9f8770194b912fb41e472af912bfbb1abe6765bb75e264",
+    "cutoff": "27.5",
+    "status": "active",
+    "category": "Siderophore-Transport",
+    "gene_name": "HatD-family-substrate-binding-protein",
+    "hmm_file": "Siderophore-Transport/PF01497_Peripla_BP_2-HatD-SsstD-PhuT-FhuD-HmuT-YfiY-FpuA-FatB-ViuP-CbrA.hmm"
+  },
+  "PF06276-RhbCF-AcsD-IucA-IucC-PvsB-Ferric_iron_reductase_FhuF_like_transporter": {
+    "sha256": "5d6da3776d1b67ffcfdff0920d1eceea7966a58799592d73cfe9d10de8daa76f",
+    "cutoff": "25.2",
+    "status": "active",
+    "category": "Siderophore-Transport",
+    "gene_name": "IucA-family-iron-reductase",
+    "hmm_file": "Siderophore-Transport/PF06276-RhbCF-AcsD-IucA-IucC-PvsB-Ferric_iron_reductase_FhuF_like_transporter.hmm"
+  },
+  "PF07715_sub-TonB_dependent_siderophore_receptor_plug-PirA-PiuA-FepA-RhtA-LvtA": {
+    "sha256": "bb3c1be61e992ca8e47acaec3ef0380fd8ef5705b339298264d2559d2fbab509",
+    "cutoff": "21.1",
+    "status": "active",
+    "category": "Siderophore-Transport",
+    "gene_name": "PirA-family-siderophore-receptor",
+    "hmm_file": "Siderophore-Transport/PF07715_sub-TonB_dependent_siderophore_receptor_plug-PirA-PiuA-FepA-RhtA-LvtA.hmm"
+  },
+  "PirA-siderophore_receptor-rep": {
+    "sha256": "f3bb967ed571a7ba2b6a2ad7527e58faa21b2faa48db246e1e223e92e0e33c3f",
+    "cutoff": "317.0",
+    "status": "active",
+    "category": "Siderophore-Transport",
+    "gene_name": "PirA-family-siderophore-receptor",
+    "hmm_file": "Siderophore-Transport/PirA-siderophore_receptor-rep.hmm"
+  },
+  "PiuA-siderophore_receptor-rep": {
+    "sha256": "ac44ed3cb762e8ef3d5808f85373e2650ef1691b0f6e72673ff00fe34eaa52f0",
+    "cutoff": "101.0",
+    "status": "active",
+    "category": "Siderophore-Transport",
+    "gene_name": "PiuA-family-siderophore-receptor",
+    "hmm_file": "Siderophore-Transport/PiuA-siderophore_receptor-rep.hmm"
+  },
+  "PvuB-FecB_vibrioferrin_transport": {
+    "sha256": "ddfc3b64007c0909e24d0ae3c4e1ec2bff798be2a117ea4260db447844cec1fc",
+    "cutoff": "150.0",
+    "status": "active",
+    "category": "Siderophore-Transport",
+    "gene_name": "PvuB-family-substrate-binding-protein",
+    "hmm_file": "Siderophore-Transport/PvuB-FecB_vibrioferrin_transport.hmm"
+  },
+  "PvuCD-FhuB-CbrBC-FeuB-CbrC-YfhA": {
+    "sha256": "b12bb47b47e07688fe853d2e36c9940e6f61ec4590e8253a413812da4521f1fb",
+    "cutoff": "18.3",
+    "status": "active",
+    "category": "Siderophore-Transport",
+    "gene_name": "PvuCD-family-permease",
+    "hmm_file": "Siderophore-Transport/PvuCD-FhuB-CbrBC-FeuB-CbrC-YfhA.hmm"
+  },
+  "PvuCD-FhuB-CbrBC-FeuBC": {
+    "sha256": "609ee7b44c52a8ad54675adb840a3e9f27a07a4f14914f0bece9d95988b2a113",
+    "cutoff": "18.3",
+    "status": "active",
+    "category": "Siderophore-Transport",
+    "gene_name": "PvuCD-family-permease",
+    "hmm_file": "Siderophore-Transport/PvuCD-FhuB-CbrBC-FeuBC.hmm"
+  },
+  "PvuE-FecB-vibrioferrin_transport": {
+    "sha256": "c112aabeab6ad7cc95cad7be265db2110c7e0364e7be5e7343538c47af04dea3",
+    "cutoff": "350.0",
+    "status": "active",
+    "category": "Siderophore-Transport",
+    "gene_name": "PvuE-family-substrate-binding-protein",
+    "hmm_file": "Siderophore-Transport/PvuE-FecB-vibrioferrin_transport.hmm"
+  },
+  "Sid_EntS_enterobactin_exporter_Ecoli_P24077_180603": {
+    "sha256": "102e0ef19cc6146c80fce800da92944b499ff9d3b51813046b3e3a9bd20125ea",
+    "cutoff": "18.3",
+    "status": "active",
+    "category": "Siderophore-Transport",
+    "gene_name": "EntS-family-siderophore-export",
+    "hmm_file": "Siderophore-Transport/Sid_EntS_enterobactin_exporter_Ecoli_P24077_180603.hmm"
+  },
+  "Sid_FptB_Ferripyochelin_uptake_Pseudomonas_aeruginosa_PA4220_180623": {
+    "sha256": "6d3e27824a082a5aacba1a3d3d3acebd6f4ae138a9fae931c2b829b9fc0d4cee",
+    "cutoff": "50.0",
+    "status": "active",
+    "category": "Siderophore-Transport",
+    "gene_name": "FptB-family-siderophore-transport",
+    "hmm_file": "Siderophore-Transport/Sid_FptB_Ferripyochelin_uptake_Pseudomonas_aeruginosa_PA4220_180623.hmm"
+  },
+  "Sid_FptC_Ferripyochelin_uptake_Pseudomonas_aeruginosa_PA4219_180623": {
+    "sha256": "7a5b753f9d82e67a96dbd1ec0d57f9939595e0760572b16b51c8d63015ed7ac4",
+    "cutoff": "18.2",
+    "status": "active",
+    "category": "Siderophore-Transport",
+    "gene_name": "FptC-family-siderophore-transport",
+    "hmm_file": "Siderophore-Transport/Sid_FptC_Ferripyochelin_uptake_Pseudomonas_aeruginosa_PA4219_180623.hmm"
+  },
+  "Sid_FptX_Ferripyochelin_uptake_Pseudomonas_aeruginosa_PA4218_180623": {
+    "sha256": "134a222014c9d9c63f5adbd1e148d9bf369cdfe71a9fd122fbdc4e87a1e4b359",
+    "cutoff": "18.4",
+    "status": "active",
+    "category": "Siderophore-Transport",
+    "gene_name": "FptX-family-siderophore-transport",
+    "hmm_file": "Siderophore-Transport/Sid_FptX_Ferripyochelin_uptake_Pseudomonas_aeruginosa_PA4218_180623.hmm"
+  },
+  "Sid_FpvC_metal_ion_transport_PA2407_Paeruginosa_PAO1_180602": {
+    "sha256": "babcff42292896569d26e11652bd423aee23f068f85bcdee214333928255cf42",
+    "cutoff": "18.5",
+    "status": "active",
+    "category": "Siderophore-Transport",
+    "gene_name": "FpvC-family-siderophore-transport",
+    "hmm_file": "Siderophore-Transport/Sid_FpvC_metal_ion_transport_PA2407_Paeruginosa_PAO1_180602.hmm"
+  },
+  "Sid_FpvD_ATPase_PA2408_Paeruginosa_PAO1_180602": {
+    "sha256": "3ffe6f4bb2903549e1a89a992226c1d8432e5786092dc5f1e95296c4cecdde05",
+    "cutoff": "40.0",
+    "status": "active",
+    "category": "Siderophore-Transport",
+    "gene_name": "FpvD-family-siderophore-transport",
+    "hmm_file": "Siderophore-Transport/Sid_FpvD_ATPase_PA2408_Paeruginosa_PAO1_180602.hmm"
+  },
+  "Sid_FpvF_metal_ion_transport_PA2410_Paeruginosa_PAO1_180602": {
+    "sha256": "3b9a7d85dde32b1ef9eb17ccd71ee3313578f39a468172e88ef80191256ba5e3",
+    "cutoff": "18.7",
+    "status": "active",
+    "category": "Siderophore-Transport",
+    "gene_name": "FpvF-family-siderophore-transport",
+    "hmm_file": "Siderophore-Transport/Sid_FpvF_metal_ion_transport_PA2410_Paeruginosa_PAO1_180602.hmm"
+  },
+  "Sid_FpvG_iron_reductase_PA2403_Paeruginosa_PAO1_180602": {
+    "sha256": "44a877e549c973ac55b477be8bdfed7d1d7ef71e76801a326fb3533a5c09ff32",
+    "cutoff": "18.0",
+    "status": "active",
+    "category": "Siderophore-Transport",
+    "gene_name": "FpvG-family-siderophore-transport",
+    "hmm_file": "Siderophore-Transport/Sid_FpvG_iron_reductase_PA2403_Paeruginosa_PAO1_180602.hmm"
+  },
+  "Sid_FpvH_iron_release_PA2404_Paeruginosa_PAO1_180602": {
+    "sha256": "b77babd9d89ad3225cf9a53cdf94e3666de62ebc072d2dae6bac91f84343ec40",
+    "cutoff": "50.0",
+    "status": "active",
+    "category": "Siderophore-Transport",
+    "gene_name": "FpvH-family-siderophore-transport",
+    "hmm_file": "Siderophore-Transport/Sid_FpvH_iron_release_PA2404_Paeruginosa_PAO1_180602.hmm"
+  },
+  "Sid_FpvJ_PA2405_Paeruginosa_PAO1_180602": {
+    "sha256": "fbeb1276bf006165eae68f14e659eece24e4a99cff99fff34117db1e07d5e4fb",
+    "cutoff": "40.0",
+    "status": "active",
+    "category": "Siderophore-Transport",
+    "gene_name": "FpvJ-family-siderophore-transport",
+    "hmm_file": "Siderophore-Transport/Sid_FpvJ_PA2405_Paeruginosa_PAO1_180602.hmm"
+  },
+  "Sid_IroB_Shigella_dysenteriae_AAR13266.1_180606": {
+    "sha256": "dceea3e31edc18276ac869e84124072d4475b2456e32417b2cea57462f8848e6",
+    "cutoff": "132.0",
+    "status": "active",
+    "category": "Siderophore-Transport",
+    "gene_name": "IroB-family-siderophore-transport",
+    "hmm_file": "Siderophore-Transport/Sid_IroB_Shigella_dysenteriae_AAR13266.1_180606.hmm"
+  },
+  "Sid_IroE_Shigella_dysenteriae_AAR13269.1_180606": {
+    "sha256": "25defd15b1ba009d8e096e1d224d6fac16de1f2a11d0a8156e06367bbfce0452",
+    "cutoff": "20.0",
+    "status": "active",
+    "category": "Siderophore-Transport",
+    "gene_name": "IroE-family-siderophore-transport",
+    "hmm_file": "Siderophore-Transport/Sid_IroE_Shigella_dysenteriae_AAR13269.1_180606.hmm"
+  },
+  "Sid_LbtC_Legiobactin_PAP2_superfamily_Legionella_oakridgensis_AHE65915.1_180604": {
+    "sha256": "170d1fb44e7514eb3c7b071d11fe0bc3d1d0d0d1b67b4bb10851328164adcbbd",
+    "cutoff": "20.0",
+    "status": "active",
+    "category": "Siderophore-Transport",
+    "gene_name": "MFS-transporter",
+    "hmm_file": "Siderophore-Transport/Sid_LbtC_Legiobactin_PAP2_superfamily_Legionella_oakridgensis_AHE65915.1_180604.hmm"
+  },
+  "Sid_PvdR_Pyoverdine_export_Paeruginosa_PA2389_180623": {
+    "sha256": "63ee8d8c7a5b6c006b3e75e34f9def2e1ca0ff8b00186d95a5a4786ac3910337",
+    "cutoff": "61.0",
+    "status": "active",
+    "category": "Siderophore-Transport",
+    "gene_name": "PvdR-family-sideropore-export",
+    "hmm_file": "Siderophore-Transport/Sid_PvdR_Pyoverdine_export_Paeruginosa_PA2389_180623.hmm"
+  },
+  "Sid_PvdT_Pyoverdine_export_Paeruginosa_PA2390_180623": {
+    "sha256": "5956d3ed363a786d8ed5173d7be8aa678ac728a9a774fd853cf529a83b343d39",
+    "cutoff": "175.0",
+    "status": "active",
+    "category": "Siderophore-Transport",
+    "gene_name": "PvdT-family-siderophore-export",
+    "hmm_file": "Siderophore-Transport/Sid_PvdT_Pyoverdine_export_Paeruginosa_PA2390_180623.hmm"
+  },
+  "Sid_VabS_Vanchrobactin_Export_Vibrio_anguillarum_CAJ45638.1_180623": {
+    "sha256": "72bcc6ada016e51711107046244535c70d79dfded8b274aa3f9f7de94836ea98",
+    "cutoff": "204.0",
+    "status": "active",
+    "category": "Siderophore-Transport",
+    "gene_name": "VabS-family-siderophore-export",
+    "hmm_file": "Siderophore-Transport/Sid_VabS_Vanchrobactin_Export_Vibrio_anguillarum_CAJ45638.1_180623.hmm"
+  },
+  "Sid_ViuB_Vibriobactin_siderophore_transport_utilization_protein_Vibrio_cholerae_A5F660.txt-nr": {
+    "sha256": "d351a6fcdb3049d0735649a359ee5ee6a0d869456c06aba94012c5206057465e",
+    "cutoff": "0.0",
+    "status": "active",
+    "category": "Siderophore-Transport",
+    "gene_name": "ViuB-family-siderophore-utilization",
+    "hmm_file": "Siderophore-Transport/Sid_ViuB_Vibriobactin_siderophore_transport_utilization_protein_Vibrio_cholerae_A5F660.txt-nr.hmm"
+  },
+  "Sid_YqjH_NADPH-dep_ferric_chelate_reductase_enterobactin_Q46871_Escherichia_coli_180606": {
+    "sha256": "c352c8b45cbfaebafc99375aa872ee78532355bcb9a3702166bb10a5b3e563d4",
+    "cutoff": "27.0",
+    "status": "active",
+    "category": "Siderophore-Transport",
+    "gene_name": "YqjH-family-iron-reductase",
+    "hmm_file": "Siderophore-Transport/Sid_YqjH_NADPH-dep_ferric_chelate_reductase_enterobactin_Q46871_Escherichia_coli_180606.hmm"
+  },
+  "put_B4EXX6_V2": {
+    "sha256": "2b9adaae3a7c951128b66dfca61bc0a699a7023d45e9c985653e96a73b0cb6ff",
+    "cutoff": "542.6",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "put_B4EXX6_V2",
+    "hmm_file": "Siderophore-Synthesis/put_B4EXX6_V2.hmm"
+  },
+  "put_B4EXY3_V2": {
+    "sha256": "fa9c2418e0d96344d974f30717d726bab077be5b6ffda4a4827aafd5813d379f",
+    "cutoff": "306.4",
+    "status": "active",
+    "category": "Siderophore-Synthesis",
+    "gene_name": "put_B4EXY3_V2",
+    "hmm_file": "Siderophore-Synthesis/put_B4EXY3_V2.hmm"
+  },
+  "put_FcuA_V3_corr": {
+    "sha256": "872bc01938684e485a263b0eb9ca53a5df07760fee5709e4d9c9a9531b29f0f1",
+    "cutoff": "853.8",
+    "status": "active",
+    "category": "Siderophore-Transport",
+    "gene_name": "put_FcuA_V3_corr",
+    "hmm_file": "Siderophore-Transport/put_FcuA_V3_corr.hmm"
+  },
+  "put_FhuA_V3_corr": {
+    "sha256": "e58abf743bda14836e2f5540380cd5d7adbbca27eea44eb36e8a2219f451e299",
+    "cutoff": "844.0",
+    "status": "active",
+    "category": "Siderophore-Transport",
+    "gene_name": "put_FhuA_V3_corr",
+    "hmm_file": "Siderophore-Transport/put_FhuA_V3_corr.hmm"
+  },
+  "put_FhuE_V2_corr": {
+    "sha256": "6712a8e4600b6bb43ce1ec77acda6586d753e42676894bf028b325ceb1768b11",
+    "cutoff": "775.5",
+    "status": "active",
+    "category": "Siderophore-Transport",
+    "gene_name": "put_FhuE_V2_corr",
+    "hmm_file": "Siderophore-Transport/put_FhuE_V2_corr.hmm"
+  },
+  "put_FiuA_V3_corr": {
+    "sha256": "dcf8b40c07abf29db2b8d5cdc1075c4c5177516763d5959d4f52c84e1dc123d6",
+    "cutoff": "879.7",
+    "status": "active",
+    "category": "Siderophore-Transport",
+    "gene_name": "put_FiuA_V3_corr",
+    "hmm_file": "Siderophore-Transport/put_FiuA_V3_corr.hmm"
+  },
+  "HasB-TonB_paralog_heme_uptake-rep": {
+    "sha256": "b8c51ff8ebe11264e195757f2cffea972425af92f41398d16e19df534686e9cb",
+    "cutoff": "75.0",
+    "status": "active",
+    "category": "Siderophore-TransportPotential",
+    "gene_name": "TonB-family",
+    "hmm_file": "Siderophore-TransportPotential/HasB-TonB_paralog_heme_uptake-rep.hmm"
+  },
+  "PF01618-MotA_TolQ_ExbB_proton_channel_family": {
+    "sha256": "658bf7fc80e105578770ba2f714a79cdc4ae3f70f1b3d117ec4974cdbfb3e034",
+    "cutoff": "22.3",
+    "status": "active",
+    "category": "Siderophore-TransportPotential",
+    "gene_name": "ExbB-family",
+    "hmm_file": "Siderophore-TransportPotential/PF01618-MotA_TolQ_ExbB_proton_channel_family.hmm"
+  },
+  "PF02472-ExbD": {
+    "sha256": "2f2d2e2019b288fc42314d4b55b659051440532ee019900ec941803b15d4e821",
+    "cutoff": "32.7",
+    "status": "active",
+    "category": "Siderophore-TransportPotential",
+    "gene_name": "ExbD-family",
+    "hmm_file": "Siderophore-TransportPotential/PF02472-ExbD.hmm"
+  },
+  "PF03544_TonB_C": {
+    "sha256": "150d42e02466c06384a833ba3bf61ac3c3a02048bf2d90fbe8d31d2fa4d864e2",
+    "cutoff": "24.6",
+    "status": "active",
+    "category": "Siderophore-TransportPotential",
+    "gene_name": "TonB-family",
+    "hmm_file": "Siderophore-TransportPotential/PF03544_TonB_C.hmm"
+  },
+  "PF13103_TonB_2": {
+    "sha256": "bfdaf5caa71fb8bbf0aa197549f4891f6d256ba44324092189f708aca97a3c40",
+    "cutoff": "21.8",
+    "status": "active",
+    "category": "Siderophore-TransportPotential",
+    "gene_name": "TonB-family",
+    "hmm_file": "Siderophore-TransportPotential/PF13103_TonB_2.hmm"
+  },
+  "PF16031_TonB_N": {
+    "sha256": "3792ac97003743fd5cf5b28d015e9e9f114aa2370041dc1dcba660722fb384b0",
+    "cutoff": "33.6",
+    "status": "active",
+    "category": "Siderophore-TransportPotential",
+    "gene_name": "TonB-family",
+    "hmm_file": "Siderophore-TransportPotential/PF16031_TonB_N.hmm"
+  },
+  "Fe_ferripyoverdine_receptor_1": {
+    "sha256": "94a3f8d9def7cf232f5c1076c574be43934ddddaa448edbc2b8e2a18a48a24fc",
+    "cutoff": "0.0",
+    "status": "active",
+    "category": "Siderophore-Transport",
+    "gene_name": "Ferripyoverdine receptor",
+    "hmm_file": "Siderophore-Transport/Fe_ferripyoverdine_receptor_1.hmm"
+  },
+  "Fe_pyochelin_1": {
+    "sha256": "df8681b7fbd2b249220404562abeacc0ff6324e5fcff134b05f710dd1bdf6389",
+    "cutoff": "0.0",
+    "status": "active",
+    "category": "Siderophore-Transport",
+    "gene_name": "Fe(3+)-pyochelin receptor",
+    "hmm_file": "Siderophore-Transport/Fe_pyochelin_1.hmm"
+  },
+  "mbnA_TIGR04071": {
+    "sha256": "51615618e6a7b88bdf72e6388e922c43a85dc022b1f298dbfec28c3677ab36f9",
+    "cutoff": "24.0",
+    "status": "active",
+    "category": "Metallophore-Synthesis",
+    "gene_name": "mbnA-domain",
+    "hmm_file": "Metallophore-Synthesis/mbnA_TIGR04071.hmm"
+  },
+  "mbnB_TIGR04159": {
+    "sha256": "331af3bf65e17d440093aa85a0dba9024bc0208c4fe144bf625cf6d12e54da67",
+    "cutoff": "325.0",
+    "status": "active",
+    "category": "Metallophore-Synthesis",
+    "gene_name": "mbnB",
+    "hmm_file": "Metallophore-Synthesis/mbnB_TIGR04159.hmm"
+  },
+  "mbnC_TIGR04160": {
+    "sha256": "6e4a5dfd9fd1f6dc1e0a500f7be5f6808b99cdd17935468d3b4123dc68916866",
+    "cutoff": "185.0",
+    "status": "active",
+    "category": "Metallophore-Synthesis",
+    "gene_name": "mbnC",
+    "hmm_file": "Metallophore-Synthesis/mbnC_TIGR04160.hmm"
+  }
+}

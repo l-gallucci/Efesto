@@ -43,7 +43,7 @@ def check(wheel, sdist, smoke=False):
             assert sha(whl.read("efesto/data/" + rel)) == sha(source(rel)), rel
         assert "efesto/decisions.py" in names
         for name in ("HMM-bitcutoffs.txt", "FeGenie-map.txt", "category_aliases.tsv",
-                     "category_catalog.tsv", "category_curation.tsv", "model_licenses.tsv",
+                     "category_catalog.tsv", "category_curation.tsv", "siderophore_metadata.tsv", "siderophore_reclassification.tsv", "model_licenses.tsv",
                      "LICENSES.md"):
             rel = "hmm_library/" + name
             assert whl.read("efesto/data/" + rel) == source(rel), rel

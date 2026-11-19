@@ -103,9 +103,20 @@ def catalog_fragments():
                            sum(excluded.values()), reasons))
         return table(['Source label', 'Enabled', 'Why included', 'Excluded', 'Why excluded'], result)
 
+    with (ROOT / 'hmm_library/siderophore_metadata.tsv').open(newline='') as handle:
+        siderophores = list(csv.DictReader(handle, delimiter='\t'))
     by_stem = {r['stem']: r for r in rows}
+    if any(r['category'] != by_stem[r['stem']]['category'] or
+           r['status'] != by_stem[r['stem']]['status'] for r in siderophores):
+        raise ValueError('Siderophore metadata differs from registry')
     return {
         'catalog_summary': summary,
+        'siderophore_table': table(
+            ['Model', 'Source', 'Category', 'Status', 'Interpretation', 'References'],
+            [(f"`{r['stem']}`", r['source'], r['category'], r['status'],
+              r['interpretation'], '; '.join(f'[source {i+1}]({url})' for i, url in
+                                            enumerate(r['functional_reference'].split(';')) if url))
+             for r in sorted(siderophores, key=lambda r: (r['category'], r['stem']))]),
         'category_table': count_table('category', 'Category'),
         'source_table': count_table('source', 'Source label'),
         'source_decision_table': source_decision_table(),

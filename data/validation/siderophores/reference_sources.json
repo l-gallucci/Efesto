@@ -1,0 +1,34 @@
+[
+  {
+    "accession": "P39405",
+    "role": "FhuF ferric-siderophore reductase",
+    "source": "https://rest.uniprot.org/uniprotkb/P39405.fasta",
+    "retrieved": "2026-11-19",
+    "fasta_sha256": "b7353f9e1d8f00e31587c4378313bec4819c01b802a881226c6a53c7ca9aead7",
+    "reference": "https://doi.org/10.1007/s00775-021-01854-y"
+  },
+  {
+    "accession": "A0A1A9TA96",
+    "role": "IucA aerobactin synthetase",
+    "source": "https://rest.uniprot.org/uniprotkb/A0A1A9TA96.fasta",
+    "retrieved": "2026-11-19",
+    "fasta_sha256": "632d2a74a869d3f2dc8065e15694b1f08458527661c6aa47b5244405f96003e8",
+    "reference": "https://doi.org/10.1021/acs.biochem.6b00409"
+  },
+  {
+    "accession": "Q93AT8",
+    "role": "AcsD achromobactin biosynthetic enzyme",
+    "source": "https://rest.uniprot.org/uniprotkb/Q93AT8.fasta",
+    "retrieved": "2026-11-19",
+    "fasta_sha256": "14b832d6afc5a86ed5d206814ee18d01ab0a4f768e888d69b4dfa359253c0431",
+    "reference": "https://doi.org/10.1038/nchembio.145"
+  },
+  {
+    "accession": "Q46871",
+    "role": "YqjH ferric-chelate reductase",
+    "source": "https://rest.uniprot.org/uniprotkb/Q46871.fasta",
+    "retrieved": "2026-11-19",
+    "fasta_sha256": "7aa63d031189d85479f3f30d49bf38b2ff38ca01d00db1111e9bdb622ea516db",
+    "reference": "https://doi.org/10.1021/bi201517h"
+  }
+]

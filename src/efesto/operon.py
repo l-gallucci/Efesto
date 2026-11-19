@@ -8,7 +8,7 @@ import json
 import re
 from pathlib import Path
 
-from efesto.categories import canonical_category
+from efesto.categories import canonical_category, context_category, rule_category
 
 
 # ── Default operon rules (used when no operon_rules.json is present) ──────────
@@ -46,7 +46,7 @@ _DEFAULT_OPERON_RULES = [
      "genes": ["MtrA", "MtrB_TIGR03509", "MtrC_TIGR03507", "MtoA"],
      "rule": "mtr_disambiguation", "on_fail": "keep_all",
      "max_bp_gap": 2000},
-    {"name": "SIDERO_TRANSPORT",
+    {"name": "SIDERO_TRANSPORT", "category_basis": "context",
      "categories": ["Siderophore-TransportPotential",
                     "Heme-Transport",
                     "Siderophore-Transport", "IronAcquisition-ComplexTransport"],
@@ -57,7 +57,7 @@ _DEFAULT_OPERON_RULES = [
                       "LbtU-LvtA-PiuA-PirA-RhtA", "LbtU-LbtB-legiobactin_receptor",
                       "LbtU_LbtB-legiobactin_receptor_2", "IroC-salmochelin_transport-rep"],
      "on_fail": "drop", "max_bp_gap": 2000},
-    {"name": "SIDERO_SYNTH", "categories": ["Siderophore-Synthesis"],
+    {"name": "SIDERO_SYNTH", "category_basis": "context", "categories": ["Siderophore-Synthesis"],
      "genes": [], "rule": "require_n_cat", "min_genes": 3, "on_fail": "drop",
      "max_bp_gap": 5000},
     {"name": "IRON_TRANSPORT",
@@ -278,18 +278,18 @@ def filter_cluster_fegenie(cluster_rows, report_all_pats, all_results=False,
                                                ("SIDERO_SYNTH", _SIDERO_SYNTH_CATS, 3, set()),
                                                ("IRON_TRANSPORT", _IRON_TRANS_CATS, 2, set())):
         members = {r["hmm_stem"] for r in rows
-                   if canonical_category(r["cat"]) in categories}
+                   if context_category(r) in categories}
         failed = len(members) < minimum and not members & trusted
-        affected = [r for r in rows if canonical_category(r["cat"]) in categories]
+        affected = [r for r in rows if context_category(r) in categories]
         _record_decision(decisions, affected, rule_id=name, rule_type="require_n_cat",
                          status="failed" if failed else "passed",
                          reason_code=("minimum_models_not_met" if failed else
                                       "trusted_lone_observed" if len(members) < minimum else "minimum_models_met"),
                          excluded=[r["orf"] for r in affected] if failed else [],
-                         observed_models=sorted(members), minimum_models=minimum,
+                         observed_models=sorted(members), minimum_models=minimum, category_basis="context",
                          trusted_models_observed=sorted(members & trusted))
         if failed:
-            rows = [r for r in rows if canonical_category(r["cat"]) not in categories]
+            rows = [r for r in rows if context_category(r) not in categories]
     # Category disambiguation does not exempt other systems from filtering.
     return _mtr(rows, decisions=decisions) if any(r["hmm_stem"] in _MTR_GENES for r in rows) else rows
 
@@ -316,8 +316,8 @@ def filter_cluster_json(cluster_rows, operon_rules, report_all_pats,
     def _ugi(rows, gs):
         return len({r["hmm_stem"] for r in rows if r["hmm_stem"] in gs})
 
-    def _ric(rows, cs):
-        return [r for r in rows if r["cat"] in cs]
+    def _ric(rows, cs, rd):
+        return [r for r in rows if rule_category(r, rd) in cs]
 
     def _apply(rows, rd):
         gs = set(rd.get("genes", []))
@@ -325,7 +325,7 @@ def filter_cluster_json(cluster_rows, operon_rules, report_all_pats,
         on_fail = rd.get("on_fail", "keep_all")
         rt = rd["rule"]
         sp = {r["hmm_stem"] for r in rows}
-        cp = {r["cat"] for r in rows}
+        cp = {rule_category(r, rd) for r in rows}
         if not ((gs and sp & gs) or (cs and cp & cs)):
             return rows
         raw_min = rd.get("min_genes", 1)
@@ -345,12 +345,12 @@ def filter_cluster_json(cluster_rows, operon_rules, report_all_pats,
                 return non_mbrs
             return rows if on_fail == "keep_all" else []
         if rt == "require_n_cat":
-            if len({r["hmm_stem"] for r in _ric(rows, cs)}) >= min_n:
+            if len({r["hmm_stem"] for r in _ric(rows, cs, rd)}) >= min_n:
                 return rows
             return rows if on_fail == "keep_all" else []
         if rt == "require_n_cat_or_lone_trusted":
             tl    = set(rd.get("trusted_lone", []))
-            cat_m = _ric(rows, cs)
+            cat_m = _ric(rows, cs, rd)
             uq    = {r["hmm_stem"] for r in cat_m}
             if len(uq) > 1 or tl & sp or len(uq) >= min_n:
                 return rows
@@ -366,7 +366,7 @@ def filter_cluster_json(cluster_rows, operon_rules, report_all_pats,
         gs = set(rd.get("genes", []))
         cs = {canonical_category(c) for c in rd.get("categories", [])}
         named = [r for r in before if r["hmm_stem"] in gs]
-        categorized = [r for r in before if r["cat"] in cs]
+        categorized = [r for r in before if rule_category(r, rd) in cs]
         if named or categorized:
             kind = rd["rule"]
             observed = {r["hmm_stem"] for r in (categorized if kind.startswith("require_n_cat") else named)}
@@ -395,7 +395,8 @@ def filter_cluster_json(cluster_rows, operon_rules, report_all_pats,
                              excluded=excluded, observed_models=sorted(observed),
                              minimum_models=minimum if kind.startswith("require_n") else None,
                              required_anchors=[rd.get("anchor", "")] if kind == "require_anchor" else [],
-                             on_fail=rd.get("on_fail", "keep_all"), relaxed=relaxed)
+                             on_fail=rd.get("on_fail", "keep_all"), relaxed=relaxed,
+                             category_basis=rd.get("category_basis", "annotation"))
         if not rows:
             return []
     return rows

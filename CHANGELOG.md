@@ -1,5 +1,16 @@
 # Changelog
 
+## Unreleased
+
+- Separate siderophore synthesis, export and utilization labels from the stable
+  neighborhood groups used for candidate retention; include the roles in Fe selectors.
+- Distinguish nutritional ferric-chelate reduction from respiratory iron reduction.
+- Report the shared FhuF/IucA/IucC domain PF06276 as function unresolved; mark
+  PF06276 and the unresolved PHYLLO assignment experimental, retaining both in searches.
+- Clarify IroB/K23725 functional overlap, substrate-ambiguous transport families,
+  vibriobactin VibH, VabS and shared NRPS accessories; preserve HMMs and cutoffs.
+- Add a complete siderophore/metallophore scope table and reference scope regressions.
+
 ## 1.0.0
 
 First tagged-release preparation. Earlier development checkouts used internal

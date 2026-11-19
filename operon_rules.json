@@ -170,7 +170,8 @@
         "IroC-salmochelin_transport-rep"
       ],
       "on_fail": "drop",
-      "max_bp_gap": 2000
+      "max_bp_gap": 2000,
+      "category_basis": "context"
     },
     {
       "_comment": "Siderophore biosynthesis: need \u22653 distinct synthesis HMMs in cluster",
@@ -182,7 +183,8 @@
       "rule": "require_n_cat",
       "min_genes": 3,
       "on_fail": "drop",
-      "max_bp_gap": 5000
+      "max_bp_gap": 5000,
+      "category_basis": "context"
     },
     {
       "_comment": "Iron/heme transport: need \u22652 distinct transport HMMs in cluster",

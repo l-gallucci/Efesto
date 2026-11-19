@@ -116,6 +116,8 @@ def _apply_category_curations(models):
             model["category"] = decision["category"]
             model["category_review_status"] = decision["review_status"]
             model["category_note"] = decision["note"]
+            if decision.get("gene_name"):
+                model["gene_name"] = decision["gene_name"]
             if decision["review_status"] == "requires_review":
                 model["confidence"] = "review"
             if decision["status_override"]:

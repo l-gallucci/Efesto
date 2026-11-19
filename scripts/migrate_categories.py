@@ -53,6 +53,8 @@ def plan_migration(library):
         if decision:
             row["category_review_status"] = decision["review_status"]
             row["category_note"] = decision["note"]
+            if decision.get("gene_name"):
+                row["gene_name"] = decision["gene_name"]
             if decision["status_override"]:
                 row["status"] = decision["status_override"]
         else:
@@ -98,6 +100,31 @@ def migrate(library, apply=False):
     for source, _ in done:
         if source.parent.exists() and not any(source.parent.iterdir()):
             source.parent.rmdir()
+    map_path = library / "FeGenie-map.txt"
+    if map_path.exists():
+        names = {r["stem"]: r.get("gene_name", r["stem"]) for r in rows}
+        lines = []
+        for line in map_path.read_text().splitlines():
+            parts = line.split("\t")
+            if len(parts) >= 2 and parts[0] in names:
+                parts[1] = names[parts[0]]
+            lines.append("\t".join(parts))
+        map_path.write_text("\n".join(lines) + "\n")
+    catalog = library / "category_catalog.tsv"
+    if catalog.exists():
+        from collections import Counter, defaultdict
+        counts = defaultdict(Counter)
+        for row in rows:
+            count = counts[row["category"]]
+            count["total"] += 1
+            status = row["status"]
+            count[status if status in {"active", "experimental"} else "deprecated"] += 1
+        with catalog.open("w", newline="") as handle:
+            writer = csv.writer(handle, delimiter="\t", lineterminator="\n")
+            keys = ["total", "active", "experimental", "deprecated"]
+            writer.writerow(["category"] + keys)
+            writer.writerows([category] + [counts[category][key] for key in keys]
+                             for category in sorted(counts))
     return summary
 
 

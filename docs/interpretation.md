@@ -54,6 +54,8 @@ For MtrA plus LanM hits, LanM does not supply a missing Mtr component. See
 | ImoA | Deprecated in this library; native Fe(II) oxidation not established by the cited evidence |
 | TupA NF041772 | Known characterized references fall below GA; negative detection is not absence of W uptake |
 | LanM / LanD | Lanthanide binding and handling, not a complete uptake system |
+| Siderophore families | See the [complete scope table](siderophores.md); shared domains and generic transporters need pathway-specific evidence |
+| PF06276 | Shared by FhuF reductases and NIS biosynthetic enzymes; the match alone does not resolve the reaction |
 | Cnt families | Opine-type metallophore potential; not a unique product or metal assignment |
 | MbnA/B/C | Predicted biosynthetic potential; the short precursor may be missed by gene calling |
 
